@@ -17,7 +17,9 @@ namespace CommonTools.Lib45.LiteDbTools
         }
 
 
-        public abstract void Validate(T model, SharedLiteDB db);
+        protected virtual void Validate(T model, SharedLiteDB db)
+        {
+        }
 
 
         public int Insert(T record)

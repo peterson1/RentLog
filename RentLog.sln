@@ -3,13 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2043
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonTools.Lib11", "CommonTools.Lib11\CommonTools.Lib11.csproj", "{EDCCA7DF-1CB2-48E9-B57B-DA8A118FDA44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonTools.Lib11", "CommonTools.Lib11\CommonTools.Lib11.csproj", "{EDCCA7DF-1CB2-48E9-B57B-DA8A118FDA44}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonTools.Lib45", "CommonTools.Lib45\CommonTools.Lib45.csproj", "{89C1D90F-AF50-48B4-8178-9B6CC2E28B11}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentLog.StallsCrud", "RentLog.StallsCrud\RentLog.StallsCrud.csproj", "{DC75E044-9366-4801-AD04-E31FB653ABFE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentLog.DomainLib45", "RentLog.DomainLib45\RentLog.DomainLib45.csproj", "{D789FFC5-112E-4E95-8D86-E46DA7EE54FF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentLog.DomainLib11", "RentLog.DomainLib11\RentLog.DomainLib11.csproj", "{D508BBC8-4D2C-46DE-A090-CC333D01270F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentLog.DatabaseLib", "RentLog.DatabaseLib\RentLog.DatabaseLib.csproj", "{A1AAA1A9-81D2-4DB6-8BD1-D7DE5F57CCB2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{D789FFC5-112E-4E95-8D86-E46DA7EE54FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D789FFC5-112E-4E95-8D86-E46DA7EE54FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D789FFC5-112E-4E95-8D86-E46DA7EE54FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D508BBC8-4D2C-46DE-A090-CC333D01270F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D508BBC8-4D2C-46DE-A090-CC333D01270F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D508BBC8-4D2C-46DE-A090-CC333D01270F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D508BBC8-4D2C-46DE-A090-CC333D01270F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1AAA1A9-81D2-4DB6-8BD1-D7DE5F57CCB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1AAA1A9-81D2-4DB6-8BD1-D7DE5F57CCB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1AAA1A9-81D2-4DB6-8BD1-D7DE5F57CCB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1AAA1A9-81D2-4DB6-8BD1-D7DE5F57CCB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -9,11 +9,6 @@ namespace CommonTools.Lib45.LiteDbTools
         }
 
 
-        public override void Validate(DbMetadata model, SharedLiteDB db)
-        {
-        }
-
-
         public string this[string key]
         {
             get => ByName(key, false)?.Value;
