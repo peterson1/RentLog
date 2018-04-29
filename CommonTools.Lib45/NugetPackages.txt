@@ -4,9 +4,15 @@ Framework: .NET Framework 4.5
 Framework Assembly References:
 - System.Management
 
-Install-Package MaterialDesignThemes
 Install-Package PropertyChanged.Fody
 Install-Package Costura.Fody
 Install-Package LiteDB
 Install-Package System.ValueTuple
 Install-Package System.Windows.Interactivity.WPF
+Install-Package MaterialDesignThemes
+
+
+for each exe:
+Install-Package PropertyChanged.Fody
+Install-Package Costura.Fody
+Install-Package Mono.Options

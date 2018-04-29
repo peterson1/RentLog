@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace CommonTools.Lib45.FileSystemTools
 {
-    class Class1
+    public interface IHasUpdatedCopy
     {
+        string UpdatedCopyPath { get; }
     }
 }
