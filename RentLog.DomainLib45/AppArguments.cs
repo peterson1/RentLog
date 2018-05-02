@@ -1,8 +1,12 @@
-﻿using CommonTools.Lib11.GoogleTools;
+﻿using CommonTools.Lib11.DatabaseTools;
+using CommonTools.Lib11.GoogleTools;
 using CommonTools.Lib45.FileSystemTools;
 using CommonTools.Lib45.LicenseTools;
+using CommonTools.Lib45.LiteDbTools;
 using CommonTools.Lib45.ThreadTools;
 using Mono.Options;
+using RentLog.DomainLib11.DTOs;
+using RentLog.DomainLib45.Repositories;
 using System;
 
 namespace RentLog.DomainLib45
@@ -12,14 +16,21 @@ namespace RentLog.DomainLib45
         public AppArguments()
         {
             Parse(Environment.GetCommandLineArgs());
+            var db   = new SharedLiteDB(DbFilePath, Credentials.HumanName);
+            Stalls   = new StallsRepo(db);
+            Sections = new SectionsRepo(db);
         }
 
 
-        public string               SystemName       { get; private set; } = "Rent Logs";
-        public string               DbFilePath       { get; private set; }
         public string               UpdatedCopyPath  { get; private set; }
         public bool                 IsValidUser      { get; private set; }
         public FirebaseCredentials  Credentials      { get; private set; }
+
+        public string               SystemName       { get; private set; } = "Rent Logs";
+        public string               DbFilePath       { get; private set; }
+
+        public StallsRepo           Stalls           { get; }
+        public SectionsRepo         Sections         { get; }
 
 
         private void SetCredentials(string key)

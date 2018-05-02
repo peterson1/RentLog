@@ -1,4 +1,5 @@
-﻿using CommonTools.Lib11.DataStructures;
+﻿using CommonTools.Lib11.DatabaseTools;
+using CommonTools.Lib11.DataStructures;
 using CommonTools.Lib11.GoogleTools;
 using CommonTools.Lib45.LiteDbTools;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace CommonTools.Lib45.BaseViewModels
         private List<TDTO> _queried;
 
 
-        public FilteredSavedListVMBase(SharedCollectionBase<TDTO> sharedCollection, TArg appArguments, bool doReload = true) : base(sharedCollection, appArguments, doReload)
+        public FilteredSavedListVMBase(ISimpleRepo<TDTO> simpleRepo, TArg appArguments, bool doReload = true) : base(simpleRepo, appArguments, doReload)
         {
             Filter.TextFilterChanged += (s, e) => ApplyTextFilters();
         }

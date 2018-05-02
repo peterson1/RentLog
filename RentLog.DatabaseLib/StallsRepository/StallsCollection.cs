@@ -9,8 +9,7 @@ namespace RentLog.DatabaseLib.StallsRepository
         private const string COLXN_NAME = "StallModel";
 
 
-        public StallsCollection(string dbFilePath, string currentUser) 
-            : base(COLXN_NAME, new RentLogDB(dbFilePath, currentUser))
+        public StallsCollection(SharedLiteDB sharedLiteDB) : base(COLXN_NAME, sharedLiteDB)
         {
             BsonMapper.Global.Entity<StallDTO>()
                 .DbRef(_ => _.Section, "SectionModel");

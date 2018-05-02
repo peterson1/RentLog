@@ -52,6 +52,8 @@
   <ItemGroup>
     <Compile Include="AppArguments.cs" />
     <Compile Include="BaseViewModels\BrandedWindowBase.cs" />
+    <Compile Include="Repositories\SectionsRepo.cs" />
+    <Compile Include="Repositories\SharedCollectionShim.cs" />
     <Compile Include="Repositories\StallsRepo.cs" />
   </ItemGroup>
   <ItemGroup>

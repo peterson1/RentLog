@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CommonTools.Lib45.LiteDbTools
 {
-    public abstract class SharedLiteDB
+    public class SharedLiteDB
     {
         public event EventHandler DbChanged = delegate { };
         private MemoryStream      _mem;
@@ -17,7 +17,7 @@ namespace CommonTools.Lib45.LiteDbTools
         private bool              _isDelaying;
 
 
-        public SharedLiteDB(string dbFilePath, string currentUser, bool doInitialize = true)
+        public SharedLiteDB(string dbFilePath, string currentUser)
         {
             if (dbFilePath.IsBlank())
                 throw Fault.NullRef("DB File Path");
@@ -25,7 +25,6 @@ namespace CommonTools.Lib45.LiteDbTools
             DbPath = dbFilePath;
 
             InitializeCommons(currentUser);
-            if (doInitialize) InitializeCollections();
 
             if (!File.Exists(DbPath))
                 Metadata.CreateInitialRecord();
@@ -33,20 +32,16 @@ namespace CommonTools.Lib45.LiteDbTools
             InitializeFileWatcher();
         }
 
-        public SharedLiteDB(MemoryStream memoryStream, string currentUser, bool doInitialize = true)
+        public SharedLiteDB(MemoryStream memoryStream, string currentUser)
         {
             _mem = memoryStream;
             InitializeCommons(currentUser);
-            if (doInitialize) InitializeCollections();
         }
 
 
         public string              DbPath       { get; }
         public string              CurrentUser  { get; private set; }
         public MetadataCollection  Metadata     { get; private set; }
-
-
-        protected abstract void InitializeCollections();
 
 
         public LiteDatabase OpenRead()

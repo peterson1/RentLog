@@ -1,4 +1,5 @@
-﻿using CommonTools.Lib11.DataStructures;
+﻿using CommonTools.Lib11.DatabaseTools;
+using CommonTools.Lib11.DataStructures;
 using CommonTools.Lib11.GoogleTools;
 using CommonTools.Lib11.InputCommands;
 using CommonTools.Lib45.InputCommands;
@@ -17,16 +18,16 @@ namespace CommonTools.Lib45.BaseViewModels
     {
         public event EventHandler<decimal>       TotalSumChanged;
 
-        private SharedCollectionBase<TDTO> _repo;
+        private ISimpleRepo<TDTO> _repo;
 
 
-        public SavedListVMBase(SharedCollectionBase<TDTO> sharedCollection, TArg appArguments, bool doReload = true)
+        public SavedListVMBase(ISimpleRepo<TDTO> repository, TArg appArguments, bool doReload = true)
         {
-            _repo      = sharedCollection;
+            _repo      = repository;
             AppArgs    = appArguments;
             RefreshCmd = R2Command.Relay(ReloadFromDB, null, "Refresh");
 
-            _repo.ContentChanged          += (s, e) => ReloadFromDB();
+            _repo.ContentChanged        += (s, e) => ReloadFromDB();
             ItemsList.ItemDeleted       += (s, e) => ExecuteDeleteRecord(e);
             ItemsList.CollectionChanged += (s, e) => UpdateTotalSum();
             ItemsList.ItemOpened        += ItemsList_ItemOpened;
@@ -56,7 +57,7 @@ namespace CommonTools.Lib45.BaseViewModels
         }
 
 
-        protected virtual void DeleteRecord(SharedCollectionBase<TDTO> db, TDTO dto)
+        protected virtual void DeleteRecord(ISimpleRepo<TDTO> db, TDTO dto)
         {
             if (CanDeletetRecord(dto)) db.Delete(dto);
             ReloadFromDB();
@@ -85,7 +86,7 @@ namespace CommonTools.Lib45.BaseViewModels
             => PostProcessQueried(QueryItems(_repo));
 
 
-        protected virtual List<TDTO> QueryItems(SharedCollectionBase<TDTO> db)
+        protected virtual List<TDTO> QueryItems(ISimpleRepo<TDTO> db)
             => db.GetAll();
 
 
