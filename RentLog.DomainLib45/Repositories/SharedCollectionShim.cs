@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace RentLog.DomainLib45.Repositories
 {
+    //core candidate
     public abstract class SharedCollectionShim<T> : ISimpleRepo<T>
         where T : IDocumentDTO
     {
@@ -23,9 +24,10 @@ namespace RentLog.DomainLib45.Repositories
 
 
         protected abstract SharedCollectionBase<T> GetSharedCollection (SharedLiteDB sharedLiteDB);
-        //protected abstract Func<T, object>         DefaultSort         ();
+        protected abstract IEnumerable<T> ToSorted(IEnumerable<T> items);
 
-        //public List<T> GetSorted() => GetAll().OrderBy(DefaultSort()).ToList();
+
+        protected List<T> ToSortedList(IEnumerable<T> items) => ToSorted(items).ToList();
 
 
         public virtual List<T> GetAll ()                => _colxn.GetAll();

@@ -14,17 +14,14 @@ namespace RentLog.DomainLib45.Repositories
 
 
         public List<StallDTO> ForSection(SectionDTO section)
-            => GetAll().Where(_ => _.Section.Id == section.Id).SortByName();
+            => ToSortedList(GetAll().Where(_ => _.Section.Id == section?.Id));
 
 
         protected override SharedCollectionBase<StallDTO> GetSharedCollection(SharedLiteDB sharedLiteDB)
             => new StallsCollection(sharedLiteDB);
-    }
 
 
-    public static class StallsRepoExt
-    {
-        public static List<StallDTO> SortByName(this IEnumerable<StallDTO> items)
-            => items.OrderBy(_ => _.Name).ToList();
+        protected override IEnumerable<StallDTO> ToSorted(IEnumerable<StallDTO> items)
+            => items.OrderBy(_ => _.Name);
     }
 }

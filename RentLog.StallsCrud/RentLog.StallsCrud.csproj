@@ -71,12 +71,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="SectionsList\SectionsListUI.xaml.cs">
+      <DependentUpon>SectionsListUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SectionsList\SectionsListVM.cs" />
     <Compile Include="StallsList\StallRowVM.cs" />
+    <Compile Include="StallsList\StallsFilterUI.xaml.cs">
+      <DependentUpon>StallsFilterUI.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StallsList\StallsFilterVM.cs" />
     <Compile Include="StallsList\StallsListUI.xaml.cs">
       <DependentUpon>StallsListUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="StallsList\StallsListVM.cs" />
+    <Compile Include="StallsList\StallsTable.xaml.cs">
+      <DependentUpon>StallsTable.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -89,7 +99,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="SectionsList\SectionsListUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StallsList\StallsFilterUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="StallsList\StallsListUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StallsList\StallsTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,5 +1,6 @@
 ﻿using CommonTools.Lib11.DataStructures;
 using CommonTools.Lib11.ReflectionTools;
+using RentLog.DomainLib11.Models;
 using System;
 
 namespace RentLog.DomainLib11.DTOs
@@ -21,5 +22,6 @@ namespace RentLog.DomainLib11.DTOs
 
         public T DeepClone   <T>() => throw new NotImplementedException();
         public T ShallowClone<T>() => (T)this.MemberwiseClone();
+        public override string ToString() => Name;
     }
 }

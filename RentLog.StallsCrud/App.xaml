@@ -50,6 +50,10 @@
                    BasedOn="{StaticResource colLeft}">
                 <Setter Property="FontWeight" Value="Medium" />
             </Style>
+            <Style x:Key="colLabelCenter" TargetType="TextBlock"
+                   BasedOn="{StaticResource colLabel}">
+                <Setter Property="TextAlignment" Value="Center" />
+            </Style>
             <Style x:Key="colSmallWrapLeft" TargetType="TextBlock"
                    BasedOn="{StaticResource colLeft}">
                 <Setter Property="TextWrapping" Value="Wrap" />
@@ -76,10 +80,6 @@
                    BasedOn="{StaticResource colLabel}">
                 <Setter Property="TextAlignment" Value="Right" />
                 <Setter Property="FontStyle" Value="Italic" />
-            </Style>
-            <Style x:Key="colHdrCentered" TargetType="DataGridColumnHeader"
-                   BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                <Setter Property="HorizontalAlignment" Value="Center"/>
             </Style>
             <Style x:Key="dgReadOnly" TargetType="DataGrid" 
                    BasedOn="{StaticResource MaterialDesignDataGrid}">

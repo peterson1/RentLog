@@ -1,11 +1,9 @@
-﻿using CommonTools.Lib11.DatabaseTools;
-using CommonTools.Lib11.GoogleTools;
+﻿using CommonTools.Lib11.GoogleTools;
 using CommonTools.Lib45.FileSystemTools;
 using CommonTools.Lib45.LicenseTools;
 using CommonTools.Lib45.LiteDbTools;
 using CommonTools.Lib45.ThreadTools;
 using Mono.Options;
-using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib45.Repositories;
 using System;
 
@@ -16,9 +14,10 @@ namespace RentLog.DomainLib45
         public AppArguments()
         {
             Parse(Environment.GetCommandLineArgs());
-            var db   = new SharedLiteDB(DbFilePath, Credentials?.HumanName ?? "Anonymous");
-            Stalls   = new StallsRepo(db);
-            Sections = new SectionsRepo(db);
+            var db       = new SharedLiteDB(DbFilePath, Credentials?.HumanName ?? "Anonymous");
+            Stalls       = new StallsRepo(db);
+            Sections     = new SectionsRepo(db);
+            ActiveLeases = new ActiveLeasesRepo(db);
         }
 
 
@@ -31,6 +30,7 @@ namespace RentLog.DomainLib45
 
         public StallsRepo           Stalls           { get; }
         public SectionsRepo         Sections         { get; }
+        public ActiveLeasesRepo     ActiveLeases     { get; }
 
 
         private void SetCredentials(string key)

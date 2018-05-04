@@ -5,7 +5,7 @@ namespace RentLog.DatabaseLib.SectionsRepository
 {
     public class SectionsCollection : NamedCollectionBase<SectionDTO>
     {
-        private const string COLXN_NAME = "SectionModel";
+        internal const string COLXN_NAME = "SectionModel";
 
 
         public SectionsCollection(SharedLiteDB sharedLiteDB) : base(COLXN_NAME, sharedLiteDB)

@@ -1,4 +1,4 @@
-﻿namespace RentLog.DomainLib11.DTOs
+﻿namespace RentLog.DomainLib11.Models
 {
     public class RightsParams
     {

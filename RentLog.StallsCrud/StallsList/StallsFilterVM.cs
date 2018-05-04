@@ -6,8 +6,24 @@ namespace RentLog.StallsCrud.StallsList
 {
     class StallsFilterVM : TextFilterBase<StallRowVM>
     {
-        public string Name { get; set; }
+        public string  FilterStall             { get; set; }
+        public string  FilterOccupant          { get; set; }
+        public string  FilterRentRate          { get; set; }
+        public string  FilterGracePeriod       { get; set; }
+        public string  FilterTotalRights       { get; set; }
+        public string  FilterRightsSettlement  { get; set; }
+        public string  FilterIsOperational     { get; set; }
 
-        protected override Dictionary<string, Func<StallRowVM, string>> FilterProperties => throw new NotImplementedException();
+
+        protected override Dictionary<string, Func<StallRowVM, string>> FilterProperties => new Dictionary<string, Func<StallRowVM, string>>
+        {
+            { nameof(FilterStall           ), _ => _.DTO.Name },
+            { nameof(FilterOccupant        ), _ => _.Occupant?.Tenant.FirstAndLastNames },
+            { nameof(FilterRentRate        ), _ => _.DTO.DefaultRent.RegularRate.ToString() },
+            { nameof(FilterGracePeriod     ), _ => _.DTO.DefaultRent.GracePeriodDays.ToString() },
+            { nameof(FilterTotalRights     ), _ => _.DTO.DefaultRights.TotalAmount.ToString() },
+            { nameof(FilterRightsSettlement), _ => _.DTO.DefaultRights.SettlementDays.ToString() },
+            { nameof(FilterIsOperational   ), _ => _.DTO.IsOperational.ToString() },
+        };
     }
 }

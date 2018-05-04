@@ -1,8 +1,10 @@
 ﻿using CommonTools.Lib45.BaseViewModels;
+using PropertyChanged;
 using System.Windows;
 
 namespace RentLog.DomainLib45.BaseViewModels
 {
+    [AddINotifyPropertyChangedInterface]
     public abstract class BrandedWindowBase : UpdatedExeVMBase<AppArguments>
     {
         protected override string CaptionPrefix => AppArgs.SystemName;
