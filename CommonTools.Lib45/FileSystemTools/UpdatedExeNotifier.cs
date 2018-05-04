@@ -4,18 +4,33 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using static System.Environment;
 
 namespace CommonTools.Lib45.FileSystemTools
 {
     [AddINotifyPropertyChangedInterface]
     public class UpdatedExeNotifier : UpdatedFileNotifier
     {
-        private string _args;
-        private string _tempExe;
 
         public UpdatedExeNotifier(string fileToWatch) : base(fileToWatch)
         {
-            _args = GetCommandLineArgs();
+            if (!CurrentExe.GetFullPath().IsInTempDir())
+                RelaunchInTemp();
+        }
+
+
+        private void RelaunchInTemp()
+        {
+            var exeNow = CurrentExe.GetFullPath();
+            var cfgNow = exeNow + ".config";
+            var tmpExe = WatchedFile.MakeTempCopy(".exe");
+            var tmpCfg = tmpExe + ".config";
+
+            if (File.Exists(cfgNow))
+                File.Copy(cfgNow, tmpCfg, true);
+
+            Process.Start(tmpExe, GetCommandLineArgs());
+            Application.Current.Shutdown();
         }
 
 
@@ -37,26 +52,7 @@ namespace CommonTools.Lib45.FileSystemTools
         }
 
 
-        protected override void OnFileChanged() 
-            => _tempExe = CopyWatchedToTemp();
-
-
-        protected override void OnExecuteClick()
-        {
-            Process.Start(_tempExe, _args);
-            //MessageBox.Show(_tempExe, "_tempExe");
-            //MessageBox.Show(_args, "_args");
-            Application.Current.Shutdown();
-        }
-
-
-        private string CopyWatchedToTemp()
-        {
-            var tmp = Path.GetTempFileName();
-            File.Delete(tmp);
-            tmp += ".exe";
-            File.Copy(WatchedFile, tmp, true);
-            return tmp;
-        }
+        protected override void OnExecuteClick() 
+            => RelaunchInTemp();
     }
 }

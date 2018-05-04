@@ -21,27 +21,34 @@ namespace CommonTools.Lib45.FileSystemTools
         {
             WatchedFile = fileToWatch;
             ExecuteCmd  = R2Command.Relay(OnExecuteClick);
-            InitializeFileWatcher();
+            if (!fileToWatch.IsBlank())
+                InitializeFileWatcher();
         }
 
 
-        public string      WatchedFile    { get; }
-        public IR2Command  ExecuteCmd     { get; }
-        public bool        IsFileChanged  { get; private set; }
+        public string      WatchedFile          { get; }
+        public IR2Command  ExecuteCmd           { get; }
+        public bool        IsFileChanged        { get; private set; }
+        public bool        ExecuteOnFileChanged { get; set; }
 
 
         protected virtual void OnExecuteClick () { }
-        protected virtual void OnFileChanged  () { }
+
+
+        protected virtual void OnFileChanged()
+        {
+            if (ExecuteOnFileChanged)
+            {
+                UIThread.Run(() =>
+                    ExecuteCmd.ExecuteIfItCan());
+            }
+        }
 
 
         private void InitializeFileWatcher()
         {
-            if (WatchedFile.IsBlank())
-                throw Fault.NullRef(nameof(WatchedFile));
-
-            if (!File.Exists(WatchedFile))
-                throw Fault.MissingFile(WatchedFile);
-
+            if (WatchedFile.IsBlank()) return;
+            if (!File.Exists(WatchedFile)) return;
             var abs = WatchedFile.MakeAbsolute();
             var dir = Path.GetDirectoryName(abs);
             var nme = Path.GetFileName(abs);

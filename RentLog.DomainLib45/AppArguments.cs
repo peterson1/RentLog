@@ -16,7 +16,7 @@ namespace RentLog.DomainLib45
         public AppArguments()
         {
             Parse(Environment.GetCommandLineArgs());
-            var db   = new SharedLiteDB(DbFilePath, Credentials.HumanName);
+            var db   = new SharedLiteDB(DbFilePath, Credentials?.HumanName ?? "Anonymous");
             Stalls   = new StallsRepo(db);
             Sections = new SectionsRepo(db);
         }

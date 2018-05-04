@@ -1,7 +1,11 @@
-﻿using System.Diagnostics;
-using System.IO;
-using System.Text;
+﻿using CommonTools.Lib11.ExceptionTools;
 using CommonTools.Lib11.StringTools;
+using CommonTools.Lib45.ThreadTools;
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Text;
 
 namespace CommonTools.Lib45.FileSystemTools
 {
@@ -64,6 +68,11 @@ namespace CommonTools.Lib45.FileSystemTools
             return byts;
         }
 
+
+        public static bool IsInTempDir(this string filePath) 
+            => filePath.Contains(Path.GetTempPath());
+
+
         //public static string CreateTempCopy(this string filePath)
         //{
         //    var tmpPath = Path.GetTempFileName();
@@ -106,6 +115,57 @@ namespace CommonTools.Lib45.FileSystemTools
             var ss = ver.Split('.');
             if (ss.Length != 4) return ver;
             return $"{ss[2]}.{int.Parse(ss[3])}";
+        }
+
+
+
+        public static FileSystemWatcher OnFileChanged(this string filePath, Action onFileChanged)
+        {
+            if (filePath.IsBlank())
+                throw Fault.NullRef("filePath");
+
+            if (!File.Exists(filePath))
+                throw Fault.MissingFile(filePath);
+
+            var abs    = filePath.MakeAbsolute();
+            var dir    = Path.GetDirectoryName(abs);
+            var nme    = Path.GetFileName(abs);
+            var watchr = new FileSystemWatcher(dir, nme);
+
+            watchr.NotifyFilter = NotifyFilters.LastWrite;
+            watchr.Changed += (s, e) =>
+            {
+                try
+                {
+                    onFileChanged?.Invoke();
+                }
+                catch (Exception ex)
+                {
+                    Alert.Show(ex, "OnFileChanged");
+                }
+            };
+            watchr.EnableRaisingEvents = true;
+            return watchr;
+        }
+
+
+        public static bool FileContains(this string filePath, string text)
+        {
+            if (!File.Exists(filePath))
+                throw Fault.MissingFile(filePath);
+
+            return File.ReadLines(filePath).ToList()
+                    .Any(_ => _.Contains(text));
+        }
+
+
+        public static void CreateFileIfMissing(this string filePath)
+        {
+            if (File.Exists(filePath)) return;
+            var abs = filePath.MakeAbsolute();
+            var dir = Path.GetDirectoryName(abs);
+            Directory.CreateDirectory(dir);
+            File.Create(abs);
         }
     }
 }
