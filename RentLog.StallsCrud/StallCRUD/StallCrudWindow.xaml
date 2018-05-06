@@ -23,17 +23,35 @@
     <Window.Resources>
         <Style TargetType="TextBox"
                BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
-            <Setter Property="Margin" Value="0 7 0 7" />
+            <Setter Property="Margin" Value="10 10 10 10" />
+            <Setter Property="MinWidth" Value="150" />
         </Style>
 
         <Style TargetType="ComboBox"
                BasedOn="{StaticResource MaterialDesignFloatingHintComboBox}">
-            <Setter Property="Margin" Value="0 5 0 7" />
+            <Setter Property="Margin" Value="10 10 10 10" />
+            <Setter Property="MinWidth" Value="150" />
         </Style>
 
         <Style TargetType="DatePicker"
                BasedOn="{StaticResource MaterialDesignFloatingHintDatePicker}">
-            <Setter Property="Margin" Value="0 19 0 7" />
+            <Setter Property="Margin" Value="10 10 10 10" />
+            <Setter Property="MinWidth" Value="150" />
+        </Style>
+
+        <Style TargetType="CheckBox"
+               BasedOn="{StaticResource MaterialDesignCheckBox}">
+            <Setter Property="Margin" Value="10 10 10 10" />
+            <Setter Property="MinWidth" Value="150" />
+        </Style>
+
+        <Style x:Key="txtReadOnly" TargetType="TextBox"
+               BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+            <Setter Property="Margin" Value="10 10 10 10" />
+            <Setter Property="MinWidth" Value="150" />
+            <Setter Property="IsReadOnly" Value="True" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkBrush}" />
         </Style>
 
     </Window.Resources>
@@ -44,41 +62,74 @@
 
                 <TextBox Text="{Binding Draft.Section.Name}"
                          mat:HintAssist.Hint="section"
-                         IsReadOnly="True" />
+                         Style="{StaticResource txtReadOnly}" />
 
-                <ComboBox ItemsSource="{Binding BillIntervals}"
-                          SelectedItem="{Binding Draft.DefaultRent.Interval, UpdateSourceTrigger=PropertyChanged}"
-                          IsEnabled="False"
-                          mat:HintAssist.Hint="rent interval" />
+                <TextBox Text="{Binding Draft.DefaultRent.PenaltyRule}"
+                         mat:HintAssist.Hint="Rent Penalty Rule"
+                         Style="{StaticResource txtReadOnly}"
+                         Margin="10 53 0 0"  />
 
-                <TextBox Text="{Binding Occupant.Tenant, Mode=OneWay}"
-                         mat:HintAssist.Hint="cuurent occupant"
-                         Visibility="{Binding Occupant, Converter={StaticResource visIfNotNull}}"
-                         IsReadOnly="True" />
+                <TextBox Text="{Binding Draft.DefaultRights.PenaltyRule}"
+                         mat:HintAssist.Hint="Rights Penalty Rule"
+                         Style="{StaticResource txtReadOnly}"
+                         Margin="10 116 0 0" />
             </StackPanel>
 
 
             <StackPanel Margin="50 0 0 0">
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="txtFirstFocus"
+                             Text="{Binding Draft.Name, UpdateSourceTrigger=PropertyChanged}"
+                             mat:HintAssist.Hint="stall name" />
+
+                    <TextBox Text="{Binding Occupant.Tenant, Mode=OneWay}"
+                             mat:HintAssist.Hint="cuurent occupant"
+                             Visibility="{Binding Occupant, Converter={StaticResource visIfNotNull}}"
+                             IsReadOnly="True" />
+                </StackPanel>
+
+                
+                <StackPanel Orientation="Horizontal" Margin="0 40 0 0">
+                    <TextBox Text="{Binding Draft.DefaultRent.RegularRate, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
+                             mat:HintAssist.Hint="default rent rate" />
+
+                    <ComboBox ItemsSource="{Binding BillIntervals}"
+                              SelectedItem="{Binding Draft.DefaultRent.Interval, UpdateSourceTrigger=PropertyChanged}"
+                              IsEnabled="False"
+                              mat:HintAssist.Hint="default rent interval" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Text="{Binding Draft.DefaultRent.GracePeriodDays, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource spanDays}}"
+                             mat:HintAssist.Hint="default grace period" />
+
+                    <TextBox Text="{Binding Draft.DefaultRent.PenaltyRate1, StringFormat=P1, UpdateSourceTrigger=PropertyChanged}"
+                             mat:HintAssist.Hint="default rent surcharge" />
+                </StackPanel>
+
+                
+                
+                <StackPanel Orientation="Horizontal" Margin="0 40 0 0">
+                    <TextBox Text="{Binding Draft.DefaultRights.TotalAmount, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
+                             mat:HintAssist.Hint="default total rights" />
+
+                    <TextBox Text="{Binding Draft.DefaultRights.SettlementDays, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource spanDays}}"
+                             mat:HintAssist.Hint="rights settlement" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Text="{Binding Draft.DefaultRights.PenaltyRate1, StringFormat=P1, UpdateSourceTrigger=PropertyChanged}"
+                             mat:HintAssist.Hint="initial rights penalty" />
+
+                    <TextBox Text="{Binding Draft.DefaultRights.PenaltyRate2, StringFormat=P1, UpdateSourceTrigger=PropertyChanged}"
+                             mat:HintAssist.Hint="daily rights surcharge" />
+                </StackPanel>
                     
-                <TextBox x:Name="txtFirstFocus"
-                         Text="{Binding Draft.Name, UpdateSourceTrigger=PropertyChanged}"
-                         mat:HintAssist.Hint="stall name" />
-
-                <TextBox Text="{Binding Draft.DefaultRent.RegularRate, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
-                         mat:HintAssist.Hint="default rent rate" />
-
-                <TextBox Text="{Binding Draft.DefaultRent.GracePeriodDays, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource spanDays}}"
-                         mat:HintAssist.Hint="default grace period" />
-
-                <TextBox Text="{Binding Draft.DefaultRights.TotalAmount, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
-                         mat:HintAssist.Hint="default total rights" />
-
-                <TextBox Text="{Binding Draft.DefaultRights.SettlementDays, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource spanDays}}"
-                         mat:HintAssist.Hint="default grace period" />
 
                 <CheckBox IsChecked="{Binding Draft.IsOperational, UpdateSourceTrigger=PropertyChanged}"
                           Content="Operational"
-                          Margin="0 10 0 10" />
+                          Margin="10 30 10 10" />
 
                 <!--<TextBox Text="{Binding Draft.Purpose, UpdateSourceTrigger=PropertyChanged}"
                             TabIndex="1"

@@ -58,10 +58,9 @@ namespace CommonTools.Lib45.BaseViewModels
         private void EncodeNewDraft()
         {
             SaveDraftCmd = R2Command.Async(ExecuteSaveDraft, _ => CanSave(), $"Save {TypeDescription}");
-            //Draft        = new TDraft();
-            //SetNewDraftDefaults(Draft);
             Draft = GetNewDraft();
-            this.Show<TWindow>(showModal: true);
+            if (Draft != null)
+                this.Show<TWindow>(showModal: true);
         }
 
 
