@@ -20,7 +20,7 @@ namespace RentLog.DomainLib45.Repositories
         public override List<SectionDTO> GetAll() => ToSortedList(_colxn.GetAll());
 
 
-        protected override IEnumerable<SectionDTO> ToSorted(IEnumerable<SectionDTO> items)
+        public override IEnumerable<SectionDTO> ToSorted(IEnumerable<SectionDTO> items)
             => items.OrderBy(_ => _.Name);
     }
 }

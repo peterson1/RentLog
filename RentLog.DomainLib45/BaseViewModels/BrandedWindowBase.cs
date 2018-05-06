@@ -1,5 +1,6 @@
 ﻿using CommonTools.Lib45.BaseViewModels;
 using PropertyChanged;
+using RentLog.DomainLib11.Authorization;
 using System.Windows;
 
 namespace RentLog.DomainLib45.BaseViewModels
@@ -12,6 +13,8 @@ namespace RentLog.DomainLib45.BaseViewModels
 
         public BrandedWindowBase(AppArguments appArguments) : base(appArguments)
         {
+            AccessControlExtensions.OnUnauthorizedAccess = s => ShowNotAllowed(s);
+            SetCaption($"as {AppArgs?.Credentials?.NameAndRole ?? "Anonymous"}");
         }
 
 
@@ -21,5 +24,8 @@ namespace RentLog.DomainLib45.BaseViewModels
             //later: move xaml boilerplates to here
 
         }
+
+        private static void ShowNotAllowed(string msg)
+            => MessageBox.Show(msg, "  Unauthorized Access", MessageBoxButton.OK, MessageBoxImage.Information);
     }
 }

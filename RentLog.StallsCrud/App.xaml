@@ -121,6 +121,7 @@
             </Style>
 
             <cnv:VisibleIfTrueConverter     x:Key="visIfTrue"     />
+            <cnv:VisibleIfNotNullConverter  x:Key="visIfNotNull"  />
             <cnv:VisibleIfFalseConverter    x:Key="visIfFalse"    />
             <cnv:VisibleIfNotZeroConverter  x:Key="visIfNotZero"  />
             <cnv:SpanDaysConverter          x:Key="spanDays"      />

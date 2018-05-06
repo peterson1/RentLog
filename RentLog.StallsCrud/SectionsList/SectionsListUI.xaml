@@ -19,8 +19,12 @@
                       SelectedItem="{Binding Selected, UpdateSourceTrigger=PropertyChanged}"
                       MinWidth="100" />
             <Button Content="{mat:PackIcon Kind=Pencil}"
+                    Command="{Binding EditCurrentCmd}"
+                    ToolTip="{Binding EditCurrentCmd.CurrentLabel}"
                     Style="{StaticResource flatBtn}" />
             <Button Content="{mat:PackIcon Kind=Plus}"
+                    Command="{Binding Crud.EncodeNewDraftCmd}"
+                    ToolTip="{Binding Crud.EncodeNewDraftCmd.CurrentLabel}"
                     Style="{StaticResource flatBtn}" />
         </StackPanel>
     </StackPanel>

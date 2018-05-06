@@ -1,18 +1,20 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
 using CommonTools.Lib45.BaseViewModels;
+using CommonTools.Lib45.ThreadTools;
 using PropertyChanged;
+using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.Models;
+using RentLog.DomainLib11.ReportRows;
 using RentLog.DomainLib45;
-using RentLog.DomainLib45.Repositories;
-using System;
+using RentLog.StallsCrud.StallCRUD;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace RentLog.StallsCrud.StallsList
 {
     [AddINotifyPropertyChangedInterface]
-    class StallsListVM : IndirectFilteredListVMBase<StallRowVM, StallDTO, StallsFilterVM, AppArguments>
+    public class StallsListVM : IndirectFilteredListVMBase<StallRow, StallDTO, StallsFilterVM, AppArguments>
     {
         private Dictionary<int, LeaseDTO> _stallIdToLeases;
         private LeaseDTO _vacant = GetVacantPlaceHoder();
@@ -20,28 +22,44 @@ namespace RentLog.StallsCrud.StallsList
 
         public StallsListVM(AppArguments appArguments) : base(appArguments.Stalls, appArguments, false)
         {
-            _stallIdToLeases = AppArgs.ActiveLeases.GetAll().ToDictionary(_ => _.Stall.Id);
+            Crud             = new StallCrudVM(appArguments);
+            _stallIdToLeases = AppArgs.ActiveLeases.StallsLookup();
         }
 
 
-        public SectionDTO Section { get; internal set; }
+        public StallCrudVM  Crud     { get; }
 
 
         protected override List<StallDTO> QueryItems(ISimpleRepo<StallDTO> db)
-            => AppArgs.Stalls.ForSection(Section);
+            => AppArgs.Stalls.ForSection(AppArgs.CurrentSection);
 
 
-        protected override StallRowVM CastToRow(StallDTO dto)
+        protected override StallRow CastToRow(StallDTO dto)
         {
-            var row      = new StallRowVM(dto);
-            //if (_stallIdToLeases.TryGetValue(dto.Id, out LeaseDTO lse))
-            //    row.Occupant = lse;
+            var row      = new StallRow(dto);
             row.Occupant = _stallIdToLeases.TryGetValue(dto.Id, out LeaseDTO lse)
                          ? lse : _vacant;
             return row;
         }
 
-        protected override Func<StallDTO, decimal> SummedAmount => throw new NotImplementedException();
+
+        protected override bool CanDeletetRecord(StallDTO rec)
+        {
+            if (!AppArgs.CanDeleteStall(true)) return false;
+            if (_stallIdToLeases.TryGetValue(rec.Id, out LeaseDTO lse))
+            {
+                Alert.Show("Cannot Delete if Occupied", $"Currently occupied by {lse}");
+                return false;
+            }
+            return true;
+        }
+
+
+        protected override void LoadRecordForEditing(StallDTO rec)
+        {
+            Crud.Occupant = Rows.SingleOrDefault(_ => _.DTO.Id == rec.Id)?.Occupant;
+            Crud.EditCurrentRecord(rec);
+        }
 
         private static LeaseDTO GetVacantPlaceHoder()
             => new LeaseDTO

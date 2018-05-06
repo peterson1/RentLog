@@ -24,10 +24,10 @@ namespace RentLog.DomainLib45.Repositories
 
 
         protected abstract SharedCollectionBase<T> GetSharedCollection (SharedLiteDB sharedLiteDB);
-        protected abstract IEnumerable<T> ToSorted(IEnumerable<T> items);
+        public abstract IEnumerable<T> ToSorted(IEnumerable<T> items);
 
 
-        protected List<T> ToSortedList(IEnumerable<T> items) => ToSorted(items).ToList();
+        public List<T> ToSortedList(IEnumerable<T> items) => ToSorted(items).ToList();
 
 
         public virtual List<T> GetAll ()                => _colxn.GetAll();

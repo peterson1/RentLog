@@ -9,7 +9,8 @@
     <DataGrid ItemsSource="{Binding }"
               DataContext="{Binding Rows}"
               Style="{StaticResource dgReadOnly}"
-              HeadersVisibility="None">
+              HeadersVisibility="None"
+              x:Name="dg">
         <DataGrid.Columns>
             <DataGridTextColumn Width="15*" Header="stall"             Binding="{Binding DTO.Name}" ElementStyle="{StaticResource colLabelCenter}" />
             <DataGridTextColumn Width="33*" Header="occupant"          Binding="{Binding Occupant.Tenant}" />

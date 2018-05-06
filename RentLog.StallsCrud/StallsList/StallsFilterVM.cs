@@ -1,10 +1,11 @@
 ﻿using CommonTools.Lib45.BaseViewModels;
+using RentLog.DomainLib11.ReportRows;
 using System;
 using System.Collections.Generic;
 
 namespace RentLog.StallsCrud.StallsList
 {
-    class StallsFilterVM : TextFilterBase<StallRowVM>
+    public class StallsFilterVM : TextFilterBase<StallRow>
     {
         public string  FilterStall             { get; set; }
         public string  FilterOccupant          { get; set; }
@@ -15,7 +16,7 @@ namespace RentLog.StallsCrud.StallsList
         public string  FilterIsOperational     { get; set; }
 
 
-        protected override Dictionary<string, Func<StallRowVM, string>> FilterProperties => new Dictionary<string, Func<StallRowVM, string>>
+        protected override Dictionary<string, Func<StallRow, string>> FilterProperties => new Dictionary<string, Func<StallRow, string>>
         {
             { nameof(FilterStall           ), _ => _.DTO.Name },
             { nameof(FilterOccupant        ), _ => _.Occupant?.Tenant.FirstAndLastNames },

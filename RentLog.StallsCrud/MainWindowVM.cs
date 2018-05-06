@@ -28,7 +28,7 @@ namespace RentLog.StallsCrud
 
         protected override void OnRefreshClicked()
         {
-            Stalls.Section = Sections.Selected;
+            AppArgs.CurrentSection = Sections.Selected;
             Stalls.ReloadFromDB();
         }
     }

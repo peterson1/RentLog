@@ -1,9 +1,13 @@
-﻿using CommonTools.Lib11.GoogleTools;
+﻿using CommonTools.Lib11.DatabaseTools;
+using CommonTools.Lib11.GoogleTools;
+using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.FileSystemTools;
 using CommonTools.Lib45.LicenseTools;
 using CommonTools.Lib45.LiteDbTools;
 using CommonTools.Lib45.ThreadTools;
 using Mono.Options;
+using RentLog.DomainLib11.DTOs;
+using RentLog.DomainLib11.Repositories;
 using RentLog.DomainLib45.Repositories;
 using System;
 
@@ -14,10 +18,13 @@ namespace RentLog.DomainLib45
         public AppArguments()
         {
             Parse(Environment.GetCommandLineArgs());
-            var db       = new SharedLiteDB(DbFilePath, Credentials?.HumanName ?? "Anonymous");
-            Stalls       = new StallsRepo(db);
-            Sections     = new SectionsRepo(db);
-            ActiveLeases = new ActiveLeasesRepo(db);
+            if (!DbFilePath.IsBlank())
+            {
+                var db       = new SharedLiteDB(DbFilePath, Credentials?.HumanName ?? "Anonymous");
+                Stalls       = new StallsRepo(db);
+                Sections     = new SectionsRepo(db);
+                ActiveLeases = new ActiveLeasesRepo(db);
+            }
         }
 
 
@@ -28,9 +35,12 @@ namespace RentLog.DomainLib45
         public string               SystemName       { get; private set; } = "Rent Logs";
         public string               DbFilePath       { get; private set; }
 
-        public StallsRepo           Stalls           { get; }
-        public SectionsRepo         Sections         { get; }
-        public ActiveLeasesRepo     ActiveLeases     { get; }
+        public IStallsRepo   Stalls         { get; protected set; }
+        public SectionsRepo  Sections       { get; }
+        public ILeasesRepo   ActiveLeases   { get; protected set; }
+
+        public SectionDTO    CurrentSection   { get; set; }
+
 
 
         private void SetCredentials(string key)

@@ -1,28 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using CommonTools.Lib45.UIExtensions;
+using RentLog.DomainLib11.ReportRows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace RentLog.StallsCrud.StallsList
 {
-    /// <summary>
-    /// Interaction logic for StallsTable.xaml
-    /// </summary>
     public partial class StallsTable : UserControl
     {
         public StallsTable()
         {
             InitializeComponent();
+            Loaded += (a, b) =>
+            {
+                dg.ConfirmToDelete<StallRow>(
+                    _ => $"Are you sure you want to delete the entry for “{_.DTO.Name}”?");
+
+                dg.EnableOpenCurrent<StallRow>();
+                dg.ScrollToEndOnChange();
+            };
         }
     }
 }

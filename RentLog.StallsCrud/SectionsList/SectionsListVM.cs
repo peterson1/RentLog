@@ -1,32 +1,40 @@
-﻿using System.Collections.Generic;
-using CommonTools.Lib11.DatabaseTools;
+﻿using CommonTools.Lib11.InputCommands;
 using CommonTools.Lib45.BaseViewModels;
+using CommonTools.Lib45.InputCommands;
+using CommonTools.Lib45.InputDialogs;
 using PropertyChanged;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib45;
+using System;
 
 namespace RentLog.StallsCrud.SectionsList
 {
     [AddINotifyPropertyChangedInterface]
     class SectionsListVM : SavedListVMBase<SectionDTO, AppArguments>
     {
-        //public event EventHandler SectionChanged;
-
-
         public SectionsListVM(AppArguments appArguments) : base(appArguments.Sections, appArguments, true)
         {
+            Crud           = new StallTemplateEditor(appArguments);
+            EditCurrentCmd = R2Command.Relay(EditCurrent, null, "Edit this Section");
         }
+        //todo:access control
+
+        public StallTemplateEditor Crud            { get; }
+        public IR2Command          EditCurrentCmd  { get; }
 
 
-        //public SectionsListVM(AppArguments args)
+        //private void AddNewSection()
         //{
-        //    Items.SetItems(args.Sections.GetAll());
+        //    if (!PopUpInput.TryGetString("Section Name", out string name)) return;
         //}
 
-        //public UIList<SectionDTO>  Items    { get; } = new UIList<SectionDTO>();
-        //public SectionDTO          Current  { get; set; }
 
-        //public void OnCurrentChanged() 
-        //    => SectionChanged?.Invoke(this, EventArgs.Empty);
+        private void EditCurrent()
+        {
+            if (!PopUpInput.TryGetString("Section Name", out string name, Selected.Name)) return;
+            Selected.Name = name;
+            Crud.Section = Selected;
+            Crud.EditCurrentRecord(Selected.StallTemplate);
+        }
     }
 }

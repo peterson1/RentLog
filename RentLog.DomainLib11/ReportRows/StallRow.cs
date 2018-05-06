@@ -1,15 +1,13 @@
 ﻿using CommonTools.Lib11.DataStructures;
 using RentLog.DomainLib11.DTOs;
-using RentLog.DomainLib11.Models;
 
-namespace RentLog.StallsCrud.StallsList
+namespace RentLog.DomainLib11.ReportRows
 {
-    public class StallRowVM : IHasDTO<StallDTO>
+    public class StallRow : IHasDTO<StallDTO>
     {
-        public StallRowVM(StallDTO dto)
+        public StallRow(StallDTO dto)
         {
             DTO = dto;
-            
         }
 
 
