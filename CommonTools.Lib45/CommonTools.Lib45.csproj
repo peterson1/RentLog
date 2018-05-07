@@ -134,6 +134,7 @@
     <Compile Include="LiteDbTools\SharedCollectionBase_Connects.cs" />
     <Compile Include="LiteDbTools\SharedCollectionBase_Reads.cs" />
     <Compile Include="LiteDbTools\SharedCollectionBase_Writes.cs" />
+    <Compile Include="LiteDbTools\SharedCollectionShim.cs" />
     <Compile Include="LiteDbTools\SharedLiteDB.cs" />
     <Compile Include="PrintTools\DataGridPrintExtensions.cs" />
     <Compile Include="PrintTools\MatelichDataGridPaginator.cs" />

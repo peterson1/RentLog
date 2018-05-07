@@ -1,13 +1,11 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
 using CommonTools.Lib11.DataStructures;
-using CommonTools.Lib45.LiteDbTools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RentLog.DomainLib45.Repositories
+namespace CommonTools.Lib45.LiteDbTools
 {
-    //core candidate
     public abstract class SharedCollectionShim<T> : ISimpleRepo<T>
         where T : IDocumentDTO
     {
@@ -31,8 +29,16 @@ namespace RentLog.DomainLib45.Repositories
 
 
         public virtual List<T> GetAll ()                => _colxn.GetAll();
-        public virtual int     Insert (T newRecord)     => _colxn.Insert(newRecord);
         public virtual bool    Delete (T record)        => _colxn.Delete(record);
         public virtual bool    Update (T changedRecord) => _colxn.Update(changedRecord);
+
+
+        public virtual int Insert(T newRecord)
+        {
+            BeforeInsert(newRecord);
+            return _colxn.Insert(newRecord);
+        }
+
+        protected virtual void BeforeInsert(T newRecord) { }
     }
 }
