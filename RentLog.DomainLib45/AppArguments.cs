@@ -6,6 +6,7 @@ using CommonTools.Lib45.LicenseTools;
 using CommonTools.Lib45.LiteDbTools;
 using CommonTools.Lib45.ThreadTools;
 using Mono.Options;
+using RentLog.DatabaseLib.StallsRepository;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.Repositories;
 using RentLog.DomainLib45.Repositories;
@@ -18,13 +19,9 @@ namespace RentLog.DomainLib45
         public AppArguments()
         {
             Parse(Environment.GetCommandLineArgs());
+
             if (!DbFilePath.IsBlank())
-            {
-                var db       = new SharedLiteDB(DbFilePath, Credentials?.HumanName ?? "Anonymous");
-                Stalls       = new StallsRepo(db);
-                Sections     = new SectionsRepo(db);
-                ActiveLeases = new ActiveLeasesRepo(db);
-            }
+                DB = ConnectToDatabases();
         }
 
 
@@ -35,12 +32,25 @@ namespace RentLog.DomainLib45
         public string               SystemName       { get; private set; } = "Rent Logs";
         public string               DbFilePath       { get; private set; }
 
-        public IStallsRepo   Stalls         { get; protected set; }
-        public SectionsRepo  Sections       { get; }
-        public ILeasesRepo   ActiveLeases   { get; protected set; }
+        public AllRepositories      DB               { get; }
+
+        //public IStallsRepo   Stalls         { get; protected set; }
+        //public SectionsRepo  Sections       { get; }
+        //public ILeasesRepo   ActiveLeases   { get; protected set; }
 
         public SectionDTO    CurrentSection   { get; set; }
 
+
+        private AllRepositories ConnectToDatabases()
+        {
+            var all          = new AllRepositories();
+            var db           = new SharedLiteDB(DbFilePath, Credentials?.HumanName ?? "Anonymous");
+            all.Stalls       =  new StallsRepo1(new StallsCollection(db), all);
+            all.Sections     = new SectionsRepo(db);
+            all.ActiveLeases = new ActiveLeasesRepo(db);
+
+            return all;
+        }
 
 
         private void SetCredentials(string key)

@@ -1,11 +1,12 @@
-﻿using CommonTools.Lib45.LiteDbTools;
+﻿using CommonTools.Lib11.DatabaseTools;
+using CommonTools.Lib45.LiteDbTools;
 using LiteDB;
 using RentLog.DatabaseLib.SectionsRepository;
 using RentLog.DomainLib11.DTOs;
 
 namespace RentLog.DatabaseLib.StallsRepository
 {
-    public class StallsCollection : NamedCollectionBase<StallDTO>
+    public class StallsCollection : NamedCollectionBase<StallDTO>, ISimpleRepo<StallDTO>
     {
         internal const string COLXN_NAME = "StallModel";
 
