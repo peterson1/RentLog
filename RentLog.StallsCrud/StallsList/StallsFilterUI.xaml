@@ -13,20 +13,28 @@
                    BasedOn="{StaticResource filterTxtbox}" />
         </Grid.Resources>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="15*" />
-            <ColumnDefinition Width="33*" />
+            <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="13*" />
+            <ColumnDefinition Width="09*" />
+            <ColumnDefinition Width="09*" />
+            <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="07*" />
             <ColumnDefinition Width="10*" />
             <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="12*" />
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="08*" />
+            <ColumnDefinition Width="07*" />
+            <ColumnDefinition Width="07*" />
         </Grid.ColumnDefinitions>
-        <TextBox Grid.Column="0" mat:HintAssist.Hint="stall"             Text="{Binding FilterStall           , UpdateSourceTrigger=PropertyChanged}" />
-        <TextBox Grid.Column="1" mat:HintAssist.Hint="occupant"          Text="{Binding FilterOccupant        , UpdateSourceTrigger=PropertyChanged}" />
-        <TextBox Grid.Column="2" mat:HintAssist.Hint="rent rate"         Text="{Binding FilterRentRate        , UpdateSourceTrigger=PropertyChanged}" />
-        <TextBox Grid.Column="3" mat:HintAssist.Hint="grace period"      Text="{Binding FilterGracePeriod     , UpdateSourceTrigger=PropertyChanged}" />
-        <TextBox Grid.Column="4" mat:HintAssist.Hint="total rights"      Text="{Binding FilterTotalRights     , UpdateSourceTrigger=PropertyChanged}" />
-        <TextBox Grid.Column="5" mat:HintAssist.Hint="rights settlement" Text="{Binding FilterRightsSettlement, UpdateSourceTrigger=PropertyChanged}" />
-        <TextBox Grid.Column="6" mat:HintAssist.Hint="operational"       Text="{Binding FilterIsOperational   , UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="00" mat:HintAssist.Hint="stall"             Text="{Binding FilterStall           , UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="01" mat:HintAssist.Hint="occupant"          Text="{Binding FilterOccupant        , UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="02" mat:HintAssist.Hint="rent rate"         Text="{Binding FilterRentRate        , UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="03" mat:HintAssist.Hint="interval"          Text="{Binding FilterBillInterval    , UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="04" mat:HintAssist.Hint="grace period"      Text="{Binding FilterGracePeriod     , UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="05" mat:HintAssist.Hint="rent surcharge"    Text="{Binding FilterRentSurcharge   , UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="06" mat:HintAssist.Hint="total rights"      Text="{Binding FilterTotalRights     , UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="07" mat:HintAssist.Hint="rights settlement" Text="{Binding FilterRightsSettlement, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="08" mat:HintAssist.Hint="rights penalty 1"  Text="{Binding FilterRightsSurcharge1, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="09" mat:HintAssist.Hint="rights surcharge"  Text="{Binding FilterRightsSurcharge2, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="10" mat:HintAssist.Hint="operational"       Text="{Binding FilterIsOperational   , UpdateSourceTrigger=PropertyChanged}" />
     </Grid>
 </UserControl>

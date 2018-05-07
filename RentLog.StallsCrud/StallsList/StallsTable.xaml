@@ -12,13 +12,17 @@
               HeadersVisibility="None"
               x:Name="dg">
         <DataGrid.Columns>
-            <DataGridTextColumn Width="15*" Header="stall"             Binding="{Binding DTO.Name}" ElementStyle="{StaticResource colLabelCenter}" />
-            <DataGridTextColumn Width="33*" Header="occupant"          Binding="{Binding Occupant.Tenant}" />
-            <DataGridTextColumn Width="10*" Header="rent rate"         Binding="{Binding DTO.DefaultRent.RegularRate, StringFormat=N2}" ElementStyle="{StaticResource colRight}" />
+            <DataGridTextColumn Width="10*" Header="stall"             Binding="{Binding DTO.Name}" ElementStyle="{StaticResource colLabelCenter}" />
+            <DataGridTextColumn Width="13*" Header="occupant"          Binding="{Binding Occupant.Tenant}" />
+            <DataGridTextColumn Width="09*" Header="rent rate"         Binding="{Binding DTO.DefaultRent.RegularRate, StringFormat=N2}" ElementStyle="{StaticResource colCenter}" />
+            <DataGridTextColumn Width="09*" Header="interval"          Binding="{Binding DTO.DefaultRent.Interval}" ElementStyle="{StaticResource colCenter}" />
             <DataGridTextColumn Width="10*" Header="grace period"      Binding="{Binding DTO.DefaultRent.GracePeriodDays, StringFormat={}{0} days}" ElementStyle="{StaticResource colCenter}" />
-            <DataGridTextColumn Width="12*" Header="total rights"      Binding="{Binding DTO.DefaultRights.TotalAmount, StringFormat=N2}" ElementStyle="{StaticResource colRight}" />
+            <DataGridTextColumn Width="07*" Header="rent surcharge"    Binding="{Binding DTO.DefaultRent.PenaltyRate1, StringFormat=P1}" ElementStyle="{StaticResource colCenter}" />
+            <DataGridTextColumn Width="10*" Header="total rights"      Binding="{Binding DTO.DefaultRights.TotalAmount, StringFormat=N2}" ElementStyle="{StaticResource colRight}" />
             <DataGridTextColumn Width="10*" Header="rights settlement" Binding="{Binding DTO.DefaultRights.SettlementDays, StringFormat={}{0} days}" ElementStyle="{StaticResource colCenter}" />
-            <DataGridTextColumn Width="10*" Header="operational"       Binding="{Binding DTO.IsOperational}" ElementStyle="{StaticResource colCenter}" />
+            <DataGridTextColumn Width="08*" Header="rights penalty 1"  Binding="{Binding DTO.DefaultRights.PenaltyRate1, StringFormat=P1}" ElementStyle="{StaticResource colCenter}" />
+            <DataGridTextColumn Width="07*" Header="rights surcharge"  Binding="{Binding DTO.DefaultRights.PenaltyRate2, StringFormat=P1}" ElementStyle="{StaticResource colCenter}" />
+            <DataGridTextColumn Width="07*" Header="operational"       Binding="{Binding DTO.IsOperational}" ElementStyle="{StaticResource colCenter}" />
         </DataGrid.Columns>
     </DataGrid>
 </UserControl>
