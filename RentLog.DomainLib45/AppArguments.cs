@@ -5,6 +5,7 @@ using CommonTools.Lib45.ThreadTools;
 using Mono.Options;
 using RentLog.DatabaseLib.DatabaseFinders;
 using RentLog.DomainLib11.BalanceRepos;
+using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
 using System;
@@ -18,6 +19,7 @@ namespace RentLog.DomainLib45
             Parse(Environment.GetCommandLineArgs());
             CurrentUser = Credentials?.HumanName ?? "Anonymous";
             MarketState = MarketStateDBFile.Load(DbFilePath, CurrentUser);
+            Collections = new CollectionsDBFolder(DbFilePath, CurrentUser);
             Balances    = new BalancesDBFolder(DbFilePath, CurrentUser);
         }
 
@@ -31,6 +33,7 @@ namespace RentLog.DomainLib45
         public string               DbFilePath       { get; private set; }
 
         public MarketStateDB        MarketState      { get; }
+        public ICollectionDBs       Collections      { get; }
         public IBalanceDBs          Balances         { get; }
         public SectionDTO           CurrentSection   { get; set; }
 

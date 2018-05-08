@@ -1,4 +1,5 @@
 ﻿using CommonTools.Lib11.DataStructures;
+using CommonTools.Lib11.DTOs;
 using LiteDB;
 using System;
 using System.Collections.Generic;

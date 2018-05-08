@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace CommonTools.Lib11.DatabaseTools
 {
-    public abstract class SimpleRepoShimBase<T>
+    public abstract class SimpleRepoShimBase<T> : ISimpleRepo<T>
     {
         public event EventHandler<T> ContentChanged = delegate { };
 
@@ -27,6 +27,7 @@ namespace CommonTools.Lib11.DatabaseTools
 
 
         public List<T> GetAll() => ToSortedList(_repo.GetAll());
+        public T Find(int recordId, bool errorIfMissing) => _repo.Find(recordId, errorIfMissing);
 
 
         public int Insert(T newRecord)

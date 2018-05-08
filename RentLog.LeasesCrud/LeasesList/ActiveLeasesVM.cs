@@ -15,7 +15,8 @@ namespace RentLog.LeasesCrud.LeasesList
         protected override ActiveLeaseRow CastToRow(LeaseDTO lse)
         {
             var row           = new ActiveLeaseRow(lse);
-            var bill          = AppArgs.Balances.GetLatest(lse);
+            var date          = AppArgs.Collections.LastPostedDate();
+            var bill          = AppArgs.Balances.GetBill(lse, date);
             row.RentBalance   = bill.For(BillCode.Rent  ).OpeningBalance;
             row.RightsBalance = bill.For(BillCode.Rights).OpeningBalance;
             return row;

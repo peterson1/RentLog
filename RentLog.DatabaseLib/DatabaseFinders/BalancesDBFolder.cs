@@ -15,12 +15,6 @@ namespace RentLog.DatabaseLib.DatabaseFinders
         }
 
 
-        protected override DateTime GetLastClosedDate()
-        {
-            throw new NotImplementedException();
-        }
-
-
         protected override IDailyBillsRepo GetRepo(LeaseDTO lse)
         {
             throw new NotImplementedException();

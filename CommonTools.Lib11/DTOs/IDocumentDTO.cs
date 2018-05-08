@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CommonTools.Lib11.DataStructures
+namespace CommonTools.Lib11.DTOs
 {
     public interface IDocumentDTO
     {

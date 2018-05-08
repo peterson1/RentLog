@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseFinders\BalancesDBFolder.cs" />
+    <Compile Include="DatabaseFinders\CollectionsDBFolder.cs" />
     <Compile Include="DatabaseFinders\MarketStateDBFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LeasesRepository\ActiveLeasesCollection.cs" />

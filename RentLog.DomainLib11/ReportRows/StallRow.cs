@@ -1,4 +1,5 @@
 ﻿using CommonTools.Lib11.DataStructures;
+using CommonTools.Lib11.DTOs;
 using RentLog.DomainLib11.DTOs;
 
 namespace RentLog.DomainLib11.ReportRows

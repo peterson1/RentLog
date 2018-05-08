@@ -1,4 +1,4 @@
-﻿using CommonTools.Lib11.DataStructures;
+﻿using CommonTools.Lib11.DTOs;
 using CommonTools.Lib11.ExceptionTools;
 using LiteDB;
 using System;

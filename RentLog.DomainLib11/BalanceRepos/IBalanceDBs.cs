@@ -5,7 +5,6 @@ namespace RentLog.DomainLib11.BalanceRepos
 {
     public interface IBalanceDBs
     {
-        DateTime      LastClosedDate { get; }
-        DailyBillDTO  GetLatest      (LeaseDTO lse);
+        DailyBillDTO  GetBill  (LeaseDTO lse, DateTime date);
     }
 }

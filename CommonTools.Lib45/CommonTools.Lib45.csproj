@@ -128,7 +128,6 @@
       <DependentUpon>PopUpInputStringWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="LicenseTools\SeatLicenser.cs" />
-    <Compile Include="LiteDbTools\DbMetadata.cs" />
     <Compile Include="LiteDbTools\MetadataCollection.cs" />
     <Compile Include="LiteDbTools\NamedCollectionBase.cs" />
     <Compile Include="LiteDbTools\SharedCollectionBase_Connects.cs" />

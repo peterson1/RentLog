@@ -5,24 +5,14 @@ namespace RentLog.DomainLib11.BalanceRepos
 {
     public abstract class BalanceDBsBase : IBalanceDBs
     {
-        public BalanceDBsBase()
-        {
-            LastClosedDate = GetLastClosedDate();
-        }
+        protected abstract IDailyBillsRepo GetRepo(LeaseDTO lse);
 
 
-        public DateTime LastClosedDate { get; }
-
-
-        protected abstract DateTime        GetLastClosedDate ();
-        protected abstract IDailyBillsRepo GetRepo           (LeaseDTO lse);
-
-
-        public DailyBillDTO GetLatest(LeaseDTO lse)
+        public DailyBillDTO GetBill(LeaseDTO lse, DateTime date)
         {
             var repo = GetRepo(lse);
-            throw new NotImplementedException();
+            var id   = date.ToBillID();
+            return repo.Find(id, true);
         }
-
     }
 }

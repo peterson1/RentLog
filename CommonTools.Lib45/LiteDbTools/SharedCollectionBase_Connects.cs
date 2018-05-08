@@ -1,4 +1,5 @@
 ﻿using CommonTools.Lib11.DataStructures;
+using CommonTools.Lib11.DTOs;
 using LiteDB;
 
 namespace CommonTools.Lib45.LiteDbTools
