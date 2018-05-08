@@ -18,7 +18,7 @@ namespace RentLog.StallsCrud.StallCRUD
         protected override string CaptionPrefix   => "Stall";
 
 
-        public StallCrudVM(AppArguments appArguments) : base(appArguments.Stalls, appArguments)
+        public StallCrudVM(AppArguments appArguments) : base(appArguments.DB.Stalls, appArguments)
         {
         }
 

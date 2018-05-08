@@ -1,15 +1,15 @@
-﻿using CommonTools.Lib11.DatabaseTools;
-using CommonTools.Lib11.GoogleTools;
+﻿using CommonTools.Lib11.GoogleTools;
 using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.FileSystemTools;
 using CommonTools.Lib45.LicenseTools;
 using CommonTools.Lib45.LiteDbTools;
 using CommonTools.Lib45.ThreadTools;
 using Mono.Options;
+using RentLog.DatabaseLib.LeasesRepository;
+using RentLog.DatabaseLib.SectionsRepository;
 using RentLog.DatabaseLib.StallsRepository;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.Repositories;
-using RentLog.DomainLib45.Repositories;
 using System;
 
 namespace RentLog.DomainLib45
@@ -45,10 +45,9 @@ namespace RentLog.DomainLib45
         {
             var all          = new AllRepositories();
             var db           = new SharedLiteDB(DbFilePath, Credentials?.HumanName ?? "Anonymous");
-            all.Stalls       =  new StallsRepo1(new StallsCollection(db), all);
-            all.Sections     = new SectionsRepo(db);
-            all.ActiveLeases = new ActiveLeasesRepo(db);
-
+            all.Stalls       = new StallsRepo1(new StallsCollection(db), all);
+            all.Sections     = new SectionsRepo1(new SectionsCollection(db), all);
+            all.ActiveLeases = new ActiveLeasesRepo1(new ActiveLeasesCollection(db), all);
             return all;
         }
 

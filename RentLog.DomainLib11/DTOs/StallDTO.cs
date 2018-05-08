@@ -23,5 +23,9 @@ namespace RentLog.DomainLib11.DTOs
         public T DeepClone   <T>() => throw new NotImplementedException();
         public T ShallowClone<T>() => (T)this.MemberwiseClone();
         public override string ToString() => Name;
+
+
+        public static StallDTO Named(string name)
+            => new StallDTO { Name = name };
     }
 }

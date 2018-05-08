@@ -18,10 +18,6 @@ namespace CommonTools.Lib45.ApplicationTools
             TArg args = default(TArg);
             SafeExecute(() => args = new TArg(), "Parsing arguments");
             SafeExecute(() => actionOnArguments(args), "Consuming arguments");
-
-            //todo: find a place for this
-            //app.Exit += (s, e) => RunOnExit(args);
-            //AccessControlExtensions.OnUnauthorizedAccess = s => ShowNotAllowed(s);
         }
 
 

@@ -63,9 +63,6 @@
   <ItemGroup>
     <Compile Include="AppArguments.cs" />
     <Compile Include="BaseViewModels\BrandedWindowBase.cs" />
-    <Compile Include="Repositories\ActiveLeasesRepo.cs" />
-    <Compile Include="Repositories\SectionsRepo.cs" />
-    <Compile Include="Repositories\StallsRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

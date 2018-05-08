@@ -1,11 +1,12 @@
-﻿using CommonTools.Lib45.LiteDbTools;
+﻿using CommonTools.Lib11.DatabaseTools;
+using CommonTools.Lib45.LiteDbTools;
 using LiteDB;
 using RentLog.DatabaseLib.StallsRepository;
 using RentLog.DomainLib11.DTOs;
 
 namespace RentLog.DatabaseLib.LeasesRepository
 {
-    public class ActiveLeasesCollection : NamedCollectionBase<LeaseDTO>
+    public class ActiveLeasesCollection : NamedCollectionBase<LeaseDTO>, ISimpleRepo<LeaseDTO>
     {
         private const string COLXN_NAME = "ActiveLeases";
 

@@ -12,8 +12,19 @@ namespace RentLog.DomainLib11.Authorization
         public static bool CanAddStall(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
             "Add Stall", "Supervisor", "Admin");
 
+        public static bool CanEditStall(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
+            "Edit Stall", "Supervisor", "Admin");
+
         public static bool CanDeleteStall(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
             "Delete Stall", "Supervisor", "Admin");
+
+
+
+        public static bool CanAddSection(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
+            "Add Section", "Supervisor", "Admin");
+
+        public static bool CanEditSection(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
+            "Edit Section", "Supervisor", "Admin");
 
 
 

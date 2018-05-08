@@ -3,6 +3,7 @@ using CommonTools.Lib11.EnumTools;
 using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.BaseViewModels;
 using CommonTools.Lib45.InputDialogs;
+using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.Models;
 using RentLog.DomainLib45;
@@ -29,8 +30,12 @@ namespace RentLog.StallsCrud.SectionsList
         protected override void SaveNewRecord(StallDTO draft)
         {
             Section.StallTemplate = draft;
-            AppArgs.Sections.Insert(Section);
+            AppArgs.DB.Sections.Insert(Section);
         }
+
+
+        protected override bool CanEncodeNewDraft()
+            => AppArgs.CanAddSection(false);
 
 
         protected override StallDTO GetNewDraft()
@@ -44,34 +49,28 @@ namespace RentLog.StallsCrud.SectionsList
         {
             Name          = sectionName + " {0:000}",
             Section       = new SectionDTO { Name = sectionName },
-            DefaultRent   = GetDefaultRentParams(),
-            DefaultRights = GetDefaultRightsParams(),
+            DefaultRent   = new RentParams
+            {
+                Interval        = BillInterval.Daily,
+                GracePeriodDays = 3,
+                PenaltyRule     = "Daily Surcharge",
+                PenaltyRate1    = 0.03M,
+            },
+            DefaultRights = new RightsParams
+            {
+                SettlementDays = 180,
+                PenaltyRule    = "Daily Surcharge after 90 days",
+                PenaltyRate1   = 0.2M,
+                PenaltyRate2   = 0.03M
+            },
             IsOperational = true,
-        };
-
-        //todo: show this in UI
-        private RentParams GetDefaultRentParams() => new RentParams
-        {
-            Interval        = BillInterval.Daily,
-            GracePeriodDays = 3,
-            PenaltyRule     = "Daily Surcharge",
-            PenaltyRate1    = 0.03M,
-        };
-
-        //todo: show this in UI
-        private RightsParams GetDefaultRightsParams() => new RightsParams
-        {
-            SettlementDays = 180,
-            PenaltyRule    = "Daily Surcharge after 90 days",
-            PenaltyRate1   = 0.2M,
-            PenaltyRate2   = 0.03M
         };
 
 
         protected override void UpdateRecord(StallDTO record)
         {
             Section.StallTemplate = record;
-            AppArgs.Sections.Update(Section);
+            AppArgs.DB.Sections.Update(Section);
         }
 
 
