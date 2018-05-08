@@ -12,5 +12,19 @@ namespace RentLog.DomainLib11.Repositories
         public SectionsRepo1(ISimpleRepo<SectionDTO> simpleRepo, AllRepositories allRepositories) : base(simpleRepo, allRepositories)
         {
         }
+
+
+        protected override void ValidateBeforeInsert(SectionDTO newRecord)
+        {
+            this.RejectDuplicateRecord(_ => _.Name == newRecord.Name, 
+                nameof(newRecord.Name), newRecord);
+        }
+
+
+        protected override void ValidateBeforeUpdate(SectionDTO changedRecord)
+        {
+            this.RejectDuplicateRecord(_ => _.Name == changedRecord.Name,
+                nameof(changedRecord.Name), changedRecord);
+        }
     }
 }

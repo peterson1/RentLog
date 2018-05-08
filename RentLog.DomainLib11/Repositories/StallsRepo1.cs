@@ -15,7 +15,15 @@ namespace RentLog.DomainLib11.Repositories
 
         protected override void ValidateBeforeInsert(StallDTO newRecord)
         {
-            this.RejectDuplicateName(newRecord);
+            this.RejectDuplicateRecord(_ => _.Name == newRecord.Name,
+                nameof(newRecord.Name), newRecord);
+        }
+
+
+        protected override void ValidateBeforeUpdate(StallDTO changedRecord)
+        {
+            this.RejectDuplicateRecord(_ => _.Name == changedRecord.Name,
+                nameof(changedRecord.Name), changedRecord);
         }
 
 
