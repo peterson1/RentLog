@@ -6,7 +6,7 @@ using RentLog.DomainLib45;
 using CommonTools.Lib11.DataStructures;
 using RentLog.DomainLib11.Models;
 using CommonTools.Lib11.EnumTools;
-using RentLog.DomainLib11.Repositories;
+using RentLog.DomainLib11.MarketStateRepos;
 using System;
 using System.Linq;
 
@@ -18,7 +18,7 @@ namespace RentLog.StallsCrud.StallCRUD
         protected override string CaptionPrefix   => "Stall";
 
 
-        public StallCrudVM(AppArguments appArguments) : base(appArguments.DB.Stalls, appArguments)
+        public StallCrudVM(AppArguments appArguments) : base(appArguments.MarketState.Stalls, appArguments)
         {
         }
 

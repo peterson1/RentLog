@@ -1,15 +1,12 @@
 ﻿using CommonTools.Lib11.GoogleTools;
-using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.FileSystemTools;
 using CommonTools.Lib45.LicenseTools;
-using CommonTools.Lib45.LiteDbTools;
 using CommonTools.Lib45.ThreadTools;
 using Mono.Options;
-using RentLog.DatabaseLib.LeasesRepository;
-using RentLog.DatabaseLib.SectionsRepository;
-using RentLog.DatabaseLib.StallsRepository;
+using RentLog.DatabaseLib.DatabaseFinders;
+using RentLog.DomainLib11.BalanceRepos;
 using RentLog.DomainLib11.DTOs;
-using RentLog.DomainLib11.Repositories;
+using RentLog.DomainLib11.MarketStateRepos;
 using System;
 
 namespace RentLog.DomainLib45
@@ -19,37 +16,23 @@ namespace RentLog.DomainLib45
         public AppArguments()
         {
             Parse(Environment.GetCommandLineArgs());
-
-            if (!DbFilePath.IsBlank())
-                DB = ConnectToDatabases();
+            CurrentUser = Credentials?.HumanName ?? "Anonymous";
+            MarketState = MarketStateDBFile.Load(DbFilePath, CurrentUser);
+            Balances    = new BalancesDBFolder(DbFilePath, CurrentUser);
         }
 
 
         public string               UpdatedCopyPath  { get; private set; }
         public bool                 IsValidUser      { get; private set; }
         public FirebaseCredentials  Credentials      { get; private set; }
+        public string               CurrentUser      { get; }
 
         public string               SystemName       { get; private set; } = "Rent Logs";
         public string               DbFilePath       { get; private set; }
 
-        public AllRepositories      DB               { get; }
-
-        //public IStallsRepo   Stalls         { get; protected set; }
-        //public SectionsRepo  Sections       { get; }
-        //public ILeasesRepo   ActiveLeases   { get; protected set; }
-
-        public SectionDTO    CurrentSection   { get; set; }
-
-
-        private AllRepositories ConnectToDatabases()
-        {
-            var all          = new AllRepositories();
-            var db           = new SharedLiteDB(DbFilePath, Credentials?.HumanName ?? "Anonymous");
-            all.Stalls       = new StallsRepo1(new StallsCollection(db), all);
-            all.Sections     = new SectionsRepo1(new SectionsCollection(db), all);
-            all.ActiveLeases = new ActiveLeasesRepo1(new ActiveLeasesCollection(db), all);
-            return all;
-        }
+        public MarketStateDB        MarketState      { get; }
+        public IBalanceDBs          Balances         { get; }
+        public SectionDTO           CurrentSection   { get; set; }
 
 
         private void SetCredentials(string key)

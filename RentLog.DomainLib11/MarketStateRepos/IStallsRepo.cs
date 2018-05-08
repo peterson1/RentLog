@@ -2,7 +2,7 @@
 using RentLog.DomainLib11.DTOs;
 using System.Collections.Generic;
 
-namespace RentLog.DomainLib11.Repositories
+namespace RentLog.DomainLib11.MarketStateRepos
 {
     public interface IStallsRepo : ISimpleRepo<StallDTO>
     {

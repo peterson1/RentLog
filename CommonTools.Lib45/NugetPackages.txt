@@ -14,6 +14,10 @@ Install-Package MaterialDesignThemes
 for each exe:
 Install-Package PropertyChanged.Fody
 Install-Package Costura.Fody
-Install-Package Mono.Options
 Install-Package MaterialDesignThemes
 Install-Package Newtonsoft.Json
+
+optional:
+Install-Package Dragablz
+Install-Package MaterialDesignColors
+Install-Package Mono.Options

@@ -1,9 +1,9 @@
 ﻿using Moq;
-using RentLog.DomainLib11.Repositories;
+using RentLog.DomainLib11.MarketStateRepos;
 
 namespace RentLog.Tests.TestTools
 {
-    class MockDB : AllRepositories
+    class MockDB : MarketStateDB
     {
         public MockDB()
         {

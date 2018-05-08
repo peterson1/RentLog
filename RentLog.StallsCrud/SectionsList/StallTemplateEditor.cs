@@ -30,7 +30,7 @@ namespace RentLog.StallsCrud.SectionsList
         protected override void SaveNewRecord(StallDTO draft)
         {
             Section.StallTemplate = draft;
-            AppArgs.DB.Sections.Insert(Section);
+            AppArgs.MarketState.Sections.Insert(Section);
         }
 
 
@@ -71,7 +71,7 @@ namespace RentLog.StallsCrud.SectionsList
         protected override void UpdateRecord(StallDTO record)
         {
             Section.StallTemplate = record;
-            AppArgs.DB.Sections.Update(Section);
+            AppArgs.MarketState.Sections.Update(Section);
         }
 
 

@@ -1,6 +1,6 @@
-﻿namespace RentLog.DomainLib11.Repositories
+﻿namespace RentLog.DomainLib11.MarketStateRepos
 {
-    public class AllRepositories
+    public class MarketStateDB
     {
         public virtual IStallsRepo    Stalls        { get; set; }
         public virtual ISectionsRepo  Sections      { get; set; }

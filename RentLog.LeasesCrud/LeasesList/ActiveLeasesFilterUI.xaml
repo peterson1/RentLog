@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="RentLog.LeasesCrud.LeasesList.ActiveLeasesFilterUI"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RentLog.LeasesCrud.LeasesList"
+             xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="TextBox" 
+               BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+            <Setter Property="Margin" Value="0 0 5 0" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+        </Style>
+    </UserControl.Resources>
+    <Grid DataContext="{Binding }">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="12*" />
+            <ColumnDefinition Width="09*" />
+            <ColumnDefinition Width="09*" />
+            <ColumnDefinition Width="09*" />
+            <ColumnDefinition Width="06*" />
+            <ColumnDefinition Width="08*" />
+            <ColumnDefinition Width="09*" />
+            <ColumnDefinition Width="08*" />
+
+            <ColumnDefinition Width="05*" />
+            <ColumnDefinition Width="05*" />
+
+            <ColumnDefinition Width="14*" />
+            <ColumnDefinition Width="06*" />
+        </Grid.ColumnDefinitions>
+        <TextBox Grid.Column="0" mat:HintAssist.Hint="tenant"          Text="{Binding TenantFilter       , UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="1" mat:HintAssist.Hint="stall"           Text="{Binding StallFilter        , UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="2" mat:HintAssist.Hint="start"           Text="{Binding ContractStartFilter, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="3" mat:HintAssist.Hint="end"             Text="{Binding ContractEndFilter  , UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="4" mat:HintAssist.Hint="interval"        Text="{Binding RentIntervalFilter , UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="5" mat:HintAssist.Hint="rent rate"       Text="{Binding RentRateFilter     , UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="6" mat:HintAssist.Hint="total rights"    Text="{Binding TotalRightsFilter  , UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="7" mat:HintAssist.Hint="rights due"      Text="{Binding RightsDueFilter    , UpdateSourceTrigger=PropertyChanged}" />
+
+        <TextBox Grid.Column="8" mat:HintAssist.Hint="rent balance"   />
+        <TextBox Grid.Column="9" mat:HintAssist.Hint="rights balance" />
+
+        <TextBox Grid.Column="10" mat:HintAssist.Hint="product to sell" Text="{Binding ProductToSellFilter, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="11" mat:HintAssist.Hint="remarks"         Text="{Binding RemarksFilter      , UpdateSourceTrigger=PropertyChanged}" />
+    </Grid>
+</UserControl>

@@ -4,11 +4,11 @@ using RentLog.DomainLib11.Validations;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RentLog.DomainLib11.Repositories
+namespace RentLog.DomainLib11.MarketStateRepos
 {
-    public class StallsRepo1 : AllReposShimBase<StallDTO>, IStallsRepo
+    public class StallsRepo1 : MarketStateRepoShimBase<StallDTO>, IStallsRepo
     {
-        public StallsRepo1(ISimpleRepo<StallDTO> simpleRepo, AllRepositories allRepositories) : base(simpleRepo, allRepositories)
+        public StallsRepo1(ISimpleRepo<StallDTO> simpleRepo, MarketStateDB allRepositories) : base(simpleRepo, allRepositories)
         {
         }
 

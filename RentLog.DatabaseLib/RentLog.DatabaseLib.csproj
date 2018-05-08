@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseFinders\BalancesDBFolder.cs" />
+    <Compile Include="DatabaseFinders\MarketStateDBFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LeasesRepository\ActiveLeasesCollection.cs" />
     <Compile Include="SectionsRepository\SectionsCollection.cs" />
@@ -65,5 +67,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

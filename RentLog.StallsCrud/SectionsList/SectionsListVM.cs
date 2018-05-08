@@ -13,7 +13,7 @@ namespace RentLog.StallsCrud.SectionsList
     [AddINotifyPropertyChangedInterface]
     class SectionsListVM : SavedListVMBase<SectionDTO, AppArguments>
     {
-        public SectionsListVM(AppArguments appArguments) : base(appArguments.DB.Sections, appArguments, true)
+        public SectionsListVM(AppArguments appArguments) : base(appArguments.MarketState.Sections, appArguments, true)
         {
             Crud           = new StallTemplateEditor(appArguments);
             EditCurrentCmd = R2Command.Relay(EditCurrent, _ => CanEditRecord(AppArgs.CurrentSection), "Edit this Section");

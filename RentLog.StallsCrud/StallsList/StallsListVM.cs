@@ -20,10 +20,10 @@ namespace RentLog.StallsCrud.StallsList
         private LeaseDTO _vacant = GetVacantPlaceHoder();
 
 
-        public StallsListVM(AppArguments appArguments) : base(appArguments.DB.Stalls, appArguments, false)
+        public StallsListVM(AppArguments appArguments) : base(appArguments.MarketState.Stalls, appArguments, false)
         {
             Crud             = new StallCrudVM(appArguments);
-            _stallIdToLeases = AppArgs.DB.ActiveLeases.StallsLookup();
+            _stallIdToLeases = AppArgs.MarketState.ActiveLeases.StallsLookup();
         }
 
 
@@ -31,7 +31,7 @@ namespace RentLog.StallsCrud.StallsList
 
 
         protected override List<StallDTO> QueryItems(ISimpleRepo<StallDTO> db)
-            => AppArgs.DB.Stalls.ForSection(AppArgs.CurrentSection);
+            => AppArgs.MarketState.Stalls.ForSection(AppArgs.CurrentSection);
 
 
         protected override StallRow CastToRow(StallDTO dto)

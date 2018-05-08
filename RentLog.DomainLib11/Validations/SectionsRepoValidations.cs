@@ -1,6 +1,6 @@
 ﻿using CommonTools.Lib11.ExceptionTools;
 using RentLog.DomainLib11.DTOs;
-using RentLog.DomainLib11.Repositories;
+using RentLog.DomainLib11.MarketStateRepos;
 using System.Linq;
 
 namespace RentLog.DomainLib11.Validations

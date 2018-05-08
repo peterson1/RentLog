@@ -3,7 +3,7 @@ using CommonTools.Lib11.ExceptionTools;
 using FluentAssertions;
 using Moq;
 using RentLog.DomainLib11.DTOs;
-using RentLog.DomainLib11.Repositories;
+using RentLog.DomainLib11.MarketStateRepos;
 using RentLog.Tests.TestTools;
 using System.Collections.Generic;
 using Xunit;

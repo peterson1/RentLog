@@ -5,11 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RentLog.DomainLib11.Repositories
+namespace RentLog.DomainLib11.MarketStateRepos
 {
-    public class SectionsRepo1 : AllReposShimBase<SectionDTO>, ISectionsRepo
+    public class SectionsRepo1 : MarketStateRepoShimBase<SectionDTO>, ISectionsRepo
     {
-        public SectionsRepo1(ISimpleRepo<SectionDTO> simpleRepo, AllRepositories allRepositories) : base(simpleRepo, allRepositories)
+        public SectionsRepo1(ISimpleRepo<SectionDTO> simpleRepo, MarketStateDB allRepositories) : base(simpleRepo, allRepositories)
         {
         }
 
