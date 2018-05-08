@@ -40,7 +40,8 @@ namespace RentLog.StallsCrud.SectionsList
 
         protected override StallDTO GetNewDraft()
         {
-            if (!PopUpInput.TryGetString("Section Name", out string name)) return null;
+            if (!PopUpInput.TryGetString("Section Name", out string name, "Section")) return null;
+            Section = SectionDTO.Named(name);
             return GetDefaultStallTemplate(name);
         }
 
@@ -48,7 +49,7 @@ namespace RentLog.StallsCrud.SectionsList
         private StallDTO GetDefaultStallTemplate(string sectionName) => new StallDTO
         {
             Name          = sectionName + " {0:000}",
-            Section       = new SectionDTO { Name = sectionName },
+            Section       = this.Section,
             DefaultRent   = new RentParams
             {
                 Interval        = BillInterval.Daily,

@@ -6,6 +6,7 @@ using PropertyChanged;
 using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib45;
+using System.Linq;
 
 namespace RentLog.StallsCrud.SectionsList
 {

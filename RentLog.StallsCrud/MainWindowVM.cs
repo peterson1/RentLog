@@ -28,6 +28,11 @@ namespace RentLog.StallsCrud
 
         protected override void OnRefreshClicked()
         {
+            if (Sections.Selected == null)
+                Sections.Selected = Sections.ItemsList.FirstOrDefault();
+
+            if (Sections.Selected == null) return;
+
             AppArgs.CurrentSection = Sections.Selected;
             Stalls.ReloadFromDB();
         }
