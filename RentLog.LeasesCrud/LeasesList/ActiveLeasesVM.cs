@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using CommonTools.Lib11.DatabaseTools;
+﻿using CommonTools.Lib11.DatabaseTools;
 using CommonTools.Lib45.BaseViewModels;
-using CommonTools.Lib45.ThreadTools;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.ReportRows;
 using RentLog.DomainLib45;
+using RentLog.DomainLib45.SoaViewer.MainWindow;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RentLog.LeasesCrud.LeasesList
 {
@@ -17,9 +17,7 @@ namespace RentLog.LeasesCrud.LeasesList
 
 
         protected override void OnItemOpened(LeaseDTO e)
-        {
-            Alert.Show(e.ToString());
-        }
+            => SoaViewer.Show(e, AppArgs);
 
 
         protected override List<LeaseDTO> QueryItems(ISimpleRepo<LeaseDTO> db)

@@ -146,6 +146,10 @@
     <Compile Include="StyledButtons\UpdatedExeNotifierBar.xaml.cs">
       <DependentUpon>UpdatedExeNotifierBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TextLabels\DualText.xaml.cs">
+      <DependentUpon>DualText.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TextLabels\DualText_DependencyProperties.cs" />
     <Compile Include="ThreadTools\ProcessKiller.cs" />
     <Compile Include="ThreadTools\ThisThread.cs" />
     <Compile Include="ThreadTools\ThreadedMessageBox.cs" />
@@ -205,6 +209,10 @@
     <Page Include="StyledButtons\UpdatedExeNotifierBar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TextLabels\DualText.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

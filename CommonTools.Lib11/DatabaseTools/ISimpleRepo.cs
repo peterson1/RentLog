@@ -10,6 +10,7 @@ namespace CommonTools.Lib11.DatabaseTools
         List<T> GetAll  ();
         T       Find    (int recordId, bool errorIfMissing);
         bool    HasName (string recordName, string field = "Name");
+        Dictionary<int, T> ToDictionary();
 
         int     Insert  (T newRecord);
         bool    Update  (T changedRecord);

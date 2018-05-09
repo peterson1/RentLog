@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CollectorsRepository\CollectorsCollection.cs" />
     <Compile Include="DailyBillsRepository\DailyBillsCollection.cs" />
     <Compile Include="DailyColxnsRepository\CashierColxnsCollection.cs" />
     <Compile Include="DatabaseFinders\BalancesLocalDir.cs" />

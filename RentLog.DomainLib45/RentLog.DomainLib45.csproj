@@ -63,7 +63,25 @@
   <ItemGroup>
     <Compile Include="AppArguments.cs" />
     <Compile Include="BaseViewModels\BrandedWindowBase.cs" />
+    <Compile Include="SoaViewer\MainWindow\BillStateSoaCell.xaml.cs">
+      <DependentUpon>BillStateSoaCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SoaViewer\MainWindow\DailyBillsTable.xaml.cs">
+      <DependentUpon>DailyBillsTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SoaViewer\MainWindow\DateSoaCell.xaml.cs">
+      <DependentUpon>DateSoaCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SoaViewer\MainWindow\MainToolbar.xaml.cs">
+      <DependentUpon>MainToolbar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SoaViewer\MainWindow\RentColumn\RentHeader.xaml.cs">
+      <DependentUpon>RentHeader.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SoaViewer\MainWindow\SoaViewerVM.cs" />
+    <Compile Include="SoaViewer\MainWindow\SoaViewerWindow.xaml.cs">
+      <DependentUpon>SoaViewerWindow.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -110,7 +128,32 @@
   <ItemGroup>
     <Resource Include="FodyWeavers.xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Page Include="SoaViewer\MainWindow\BillStateSoaCell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SoaViewer\MainWindow\DailyBillsTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SoaViewer\MainWindow\DateSoaCell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SoaViewer\MainWindow\MainToolbar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SoaViewer\MainWindow\RentColumn\RentHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SoaViewer\MainWindow\SoaViewerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.3.0.3\build\Fody.targets" Condition="Exists('..\packages\Fody.3.0.3\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

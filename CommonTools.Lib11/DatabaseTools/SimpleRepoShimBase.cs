@@ -26,9 +26,10 @@ namespace CommonTools.Lib11.DatabaseTools
         protected List<T> ToSortedList(IEnumerable<T> items) => ToSorted(items).ToList();
 
 
-        public List<T> GetAll() => ToSortedList(_repo.GetAll());
-        public T Find(int recordId, bool errorIfMissing) => _repo.Find(recordId, errorIfMissing);
-        public bool HasName(string recordName, string field = "Name") => _repo.HasName(recordName, field);
+        public List<T>            GetAll       ()                                         => ToSortedList(_repo.GetAll());
+        public T                  Find         (int recordId, bool errorIfMissing)        => _repo.Find(recordId, errorIfMissing);
+        public bool               HasName      (string recordName, string field = "Name") => _repo.HasName(recordName, field);
+        public Dictionary<int, T> ToDictionary ()                                         => _repo.ToDictionary();
 
 
         public int Insert(T newRecord)

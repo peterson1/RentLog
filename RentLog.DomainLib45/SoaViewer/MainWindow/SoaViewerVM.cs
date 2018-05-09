@@ -1,11 +1,10 @@
-﻿using CommonTools.Lib45.BaseViewModels;
+﻿using CommonTools.Lib11.DataStructures;
+using CommonTools.Lib45.BaseViewModels;
 using RentLog.DomainLib11.BalanceRepos;
 using RentLog.DomainLib11.DTOs;
-using System;
+using RentLog.DomainLib11.ReportRows;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RentLog.DomainLib45.SoaViewer.MainWindow
 {
@@ -25,6 +24,33 @@ namespace RentLog.DomainLib45.SoaViewer.MainWindow
         }
 
 
-        public LeaseDTO Lease { get; }
+        public LeaseDTO               Lease { get; }
+        public UIList<DailyBillsRow>  Rows  { get; } = new UIList<DailyBillsRow>();
+
+
+        protected override void OnRefreshClicked()
+        {
+            Rows.SetItems(GetBillRows());
+        }
+
+
+        private IEnumerable<DailyBillsRow> GetBillRows()
+        {
+            var colctrs = AppArgs.MarketState.Collectors.ToDictionary();
+            var rows    = _repo.GetAll ()
+                               .Select (_ => new DailyBillsRow(Lease, _, colctrs))
+                               .ToList ();
+            return rows;
+        }
+    }
+
+
+    public static class SoaViewer
+    {
+        public static void Show(LeaseDTO lse, AppArguments args)
+        {
+            if (lse == null || args == null) return;
+            new SoaViewerVM(lse, args).Show<SoaViewerWindow>();
+        }
     }
 }
