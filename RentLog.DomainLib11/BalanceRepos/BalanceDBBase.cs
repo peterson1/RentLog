@@ -5,7 +5,7 @@ namespace RentLog.DomainLib11.BalanceRepos
 {
     public abstract class BalanceDBBase : IBalanceDB
     {
-        protected abstract IDailyBillsRepo GetRepo(LeaseDTO lse);
+        public abstract IDailyBillsRepo GetRepo(LeaseDTO lse);
 
 
         public DailyBillDTO GetBill(LeaseDTO lse, DateTime date)

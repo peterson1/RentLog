@@ -23,7 +23,7 @@ namespace RentLog.DatabaseLib.DatabaseFinders
         }
 
 
-        protected override IDailyBillsRepo GetRepo(LeaseDTO lse)
+        public override IDailyBillsRepo GetRepo(LeaseDTO lse)
         {
             var file = Path.Combine(_dir, GetFilename(lse));
             var db   = new SharedLiteDB(file, _usr);

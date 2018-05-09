@@ -8,7 +8,8 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
         <local:ActiveLeasesFilterUI DockPanel.Dock="Top"
-                                    DataContext="{Binding Filter}" />
+                                    DataContext="{Binding Filter}"
+                                    Margin="0 0 15 0" />
 
         <local:ActiveLeasesTable DataContext="{Binding Rows}" />
     </DockPanel>
