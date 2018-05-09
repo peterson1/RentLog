@@ -1,6 +1,8 @@
 ﻿using CommonTools.Lib11.ExceptionTools;
 using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.FileSystemTools;
+using CommonTools.Lib45.LiteDbTools;
+using RentLog.DatabaseLib.DailyColxnsRepository;
 using RentLog.DomainLib11.CollectionRepos;
 using System;
 using System.Collections.Generic;
@@ -9,15 +11,16 @@ using System.Linq;
 
 namespace RentLog.DatabaseLib.DatabaseFinders
 {
-    public class CollectionsDBFolder : CollectionDBsBase
+    public class CollectionsLocalDir : CollectionsDirBase
     {
         private const string COLLECTIONS_DIR = "Collections";
+        private const string FILENAME_FMT    = "{0:yyyy-MM-dd}_Solo.ldb";
 
         private string _dir;
         private string _usr;
 
 
-        public CollectionsDBFolder(string marketDbFilePath, string currentUser)
+        public CollectionsLocalDir(string marketDbFilePath, string currentUser)
         {
             _dir = FindCollectionsDir(marketDbFilePath);
             _usr = currentUser;
@@ -50,5 +53,18 @@ namespace RentLog.DatabaseLib.DatabaseFinders
             else
                 throw Fault.BadArg("date prefix", dateStr);
         }
+
+
+        protected override ICollectionsDB GetDB(DateTime date)
+        {
+            var file          = AsFilePath(date);
+            var db            = new SharedLiteDB(file, _usr);
+            var cashierColxns = new CashierColxnsRepo1(new CashierColxnsCollection(db));
+            return new CollectionsDB1(db.Metadata, cashierColxns);
+        }
+
+
+        private string AsFilePath(DateTime date)
+            => Path.Combine(_dir, string.Format(FILENAME_FMT, date));
     }
 }

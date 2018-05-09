@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace RentLog.DomainLib11.CollectionRepos
 {
-    public interface ICollectionDBs
+    public interface ICollectionsDir
     {
         DateTime LastPostedDate();
         IOrderedEnumerable<DateTime> AllDates();

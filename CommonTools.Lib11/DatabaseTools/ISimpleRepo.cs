@@ -9,6 +9,7 @@ namespace CommonTools.Lib11.DatabaseTools
 
         List<T> GetAll  ();
         T       Find    (int recordId, bool errorIfMissing);
+        bool    HasName (string recordName, string field = "Name");
 
         int     Insert  (T newRecord);
         bool    Update  (T changedRecord);

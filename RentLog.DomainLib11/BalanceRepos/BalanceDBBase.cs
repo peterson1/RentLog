@@ -3,7 +3,7 @@ using System;
 
 namespace RentLog.DomainLib11.BalanceRepos
 {
-    public abstract class BalanceDBsBase : IBalanceDBs
+    public abstract class BalanceDBBase : IBalanceDB
     {
         protected abstract IDailyBillsRepo GetRepo(LeaseDTO lse);
 

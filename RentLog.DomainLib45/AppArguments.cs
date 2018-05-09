@@ -19,8 +19,8 @@ namespace RentLog.DomainLib45
             Parse(Environment.GetCommandLineArgs());
             CurrentUser = Credentials?.HumanName ?? "Anonymous";
             MarketState = MarketStateDBFile.Load(DbFilePath, CurrentUser);
-            Collections = new CollectionsDBFolder(DbFilePath, CurrentUser);
-            Balances    = new BalancesDBFolder(DbFilePath, CurrentUser);
+            Collections = new CollectionsLocalDir(DbFilePath, CurrentUser);
+            Balances    = new BalancesLocalDir(DbFilePath, CurrentUser);
         }
 
 
@@ -33,8 +33,8 @@ namespace RentLog.DomainLib45
         public string               DbFilePath       { get; private set; }
 
         public MarketStateDB        MarketState      { get; }
-        public ICollectionDBs       Collections      { get; }
-        public IBalanceDBs          Balances         { get; }
+        public ICollectionsDir      Collections      { get; }
+        public IBalanceDB          Balances         { get; }
         public SectionDTO           CurrentSection   { get; set; }
 
 

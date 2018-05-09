@@ -6,12 +6,12 @@ using RentLog.DomainLib11.DTOs;
 
 namespace RentLog.DatabaseLib.LeasesRepository
 {
-    public class ActiveLeasesCollection : NamedCollectionBase<LeaseDTO>, ISimpleRepo<LeaseDTO>
+    internal class ActiveLeasesCollection : NamedCollectionBase<LeaseDTO>, ISimpleRepo<LeaseDTO>
     {
         private const string COLXN_NAME = "ActiveLeases";
 
 
-        public ActiveLeasesCollection(SharedLiteDB sharedLiteDB) : base(COLXN_NAME, sharedLiteDB)
+        internal ActiveLeasesCollection(SharedLiteDB sharedLiteDB) : base(COLXN_NAME, sharedLiteDB)
         {
             BsonMapper.Global.Entity<LeaseDTO>()
                 .DbRef(_ => _.Stall, StallsCollection.COLXN_NAME);

@@ -3,7 +3,7 @@ using System;
 
 namespace RentLog.DomainLib11.BalanceRepos
 {
-    public interface IBalanceDBs
+    public interface IBalanceDB
     {
         DailyBillDTO  GetBill  (LeaseDTO lse, DateTime date);
     }
