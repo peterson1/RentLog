@@ -5,6 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RentLog.DomainLib45.SoaViewer.MainWindow"
              xmlns:rent="clr-namespace:RentLog.DomainLib45.SoaViewer.MainWindow.RentColumn"
+             xmlns:rights="clr-namespace:RentLog.DomainLib45.SoaViewer.MainWindow.RightsColumn"
+             xmlns:elctrc="clr-namespace:RentLog.DomainLib45.SoaViewer.MainWindow.ElectricColumn"
+             xmlns:water="clr-namespace:RentLog.DomainLib45.SoaViewer.MainWindow.WaterColumn"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -52,15 +55,17 @@
                                 ElementStyle="{StaticResource colSimpleText}"
                                 Width="85" />
 
+            
             <DataGridTextColumn Header="collector"
                                 Binding="{Binding Collector.Name}"
                                 ElementStyle="{StaticResource colSimpleText}"
                                 Width="80" />
             
+            
             <DataGridTemplateColumn>
                 <DataGridTemplateColumn.HeaderTemplate>
                     <DataTemplate>
-                        <rent:RentHeader DataContext="{Binding DataContext.Lease, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                        <rent:RentHeader />
                     </DataTemplate>
                 </DataGridTemplateColumn.HeaderTemplate>
                 <DataGridTemplateColumn.CellTemplate>
@@ -69,6 +74,49 @@
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
+
+            
+            <DataGridTemplateColumn>
+                <DataGridTemplateColumn.HeaderTemplate>
+                    <DataTemplate>
+                        <rights:RightsHeader />
+                    </DataTemplate>
+                </DataGridTemplateColumn.HeaderTemplate>
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <local:BillStateSoaCell DataContext="{Binding Rights}" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+
+            <DataGridTemplateColumn>
+                <DataGridTemplateColumn.HeaderTemplate>
+                    <DataTemplate>
+                        <elctrc:ElectricHeader />
+                    </DataTemplate>
+                </DataGridTemplateColumn.HeaderTemplate>
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <local:BillStateSoaCell DataContext="{Binding Electric}" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+
+            <DataGridTemplateColumn>
+                <DataGridTemplateColumn.HeaderTemplate>
+                    <DataTemplate>
+                        <water:WaterHeader />
+                    </DataTemplate>
+                </DataGridTemplateColumn.HeaderTemplate>
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <local:BillStateSoaCell DataContext="{Binding Water}" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
         </DataGrid.Columns>
     </DataGrid>
 </UserControl>

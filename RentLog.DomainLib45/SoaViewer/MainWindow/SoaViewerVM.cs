@@ -1,5 +1,6 @@
 ﻿using CommonTools.Lib11.DataStructures;
 using CommonTools.Lib45.BaseViewModels;
+using CommonTools.Lib45.ThreadTools;
 using RentLog.DomainLib11.BalanceRepos;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.ReportRows;
@@ -26,6 +27,7 @@ namespace RentLog.DomainLib45.SoaViewer.MainWindow
 
         public LeaseDTO               Lease { get; }
         public UIList<DailyBillsRow>  Rows  { get; } = new UIList<DailyBillsRow>();
+        public DailyBillsRow          FirstRow => Rows.FirstOrDefault();
 
 
         protected override void OnRefreshClicked()
@@ -41,6 +43,12 @@ namespace RentLog.DomainLib45.SoaViewer.MainWindow
                                .Select (_ => new DailyBillsRow(Lease, _, colctrs))
                                .ToList ();
             return rows;
+        }
+
+
+        protected override void OnPrintClicked()
+        {
+            Alert.Show("print!");
         }
     }
 

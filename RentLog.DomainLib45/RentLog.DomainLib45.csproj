@@ -72,15 +72,24 @@
     <Compile Include="SoaViewer\MainWindow\DateSoaCell.xaml.cs">
       <DependentUpon>DateSoaCell.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SoaViewer\MainWindow\ElectricColumn\ElectricHeader.xaml.cs">
+      <DependentUpon>ElectricHeader.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SoaViewer\MainWindow\MainToolbar.xaml.cs">
       <DependentUpon>MainToolbar.xaml</DependentUpon>
     </Compile>
     <Compile Include="SoaViewer\MainWindow\RentColumn\RentHeader.xaml.cs">
       <DependentUpon>RentHeader.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SoaViewer\MainWindow\RightsColumn\RightsHeader.xaml.cs">
+      <DependentUpon>RightsHeader.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SoaViewer\MainWindow\SoaViewerVM.cs" />
     <Compile Include="SoaViewer\MainWindow\SoaViewerWindow.xaml.cs">
       <DependentUpon>SoaViewerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SoaViewer\MainWindow\WaterColumn\WaterHeader.xaml.cs">
+      <DependentUpon>WaterHeader.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -141,6 +150,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SoaViewer\MainWindow\ElectricColumn\ElectricHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SoaViewer\MainWindow\MainToolbar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -149,7 +162,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SoaViewer\MainWindow\RightsColumn\RightsHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SoaViewer\MainWindow\SoaViewerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SoaViewer\MainWindow\WaterColumn\WaterHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

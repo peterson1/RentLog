@@ -22,6 +22,7 @@ namespace CommonTools.Lib45.BaseViewModels
         public MainWindowVMBase(TArg appArguments)
         {
             AppArgs        = appArguments;
+            PrintCmd       = R2Command.Relay(OnPrintClicked, _ => !IsBusy, "Print");
             RefreshCmd     = R2Command.Async(DoRefresh, _ => !IsBusy, "Refresh");
             CloseWindowCmd = R2Command.Relay(CloseWindow, null, "Close Window");
             //SetCaption($"as {AppArgs?.Credentials?.NameAndRole ?? "Anonymous"}");
@@ -33,11 +34,14 @@ namespace CommonTools.Lib45.BaseViewModels
         public string      Caption         { get; private set; }
         public bool        IsBusy          { get; private set; }
         public string      BusyText        { get; private set; }
+        public IR2Command  PrintCmd        { get; }
         public IR2Command  RefreshCmd      { get; }
         public IR2Command  CloseWindowCmd  { get; }
 
 
         public void CloseWindow() => AsUI(() => _win?.Close());
+
+
 
 
         protected void SetCaption(string message)
@@ -76,6 +80,8 @@ namespace CommonTools.Lib45.BaseViewModels
 
             StopBeingBusy();
         }
+
+        protected virtual void OnPrintClicked       () { }
         protected virtual void OnRefreshClicked     () { }
         protected virtual Task OnRefreshClickedAsync() => Task.Delay(0);
         public void ClickRefresh() => RefreshCmd.ExecuteIfItCan();

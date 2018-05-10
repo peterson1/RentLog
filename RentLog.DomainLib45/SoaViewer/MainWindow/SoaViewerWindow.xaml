@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:RentLog.DomainLib45.SoaViewer.MainWindow"
         mc:Ignorable="d"
         Title="{Binding Caption}" 
-        Width="1360" Height="700"
+        SizeToContent="Width" Height="900"
         xmlns:busy="clr-namespace:CommonTools.Lib45.BusyIndicators;assembly=CommonTools.Lib45"
         xmlns:butns="clr-namespace:CommonTools.Lib45.StyledButtons;assembly=CommonTools.Lib45"
         xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -32,7 +32,7 @@
 
         <Style x:Key="soaHdrLabel" TargetType="TextBlock"
                BasedOn="{StaticResource MaterialDesignBody2TextBlock}">
-            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueLightBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
             <Setter Property="TextAlignment" Value="Right" />
             <Setter Property="MinWidth" Value="60" />
         </Style>
@@ -44,12 +44,12 @@
 
     </Window.Resources>
     <Grid>
-        <DockPanel>
-            <local:MainToolbar DockPanel.Dock="Top" />
-            
-            <local:DailyBillsTable />
+        <Grid>
+            <local:DailyBillsTable Margin="0 15 0 0" />
         
-        </DockPanel>
+            <local:MainToolbar VerticalAlignment="Top"
+                               Margin="30 10 0 0" />
+        </Grid>
         <busy:BusyDialog />
     </Grid>
 </Window>
