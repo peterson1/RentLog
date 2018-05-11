@@ -4,6 +4,7 @@ using CommonTools.Lib45.ThreadTools;
 using RentLog.DomainLib11.BalanceRepos;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.ReportRows;
+using RentLog.DomainLib45.SoaViewer.PrintLayouts;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -48,7 +49,7 @@ namespace RentLog.DomainLib45.SoaViewer.MainWindow
 
         protected override void OnPrintClicked()
         {
-            Alert.Show("print!");
+            SoaPrintVM.Print(this);
         }
     }
 

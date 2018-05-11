@@ -91,6 +91,10 @@
     <Compile Include="SoaViewer\MainWindow\WaterColumn\WaterHeader.xaml.cs">
       <DependentUpon>WaterHeader.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SoaViewer\PrintLayouts\SoaPrintVM.cs" />
+    <Compile Include="SoaViewer\PrintLayouts\SoaPrintWindow1.xaml.cs">
+      <DependentUpon>SoaPrintWindow1.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -171,6 +175,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SoaViewer\MainWindow\WaterColumn\WaterHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SoaViewer\PrintLayouts\SoaPrintWindow1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

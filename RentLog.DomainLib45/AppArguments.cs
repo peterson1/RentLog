@@ -34,7 +34,7 @@ namespace RentLog.DomainLib45
 
         public MarketStateDB        MarketState      { get; }
         public ICollectionsDir      Collections      { get; }
-        public IBalanceDB          Balances         { get; }
+        public IBalanceDB           Balances         { get; }
         public SectionDTO           CurrentSection   { get; set; }
 
 

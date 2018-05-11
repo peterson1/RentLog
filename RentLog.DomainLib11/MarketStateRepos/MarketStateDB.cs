@@ -6,5 +6,6 @@
         public virtual ISectionsRepo    Sections      { get; set; }
         public virtual ICollectorsRepo  Collectors    { get; set; }
         public virtual ILeasesRepo      ActiveLeases  { get; set; }
+        public virtual string           BranchName    { get; set; }
     }
 }
