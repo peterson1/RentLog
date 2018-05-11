@@ -63,6 +63,10 @@
   <ItemGroup>
     <Compile Include="AppArguments.cs" />
     <Compile Include="BaseViewModels\BrandedWindowBase.cs" />
+    <Compile Include="SoaViewer\CellViewer\SoaCellViewerVM.cs" />
+    <Compile Include="SoaViewer\CellViewer\SoaCellViewerWindow.xaml.cs">
+      <DependentUpon>SoaCellViewerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SoaViewer\MainWindow\BillStateSoaCell.xaml.cs">
       <DependentUpon>BillStateSoaCell.xaml</DependentUpon>
     </Compile>
@@ -142,6 +146,10 @@
     <Resource Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="SoaViewer\CellViewer\SoaCellViewerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SoaViewer\MainWindow\BillStateSoaCell.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
