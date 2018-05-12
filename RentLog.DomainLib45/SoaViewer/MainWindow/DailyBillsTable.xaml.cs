@@ -1,28 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using CommonTools.Lib11.ExceptionTools;
+using CommonTools.Lib45.UIExtensions;
+using RentLog.DomainLib11.DTOs;
+using RentLog.DomainLib11.ReportRows;
+using System;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace RentLog.DomainLib45.SoaViewer.MainWindow
 {
-    /// <summary>
-    /// Interaction logic for DailyBillsTable.xaml
-    /// </summary>
     public partial class DailyBillsTable : UserControl
     {
         public DailyBillsTable()
         {
             InitializeComponent();
+            Loaded += (s, e) =>
+            {
+                dg.EnableOpenCurrent<DailyBillsRow>();
+
+                if (dg.Columns.Count != 7)
+                    throw new NotImplementedException("update hard-coded column indices");
+            };
         }
+
+
+        private BillCode GetCurrentBillCode()
+        {
+            var colIndex = dg.CurrentCell.Column.DisplayIndex;
+            switch (colIndex)
+            {
+                case 3: return BillCode.Rent;
+                case 4: return BillCode.Rights;
+                case 5: return BillCode.Electric;
+                case 6: return BillCode.Water;
+                default:
+                    throw Fault.BadArg("columnIndex", colIndex);
+            }
+        }
+
+
+        private void dg_CurrentCellChanged(object sender, EventArgs e)
+            => VM.BillCode = GetCurrentBillCode();
+
+
+        private SoaViewerVM VM => DataContext as SoaViewerVM;
     }
 }

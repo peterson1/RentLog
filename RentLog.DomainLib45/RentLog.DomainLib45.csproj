@@ -33,6 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.4.0.1044, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.2.4.0.1044\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="Mono.Options, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Mono.Options.5.3.0.1\lib\net4-client\Mono.Options.dll</HintPath>
     </Reference>
@@ -46,6 +52,9 @@
     <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,9 +72,22 @@
   <ItemGroup>
     <Compile Include="AppArguments.cs" />
     <Compile Include="BaseViewModels\BrandedWindowBase.cs" />
+    <Compile Include="SoaViewer\AdjustmentsCRUD\AdjustmentsListVM.cs" />
+    <Compile Include="SoaViewer\CellViewer\AdjustmentsUI.xaml.cs">
+      <DependentUpon>AdjustmentsUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SoaViewer\CellViewer\PaymentsUI.xaml.cs">
+      <DependentUpon>PaymentsUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SoaViewer\CellViewer\PenaltiesUI.xaml.cs">
+      <DependentUpon>PenaltiesUI.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SoaViewer\CellViewer\SoaCellViewerVM.cs" />
     <Compile Include="SoaViewer\CellViewer\SoaCellViewerWindow.xaml.cs">
       <DependentUpon>SoaCellViewerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SoaViewer\CellViewer\ViewerHeader.xaml.cs">
+      <DependentUpon>ViewerHeader.xaml</DependentUpon>
     </Compile>
     <Compile Include="SoaViewer\MainWindow\BillStateSoaCell.xaml.cs">
       <DependentUpon>BillStateSoaCell.xaml</DependentUpon>
@@ -146,7 +168,23 @@
     <Resource Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="SoaViewer\CellViewer\AdjustmentsUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SoaViewer\CellViewer\PaymentsUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SoaViewer\CellViewer\PenaltiesUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SoaViewer\CellViewer\SoaCellViewerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SoaViewer\CellViewer\ViewerHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

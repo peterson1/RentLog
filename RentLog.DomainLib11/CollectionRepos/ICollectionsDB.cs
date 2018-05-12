@@ -4,6 +4,7 @@
     {
         bool IsPosted();
 
-        ICashierColxnsRepo  CashierColxns  { get; }
+        ICashierColxnsRepo       CashierColxns  { get; }
+        IBalanceAdjustmentsRepo  BalanceAdjs    { get; }
     }
 }

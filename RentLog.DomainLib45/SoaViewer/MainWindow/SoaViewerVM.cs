@@ -1,9 +1,9 @@
 ﻿using CommonTools.Lib11.DataStructures;
 using CommonTools.Lib45.BaseViewModels;
-using CommonTools.Lib45.ThreadTools;
 using RentLog.DomainLib11.BalanceRepos;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.ReportRows;
+using RentLog.DomainLib45.SoaViewer.CellViewer;
 using RentLog.DomainLib45.SoaViewer.PrintLayouts;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,35 +22,35 @@ namespace RentLog.DomainLib45.SoaViewer.MainWindow
             Lease = leaseDTO;
             _repo = AppArgs.Balances.GetRepo(Lease);
             SetCaption($"[{Lease.Id}]  {Lease.TenantAndStall}");
+            Rows.ItemOpened += (s, e) => OnItemOpened(e);
             ClickRefresh();
         }
 
 
-        public LeaseDTO               Lease { get; }
-        public UIList<DailyBillsRow>  Rows  { get; } = new UIList<DailyBillsRow>();
-        public DailyBillsRow          FirstRow => Rows.FirstOrDefault();
-
-
-        protected override void OnRefreshClicked()
-        {
-            Rows.SetItems(GetBillRows());
-        }
+        public LeaseDTO               Lease     { get; }
+        public BillCode               BillCode  { get; set; }
+        public UIList<DailyBillsRow>  Rows      { get; } = new UIList<DailyBillsRow>();
+        public DailyBillsRow          FirstRow  => Rows.FirstOrDefault();
 
 
         private IEnumerable<DailyBillsRow> GetBillRows()
         {
             var colctrs = AppArgs.MarketState.Collectors.ToDictionary();
-            var rows    = _repo.GetAll ()
-                               .Select (_ => new DailyBillsRow(Lease, _, colctrs))
-                               .ToList ();
-            return rows;
+            return _repo.GetAll ()
+                        .Select (_ => new DailyBillsRow(Lease, _, colctrs))
+                        .ToList ();
         }
 
 
-        protected override void OnPrintClicked()
+        private void OnItemOpened(DailyBillsRow e)
         {
-            SoaPrintVM.Print(this);
+            var changd = SoaCellViewer.Show(Lease, e.Date, e.DTO.For(BillCode), AppArgs);
+            if (changd == true) ClickRefresh();
         }
+
+
+        protected override void OnRefreshClicked() => Rows.SetItems(GetBillRows());
+        protected override void OnPrintClicked  () => SoaPrintVM.Print(this);
     }
 
 

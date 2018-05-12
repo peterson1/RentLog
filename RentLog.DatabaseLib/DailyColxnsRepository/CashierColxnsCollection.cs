@@ -1,11 +1,5 @@
-﻿using CommonTools.Lib11.DatabaseTools;
-using CommonTools.Lib45.LiteDbTools;
+﻿using CommonTools.Lib45.LiteDbTools;
 using RentLog.DomainLib11.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RentLog.DatabaseLib.DailyColxnsRepository
 {

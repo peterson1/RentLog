@@ -26,6 +26,7 @@ namespace CommonTools.Lib45.BaseViewModels
         {
             _repo      = repository;
             AppArgs    = appArguments;
+            AddNewCmd  = R2Command.Relay(AddNewItem, null, "Add New Item");
             RefreshCmd = R2Command.Relay(ReloadFromDB, null, "Refresh");
 
             _repo.ContentChanged        += (s, e) => ReloadFromDB();
@@ -37,23 +38,21 @@ namespace CommonTools.Lib45.BaseViewModels
         }
 
 
-        public TArg          AppArgs    { get; }
-        public IR2Command    RefreshCmd { get; }
-        public UIList<TDTO>  ItemsList  { get; } = new UIList<TDTO>();
-        public TDTO          Selected   { get; set; }
-        public decimal       TotalSum   { get; private set; }
+        public TArg          AppArgs     { get; }
+        public IR2Command    AddNewCmd   { get; }
+        public IR2Command    RefreshCmd  { get; }
+        public UIList<TDTO>  ItemsList   { get; } = new UIList<TDTO>();
+        public TDTO          Selected    { get; set; }
+        public decimal       TotalSum    { get; private set; }
 
 
         protected virtual Func<TDTO, decimal> SummedAmount { get; }
+        protected virtual void AddNewItem          () { }
         protected virtual bool CanDeletetRecord    (TDTO rec) => true;
         protected virtual bool CanEditRecord       (TDTO rec) => true;
         protected virtual void LoadRecordForEditing(TDTO rec) { }
         protected virtual IEnumerable<TDTO> PostProcessQueried(IEnumerable<TDTO> items) => items;
-
-        protected virtual void OnSelectedChanged()
-        {
-            SelectedChanged?.Invoke(this, Selected);
-        }
+        protected virtual void OnSelectedChanged() => SelectedChanged?.Invoke(this, Selected);
 
 
         protected void ExecuteDeleteRecord(TDTO dto)

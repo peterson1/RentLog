@@ -31,7 +31,7 @@ namespace CommonTools.Lib11.DataStructures
 
 
         public double  SummaryAmount  { get; set; }
-        public decimal TotalSum       { get; set; }
+        //public decimal TotalSum       { get; set; }
         public T       CurrentItem    { get; set; }
 
 

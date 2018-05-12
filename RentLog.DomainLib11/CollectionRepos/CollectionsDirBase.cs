@@ -10,8 +10,8 @@ namespace RentLog.DomainLib11.CollectionRepos
             => FindAllDates().OrderBy(_ => _);
             
 
-        protected abstract ICollectionsDB GetDB(DateTime dateTime);
-        protected abstract IEnumerable<DateTime> FindAllDates();
+        public    abstract ICollectionsDB         For           (DateTime dateTime);
+        protected abstract IEnumerable<DateTime>  FindAllDates  ();
 
 
         public DateTime LastPostedDate()
@@ -20,7 +20,7 @@ namespace RentLog.DomainLib11.CollectionRepos
 
             for (int i = dates.Count - 1; i >= 0; i--)
             {
-                var repo = GetDB(dates[i]);
+                var repo = For(dates[i]);
                 if (repo.IsPosted()) return dates[i];
             }
 

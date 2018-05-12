@@ -122,7 +122,8 @@ namespace CommonTools.Lib45.BaseViewModels
         protected void ReturnDialogResult(bool? result)
         {
             if (_win == null) return;
-            _win.DialogResult = result;
+            if (_win.IsActive)
+                _win.DialogResult = result;
             CloseWindow();
         }
 

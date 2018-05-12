@@ -14,6 +14,7 @@ namespace CommonTools.Lib11.DatabaseTools
 
         int     Insert  (T newRecord);
         bool    Update  (T changedRecord);
+        bool    Upsert  (T record);
         bool    Delete  (T record);
     }
 }

@@ -3,6 +3,7 @@ using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.FileSystemTools;
 using CommonTools.Lib45.LiteDbTools;
 using RentLog.DatabaseLib.DailyColxnsRepository;
+using RentLog.DomainLib11.BalanceRepos;
 using RentLog.DomainLib11.CollectionRepos;
 using System;
 using System.Collections.Generic;
@@ -16,14 +17,16 @@ namespace RentLog.DatabaseLib.DatabaseFinders
         private const string COLLECTIONS_DIR = "Collections";
         private const string FILENAME_FMT    = "{0:yyyy-MM-dd}_Solo.ldb";
 
-        private string _dir;
-        private string _usr;
+        private string     _dir;
+        private string     _usr;
+        private IBalanceDB _balDB;
 
 
-        public CollectionsLocalDir(string marketDbFilePath, string currentUser)
+        public CollectionsLocalDir(string marketDbFilePath, string currentUser, IBalanceDB balanceDB)
         {
-            _dir = FindCollectionsDir(marketDbFilePath);
-            _usr = currentUser;
+            _dir   = FindCollectionsDir(marketDbFilePath);
+            _usr   = currentUser;
+            _balDB = balanceDB;
         }
 
 
@@ -55,12 +58,13 @@ namespace RentLog.DatabaseLib.DatabaseFinders
         }
 
 
-        protected override ICollectionsDB GetDB(DateTime date)
+        public override ICollectionsDB For (DateTime date)
         {
             var file          = AsFilePath(date);
             var db            = new SharedLiteDB(file, _usr);
             var cashierColxns = new CashierColxnsRepo1(new CashierColxnsCollection(db));
-            return new CollectionsDB1(db.Metadata, cashierColxns);
+            var balanceAdjs   = new BalanceAdjsRepo1(date, new BalanceAdjsCollection(db), _balDB);
+            return new CollectionsDB1(db.Metadata, cashierColxns, balanceAdjs);
         }
 
 

@@ -26,7 +26,10 @@
             <Setter Property="FontSize" Value="11" />
         </Style>
     </UserControl.Resources>
-    <DataGrid ItemsSource="{Binding Rows}"
+    <DataGrid x:Name="dg"
+              CurrentCellChanged="dg_CurrentCellChanged"
+              ItemsSource="{Binding }"
+              DataContext="{Binding Rows}"
               ColumnHeaderStyle="{StaticResource hdrBottom}"
               Style="{DynamicResource dgReadOnly}">
         <DataGrid.Resources>

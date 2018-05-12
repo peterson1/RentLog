@@ -23,16 +23,16 @@ namespace RentLog.DatabaseLib.DatabaseFinders
         }
 
 
-        public override IDailyBillsRepo GetRepo(LeaseDTO lse)
+        public override IDailyBillsRepo GetRepo(int lseID)
         {
-            var file = Path.Combine(_dir, GetFilename(lse));
+            var file = Path.Combine(_dir, GetFilename(lseID));
             var db   = new SharedLiteDB(file, _usr);
             return new DailyBillsRepo1(new DailyBillsCollection(db));
         }
 
 
-        private static string GetFilename(LeaseDTO lease)
-            => string.Format(FILENAME_FMT, lease.Id);
+        private static string GetFilename(int lseID)
+            => string.Format(FILENAME_FMT, lseID);
 
 
         private string FindBalancesDir(string marketDbFilePath)

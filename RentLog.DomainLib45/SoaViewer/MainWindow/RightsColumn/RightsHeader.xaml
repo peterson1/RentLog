@@ -4,25 +4,26 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RentLog.DomainLib45.SoaViewer.MainWindow.RightsColumn"
+             xmlns:main="clr-namespace:RentLog.DomainLib45.SoaViewer.MainWindow"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel>
         <TextBlock Text="Rights" Style="{DynamicResource soaColHdr}" />
 
         <StackPanel Style="{DynamicResource soaHdrStack}"
-                    DataContext="{Binding DataContext.Lease, RelativeSource={RelativeSource AncestorType=DataGrid}}">
+                    DataContext="{Binding DataContext.Lease, RelativeSource={RelativeSource AncestorType=main:DailyBillsTable}}">
             <TextBlock Text="total" Style="{DynamicResource soaHdrLabel}" />
             <TextBlock Text="{Binding Rights.TotalAmount, StringFormat=N2}" Style="{DynamicResource soaHdrValue}" />
         </StackPanel>
 
         <!--<StackPanel Style="{DynamicResource soaHdrStack}"
-                    DataContext="{Binding DataContext.Lease, RelativeSource={RelativeSource AncestorType=DataGrid}}">
+                    DataContext="{Binding DataContext.Lease, RelativeSource={RelativeSource AncestorType=main:DailyBillsTable}}">
             <TextBlock Text="due date" Style="{DynamicResource soaHdrLabel}" />
             <TextBlock Text="{Binding RightsDueDate, StringFormat=d MMM yyyy}" Style="{DynamicResource soaHdrValue}" />
         </StackPanel>-->
 
         <StackPanel Style="{DynamicResource soaHdrStack}"
-                    DataContext="{Binding DataContext.FirstRow, RelativeSource={RelativeSource AncestorType=DataGrid}}">
+                    DataContext="{Binding DataContext.FirstRow, RelativeSource={RelativeSource AncestorType=main:DailyBillsTable}}">
             <TextBlock Text="balance" Style="{DynamicResource soaHdrLabel}" />
             <TextBlock Text="{Binding Rights.OpeningBalance, StringFormat=N2}" 
                        Style="{DynamicResource soaHdrValue}"
