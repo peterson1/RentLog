@@ -1,7 +1,9 @@
-﻿using CommonTools.Lib11.DTOs;
+﻿using CommonTools.Lib11.CollectionTools;
+using CommonTools.Lib11.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace CommonTools.Lib11.DatabaseTools
 {
@@ -29,6 +31,7 @@ namespace CommonTools.Lib11.DatabaseTools
 
 
         public List<T>            GetAll       ()                                         => ToSortedList(_repo.GetAll());
+        public List<T>            Find         (Expression<Func<T, bool>> predicate)      => ToSortedList(_repo.Find(predicate));
         public T                  Find         (int recordId, bool errorIfMissing)        => _repo.Find(recordId, errorIfMissing);
         public bool               HasName      (string recordName, string field = "Name") => _repo.HasName(recordName, field);
         public Dictionary<int, T> ToDictionary ()                                         => _repo.ToDictionary();
@@ -74,6 +77,15 @@ namespace CommonTools.Lib11.DatabaseTools
             var ok = _repo.Delete(record);
             ExecuteAfterSave(record);
             return ok;
+        }
+
+
+        public void Update(IEnumerable<T> records, bool doValidate)
+        {
+            if (doValidate)
+                records.ForEach(_ => ValidateBeforeUpdate(_));
+
+            _repo.Update(records, doValidate);
         }
     }
 }

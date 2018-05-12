@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace CommonTools.Lib11.DatabaseTools
 {
@@ -9,11 +10,15 @@ namespace CommonTools.Lib11.DatabaseTools
 
         List<T> GetAll  ();
         T       Find    (int recordId, bool errorIfMissing);
+        List<T> Find    (Expression<Func<T, bool>> predicate);
         bool    HasName (string recordName, string field = "Name");
         Dictionary<int, T> ToDictionary();
 
         int     Insert  (T newRecord);
+
         bool    Update  (T changedRecord);
+        void    Update  (IEnumerable<T> records, bool doValidate);
+
         bool    Upsert  (T record);
         bool    Delete  (T record);
     }

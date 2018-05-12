@@ -8,18 +8,14 @@ namespace RentLog.DomainLib11.CollectionRepos
         private const string POST_DATE = "PostDate";
         private ISimpleRepo<KeyValuePairDTO> _meta;
 
-        public CollectionsDB1(ISimpleRepo<KeyValuePairDTO> metadataRepo, 
-                              ICashierColxnsRepo cashierColxnsRepo,
-                              IBalanceAdjustmentsRepo balanceAdjustmentsRepo)
+        public CollectionsDB1(ISimpleRepo<KeyValuePairDTO> metadataRepo)
         {
-            _meta         = metadataRepo;
-            CashierColxns = cashierColxnsRepo;
-            BalanceAdjs   = balanceAdjustmentsRepo;
+            _meta = metadataRepo;
         }
 
 
-        public ICashierColxnsRepo       CashierColxns  { get; }
-        public IBalanceAdjustmentsRepo  BalanceAdjs    { get; }
+        public ICashierColxnsRepo       CashierColxns  { get; set; }
+        public IBalanceAdjustmentsRepo  BalanceAdjs    { get; set; }
 
 
         public bool IsPosted() => _meta.HasName(POST_DATE);

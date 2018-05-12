@@ -60,11 +60,12 @@ namespace RentLog.DatabaseLib.DatabaseFinders
 
         public override ICollectionsDB For (DateTime date)
         {
-            var file          = AsFilePath(date);
-            var db            = new SharedLiteDB(file, _usr);
-            var cashierColxns = new CashierColxnsRepo1(new CashierColxnsCollection(db));
-            var balanceAdjs   = new BalanceAdjsRepo1(date, new BalanceAdjsCollection(db), _balDB);
-            return new CollectionsDB1(db.Metadata, cashierColxns, balanceAdjs);
+            var file               = AsFilePath(date);
+            var db                 = new SharedLiteDB(file, _usr);
+            var colxnsDB           = new CollectionsDB1(db.Metadata);
+            colxnsDB.CashierColxns = new CashierColxnsRepo1(new CashierColxnsCollection(db));
+            colxnsDB.BalanceAdjs   = new BalanceAdjsRepo1(date, new BalanceAdjsCollection(db), _balDB, colxnsDB);
+            return colxnsDB;
         }
 
 

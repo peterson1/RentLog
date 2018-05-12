@@ -7,12 +7,14 @@ namespace RentLog.DomainLib11.CollectionRepos
 {
     public class BalanceAdjsRepo1 : SimpleRepoShimBase<BalanceAdjustmentDTO>, IBalanceAdjustmentsRepo
     {
-        private IBalanceDB _balDB;
+        private IBalanceDB     _balDB;
+        private ICollectionsDB _colxnsDB;
 
-        public BalanceAdjsRepo1(DateTime date, ISimpleRepo<BalanceAdjustmentDTO> simpleRepo, IBalanceDB balanceDB) : base(simpleRepo)
+        public BalanceAdjsRepo1(DateTime date, ISimpleRepo<BalanceAdjustmentDTO> simpleRepo, IBalanceDB balanceDB, ICollectionsDB collectionsDB) : base(simpleRepo)
         {
-            _balDB = balanceDB;
-            Date   = date;
+            _balDB    = balanceDB;
+            _colxnsDB = collectionsDB;
+            Date      = date;
         }
 
 
@@ -21,6 +23,6 @@ namespace RentLog.DomainLib11.CollectionRepos
 
         protected override void ExecuteAfterSave(BalanceAdjustmentDTO record) 
             => _balDB.GetRepo(record.LeaseId)
-                     .UpdateFrom(Date, record.BillCode);
+                     .UpdateFrom(Date, record.BillCode, _colxnsDB);
     }
 }
