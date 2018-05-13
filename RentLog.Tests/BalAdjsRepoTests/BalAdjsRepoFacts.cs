@@ -1,7 +1,7 @@
-﻿using CommonTools.Lib11.DatabaseTools;
-using FluentAssertions.Extensions;
+﻿using FluentAssertions.Extensions;
 using Moq;
 using RentLog.DomainLib11.BalanceRepos;
+using RentLog.DomainLib11.BillingRules;
 using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DTOs;
 using Xunit;
@@ -15,6 +15,7 @@ namespace RentLog.Tests.BalAdjsRepoTests
         public void InsertcallsBatchBalUpdate()
         {
             var mColxnsDB   = new Mock<ICollectionsDB>();
+            var mDailyBilr  = new Mock<IDailyBiller>();
             var mBillsRepo  = new Mock<IDailyBillsRepo>();
             var mBalsDB     = new Mock<IBalanceDB>();
             var mBalRepo    = new Mock<IBalanceAdjustmentsRepo>();
@@ -23,7 +24,8 @@ namespace RentLog.Tests.BalAdjsRepoTests
             var sut = new BalanceAdjsRepo1(date, mBalRepo.Object, mBalsDB.Object, mColxnsDB.Object);
             sut.Insert(new BalanceAdjustmentDTO());
             mBillsRepo.Verify(_
-                => _.UpdateFrom(date, It.IsAny<BillCode>(), mColxnsDB.Object), Times.Once());
+                => _.UpdateFrom(date, It.IsAny<BillCode>(), It.IsAny<IDailyBiller>()), 
+                        Times.Once());
         }
 
 
@@ -31,6 +33,7 @@ namespace RentLog.Tests.BalAdjsRepoTests
         public void UpdatecallsBatchBalUpdate()
         {
             var mColxnsDB   = new Mock<ICollectionsDB>();
+            var mDailyBilr  = new Mock<IDailyBiller>();
             var mBillsRepo  = new Mock<IDailyBillsRepo>();
             var mBalsDB     = new Mock<IBalanceDB>();
             var mBalRepo    = new Mock<IBalanceAdjustmentsRepo>();
@@ -39,7 +42,7 @@ namespace RentLog.Tests.BalAdjsRepoTests
             var sut = new BalanceAdjsRepo1(date, mBalRepo.Object, mBalsDB.Object, mColxnsDB.Object);
             sut.Update(new BalanceAdjustmentDTO());
             mBillsRepo.Verify(_
-                => _.UpdateFrom(date, It.IsAny<BillCode>(), mColxnsDB.Object), Times.Once());
+                => _.UpdateFrom(date, It.IsAny<BillCode>(), It.IsAny<IDailyBiller>()), Times.Once());
         }
 
 
@@ -47,6 +50,7 @@ namespace RentLog.Tests.BalAdjsRepoTests
         public void DeletecallsBatchBalUpdate()
         {
             var mColxnsDB   = new Mock<ICollectionsDB>();
+            var mDailyBilr = new Mock<IDailyBiller>();
             var mBillsRepo  = new Mock<IDailyBillsRepo>();
             var mBalsDB     = new Mock<IBalanceDB>();
             var mBalRepo    = new Mock<IBalanceAdjustmentsRepo>();
@@ -55,7 +59,7 @@ namespace RentLog.Tests.BalAdjsRepoTests
             var sut = new BalanceAdjsRepo1(date, mBalRepo.Object, mBalsDB.Object, mColxnsDB.Object);
             sut.Delete(new BalanceAdjustmentDTO());
             mBillsRepo.Verify(_
-                => _.UpdateFrom(date, It.IsAny<BillCode>(), mColxnsDB.Object), Times.Once());
+                => _.UpdateFrom(date, It.IsAny<BillCode>(), It.IsAny<IDailyBiller>()), Times.Once());
         }
     }
 }
