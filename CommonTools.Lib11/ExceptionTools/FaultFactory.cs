@@ -25,6 +25,10 @@ namespace CommonTools.Lib11.ExceptionTools
                 $"Invalid [{argumentName}]: “{argumentValue}”");
 
 
+        public static BadKeyException BadKey<T>(string expectedKey, string actualKey, string keyDescription = "Key")
+            => BadKeyException.For<T>(expectedKey, actualKey, keyDescription);
+
+
         public static InvalidCastException BadCast<T>(string textToParse, T targetType)
             => new InvalidCastException(
                 $"Non-convertible to ‹{typeof(T).Name}›: “{textToParse}”.");
