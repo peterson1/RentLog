@@ -5,6 +5,8 @@ using CommonTools.Lib45.LiteDbTools;
 using RentLog.DatabaseLib.DailyColxnsRepository;
 using RentLog.DomainLib11.BalanceRepos;
 using RentLog.DomainLib11.CollectionRepos;
+using RentLog.DomainLib11.DTOs;
+using RentLog.DomainLib11.MarketStateRepos;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,14 +20,15 @@ namespace RentLog.DatabaseLib.DatabaseFinders
         private const string FILENAME_FMT    = "{0:yyyy-MM-dd}_Solo.ldb";
 
         private string     _dir;
-        private string     _usr;
+        //private string     _usr;
+        private MarketStateDB _mkt;
         private IBalanceDB _balDB;
 
 
-        public CollectionsLocalDir(string marketDbFilePath, string currentUser, IBalanceDB balanceDB)
+        public CollectionsLocalDir(MarketStateDB marketStateDB, IBalanceDB balanceDB)
         {
-            _dir   = FindCollectionsDir(marketDbFilePath);
-            _usr   = currentUser;
+            _mkt   = marketStateDB;
+            _dir   = FindCollectionsDir(_mkt.DatabasePath);
             _balDB = balanceDB;
         }
 
@@ -61,11 +64,23 @@ namespace RentLog.DatabaseLib.DatabaseFinders
         public override ICollectionsDB For (DateTime date)
         {
             var file               = AsFilePath(date);
-            var db                 = new SharedLiteDB(file, _usr);
-            var colxnsDB           = new CollectionsDB1(db.Metadata);
+            var db                 = new SharedLiteDB(file, _mkt.CurrentUser);
+            var colxnsDB           = new CollectionsDB1(db.Metadata, _mkt);
+            SetIntendedColxns(colxnsDB.IntendedColxns, db);
             colxnsDB.CashierColxns = new CashierColxnsRepo1(new CashierColxnsCollection(db));
-            colxnsDB.BalanceAdjs   = new BalanceAdjsRepo1(date, new BalanceAdjsCollection(db), _balDB, colxnsDB);
+            colxnsDB.BalanceAdjs   = new BalanceAdjsRepo1(date, new BalanceAdjsCollection(db), _balDB, this);
             return colxnsDB;
+        }
+
+
+        private void SetIntendedColxns(Dictionary<int, IIntendedColxnsRepo> dict, SharedLiteDB db)
+        {
+            foreach (var sec in _mkt.Sections.GetAll())
+            {
+                var colxn = new IntendedColxnsCollection(sec, db);
+                var repo  = new IntendedColxnsRepo1(colxn);
+                dict.Add(sec.Id, repo);
+            }
         }
 
 

@@ -47,6 +47,7 @@
     <Compile Include="DailyBillsRepository\DailyBillsCollection.cs" />
     <Compile Include="DailyColxnsRepository\BalanceAdjsCollection.cs" />
     <Compile Include="DailyColxnsRepository\CashierColxnsCollection.cs" />
+    <Compile Include="DailyColxnsRepository\IntendedColxnsCollection.cs" />
     <Compile Include="DatabaseFinders\BalancesLocalDir.cs" />
     <Compile Include="DatabaseFinders\CollectionsLocalDir.cs" />
     <Compile Include="DatabaseFinders\MarketStateDBFile.cs" />

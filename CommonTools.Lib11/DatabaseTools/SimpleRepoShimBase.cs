@@ -25,7 +25,7 @@ namespace CommonTools.Lib11.DatabaseTools
         protected virtual void ValidateBeforeUpdate(T changedRecord) { }
         protected virtual void ValidateBeforeDelete(T record) { }
         protected virtual void ExecuteAfterSave    (T record) { }
-        protected virtual IOrderedEnumerable<T> ToSorted(IEnumerable<T> items) => items.OrderBy(_ => _.ToString());
+        protected virtual IEnumerable<T> ToSorted(IEnumerable<T> items) => items;
 
         protected List<T> ToSortedList(IEnumerable<T> items) => ToSorted(items).ToList();
 

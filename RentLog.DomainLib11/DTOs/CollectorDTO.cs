@@ -22,7 +22,12 @@ namespace RentLog.DomainLib11.DTOs
         public override string ToString() => Name;
 
 
+
         public static CollectorDTO Named(string name)
             => new CollectorDTO { Name = name };
+
+
+        public static CollectorDTO Office()
+            => CollectorDTO.Named("Office");
     }
 }

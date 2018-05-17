@@ -8,17 +8,17 @@ namespace RentLog.DomainLib11.CollectionRepos
 {
     public class BalanceAdjsRepo1 : SimpleRepoShimBase<BalanceAdjustmentDTO>, IBalanceAdjustmentsRepo
     {
-        private IBalanceDB     _balDB;
-        private ICollectionsDB _colxnsDB;
-        private IDailyBiller   _billr;
+        private IBalanceDB      _balDB;
+        private ICollectionsDir _colxnsDir;
+        private IDailyBiller    _billr;
 
 
-        public BalanceAdjsRepo1(DateTime date, ISimpleRepo<BalanceAdjustmentDTO> simpleRepo, IBalanceDB balanceDB, ICollectionsDB collectionsDB) : base(simpleRepo)
+        public BalanceAdjsRepo1(DateTime date, ISimpleRepo<BalanceAdjustmentDTO> simpleRepo, IBalanceDB balanceDB, ICollectionsDir collectionsDir) : base(simpleRepo)
         {
-            _balDB    = balanceDB;
-            _colxnsDB = collectionsDB;
-            Date      = date;
-            _billr    = new DailyBiller1(collectionsDB);
+            _balDB     = balanceDB;
+            _colxnsDir = collectionsDir;
+            Date       = date;
+            _billr     = new DailyBiller1(collectionsDir);
         }
 
 

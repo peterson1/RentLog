@@ -11,7 +11,7 @@ using Xunit;
 namespace RentLog.Tests.StallsRepoTests
 {
     [Trait("Stalls Repo", "Solitary")]
-    public class StallsRepoFacts
+    public class StallsRepoWriterFacts
     {
         [Fact(DisplayName = "Insert Rejects duplicate name")]
         public void InsertRejectsduplicatestallname()

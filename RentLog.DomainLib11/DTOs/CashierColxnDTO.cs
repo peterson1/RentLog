@@ -1,6 +1,7 @@
 ﻿using CommonTools.Lib11.DTOs;
 using CommonTools.Lib11.ReflectionTools;
 using System;
+using static RentLog.DomainLib11.DTOs.DailyBillDTO;
 
 namespace RentLog.DomainLib11.DTOs
 {
@@ -19,5 +20,14 @@ namespace RentLog.DomainLib11.DTOs
 
         public T DeepClone   <T>() => throw new NotImplementedException();
         public T ShallowClone<T>() => (T)this.MemberwiseClone();
+
+
+        internal BillPayment ToBillPayment() => new BillPayment
+        {
+            Amount    = this.Amount,
+            PRNumber  = int.TryParse(DocumentRef, out int num) ? num : -1,
+            Remarks   = this.Remarks,
+            Collector = CollectorDTO.Office(),
+        };
     }
 }

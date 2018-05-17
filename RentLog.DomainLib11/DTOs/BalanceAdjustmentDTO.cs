@@ -1,6 +1,7 @@
 ﻿using CommonTools.Lib11.DTOs;
 using CommonTools.Lib11.ReflectionTools;
 using System;
+using static RentLog.DomainLib11.DTOs.DailyBillDTO;
 
 namespace RentLog.DomainLib11.DTOs
 {
@@ -16,6 +17,15 @@ namespace RentLog.DomainLib11.DTOs
         public decimal     AmountOffset  { get; set; }
         public string      Reason        { get; set; }
         public string      DocumentRef   { get; set; }
+
+
+        internal BillAdjustment ToBillAdjustment() => new BillAdjustment
+        {
+            DocumentRef  = this.DocumentRef,
+            AdjustedBy   = this.Author,
+            AmountOffset = this.AmountOffset,
+            Reason       = this.Reason,
+        };
 
 
         public T DeepClone   <T>() => throw new NotImplementedException();

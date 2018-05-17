@@ -73,17 +73,32 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BalAdjsRepoTests\BalAdjsRepoFacts.cs" />
-    <Compile Include="DailyBillerTests\RentBillerFacts.cs" />
-    <Compile Include="DailyBillsRepoTests\DailyBillsRepoFacts.cs" />
+    <Compile Include="BillRowComposerTests\BillRowComposerBaseFacts.cs" />
+    <Compile Include="LeasesRepoTests\ActiveLeasesRepoReaderFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SampleDBs\SampleDBsDir.cs" />
     <Compile Include="SectionsRepoTests\SectionsRepoFacts.cs" />
-    <Compile Include="StallsRepoTests\StallsRepoFacts.cs" />
+    <Compile Include="StallsRepoTests\StallsRepoReaderFacts.cs" />
+    <Compile Include="StallsRepoTests\StallsRepoWriterFacts.cs" />
     <Compile Include="SurchargerTests\RentSurchargerTests\RentDailySurchargeFacts.cs" />
     <Compile Include="TestTools\MockDB.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="SampleDBs\2018-05-12 Helen Ablen - 197 - DRY 008\Balances\Lease00197_Balance.ldb" />
+    <None Include="SampleDBs\2018-05-12 Helen Ablen - 197 - DRY 008\Collections\2018-05-03_Solo.ldb" />
+    <None Include="SampleDBs\2018-05-12 Helen Ablen - 197 - DRY 008\Collections\2018-05-04_Solo.ldb" />
+    <None Include="SampleDBs\2018-05-12 Helen Ablen - 197 - DRY 008\Collections\2018-05-05_Solo.ldb" />
+    <None Include="SampleDBs\2018-05-12 Helen Ablen - 197 - DRY 008\Collections\2018-05-06_Solo.ldb" />
+    <None Include="SampleDBs\2018-05-12 Helen Ablen - 197 - DRY 008\Collections\2018-05-07_Solo.ldb" />
+    <None Include="SampleDBs\2018-05-12 Helen Ablen - 197 - DRY 008\Collections\2018-05-08_Solo.ldb" />
+    <None Include="SampleDBs\2018-05-12 Helen Ablen - 197 - DRY 008\Collections\2018-05-09_Solo.ldb" />
+    <None Include="SampleDBs\2018-05-12 Helen Ablen - 197 - DRY 008\Collections\2018-05-10_Solo.ldb" />
+    <None Include="SampleDBs\2018-05-12 Helen Ablen - 197 - DRY 008\Collections\2018-05-11_Solo.ldb" />
+    <None Include="SampleDBs\2018-05-12 Helen Ablen - 197 - DRY 008\Collections\2018-05-12_Solo.ldb" />
+    <None Include="SampleDBs\2018-05-12 Helen Ablen - 197 - DRY 008\Collections\2018-05-13_Solo.ldb" />
+    <None Include="SampleDBs\2018-05-12 Helen Ablen - 197 - DRY 008\MarketState.ldb" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
@@ -96,6 +111,10 @@
     <ProjectReference Include="..\CommonTools.Lib45\CommonTools.Lib45.csproj">
       <Project>{89c1d90f-af50-48b4-8178-9b6cc2e28b11}</Project>
       <Name>CommonTools.Lib45</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RentLog.DatabaseLib\RentLog.DatabaseLib.csproj">
+      <Project>{a1aaa1a9-81d2-4db6-8bd1-d7de5f57ccb2}</Project>
+      <Name>RentLog.DatabaseLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\RentLog.DomainLib11\RentLog.DomainLib11.csproj">
       <Project>{d508bbc8-4d2c-46de-a090-cc333d01270f}</Project>

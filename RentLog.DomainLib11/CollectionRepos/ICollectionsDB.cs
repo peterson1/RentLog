@@ -1,10 +1,15 @@
-﻿namespace RentLog.DomainLib11.CollectionRepos
+﻿using RentLog.DomainLib11.DTOs;
+using System.Collections.Generic;
+
+namespace RentLog.DomainLib11.CollectionRepos
 {
     public interface ICollectionsDB
     {
-        bool IsPosted();
+        Dictionary<int, IIntendedColxnsRepo> IntendedColxns { get; }
+        ICashierColxnsRepo       CashierColxns   { get; }
+        IBalanceAdjustmentsRepo  BalanceAdjs     { get; }
 
-        ICashierColxnsRepo       CashierColxns  { get; }
-        IBalanceAdjustmentsRepo  BalanceAdjs    { get; }
+        bool          IsPosted      ();
+        CollectorDTO  GetCollector  (LeaseDTO lease);
     }
 }

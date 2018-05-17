@@ -9,10 +9,12 @@ namespace RentLog.DomainLib11.BalanceRepos
 {
     public class DailyBillsRepo1 : SimpleRepoShimBase<DailyBillDTO>, IDailyBillsRepo
     {
+        private LeaseDTO _lse;
 
 
-        public DailyBillsRepo1(ISimpleRepo<DailyBillDTO> simpleRepo) : base(simpleRepo)
+        public DailyBillsRepo1(LeaseDTO lease, ISimpleRepo<DailyBillDTO> simpleRepo) : base(simpleRepo)
         {
+            _lse = lease;
         }
 
 
@@ -27,8 +29,8 @@ namespace RentLog.DomainLib11.BalanceRepos
 
             foreach (var dto in affctd)
             {
-                //var newState = RecomputeBill(dto, billCode, colxnsDB);
-                var newState = dailyBiller.ComputeBill(dto, billCode);
+                var rowDate  = dto.GetBillDate();
+                var newState = dailyBiller.ComputeBill(billCode, _lse, rowDate, openingBal);
                 dto.Bills.RemoveAll(_ => _.BillCode == billCode);
                 dto.Bills.Add(newState);
 
@@ -38,7 +40,7 @@ namespace RentLog.DomainLib11.BalanceRepos
         }
 
 
-        protected override IOrderedEnumerable<DailyBillDTO> ToSorted(IEnumerable<DailyBillDTO> items)
+        protected override IEnumerable<DailyBillDTO> ToSorted(IEnumerable<DailyBillDTO> items)
             => items.OrderByDescending(_ => _.Id);
     }
 }
