@@ -4,7 +4,6 @@ using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DTOs;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using static RentLog.DomainLib11.DTOs.DailyBillDTO;
 
 namespace RentLog.DomainLib11.BillingRules
@@ -16,12 +15,6 @@ namespace RentLog.DomainLib11.BillingRules
 
         public RentBillComposer1(ICollectionsDir collectionsDir) : base(collectionsDir)
         {
-        }
-
-
-        public override decimal ComputeClosingBalance(BillState billState)
-        {
-            throw new NotImplementedException();
         }
 
 
@@ -39,13 +32,9 @@ namespace RentLog.DomainLib11.BillingRules
         }
 
 
-
-
-
-
-        //private BillAdjustment ToAdjustment(BalanceAdjustmentDTO dto)
-        //    => new BillAdjustment
-        //    {
-        //    };
+        public override decimal TotalDue(BillState billState)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

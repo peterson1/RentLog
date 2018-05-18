@@ -11,7 +11,7 @@ using Xunit;
 
 namespace RentLog.Tests.BillRowComposerTests
 {
-    [Trait("Bill Row Composer", "Sample DB Dir")]
+    [Trait("Bill Composer Base", "Sample DB Dir")]
     public class BillRowComposerBaseFacts
     {
         [Fact(DisplayName = "Reads Adjustments")]
@@ -43,6 +43,7 @@ namespace RentLog.Tests.BillRowComposerTests
             sut._billCode = BillCode.Electric;
             pay = sut.ReadPayments(lse, 11.May(2018));
             pay.Single().Amount.Should().Be(33);
+            pay.Single().Collector.Name.Should().Be("Jomar Pasaludos");
         }
 
 

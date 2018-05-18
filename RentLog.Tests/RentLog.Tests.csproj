@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="BalAdjsRepoTests\BalAdjsRepoFacts.cs" />
     <Compile Include="BillRowComposerTests\BillRowComposerBaseFacts.cs" />
+    <Compile Include="BillRowComposerTests\RentBillComposerFacts.cs" />
     <Compile Include="LeasesRepoTests\ActiveLeasesRepoReaderFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleDBs\SampleDBsDir.cs" />

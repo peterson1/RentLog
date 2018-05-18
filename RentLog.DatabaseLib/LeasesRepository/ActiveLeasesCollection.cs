@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using CommonTools.Lib11.DatabaseTools;
+﻿using CommonTools.Lib11.DatabaseTools;
 using CommonTools.Lib45.LiteDbTools;
 using LiteDB;
-using RentLog.DatabaseLib.SectionsRepository;
 using RentLog.DatabaseLib.StallsRepository;
 using RentLog.DomainLib11.DTOs;
 
@@ -15,10 +13,6 @@ namespace RentLog.DatabaseLib.LeasesRepository
 
         internal ActiveLeasesCollection(SharedLiteDB sharedLiteDB) : base(sharedLiteDB)
         {
-            //todo: test this
-            //BsonMapper.Global.Entity<StallDTO>()
-            //    .DbRef(_ => _.Section, SectionsCollection.COLXN_NAME);
-
             BsonMapper.Global.Entity<LeaseDTO>()
                 .DbRef(_ => _.Stall, StallsCollection.COLXN_NAME);
         }

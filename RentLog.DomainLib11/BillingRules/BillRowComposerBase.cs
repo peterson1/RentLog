@@ -1,6 +1,5 @@
 ﻿using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DTOs;
-using RentLog.DomainLib11.MarketStateRepos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +19,12 @@ namespace RentLog.DomainLib11.BillingRules
 
         protected abstract BillCode BillCode { get; }
 
-        public abstract decimal              ComputeClosingBalance (BillState billState);
-        public abstract List<BillPenalty>    ComputePenalties      (LeaseDTO lse, DateTime date, decimal? previousBalance);
+        public abstract List<BillPenalty> ComputePenalties (LeaseDTO lse, DateTime date, decimal? previousBalance);
+        public abstract decimal           TotalDue         (BillState billState);
+
+
+        public decimal ComputeClosingBalance(BillState billState)
+            => TotalDue(billState) - billState.TotalPayments;
 
 
         public List<BillAdjustment> ReadAdjustments(LeaseDTO lse, DateTime date)
