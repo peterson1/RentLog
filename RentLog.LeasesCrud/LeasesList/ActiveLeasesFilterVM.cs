@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace RentLog.LeasesCrud.LeasesList
 {
-    public class ActiveLeasesFilterVM : TextFilterBase<ActiveLeaseRow>
+    public class ActiveLeasesFilterVM : TextFilterBase<LeaseBalanceRow>
     {
         public string  TenantFilter         { get; set; }
         public string  StallFilter          { get; set; }
@@ -19,7 +19,7 @@ namespace RentLog.LeasesCrud.LeasesList
         public string  RemarksFilter        { get; set; }
 
 
-        protected override Dictionary<string, Func<ActiveLeaseRow, string>> FilterProperties => new Dictionary<string, Func<ActiveLeaseRow, string>>
+        protected override Dictionary<string, Func<LeaseBalanceRow, string>> FilterProperties => new Dictionary<string, Func<LeaseBalanceRow, string>>
         {
                 { nameof(TenantFilter       ), _ => _.DTO.Tenant.FirstAndLastNames            },
                 { nameof(StallFilter        ), _ => _.DTO.Stall.Name                          },

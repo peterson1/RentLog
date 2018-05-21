@@ -19,8 +19,8 @@
             <DataGridTextColumn Width="09*" Header="total rights"    Binding="{Binding DTO.Rights.TotalAmount, StringFormat=N2}" ElementStyle="{StaticResource colCenter}" />
             <DataGridTextColumn Width="08*" Header="settlement"      Binding="{Binding DTO.Rights.SettlementDays, Converter={StaticResource spanDays}}" ElementStyle="{StaticResource colCenter}" />
 
-            <DataGridTextColumn Width="07*" Header="rent balance"    Binding="{Binding RentBalance, StringFormat=N2}" ElementStyle="{StaticResource colRight}" />
-            <DataGridTextColumn Width="07*" Header="rights balance"  Binding="{Binding RightsBalance, StringFormat=N2}" ElementStyle="{StaticResource colRight}" />
+            <DataGridTextColumn Width="07*" Header="rent balance"    Binding="{Binding Rent, StringFormat=N2}" ElementStyle="{StaticResource colRight}" />
+            <DataGridTextColumn Width="07*" Header="rights balance"  Binding="{Binding Rights, StringFormat=N2}" ElementStyle="{StaticResource colRight}" />
 
             <DataGridTextColumn Width="14*" Header="product to sell" Binding="{Binding DTO.ProductToSell}" />
             <DataGridTextColumn Width="06*" Header="remarks"         Binding="{Binding DTO.Remarks}" />

@@ -11,7 +11,7 @@ namespace RentLog.LeasesCrud.LeasesList
             InitializeComponent();
             Loaded += (s, e) =>
             {
-                dg.EnableOpenCurrent<ActiveLeaseRow>();
+                dg.EnableOpenCurrent<LeaseBalanceRow>();
             };
         }
     }

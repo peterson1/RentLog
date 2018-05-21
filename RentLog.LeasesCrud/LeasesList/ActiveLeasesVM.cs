@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace RentLog.LeasesCrud.LeasesList
 {
-    public class ActiveLeasesVM : IndirectFilteredListVMBase<ActiveLeaseRow, LeaseDTO, ActiveLeasesFilterVM, AppArguments>
+    public class ActiveLeasesVM : IndirectFilteredListVMBase<LeaseBalanceRow, LeaseDTO, ActiveLeasesFilterVM, AppArguments>
     {
         public ActiveLeasesVM(AppArguments appArguments) : base(appArguments.MarketState.ActiveLeases, appArguments, false)
         {
@@ -24,13 +24,13 @@ namespace RentLog.LeasesCrud.LeasesList
             => db.GetAll().OrderByDescending(_ => _.Id).ToList();
 
 
-        protected override ActiveLeaseRow CastToRow(LeaseDTO lse)
+        protected override LeaseBalanceRow CastToRow(LeaseDTO lse)
         {
-            var row           = new ActiveLeaseRow(lse);
-            var date          = AppArgs.Collections.LastPostedDate();
-            var bill          = AppArgs.Balances.GetBill(lse, date);
-            row.RentBalance   = bill.For(BillCode.Rent  ).ClosingBalance;
-            row.RightsBalance = bill.For(BillCode.Rights).ClosingBalance;
+            var row    = new LeaseBalanceRow(lse);
+            var date   = AppArgs.Collections.LastPostedDate();
+            var bill   = AppArgs.Balances.GetBill(lse, date);
+            row.Rent   = bill.For(BillCode.Rent  ).ClosingBalance;
+            row.Rights = bill.For(BillCode.Rights).ClosingBalance;
             return row;
         }
     }

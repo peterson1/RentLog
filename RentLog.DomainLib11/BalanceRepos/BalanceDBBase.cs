@@ -54,7 +54,7 @@ namespace RentLog.DomainLib11.BalanceRepos
         private bool IsRightsOverdue(LeaseBalanceRow row, DateTime date)
         {
             if ((row.Rights ?? 0) <= 0) return false;
-            return date > row.Lease.RightsDueDate;
+            return date > row.DTO.RightsDueDate;
         }
 
 
@@ -65,7 +65,7 @@ namespace RentLog.DomainLib11.BalanceRepos
             //assume zero backrent from here on
 
             if (!row.IsActive) return true;
-            if (date <= row.Lease.RightsDueDate) return true;
+            if (date <= row.DTO.RightsDueDate) return true;
             if ((row.Rights ?? 0) <= 0) return true;
 
             return false;
