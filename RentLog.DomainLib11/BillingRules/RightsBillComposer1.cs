@@ -1,30 +1,29 @@
 ﻿using CommonTools.Lib11.ExceptionTools;
-using RentLog.DomainLib11.BillingRules.RentPenalties;
+using RentLog.DomainLib11.BillingRules.RightsPenalties;
 using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DTOs;
-using RentLog.DomainLib11.StateTransitions;
 using System;
 using System.Collections.Generic;
 using static RentLog.DomainLib11.DTOs.DailyBillDTO;
 
 namespace RentLog.DomainLib11.BillingRules
 {
-    public class RentBillComposer1 : BillRowComposerBase
+    public class RightsBillComposer1 : BillRowComposerBase
     {
-        protected override BillCode BillCode => BillCode.Rent;
+        protected override BillCode BillCode => BillCode.Rights;
 
 
-        public RentBillComposer1(ICollectionsDir collectionsDir) : base(collectionsDir)
+        public RightsBillComposer1(ICollectionsDir collectionsDir) : base(collectionsDir)
         {
         }
 
 
         public override List<BillPenalty> ComputePenalties(LeaseDTO lse, DateTime date, decimal? previousBalance)
         {
-            switch (lse.Rent.PenaltyRule)
+            switch (lse.Rights.PenaltyRule)
             {
-                case RentDailySurcharger.RULE:
-                    return new RentDailySurcharger()
+                case RightsDailyAfter90Surcharger.RULE:
+                    return new RightsDailyAfter90Surcharger()
                         .GetPenalties(lse, date, previousBalance);
 
                 default:
@@ -34,11 +33,7 @@ namespace RentLog.DomainLib11.BillingRules
 
 
         protected override decimal GetRegularDue(LeaseDTO lse, BillState billState, DateTime date)
-        {
-            if (!lse.IsActive(date)) return 0;
-
-            return date.Date >= lse.FirstRentDueDate
-                ? lse.Rent.RegularRate : 0;
-        }
+            => lse.ContractStart == date.Date 
+             ? lse.Rights.TotalAmount : 0;
     }
 }

@@ -8,7 +8,7 @@ using static RentLog.DomainLib11.DTOs.DailyBillDTO;
 
 namespace RentLog.DomainLib11.BillingRules.RentPenalties
 {
-    public class RentDailySurcharger
+    public class RentDailySurcharger : IBillSurcharger
     {
         public const string RULE = "Daily Surcharge";
 
@@ -24,7 +24,7 @@ namespace RentLog.DomainLib11.BillingRules.RentPenalties
                 new BillPenalty
                 {
                     Label       = RULE,
-                    Amount      = oldBal.Value * rate,
+                    Amount      = Math.Round(oldBal.Value * rate, 0),
                     Computation = "balance * penaltyRate" + L.f
                                 + $"{oldBal:N2} * {rate:N2}" + L.f 
                                 + "(centavos rounded off)"

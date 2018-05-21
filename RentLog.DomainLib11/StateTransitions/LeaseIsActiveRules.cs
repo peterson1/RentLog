@@ -8,6 +8,8 @@ namespace RentLog.DomainLib11.StateTransitions
     {
         public static bool IsActive(this LeaseDTO lse, DateTime asOfDate)
         {
+            asOfDate = asOfDate.Date;
+
             if (lse is InactiveLeaseDTO inactv)
             {
                 if (asOfDate > inactv.DeactivatedDate) return false;

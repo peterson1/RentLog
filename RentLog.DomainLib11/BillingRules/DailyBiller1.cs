@@ -8,19 +8,25 @@ namespace RentLog.DomainLib11.BillingRules
 {
     public class DailyBiller1 : IDailyBiller
     {
-        private RentBillComposer1 _rentBillr;
+        private RentBillComposer1     _rentComposr;
+        private RightsBillComposer1   _rightsComposr;
+        private ElectricBillComposer1 _electricComposr;
+        private WaterBillComposer1    _waterComposr;
 
 
         public DailyBiller1(ICollectionsDir collectionsDir)
         {
-            _rentBillr = new RentBillComposer1(collectionsDir);
+            _rentComposr     = new RentBillComposer1(collectionsDir);
+            _rightsComposr   = new RightsBillComposer1(collectionsDir);
+            _electricComposr = new ElectricBillComposer1(collectionsDir);
+            _waterComposr    = new WaterBillComposer1(collectionsDir);
         }
 
 
         public BillState ComputeBill(BillCode billCode, LeaseDTO lease, DateTime date, decimal? previousBalance)
         {
             var composr = GetRowComposer(billCode);
-            var state = new BillState
+            var state   = new BillState
             {
                 BillCode       = billCode,
                 OpeningBalance = previousBalance,
@@ -37,7 +43,10 @@ namespace RentLog.DomainLib11.BillingRules
         {
             switch (billCode)
             {
-                case BillCode.Rent: return _rentBillr;
+                case BillCode.Rent    : return _rentComposr;
+                case BillCode.Rights  : return _rightsComposr;
+                case BillCode.Electric: return _electricComposr;
+                case BillCode.Water   : return _waterComposr;
                 default:
                     throw Fault.BadArg("BillCode", billCode);
             }

@@ -27,6 +27,21 @@ namespace RentLog.Tests.SurchargerTests.RentSurchargerTests
         }
 
 
+        [Fact(DisplayName = "Rate * Balance (rounded)")]
+        public void RateTimesBalancerounded()
+        {
+            var sut     = new RentDailySurcharger();
+            var lse     = LeaseWithPenaltyRate(0.03M);
+            var date    = 3.May(2018);
+            var oldBal  = 90;
+            var charges = sut.GetPenalties(lse, date, oldBal);
+            charges.Should().HaveCount(1);
+            var penalty = charges.Single();
+            penalty.Amount.Should().Be(3);
+            penalty.Label.Should().Be(RentDailySurcharger.RULE);
+        }
+
+
         [Fact(DisplayName = "Error if Different Rule")]
         public void ErrorifDifferentRule()
         {

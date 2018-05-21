@@ -89,7 +89,6 @@ namespace RentLog.Tests.BillRowComposerTests
         }
 
 
-
         private BillState SampleBillState() => new BillState
         {
             Penalties   = new List<BillPenalty>    { new BillPenalty   () },
