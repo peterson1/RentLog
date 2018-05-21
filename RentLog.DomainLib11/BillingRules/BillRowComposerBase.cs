@@ -20,11 +20,11 @@ namespace RentLog.DomainLib11.BillingRules
         protected abstract BillCode BillCode { get; }
 
         public abstract List<BillPenalty> ComputePenalties (LeaseDTO lse, DateTime date, decimal? previousBalance);
-        public abstract decimal           TotalDue         (BillState billState);
+        public abstract decimal           TotalDue         (LeaseDTO lse, BillState billState, DateTime date);
 
 
-        public decimal ComputeClosingBalance(BillState billState)
-            => TotalDue(billState) - billState.TotalPayments;
+        public decimal ComputeClosingBalance(LeaseDTO lse, BillState billState, DateTime date)
+            => TotalDue(lse, billState, date) - billState.TotalPayments;
 
 
         public List<BillAdjustment> ReadAdjustments(LeaseDTO lse, DateTime date)

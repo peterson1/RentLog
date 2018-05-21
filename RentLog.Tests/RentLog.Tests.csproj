@@ -81,6 +81,7 @@
     <Compile Include="SectionsRepoTests\SectionsRepoFacts.cs" />
     <Compile Include="StallsRepoTests\StallsRepoReaderFacts.cs" />
     <Compile Include="StallsRepoTests\StallsRepoWriterFacts.cs" />
+    <Compile Include="StateTransitionTests\LeaseIsActiveFacts.cs" />
     <Compile Include="SurchargerTests\RentSurchargerTests\RentDailySurchargeFacts.cs" />
     <Compile Include="TestTools\MockDB.cs" />
   </ItemGroup>

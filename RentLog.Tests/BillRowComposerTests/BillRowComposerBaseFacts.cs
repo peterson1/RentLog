@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
+using static RentLog.DomainLib11.DTOs.DailyBillDTO;
 
 namespace RentLog.Tests.BillRowComposerTests
 {
@@ -58,12 +59,13 @@ namespace RentLog.Tests.BillRowComposerTests
             }
 
 
-            public override decimal ComputeClosingBalance(DailyBillDTO.BillState billState)
+            public override List<DailyBillDTO.BillPenalty> ComputePenalties(LeaseDTO lse, DateTime date, decimal? previousBalance)
             {
                 throw new NotImplementedException();
             }
 
-            public override List<DailyBillDTO.BillPenalty> ComputePenalties(LeaseDTO lse, DateTime date, decimal? previousBalance)
+
+            public override decimal TotalDue(LeaseDTO lse, BillState billState, DateTime date)
             {
                 throw new NotImplementedException();
             }

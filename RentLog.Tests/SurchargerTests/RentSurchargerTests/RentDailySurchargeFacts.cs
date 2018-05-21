@@ -84,7 +84,10 @@ namespace RentLog.Tests.SurchargerTests.RentSurchargerTests
 
         private LeaseDTO LeaseWithPenaltyRate(decimal penaltyRate1) => new LeaseDTO
         {
-            Rent = new RentParams
+            ContractStart = 2.May(2018),
+            ContractEnd   = 29.May(2018),
+            Stall         = new StallDTO { IsOperational = true },
+            Rent          = new RentParams
             {
                 PenaltyRule  = RentDailySurcharger.RULE,
                 PenaltyRate1 = penaltyRate1

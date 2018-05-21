@@ -2,6 +2,7 @@
 using RentLog.DomainLib11.BillingRules.RentPenalties;
 using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DTOs;
+using RentLog.DomainLib11.StateTransitions;
 using System;
 using System.Collections.Generic;
 using static RentLog.DomainLib11.DTOs.DailyBillDTO;
@@ -32,9 +33,19 @@ namespace RentLog.DomainLib11.BillingRules
         }
 
 
-        public override decimal TotalDue(BillState billState)
+        public override decimal TotalDue(LeaseDTO lse, BillState state, DateTime date)
         {
-            throw new NotImplementedException();
+            var due = (state.OpeningBalance ?? 0)
+                     + state.TotalPenalties
+                     + state.TotalAdjustments;
+
+            if (lse.IsActive(date))
+            {
+                if (date >= lse.FirstRentDueDate)
+                    due += lse.Rent.RegularRate;
+            }
+
+            return due;
         }
     }
 }

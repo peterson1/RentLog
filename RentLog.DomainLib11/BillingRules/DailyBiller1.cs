@@ -28,7 +28,7 @@ namespace RentLog.DomainLib11.BillingRules
                 Payments       = composr.ReadPayments(lease, date),
                 Adjustments    = composr.ReadAdjustments(lease, date),
             };
-            state.ClosingBalance = composr.ComputeClosingBalance(state);
+            state.ClosingBalance = composr.ComputeClosingBalance(lease, state, date);
             return state;
         }
 

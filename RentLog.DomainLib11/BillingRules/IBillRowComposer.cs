@@ -11,6 +11,6 @@ namespace RentLog.DomainLib11.BillingRules
         List<BillAdjustment>  ReadAdjustments        (LeaseDTO lse, DateTime date);
 
         List<BillPenalty>     ComputePenalties       (LeaseDTO lse, DateTime date, decimal? previousBalance);
-        decimal               ComputeClosingBalance  (BillState billState);
+        decimal               ComputeClosingBalance  (LeaseDTO lse, BillState billState, DateTime date);
     }
 }
