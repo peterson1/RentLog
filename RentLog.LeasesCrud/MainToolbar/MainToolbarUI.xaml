@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="RentLog.LeasesCrud.MainToolbar.MainToolbarUI"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RentLog.LeasesCrud.MainToolbar"
+             xmlns:butns="clr-namespace:CommonTools.Lib45.StyledButtons;assembly=CommonTools.Lib45"
+             xmlns:labls="clr-namespace:CommonTools.Lib45.TextLabels;assembly=CommonTools.Lib45"
+             xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="labls:DualText">
+            <Setter Property="Text1Width" Value="auto" />
+            <Setter Property="Text1Brush" Value="LightBlue" />
+            <Setter Property="Text2Brush" Value="White" />
+            <Setter Property="Margin" Value="15 0 15 0" />
+        </Style>
+    </UserControl.Resources>
+    <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    Margin="0 3 0 0"
+                    DataContext="{Binding MainToolBar}">
+            
+            <labls:DualText Text1="Total Back Rent"
+                            Text2="{Binding Overdues.Rent, StringFormat=N2}" />
+            
+            <labls:DualText Text1="Total Overdue Rights"
+                            Text2="{Binding Overdues.Rights, StringFormat=N2}" />
+        </StackPanel>
+        
+        <butns:RefreshButtonWhite Margin="10 0 0 0" />
+    </StackPanel>
+</UserControl>

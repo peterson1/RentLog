@@ -103,6 +103,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MainToolbar\MainToolbarUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -126,6 +130,10 @@
     <Compile Include="LeasesList\InactiveLeasesVM.cs" />
     <Compile Include="LeasesList\ActiveLeasesFilterVM.cs" />
     <Compile Include="LeasesList\ActiveLeasesVM.cs" />
+    <Compile Include="MainToolbar\MainToolbarUI.xaml.cs">
+      <DependentUpon>MainToolbarUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainToolbar\MainToolbarVM.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

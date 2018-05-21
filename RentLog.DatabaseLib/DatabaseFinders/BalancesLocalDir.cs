@@ -30,18 +30,6 @@ namespace RentLog.DatabaseLib.DatabaseFinders
         {
             var file = Path.Combine(_dir, GetFilename(lseID));
             var db   = new SharedLiteDB(file, _mkt.CurrentUser);
-
-
-            //var colxn = new DailyBillsCollection(db);
-
-            //colxn.Delete(_ => _.Id < new DateTime(2018, 5, 19).ToBillID());
-            
-            //var latest = colxn.Latest();
-            //if (latest != null)
-            //    colxn.Delete(_ => _.Id < latest.Id);
-
-
-
             var lse  = _mkt.FindLease(lseID);
             return new DailyBillsRepo1(lse, new DailyBillsCollection(db));
         }

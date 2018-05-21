@@ -143,6 +143,9 @@
     <Compile Include="StyledButtons\PrintBtnLabeled.xaml.cs">
       <DependentUpon>PrintBtnLabeled.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StyledButtons\RefreshButtonWhite.xaml.cs">
+      <DependentUpon>RefreshButtonWhite.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StyledButtons\SimpleRefreshButton.xaml.cs">
       <DependentUpon>SimpleRefreshButton.xaml</DependentUpon>
     </Compile>
@@ -206,6 +209,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="StyledButtons\PrintBtnLabeled.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StyledButtons\RefreshButtonWhite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

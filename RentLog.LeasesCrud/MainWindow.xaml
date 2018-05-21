@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:lses="clr-namespace:RentLog.LeasesCrud.LeasesList"
+        xmlns:tbar="clr-namespace:RentLog.LeasesCrud.MainToolbar"
         xmlns:local="clr-namespace:RentLog.LeasesCrud"
         mc:Ignorable="d"
         Title="{Binding Caption}" 
@@ -38,7 +39,11 @@
                 </TabItem>
 
             </dragz:TabablzControl>
-            
+
+            <tbar:MainToolbarUI HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Margin="0 4 20 0" />
+
             <busy:BusyDialog />
         </Grid>
     </DockPanel>

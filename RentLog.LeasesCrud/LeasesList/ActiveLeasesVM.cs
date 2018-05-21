@@ -11,7 +11,7 @@ namespace RentLog.LeasesCrud.LeasesList
 {
     public class ActiveLeasesVM : IndirectFilteredListVMBase<ActiveLeaseRow, LeaseDTO, ActiveLeasesFilterVM, AppArguments>
     {
-        public ActiveLeasesVM(AppArguments appArguments) : base(appArguments.MarketState.ActiveLeases, appArguments, true)
+        public ActiveLeasesVM(AppArguments appArguments) : base(appArguments.MarketState.ActiveLeases, appArguments, false)
         {
         }
 

@@ -1,12 +1,9 @@
-﻿using PropertyChanged;
+﻿using System.Threading.Tasks;
+using PropertyChanged;
 using RentLog.DomainLib45;
 using RentLog.DomainLib45.BaseViewModels;
 using RentLog.LeasesCrud.LeasesList;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RentLog.LeasesCrud.MainToolbar;
 
 namespace RentLog.LeasesCrud
 {
@@ -15,12 +12,31 @@ namespace RentLog.LeasesCrud
     {
         public MainWindowVM(AppArguments appArguments) : base(appArguments)
         {
+            MainToolBar  = new MainToolbarVM(appArguments);
             ActiveLeases = new ActiveLeasesVM(appArguments);
+            ClickRefresh();
         }
 
 
-
+        public MainToolbarVM     MainToolBar     { get; }
         public ActiveLeasesVM    ActiveLeases    { get; }
         public InactiveLeasesVM  InactiveLeases  { get; }
+
+
+        protected override void OnRefreshClicked()
+        {
+            MainToolBar.UpdateAll();
+            ActiveLeases.ReloadFromDB();
+        }
+
+
+        //protected override async Task OnRefreshClickedAsync()
+        //{
+        //    await Task.Run(() =>
+        //    {
+        //        MainToolBar.UpdateAll();
+        //        ActiveLeases.ReloadFromDB();
+        //    });
+        //}
     }
 }
