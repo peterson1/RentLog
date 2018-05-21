@@ -1,9 +1,11 @@
 ﻿using CommonTools.Lib45.FileSystemTools;
 using CommonTools.Lib45.LiteDbTools;
 using RentLog.DatabaseLib.DailyBillsRepository;
+using RentLog.DatabaseLib.LeasesRepository;
 using RentLog.DomainLib11.BalanceRepos;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
+using System;
 using System.IO;
 
 namespace RentLog.DatabaseLib.DatabaseFinders
@@ -28,6 +30,18 @@ namespace RentLog.DatabaseLib.DatabaseFinders
         {
             var file = Path.Combine(_dir, GetFilename(lseID));
             var db   = new SharedLiteDB(file, _mkt.CurrentUser);
+
+
+            //var colxn = new DailyBillsCollection(db);
+
+            //colxn.Delete(_ => _.Id < new DateTime(2018, 5, 19).ToBillID());
+            
+            //var latest = colxn.Latest();
+            //if (latest != null)
+            //    colxn.Delete(_ => _.Id < latest.Id);
+
+
+
             var lse  = _mkt.FindLease(lseID);
             return new DailyBillsRepo1(lse, new DailyBillsCollection(db));
         }
@@ -46,5 +60,7 @@ namespace RentLog.DatabaseLib.DatabaseFinders
                 Directory.CreateDirectory(balDir);
             return balDir;
         }
+
+        protected override MarketStateDB GetMarketState() => _mkt;
     }
 }

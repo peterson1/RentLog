@@ -9,16 +9,16 @@ namespace RentLog.Tests.TestTools
         {
             MoqStalls       = new Mock<IStallsRepo>();
             MoqSections     = new Mock<ISectionsRepo>();
-            MoqActiveLeases = new Mock<ILeasesRepo>();
+            MoqActiveLeases = new Mock<IActiveLeasesRepo>();
         }
 
         public Mock<IStallsRepo>   MoqStalls       { get; }
         public Mock<ISectionsRepo> MoqSections     { get; }
-        public Mock<ILeasesRepo>   MoqActiveLeases { get; }
+        public Mock<IActiveLeasesRepo>   MoqActiveLeases { get; }
 
 
         public override IStallsRepo   Stalls       => MoqStalls.Object;
         public override ISectionsRepo Sections     => MoqSections.Object;
-        public override ILeasesRepo   ActiveLeases => MoqActiveLeases.Object;
+        public override IActiveLeasesRepo   ActiveLeases => MoqActiveLeases.Object;
     }
 }

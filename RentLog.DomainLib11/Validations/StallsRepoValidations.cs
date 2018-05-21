@@ -16,7 +16,7 @@ namespace RentLog.DomainLib11.Validations
         //}
 
 
-        internal static void DontDeleteIfOccupied(this IStallsRepo repo, StallDTO stall, ILeasesRepo activeLses)
+        internal static void DontDeleteIfOccupied(this IStallsRepo repo, StallDTO stall, IActiveLeasesRepo activeLses)
         {
             var lse = activeLses.GetAll().SingleOrDefault(_ => _.Stall.Id == stall.Id);
             if (lse != null)

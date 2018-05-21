@@ -30,12 +30,25 @@ namespace RentLog.Tests.SampleDBs
             => Load("2018-05-12 Helen Ablen - 197 - DRY 008", 197, out lse);
 
 
-        internal static SampleDBsDir Load(string folderName, int lseId, out LeaseDTO lse)
+        internal static SampleDBsDir May_19_F_Garay() => Load("2018-05-19 F_Garay");
+
+
+        internal static SampleDBsDir Load(string folderName)
         {
-            var dbPath = Path.Combine(@"..\..\SampleDBs", 
+            var dbPath = Path.Combine(@"..\..\SampleDBs",
                             folderName, "MarketState.ldb");
             File.Exists(dbPath).Should().BeTrue();
-            var dir = new SampleDBsDir(dbPath, "Test Runner");
+            return new SampleDBsDir(dbPath, "Test Runner");
+        }
+
+
+        internal static SampleDBsDir Load(string folderName, int lseId, out LeaseDTO lse)
+        {
+            //var dbPath = Path.Combine(@"..\..\SampleDBs", 
+            //                folderName, "MarketState.ldb");
+            //File.Exists(dbPath).Should().BeTrue();
+            //var dir = new SampleDBsDir(dbPath, "Test Runner");
+            var dir = Load(folderName);
             lse = dir.MarketState.ActiveLeases.Find(lseId, true);
             return dir;
         }

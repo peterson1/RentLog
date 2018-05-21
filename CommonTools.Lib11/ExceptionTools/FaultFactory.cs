@@ -43,5 +43,9 @@ namespace CommonTools.Lib11.ExceptionTools
 
         public static FileNotFoundException MissingDir(string foldrPath)
             => new FileNotFoundException($"Missing folder: {foldrPath}");
+
+
+        public static RecordNotFoundException NoMatch<T>(string field, object value)
+            => RecordNotFoundException.For<T>(field, value);
     }
 }

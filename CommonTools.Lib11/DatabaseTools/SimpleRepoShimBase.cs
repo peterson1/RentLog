@@ -33,6 +33,8 @@ namespace CommonTools.Lib11.DatabaseTools
         public List<T>            GetAll       ()                                         => ToSortedList(_repo.GetAll());
         public List<T>            Find         (Expression<Func<T, bool>> predicate)      => ToSortedList(_repo.Find(predicate));
         public T                  Find         (int recordId, bool errorIfMissing)        => _repo.Find(recordId, errorIfMissing);
+        public T                  Earliest     () => _repo.Earliest();
+        public T                  Latest       () => _repo.Latest();
         public bool               HasName      (string recordName, string field = "Name") => _repo.HasName(recordName, field);
         public Dictionary<int, T> ToDictionary ()                                         => _repo.ToDictionary();
 

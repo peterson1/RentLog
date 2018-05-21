@@ -30,6 +30,11 @@ namespace CommonTools.Lib45.LiteDbTools
                 Metadata.CreateInitialRecord();
 
             InitializeFileWatcher();
+
+            //using (var db = OpenWrite())
+            //{
+            //    db.Shrink();
+            //}
         }
 
         public SharedLiteDB(MemoryStream memoryStream, string currentUser)

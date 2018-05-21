@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace RentLog.DomainLib11.MarketStateRepos
 {
-    public interface ILeasesRepo : ISimpleRepo<LeaseDTO>
+    public interface IActiveLeasesRepo : ISimpleRepo<LeaseDTO>
     {
         Dictionary<int, LeaseDTO> StallsLookup();
     }

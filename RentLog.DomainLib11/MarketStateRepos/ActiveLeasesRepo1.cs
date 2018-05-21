@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace RentLog.DomainLib11.MarketStateRepos
 {
-    public class ActiveLeasesRepo1 : MarketStateRepoShimBase<LeaseDTO>, ILeasesRepo
+    public class ActiveLeasesRepo1 : MarketStateRepoShimBase<LeaseDTO>, IActiveLeasesRepo
     {
         public ActiveLeasesRepo1(ISimpleRepo<LeaseDTO> simpleRepo, MarketStateDB allRepositories) : base(simpleRepo, allRepositories)
         {

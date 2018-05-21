@@ -13,17 +13,18 @@ namespace RentLog.DatabaseLib.DatabaseFinders
 
         public static MarketStateDB Load(string marketDbFilePath, string currentUser)
         {
-            var mkt          = new MarketStateDB();
-            var db           = new SharedLiteDB(marketDbFilePath, currentUser);
-
-            mkt.DatabasePath = marketDbFilePath;
-            mkt.CurrentUser  = currentUser;
-            mkt.BranchName   = db.Metadata[BRANCH_KEY];
-
-            mkt.Stalls       = new StallsRepo1(new StallsCollection(db), mkt);
-            mkt.Collectors   = new CollectorsRepo1(new CollectorsCollection(db), mkt);
-            mkt.Sections     = new SectionsRepo1(new SectionsCollection(db), mkt);
-            mkt.ActiveLeases = new ActiveLeasesRepo1(new ActiveLeasesCollection(db), mkt);
+            var mkt            = new MarketStateDB();
+            var db             = new SharedLiteDB(marketDbFilePath, currentUser);
+                               
+            mkt.DatabasePath   = marketDbFilePath;
+            mkt.CurrentUser    = currentUser;
+            mkt.BranchName     = db.Metadata[BRANCH_KEY];
+                               
+            mkt.Stalls         = new StallsRepo1(new StallsCollection(db), mkt);
+            mkt.Collectors     = new CollectorsRepo1(new CollectorsCollection(db), mkt);
+            mkt.Sections       = new SectionsRepo1(new SectionsCollection(db), mkt);
+            mkt.ActiveLeases   = new ActiveLeasesRepo1(new ActiveLeasesCollection(db), mkt);
+            mkt.InactiveLeases = new InactiveLeasesRepo1(new InactiveLeasesCollection(db), mkt);
 
             return mkt;
         }
