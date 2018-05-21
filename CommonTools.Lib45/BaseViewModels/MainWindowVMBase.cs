@@ -74,8 +74,9 @@ namespace CommonTools.Lib45.BaseViewModels
         private async Task DoRefresh()
         {
             StartBeingBusy(RefreshingText);
-            OnRefreshClicked();
 
+            //OnRefreshClicked();
+            await Task.Run(() => OnRefreshClicked());
             await Task.Run(() => OnRefreshClickedAsync());
 
             StopBeingBusy();

@@ -1,12 +1,13 @@
 ﻿using CommonTools.Lib11.DataStructures;
 using CommonTools.Lib45.BaseViewModels;
-using RentLog.DomainLib11.BalanceRepos;
+using CommonTools.Lib45.ThreadTools;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.ReportRows;
 using RentLog.DomainLib45.SoaViewer.CellViewer;
 using RentLog.DomainLib45.SoaViewer.PrintLayouts;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace RentLog.DomainLib45.SoaViewer.MainWindow
 {
@@ -14,13 +15,10 @@ namespace RentLog.DomainLib45.SoaViewer.MainWindow
     {
         protected override string CaptionPrefix => "Statement of Account";
 
-        private IDailyBillsRepo _repo;
-
 
         public SoaViewerVM(LeaseDTO leaseDTO, AppArguments appArguments) : base(appArguments)
         {
             Lease = leaseDTO;
-            _repo = AppArgs.Balances.GetRepo(Lease);
             SetCaption($"[{Lease.Id}]  {Lease.TenantAndStall}");
             Rows.ItemOpened += (s, e) => OnItemOpened(e);
             ClickRefresh();
@@ -36,9 +34,10 @@ namespace RentLog.DomainLib45.SoaViewer.MainWindow
         private IEnumerable<DailyBillsRow> GetBillRows()
         {
             var colctrs = AppArgs.MarketState.Collectors.ToDictionary();
-            return _repo.GetAll ()
-                        .Select (_ => new DailyBillsRow(Lease, _, colctrs))
-                        .ToList ();
+            var repo    = AppArgs.Balances.GetRepo(Lease);
+            return repo.GetAll ()
+                       .Select (_ => new DailyBillsRow(Lease, _, colctrs))
+                       .ToList ();
         }
 
 
@@ -49,7 +48,15 @@ namespace RentLog.DomainLib45.SoaViewer.MainWindow
         }
 
 
-        protected override void OnRefreshClicked() => Rows.SetItems(GetBillRows());
+
+        //protected override void OnRefreshClicked() => Rows.SetItems(GetBillRows());
+        protected override async Task OnRefreshClickedAsync()
+        {
+            IEnumerable<DailyBillsRow> rows = null;
+            await Task.Run(() => rows = GetBillRows());
+            UIThread.Run(() => Rows.SetItems(rows));
+        }
+
         protected override void OnPrintClicked  () => SoaPrintVM.Print(this);
     }
 

@@ -4,6 +4,7 @@ using CommonTools.Lib11.DTOs;
 using CommonTools.Lib11.GoogleTools;
 using CommonTools.Lib11.InputCommands;
 using CommonTools.Lib45.InputCommands;
+using CommonTools.Lib45.ThreadTools;
 using PropertyChanged;
 using System;
 using System.Collections.Generic;
@@ -85,8 +86,10 @@ namespace CommonTools.Lib45.BaseViewModels
 
 
         public virtual void ReloadFromDB()
-            => ItemsList.SetItems(GetPostProcessedResult());
-
+        {
+            var items = GetPostProcessedResult();
+            UIThread.Run(() => ItemsList.SetItems(items));
+        }
 
         protected IEnumerable<TDTO> GetPostProcessedResult()
             => PostProcessQueried(QueryItems(_repo));
