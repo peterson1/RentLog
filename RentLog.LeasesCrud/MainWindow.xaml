@@ -30,12 +30,14 @@
                     <dragz:InterTabController />
                 </dragz:TabablzControl.InterTabController>
 
-                <TabItem Header="Active Leases">
-                    <lses:ActiveLeasesUI DataContext="{Binding ActiveLeases}" />
+                <TabItem DataContext="{Binding ActiveLeases}"
+                         Header="{Binding Caption}">
+                    <lses:ActiveLeasesUI />
                 </TabItem>
 
-                <TabItem Header="Inactive Leases">
-                    <lses:InactiveLeasesUI DataContext="{Binding InactiveLeases}" />
+                <TabItem DataContext="{Binding InactiveLeases}" 
+                         Header="{Binding Caption}">
+                    <lses:InactiveLeasesUI />
                 </TabItem>
 
             </dragz:TabablzControl>

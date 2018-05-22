@@ -12,8 +12,9 @@ namespace RentLog.LeasesCrud
     {
         public MainWindowVM(AppArguments appArguments) : base(appArguments)
         {
-            MainToolBar  = new MainToolbarVM(appArguments);
-            ActiveLeases = new ActiveLeasesVM(appArguments);
+            MainToolBar    = new MainToolbarVM(appArguments);
+            ActiveLeases   = new ActiveLeasesVM(appArguments);
+            InactiveLeases = new InactiveLeasesVM(appArguments);
             ClickRefresh();
         }
 
@@ -25,8 +26,9 @@ namespace RentLog.LeasesCrud
 
         protected override void OnRefreshClicked()
         {
-            MainToolBar.UpdateAll();
-            ActiveLeases.ReloadFromDB();
+            MainToolBar   .UpdateAll();
+            ActiveLeases  .ReloadFromDB();
+            InactiveLeases.ReloadFromDB();
         }
 
 

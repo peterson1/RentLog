@@ -6,7 +6,11 @@
              xmlns:local="clr-namespace:RentLog.LeasesCrud.LeasesList"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    <DockPanel>
+        <local:InactiveLeasesFilterUI DockPanel.Dock="Top"
+                                      DataContext="{Binding Filter}"
+                                      Margin="0 0 15 0" />
+
+        <local:InactiveLeasesTable DataContext="{Binding Rows}" />
+    </DockPanel>
 </UserControl>

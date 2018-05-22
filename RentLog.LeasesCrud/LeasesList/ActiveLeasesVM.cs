@@ -1,5 +1,6 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
 using CommonTools.Lib45.BaseViewModels;
+using PropertyChanged;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.ReportRows;
 using RentLog.DomainLib45;
@@ -9,11 +10,15 @@ using System.Linq;
 
 namespace RentLog.LeasesCrud.LeasesList
 {
-    public class ActiveLeasesVM : IndirectFilteredListVMBase<LeaseBalanceRow, LeaseDTO, ActiveLeasesFilterVM, AppArguments>
+    [AddINotifyPropertyChangedInterface]
+    public class ActiveLeasesVM : IndirectFilteredListVMBase<LeaseBalanceRow, LeaseDTO, LeasesFilterVM, AppArguments>
     {
         public ActiveLeasesVM(AppArguments appArguments) : base(appArguments.MarketState.ActiveLeases, appArguments, false)
         {
         }
+
+
+        public string Caption { get; private set; }
 
 
         protected override void OnItemOpened(LeaseDTO e)
@@ -21,17 +26,17 @@ namespace RentLog.LeasesCrud.LeasesList
 
 
         protected override List<LeaseDTO> QueryItems(ISimpleRepo<LeaseDTO> db)
-            => db.GetAll().OrderByDescending(_ => _.Id).ToList();
-
+        {
+            var items = db.GetAll().OrderByDescending(_ => _.Id).ToList();
+            Caption   = $"  Active Leases  ({items.Count:N0})  ";
+            return items;
+        }
 
         protected override LeaseBalanceRow CastToRow(LeaseDTO lse)
         {
-            var row    = new LeaseBalanceRow(lse);
-            var date   = AppArgs.Collections.LastPostedDate();
-            var bill   = AppArgs.Balances.GetBill(lse, date);
-            row.Rent   = bill.For(BillCode.Rent  ).ClosingBalance;
-            row.Rights = bill.For(BillCode.Rights).ClosingBalance;
-            return row;
+            var date = AppArgs.Collections.LastPostedDate();
+            var bill = AppArgs.Balances.GetBill(lse, date);
+            return new LeaseBalanceRow(lse, bill);
         }
     }
 }

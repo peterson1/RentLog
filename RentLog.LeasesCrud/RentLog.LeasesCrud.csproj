@@ -99,6 +99,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="LeasesList\InactiveLeasesFilterUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LeasesList\InactiveLeasesTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LeasesList\InactiveLeasesUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -124,11 +132,17 @@
     <Compile Include="LeasesList\ActiveLeasesUI.xaml.cs">
       <DependentUpon>ActiveLeasesUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LeasesList\InactiveLeasesFilterUI.xaml.cs">
+      <DependentUpon>InactiveLeasesFilterUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LeasesList\InactiveLeasesTable.xaml.cs">
+      <DependentUpon>InactiveLeasesTable.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LeasesList\InactiveLeasesUI.xaml.cs">
       <DependentUpon>InactiveLeasesUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="LeasesList\InactiveLeasesVM.cs" />
-    <Compile Include="LeasesList\ActiveLeasesFilterVM.cs" />
+    <Compile Include="LeasesList\LeasesFilterVM.cs" />
     <Compile Include="LeasesList\ActiveLeasesVM.cs" />
     <Compile Include="MainToolbar\MainToolbarUI.xaml.cs">
       <DependentUpon>MainToolbarUI.xaml</DependentUpon>

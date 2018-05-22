@@ -42,11 +42,11 @@ namespace RentLog.DomainLib11.BalanceRepos
 
             return new BillAmounts
             {
-                Rent     = list.Sum  (_ => _.Rent    .Value.ZeroIfNegative()),
+                Rent     = list.Sum  (_ => _.Rent    .ZeroIfNullOrNegative()),
                 Rights   = list.Where(_ => IsRightsOverdue(_, date))
-                               .Sum  (_ => _.Rights  .Value.ZeroIfNegative()),
-                Electric = list.Sum  (_ => _.Electric.Value.ZeroIfNegative()),
-                Water    = list.Sum  (_ => _.Water   .Value.ZeroIfNegative()),
+                               .Sum  (_ => _.Rights  .ZeroIfNullOrNegative()),
+                Electric = list.Sum  (_ => _.Electric.ZeroIfNullOrNegative()),
+                Water    = list.Sum  (_ => _.Water   .ZeroIfNullOrNegative()),
             };
         }
 
@@ -80,13 +80,14 @@ namespace RentLog.DomainLib11.BalanceRepos
                      : repo.Latest();
             if (bals == null) return null;
 
-            return new LeaseBalanceRow(lse)
-            {
-                Rent     = bals.For(BillCode.Rent    )?.ClosingBalance ?? 0,
-                Rights   = bals.For(BillCode.Rights  )?.ClosingBalance ?? 0,
-                Electric = bals.For(BillCode.Electric)?.ClosingBalance ?? 0,
-                Water    = bals.For(BillCode.Water   )?.ClosingBalance ?? 0,
-            };
+            //return new LeaseBalanceRow(lse)
+            //{
+            //    Rent     = bals.For(BillCode.Rent    )?.ClosingBalance ?? 0,
+            //    Rights   = bals.For(BillCode.Rights  )?.ClosingBalance ?? 0,
+            //    Electric = bals.For(BillCode.Electric)?.ClosingBalance ?? 0,
+            //    Water    = bals.For(BillCode.Water   )?.ClosingBalance ?? 0,
+            //};
+            return new LeaseBalanceRow(lse, bals);
         }
     }
 }
