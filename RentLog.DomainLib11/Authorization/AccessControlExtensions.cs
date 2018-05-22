@@ -9,6 +9,17 @@ namespace RentLog.DomainLib11.Authorization
         public static Action<string> OnUnauthorizedAccess;
 
 
+        public static bool CanAddLease(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
+            "Add Lease", "Supervisor", "Admin");
+
+        public static bool CanEditLease(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
+            "Edit Lease", "Admin");
+
+        public static bool CanTerminateteLease(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
+            "Terminate Lease", "Supervisor", "Admin");
+
+
+
         public static bool CanAddStall(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
             "Add Stall", "Supervisor", "Admin");
 

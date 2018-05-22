@@ -1,6 +1,8 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.Validations;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RentLog.DomainLib11.MarketStateRepos
 {
@@ -23,5 +25,8 @@ namespace RentLog.DomainLib11.MarketStateRepos
             this.RejectDuplicateRecord(_ => _.Name == changedRecord.Name,
                 nameof(changedRecord.Name), changedRecord);
         }
+
+        protected override IEnumerable<SectionDTO> ToSorted(IEnumerable<SectionDTO> items)
+            => items.OrderBy(_ => _.Name);
     }
 }

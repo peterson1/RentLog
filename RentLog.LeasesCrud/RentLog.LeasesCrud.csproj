@@ -87,6 +87,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="LeaseCRUD\ContractInfoPane.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LeaseCRUD\LeaseCrudWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LeaseCRUD\TenantInfoPane.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LeasesList\ActiveLeasesFilterUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -122,6 +134,16 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LeaseCRUD\ContractInfoPane.xaml.cs">
+      <DependentUpon>ContractInfoPane.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LeaseCRUD\LeaseCrudVM.cs" />
+    <Compile Include="LeaseCRUD\LeaseCrudWindow.xaml.cs">
+      <DependentUpon>LeaseCrudWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LeaseCRUD\TenantInfoPane.xaml.cs">
+      <DependentUpon>TenantInfoPane.xaml</DependentUpon>
     </Compile>
     <Compile Include="LeasesList\ActiveLeasesFilterUI.xaml.cs">
       <DependentUpon>ActiveLeasesFilterUI.xaml</DependentUpon>

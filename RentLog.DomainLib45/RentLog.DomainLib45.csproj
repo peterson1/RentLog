@@ -121,6 +121,10 @@
     <Compile Include="SoaViewer\PrintLayouts\SoaPrintWindow1.xaml.cs">
       <DependentUpon>SoaPrintWindow1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StallPicker\StallPickerVM.cs" />
+    <Compile Include="StallPicker\StallPickerWindow.xaml.cs">
+      <DependentUpon>StallPickerWindow.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -225,6 +229,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SoaViewer\PrintLayouts\SoaPrintWindow1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StallPicker\StallPickerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

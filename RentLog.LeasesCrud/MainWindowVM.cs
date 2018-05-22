@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using PropertyChanged;
+﻿using PropertyChanged;
 using RentLog.DomainLib45;
 using RentLog.DomainLib45.BaseViewModels;
 using RentLog.LeasesCrud.LeasesList;
@@ -15,6 +14,7 @@ namespace RentLog.LeasesCrud
             MainToolBar    = new MainToolbarVM(appArguments);
             ActiveLeases   = new ActiveLeasesVM(appArguments);
             InactiveLeases = new InactiveLeasesVM(appArguments);
+            ActiveLeases.Crud.SaveCompleted += (s, e) => ClickRefresh();
             ClickRefresh();
         }
 
@@ -30,15 +30,5 @@ namespace RentLog.LeasesCrud
             ActiveLeases  .ReloadFromDB();
             InactiveLeases.ReloadFromDB();
         }
-
-
-        //protected override async Task OnRefreshClickedAsync()
-        //{
-        //    await Task.Run(() =>
-        //    {
-        //        MainToolBar.UpdateAll();
-        //        ActiveLeases.ReloadFromDB();
-        //    });
-        //}
     }
 }

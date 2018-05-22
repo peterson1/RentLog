@@ -22,7 +22,7 @@ namespace RentLog.DomainLib11.BalanceRepos
         {
             var repo = GetRepo(lse);
             var id   = date.ToBillID();
-            return repo.Find(id, true);
+            return repo.Find(id, false);
         }
 
 

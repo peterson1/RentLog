@@ -46,6 +46,10 @@
                                 VerticalAlignment="Top"
                                 Margin="0 4 20 0" />
 
+            <butns:EncodeNewDraftBtn1 HorizontalAlignment="Right"
+                                      VerticalAlignment="Bottom"
+                                      DataContext="{Binding ActiveLeases.Crud}"
+                                      Margin="0 0 40 30" />
             <busy:BusyDialog />
         </Grid>
     </DockPanel>

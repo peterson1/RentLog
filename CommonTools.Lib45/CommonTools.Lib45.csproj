@@ -137,6 +137,9 @@
     <Compile Include="PrintTools\DataGridPrintExtensions.cs" />
     <Compile Include="PrintTools\MatelichDataGridPaginator.cs" />
     <Compile Include="PrintTools\PageRangeDocumentPaginator.cs" />
+    <Compile Include="StyledButtons\AddNewItemBtn1.xaml.cs">
+      <DependentUpon>AddNewItemBtn1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StyledButtons\EncodeNewDraftBtn1.xaml.cs">
       <DependentUpon>EncodeNewDraftBtn1.xaml</DependentUpon>
     </Compile>
@@ -166,7 +169,9 @@
     <Compile Include="UIExtensions\ListScrollerExtensions.cs" />
     <Compile Include="UIExtensions\StylePropertySetters.cs" />
     <Compile Include="UIExtensions\UIValidationExtensions.cs" />
+    <Compile Include="UIExtensions\VisualElementExtensions.cs" />
     <Compile Include="UIExtensions\WindowExtensions.cs" />
+    <Compile Include="ValidationRules\NotBlankValidationRule.cs" />
     <Compile Include="ValueConverters\DecimalProxyConverter.cs" />
     <Compile Include="ValueConverters\FirstLetterConverter.cs" />
     <Compile Include="ValueConverters\SpanDaysConverter.cs" />
@@ -203,6 +208,10 @@
     <Page Include="PrintTools\DataGridPaginatorResourceDictionary1.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StyledButtons\AddNewItemBtn1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StyledButtons\EncodeNewDraftBtn1.xaml">
       <Generator>MSBuild:Compile</Generator>

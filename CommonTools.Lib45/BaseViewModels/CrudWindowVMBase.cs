@@ -29,7 +29,7 @@ namespace CommonTools.Lib45.BaseViewModels
         public  IR2Command  EncodeNewDraftCmd  { get; }
         public  IR2Command  SaveDraftCmd       { get; private set; }
         public  TDraft      Draft              { get; private set; }
-        public string       WhyInvalid         { get; private set; }
+        public string       WhyInvalid         { get; protected set; }
 
 
         public    abstract string  TypeDescription  { get; }
@@ -60,10 +60,12 @@ namespace CommonTools.Lib45.BaseViewModels
             SaveDraftCmd = R2Command.Async(ExecuteSaveDraft, _ => CanSave(), $"Save {TypeDescription}");
             Draft = GetNewDraft();
             if (Draft != null)
-                this.Show<TWindow>(showModal: true);
+                ShowModalWindow();
         }
 
 
+        protected virtual void ShowModalWindow()
+            => this.Show<TWindow>(showModal: true);
 
 
         public bool? EditCurrentRecord(TDraft currentItem)

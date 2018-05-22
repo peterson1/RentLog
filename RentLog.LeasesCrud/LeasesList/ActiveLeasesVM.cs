@@ -1,10 +1,12 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
 using CommonTools.Lib45.BaseViewModels;
+using CommonTools.Lib45.ThreadTools;
 using PropertyChanged;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.ReportRows;
 using RentLog.DomainLib45;
 using RentLog.DomainLib45.SoaViewer.MainWindow;
+using RentLog.LeasesCrud.LeaseCRUD;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,10 +17,12 @@ namespace RentLog.LeasesCrud.LeasesList
     {
         public ActiveLeasesVM(AppArguments appArguments) : base(appArguments.MarketState.ActiveLeases, appArguments, false)
         {
+            Crud = new LeaseCrudVM(AppArgs.MarketState.ActiveLeases, AppArgs);
         }
 
 
-        public string Caption { get; private set; }
+        public string       Caption  { get; private set; }
+        public LeaseCrudVM  Crud     { get; }
 
 
         protected override void OnItemOpened(LeaseDTO e)

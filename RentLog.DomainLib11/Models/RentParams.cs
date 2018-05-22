@@ -1,4 +1,6 @@
-﻿namespace RentLog.DomainLib11.Models
+﻿using System;
+
+namespace RentLog.DomainLib11.Models
 {
     public enum BillInterval
     {
@@ -21,5 +23,8 @@
         public string        PenaltyRule      { get; set; }
         public decimal       PenaltyRate1     { get; set; }
         public decimal       PenaltyRate2     { get; set; }
+
+        public RentParams DeepClone   () => throw new NotImplementedException();
+        public RentParams ShallowClone() => (RentParams)this.MemberwiseClone();
     }
 }
