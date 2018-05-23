@@ -23,7 +23,6 @@ namespace RentLog.LeasesCrud.LeaseCRUD
 
 
         //todo: copy this to DTO before update
-        //todo: fill this from DTO on load
         public DateTime?    DraftBirthDate    { get; set; }
         public TenantModel  TenantTemplate    { get; set; }
                                               
@@ -53,6 +52,13 @@ namespace RentLog.LeasesCrud.LeaseCRUD
             draft.Tenant = TenantTemplate?.ShallowClone()
                          ?? new TenantModel { Country = "Philippines" };
             return draft;
+        }
+
+
+        protected override LeaseDTO CreateDraftFromRecord(LeaseDTO record)
+        {
+            DraftBirthDate = record.Tenant.BirthDate;
+            return base.CreateDraftFromRecord(record);
         }
 
 

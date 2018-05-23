@@ -10,7 +10,6 @@ using RentLog.DomainLib11.ReportRows;
 using RentLog.DomainLib45;
 using RentLog.DomainLib45.SoaViewer.MainWindow;
 using RentLog.LeasesCrud.LeaseCRUD;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -22,7 +21,7 @@ namespace RentLog.LeasesCrud.LeasesList
         public ActiveLeasesVM(AppArguments appArguments) : base(appArguments.MarketState.ActiveLeases, appArguments, false)
         {
             Crud                  = new LeaseCrudVM(AppArgs.MarketState.ActiveLeases, AppArgs);
-            AddStallToTenantCmd   = R2Command.Relay(AddStallToTenant  , _ => Crud.CanEncodeNewDraft(), "Add Stall to this Tenant");
+            AddStallToTenantCmd   = R2Command.Relay(AddStallToTenant  , _ => Crud.CanEncodeNewDraft(), "Add another Stall to this Tenant");
             EditThisLeaseCmd      = R2Command.Relay(EditThisLease     , _ => CanEditRecord(Rows.CurrentItem?.DTO), "Edit this Lease");
             TerminateThisLeaseCmd = R2Command.Relay(TerminateThisLease, _ => AppArgs.CanTerminateteLease(false), "Terminate this Lease");
         }
@@ -35,18 +34,6 @@ namespace RentLog.LeasesCrud.LeasesList
         public IR2Command   TerminateThisLeaseCmd  { get; }
 
 
-        private void TerminateThisLease()
-        {
-            Alert.Show($"Terminating {Rows.CurrentItem.DTO.TenantAndStall}");
-        }
-
-
-        private void EditThisLease()
-        {
-            Alert.Show($"Editing {Rows.CurrentItem.DTO.TenantAndStall}");
-        }
-
-
         private void AddStallToTenant()
         {
             var lse = Rows.CurrentItem?.DTO;
@@ -54,6 +41,20 @@ namespace RentLog.LeasesCrud.LeasesList
             Crud.TenantTemplate = lse.Tenant.ShallowClone();
             Crud.DraftBirthDate = lse.Tenant.BirthDate;
             Crud.EncodeNewDraftCmd.ExecuteIfItCan();
+        }
+
+
+        private void EditThisLease()
+        {
+            var lse = Rows.CurrentItem?.DTO;
+            if (lse == null) return;
+            Crud.EditCurrentRecord(lse);
+        }
+
+
+        private void TerminateThisLease()
+        {
+            Alert.Show($"Terminating {Rows.CurrentItem.DTO.TenantAndStall}");
         }
 
 
