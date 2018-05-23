@@ -14,7 +14,7 @@ namespace RentLog.LeasesCrud.LeaseCRUD
     public class LeaseCrudVM : RepoCrudWindowVMBase<IActiveLeasesRepo, LeaseDTO, LeaseCrudWindow, AppArguments>
     {
         public    override string TypeDescription => "Lease";
-        protected override string CaptionPrefix   => "Lease";
+        protected override string CaptionPrefix   => "Lease Editor";
 
 
         public LeaseCrudVM(IActiveLeasesRepo repository, AppArguments appArguments) : base(repository, appArguments)
@@ -24,11 +24,12 @@ namespace RentLog.LeasesCrud.LeaseCRUD
 
         //todo: copy this to DTO before update
         //todo: fill this from DTO on load
-        public DateTime?  DraftBirthDate    { get; set; }
-                                            
-        public double?    ContractSpanDays  { get; private set; }
-        public DateTime?  FirstRentDueDate  { get; private set; }
-        public DateTime?  RightsDueDate     { get; private set; }
+        public DateTime?    DraftBirthDate    { get; set; }
+        public TenantModel  TenantTemplate    { get; set; }
+                                              
+        public double?      ContractSpanDays  { get; private set; }
+        public DateTime?    FirstRentDueDate  { get; private set; }
+        public DateTime?    RightsDueDate     { get; private set; }
 
 
 
@@ -41,23 +42,26 @@ namespace RentLog.LeasesCrud.LeaseCRUD
             var start  = DateTime.Now.Date;
             WhyInvalid = "Please fill up all required fields.";
 
-            return new LeaseDTO
+            var draft = new LeaseDTO
             {
                 ContractStart = start,
                 ContractEnd   = start.AddYears(1),
-                Tenant        = new TenantModel { Country = "Philippines" },
                 Stall         = stall,
                 Rent          = stall.DefaultRent.ShallowClone(),
                 Rights        = stall.DefaultRights.ShallowClone(),
             };
+            draft.Tenant = TenantTemplate?.ShallowClone()
+                         ?? new TenantModel { Country = "Philippines" };
+            return draft;
         }
 
 
         protected override void SaveNewRecord(LeaseDTO draft)
         {
-            draft.Tenant.BirthDate     = DraftBirthDate.Value;
+            draft.Tenant.BirthDate     = DraftBirthDate.Value.Date;
             draft.ApplicationSubmitted = draft.ContractStart;
             base.SaveNewRecord(draft);
+            DraftBirthDate = null;
         }
 
 
@@ -71,12 +75,16 @@ namespace RentLog.LeasesCrud.LeaseCRUD
 
         protected override bool IsValidDraft(LeaseDTO draft, out string whyInvalid)
         {
-            //todo: validate lease draft
+            if (draft.ContractStart >= draft.ContractEnd)
+            {
+                whyInvalid = "“Contract End” date should be later than “Contract Start” date.";
+                return false;
+            }
             whyInvalid = "";
             return true;
         }
 
 
-        protected override bool CanEncodeNewDraft() => AppArgs.CanAddLease(false);
+        public override bool CanEncodeNewDraft() => AppArgs.CanAddLease(false);
     }
 }

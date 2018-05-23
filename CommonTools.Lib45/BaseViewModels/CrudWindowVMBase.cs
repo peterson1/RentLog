@@ -35,7 +35,7 @@ namespace CommonTools.Lib45.BaseViewModels
         public    abstract string  TypeDescription  { get; }
         protected abstract bool    IsValidDraft     (TDraft draft, out string whyInvalid);
 
-        protected virtual bool   CanEncodeNewDraft  ()             => true;
+        public    virtual bool   CanEncodeNewDraft  ()             => true;
         protected virtual void   SaveNewRecord      (TDraft draft) { }
         protected virtual Task   SaveNewRecordAsync (TDraft draft) => Task.Delay(0);
         protected virtual void   UpdateRecord       (TDraft record) { }

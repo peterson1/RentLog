@@ -11,6 +11,6 @@
                                     DataContext="{Binding Filter}"
                                     Margin="0 0 15 0" />
 
-        <local:ActiveLeasesTable DataContext="{Binding Rows}" />
+        <local:ActiveLeasesTable />
     </DockPanel>
 </UserControl>

@@ -50,7 +50,7 @@ namespace CommonTools.Lib45.BaseViewModels
         protected virtual Func<TDTO, decimal> SummedAmount { get; }
         protected virtual void AddNewItem          () { }
         protected virtual bool CanDeletetRecord    (TDTO rec) => true;
-        protected virtual bool CanEditRecord       (TDTO rec) => true;
+        public    virtual bool CanEditRecord       (TDTO rec) => true;
         protected virtual void LoadRecordForEditing(TDTO rec) { }
         protected virtual IEnumerable<TDTO> PostProcessQueried(IEnumerable<TDTO> items) => items;
         protected virtual void OnSelectedChanged() => SelectedChanged?.Invoke(this, Selected);

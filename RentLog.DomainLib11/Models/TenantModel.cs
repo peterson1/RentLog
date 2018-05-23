@@ -29,5 +29,8 @@ namespace RentLog.DomainLib11.Models
         public string FirstAndLastNames => $"{FirstName} {LastName}";
 
         public override string ToString() => FirstAndLastNames;
+
+        public TenantModel DeepClone   () => throw new NotImplementedException();
+        public TenantModel ShallowClone() => (TenantModel)this.MemberwiseClone();
     }
 }
