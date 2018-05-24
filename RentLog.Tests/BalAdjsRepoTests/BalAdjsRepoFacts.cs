@@ -21,11 +21,10 @@ namespace RentLog.Tests.BalAdjsRepoTests
             var mBalRepo    = new Mock<IBalanceAdjustmentsRepo>();
             mBalsDB.Setup(_ => _.GetRepo(It.IsAny<int>())).Returns(mBillsRepo.Object);
             var date = 3.May(2018);
-            var sut = new BalanceAdjsRepo1(date, mBalRepo.Object, mBalsDB.Object, mColxnsDir.Object);
+            var sut = new BalanceAdjsRepo1(date, mBalRepo.Object, mBalsDB.Object);
             sut.Insert(new BalanceAdjustmentDTO());
             mBillsRepo.Verify(_
-                => _.UpdateFrom(date, It.IsAny<BillCode>(), It.IsAny<IDailyBiller>()), 
-                        Times.Once());
+                => _.UpdateFrom(date, It.IsAny<BillCode>()), Times.Once());
         }
 
 
@@ -39,10 +38,10 @@ namespace RentLog.Tests.BalAdjsRepoTests
             var mBalRepo    = new Mock<IBalanceAdjustmentsRepo>();
             mBalsDB.Setup(_ => _.GetRepo(It.IsAny<int>())).Returns(mBillsRepo.Object);
             var date = 3.May(2018);
-            var sut = new BalanceAdjsRepo1(date, mBalRepo.Object, mBalsDB.Object, mColxnsDir.Object);
+            var sut = new BalanceAdjsRepo1(date, mBalRepo.Object, mBalsDB.Object);
             sut.Update(new BalanceAdjustmentDTO());
             mBillsRepo.Verify(_
-                => _.UpdateFrom(date, It.IsAny<BillCode>(), It.IsAny<IDailyBiller>()), Times.Once());
+                => _.UpdateFrom(date, It.IsAny<BillCode>()), Times.Once());
         }
 
 
@@ -56,10 +55,10 @@ namespace RentLog.Tests.BalAdjsRepoTests
             var mBalRepo    = new Mock<IBalanceAdjustmentsRepo>();
             mBalsDB.Setup(_ => _.GetRepo(It.IsAny<int>())).Returns(mBillsRepo.Object);
             var date = 3.May(2018);
-            var sut = new BalanceAdjsRepo1(date, mBalRepo.Object, mBalsDB.Object, mColxnsDir.Object);
+            var sut = new BalanceAdjsRepo1(date, mBalRepo.Object, mBalsDB.Object);
             sut.Delete(new BalanceAdjustmentDTO());
             mBillsRepo.Verify(_
-                => _.UpdateFrom(date, It.IsAny<BillCode>(), It.IsAny<IDailyBiller>()), Times.Once());
+                => _.UpdateFrom(date, It.IsAny<BillCode>()), Times.Once());
         }
     }
 }

@@ -23,6 +23,7 @@ namespace RentLog.DatabaseLib.DatabaseFinders
         {
             _mkt = marketStateDB;
             _dir = FindBalancesDir(_mkt.DatabasePath);
+            _mkt.Balances = this;
         }
 
 
@@ -31,7 +32,7 @@ namespace RentLog.DatabaseLib.DatabaseFinders
             var file = Path.Combine(_dir, GetFilename(lseID));
             var db   = new SharedLiteDB(file, _mkt.CurrentUser);
             var lse  = _mkt.FindLease(lseID);
-            return new DailyBillsRepo1(lse, new DailyBillsCollection(db));
+            return new DailyBillsRepo1(lse, new DailyBillsCollection(db), _mkt.Collections);
         }
 
 

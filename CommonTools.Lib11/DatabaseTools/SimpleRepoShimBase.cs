@@ -83,6 +83,9 @@ namespace CommonTools.Lib11.DatabaseTools
         }
 
 
+        public bool Delete(int recordId) => _repo.Delete(recordId);
+
+
         public void Update(IEnumerable<T> records, bool doValidate)
         {
             if (doValidate)

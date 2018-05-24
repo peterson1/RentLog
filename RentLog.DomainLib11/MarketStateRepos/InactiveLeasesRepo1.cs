@@ -18,9 +18,15 @@ namespace RentLog.DomainLib11.MarketStateRepos
         }
 
 
-        protected override void ExecuteAfterSave(InactiveLeaseDTO record)
+        protected override void ExecuteAfterSave(InactiveLeaseDTO lse)
         {
-            //todo: delete record from Actives
+            _db.ActiveLeases.Delete(lse.Id);
+
+            if (_db.ActiveLeases.HasId(lse.Id))
+                throw Bad.State<LeaseDTO>("Deactivated", "Exists-As-Active");
+
+            _db.Balances.GetRepo(lse.Id)
+               .UpdateFrom(lse.DeactivatedDate);
         }
     }
 }

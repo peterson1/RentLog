@@ -9,6 +9,7 @@ using PropertyChanged;
 using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.ReportRows;
+using RentLog.DomainLib11.StateTransitions;
 using RentLog.DomainLib45;
 using RentLog.DomainLib45.SoaViewer.MainWindow;
 using RentLog.LeasesCrud.LeaseCRUD;
@@ -66,14 +67,7 @@ namespace RentLog.LeasesCrud.LeasesList
             if (!PopUpInput.TryGetDate($"When is the last billable day for {L.f}{lse}?",
                 out DateTime termDate, DateTime.Now.Date)) return;
 
-            //if (!termDate.HasValue) return;
-
-            //AppArgs.MarketState.DeactivateLease(lse, "Manual Termination",
-            //    termDate.Value, AppArgs.CurrentUser);
-
-            //var inactv = AppArgs.MarketState.InactiveLeases.Find(SelectedLease.Model.Id);
-
-            //BatchBalanceUpdate.StartingFrom(termDate.Value, inactv, AppArgs);
+            AppArgs.MarketState.DeactivateLease(lse, "Manual Termination", termDate);
         }
 
 

@@ -1,5 +1,6 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
 using RentLog.DomainLib11.BillingRules;
+using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DTOs;
 using System;
 using System.Collections.Generic;
@@ -9,16 +10,24 @@ namespace RentLog.DomainLib11.BalanceRepos
 {
     public class DailyBillsRepo1 : SimpleRepoShimBase<DailyBillDTO>, IDailyBillsRepo
     {
-        private LeaseDTO _lse;
+        private LeaseDTO     _lse;
+        private IDailyBiller _billr;
 
 
-        public DailyBillsRepo1(LeaseDTO lease, ISimpleRepo<DailyBillDTO> simpleRepo) : base(simpleRepo)
+        public DailyBillsRepo1(LeaseDTO lease, ISimpleRepo<DailyBillDTO> simpleRepo, ICollectionsDir collectionsDir) : base(simpleRepo)
         {
-            _lse = lease;
+            _lse   = lease;
+            _billr = new DailyBiller1(collectionsDir);
         }
 
 
-        public void UpdateFrom(DateTime date, BillCode billCode, IDailyBiller dailyBiller)
+        public void UpdateFrom(DateTime date)
+        {
+            //todo: Update each billcode
+        }
+
+
+        public void UpdateFrom(DateTime date, BillCode billCode)
         {
             var minID      = date.ToBillID();
             var affctd     = _repo.Find    (_ => _.Id >= minID)
@@ -30,7 +39,7 @@ namespace RentLog.DomainLib11.BalanceRepos
             foreach (var dto in affctd)
             {
                 var rowDate  = dto.GetBillDate();
-                var newState = dailyBiller.ComputeBill(billCode, _lse, rowDate, openingBal);
+                var newState = _billr.ComputeBill(billCode, _lse, rowDate, openingBal);
                 dto.Bills.RemoveAll(_ => _.BillCode == billCode);
                 dto.Bills.Add(newState);
 

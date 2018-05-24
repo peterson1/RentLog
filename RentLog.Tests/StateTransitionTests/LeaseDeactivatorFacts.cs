@@ -6,10 +6,10 @@ using FluentAssertions;
 using System;
 using CommonTools.Lib11.ExceptionTools;
 using Moq;
+using RentLog.DomainLib11.BalanceRepos;
 
 namespace RentLog.Tests.StateTransitionTests
 {
-    //todo: move all theses to inactives repo tests
     [Trait("Deactivate Lease", "Solitary")]
     public class LeaseDeactivatorFacts
     {
@@ -23,39 +23,11 @@ namespace RentLog.Tests.StateTransitionTests
         }
 
 
-        //[Fact(DisplayName = "Rejects non-existent Lease record")]
-        //public void RejectsnonexistentLeaserecord()
-        //{
-        //    var sut = new MockDB();
-        //    var lse = new LeaseDTO();
-
-        //    sut.MoqActiveLeases.Setup(_ 
-        //        => _.HasId(lse.Id)).Returns(false);
-
-        //    sut.Invoking(_ => _.DeactivateLease(lse, "", DateTime.Now))
-        //        .Should().Throw<InvalidInsertionException>();
-        //}
-
-
-        [Fact(DisplayName = "Error if record undeleted from Actives")]
-        public void ErrorifrecordundeletedforActives()
-        {
-            var sut = new MockDB();
-            var lse = new LeaseDTO();
-
-            sut.MoqActiveLeases.Setup(_ 
-                => _.HasId(lse.Id)).Returns(true);
-
-            sut.Invoking(_ => _.DeactivateLease(lse, "", DateTime.Now))
-                .Should().Throw<InvalidStateException>();
-        }
-
-
         [Fact(DisplayName = "Returns record with same Id")]
         public void ReturnsrecordwithsameId()
         {
             var sut = new MockDB();
-            var lse = new LeaseDTO();
+            var lse = new LeaseDTO { Id = 12345 };
             var rec = sut.DeactivateLease(lse, "", DateTime.Now);
             rec.Should().NotBeNull();
             rec.Id.Should().Be(lse.Id);

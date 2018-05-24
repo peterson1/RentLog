@@ -1,6 +1,7 @@
 ﻿using CommonTools.Lib11.ExceptionTools;
+using RentLog.DomainLib11.BalanceRepos;
+using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DTOs;
-using System;
 
 namespace RentLog.DomainLib11.MarketStateRepos
 {
@@ -14,6 +15,9 @@ namespace RentLog.DomainLib11.MarketStateRepos
         public virtual IActiveLeasesRepo    ActiveLeases    { get; set; }
         public virtual IInactiveLeasesRepo  InactiveLeases  { get; set; }
         public virtual string               BranchName      { get; set; }
+
+        public virtual IBalanceDB           Balances        { get; set; }
+        public virtual ICollectionsDir      Collections     { get; set; }
 
 
         public LeaseDTO FindLease(int leaseID)

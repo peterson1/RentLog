@@ -47,6 +47,13 @@ namespace CommonTools.Lib45.LiteDbTools
             => WriteBulk(records, (c, r) => c.Upsert(r), doValidate);
 
 
+        public bool Delete(int recordId)
+        {
+            using (var db = _db.OpenWrite())
+                return GetCollection(db).Delete(recordId);
+        }
+
+
         public bool Delete(T record)
         {
             var ok = false;

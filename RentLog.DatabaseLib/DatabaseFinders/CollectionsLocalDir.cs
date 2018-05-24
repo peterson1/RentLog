@@ -19,17 +19,15 @@ namespace RentLog.DatabaseLib.DatabaseFinders
         private const string COLLECTIONS_DIR = "Collections";
         private const string FILENAME_FMT    = "{0:yyyy-MM-dd}_Solo.ldb";
 
-        private string     _dir;
-        //private string     _usr;
+        private string        _dir;
         private MarketStateDB _mkt;
-        private IBalanceDB _balDB;
 
 
-        public CollectionsLocalDir(MarketStateDB marketStateDB, IBalanceDB balanceDB)
+        public CollectionsLocalDir(MarketStateDB marketStateDB)
         {
-            _mkt   = marketStateDB;
-            _dir   = FindCollectionsDir(_mkt.DatabasePath);
-            _balDB = balanceDB;
+            _mkt             = marketStateDB;
+            _dir             = FindCollectionsDir(_mkt.DatabasePath);
+            _mkt.Collections = this;
         }
 
 
@@ -68,7 +66,7 @@ namespace RentLog.DatabaseLib.DatabaseFinders
             var colxnsDB           = new CollectionsDB1(db.Metadata, _mkt);
             SetIntendedColxns(colxnsDB.IntendedColxns, db);
             colxnsDB.CashierColxns = new CashierColxnsRepo1(new CashierColxnsCollection(db));
-            colxnsDB.BalanceAdjs   = new BalanceAdjsRepo1(date, new BalanceAdjsCollection(db), _balDB, this);
+            colxnsDB.BalanceAdjs   = new BalanceAdjsRepo1(date, new BalanceAdjsCollection(db), _mkt.Balances);
             return colxnsDB;
         }
 

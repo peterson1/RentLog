@@ -24,5 +24,6 @@ namespace CommonTools.Lib11.DatabaseTools
                          
         bool    Upsert   (T record);
         bool    Delete   (T record);
+        bool    Delete   (int recordId);
     }
 }
