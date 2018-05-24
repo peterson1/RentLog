@@ -34,7 +34,7 @@ namespace RentLog.StallsCrud.SectionsList
         }
 
 
-        protected override bool CanEncodeNewDraft()
+        public override bool CanEncodeNewDraft()
             => AppArgs.CanAddSection(false);
 
 

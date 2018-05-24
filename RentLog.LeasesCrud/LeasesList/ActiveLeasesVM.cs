@@ -1,7 +1,9 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
 using CommonTools.Lib11.InputCommands;
+using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.BaseViewModels;
 using CommonTools.Lib45.InputCommands;
+using CommonTools.Lib45.InputDialogs;
 using CommonTools.Lib45.ThreadTools;
 using PropertyChanged;
 using RentLog.DomainLib11.Authorization;
@@ -10,8 +12,10 @@ using RentLog.DomainLib11.ReportRows;
 using RentLog.DomainLib45;
 using RentLog.DomainLib45.SoaViewer.MainWindow;
 using RentLog.LeasesCrud.LeaseCRUD;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 
 namespace RentLog.LeasesCrud.LeasesList
 {
@@ -36,8 +40,7 @@ namespace RentLog.LeasesCrud.LeasesList
 
         private void AddStallToTenant()
         {
-            var lse = Rows.CurrentItem?.DTO;
-            if (lse == null) return;
+            if (TryGetPickedRow(out LeaseDTO lse)) return;
             Crud.TenantTemplate = lse.Tenant.ShallowClone();
             Crud.DraftBirthDate = lse.Tenant.BirthDate;
             Crud.EncodeNewDraftCmd.ExecuteIfItCan();
@@ -46,15 +49,31 @@ namespace RentLog.LeasesCrud.LeasesList
 
         private void EditThisLease()
         {
-            var lse = Rows.CurrentItem?.DTO;
-            if (lse == null) return;
+            if (TryGetPickedRow(out LeaseDTO lse)) return;
             Crud.EditCurrentRecord(lse);
         }
 
 
         private void TerminateThisLease()
         {
-            Alert.Show($"Terminating {Rows.CurrentItem.DTO.TenantAndStall}");
+            if (TryGetPickedRow(out LeaseDTO lse)) return;
+
+            var resp = MessageBox.Show($"Are you sure you want to terminate the lease for {L.f} {lse}?",
+                "   Confirm Termination", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (resp != MessageBoxResult.Yes) return;
+
+            if (!PopUpInput.TryGetDate($"When is the last billable day for {L.f}{lse}?",
+                out DateTime termDate, DateTime.Now.Date)) return;
+
+            //if (!termDate.HasValue) return;
+
+            //AppArgs.MarketState.DeactivateLease(lse, "Manual Termination",
+            //    termDate.Value, AppArgs.CurrentUser);
+
+            //var inactv = AppArgs.MarketState.InactiveLeases.Find(SelectedLease.Model.Id);
+
+            //BatchBalanceUpdate.StartingFrom(termDate.Value, inactv, AppArgs);
         }
 
 

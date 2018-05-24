@@ -5,7 +5,7 @@ using Xunit;
 
 namespace RentLog.Tests.LeasesRepoTests
 {
-    [Trait("Leases Repo", "Sample Dir")]
+    [Trait("Active Leases Repo", "Sample Dir")]
     public class ActiveLeasesRepoReaderFacts
     {
         [Fact(DisplayName = "Find by ID includes Section object")]

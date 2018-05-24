@@ -43,7 +43,7 @@ namespace RentLog.StallsCrud.StallsList
         }
 
 
-        protected override bool CanEditRecord(StallDTO rec)
+        public override bool CanEditRecord(StallDTO rec)
             => AppArgs.CanEditStall(true);
 
 

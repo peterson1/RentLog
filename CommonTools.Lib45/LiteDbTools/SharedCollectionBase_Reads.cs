@@ -25,6 +25,16 @@ namespace CommonTools.Lib45.LiteDbTools
         }
 
 
+        public bool HasId(int recordId)
+        {
+            using (var db = _db.OpenRead())
+            {
+                var rec = GetCollection(db).FindById(recordId);
+                return rec != null;
+            }
+        }
+
+
         public List<T> Find(Expression<Func<T, bool>> predicate)
         {
             using (var db = _db.OpenRead())

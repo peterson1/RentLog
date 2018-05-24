@@ -22,7 +22,6 @@ namespace RentLog.LeasesCrud.LeaseCRUD
         }
 
 
-        //todo: copy this to DTO before update
         public DateTime?    DraftBirthDate    { get; set; }
         public TenantModel  TenantTemplate    { get; set; }
                                               
@@ -67,7 +66,21 @@ namespace RentLog.LeasesCrud.LeaseCRUD
             draft.Tenant.BirthDate     = DraftBirthDate.Value.Date;
             draft.ApplicationSubmitted = draft.ContractStart;
             base.SaveNewRecord(draft);
+        }
+
+
+        protected override void UpdateRecord(LeaseDTO record)
+        {
+            record.Tenant.BirthDate = DraftBirthDate.Value.Date;
+            base.UpdateRecord(record);
+        }
+
+
+        protected override void ClearDraftAfterSave()
+        {
             DraftBirthDate = null;
+            TenantTemplate = null;
+            base.ClearDraftAfterSave();
         }
 
 

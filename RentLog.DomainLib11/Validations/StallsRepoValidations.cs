@@ -20,7 +20,7 @@ namespace RentLog.DomainLib11.Validations
         {
             var lse = activeLses.GetAll().SingleOrDefault(_ => _.Stall.Id == stall.Id);
             if (lse != null)
-                throw InvalidDeletionException.For(stall, $"Occupied by {lse}");
+                throw Bad.Delete(stall, $"Occupied by {lse}");
         }
     }
 }

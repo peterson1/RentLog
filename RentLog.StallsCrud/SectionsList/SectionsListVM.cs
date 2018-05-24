@@ -24,7 +24,7 @@ namespace RentLog.StallsCrud.SectionsList
         public IR2Command          EditCurrentCmd  { get; }
 
 
-        protected override bool CanEditRecord(SectionDTO rec)
+        public override bool CanEditRecord(SectionDTO rec)
             => AppArgs.CanEditSection(false);
 
 

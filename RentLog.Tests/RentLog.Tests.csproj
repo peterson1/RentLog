@@ -77,11 +77,14 @@
     <Compile Include="BillRowComposerTests\RentBillComposerFacts.cs" />
     <Compile Include="BillRowComposerTests\RightsBillComposerFacts.cs" />
     <Compile Include="LeasesRepoTests\ActiveLeasesRepoReaderFacts.cs" />
+    <Compile Include="LeasesRepoTests\ActiveLeasesRepoWriterFacts.cs" />
+    <Compile Include="LeasesRepoTests\InactiveLeasesRepoWriterFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleDBs\SampleDBsDir.cs" />
     <Compile Include="SectionsRepoTests\SectionsRepoFacts.cs" />
     <Compile Include="StallsRepoTests\StallsRepoReaderFacts.cs" />
     <Compile Include="StallsRepoTests\StallsRepoWriterFacts.cs" />
+    <Compile Include="StateTransitionTests\LeaseDeactivatorFacts.cs" />
     <Compile Include="StateTransitionTests\LeaseIsActiveFacts.cs" />
     <Compile Include="SurchargerTests\RentSurchargerTests\RentDailySurchargeFacts.cs" />
     <Compile Include="TestTools\MockDB.cs" />

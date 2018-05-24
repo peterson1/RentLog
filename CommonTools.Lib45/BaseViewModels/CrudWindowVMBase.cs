@@ -88,10 +88,8 @@ namespace CommonTools.Lib45.BaseViewModels
             SaveNewRecord(Draft);
             await SaveNewRecordAsync(Draft);
             NewRecordSaved?.Invoke(this, Draft);
-            SaveCompleted ?.Invoke(this, EventArgs.Empty);
 
-            StopBeingBusy();
-            ReturnDialogResult(true);
+            AfterSaveCompleted(Draft);
         }
 
 
@@ -103,10 +101,23 @@ namespace CommonTools.Lib45.BaseViewModels
             UpdateRecord(Draft);
             await UpdateRecordAsync(Draft);
             RecordUpdated?.Invoke(this, Draft);
-            SaveCompleted?.Invoke(this, EventArgs.Empty);
 
+            AfterSaveCompleted(Draft);
+        }
+
+
+        protected virtual void AfterSaveCompleted(TDraft savedRecord)
+        {
+            SaveCompleted?.Invoke(this, EventArgs.Empty);
+            ClearDraftAfterSave();
             StopBeingBusy();
             ReturnDialogResult(true);
+        }
+
+
+        protected virtual void ClearDraftAfterSave()
+        {
+            Draft = default(TDraft);
         }
     }
 }

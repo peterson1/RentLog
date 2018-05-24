@@ -27,7 +27,7 @@ namespace RentLog.StallsCrud.StallCRUD
         public UIList<BillInterval> BillIntervals { get; } = new UIList<BillInterval>(EnumTool.List<BillInterval>());
 
 
-        protected override bool CanEncodeNewDraft() => AppArgs.CanAddStall(false);
+        public override bool CanEncodeNewDraft() => AppArgs.CanAddStall(false);
 
 
         protected override StallDTO GetNewDraft()

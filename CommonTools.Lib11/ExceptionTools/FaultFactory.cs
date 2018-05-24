@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace CommonTools.Lib11.ExceptionTools
 {
-    public static class Fault
+    public struct Fault
     {
         public static InvalidOperationException CallFirst(string requiredMethod, [CallerMemberName] string callingMethod = null)
             => new InvalidOperationException(
@@ -47,5 +47,9 @@ namespace CommonTools.Lib11.ExceptionTools
 
         public static RecordNotFoundException NoMatch<T>(string field, object value)
             => RecordNotFoundException.For<T>(field, value);
+
+
+        public static InvalidStateException BadState<T>(string expectedState, string actualState)
+            => new InvalidStateException($"Expected state of ‹{typeof(T).Name}› to be “{expectedState}”, but was “{actualState}”");
     }
 }

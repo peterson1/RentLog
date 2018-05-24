@@ -13,6 +13,7 @@ namespace CommonTools.Lib11.DatabaseTools
         List<T> Find     (Expression<Func<T, bool>> predicate);
         T       Earliest ();
         T       Latest   ();
+        bool    HasId    (int recordId);
         bool    HasName  (string recordName, string field = "Name");
         Dictionary<int, T> ToDictionary();
 

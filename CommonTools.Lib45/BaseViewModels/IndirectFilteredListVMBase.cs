@@ -11,7 +11,7 @@ namespace CommonTools.Lib45.BaseViewModels
     public abstract class IndirectFilteredListVMBase<TRow, TDTO, TFilter, TArg>
         : SavedListVMBase<TDTO, TArg> 
             where TRow    : IHasDTO<TDTO>
-            where TDTO    : IDocumentDTO
+            where TDTO    : class, IDocumentDTO
             where TFilter : TextFilterBase<TRow>, new()
             where TArg    : ICredentialsProvider
     {
@@ -50,6 +50,13 @@ namespace CommonTools.Lib45.BaseViewModels
             var list = _cache.ToList();
             Filter.RemoveNonMatches(ref list);
             UIThread.Run(() => Rows.SetItems(list));
+        }
+
+
+        protected bool TryGetPickedRow(out TDTO dto)
+        {
+            dto = Rows.CurrentItem?.DTO;
+            return dto != null;
         }
     }
 }
