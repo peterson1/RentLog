@@ -36,8 +36,12 @@
                       StaysOpen="False"
                       Foreground="White">
             <StackPanel DataContext="{Binding MainToolBar}">
+                
                 <Button Command="{Binding WithOverduesReportCmd}"
                         Content="{Binding WithOverduesReportCmd.CurrentLabel}" />
+
+                <Button Command="{Binding PrintCurrentListCmd}"
+                        Content="{Binding PrintCurrentListCmd.CurrentLabel}" />
             </StackPanel>
         </mat:PopupBox>
         

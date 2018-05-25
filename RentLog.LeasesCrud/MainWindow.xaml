@@ -25,19 +25,19 @@
                                      DockPanel.Dock="Top" />
         <Grid>
 
-            <dragz:TabablzControl FixedHeaderCount="2">
+            <dragz:TabablzControl x:Name="tabs" FixedHeaderCount="2">
                 <dragz:TabablzControl.InterTabController>
                     <dragz:InterTabController />
                 </dragz:TabablzControl.InterTabController>
 
                 <TabItem DataContext="{Binding ActiveLeases}"
                          Header="{Binding Caption}">
-                    <lses:ActiveLeasesUI />
+                    <lses:ActiveLeasesUI x:Name="actives" />
                 </TabItem>
 
                 <TabItem DataContext="{Binding InactiveLeases}" 
                          Header="{Binding Caption}">
-                    <lses:InactiveLeasesUI />
+                    <lses:InactiveLeasesUI x:Name="inactives" />
                 </TabItem>
 
             </dragz:TabablzControl>

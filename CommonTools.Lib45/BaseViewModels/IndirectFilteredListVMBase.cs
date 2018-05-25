@@ -3,13 +3,14 @@ using CommonTools.Lib11.DataStructures;
 using CommonTools.Lib11.DTOs;
 using CommonTools.Lib11.GoogleTools;
 using CommonTools.Lib45.ThreadTools;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace CommonTools.Lib45.BaseViewModels
 {
     public abstract class IndirectFilteredListVMBase<TRow, TDTO, TFilter, TArg>
-        : SavedListVMBase<TDTO, TArg> 
+        : SavedListVMBase<TDTO, TArg>, IEnumerable<TRow>
             where TRow    : IHasDTO<TDTO>
             where TDTO    : class, IDocumentDTO
             where TFilter : TextFilterBase<TRow>, new()
@@ -58,5 +59,9 @@ namespace CommonTools.Lib45.BaseViewModels
             dto = Rows.CurrentItem?.DTO;
             return dto != null;
         }
+
+
+        public IEnumerator<TRow> GetEnumerator() => ((IEnumerable<TRow>)Rows).GetEnumerator();
+        IEnumerator  IEnumerable.GetEnumerator() => ((IEnumerable<TRow>)Rows).GetEnumerator();
     }
 }
