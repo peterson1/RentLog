@@ -29,7 +29,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>embedded</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\..\GDrive\MSA\Fortune Market\Tenants %28aka MSA%29\MSA_Deploy\</OutputPath>
+    <OutputPath>..\..\..\Google Drive\MSA\Fortune Market\Tenants %28aka MSA%29\MSA_Deploy\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
