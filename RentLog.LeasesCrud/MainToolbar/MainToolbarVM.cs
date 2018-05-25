@@ -1,7 +1,8 @@
-﻿using System;
+﻿using CommonTools.Lib11.InputCommands;
 using PropertyChanged;
 using RentLog.DomainLib11.Models;
 using RentLog.DomainLib45;
+using RentLog.DomainLib45.WithOverduesReport;
 
 namespace RentLog.LeasesCrud.MainToolbar
 {
@@ -14,22 +15,17 @@ namespace RentLog.LeasesCrud.MainToolbar
         public MainToolbarVM(AppArguments appArguments)
         {
             _args = appArguments;
+            WithOverduesReportCmd = WithOverduesReport.CreateLauncherCmd(_args);
         }
 
 
-        public BillAmounts Overdues { get; private set; }
+        public IR2Command   WithOverduesReportCmd  { get; }
+        public BillAmounts  Overdues               { get; private set; }
 
 
         public void UpdateAll()
         {
-            Overdues = GetTotalOverdues();
-        }
-
-
-        private BillAmounts GetTotalOverdues()
-        {
-            var date = _args.Collections.LastPostedDate();
-            return _args.Balances.TotalOverdues(date);
+            Overdues = _args.Balances.TotalOverdues();
         }
     }
 }

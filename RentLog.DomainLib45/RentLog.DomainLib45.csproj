@@ -125,6 +125,13 @@
     <Compile Include="StallPicker\StallPickerWindow.xaml.cs">
       <DependentUpon>StallPickerWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WithOverduesReport\OverduesTable.xaml.cs">
+      <DependentUpon>OverduesTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WithOverduesReport\WithOverduesReportVM.cs" />
+    <Compile Include="WithOverduesReport\WithOverduesReportWindow.xaml.cs">
+      <DependentUpon>WithOverduesReportWindow.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -233,6 +240,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StallPicker\StallPickerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WithOverduesReport\OverduesTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WithOverduesReport\WithOverduesReportWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -15,6 +15,7 @@ namespace RentLog.LeasesCrud
             ActiveLeases   = new ActiveLeasesVM(appArguments);
             InactiveLeases = new InactiveLeasesVM(appArguments);
             ActiveLeases.Crud.SaveCompleted += (s, e) => ClickRefresh();
+            ActiveLeases.LeaseDeactivated   += (s, e) => ClickRefresh();
             ClickRefresh();
         }
 

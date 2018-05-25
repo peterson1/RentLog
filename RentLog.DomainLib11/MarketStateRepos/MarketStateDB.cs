@@ -19,7 +19,6 @@ namespace RentLog.DomainLib11.MarketStateRepos
         public virtual IBalanceDB           Balances        { get; set; }
         public virtual ICollectionsDir      Collections     { get; set; }
 
-
         public LeaseDTO FindLease(int leaseID)
         {
             var match = ActiveLeases.Find(leaseID, false);

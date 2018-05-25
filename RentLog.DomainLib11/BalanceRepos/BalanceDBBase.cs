@@ -27,10 +27,18 @@ namespace RentLog.DomainLib11.BalanceRepos
         }
 
 
-        public BillAmounts TotalOverdues(DateTime date)
+        public BillAmounts TotalOverdues(DateTime? asOfDate = null)
+        {
+            var rows = GetOverdueLeases(out BillAmounts totals, asOfDate);
+            return totals;
+        }
+
+
+        public List<LeaseBalanceRow> GetOverdueLeases (out BillAmounts totals, DateTime? asOfDate = null)
         {
             var list = new List<LeaseBalanceRow>();
             var mkt  = GetMarketState();
+            var date = asOfDate ?? mkt.Collections.LastPostedDate();
 
             foreach (var lse in mkt.ActiveLeases.GetAll())
                 list.Add(GetBalance(lse, date));
@@ -39,9 +47,8 @@ namespace RentLog.DomainLib11.BalanceRepos
                 list.Add(GetBalance(lse, null));
 
             list.RemoveAll(_ => NoOverdue(_, date));
-            //var ord = list.OrderByDescending(_ => _.Rights).ToList();
 
-            return new BillAmounts
+            totals = new BillAmounts
             {
                 Rent     = list.Sum  (_ => _.Rent    .ZeroIfNullOrNegative()),
                 Rights   = list.Where(_ => IsRightsOverdue(_, date))
@@ -49,6 +56,7 @@ namespace RentLog.DomainLib11.BalanceRepos
                 Electric = list.Sum  (_ => _.Electric.ZeroIfNullOrNegative()),
                 Water    = list.Sum  (_ => _.Water   .ZeroIfNullOrNegative()),
             };
+            return list;
         }
 
 

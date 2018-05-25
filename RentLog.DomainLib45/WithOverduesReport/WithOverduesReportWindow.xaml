@@ -1,0 +1,48 @@
+﻿<Window x:Class="RentLog.DomainLib45.WithOverduesReport.WithOverduesReportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RentLog.DomainLib45.WithOverduesReport"
+        mc:Ignorable="d"
+        Title="{Binding Caption}" 
+        SizeToContent="Width" Height="700"
+        xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:labl="clr-namespace:CommonTools.Lib45.TextLabels;assembly=CommonTools.Lib45"
+        xmlns:butns="clr-namespace:CommonTools.Lib45.StyledButtons;assembly=CommonTools.Lib45"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <Window.Resources>
+        <Style TargetType="labl:DualText">
+            <Setter Property="Text1Width" Value="120" />
+            <Setter Property="Text2Width" Value="80" />
+            <Setter Property="Text2Weight" Value="Medium" />
+            <Setter Property="Text2Alignment" Value="Right" />
+            <Setter Property="Margin" Value="0 2 0 2" />
+        </Style>
+    </Window.Resources>
+    <DockPanel>
+
+        <StackPanel Orientation="Horizontal"
+                    DockPanel.Dock="Top"
+                    HorizontalAlignment="Right"
+                    Margin="0 10 30 10">
+            <StackPanel >
+                <labl:DualText Text1="Total Back Rent"
+                               Text2="{Binding Totals.Rent, StringFormat=N2}" />
+                <labl:DualText Text1="Total Overdue Rights"
+                               Text2="{Binding Totals.Rights, StringFormat=N2}" />
+            </StackPanel>
+            
+            <butns:PrintBtnLabeled Margin="30 0 0 0" />
+        </StackPanel>
+
+
+        <local:OverduesTable x:Name="tbl" DataContext="{Binding Rows}" />
+    </DockPanel>
+</Window>

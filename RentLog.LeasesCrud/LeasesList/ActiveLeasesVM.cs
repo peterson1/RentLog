@@ -4,7 +4,6 @@ using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.BaseViewModels;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.InputDialogs;
-using CommonTools.Lib45.ThreadTools;
 using PropertyChanged;
 using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.DTOs;
@@ -23,6 +22,9 @@ namespace RentLog.LeasesCrud.LeasesList
     [AddINotifyPropertyChangedInterface]
     public class ActiveLeasesVM : IndirectFilteredListVMBase<LeaseBalanceRow, LeaseDTO, LeasesFilterVM, AppArguments>
     {
+        public event EventHandler LeaseDeactivated = delegate { };
+
+
         public ActiveLeasesVM(AppArguments appArguments) : base(appArguments.MarketState.ActiveLeases, appArguments, false)
         {
             Crud                  = new LeaseCrudVM(AppArgs.MarketState.ActiveLeases, AppArgs);
@@ -41,7 +43,7 @@ namespace RentLog.LeasesCrud.LeasesList
 
         private void AddStallToTenant()
         {
-            if (TryGetPickedRow(out LeaseDTO lse)) return;
+            if (!TryGetPickedRow(out LeaseDTO lse)) return;
             Crud.TenantTemplate = lse.Tenant.ShallowClone();
             Crud.DraftBirthDate = lse.Tenant.BirthDate;
             Crud.EncodeNewDraftCmd.ExecuteIfItCan();
@@ -50,14 +52,14 @@ namespace RentLog.LeasesCrud.LeasesList
 
         private void EditThisLease()
         {
-            if (TryGetPickedRow(out LeaseDTO lse)) return;
+            if (!TryGetPickedRow(out LeaseDTO lse)) return;
             Crud.EditCurrentRecord(lse);
         }
 
 
         private void TerminateThisLease()
         {
-            if (TryGetPickedRow(out LeaseDTO lse)) return;
+            if (!TryGetPickedRow(out LeaseDTO lse)) return;
 
             var resp = MessageBox.Show($"Are you sure you want to terminate the lease for {L.f} {lse}?",
                 "   Confirm Termination", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -68,6 +70,7 @@ namespace RentLog.LeasesCrud.LeasesList
                 out DateTime termDate, DateTime.Now.Date)) return;
 
             AppArgs.MarketState.DeactivateLease(lse, "Manual Termination", termDate);
+            LeaseDeactivated?.Invoke(this, EventArgs.Empty);
         }
 
 

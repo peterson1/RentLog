@@ -31,5 +31,15 @@
         </StackPanel>
         
         <butns:RefreshButtonWhite Margin="10 0 0 0" />
+
+        <mat:PopupBox PlacementMode="BottomAndAlignRightEdges" 
+                      StaysOpen="False"
+                      Foreground="White">
+            <StackPanel DataContext="{Binding MainToolBar}">
+                <Button Command="{Binding WithOverduesReportCmd}"
+                        Content="{Binding WithOverduesReportCmd.CurrentLabel}" />
+            </StackPanel>
+        </mat:PopupBox>
+        
     </StackPanel>
 </UserControl>

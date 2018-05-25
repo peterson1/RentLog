@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="RentLog.DomainLib45.WithOverduesReport.OverduesTable"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RentLog.DomainLib45.WithOverduesReport"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <DataGrid x:Name="dg" ItemsSource="{Binding }"
+              Style="{StaticResource dgReadOnly}">
+        <DataGrid.Columns>
+
+            <DataGridTextColumn Header="tenant" Binding="{Binding DTO.Tenant.FirstAndLastNames}"
+                                ElementStyle="{StaticResource colRight}" />
+
+            <DataGridTextColumn Header="stall" Binding="{Binding DTO.Stall.Name}"
+                                ElementStyle="{StaticResource colRight}" />
+
+            <DataGridTextColumn Header="is active" Binding="{Binding IsActive}"
+                                ElementStyle="{StaticResource colCenter}" />
+
+            <DataGridTextColumn Header="rent rate" Binding="{Binding DTO.Rent.RegularRate, StringFormat=N2}"
+                                ElementStyle="{StaticResource colRight}" />
+
+            <DataGridTextColumn Header="rent start" Binding="{Binding DTO.ContractStart, StringFormat=d MMM yyyy}"
+                                ElementStyle="{StaticResource colCenter}" />
+
+            <DataGridTextColumn Header="rent end" Binding="{Binding DTO.ContractEnd, StringFormat=d MMM yyyy}"
+                                ElementStyle="{StaticResource colCenter}" />
+
+            <DataGridTextColumn Header="rights due" Binding="{Binding DTO.RightsDueDate, StringFormat=d MMM yyyy}"
+                                ElementStyle="{StaticResource colCenter}" />
+
+            <DataGridTextColumn Header="total rights" Binding="{Binding DTO.Rights.TotalAmount, StringFormat=N2}"
+                                ElementStyle="{StaticResource colRight}" />
+
+            <DataGridTextColumn Header="rent balance" Binding="{Binding Rent, StringFormat=N2}"
+                                ElementStyle="{StaticResource colRight}" />
+
+            <DataGridTextColumn Header="rights balance" Binding="{Binding Rights, StringFormat=N2}"
+                                ElementStyle="{StaticResource colRight}" />
+        </DataGrid.Columns>
+    </DataGrid>
+</UserControl>

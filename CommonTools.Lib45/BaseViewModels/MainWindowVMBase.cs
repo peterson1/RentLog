@@ -13,6 +13,8 @@ namespace CommonTools.Lib45.BaseViewModels
     [AddINotifyPropertyChangedInterface]
     public abstract class MainWindowVMBase<TArg>
     {
+        public event EventHandler PrintClicked = delegate { };
+
         protected string RefreshingText = "Refreshing list of records...";
         protected abstract string CaptionPrefix { get; }
 
@@ -82,8 +84,8 @@ namespace CommonTools.Lib45.BaseViewModels
             StopBeingBusy();
         }
 
-        protected virtual void OnPrintClicked       () { }
         protected virtual void OnRefreshClicked     () { }
+        protected virtual void OnPrintClicked       () => PrintClicked?.Invoke(this, EventArgs.Empty);
         protected virtual Task OnRefreshClickedAsync() => Task.Delay(0);
         public void ClickRefresh() => RefreshCmd.ExecuteIfItCan();
 

@@ -1,12 +1,10 @@
-﻿using RentLog.Tests.TestTools;
-using RentLog.DomainLib11.StateTransitions;
-using Xunit;
-using RentLog.DomainLib11.DTOs;
+﻿using CommonTools.Lib11.ExceptionTools;
 using FluentAssertions;
+using RentLog.DomainLib11.DTOs;
+using RentLog.DomainLib11.StateTransitions;
+using RentLog.Tests.TestTools;
 using System;
-using CommonTools.Lib11.ExceptionTools;
-using Moq;
-using RentLog.DomainLib11.BalanceRepos;
+using Xunit;
 
 namespace RentLog.Tests.StateTransitionTests
 {
