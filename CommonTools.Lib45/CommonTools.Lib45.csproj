@@ -90,6 +90,7 @@
       <DependentUpon>BusyDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Cryptography\AESThenHMAC.cs" />
+    <Compile Include="ExcelTools\DataGridToExcel.cs" />
     <Compile Include="FileSystemTools\Base64FileIO.cs" />
     <Compile Include="FileSystemTools\ClonedCopyExeUpdater.cs" />
     <Compile Include="FileSystemTools\CurrentExeTools.cs" />

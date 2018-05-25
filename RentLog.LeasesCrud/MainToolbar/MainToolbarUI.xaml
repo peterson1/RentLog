@@ -42,6 +42,9 @@
 
                 <Button Command="{Binding PrintCurrentListCmd}"
                         Content="{Binding PrintCurrentListCmd.CurrentLabel}" />
+
+                <Button Command="{Binding ExportListToExcelCmd}"
+                        Content="{Binding ExportListToExcelCmd.CurrentLabel}" />
             </StackPanel>
         </mat:PopupBox>
         

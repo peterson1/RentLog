@@ -1,4 +1,5 @@
 ﻿using CommonTools.Lib11.InputCommands;
+using CommonTools.Lib45.ExcelTools;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.PrintTools;
 using PropertyChanged;
@@ -17,15 +18,17 @@ namespace RentLog.LeasesCrud.MainToolbar
 
         public MainToolbarVM(MainWindowVM mainWindowVM)
         {
-            _main = mainWindowVM;
-            _args = _main.AppArgs;
+            _main                 = mainWindowVM;
+            _args                 = _main.AppArgs;
             WithOverduesReportCmd = WithOverduesReport.CreateLauncherCmd(_args);
-            PrintCurrentListCmd = R2Command.Relay(PrintCurrentList, null, "Print Current List");
+            PrintCurrentListCmd   = R2Command.Relay(PrintCurrentList, null, "Print Current List");
+            ExportListToExcelCmd  = R2Command.Relay(ExportListToExcel, null, "Export List to Excel");
         }
 
 
         public IR2Command   WithOverduesReportCmd  { get; }
         public IR2Command   PrintCurrentListCmd    { get; }
+        public IR2Command   ExportListToExcelCmd   { get; }
         public BillAmounts  Overdues               { get; private set; }
 
 
@@ -38,9 +41,11 @@ namespace RentLog.LeasesCrud.MainToolbar
         }
 
 
-        public void UpdateAll()
-        {
-            Overdues = _args.Balances.TotalOverdues();
-        }
+        private void ExportListToExcel() 
+            => _main.CurrentTable.ExportToExcel();
+
+
+        public void UpdateAll() 
+            => Overdues = _args.Balances.TotalOverdues();
     }
 }
