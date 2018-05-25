@@ -6,6 +6,7 @@ using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.ThreadTools;
 using RentLog.DomainLib11.Models;
 using RentLog.DomainLib11.ReportRows;
+using RentLog.DomainLib45.SoaViewers.MainWindow;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace RentLog.DomainLib45.WithOverduesReport
         public WithOverduesReportVM(AppArguments appArguments) : base(appArguments)
         {
             ClickRefresh();
+            Rows.ItemOpened += (s, e) => SoaViewer.Show(e.DTO, AppArgs);
         }
 
 

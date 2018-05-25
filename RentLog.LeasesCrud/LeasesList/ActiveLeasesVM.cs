@@ -10,7 +10,7 @@ using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.ReportRows;
 using RentLog.DomainLib11.StateTransitions;
 using RentLog.DomainLib45;
-using RentLog.DomainLib45.SoaViewer.MainWindow;
+using RentLog.DomainLib45.SoaViewers.MainWindow;
 using RentLog.LeasesCrud.LeaseCRUD;
 using System;
 using System.Collections.Generic;

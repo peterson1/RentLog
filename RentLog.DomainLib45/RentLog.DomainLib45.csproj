@@ -72,53 +72,53 @@
   <ItemGroup>
     <Compile Include="AppArguments.cs" />
     <Compile Include="BaseViewModels\BrandedWindowBase.cs" />
-    <Compile Include="SoaViewer\AdjustmentsCRUD\AdjustmentsListVM.cs" />
-    <Compile Include="SoaViewer\CellViewer\AdjustmentsUI.xaml.cs">
+    <Compile Include="SoaViewers\AdjustmentsCRUD\AdjustmentsListVM.cs" />
+    <Compile Include="SoaViewers\CellViewer\AdjustmentsUI.xaml.cs">
       <DependentUpon>AdjustmentsUI.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SoaViewer\CellViewer\PaymentsUI.xaml.cs">
+    <Compile Include="SoaViewers\CellViewer\PaymentsUI.xaml.cs">
       <DependentUpon>PaymentsUI.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SoaViewer\CellViewer\PenaltiesUI.xaml.cs">
+    <Compile Include="SoaViewers\CellViewer\PenaltiesUI.xaml.cs">
       <DependentUpon>PenaltiesUI.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SoaViewer\CellViewer\SoaCellViewerVM.cs" />
-    <Compile Include="SoaViewer\CellViewer\SoaCellViewerWindow.xaml.cs">
+    <Compile Include="SoaViewers\CellViewer\SoaCellViewerVM.cs" />
+    <Compile Include="SoaViewers\CellViewer\SoaCellViewerWindow.xaml.cs">
       <DependentUpon>SoaCellViewerWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SoaViewer\CellViewer\ViewerHeader.xaml.cs">
+    <Compile Include="SoaViewers\CellViewer\ViewerHeader.xaml.cs">
       <DependentUpon>ViewerHeader.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SoaViewer\MainWindow\BillStateSoaCell.xaml.cs">
+    <Compile Include="SoaViewers\MainWindow\BillStateSoaCell.xaml.cs">
       <DependentUpon>BillStateSoaCell.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SoaViewer\MainWindow\DailyBillsTable.xaml.cs">
+    <Compile Include="SoaViewers\MainWindow\DailyBillsTable.xaml.cs">
       <DependentUpon>DailyBillsTable.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SoaViewer\MainWindow\DateSoaCell.xaml.cs">
+    <Compile Include="SoaViewers\MainWindow\DateSoaCell.xaml.cs">
       <DependentUpon>DateSoaCell.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SoaViewer\MainWindow\ElectricColumn\ElectricHeader.xaml.cs">
+    <Compile Include="SoaViewers\MainWindow\ElectricColumn\ElectricHeader.xaml.cs">
       <DependentUpon>ElectricHeader.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SoaViewer\MainWindow\MainToolbar.xaml.cs">
+    <Compile Include="SoaViewers\MainWindow\MainToolbar.xaml.cs">
       <DependentUpon>MainToolbar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SoaViewer\MainWindow\RentColumn\RentHeader.xaml.cs">
+    <Compile Include="SoaViewers\MainWindow\RentColumn\RentHeader.xaml.cs">
       <DependentUpon>RentHeader.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SoaViewer\MainWindow\RightsColumn\RightsHeader.xaml.cs">
+    <Compile Include="SoaViewers\MainWindow\RightsColumn\RightsHeader.xaml.cs">
       <DependentUpon>RightsHeader.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SoaViewer\MainWindow\SoaViewerVM.cs" />
-    <Compile Include="SoaViewer\MainWindow\SoaViewerWindow.xaml.cs">
+    <Compile Include="SoaViewers\MainWindow\SoaViewerVM.cs" />
+    <Compile Include="SoaViewers\MainWindow\SoaViewerWindow.xaml.cs">
       <DependentUpon>SoaViewerWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SoaViewer\MainWindow\WaterColumn\WaterHeader.xaml.cs">
+    <Compile Include="SoaViewers\MainWindow\WaterColumn\WaterHeader.xaml.cs">
       <DependentUpon>WaterHeader.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SoaViewer\PrintLayouts\SoaPrintVM.cs" />
-    <Compile Include="SoaViewer\PrintLayouts\SoaPrintWindow1.xaml.cs">
+    <Compile Include="SoaViewers\PrintLayouts\SoaPrintVM.cs" />
+    <Compile Include="SoaViewers\PrintLayouts\SoaPrintWindow1.xaml.cs">
       <DependentUpon>SoaPrintWindow1.xaml</DependentUpon>
     </Compile>
     <Compile Include="StallPicker\StallPickerVM.cs" />
@@ -179,63 +179,63 @@
     <Resource Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="SoaViewer\CellViewer\AdjustmentsUI.xaml">
+    <Page Include="SoaViewers\CellViewer\AdjustmentsUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SoaViewer\CellViewer\PaymentsUI.xaml">
+    <Page Include="SoaViewers\CellViewer\PaymentsUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SoaViewer\CellViewer\PenaltiesUI.xaml">
+    <Page Include="SoaViewers\CellViewer\PenaltiesUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SoaViewer\CellViewer\SoaCellViewerWindow.xaml">
+    <Page Include="SoaViewers\CellViewer\SoaCellViewerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SoaViewer\CellViewer\ViewerHeader.xaml">
+    <Page Include="SoaViewers\CellViewer\ViewerHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SoaViewer\MainWindow\BillStateSoaCell.xaml">
+    <Page Include="SoaViewers\MainWindow\BillStateSoaCell.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SoaViewer\MainWindow\DailyBillsTable.xaml">
+    <Page Include="SoaViewers\MainWindow\DailyBillsTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SoaViewer\MainWindow\DateSoaCell.xaml">
+    <Page Include="SoaViewers\MainWindow\DateSoaCell.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SoaViewer\MainWindow\ElectricColumn\ElectricHeader.xaml">
+    <Page Include="SoaViewers\MainWindow\ElectricColumn\ElectricHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SoaViewer\MainWindow\MainToolbar.xaml">
+    <Page Include="SoaViewers\MainWindow\MainToolbar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SoaViewer\MainWindow\RentColumn\RentHeader.xaml">
+    <Page Include="SoaViewers\MainWindow\RentColumn\RentHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SoaViewer\MainWindow\RightsColumn\RightsHeader.xaml">
+    <Page Include="SoaViewers\MainWindow\RightsColumn\RightsHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SoaViewer\MainWindow\SoaViewerWindow.xaml">
+    <Page Include="SoaViewers\MainWindow\SoaViewerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SoaViewer\MainWindow\WaterColumn\WaterHeader.xaml">
+    <Page Include="SoaViewers\MainWindow\WaterColumn\WaterHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SoaViewer\PrintLayouts\SoaPrintWindow1.xaml">
+    <Page Include="SoaViewers\PrintLayouts\SoaPrintWindow1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
