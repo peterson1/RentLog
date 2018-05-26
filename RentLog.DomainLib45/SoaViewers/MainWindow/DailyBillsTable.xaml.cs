@@ -24,22 +24,25 @@ namespace RentLog.DomainLib45.SoaViewers.MainWindow
 
         private BillCode GetCurrentBillCode()
         {
+            if (dg.CurrentCell == null)  return BillCode.Other;
+            if (!dg.CurrentCell.IsValid) return BillCode.Other;
+
             var colIndex = dg.CurrentCell.Column.DisplayIndex;
             switch (colIndex)
             {
-                case 3: return BillCode.Rent;
-                case 4: return BillCode.Rights;
-                case 5: return BillCode.Electric;
-                case 6: return BillCode.Water;
-                default:
-                    throw Fault.BadArg("columnIndex", colIndex);
+                case  3: return BillCode.Rent;
+                case  4: return BillCode.Rights;
+                case  5: return BillCode.Electric;
+                case  6: return BillCode.Water;
+                default: return BillCode.Other;
             }
         }
 
 
         private void dg_CurrentCellChanged(object sender, EventArgs e)
-            => VM.BillCode = GetCurrentBillCode();
-
+        {
+            VM.BillCode = GetCurrentBillCode();
+        }
 
         private SoaViewerVM VM => DataContext as SoaViewerVM;
     }

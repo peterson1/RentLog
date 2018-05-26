@@ -26,7 +26,7 @@ namespace RentLog.DomainLib45.SoaViewers.MainWindow
 
 
         public LeaseDTO               Lease     { get; }
-        public BillCode               BillCode  { get; set; }
+        public BillCode               BillCode  { get; set; } = BillCode.Other;
         public UIList<DailyBillsRow>  Rows      { get; } = new UIList<DailyBillsRow>();
         public DailyBillsRow          FirstRow  => Rows.FirstOrDefault();
 
@@ -43,6 +43,7 @@ namespace RentLog.DomainLib45.SoaViewers.MainWindow
 
         private void OnItemOpened(DailyBillsRow e)
         {
+            if (BillCode == BillCode.Other) return;
             var changd = SoaCellViewer.Show(Lease, e.Date, e.DTO.For(BillCode), AppArgs);
             if (changd == true) ClickRefresh();
         }
