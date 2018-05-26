@@ -12,6 +12,9 @@ namespace RentLog.LeasesCrud
     [AddINotifyPropertyChangedInterface]
     public class MainWindowVM : BrandedWindowBase
     {
+        public override string SubAppName => "Leases";
+
+
         public MainWindowVM(AppArguments appArguments) : base(appArguments)
         {
             MainToolBar    = new MainToolbarVM(this);

@@ -8,7 +8,11 @@ namespace RentLog.DomainLib45.BaseViewModels
     [AddINotifyPropertyChangedInterface]
     public abstract class BrandedWindowBase : UpdatedExeVMBase<AppArguments>
     {
-        protected override string CaptionPrefix => AppArgs.SystemName;
+        protected override string CaptionPrefix 
+            => $"{AppArgs.MarketState.SystemName} {SubAppName}";
+
+
+        public abstract string SubAppName { get; }
 
 
         public BrandedWindowBase(AppArguments appArguments) : base(appArguments)

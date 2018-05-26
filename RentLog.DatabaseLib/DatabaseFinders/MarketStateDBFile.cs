@@ -9,7 +9,8 @@ namespace RentLog.DatabaseLib.DatabaseFinders
 {
     public static class MarketStateDBFile
     {
-        private const string BRANCH_KEY = "BranchName";
+        private const string SYSTEM_NAME_KEY = "SystemName";
+        private const string BRANCH_NAME_KEY = "BranchName";
 
         public static MarketStateDB Load(string marketDbFilePath, string currentUser)
         {
@@ -18,7 +19,8 @@ namespace RentLog.DatabaseLib.DatabaseFinders
                                
             mkt.DatabasePath   = marketDbFilePath;
             mkt.CurrentUser    = currentUser;
-            mkt.BranchName     = db.Metadata[BRANCH_KEY];
+            mkt.SystemName     = db.Metadata[SYSTEM_NAME_KEY];
+            mkt.BranchName     = db.Metadata[BRANCH_NAME_KEY];
                                
             mkt.Stalls         = new StallsRepo1(new StallsCollection(db), mkt);
             mkt.Collectors     = new CollectorsRepo1(new CollectorsCollection(db), mkt);

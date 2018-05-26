@@ -12,6 +12,9 @@ namespace RentLog.StallsCrud
     [AddINotifyPropertyChangedInterface]
     internal class MainWindowVM : BrandedWindowBase
     {
+        public override string SubAppName => "Stalls";
+
+
         public MainWindowVM(AppArguments args) : base(args)
         {
             Sections = new SectionsListVM(args);

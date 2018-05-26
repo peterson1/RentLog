@@ -29,7 +29,6 @@ namespace RentLog.DomainLib45
         public FirebaseCredentials  Credentials      { get; private set; }
         public string               CurrentUser      { get; }
 
-        public string               SystemName       { get; private set; } = "Rent Logs";
         public string               DbFilePath       { get; private set; }
 
         public MarketStateDB        MarketState      { get; }
