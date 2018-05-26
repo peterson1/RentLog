@@ -7,13 +7,14 @@ using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.ThreadTools;
 using PropertyChanged;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace CommonTools.Lib45.BaseViewModels
 {
     [AddINotifyPropertyChangedInterface]
-    public abstract class SavedListVMBase<TDTO, TArg>
+    public abstract class SavedListVMBase<TDTO, TArg> : IEnumerable<TDTO>
         where TDTO : IDocumentDTO
         where TArg : ICredentialsProvider
     {
@@ -113,6 +114,9 @@ namespace CommonTools.Lib45.BaseViewModels
             if (TotalSum != oldSum)
                 TotalSumChanged?.Invoke(this, TotalSum);
         }
+
+        public IEnumerator<TDTO> GetEnumerator() => ((IEnumerable<TDTO>)ItemsList).GetEnumerator();
+        IEnumerator IEnumerable .GetEnumerator() => ((IEnumerable<TDTO>)ItemsList).GetEnumerator();
 
 
         //public void RaisePropertyChanged(object sender, PropertyChangedEventArgs e)

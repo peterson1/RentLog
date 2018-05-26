@@ -12,7 +12,7 @@ namespace RentLog.Cashiering.CashierCollections
     [AddINotifyPropertyChangedInterface]
     public class CashierColxnsVM : EncoderListVMBase<CashierColxnDTO, AppArguments>
     {
-        public CashierColxnsVM(ISimpleRepo<CashierColxnDTO> repository, AppArguments appArguments) : base(repository, appArguments, false)
+        public CashierColxnsVM(ISimpleRepo<CashierColxnDTO> repository, AppArguments appArguments) : base(repository, appArguments)
         {
             Caption = "Tenant Payments to Office";
         }

@@ -6,6 +6,8 @@ namespace RentLog.DomainLib11.CollectionRepos
     public interface ICollectionsDB
     {
         Dictionary<int, IIntendedColxnsRepo> IntendedColxns { get; }
+        Dictionary<int, IAmbulantColxnsRepo> AmbulantColxns { get; }
+        Dictionary<int, IUncollectedsRepo>   Uncollecteds   { get; }
         ICashierColxnsRepo       CashierColxns   { get; }
         IOtherColxnsRepo         OtherColxns     { get; }
         IBankDepositsRepo        BankDeposits    { get; }

@@ -1,17 +1,16 @@
-﻿using System;
-using CommonTools.Lib11.DatabaseTools;
-using CommonTools.Lib45.BaseViewModels;
+﻿using CommonTools.Lib11.DatabaseTools;
 using PropertyChanged;
 using RentLog.Cashiering.CommonControls;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib45;
+using System;
 
 namespace RentLog.Cashiering.OtherCollections
 {
     [AddINotifyPropertyChangedInterface]
     public class OtherColxnsVM : EncoderListVMBase<OtherColxnDTO, AppArguments>
     {
-        public OtherColxnsVM(ISimpleRepo<OtherColxnDTO> repository, AppArguments appArguments) : base(repository, appArguments, false)
+        public OtherColxnsVM(ISimpleRepo<OtherColxnDTO> repository, AppArguments appArguments) : base(repository, appArguments)
         {
             Caption = "Other Collections";
         }

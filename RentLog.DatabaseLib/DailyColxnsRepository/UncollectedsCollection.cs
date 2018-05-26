@@ -3,11 +3,11 @@ using RentLog.DomainLib11.DTOs;
 
 namespace RentLog.DatabaseLib.DailyColxnsRepository
 {
-    internal class IntendedColxnsCollection : NamedCollectionBase<IntendedColxnDTO>
+    internal class UncollectedsCollection : NamedCollectionBase<UncollectedLeaseDTO>
     {
-        private const string COLXN_NAME_FMT = "Section{0}_FromLeases";
+        private const string COLXN_NAME_FMT = "Section{0}_Uncollecteds2";
 
-        internal IntendedColxnsCollection(SectionDTO section, SharedLiteDB sharedLiteDB) 
+        internal UncollectedsCollection(SectionDTO section, SharedLiteDB sharedLiteDB)
             : base(GetCollectionName(section), sharedLiteDB)
         {
         }

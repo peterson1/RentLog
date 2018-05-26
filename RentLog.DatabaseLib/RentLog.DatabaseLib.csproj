@@ -45,11 +45,13 @@
   <ItemGroup>
     <Compile Include="CollectorsRepository\CollectorsCollection.cs" />
     <Compile Include="DailyBillsRepository\DailyBillsCollection.cs" />
+    <Compile Include="DailyColxnsRepository\AmbulantColxnsCollection.cs" />
     <Compile Include="DailyColxnsRepository\BalanceAdjsCollection.cs" />
     <Compile Include="DailyColxnsRepository\BankDepositsCollection.cs" />
     <Compile Include="DailyColxnsRepository\CashierColxnsCollection.cs" />
     <Compile Include="DailyColxnsRepository\IntendedColxnsCollection.cs" />
     <Compile Include="DailyColxnsRepository\OtherColxnsCollection.cs" />
+    <Compile Include="DailyColxnsRepository\UncollectedsCollection.cs" />
     <Compile Include="DatabaseFinders\BalancesLocalDir.cs" />
     <Compile Include="DatabaseFinders\CollectionsLocalDir.cs" />
     <Compile Include="DatabaseFinders\MarketStateDBFile.cs" />

@@ -65,6 +65,8 @@ namespace RentLog.DatabaseLib.DatabaseFinders
             var db                 = new SharedLiteDB(file, _mkt.CurrentUser);
             var colxnsDB           = new CollectionsDB1(db.Metadata, _mkt);
             SetIntendedColxns(colxnsDB.IntendedColxns, db);
+            SetAmbulantColxns(colxnsDB.AmbulantColxns, db);
+            SetUncollecteds  (colxnsDB.Uncollecteds  , db);
             colxnsDB.CashierColxns = new CashierColxnsRepo1(new CashierColxnsCollection(db));
             colxnsDB.OtherColxns   = new OtherColxnsRepo1(new OtherColxnsCollection(db));
             colxnsDB.BankDeposits  = new BankDepositsRepo1(new BankDepositsCollection(db));
@@ -79,6 +81,28 @@ namespace RentLog.DatabaseLib.DatabaseFinders
             {
                 var colxn = new IntendedColxnsCollection(sec, db);
                 var repo  = new IntendedColxnsRepo1(colxn);
+                dict.Add(sec.Id, repo);
+            }
+        }
+
+
+        private void SetAmbulantColxns(Dictionary<int, IAmbulantColxnsRepo> dict, SharedLiteDB db)
+        {
+            foreach (var sec in _mkt.Sections.GetAll())
+            {
+                var colxn = new AmbulantColxnsCollection(sec, db);
+                var repo  = new AmbulantColxnsRepo1(colxn);
+                dict.Add(sec.Id, repo);
+            }
+        }
+
+
+        private void SetUncollecteds(Dictionary<int, IUncollectedsRepo> dict, SharedLiteDB db)
+        {
+            foreach (var sec in _mkt.Sections.GetAll())
+            {
+                var colxn = new UncollectedsCollection(sec, db);
+                var repo  = new UncollectedsRepo1(colxn);
                 dict.Add(sec.Id, repo);
             }
         }

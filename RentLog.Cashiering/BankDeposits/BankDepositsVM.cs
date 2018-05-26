@@ -11,7 +11,7 @@ namespace RentLog.Cashiering.BankDeposits
     [AddINotifyPropertyChangedInterface]
     public class BankDepositsVM : EncoderListVMBase<BankDepositDTO, AppArguments>
     {
-        public BankDepositsVM(ISimpleRepo<BankDepositDTO> repository, AppArguments appArguments) : base(repository, appArguments, false)
+        public BankDepositsVM(ISimpleRepo<BankDepositDTO> repository, AppArguments appArguments) : base(repository, appArguments)
         {
             Caption = "Bank Deposits";
         }

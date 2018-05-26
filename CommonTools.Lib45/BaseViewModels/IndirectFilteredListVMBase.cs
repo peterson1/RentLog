@@ -61,7 +61,7 @@ namespace CommonTools.Lib45.BaseViewModels
         }
 
 
-        public IEnumerator<TRow> GetEnumerator() => ((IEnumerable<TRow>)Rows).GetEnumerator();
-        IEnumerator  IEnumerable.GetEnumerator() => ((IEnumerable<TRow>)Rows).GetEnumerator();
+        public new IEnumerator<TRow> GetEnumerator() => ((IEnumerable<TRow>)Rows).GetEnumerator();
+             IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable<TRow>)Rows).GetEnumerator();
     }
 }

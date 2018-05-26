@@ -10,12 +10,16 @@ namespace RentLog.Cashiering.CommonControls
         where TDTO : IDocumentDTO
         where TArg : ICredentialsProvider
     {
-        public EncoderListVMBase(ISimpleRepo<TDTO> repository, TArg appArguments, bool doReload = true) : base(repository, appArguments, doReload)
+        public EncoderListVMBase(ISimpleRepo<TDTO> repository, TArg appArguments) : base(repository, appArguments, false)
         {
             CanEncode = AppArgs.CanEncodeCollections(false);
+            Caption   = ListTitle;
         }
 
 
         public bool  CanEncode  { get; }
+
+
+        protected abstract string ListTitle { get; }
     }
 }

@@ -116,10 +116,32 @@
       <DependentUpon>OtherColxnsUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="OtherCollections\OtherColxnsVM.cs" />
+    <Compile Include="SectionTabs\AmbulantCollections\AmbulantColxnsTable.xaml.cs">
+      <DependentUpon>AmbulantColxnsTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SectionTabs\AmbulantCollections\AmbulantColxnsUI.xaml.cs">
+      <DependentUpon>AmbulantColxnsUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SectionTabs\AmbulantCollections\AmbulantColxnsVM.cs" />
+    <Compile Include="SectionTabs\IntendedCollections\IntendedColxnsTable.xaml.cs">
+      <DependentUpon>IntendedColxnsTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SectionTabs\IntendedCollections\IntendedColxnsUI.xaml.cs">
+      <DependentUpon>IntendedColxnsUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SectionTabs\IntendedCollections\IntendedColxnsVM.cs" />
+    <Compile Include="SectionTabs\NoOperations\NoOperationsVM.cs" />
     <Compile Include="SectionTabs\SectionTabUI.xaml.cs">
       <DependentUpon>SectionTabUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="SectionTabs\SectionTabVM.cs" />
+    <Compile Include="SectionTabs\Uncollecteds\UncollectedsTable.xaml.cs">
+      <DependentUpon>UncollectedsTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SectionTabs\Uncollecteds\UncollectedsUI.xaml.cs">
+      <DependentUpon>UncollectedsUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SectionTabs\Uncollecteds\UncollectedsVM.cs" />
     <Page Include="BankDeposits\BankDepositsTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -164,7 +186,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SectionTabs\AmbulantCollections\AmbulantColxnsTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SectionTabs\AmbulantCollections\AmbulantColxnsUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SectionTabs\IntendedCollections\IntendedColxnsTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SectionTabs\IntendedCollections\IntendedColxnsUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SectionTabs\SectionTabUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SectionTabs\Uncollecteds\UncollectedsTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SectionTabs\Uncollecteds\UncollectedsUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
