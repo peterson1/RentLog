@@ -18,9 +18,6 @@ namespace RentLog.LeasesCrud.LeasesList
         }
 
 
-        public string Caption { get; private set; }
-
-
         protected override void OnItemOpened(InactiveLeaseDTO e)
             => SoaViewer.Show(e, AppArgs);
 

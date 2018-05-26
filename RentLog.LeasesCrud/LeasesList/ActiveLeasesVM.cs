@@ -34,7 +34,6 @@ namespace RentLog.LeasesCrud.LeasesList
         }
 
 
-        public string       Caption                { get; private set; }
         public LeaseCrudVM  Crud                   { get; }
         public IR2Command   AddStallToTenantCmd    { get; }
         public IR2Command   EditThisLeaseCmd       { get; }

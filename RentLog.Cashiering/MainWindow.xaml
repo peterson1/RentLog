@@ -3,10 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:tbar="clr-namespace:RentLog.Cashiering.MainToolbar"
+        xmlns:secTabs="clr-namespace:RentLog.Cashiering.SectionTabs"
+        xmlns:bankDeps="clr-namespace:RentLog.Cashiering.BankDeposits"
+        xmlns:cshrColxn="clr-namespace:RentLog.Cashiering.CashierCollections"
+        xmlns:othrColxn="clr-namespace:RentLog.Cashiering.OtherCollections"
         xmlns:local="clr-namespace:RentLog.Cashiering"
         mc:Ignorable="d"
         Title="{Binding Caption}" 
-        Width="1360" Height="700"
+        Width="1360" Height="700" WindowState="Maximized"
         xmlns:busy="clr-namespace:CommonTools.Lib45.BusyIndicators;assembly=CommonTools.Lib45"
         xmlns:butns="clr-namespace:CommonTools.Lib45.StyledButtons;assembly=CommonTools.Lib45"
         xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -22,33 +27,68 @@
         <butns:UpdatedExeNotifierBar DataContext="{Binding UpdateNotifier}"
                                      DockPanel.Dock="Top" />
         <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-            <dragz:TabablzControl x:Name="tabs">
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="3*" />
+                </Grid.RowDefinitions>
+
+                <bankDeps:BankDepositsUI Grid.Row="0"
+                                         DataContext="{Binding BankDeposits}" />
+
+                <GridSplitter Grid.Row="1" Style="{StaticResource hSplit}" />
+                
+                <cshrColxn:CashierColxnsUI Grid.Row="2"
+                                           DataContext="{Binding CashierColxns}"/>
+
+                <GridSplitter Grid.Row="3" Style="{StaticResource hSplit}" />
+
+                <othrColxn:OtherColxnsUI Grid.Row="4"
+                                         DataContext="{Binding OtherColxns}"/>
+            </Grid>
+
+            <GridSplitter Grid.Column="1" Style="{StaticResource vSplit}" />
+
+            <dragz:TabablzControl Grid.Column="2" x:Name="tabs"
+                                  ItemsSource="{Binding SectionTabs}"
+                                  FixedHeaderCount="{Binding SectionTabs.Count}">
+
+                <dragz:TabablzControl.Resources>
+                    <DataTemplate DataType="{x:Type secTabs:SectionTabVM}">
+                        <secTabs:SectionTabUI />
+                    </DataTemplate>
+                </dragz:TabablzControl.Resources>
+                
+                
                 <dragz:TabablzControl.InterTabController>
                     <dragz:InterTabController />
                 </dragz:TabablzControl.InterTabController>
 
-                <!--<TabItem DataContext="{Binding ActiveLeases}"
-                         Header="{Binding Caption}">
-                    <lses:ActiveLeasesUI x:Name="actives" />
-                </TabItem>
-
-                <TabItem DataContext="{Binding InactiveLeases}" 
-                         Header="{Binding Caption}">
-                    <lses:InactiveLeasesUI x:Name="inactives" />
-                </TabItem>-->
+                <dragz:TabablzControl.HeaderItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Title}" />
+                    </DataTemplate>
+                </dragz:TabablzControl.HeaderItemTemplate>
 
             </dragz:TabablzControl>
 
-            <!--<tbar:MainToolbarUI HorizontalAlignment="Right"
+            <tbar:MainToolbarUI Grid.RowSpan="5"
+                                Grid.ColumnSpan="3" 
+                                HorizontalAlignment="Right"
                                 VerticalAlignment="Top"
-                                Margin="0 4 20 0" />-->
+                                Margin="0 4 20 0" />
 
-            <!--<butns:EncodeNewDraftBtn1 HorizontalAlignment="Right"
-                                      VerticalAlignment="Bottom"
-                                      DataContext="{Binding ActiveLeases.Crud}"
-                                      Margin="0 0 40 30" />-->
-            <busy:BusyDialog />
+            <busy:BusyDialog Grid.RowSpan="5"
+                             Grid.ColumnSpan="3" />
         </Grid>
     </DockPanel>
 </Window>

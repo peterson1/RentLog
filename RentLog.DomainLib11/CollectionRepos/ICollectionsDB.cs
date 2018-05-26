@@ -7,6 +7,8 @@ namespace RentLog.DomainLib11.CollectionRepos
     {
         Dictionary<int, IIntendedColxnsRepo> IntendedColxns { get; }
         ICashierColxnsRepo       CashierColxns   { get; }
+        IOtherColxnsRepo         OtherColxns     { get; }
+        IBankDepositsRepo        BankDeposits    { get; }
         IBalanceAdjustmentsRepo  BalanceAdjs     { get; }
 
         bool          IsPosted      ();

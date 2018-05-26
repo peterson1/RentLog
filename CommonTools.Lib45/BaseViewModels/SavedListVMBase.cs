@@ -45,6 +45,7 @@ namespace CommonTools.Lib45.BaseViewModels
         public UIList<TDTO>  ItemsList   { get; } = new UIList<TDTO>();
         public TDTO          Selected    { get; set; }
         public decimal       TotalSum    { get; private set; }
+        public string        Caption     { get; protected set; }
 
 
         protected virtual Func<TDTO, decimal> SummedAmount { get; }

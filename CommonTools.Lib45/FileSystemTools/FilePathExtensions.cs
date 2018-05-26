@@ -69,8 +69,11 @@ namespace CommonTools.Lib45.FileSystemTools
         }
 
 
-        public static bool IsInTempDir(this string filePath) 
-            => filePath.Contains(Path.GetTempPath());
+        public static bool IsInTempDir(this string filePath)
+        {
+            if (filePath.IsBlank()) return false;
+            return filePath.Contains(Path.GetTempPath());
+        }
 
 
         //public static string CreateTempCopy(this string filePath)

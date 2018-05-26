@@ -6,6 +6,7 @@ namespace RentLog.DomainLib11.CollectionRepos
     public interface ICollectionsDir
     {
         DateTime                      LastPostedDate ();
+        DateTime                      UnclosedDate   ();
         IOrderedEnumerable<DateTime>  AllDates       ();
         ICollectionsDB                For            (DateTime date);
     }

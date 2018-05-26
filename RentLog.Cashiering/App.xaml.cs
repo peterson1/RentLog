@@ -12,7 +12,8 @@ namespace RentLog.Cashiering
 
             this.Initialize<AppArguments>(args =>
             {
-                new MainWindowVM(args).Show<MainWindow>();
+                var date = args.Collections.UnclosedDate();
+                new MainWindowVM(date, args).Show<MainWindow>();
             });
         }
     }

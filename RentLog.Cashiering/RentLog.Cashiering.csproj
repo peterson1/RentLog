@@ -87,6 +87,63 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BankDeposits\BankDepositsTable.xaml.cs">
+      <DependentUpon>BankDepositsTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BankDeposits\BankDepositsUI.xaml.cs">
+      <DependentUpon>BankDepositsUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BankDeposits\BankDepositsVM.cs" />
+    <Compile Include="CashierCollections\CashierColxnsTable.xaml.cs">
+      <DependentUpon>CashierColxnsTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CashierCollections\CashierColxnsUI.xaml.cs">
+      <DependentUpon>CashierColxnsUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CashierCollections\CashierColxnsVM.cs" />
+    <Compile Include="CommonControls\EncoderListVMBase.cs" />
+    <Compile Include="CommonControls\LightColorZone.xaml.cs">
+      <DependentUpon>LightColorZone.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainToolbar\MainToolbarUI.xaml.cs">
+      <DependentUpon>MainToolbarUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainToolbar\MainToolbarVM.cs" />
+    <Compile Include="OtherCollections\OtherColxnsTable.xaml.cs">
+      <DependentUpon>OtherColxnsTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OtherCollections\OtherColxnsUI.xaml.cs">
+      <DependentUpon>OtherColxnsUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OtherCollections\OtherColxnsVM.cs" />
+    <Compile Include="SectionTabs\SectionTabUI.xaml.cs">
+      <DependentUpon>SectionTabUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SectionTabs\SectionTabVM.cs" />
+    <Page Include="BankDeposits\BankDepositsTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BankDeposits\BankDepositsUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CashierCollections\CashierColxnsTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CashierCollections\CashierColxnsUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CommonControls\LightColorZone.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainToolbar\MainToolbarUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -99,6 +156,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="OtherCollections\OtherColxnsTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OtherCollections\OtherColxnsUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SectionTabs\SectionTabUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindowVM.cs" />

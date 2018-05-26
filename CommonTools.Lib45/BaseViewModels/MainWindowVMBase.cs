@@ -102,6 +102,7 @@ namespace CommonTools.Lib45.BaseViewModels
 
             #if DEBUG
             _win.SetToCloseOnEscape();
+            _win.WindowState = WindowState.Normal;
             #endif
 
             if (showModal)

@@ -26,5 +26,8 @@ namespace RentLog.DomainLib11.CollectionRepos
 
             return dates.First().AddDays(-1);
         }
+
+
+        public DateTime UnclosedDate() => LastPostedDate().AddDays(1);
     }
 }

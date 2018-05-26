@@ -9,6 +9,11 @@ namespace RentLog.DomainLib11.Authorization
         public static Action<string> OnUnauthorizedAccess;
 
 
+        public static bool CanEncodeCollections(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
+            "Encode Collections", "Cashier", "Admin");
+
+
+
         public static bool CanAddLease(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
             "Add Lease", "Supervisor", "Admin");
 

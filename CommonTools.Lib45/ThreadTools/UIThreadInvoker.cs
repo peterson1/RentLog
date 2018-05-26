@@ -7,7 +7,10 @@ namespace CommonTools.Lib45.ThreadTools
     {
         public static void Run(Action action)
         {
-            Application.Current.Dispatcher.Invoke(action);
+            if (Application.Current == null)
+                action.Invoke();
+            else
+                Application.Current.Dispatcher.Invoke(action);
         }
     }
 }

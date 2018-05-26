@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="RentLog.Cashiering.CommonControls.LightColorZone"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RentLog.Cashiering.CommonControls"
+             xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+
+        <Style x:Key="txtCaption" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        
+        <Style x:Key="squareBtnPlus" TargetType="Button"
+               BasedOn="{StaticResource MaterialDesignRaisedAccentButton}">
+            <Setter Property="Content" Value="{mat:PackIcon Kind=Plus}" />
+            <Setter Property="Width" Value="20" />
+            <Setter Property="Height" Value="20" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+
+    </UserControl.Resources>
+    <mat:ColorZone Mode="PrimaryLight"
+                   Padding="20 8 15 8">
+        <Grid>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Text="{Binding Caption}" 
+                           Style="{StaticResource txtCaption}" />
+                <TextBlock Text="{Binding ItemsList.Count, StringFormat={}({0:N0})}" 
+                           Style="{StaticResource txtCaption}"
+                           Margin="5 0 0 0" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                
+                <TextBlock Text="total :"
+                           VerticalAlignment="Center" />
+                
+                <TextBlock Text="{Binding TotalSum, StringFormat=N2}"
+                           VerticalAlignment="Center"
+                           FontWeight="Medium"
+                           Margin="5 0 0 0" />
+
+                <Button Style="{StaticResource squareBtnPlus}"
+                        Visibility="{Binding CanEncode, Converter={StaticResource visIfTrue}}"
+                        Margin="15 0 0 0" />
+            </StackPanel>
+            
+        </Grid>
+    </mat:ColorZone>
+</UserControl>

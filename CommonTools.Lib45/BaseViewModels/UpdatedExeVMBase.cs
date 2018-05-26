@@ -1,5 +1,4 @@
-﻿using CommonTools.Lib11.StringTools;
-using CommonTools.Lib45.FileSystemTools;
+﻿using CommonTools.Lib45.FileSystemTools;
 using PropertyChanged;
 
 namespace CommonTools.Lib45.BaseViewModels

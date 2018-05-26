@@ -66,6 +66,8 @@ namespace RentLog.DatabaseLib.DatabaseFinders
             var colxnsDB           = new CollectionsDB1(db.Metadata, _mkt);
             SetIntendedColxns(colxnsDB.IntendedColxns, db);
             colxnsDB.CashierColxns = new CashierColxnsRepo1(new CashierColxnsCollection(db));
+            colxnsDB.OtherColxns   = new OtherColxnsRepo1(new OtherColxnsCollection(db));
+            colxnsDB.BankDeposits  = new BankDepositsRepo1(new BankDepositsCollection(db));
             colxnsDB.BalanceAdjs   = new BalanceAdjsRepo1(date, new BalanceAdjsCollection(db), _mkt.Balances);
             return colxnsDB;
         }
