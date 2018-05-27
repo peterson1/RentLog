@@ -14,23 +14,47 @@
             <Setter Property="Text1Width" Value="auto" />
             <Setter Property="Text1Brush" Value="LightBlue" />
             <Setter Property="Text2Brush" Value="White" />
-            <Setter Property="Margin" Value="15 0 15 0" />
+            <Setter Property="Margin" Value="10 0 10 0" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="txtVerdict" TargetType="TextBlock">
+            <Setter Property="Padding" Value="15 5 15 5" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
     </UserControl.Resources>
-    <StackPanel Orientation="Horizontal">
-        <StackPanel Orientation="Horizontal"
-                    VerticalAlignment="Center"
-                    Margin="0 3 0 0"
-                    DataContext="{Binding MainToolbar}">
+    <StackPanel Orientation="Horizontal"
+                Margin="0 0 0 0">
 
-            <labls:DualText Text1="Total Collections"
-                            Text2="{Binding Overdues.Rent, StringFormat=N2}" />
+        <labls:DualText Text1="Total Collections"
+                        Text2="{Binding TotalCollections, StringFormat=N2}" />
 
-            <labls:DualText Text1="Total Deposits"
-                            Text2="{Binding Overdues.Rights, StringFormat=N2}" />
-        </StackPanel>
+        <TextBlock Style="{StaticResource txtVerdict}"
+                    Visibility="{Binding IsBalanced, Converter={StaticResource visIfTrue}}"
+                    Text="="
+                    Background="ForestGreen" />
 
-        <butns:RefreshButtonWhite Margin="10 0 0 0" />
+        <TextBlock Style="{StaticResource txtVerdict}"
+                    Visibility="{Binding IsBalanced, Converter={StaticResource visIfFalse}}"
+                    Text="does NOT match"
+                    Background="Red" />
+
+        <labls:DualText Text1="Deposits"
+                        Text2="{Binding TotalDeposits, StringFormat=N2}" />
+
+        <TextBlock Style="{StaticResource txtVerdict}"
+                    Visibility="{Binding IsBalanced, Converter={StaticResource visIfFalse}}"
+                    Text="{Binding TotalDifference, StringFormat={}diff :  {0:N2}}"
+                    Margin="0 0 0 0"
+                    Background="Red" />
+
+        <Button Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                Visibility="{Binding IsBalanced, Converter={StaticResource visIfTrue}}"
+                Command="{Binding PostAndCloseCmd}"
+                Content="{Binding PostAndCloseCmd.CurrentLabel}"
+                Height="25" />
         
+        <butns:RefreshButtonWhite Margin="10 0 0 0" />
     </StackPanel>
 </UserControl>

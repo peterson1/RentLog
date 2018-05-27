@@ -8,7 +8,7 @@ using System;
 namespace RentLog.Cashiering.BankDeposits
 {
     [AddINotifyPropertyChangedInterface]
-    public class BankDepositsVM : EncoderListVMBase<BankDepositDTO, AppArguments>
+    public class BankDepositsVM : EncoderListVMBase<BankDepositDTO>
     {
         protected override string ListTitle => "Bank Deposits";
 

@@ -8,7 +8,7 @@ using System;
 namespace RentLog.Cashiering.OtherCollections
 {
     [AddINotifyPropertyChangedInterface]
-    public class OtherColxnsVM : EncoderListVMBase<OtherColxnDTO, AppArguments>
+    public class OtherColxnsVM : EncoderListVMBase<OtherColxnDTO>
     {
         protected override string ListTitle => "Other Collections";
 

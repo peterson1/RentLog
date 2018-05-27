@@ -31,6 +31,7 @@ namespace RentLog.Tests.CashieringVMTests
             sut.SectionTabs[0].Uncollecteds.Should().HaveCount(4);
             sut.SectionTabs[0].NoOperations.Should().HaveCount(13);
             sut.SectionTabs[0].SectionTotal.Should().Be(6_890);
+            sut.SectionTabs[0].Collector.Name.Should().Be("Jomar Pasaludos");
 
             sut.SectionTabs[1].IntendedColxns.Should().HaveCount(0);
             sut.SectionTabs[1].IntendedColxns.TotalSum.Should().Be(0);
@@ -39,6 +40,7 @@ namespace RentLog.Tests.CashieringVMTests
             sut.SectionTabs[1].Uncollecteds.Should().HaveCount(0);
             sut.SectionTabs[1].NoOperations.Should().HaveCount(0);
             sut.SectionTabs[1].SectionTotal.Should().Be(210);
+            sut.SectionTabs[1].Collector.Name.Should().Be("Jomar Pasaludos");
 
             sut.SectionTabs[2].IntendedColxns.Should().HaveCount(63);
             sut.SectionTabs[2].IntendedColxns.TotalSum.Should().Be(7_785);
@@ -47,9 +49,11 @@ namespace RentLog.Tests.CashieringVMTests
             sut.SectionTabs[2].Uncollecteds.Should().HaveCount(2);
             sut.SectionTabs[2].NoOperations.Should().HaveCount(11);
             sut.SectionTabs[2].SectionTotal.Should().Be(8_315);
+            sut.SectionTabs[2].Collector.Name.Should().Be("Jomar Pasaludos");
 
             sut.TotalCollections.Should().Be(15_831);
             sut.TotalDeposits.Should().Be(15_831);
+            sut.IsBalanced.Should().BeTrue();
         }
 
 
@@ -93,6 +97,7 @@ namespace RentLog.Tests.CashieringVMTests
 
             sut.TotalCollections.Should().Be(23_298);
             sut.TotalDeposits.Should().Be(23_298);
+            sut.IsBalanced.Should().BeTrue();
         }
     }
 }

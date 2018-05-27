@@ -108,7 +108,6 @@
     <Compile Include="MainToolbar\MainToolbarUI.xaml.cs">
       <DependentUpon>MainToolbarUI.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainToolbar\MainToolbarVM.cs" />
     <Compile Include="OtherCollections\OtherColxnsTable.xaml.cs">
       <DependentUpon>OtherColxnsTable.xaml</DependentUpon>
     </Compile>
@@ -130,6 +129,12 @@
       <DependentUpon>IntendedColxnsUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="SectionTabs\IntendedCollections\IntendedColxnsVM.cs" />
+    <Compile Include="SectionTabs\NoOperations\NoOperationsTable.xaml.cs">
+      <DependentUpon>NoOperationsTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SectionTabs\NoOperations\NoOperationsUI.xaml.cs">
+      <DependentUpon>NoOperationsUI.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SectionTabs\NoOperations\NoOperationsVM.cs" />
     <Compile Include="SectionTabs\SectionTabUI.xaml.cs">
       <DependentUpon>SectionTabUI.xaml</DependentUpon>
@@ -199,6 +204,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SectionTabs\IntendedCollections\IntendedColxnsUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SectionTabs\NoOperations\NoOperationsTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SectionTabs\NoOperations\NoOperationsUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

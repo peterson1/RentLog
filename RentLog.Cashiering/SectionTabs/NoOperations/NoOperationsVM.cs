@@ -8,16 +8,19 @@ using System;
 namespace RentLog.Cashiering.SectionTabs.NoOperations
 {
     [AddINotifyPropertyChangedInterface]
-    public class NoOperationsVM : EncoderListVMBase<UncollectedLeaseDTO, AppArguments>
+    public class NoOperationsVM : EncoderListVMBase<UncollectedLeaseDTO>
     {
         protected override string ListTitle => "Did Not Operate";
 
 
         public NoOperationsVM(ISimpleRepo<UncollectedLeaseDTO> repository, AppArguments appArguments) : base(repository, appArguments)
         {
+            CanAddRows    = false;
+            TotalVisible = false;
         }
 
 
-        protected override Func<UncollectedLeaseDTO, decimal> SummedAmount => _ => _.Targets.Total;
+        protected override Func<UncollectedLeaseDTO, LeaseDTO> LeaseGetter  => _ => _.Lease;
+        protected override Func<UncollectedLeaseDTO, decimal>  SummedAmount => _ => _.Targets.Total;
     }
 }

@@ -28,7 +28,7 @@
                                      DockPanel.Dock="Top" />
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="390" />
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
@@ -75,7 +75,7 @@
 
                 <dragz:TabablzControl.HeaderItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Title}" />
+                        <TextBlock Text="{Binding Section.Name}" />
                     </DataTemplate>
                 </dragz:TabablzControl.HeaderItemTemplate>
 

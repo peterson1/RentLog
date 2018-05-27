@@ -35,11 +35,8 @@ namespace RentLog.DomainLib11.CollectionRepos
         public IBalanceAdjustmentsRepo  BalanceAdjs     { get; set; }
 
 
-        public CollectorDTO GetCollector(LeaseDTO lease)
+        public CollectorDTO GetCollector(SectionDTO sec)
         {
-            _mkt.RefreshStall(lease);
-
-            var sec = lease.Stall.Section;
             var key = string.Format(COLLECTOR_KEY, sec.Id);
             var dto = _meta.Find(_ => _.Name == key);
 
@@ -52,6 +49,13 @@ namespace RentLog.DomainLib11.CollectionRepos
                 throw Fault.BadCast(idText, id);
 
             return _mkt.Collectors.Find(id, true);
+        }
+
+
+        public CollectorDTO GetCollector(LeaseDTO lease)
+        {
+            _mkt.RefreshStall(lease);
+            return GetCollector(lease.Stall.Section);
         }
 
 

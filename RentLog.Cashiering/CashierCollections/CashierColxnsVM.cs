@@ -4,12 +4,11 @@ using RentLog.Cashiering.CommonControls;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib45;
 using System;
-using System.Collections.Generic;
 
 namespace RentLog.Cashiering.CashierCollections
 {
     [AddINotifyPropertyChangedInterface]
-    public class CashierColxnsVM : EncoderListVMBase<CashierColxnDTO, AppArguments>
+    public class CashierColxnsVM : EncoderListVMBase<CashierColxnDTO>
     {
         protected override string ListTitle => "Tenant Payments to Office";
 
@@ -19,15 +18,16 @@ namespace RentLog.Cashiering.CashierCollections
         }
 
 
-        protected override IEnumerable<CashierColxnDTO> PostProcessQueried(IEnumerable<CashierColxnDTO> items)
-        {
-            foreach (var item in items)
-                AppArgs.MarketState.RefreshStall(item.Lease);
+        //protected override IEnumerable<CashierColxnDTO> PostProcessQueried(IEnumerable<CashierColxnDTO> items)
+        //{
+        //    foreach (var item in items)
+        //        AppArgs.MarketState.RefreshStall(item.Lease);
+        //
+        //    return items;
+        //}
 
-            return items;
-        }
 
-
-        protected override Func<CashierColxnDTO, decimal> SummedAmount => _ => _.Amount;
+        protected override Func<CashierColxnDTO, LeaseDTO> LeaseGetter => _ => _.Lease;
+        protected override Func<CashierColxnDTO, decimal>  SummedAmount => _ => _.Amount;
     }
 }

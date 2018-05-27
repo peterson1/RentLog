@@ -10,21 +10,18 @@
               ItemsSource="{Binding }"
               Style="{StaticResource dgReadOnly}">
         <DataGrid.Columns>
-            <DataGridTextColumn Header="PR #"
+            <DataGridTextColumn Header="PR #" Width="10*"
                                 Binding="{Binding DocumentRef}" 
                                 ElementStyle="{StaticResource colSmallWrapCenter}" />
-            <DataGridTextColumn Header="received from"
+            <DataGridTextColumn Header="received from" Width="55*"
                                 Binding="{Binding Collector.Name}" 
                                 ElementStyle="{StaticResource colSmallWrapCenter}" />
-            <DataGridTextColumn Header="amount"
-                                Binding="{Binding Amount, StringFormat=N2}" 
-                                ElementStyle="{StaticResource colSmallWrapRightBold}" />
-            <DataGridTextColumn Header="payment for"
+            <DataGridTextColumn Header="payment" Width="15*"
                                 Binding="{Binding OtherCode}" 
                                 ElementStyle="{StaticResource colSmallWrapCenter}" />
-            <DataGridTextColumn Header="remarks"
-                                Binding="{Binding Remarks}" 
-                                ElementStyle="{StaticResource colSmallWrapCenter}" />
+            <DataGridTextColumn Header="amount" Width="20*"
+                                Binding="{Binding Amount, StringFormat=N2}" 
+                                ElementStyle="{StaticResource colSmallWrapRightBold}" />
         </DataGrid.Columns>
     </DataGrid>
 </UserControl>

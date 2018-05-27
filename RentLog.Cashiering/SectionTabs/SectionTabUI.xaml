@@ -3,14 +3,48 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:uncol="clr-namespace:RentLog.Cashiering.SectionTabs.Uncollecteds"
+             xmlns:noopr="clr-namespace:RentLog.Cashiering.SectionTabs.NoOperations"
+             xmlns:ambul="clr-namespace:RentLog.Cashiering.SectionTabs.AmbulantCollections"
+             xmlns:intnd="clr-namespace:RentLog.Cashiering.SectionTabs.IntendedCollections"
              xmlns:local="clr-namespace:RentLog.Cashiering.SectionTabs"
              xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <StackPanel>
-            <TextBlock Text="content for" />
-            <TextBlock Text="{Binding Title}" />
-        </StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="210" />
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            
+            <uncol:UncollectedsUI Grid.Row="0"
+                                  DataContext="{Binding Uncollecteds}" />
+            
+            <GridSplitter Grid.Row="1" Style="{StaticResource hSplit}" />
+            
+            <noopr:NoOperationsUI Grid.Row="2"
+                                  DataContext="{Binding NoOperations}" />
+            
+            <GridSplitter Grid.Row="3" Style="{StaticResource hSplit}" />
+            
+            <ambul:AmbulantColxnsUI Grid.Row="4"
+                                    DataContext="{Binding AmbulantColxns}" />
+        </Grid>
+
+        <GridSplitter Grid.Column="1" Style="{StaticResource vSplit}" />
+
+        <intnd:IntendedColxnsUI Grid.Column="2"
+                                DataContext="{Binding IntendedColxns}" />
+
     </Grid>
 </UserControl>

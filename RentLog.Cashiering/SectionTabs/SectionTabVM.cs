@@ -15,7 +15,8 @@ namespace RentLog.Cashiering.SectionTabs
         public SectionTabVM(SectionDTO sec, ICollectionsDB db, AppArguments appArguments)
         {
             Section        = sec;
-            IntendedColxns = new IntendedColxnsVM(db.IntendedColxns[sec.Id], appArguments);
+            Collector      = db.GetCollector(sec);
+            IntendedColxns = new IntendedColxnsVM(db.IntendedColxns[sec.Id], appArguments, this);
             AmbulantColxns = new AmbulantColxnsVM(db.AmbulantColxns[sec.Id], appArguments);
             Uncollecteds   = new UncollectedsVM  (db.Uncollecteds  [sec.Id], appArguments);
             NoOperations   = new NoOperationsVM  (db.NoOperations  [sec.Id], appArguments);
@@ -23,6 +24,7 @@ namespace RentLog.Cashiering.SectionTabs
 
 
         public SectionDTO         Section          { get; }
+        public CollectorDTO       Collector        { get; }
         public IntendedColxnsVM   IntendedColxns   { get; }
         public AmbulantColxnsVM   AmbulantColxns   { get; }
         public UncollectedsVM     Uncollecteds     { get; }

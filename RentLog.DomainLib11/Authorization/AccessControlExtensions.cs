@@ -10,7 +10,7 @@ namespace RentLog.DomainLib11.Authorization
 
 
         public static bool CanEncodeCollections(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
-            "Encode Collections", "Cashier", "Admin");
+            "Encode Collections", "Cashier");
 
 
 

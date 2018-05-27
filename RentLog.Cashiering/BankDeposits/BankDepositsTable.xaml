@@ -10,21 +10,21 @@
               ItemsSource="{Binding }"
               Style="{StaticResource dgReadOnly}">
         <DataGrid.Columns>
-            <DataGridTextColumn Header="description"
+            <DataGridTextColumn Header="description" Width="25*"
                                 Binding="{Binding Description}"
                                 ElementStyle="{StaticResource colSmallWrapLeft}" />
-            <DataGridTextColumn Header="bank acct"
+            <DataGridTextColumn Header="bank acct" Width="25*"
                                 Binding="{Binding BankAccount}"
                                 ElementStyle="{StaticResource colSmallWrapCenter}" />
-            <DataGridTextColumn Header="amount"
-                                Binding="{Binding Amount, StringFormat=N2}"
-                                ElementStyle="{StaticResource colSmallWrapRightBold}" />
-            <DataGridTextColumn Header="deposited"
+            <DataGridTextColumn Header="deposited" Width="15*"
                                 Binding="{Binding DepositDate, StringFormat=MMM d}"
                                 ElementStyle="{StaticResource colSmallWrapCenter}" />
-            <DataGridTextColumn Header="dep. slip"
+            <DataGridTextColumn Header="dep. slip" Width="15*"
                                 Binding="{Binding DocumentRef}"
                                 ElementStyle="{StaticResource colSmallWrapCenter}" />
+            <DataGridTextColumn Header="amount" Width="20*"
+                                Binding="{Binding Amount, StringFormat=N2}"
+                                ElementStyle="{StaticResource colSmallWrapRightBold}" />
         </DataGrid.Columns>
     </DataGrid>
 </UserControl>
