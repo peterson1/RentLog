@@ -3,6 +3,7 @@ using FluentAssertions.Extensions;
 using RentLog.DomainLib11.BillingRules;
 using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DTOs;
+using RentLog.DomainLib11.Models;
 using RentLog.Tests.SampleDBs;
 using System;
 using System.Collections.Generic;

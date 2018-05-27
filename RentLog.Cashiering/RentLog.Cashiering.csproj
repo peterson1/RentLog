@@ -108,6 +108,7 @@
     <Compile Include="MainToolbar\MainToolbarUI.xaml.cs">
       <DependentUpon>MainToolbarUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainToolbar\PostAndCloseVM.cs" />
     <Compile Include="OtherCollections\OtherColxnsTable.xaml.cs">
       <DependentUpon>OtherColxnsTable.xaml</DependentUpon>
     </Compile>

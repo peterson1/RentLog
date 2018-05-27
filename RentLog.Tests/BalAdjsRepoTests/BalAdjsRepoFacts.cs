@@ -4,6 +4,7 @@ using RentLog.DomainLib11.BalanceRepos;
 using RentLog.DomainLib11.BillingRules;
 using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DTOs;
+using RentLog.DomainLib11.Models;
 using Xunit;
 
 namespace RentLog.Tests.BalAdjsRepoTests

@@ -1,5 +1,6 @@
 ﻿using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DTOs;
+using RentLog.DomainLib11.Models;
 using System;
 using System.Collections.Generic;
 

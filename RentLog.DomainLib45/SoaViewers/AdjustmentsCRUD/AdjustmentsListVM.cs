@@ -3,6 +3,7 @@ using CommonTools.Lib45.BaseViewModels;
 using CommonTools.Lib45.InputDialogs;
 using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DTOs;
+using RentLog.DomainLib11.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

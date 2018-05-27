@@ -85,6 +85,7 @@
                                 Grid.ColumnSpan="3" 
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Top"
+                                DataContext="{Binding PostAndClose}"
                                 Margin="0 4 20 0" />
 
             <busy:BusyDialog Grid.RowSpan="5"

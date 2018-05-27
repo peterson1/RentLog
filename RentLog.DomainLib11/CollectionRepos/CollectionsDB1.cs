@@ -40,8 +40,7 @@ namespace RentLog.DomainLib11.CollectionRepos
             var key = string.Format(COLLECTOR_KEY, sec.Id);
             var dto = _meta.Find(_ => _.Name == key);
 
-            if (!dto.Any())
-                throw RecordNotFoundException.For<KeyValuePairDTO>("Name", key);
+            if (!dto.Any()) return null;
 
             var idText = dto.Single().Value;
 

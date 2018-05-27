@@ -2,6 +2,7 @@
 using RentLog.DomainLib11.BillingRules.RightsPenalties;
 using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DTOs;
+using RentLog.DomainLib11.Models;
 using System;
 using System.Collections.Generic;
 using static RentLog.DomainLib11.DTOs.DailyBillDTO;

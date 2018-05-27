@@ -1,7 +1,9 @@
-﻿using CommonTools.Lib11.DatabaseTools;
+﻿using CommonTools.Lib11.CollectionTools;
+using CommonTools.Lib11.DatabaseTools;
 using RentLog.DomainLib11.BillingRules;
 using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DTOs;
+using RentLog.DomainLib11.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,9 +24,7 @@ namespace RentLog.DomainLib11.BalanceRepos
 
 
         public void UpdateFrom(DateTime date)
-        {
-            //todo: Update each billcode
-        }
+            => BillCodes.Collected().ForEach(_ => UpdateFrom(date, _));
 
 
         public void UpdateFrom(DateTime date, BillCode billCode)

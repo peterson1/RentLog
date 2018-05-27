@@ -24,36 +24,39 @@
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
     </UserControl.Resources>
-    <StackPanel Orientation="Horizontal"
-                Margin="0 0 0 0">
+    <StackPanel Orientation="Horizontal">
+        
+        <StackPanel Orientation="Horizontal"
+                    Visibility="{Binding HasDeposits, Converter={StaticResource visIfTrue}}">
 
-        <labls:DualText Text1="Total Collections"
-                        Text2="{Binding TotalCollections, StringFormat=N2}" />
+            <labls:DualText Text1="Total Collections"
+                            Text2="{Binding TotalCollections, StringFormat=N2}" />
 
-        <TextBlock Style="{StaticResource txtVerdict}"
+            <TextBlock Style="{StaticResource txtVerdict}"
+                        Visibility="{Binding IsBalanced, Converter={StaticResource visIfTrue}}"
+                        Text="="
+                        Background="ForestGreen" />
+
+            <TextBlock Style="{StaticResource txtVerdict}"
+                        Visibility="{Binding IsBalanced, Converter={StaticResource visIfFalse}}"
+                        Text="does NOT match"
+                        Background="Red" />
+
+            <labls:DualText Text1="Deposits"
+                            Text2="{Binding TotalDeposits, StringFormat=N2}" />
+
+            <TextBlock Style="{StaticResource txtVerdict}"
+                        Visibility="{Binding IsBalanced, Converter={StaticResource visIfFalse}}"
+                        Text="{Binding TotalDifference, StringFormat={}diff :  {0:N2}}"
+                        Margin="0 0 0 0"
+                        Background="Red" />
+
+            <Button Style="{StaticResource MaterialDesignRaisedAccentButton}"
                     Visibility="{Binding IsBalanced, Converter={StaticResource visIfTrue}}"
-                    Text="="
-                    Background="ForestGreen" />
-
-        <TextBlock Style="{StaticResource txtVerdict}"
-                    Visibility="{Binding IsBalanced, Converter={StaticResource visIfFalse}}"
-                    Text="does NOT match"
-                    Background="Red" />
-
-        <labls:DualText Text1="Deposits"
-                        Text2="{Binding TotalDeposits, StringFormat=N2}" />
-
-        <TextBlock Style="{StaticResource txtVerdict}"
-                    Visibility="{Binding IsBalanced, Converter={StaticResource visIfFalse}}"
-                    Text="{Binding TotalDifference, StringFormat={}diff :  {0:N2}}"
-                    Margin="0 0 0 0"
-                    Background="Red" />
-
-        <Button Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                Visibility="{Binding IsBalanced, Converter={StaticResource visIfTrue}}"
-                Command="{Binding PostAndCloseCmd}"
-                Content="{Binding PostAndCloseCmd.CurrentLabel}"
-                Height="25" />
+                    Command="{Binding PostAndCloseCmd}"
+                    Content="{Binding PostAndCloseCmd.CurrentLabel}"
+                    Height="25" />
+        </StackPanel>
         
         <butns:RefreshButtonWhite Margin="10 0 0 0" />
     </StackPanel>

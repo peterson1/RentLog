@@ -1,6 +1,7 @@
 ﻿using CommonTools.Lib11.DTOs;
 using CommonTools.Lib11.StringTools;
 using RentLog.DomainLib11.DTOs;
+using RentLog.DomainLib11.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

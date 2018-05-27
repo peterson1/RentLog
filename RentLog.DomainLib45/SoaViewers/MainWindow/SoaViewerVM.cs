@@ -2,6 +2,7 @@
 using CommonTools.Lib45.BaseViewModels;
 using CommonTools.Lib45.ThreadTools;
 using RentLog.DomainLib11.DTOs;
+using RentLog.DomainLib11.Models;
 using RentLog.DomainLib11.ReportRows;
 using RentLog.DomainLib45.SoaViewers.CellViewer;
 using RentLog.DomainLib45.SoaViewers.PrintLayouts;

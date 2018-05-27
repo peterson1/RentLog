@@ -1,6 +1,7 @@
 ﻿using CommonTools.Lib11.ExceptionTools;
 using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DTOs;
+using RentLog.DomainLib11.Models;
 using System;
 using static RentLog.DomainLib11.DTOs.DailyBillDTO;
 

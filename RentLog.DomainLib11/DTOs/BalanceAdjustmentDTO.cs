@@ -1,5 +1,6 @@
 ﻿using CommonTools.Lib11.DTOs;
 using CommonTools.Lib11.ReflectionTools;
+using RentLog.DomainLib11.Models;
 using System;
 using static RentLog.DomainLib11.DTOs.DailyBillDTO;
 
