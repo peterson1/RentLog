@@ -10,3 +10,4 @@ namespace RentLog.DomainLib11.CollectionRepos
         }
     }
 }
+    

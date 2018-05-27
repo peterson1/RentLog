@@ -8,6 +8,8 @@ namespace RentLog.DomainLib11.CollectionRepos
         Dictionary<int, IIntendedColxnsRepo> IntendedColxns { get; }
         Dictionary<int, IAmbulantColxnsRepo> AmbulantColxns { get; }
         Dictionary<int, IUncollectedsRepo>   Uncollecteds   { get; }
+        Dictionary<int, INoOperationsRepo>   NoOperations   { get; }
+
         ICashierColxnsRepo       CashierColxns   { get; }
         IOtherColxnsRepo         OtherColxns     { get; }
         IBankDepositsRepo        BankDeposits    { get; }

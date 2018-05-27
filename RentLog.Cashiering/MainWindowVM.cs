@@ -27,9 +27,9 @@ namespace RentLog.Cashiering
             Date          = date;
             _colxnsDB     = AppArgs.Collections.For(Date);
             MainToolbar   = new MainToolbarVM(this);
-            BankDeposits  = new BankDepositsVM(_colxnsDB.BankDeposits, AppArgs);
             CashierColxns = new CashierColxnsVM(_colxnsDB.CashierColxns, AppArgs);
             OtherColxns   = new OtherColxnsVM(_colxnsDB.OtherColxns, AppArgs);
+            BankDeposits  = new BankDepositsVM(_colxnsDB.BankDeposits, AppArgs);
             if (clickRefresh) ClickRefresh();
             SetCaption("");
         }
@@ -38,20 +38,22 @@ namespace RentLog.Cashiering
         public DateTime              Date          { get; }
         public MainToolbarVM         MainToolbar   { get; }
         public UIList<SectionTabVM>  SectionTabs   { get; } = new UIList<SectionTabVM>();
-        public BankDepositsVM        BankDeposits  { get; }
         public CashierColxnsVM       CashierColxns { get; }
         public OtherColxnsVM         OtherColxns   { get; }
+        public BankDepositsVM        BankDeposits  { get; }
 
-        public decimal TotalDeposits => BankDeposits.TotalSum;
-        public decimal TotalCollections { get; set; }
+        public decimal TotalDeposits    => BankDeposits.TotalSum;
+        public decimal TotalCollections => SectionTabs.Sum(_ => _.SectionTotal)
+                                         + CashierColxns.TotalSum
+                                         + OtherColxns.TotalSum;
 
 
         protected override void OnRefreshClicked()
         {
             ReloadSectionTabs();
-            BankDeposits.ReloadFromDB();
             CashierColxns.ReloadFromDB();
             OtherColxns.ReloadFromDB();
+            BankDeposits.ReloadFromDB();
         }
 
 

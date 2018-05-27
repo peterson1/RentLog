@@ -67,6 +67,7 @@ namespace RentLog.DatabaseLib.DatabaseFinders
             SetIntendedColxns(colxnsDB.IntendedColxns, db);
             SetAmbulantColxns(colxnsDB.AmbulantColxns, db);
             SetUncollecteds  (colxnsDB.Uncollecteds  , db);
+            SetNoOperations  (colxnsDB.NoOperations  , db);
             colxnsDB.CashierColxns = new CashierColxnsRepo1(new CashierColxnsCollection(db));
             colxnsDB.OtherColxns   = new OtherColxnsRepo1(new OtherColxnsCollection(db));
             colxnsDB.BankDeposits  = new BankDepositsRepo1(new BankDepositsCollection(db));
@@ -103,6 +104,17 @@ namespace RentLog.DatabaseLib.DatabaseFinders
             {
                 var colxn = new UncollectedsCollection(sec, db);
                 var repo  = new UncollectedsRepo1(colxn);
+                dict.Add(sec.Id, repo);
+            }
+        }
+
+
+        private void SetNoOperations(Dictionary<int, INoOperationsRepo> dict, SharedLiteDB db)
+        {
+            foreach (var sec in _mkt.Sections.GetAll())
+            {
+                var colxn = new NoOperationsCollection(sec, db);
+                var repo  = new NoOperationsRepo1(colxn);
                 dict.Add(sec.Id, repo);
             }
         }

@@ -10,10 +10,13 @@ namespace RentLog.Cashiering.OtherCollections
     [AddINotifyPropertyChangedInterface]
     public class OtherColxnsVM : EncoderListVMBase<OtherColxnDTO, AppArguments>
     {
+        protected override string ListTitle => "Other Collections";
+
+
         public OtherColxnsVM(ISimpleRepo<OtherColxnDTO> repository, AppArguments appArguments) : base(repository, appArguments)
         {
-            Caption = "Other Collections";
         }
+
 
         protected override Func<OtherColxnDTO, decimal> SummedAmount => _ => _.Amount;
     }

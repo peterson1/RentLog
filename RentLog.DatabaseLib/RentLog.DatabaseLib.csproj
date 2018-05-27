@@ -50,6 +50,7 @@
     <Compile Include="DailyColxnsRepository\BankDepositsCollection.cs" />
     <Compile Include="DailyColxnsRepository\CashierColxnsCollection.cs" />
     <Compile Include="DailyColxnsRepository\IntendedColxnsCollection.cs" />
+    <Compile Include="DailyColxnsRepository\NoOperationsCollection.cs" />
     <Compile Include="DailyColxnsRepository\OtherColxnsCollection.cs" />
     <Compile Include="DailyColxnsRepository\UncollectedsCollection.cs" />
     <Compile Include="DatabaseFinders\BalancesLocalDir.cs" />

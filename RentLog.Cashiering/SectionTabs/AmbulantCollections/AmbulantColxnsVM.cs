@@ -10,9 +10,11 @@ namespace RentLog.Cashiering.SectionTabs.AmbulantCollections
     [AddINotifyPropertyChangedInterface]
     public class AmbulantColxnsVM : EncoderListVMBase<AmbulantColxnDTO, AppArguments>
     {
+        protected override string ListTitle => "Ambulant Collections";
+
+
         public AmbulantColxnsVM(ISimpleRepo<AmbulantColxnDTO> repository, AppArguments appArguments) : base(repository, appArguments)
         {
-            Caption = "Ambulant Collections";
         }
 
 

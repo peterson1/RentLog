@@ -1,20 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using CommonTools.Lib11.DatabaseTools;
-using CommonTools.Lib45.BaseViewModels;
+﻿using CommonTools.Lib11.DatabaseTools;
 using PropertyChanged;
 using RentLog.Cashiering.CommonControls;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib45;
+using System;
+using System.Collections.Generic;
 
 namespace RentLog.Cashiering.CashierCollections
 {
     [AddINotifyPropertyChangedInterface]
     public class CashierColxnsVM : EncoderListVMBase<CashierColxnDTO, AppArguments>
     {
+        protected override string ListTitle => "Tenant Payments to Office";
+
+
         public CashierColxnsVM(ISimpleRepo<CashierColxnDTO> repository, AppArguments appArguments) : base(repository, appArguments)
         {
-            Caption = "Tenant Payments to Office";
         }
 
 
@@ -25,6 +26,7 @@ namespace RentLog.Cashiering.CashierCollections
 
             return items;
         }
+
 
         protected override Func<CashierColxnDTO, decimal> SummedAmount => _ => _.Amount;
     }

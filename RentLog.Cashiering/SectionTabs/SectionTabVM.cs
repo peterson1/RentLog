@@ -18,7 +18,7 @@ namespace RentLog.Cashiering.SectionTabs
             IntendedColxns = new IntendedColxnsVM(db.IntendedColxns[sec.Id], appArguments);
             AmbulantColxns = new AmbulantColxnsVM(db.AmbulantColxns[sec.Id], appArguments);
             Uncollecteds   = new UncollectedsVM  (db.Uncollecteds  [sec.Id], appArguments);
-            NoOperations   = new NoOperationsVM  ()
+            NoOperations   = new NoOperationsVM  (db.NoOperations  [sec.Id], appArguments);
         }
 
 
@@ -28,11 +28,15 @@ namespace RentLog.Cashiering.SectionTabs
         public UncollectedsVM     Uncollecteds     { get; }
         public NoOperationsVM     NoOperations     { get; }
 
+        public decimal SectionTotal => IntendedColxns.TotalSum
+                                     + AmbulantColxns.TotalSum;
+
         internal void ReloadAll()
         {
             IntendedColxns.ReloadFromDB();
             AmbulantColxns.ReloadFromDB();
             Uncollecteds  .ReloadFromDB();
+            NoOperations  .ReloadFromDB();
         }
     }
 }
