@@ -45,7 +45,7 @@ namespace RentLog.StallsCrud.StallCRUD
             var nums = _repo.ForSection(AppArgs.CurrentSection)
                             .Select (_ => GetNumberPart(_.Name))
                             .Where  (_ => _.HasValue);
-            var next = nums.Max().Value + 1;
+            var next = nums.Any() ? nums.Max().Value + 1 : 1;
             return string.Format(format, next);
         }
 

@@ -6,7 +6,8 @@ using System.Windows;
 namespace CommonTools.Lib45.BaseViewModels
 {
     [AddINotifyPropertyChangedInterface]
-    public abstract class RepoCrudWindowVMBase<TRepo, TDraft, TWindow, TArg> : CrudWindowVMBase<TDraft, TWindow, TArg>
+    public abstract class RepoCrudWindowVMBase<TRepo, TDraft, TWindow, TArg> 
+        : CrudWindowVMBase<TDraft, TWindow, TArg>
         where TRepo   : ISimpleRepo<TDraft>
         where TWindow : Window, new()
         where TDraft  : Lib11.ReflectionTools.ICloneable, new()

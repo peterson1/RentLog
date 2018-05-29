@@ -49,6 +49,7 @@ namespace CommonTools.Lib45.BaseViewModels
         {
             if (IsBusy) return false;
             if (!AllFieldsValid()) return false;
+            if (Draft == null) return false;
             var ok = IsValidDraft(Draft, out string whyNot);
             WhyInvalid = whyNot;
             return ok;
