@@ -19,6 +19,10 @@ namespace RentLog.DomainLib11.DTOs
         public BillCode   BillCode     { get; set; }
 
 
+        public decimal? For(BillCode billCode)
+            => billCode == BillCode ? Amount : (decimal?)null;
+
+
         public T DeepClone   <T>() => throw new NotImplementedException();
         public T ShallowClone<T>() => (T)this.MemberwiseClone();
 

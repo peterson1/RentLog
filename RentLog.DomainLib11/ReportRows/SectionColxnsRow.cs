@@ -15,12 +15,12 @@ namespace RentLog.DomainLib11.ReportRows
         {
             Section    = sec;
             var db     = dir.Collections.For(date);
-            Collector  = db.GetCollector(sec);
+            Collector  = GetSectionCollector(sec, db);
             var colxns = GetLeaseColxns(sec, date, db, dir);
-            Rent       = colxns.Sum(_ => _.Rent     ?? 0);
-            Rights     = colxns.Sum(_ => _.Rights   ?? 0);
+            Rent       = colxns.Sum(_ => _.Rent ?? 0);
+            Rights     = colxns.Sum(_ => _.Rights ?? 0);
             Electric   = colxns.Sum(_ => _.Electric ?? 0);
-            Water      = colxns.Sum(_ => _.Water    ?? 0);
+            Water      = colxns.Sum(_ => _.Water ?? 0);
             Ambulant   = colxns.Sum(_ => _.Ambulant ?? 0);
 
             Details.SetItems(colxns);
@@ -33,7 +33,11 @@ namespace RentLog.DomainLib11.ReportRows
         public UIList<LeaseColxnRow>  Details  { get; } = new UIList<LeaseColxnRow>();
 
 
-        private List<LeaseColxnRow> GetLeaseColxns(SectionDTO sec, DateTime date, ICollectionsDB db, ITenantDBsDir dir)
+        protected virtual CollectorDTO GetSectionCollector(SectionDTO sec, ICollectionsDB db)
+            => db.GetCollector(sec);
+
+
+        protected virtual List<LeaseColxnRow> GetLeaseColxns(SectionDTO sec, DateTime date, ICollectionsDB db, ITenantDBsDir dir)
         {
             var fromLses = db.IntendedColxns[sec.Id].GetAll()
                              .Select(_ => new LeaseColxnRow(_));
