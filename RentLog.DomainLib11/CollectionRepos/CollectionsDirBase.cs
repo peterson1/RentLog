@@ -16,7 +16,9 @@ namespace RentLog.DomainLib11.CollectionRepos
 
         public DateTime LastPostedDate()
         {
-            var dates = AllDates().ToList();
+            var all = AllDates();
+            if (!all.Any()) return DateTime.Now.AddDays(-1).Date;
+            var dates = all.ToList();
 
             for (int i = dates.Count - 1; i >= 0; i--)
             {
@@ -31,3 +33,4 @@ namespace RentLog.DomainLib11.CollectionRepos
         public DateTime UnclosedDate() => LastPostedDate().AddDays(1);
     }
 }
+
