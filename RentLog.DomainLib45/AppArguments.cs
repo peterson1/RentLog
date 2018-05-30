@@ -6,13 +6,14 @@ using Mono.Options;
 using RentLog.DatabaseLib.DatabaseFinders;
 using RentLog.DomainLib11.BalanceRepos;
 using RentLog.DomainLib11.CollectionRepos;
+using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
 using System;
 
 namespace RentLog.DomainLib45
 {
-    public class AppArguments : ICredentialsProvider, IHasUpdatedCopy
+    public class AppArguments : ICredentialsProvider, IHasUpdatedCopy, ITenantDBsDir
     {
         public AppArguments()
         {

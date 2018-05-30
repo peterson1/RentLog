@@ -78,6 +78,7 @@
     <Compile Include="BillRowComposerTests\RightsBillComposerFacts.cs" />
     <Compile Include="CashieringVMTests\CashieringVMFacts.cs" />
     <Compile Include="CollectionsDirTests\CollectionsDirFacts.cs" />
+    <Compile Include="DailyColxnsTests\DailyColxnsFacts.cs" />
     <Compile Include="LeasesRepoTests\ActiveLeasesRepoReaderFacts.cs" />
     <Compile Include="LeasesRepoTests\ActiveLeasesRepoWriterFacts.cs" />
     <Compile Include="LeasesRepoTests\InactiveLeasesRepoWriterFacts.cs" />

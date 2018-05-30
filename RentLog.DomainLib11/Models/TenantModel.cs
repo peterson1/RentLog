@@ -32,5 +32,9 @@ namespace RentLog.DomainLib11.Models
 
         public TenantModel DeepClone   () => throw new NotImplementedException();
         public TenantModel ShallowClone() => (TenantModel)this.MemberwiseClone();
+
+
+        public static TenantModel Named(string name)
+            => new TenantModel { FirstName = name };
     }
 }

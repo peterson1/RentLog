@@ -9,10 +9,10 @@ namespace RentLog.DomainLib11.Models
         public decimal?  Electric  { get; set; }
         public decimal?  Water     { get; set; }
 
-        public decimal Total => (Rent     ?? 0) 
-                              + (Rights   ?? 0) 
-                              + (Electric ?? 0) 
-                              + (Water    ?? 0);
+        public virtual decimal Total => (Rent     ?? 0) 
+                                      + (Rights   ?? 0) 
+                                      + (Electric ?? 0) 
+                                      + (Water    ?? 0);
 
 
         public decimal? For(BillCode billCode)
