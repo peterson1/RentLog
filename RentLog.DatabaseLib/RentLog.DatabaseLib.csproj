@@ -56,6 +56,7 @@
     <Compile Include="DatabaseFinders\BalancesLocalDir.cs" />
     <Compile Include="DatabaseFinders\CollectionsLocalDir.cs" />
     <Compile Include="DatabaseFinders\MarketStateDBFile.cs" />
+    <Compile Include="GLAccountsRepository\GLAccountsCollection.cs" />
     <Compile Include="LeasesRepository\InactiveLeasesCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LeasesRepository\ActiveLeasesCollection.cs" />

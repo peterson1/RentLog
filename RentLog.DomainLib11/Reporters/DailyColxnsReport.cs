@@ -24,8 +24,29 @@ namespace RentLog.DomainLib11.Reporters
         public decimal   SectionsTotal  => TotalRent  + TotalRights + TotalElectric
                                          + TotalWater + TotalAmbulant;
 
+        public Dictionary<int, decimal>  Others  { get; } = new Dictionary<int, decimal>();
+        public Dictionary<int, string>   GLName  { get; } = new Dictionary<int, string>();
+
 
         private void Generate(ITenantDBsDir dir)
+        {
+            FillLookups(dir);
+            FillSectionCollections(dir);
+            FillOtherCollections(dir);
+        }
+
+
+        private void FillLookups(ITenantDBsDir dir)
+        {
+            GLName.Clear();
+            //foreach (var gl in dir.MarketState.gl)
+            //{
+            //
+            //}
+        }
+
+
+        private void FillSectionCollections(ITenantDBsDir dir)
         {
             this.Clear();
 
@@ -33,6 +54,13 @@ namespace RentLog.DomainLib11.Reporters
                 this.Add(sec.Id, new SectionColxnsRow(sec, Date, dir));
 
             this.Add(0, new OfficeColxnsRow(Date, dir));
+        }
+
+
+        private void FillOtherCollections(ITenantDBsDir dir)
+        {
+            Others.Clear();
+
         }
 
 

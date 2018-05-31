@@ -37,7 +37,9 @@ namespace CommonTools.Lib11.ExceptionTools
 
     public struct Missing
     {
-        public static FileNotFoundException  File  (string filePath)  => Fault.MissingFile(filePath);
+        public static FileNotFoundException  File  (string filePath, string fileDescription)  
+            => Fault.MissingFile(filePath, fileDescription);
+
         public static FileNotFoundException  Dir   (string foldrPath) => Fault.MissingDir(foldrPath);
     }
 }

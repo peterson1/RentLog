@@ -128,7 +128,7 @@ namespace CommonTools.Lib45.FileSystemTools
                 throw Fault.NullRef("filePath");
 
             if (!File.Exists(filePath))
-                throw Fault.MissingFile(filePath);
+                throw Missing.File(filePath, "File to watch");
 
             var abs    = filePath.MakeAbsolute();
             var dir    = Path.GetDirectoryName(abs);

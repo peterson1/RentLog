@@ -38,8 +38,8 @@ namespace CommonTools.Lib11.ExceptionTools
             => new IntrusionAttemptException();
 
 
-        public static FileNotFoundException MissingFile(string filePath)
-            => new FileNotFoundException($"Missing file: {filePath}");
+        public static FileNotFoundException MissingFile(string filePath, string fileDescription)
+            => new FileNotFoundException($"Missing “{fileDescription}”: {filePath}");
 
         public static FileNotFoundException MissingDir(string foldrPath)
             => new FileNotFoundException($"Missing folder: {foldrPath}");

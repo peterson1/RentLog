@@ -14,6 +14,9 @@ namespace RentLog.Tests.DailyColxnsTests
         const int WET = 1;
         const int OFC = 0;
 
+        const int CR  = 56;
+        const int PRK = 55;
+        const int PF  = 57;
 
         [Fact(DisplayName = "May 4")]
         public void May4()
@@ -62,6 +65,10 @@ namespace RentLog.Tests.DailyColxnsTests
             sut[WET].Total.Should().Be(   13_163);
             sut[OFC].Total.Should().Be(        0);
             sut.SectionsTotal.Should().Be(20_733);
+
+            sut.Others.Count.Should().Be(1);
+            sut.Others[CR].Should().Be(338);
+            sut.GLName[CR].Should().Be("CR");
         }
     }
 }
