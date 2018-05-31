@@ -2,6 +2,7 @@
 using RentLog.DomainLib11.ReportRows;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RentLog.DomainLib11.Reporters
 {
@@ -13,7 +14,15 @@ namespace RentLog.DomainLib11.Reporters
         }
 
 
-        public DateTime Date { get; }
+        public DateTime  Date           { get; }
+        public decimal   TotalRent      => this.Sum(_ => _.Value.Rent     ?? 0);
+        public decimal   TotalRights    => this.Sum(_ => _.Value.Rights   ?? 0);
+        public decimal   TotalElectric  => this.Sum(_ => _.Value.Electric ?? 0);
+        public decimal   TotalWater     => this.Sum(_ => _.Value.Water    ?? 0);
+        public decimal   TotalAmbulant  => this.Sum(_ => _.Value.Ambulant ?? 0);
+
+        public decimal   SectionsTotal  => TotalRent  + TotalRights + TotalElectric
+                                         + TotalWater + TotalAmbulant;
 
 
         private void Generate(ITenantDBsDir dir)
