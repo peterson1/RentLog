@@ -18,7 +18,7 @@ namespace RentLog.Tests.SampleDBs
 
         internal static SampleArgs HelenAblen_Dry8()
         {
-            SampleArgs.DirName = SampleDir.HELEN_ABLEN;
+            SampleArgs.DirName = SampleDir.LEASE_197;
             return new SampleArgs();
         }
     }
