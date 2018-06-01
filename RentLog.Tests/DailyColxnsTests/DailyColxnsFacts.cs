@@ -17,12 +17,13 @@ namespace RentLog.Tests.DailyColxnsTests
         const int CR  = 56;
         const int PRK = 55;
         const int PF  = 57;
+        const int OTH = 60;
 
         [Fact(DisplayName = "May 4")]
         public void May4()
         {
             var arg = SampleArgs.HelenAblen_Dry8();
-            var sut = DailyColxnsReport.Load(arg, 4.May(2018));
+            var sut = new DailyColxnsReport(4.May(2018), arg);
 
             sut.Should().HaveCount(4);
             sut.ContainsKey(DRY).Should().BeTrue();
@@ -67,8 +68,11 @@ namespace RentLog.Tests.DailyColxnsTests
             sut.SectionsTotal.Should().Be(20_733);
 
             sut.Others.Count.Should().Be(1);
-            sut.Others[CR].Should().Be(338);
+            sut.Others[CR].Should().Be(465);
             sut.GLName[CR].Should().Be("CR");
+
+            sut.TotalCollections.Should().Be(21_198);
+            sut.TotalDeposits.Should().Be(21_198);
         }
     }
 }

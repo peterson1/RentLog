@@ -12,7 +12,7 @@ namespace RentLog.Tests.SampleDBs
         protected override MarketStateDB GetMarketStateDB()
         {
             var dbPath = SampleDir.FindDB(DirName);
-            return MarketStateDBFile.Load(dbPath, "Test Runner");
+            return new MarketStateDBFile(dbPath, "Test Runner");
         }
 
 

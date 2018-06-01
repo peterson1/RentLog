@@ -39,7 +39,7 @@ namespace RentLog.DomainLib45
 
 
         protected virtual MarketStateDB GetMarketStateDB() 
-            => MarketStateDBFile.Load(DbFilePath, CurrentUser);
+            => new MarketStateDBFile(DbFilePath, CurrentUser);
 
 
         private void SetCredentials(string key)

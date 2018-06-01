@@ -1,4 +1,5 @@
 ﻿using CommonTools.Lib11.DTOs;
+using CommonTools.Lib11.ExceptionTools;
 using CommonTools.Lib11.ReflectionTools;
 using System;
 
@@ -19,13 +20,33 @@ namespace RentLog.DomainLib11.DTOs
         public DateTime   Timestamp  { get; set; }
         public string     Remarks    { get; set; }
 
-        public string        DocumentRef  { get; set; }
-        public CollectorDTO  Collector    { get; set; }
-        public decimal       Amount       { get; set; }
-        public OtherCode     OtherCode    { get; set; }
+        public string         DocumentRef  { get; set; }
+        public CollectorDTO   Collector    { get; set; }
+        public decimal        Amount       { get; set; }
+                              
+        public OtherCode      OtherCode    { get; set; }
+        public GLAccountDTO   GLAccount    { get; set; }
 
 
         public T DeepClone   <T>() => throw new NotImplementedException();
         public T ShallowClone<T>() => (T)this.MemberwiseClone();
+    }
+
+
+    public static class OtherColxnDTOExtensions
+    {
+        public static  int GetGLId(this OtherColxnDTO dto)
+        {
+            if (dto.GLAccount != null) return dto.GLAccount.Id;
+            switch (dto.OtherCode)
+            {
+                case OtherCode.CR_Fee        : return 56;
+                case OtherCode.Parking       : return 55;
+                case OtherCode.Processing_Fee: return 57;
+                case OtherCode.Other         : return 60;
+                default:
+                    throw Bad.Arg("OtherColxnDTO.OtherCode", dto.OtherCode);
+            }
+        }
     }
 }

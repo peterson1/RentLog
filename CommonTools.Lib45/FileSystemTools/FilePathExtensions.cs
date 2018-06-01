@@ -155,7 +155,7 @@ namespace CommonTools.Lib45.FileSystemTools
         public static bool FileContains(this string filePath, string text)
         {
             if (!File.Exists(filePath))
-                throw Fault.MissingFile(filePath);
+                throw Missing.File(filePath, $"file with text “{text}”");
 
             return File.ReadLines(filePath).ToList()
                     .Any(_ => _.Contains(text));

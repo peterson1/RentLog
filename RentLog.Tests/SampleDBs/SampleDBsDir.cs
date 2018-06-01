@@ -12,7 +12,7 @@ namespace RentLog.Tests.SampleDBs
     {
         public SampleDBsDir(string marketStateDbPath, string currentUser)
         {
-            MarketState = MarketStateDBFile.Load (marketStateDbPath, currentUser);
+            MarketState = new MarketStateDBFile  (marketStateDbPath, currentUser);
             Balances    = new BalancesLocalDir   (MarketState);
             Collections = new CollectionsLocalDir(MarketState);
         }
