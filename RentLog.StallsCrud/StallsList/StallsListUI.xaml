@@ -14,10 +14,27 @@
             <local:StallsTable />
         </DockPanel>
 
-        <butns:EncodeNewDraftBtn1 DataContext="{Binding Crud}"
+        <!--<butns:EncodeNewDraftBtn1 DataContext="{Binding Crud}"
                                   VerticalAlignment="Bottom"
                                   HorizontalAlignment="Right"
-                                  Margin="0 0 35 25" />
+                                  Margin="0 0 35 25" />-->
+
+        <mat:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
+                      VerticalAlignment="Bottom"
+                      HorizontalAlignment="Right"
+                      Margin="0 0 35 25" >
+            <StackPanel>
+                <Button Content="{mat:PackIcon Kind=TableRowPlusAfter}"
+                        Command="{Binding AddMultipleCmd}"
+                        ToolTip="{Binding AddMultipleCmd.CurrentLabel}" />
+                
+                <Button Content="{mat:PackIcon Kind=PlusOne}"
+                        DataContext="{Binding Crud}"
+                        Command="{Binding EncodeNewDraftCmd}"
+                        ToolTip="Add 1 new Stall" />
+            </StackPanel>
+        </mat:PopupBox>
+        
         <!--<Button Style="{StaticResource MaterialDesignFloatingActionButton}"
                 Content="{mat:PackIcon Kind=Plus, Size=25}"
                 Width="45" Height="45"

@@ -1,6 +1,4 @@
-﻿using CommonTools.Lib11.DataStructures;
-using PropertyChanged;
-using RentLog.DomainLib11.DTOs;
+﻿using PropertyChanged;
 using RentLog.DomainLib45;
 using RentLog.DomainLib45.BaseViewModels;
 using RentLog.StallsCrud.SectionsList;
@@ -10,7 +8,7 @@ using System.Linq;
 namespace RentLog.StallsCrud
 {
     [AddINotifyPropertyChangedInterface]
-    internal class MainWindowVM : BrandedWindowBase
+    public class MainWindowVM : BrandedWindowBase
     {
         public override string SubAppName => "Stalls";
 
@@ -18,7 +16,7 @@ namespace RentLog.StallsCrud
         public MainWindowVM(AppArguments args) : base(args)
         {
             Sections = new SectionsListVM(args);
-            Stalls   = new StallsListVM(args);
+            Stalls   = new StallsListVM(this, args);
 
             Sections.SelectedChanged += (s, e) => ClickRefresh();
             Sections.Selected = Sections.ItemsList.FirstOrDefault();

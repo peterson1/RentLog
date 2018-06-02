@@ -62,5 +62,20 @@ namespace RentLog.Tests.SectionsRepoTests
             sut.Invoking(_ => _.Update(recX))
                 .Should().Throw<DuplicateRecordsException>();
         }
+
+
+        [Fact(DisplayName = "Update Accepts non-name edit")]
+        public void UpdateAcceptsnonnameedit()
+        {
+            var moq = new Mock<ISimpleRepo<SectionDTO>>();
+            var sut = new SectionsRepo1(moq.Object, null);
+            var rec = new SectionDTO { Id = 1, Name = "Sample 1" };
+
+            moq.Setup(_ => _.GetAll())
+                .Returns(new List<SectionDTO> { rec });
+
+            rec.Name = rec.Name + " changed";
+            sut.Update(rec);
+        }
     }
 }

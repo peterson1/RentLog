@@ -1,5 +1,8 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
+using CommonTools.Lib11.InputCommands;
 using CommonTools.Lib45.BaseViewModels;
+using CommonTools.Lib45.InputCommands;
+using CommonTools.Lib45.InputDialogs;
 using CommonTools.Lib45.ThreadTools;
 using PropertyChanged;
 using RentLog.DomainLib11.Authorization;
@@ -8,8 +11,10 @@ using RentLog.DomainLib11.Models;
 using RentLog.DomainLib11.ReportRows;
 using RentLog.DomainLib45;
 using RentLog.StallsCrud.StallCRUD;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace RentLog.StallsCrud.StallsList
 {
@@ -18,16 +23,36 @@ namespace RentLog.StallsCrud.StallsList
     {
         private Dictionary<int, LeaseDTO> _stallIdToLeases;
         private LeaseDTO _vacant = GetVacantPlaceHoder();
+        private MainWindowVM _main;
 
 
-        public StallsListVM(AppArguments appArguments) : base(appArguments.MarketState.Stalls, appArguments, false)
+        public StallsListVM(MainWindowVM mainWindowVM, AppArguments appArguments) : base(appArguments.MarketState.Stalls, appArguments, false)
         {
+            _main            = mainWindowVM;
             Crud             = new StallCrudVM(appArguments);
             _stallIdToLeases = AppArgs.MarketState.ActiveLeases.StallsLookup();
+            AddMultipleCmd   = R2Command.Async(AddMultipleStalls, _ => !_main.IsBusy, "Add Multiple Stalls");
         }
 
 
-        public StallCrudVM  Crud     { get; }
+        public StallCrudVM  Crud            { get; }
+        public IR2Command   AddMultipleCmd  { get; }
+
+
+        private async Task AddMultipleStalls(object cmdParam)
+        {
+            if (!PopUpInput.TryGetInt("How many stalls are we adding?", out int count, 10, "Please enter the number of stalls to add")) return;
+            _main.StartBeingBusy($"Adding {count} stalls ...");
+
+            for (int i = 0; i < count; i++)
+            {
+                Crud.EncodeNewDraftCmd.ExecuteIfItCan();
+                await Task.Delay(100);
+                await Crud.SaveDraftCmd.RunAsync();
+            }
+
+            _main.StopBeingBusy();
+        }
 
 
         protected override List<StallDTO> QueryItems(ISimpleRepo<StallDTO> db)

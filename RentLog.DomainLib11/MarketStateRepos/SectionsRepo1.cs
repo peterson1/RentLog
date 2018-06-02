@@ -23,7 +23,7 @@ namespace RentLog.DomainLib11.MarketStateRepos
         protected override void ValidateBeforeUpdate(SectionDTO changedRecord)
         {
             this.RejectDuplicateRecord(_ => _.Name == changedRecord.Name,
-                nameof(changedRecord.Name), changedRecord);
+                nameof(changedRecord.Name), changedRecord, _ => _.Id);
         }
 
         protected override IEnumerable<SectionDTO> ToSorted(IEnumerable<SectionDTO> items)
