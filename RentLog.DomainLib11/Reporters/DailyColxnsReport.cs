@@ -1,4 +1,5 @@
-﻿using RentLog.DomainLib11.DataSources;
+﻿using CommonTools.Lib11.ExceptionTools;
+using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.ReportRows;
 using System;
@@ -26,27 +27,21 @@ namespace RentLog.DomainLib11.Reporters
                                          + TotalWater + TotalAmbulant;
 
         public Dictionary<int, decimal>  Others  { get; } = new Dictionary<int, decimal>();
-        public Dictionary<int, string>   GLName  { get; } = new Dictionary<int, string>();
 
-        public decimal  TotalCollections => SectionsTotal + Others.Sum(_ => _.Value);
-        public decimal  TotalDeposits    { get; private set; }
+        public decimal  CollectionsSum => SectionsTotal + Others.Sum(_ => _.Value);
+        public decimal  DepositsSum    { get; private set; }
 
 
         private void GenerateFrom(ITenantDBsDir dir)
         {
-            FillLookups(dir);
             FillSectionCollections(dir);
             FillOtherCollections(dir);
-            TotalDeposits = GetTotalDeposits(dir);
+            DepositsSum = GetTotalDeposits(dir);
+
+            if (CollectionsSum != DepositsSum)
+                throw Bad.Data($"Total collections ({CollectionsSum:N2}) for [{Date:d-MMM-yyyy}] does not match total deposits ({DepositsSum:N2}).");
         }
 
-
-        private void FillLookups(ITenantDBsDir dir)
-        {
-            GLName.Clear();
-            foreach (var gl in dir.MarketState.GLAccounts.GetAll())
-                GLName.Add(gl.Id, gl.Name);
-        }
 
 
         private void FillSectionCollections(ITenantDBsDir dir)

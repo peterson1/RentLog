@@ -22,7 +22,7 @@ namespace RentLog.Tests.DailyColxnsTests
         [Fact(DisplayName = "May 4")]
         public void May4()
         {
-            var arg = SampleArgs.HelenAblen_Dry8();
+            var arg = SampleArgs.Lease197();
             var sut = new DailyColxnsReport(4.May(2018), arg);
 
             sut.Should().HaveCount(4);
@@ -69,10 +69,9 @@ namespace RentLog.Tests.DailyColxnsTests
 
             sut.Others.Count.Should().Be(1);
             sut.Others[CR].Should().Be(465);
-            sut.GLName[CR].Should().Be("CR");
 
-            sut.TotalCollections.Should().Be(21_198);
-            sut.TotalDeposits.Should().Be(21_198);
+            sut.CollectionsSum.Should().Be(21_198);
+            sut.DepositsSum.Should().Be(21_198);
         }
     }
 }

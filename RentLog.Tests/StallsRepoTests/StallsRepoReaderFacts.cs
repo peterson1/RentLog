@@ -11,7 +11,7 @@ namespace RentLog.Tests.StallsRepoTests
         [Fact(DisplayName = "Find by ID includes Section object")]
         public void FindbyIDIncludesSectionobject()
         {
-            var arg = SampleDir.HelenAblen_Dry8(out LeaseDTO lse);
+            var arg = SampleDir.Lease197(out LeaseDTO lse);
             var sut = arg.MarketState.Stalls;
             var rec = sut.Find(1, true);
             rec.Section.Should().NotBeNull();
@@ -22,7 +22,7 @@ namespace RentLog.Tests.StallsRepoTests
         [Fact(DisplayName = "GetAll includes Section object")]
         public void GetAllIncludesSectionobject()
         {
-            var arg = SampleDir.HelenAblen_Dry8(out LeaseDTO lse);
+            var arg = SampleDir.Lease197(out LeaseDTO lse);
             var sut = arg.MarketState.Stalls;
             var all = sut.GetAll();
             foreach (var stall in all)

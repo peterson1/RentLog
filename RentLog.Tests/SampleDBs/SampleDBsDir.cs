@@ -30,7 +30,7 @@ namespace RentLog.Tests.SampleDBs
         internal const string MAY_19_GARAY = "2018-05-19 F_Garay";
 
 
-        internal static SampleDBsDir HelenAblen_Dry8(out LeaseDTO lse)
+        internal static SampleDBsDir Lease197(out LeaseDTO lse)
             => Load(LEASE_197, 197, out lse);
 
 

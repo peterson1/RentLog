@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace RentLog.DomainLib11.ReportRows
 {
-    public class SectionColxnsRow : BillAmounts
+    public class SectionColxnsRow : CollectionAmounts
     {
         public SectionColxnsRow(SectionDTO sec, DateTime date, ITenantDBsDir dir)
         {
@@ -28,7 +28,6 @@ namespace RentLog.DomainLib11.ReportRows
 
         public SectionDTO    Section    { get; set; }
         public CollectorDTO  Collector  { get; set; }
-        public decimal?      Ambulant   { get; set; }
 
         public UIList<LeaseColxnRow>  Details  { get; } = new UIList<LeaseColxnRow>();
 
@@ -50,7 +49,5 @@ namespace RentLog.DomainLib11.ReportRows
 
             return fromLses.Concat(fromAmbu).ToList();
         }
-
-        public override decimal Total => base.Total + (Ambulant ?? 0);
     }
 }
