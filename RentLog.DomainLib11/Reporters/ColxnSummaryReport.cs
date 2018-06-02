@@ -28,7 +28,8 @@ namespace RentLog.DomainLib11.Reporters
 
         public Dictionary<int, CollectionAmounts> SectionTotals { get; } = new Dictionary<int, CollectionAmounts>();
         public Dictionary<int, decimal>           OtherTotals   { get; } = new Dictionary<int, decimal>();
-        public Dictionary<int, string>            GLNames       { get; } = new Dictionary<int, string>();
+        public Dictionary<int, string>            GLAccounts    { get; } = new Dictionary<int, string>();
+        public Dictionary<int, string>            Sections      { get; } = new Dictionary<int, string>();
 
         public string   DateRangeText    => $"{StartDate.ToString(LONG_FMT)} to {EndDate.ToString(LONG_FMT)}";
         public decimal  TotalCollections => this.Sum(_ => _.CollectionsSum);
@@ -80,9 +81,15 @@ namespace RentLog.DomainLib11.Reporters
 
         private void FillLookups(ITenantDBsDir dir)
         {
-            GLNames.Clear();
+            GLAccounts.Clear();
             foreach (var gl in dir.MarketState.GLAccounts.GetAll())
-                GLNames.Add(gl.Id, gl.Name);
+                GLAccounts.Add(gl.Id, gl.Name);
+
+            Sections.Clear();
+            foreach (var sec in dir.MarketState.Sections.GetAll())
+                Sections.Add(sec.Id, sec.Name);
+
+            Sections.Add(0, "Office");
         }
 
 

@@ -45,8 +45,8 @@ namespace RentLog.Tests.ColxnSummaryTests
             sut.SectionTotals[WET].Rights.Should().Be(2508 + 5929);
             sut.SectionTotals[OFC].Rights.Should().Be(3000 + 0);
 
-            sut.GLNames[CR].Should().Be("CR");
-            sut.GLNames[PRK].Should().Be("Parking");
+            sut.GLAccounts[CR].Should().Be("CR");
+            sut.GLAccounts[PRK].Should().Be("Parking");
             sut.OtherTotals.Count.Should().Be(2);
             sut.OtherTotals[CR].Should().Be(465 + 666);
             sut.OtherTotals[PRK].Should().Be(549);
@@ -56,7 +56,7 @@ namespace RentLog.Tests.ColxnSummaryTests
         }
 
 
-        [Fact(DisplayName = "Colxn Summary To Excel", Skip = "Undone")]
+        [Fact(DisplayName = "Colxn Summary To Excel")]
         public void ColxnSummaryToExcel()
         {
             var arg = SampleArgs.Lease197();

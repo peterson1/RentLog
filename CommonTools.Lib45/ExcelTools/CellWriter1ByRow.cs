@@ -3,9 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CommonTools.Lib45.ExcelTools
 {
@@ -19,7 +16,7 @@ namespace CommonTools.Lib45.ExcelTools
         private BorderWriter1 _bordr;
 
 
-        public CellWriter1ByRow(string filenameSuffix, string firstWorksheetName, string extension = "xlsx")
+        public CellWriter1ByRow(string filenameSuffix, string firstWorksheetName = "Sheet 1", string extension = "xlsx")
         {
             _path = ComposeFilePath(filenameSuffix, extension);
             AddWorksheet(firstWorksheetName);
@@ -34,6 +31,9 @@ namespace CommonTools.Lib45.ExcelTools
 
 
         //public bool this[bool 
+
+
+        #region Cell Value Writers
 
 
         public ExcelRange WriteMergedText(string text, int rowSpan, int colSpan)
@@ -56,9 +56,6 @@ namespace CommonTools.Lib45.ExcelTools
 
         public void WriteMergedH2(string headerText, int rowSpan, int colSpan)
             => WriteMergedText(headerText, rowSpan, colSpan).FormatH2();
-
-
-        #region Cell Value Writers
 
         public ExcelRange WriteH1(string headerText)
             => WriteText(headerText).FormatH1();
@@ -90,15 +87,17 @@ namespace CommonTools.Lib45.ExcelTools
 
 
 
-        public void WriteDate(DateTime date, string format = "d MMM yyyy")
+        public ExcelRange WriteDate(DateTime date, string format = "d MMM yyyy")
         {
-            CurrentCell.WriteDate(date, format);
+            var rnge = CurrentCell.WriteDate(date, format);
             MoveToNextRow();
+            return rnge;
         }
-        public void WriteNumber(double? number, string format = "#,##0.00  ")
+        public ExcelRange WriteNumber(decimal? number, string format = "#,##0.00  ")
         {
-            CurrentCell.WriteNumber(number, format);
+            var rnge = CurrentCell.WriteNumber(number, format);
             MoveToNextRow();
+            return rnge;
         }
 
         public ExcelRange WriteSumFormulaForColumn(int startRow, int endRow, string format = "#,##0.00  ")
@@ -144,6 +143,12 @@ namespace CommonTools.Lib45.ExcelTools
         protected virtual void ApplyGlobalCellFormat(ExcelRange rnge)
         {
             rnge.AlignMiddle();
+        }
+
+        public double DefaultRowHeight
+        {
+            get => _ws.DefaultRowHeight;
+            set => _ws.DefaultRowHeight = value;
         }
 
         #endregion
@@ -230,6 +235,20 @@ namespace CommonTools.Lib45.ExcelTools
         public ExcelColumn CurrentCol => _ws.Column(_currentCol);
         public int CurrentRowNumber => _currentRow;
         public int CurrentColNumber => _currentCol;
+
+        #endregion
+
+
+        #region Range Accessors
+
+        public ExcelRange this [int? rowNumber, int? colNumber]
+        {
+            get => _ws.Cells[rowNumber ?? _currentRow,
+                             colNumber ?? _currentCol];
+        }
+
+        public ExcelRow    Row   (int rowNumber)    => _ws.Row(rowNumber);
+        public ExcelColumn Column(int columnNumber) => _ws.Column(columnNumber);
 
         #endregion
     }

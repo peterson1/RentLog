@@ -48,7 +48,7 @@ namespace CommonTools.Lib45.ExcelTools
             return rnge.FormatNumber(format)
                        .AlignCenter();
         }
-        public static ExcelRange WriteNumber(this ExcelRange rnge, double? number, string format = "#,##0.00  ")
+        public static ExcelRange WriteNumber(this ExcelRange rnge, decimal? number, string format = "#,##0.00  ")
         {
             rnge.Value = number;
             return rnge.FormatNumber(format)
