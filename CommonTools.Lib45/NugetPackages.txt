@@ -9,6 +9,7 @@ Install-Package LiteDB
 Install-Package System.ValueTuple
 Install-Package System.Windows.Interactivity.WPF
 Install-Package MaterialDesignThemes
+Install-Package EPPlus
 
 
 for each exe:

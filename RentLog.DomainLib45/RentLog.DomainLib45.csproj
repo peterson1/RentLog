@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="AppArguments.cs" />
     <Compile Include="BaseViewModels\BrandedWindowBase.cs" />
+    <Compile Include="Reporters\ColxnSummaryExcel.cs" />
     <Compile Include="SoaViewers\AdjustmentsCRUD\AdjustmentsListVM.cs" />
     <Compile Include="SoaViewers\CellViewer\AdjustmentsUI.xaml.cs">
       <DependentUpon>AdjustmentsUI.xaml</DependentUpon>

@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Extensions;
 using RentLog.DomainLib11.Reporters;
+using RentLog.DomainLib45.Reporters;
 using RentLog.Tests.SampleDBs;
 using Xunit;
 
@@ -52,6 +53,15 @@ namespace RentLog.Tests.ColxnSummaryTests
 
             sut.TotalCollections.Should().Be(68666);
             sut.TotalDeposits.Should().Be(68666);
+        }
+
+
+        [Fact(DisplayName = "Colxn Summary To Excel", Skip = "Undone")]
+        public void ColxnSummaryToExcel()
+        {
+            var arg = SampleArgs.Lease197();
+            var rep = new ColxnSummaryReport(3.May(2018), 12.May(2018), arg);
+            rep.ToExcel();
         }
     }
 }

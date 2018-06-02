@@ -1,4 +1,5 @@
 ﻿using CommonTools.Lib11.DateTimeTools;
+using CommonTools.Lib11.ExceptionTools;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.Models;
@@ -40,6 +41,9 @@ namespace RentLog.DomainLib11.Reporters
             FillLookups(dir);
             FillSectionTotals(dir);
             FillOtherTotals(dir);
+
+            if (TotalCollections != TotalDeposits)
+                throw Bad.Data($"Total collections ({TotalCollections:N2}) does not match total deposits ({TotalDeposits:N2}).");
         }
 
 

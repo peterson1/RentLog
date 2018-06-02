@@ -39,7 +39,7 @@ namespace RentLog.DomainLib11.Reporters
             DepositsSum = GetTotalDeposits(dir);
 
             if (CollectionsSum != DepositsSum)
-                throw Bad.Data($"Total collections ({CollectionsSum:N2}) for [{Date:d-MMM-yyyy}] does not match total deposits ({DepositsSum:N2}).");
+                throw Bad.Data($"Collections sum ({CollectionsSum:N2}) for [{Date:d-MMM-yyyy}] does not match deposits sum ({DepositsSum:N2}).");
         }
 
 
