@@ -42,7 +42,8 @@ namespace CommonTools.Lib45.InputDialogs
             win.startPickr.CalendarClosed += (s, e) 
                 => win.endPickr.IsDropDownOpen = true;
 
-            win.startPickr.IsDropDownOpen = true;
+            if (!Start.HasValue)
+                win.startPickr.IsDropDownOpen = true;
         }
     }
 }

@@ -31,6 +31,7 @@ namespace RentLog.DomainLib45
         public string               CurrentUser      { get; }
 
         public string               DbFilePath       { get; private set; }
+        public string               Param1           { get; private set; }
 
         public MarketStateDB        MarketState      { get; }
         public ICollectionsDir      Collections      { get; }
@@ -57,7 +58,8 @@ namespace RentLog.DomainLib45
             {
                 { "db|database=" , "Database file path", db  => DbFilePath  = db   },
                 {"exe|origexe="  , "Original exe path" , exe => UpdatedCopyPath = exe  },
-                {"key|publickey=", "Public key"        , key => SetCredentials(key)}
+                {"key|publickey=", "Public key"        , key => SetCredentials(key)},
+                { "p1|param1="   , "Parameter 1"       , p1  => Param1 = p1 },
             };
             try
             {
