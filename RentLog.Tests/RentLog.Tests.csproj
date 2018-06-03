@@ -94,8 +94,10 @@
     <Compile Include="StallsRepoTests\StallsRepoWriterFacts.cs" />
     <Compile Include="StateTransitionTests\LeaseDeactivatorFacts.cs" />
     <Compile Include="StateTransitionTests\LeaseIsActiveFacts.cs" />
+    <Compile Include="StateTransitionTests\MarketDayCloserFacts.cs" />
     <Compile Include="SurchargerTests\RentSurchargerTests\RentDailySurchargeFacts.cs" />
-    <Compile Include="TestTools\MockDB.cs" />
+    <Compile Include="TestTools\MockDBsDir.cs" />
+    <Compile Include="TestTools\MockMarketState.cs" />
     <Compile Include="TotalOverduesTests\TotalOverduesFacts.cs" />
   </ItemGroup>
   <ItemGroup>

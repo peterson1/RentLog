@@ -4,9 +4,9 @@ using RentLog.DomainLib11.MarketStateRepos;
 
 namespace RentLog.Tests.TestTools
 {
-    class MockDB : MarketStateDB
+    class MockMarketState : MarketStateDB
     {
-        public MockDB()
+        public MockMarketState()
         {
             MoqStalls         = new Mock<IStallsRepo>();
             MoqSections       = new Mock<ISectionsRepo>();

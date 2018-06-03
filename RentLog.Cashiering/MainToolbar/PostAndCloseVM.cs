@@ -3,6 +3,7 @@ using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.ThreadTools;
 using PropertyChanged;
+using RentLog.DomainLib11.StateTransitions;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -51,7 +52,7 @@ namespace RentLog.Cashiering.MainToolbar
                 {
                     _main.StartBeingBusy("Posting and Closing ...");
 
-                    await Task.Delay(1000 * 5);
+                    await Task.Run(() => MarketDayCloser.Run(_main.AppArgs));
 
                     UIThread.Run(() => MessageBox.Show($"Successfully posted collections for {_main.Date:d-MMM-yyyy}{L.F}"
                              + $"The next market day [{_main.Date.AddDays(1):d-MMM-yyyy}] is now open for encoding.",

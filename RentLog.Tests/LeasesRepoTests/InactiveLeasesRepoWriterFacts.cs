@@ -17,7 +17,7 @@ namespace RentLog.Tests.LeasesRepoTests
         [Fact(DisplayName = "Non-Active Insert Fails")]
         public void NonActiveInsertFails()
         {
-            var arg = new MockDB();
+            var arg = new MockMarketState();
             var moq = new Mock<ISimpleRepo<InactiveLeaseDTO>>();
             var sut = new InactiveLeasesRepo1(moq.Object, arg);
             var lse = new InactiveLeaseDTO();
@@ -33,7 +33,7 @@ namespace RentLog.Tests.LeasesRepoTests
         [Fact(DisplayName = "Insert returns rec with same ID")]
         public void ActiveInsertionreturnsrecwithsameID()
         {
-            var arg = new MockDB();
+            var arg = new MockMarketState();
             var moq = new Mock<ISimpleRepo<InactiveLeaseDTO>>();
             var sut = new InactiveLeasesRepo1(moq.Object, arg);
             var lse = new InactiveLeaseDTO { Id = 1234 };
@@ -55,7 +55,7 @@ namespace RentLog.Tests.LeasesRepoTests
         [Fact(DisplayName = "Insert removes from Actives after Save")]
         public void InsertremovesfromActivesafterSave()
         {
-            var arg = new MockDB();
+            var arg = new MockMarketState();
             var moq = new Mock<ISimpleRepo<InactiveLeaseDTO>>();
             var sut = new InactiveLeasesRepo1(moq.Object, arg);
             var lse = new InactiveLeaseDTO { Id = 1234 };
@@ -77,7 +77,7 @@ namespace RentLog.Tests.LeasesRepoTests
         [Fact(DisplayName = "Error if record undeleted from Actives")]
         public void ErrorifrecordundeletedforActives()
         {
-            var arg = new MockDB();
+            var arg = new MockMarketState();
             var moq = new Mock<ISimpleRepo<InactiveLeaseDTO>>();
             var sut = new InactiveLeasesRepo1(moq.Object, arg);
             var lse = new InactiveLeaseDTO { Id = 1234 };
@@ -94,7 +94,7 @@ namespace RentLog.Tests.LeasesRepoTests
         [Fact(DisplayName = "Insert calls BatchBalUpdate after Save")]
         public void InsertcallsBatchBalUpdateafterSave()
         {
-            var arg = new MockDB();
+            var arg = new MockMarketState();
             var moq = new Mock<ISimpleRepo<InactiveLeaseDTO>>();
             var bal = new Mock<IDailyBillsRepo>();
             var sut = new InactiveLeasesRepo1(moq.Object, arg);

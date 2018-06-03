@@ -14,7 +14,7 @@ namespace RentLog.Tests.StateTransitionTests
         [Fact(DisplayName = "Reject InactiveLease type")]
         public void RejectInactiveLeasetype()
         {
-            var sut = new MockDB();
+            var sut = new MockMarketState();
             var lse = new InactiveLeaseDTO();
             sut.Invoking(_ => _.DeactivateLease(lse, "", DateTime.Now))
                 .Should().Throw<InvalidStateException>();
@@ -24,7 +24,7 @@ namespace RentLog.Tests.StateTransitionTests
         [Fact(DisplayName = "Returns record with same Id")]
         public void ReturnsrecordwithsameId()
         {
-            var sut = new MockDB();
+            var sut = new MockMarketState();
             var lse = new LeaseDTO { Id = 12345 };
             var rec = sut.DeactivateLease(lse, "", DateTime.Now);
             rec.Should().NotBeNull();

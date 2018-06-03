@@ -50,14 +50,12 @@ namespace CommonTools.Lib45.ThreadTools
                                    Action action,
                                    MessageBoxImage messageBoxImage = MessageBoxImage.Question,
                                    MessageBoxButton messageBoxButton = MessageBoxButton.YesNo)
-            => new Thread(new ThreadStart(delegate
-            {
-                var choice = MessageBox.Show(message, "   " + caption, 
-                             messageBoxButton, messageBoxImage);
+        {
+            var choice = MessageBox.Show(message, "   " + caption, 
+                            messageBoxButton, messageBoxImage);
 
-                if (choice == MessageBoxResult.Yes)
-                    action?.Invoke();
-            }
-            )).Start();
+            if (choice == MessageBoxResult.Yes)
+                action?.Invoke();
+        }
     }
 }

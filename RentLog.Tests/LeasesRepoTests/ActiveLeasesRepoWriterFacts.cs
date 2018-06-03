@@ -15,7 +15,7 @@ namespace RentLog.Tests.LeasesRepoTests
         [Fact(DisplayName = "Undeactivated Delete fails")]
         public void CallingDeletefails()
         {
-            var arg = new MockDB();
+            var arg = new MockMarketState();
             var moq = new Mock<ISimpleRepo<LeaseDTO>>();
             var sut = new ActiveLeasesRepo1(moq.Object, arg);
             var lse = new LeaseDTO();
@@ -31,7 +31,7 @@ namespace RentLog.Tests.LeasesRepoTests
         [Fact(DisplayName = "Deactivated Delete returns true")]
         public void TestMethod()
         {
-            var arg = new MockDB();
+            var arg = new MockMarketState();
             var moq = new Mock<ISimpleRepo<LeaseDTO>>();
             var lse = new LeaseDTO();
             var sut = new ActiveLeasesRepo1(moq.Object, arg);

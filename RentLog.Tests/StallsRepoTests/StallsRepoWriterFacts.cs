@@ -68,7 +68,7 @@ namespace RentLog.Tests.StallsRepoTests
         public void CantDeleteifOccupied()
         {
             var moq   = new Mock<ISimpleRepo<StallDTO>>();
-            var db    = new MockDB();
+            var db    = new MockMarketState();
             var sut   = new StallsRepo1(moq.Object, db);
             var stall = StallDTO.Named("sample");
 
