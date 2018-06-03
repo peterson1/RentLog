@@ -85,27 +85,44 @@ namespace CommonTools.Lib45.InputDialogs
 
     public static class PopUpInput
     {
-        public static bool TryGetInt(string message, out int input, int? defaultVal = null, string caption = "Please enter a number")
+        public static bool TryGetInt(string message, 
+            out int input, int? defaultVal = null, 
+            string caption = "Please enter a number")
             => new PopUpInputInt(caption, message, defaultVal)
                 .TryGetValidInput(out input);
 
 
-        public static bool TryGetDecimal(string message, out decimal input, decimal? defaultVal = null, string caption = "Please enter a number")
+        public static bool TryGetDecimal(string message, 
+            out decimal input, decimal? defaultVal = null, 
+            string caption = "Please enter a number")
             => new PopUpInputDecimal(caption, message, defaultVal)
                 .TryGetValidInput(out input);
 
 
-        public static bool TryGetString(string message, out string input, string defaultVal = null, string caption = "Please enter a value")
+        public static bool TryGetString(string message, 
+            out string input, string defaultVal = null, 
+            string caption = "Please enter a value")
             => new PopUpInputString(caption, message, defaultVal)
                 .TryGetValidInput(out input);
 
 
-        public static bool TryGetDate(string message, out DateTime input, DateTime? defaultVal = null, string caption = "Please select a date")
+        public static bool TryGetDate(string message, 
+            out DateTime input, DateTime? defaultVal = null, 
+            string caption = "Please select a date")
             => new PopUpInputDate(caption, message, defaultVal)
                 .TryGetValidInput(out input);
 
 
-        public static bool TryGetIndex<T>(string message, out int listIndex, IEnumerable<T> options, int? defaultIndex = null, string caption = "Please select an item")
+        public static bool TryGetDateRange(string message,
+            out (DateTime Start, DateTime End) input, DateTime? defaultStart = null, DateTime? defaultEnd = null,
+            string caption = "Please select the Start and End dates")
+            => new PopUpInputDateRange(caption, message, defaultStart, defaultEnd)
+                .TryGetValidInput(out input);
+
+
+        public static bool TryGetIndex<T>(string message, 
+            out int listIndex, IEnumerable<T> options, int? defaultIndex = null, 
+            string caption = "Please select an item")
             => new PopUpInputIndex<T>(caption, message, options, defaultIndex)
                 .TryGetValidInput(out listIndex);
     }

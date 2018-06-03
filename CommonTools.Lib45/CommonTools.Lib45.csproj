@@ -118,6 +118,10 @@
     <Compile Include="InputCommands\TempExeLauncherCommand.cs" />
     <Compile Include="InputDialogs\PopUpInput.cs" />
     <Compile Include="InputDialogs\PopUpInputDate.cs" />
+    <Compile Include="InputDialogs\PopUpInputDateRange.cs" />
+    <Compile Include="InputDialogs\PopUpInputDateRangeWindow.xaml.cs">
+      <DependentUpon>PopUpInputDateRangeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InputDialogs\PopUpInputDateWindow.xaml.cs">
       <DependentUpon>PopUpInputDateWindow.xaml</DependentUpon>
     </Compile>
@@ -194,6 +198,10 @@
     <Page Include="BusyIndicators\BusyDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="InputDialogs\PopUpInputDateRangeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="InputDialogs\PopUpInputDateWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
