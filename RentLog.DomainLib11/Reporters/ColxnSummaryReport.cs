@@ -1,9 +1,7 @@
 ﻿using CommonTools.Lib11.DateTimeTools;
 using CommonTools.Lib11.ExceptionTools;
 using RentLog.DomainLib11.DataSources;
-using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.Models;
-using RentLog.DomainLib11.ReportRows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,20 +22,23 @@ namespace RentLog.DomainLib11.Reporters
 
         public DateTime  StartDate  { get; }
         public DateTime  EndDate    { get; }
-        public string    Title      { get; set; } = "Collection Summary";
+        public string    Title      { get; set; } = "Collection Summary Report";
 
         public Dictionary<int, CollectionAmounts> SectionTotals { get; } = new Dictionary<int, CollectionAmounts>();
         public Dictionary<int, decimal>           OtherTotals   { get; } = new Dictionary<int, decimal>();
         public Dictionary<int, string>            GLAccounts    { get; } = new Dictionary<int, string>();
         public Dictionary<int, string>            Sections      { get; } = new Dictionary<int, string>();
 
-        public string   DateRangeText    => $"{StartDate.ToString(LONG_FMT)} to {EndDate.ToString(LONG_FMT)}";
+        public string   BranchName      { get; private set; }
+        public string   DateRangeText    => $"{StartDate.ToString(LONG_FMT)}  to  {EndDate.ToString(LONG_FMT)}";
         public decimal  TotalCollections => this.Sum(_ => _.CollectionsSum);
         public decimal  TotalDeposits    => this.Sum(_ => _.DepositsSum);
 
 
         private void GenerateFrom(ITenantDBsDir dir)
         {
+            BranchName = dir.MarketState.BranchName;
+
             FillMainList(dir);
             FillLookups(dir);
             FillSectionTotals(dir);

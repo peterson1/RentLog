@@ -1,8 +1,10 @@
-﻿using FluentAssertions;
+﻿using CommonTools.Lib45.InputDialogs;
+using FluentAssertions;
 using FluentAssertions.Extensions;
 using RentLog.DomainLib11.Reporters;
 using RentLog.DomainLib45.Reporters;
 using RentLog.Tests.SampleDBs;
+using System;
 using Xunit;
 
 namespace RentLog.Tests.ColxnSummaryTests
@@ -60,7 +62,14 @@ namespace RentLog.Tests.ColxnSummaryTests
         public void ColxnSummaryToExcel()
         {
             var arg = SampleArgs.Lease197();
-            var rep = new ColxnSummaryReport(3.May(2018), 12.May(2018), arg);
+            var bgn = 3.May(2018);
+            var end = 12.May(2018);
+
+            //if (!PopUpInput.TryGetDateRange("Dates covered by Collection Summary Report", out (DateTime Start, DateTime End) rng, bgn, end)) return;
+            //var rep = new ColxnSummaryReport(rng.Start, rng.End, arg);
+
+            var rep = new ColxnSummaryReport(bgn, end, arg);
+
             rep.ToExcel();
         }
     }

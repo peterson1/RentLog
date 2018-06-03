@@ -8,9 +8,12 @@ namespace RentLog.DomainLib45.Reporters
 {
     public class ColxnSummaryExcelWriter
     {
-        const int H1_ROW = 2;
-        const int H2_ROW = 3;
-        const int N1_ROW = 4;
+        const int T1_ROW = 2;
+        const int T1_COL = 2;
+        const int T2_ROW = 3;
+        const int H1_ROW = 5;
+        const int H2_ROW = 6;
+        const int N1_ROW = 7;
         const double GAP1 = 3;
 
         private ColxnSummaryReport _src;
@@ -22,6 +25,7 @@ namespace RentLog.DomainLib45.Reporters
             _src = colxnSummaryReport;
             _xl  = new CellWriter1ByRow("Collections_Summary");
 
+            WriteTitles();
             writeDatesColumn();
             WriteBill("Rent"     , _ => _.Rent    );
             WriteBill("Rights"   , _ => _.Rights  );
@@ -36,9 +40,24 @@ namespace RentLog.DomainLib45.Reporters
         }
 
 
+        private void WriteTitles()
+        {
+            const int COL_SPAN = 8;
+
+            _xl.MoveTo(T1_ROW, T1_COL);
+            _xl.WriteMergedH1(_src.Title, 2, COL_SPAN);
+
+            _xl.MoveTo(T1_ROW, T1_COL + COL_SPAN);
+            _xl.WriteMergedH2(_src.BranchName, 1, COL_SPAN);
+
+            _xl.MoveTo(T2_ROW, T1_COL + COL_SPAN);
+            _xl.WriteMergedH2(_src.DateRangeText, 1, COL_SPAN);
+        }
+
+
         private void writeDatesColumn()
         {
-            _xl.MoveTo(H2_ROW, null);
+            _xl.MoveTo(H2_ROW, 1);
             _xl.WriteH2("date");
 
             _xl.MoveTo(N1_ROW, null);
@@ -146,6 +165,10 @@ namespace RentLog.DomainLib45.Reporters
             var last = N1_ROW + _src.Count;
 
             _xl.Row(1)     .Height = 10;
+            _xl.Row(T1_ROW).Height = 25;
+            _xl.Row(T2_ROW).Height = 25;
+            _xl.Row(T2_ROW + 1).Height = 10;
+
             _xl.Row(H1_ROW).Height = 30;
             _xl.Row(H2_ROW).Height = 27;
             _xl.Row(last).Height   = 27;
