@@ -79,5 +79,20 @@ namespace RentLog.Tests.StallsRepoTests
             sut.Invoking(_ => _.Delete(stall)).Should()
                 .Throw<InvalidDeletionException>();
         }
+
+
+        [Fact(DisplayName = "Update Accepts non-name edit")]
+        public void UpdateAcceptsnonnameedit()
+        {
+            var moq = new Mock<ISimpleRepo<StallDTO>>();
+            var sut = new StallsRepo1(moq.Object, null);
+            var rec = new StallDTO { Id = 1, Name = "Sample 1" };
+
+            moq.Setup(_ => _.GetAll())
+                .Returns(new List<StallDTO> { rec });
+
+            rec.Name = rec.Name + " changed";
+            sut.Update(rec);
+        }
     }
 }
