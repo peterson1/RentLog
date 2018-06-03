@@ -2,6 +2,7 @@
 using CommonTools.Lib45.ApplicationTools;
 using RentLog.DomainLib45;
 using RentLog.DomainLib45.Reporters;
+using RentLog.DomainLib45.WithOverduesReport;
 using System.Windows;
 
 namespace RentLog.ReportLauncher
@@ -19,6 +20,9 @@ namespace RentLog.ReportLauncher
         {
             switch (args.Param1.ToUpper())
             {
+                case "OVERDUES":
+                    WithOverduesReport.Show(args);
+                    break;
                 case "COLXNSMRY":
                     ColxnSummaryExcelWriter.Launch(args);
                     break;
