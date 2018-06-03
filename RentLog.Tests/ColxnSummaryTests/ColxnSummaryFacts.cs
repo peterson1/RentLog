@@ -29,7 +29,7 @@ namespace RentLog.Tests.ColxnSummaryTests
             var arg = SampleArgs.Lease197();
             var sut = new ColxnSummaryReport(4.May(2018), 6.May(2018), arg);
             sut.Count.Should().Be(3);
-            sut.DateRangeText.Should().Be("May 4, 2018 to May 6, 2018");
+            sut.DateRangeText.Should().Be("May 4, 2018  to  May 6, 2018");
 
             sut.SectionTotals.Should().HaveCount(4);
             sut.SectionTotals.ContainsKey(DRY).Should().BeTrue();

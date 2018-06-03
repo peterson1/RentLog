@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DC75E044-9366-4801-AD04-E31FB653ABFE}</ProjectGuid>
+    <ProjectGuid>{E7E0032E-DAE6-45FC-9F54-0D8C324DEAC3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>RentLog.StallsCrud</RootNamespace>
-    <AssemblyName>RL.Stalls</AssemblyName>
+    <RootNamespace>RentLog.ReportLauncher</RootNamespace>
+    <AssemblyName>RL.Reports</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -67,9 +66,6 @@
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
     </Reference>
-    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -88,26 +84,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="SectionsList\SectionsListUI.xaml.cs">
-      <DependentUpon>SectionsListUI.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SectionsList\SectionsListVM.cs" />
-    <Compile Include="SectionsList\StallTemplateEditor.cs" />
-    <Compile Include="StallCRUD\StallCrudVM.cs" />
-    <Compile Include="StallCRUD\StallCrudWindow.xaml.cs">
-      <DependentUpon>StallCrudWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="StallsList\StallsFilterUI.xaml.cs">
-      <DependentUpon>StallsFilterUI.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="StallsList\StallsFilterVM.cs" />
-    <Compile Include="StallsList\StallsListUI.xaml.cs">
-      <DependentUpon>StallsListUI.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="StallsList\StallsListVM.cs" />
-    <Compile Include="StallsList\StallsTable.xaml.cs">
-      <DependentUpon>StallsTable.xaml</DependentUpon>
-    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -120,29 +96,8 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="SectionsList\SectionsListUI.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="StallCRUD\StallCrudWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="StallsList\StallsFilterUI.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="StallsList\StallsListUI.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="StallsList\StallsTable.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainWindowVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -188,9 +143,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="FodyWeavers.xml">
-      <SubType>Designer</SubType>
-    </Resource>
+    <Resource Include="FodyWeavers.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.3.0.3\build\Fody.targets" Condition="Exists('..\packages\Fody.3.0.3\build\Fody.targets')" />
