@@ -32,6 +32,12 @@ namespace CommonTools.Lib45.InputDialogs
                 return false;
             }
 
+            if (End.Value < Start.Value)
+            {
+                WhyInvalid = "End Date should be AFTER Start Date.";
+                return false;
+            }
+
             parsed = (Start.Value, End.Value);
             return true;
         }
