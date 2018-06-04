@@ -3,6 +3,7 @@ using CommonTools.Lib45.ExcelTools;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.PrintTools;
 using PropertyChanged;
+using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.Models;
 using RentLog.DomainLib45;
 using RentLog.DomainLib45.WithOverduesReport;
@@ -12,8 +13,8 @@ namespace RentLog.LeasesCrud.MainToolbar
     [AddINotifyPropertyChangedInterface]
     public class MainToolbarVM
     {
-        private MainWindowVM _main;
-        private AppArguments _args;
+        private MainWindowVM  _main;
+        private ITenantDBsDir _args;
 
 
         public MainToolbarVM(MainWindowVM mainWindowVM)

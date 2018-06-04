@@ -1,6 +1,7 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
 using PropertyChanged;
 using RentLog.Cashiering.CommonControls;
+using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib45;
 using System;
@@ -13,7 +14,7 @@ namespace RentLog.Cashiering.SectionTabs.AmbulantCollections
         protected override string ListTitle => "Ambulant Collections";
 
 
-        public AmbulantColxnsVM(ISimpleRepo<AmbulantColxnDTO> repository, AppArguments appArguments) : base(repository, appArguments)
+        public AmbulantColxnsVM(ISimpleRepo<AmbulantColxnDTO> repository, ITenantDBsDir appArguments) : base(repository, appArguments)
         {
             TotalVisible = false;
         }

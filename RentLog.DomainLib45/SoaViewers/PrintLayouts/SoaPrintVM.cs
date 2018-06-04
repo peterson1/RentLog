@@ -1,10 +1,11 @@
 ﻿using CommonTools.Lib45.BaseViewModels;
 using CommonTools.Lib45.PrintTools;
+using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib45.SoaViewers.MainWindow;
 
 namespace RentLog.DomainLib45.SoaViewers.PrintLayouts
 {
-    public class SoaPrintVM : MainWindowVMBase<AppArguments>
+    public class SoaPrintVM : MainWindowVMBase<ITenantDBsDir>
     {
         protected override string CaptionPrefix => "Statement of Account";
 

@@ -36,6 +36,7 @@ namespace CommonTools.Lib45.BaseViewModels
         public string      Caption         { get; private set; }
         public bool        IsBusy          { get; private set; }
         public string      BusyText        { get; private set; }
+        public bool        ShouldClose     { get; protected set; }
         public IR2Command  PrintCmd        { get; }
         public IR2Command  RefreshCmd      { get; }
         public IR2Command  CloseWindowCmd  { get; }

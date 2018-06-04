@@ -4,6 +4,7 @@ using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.BaseViewModels;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.ThreadTools;
+using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.Models;
 using RentLog.DomainLib11.ReportRows;
 using RentLog.DomainLib45.SoaViewers.MainWindow;
@@ -14,12 +15,12 @@ using System.Threading.Tasks;
 
 namespace RentLog.DomainLib45.WithOverduesReport
 {
-    public class WithOverduesReportVM : MainWindowVMBase<AppArguments>
+    public class WithOverduesReportVM : MainWindowVMBase<ITenantDBsDir>
     {
         protected override string CaptionPrefix => WithOverduesReport.TITLE;
 
 
-        public WithOverduesReportVM(AppArguments appArguments) : base(appArguments)
+        public WithOverduesReportVM(ITenantDBsDir appArguments) : base(appArguments)
         {
             ClickRefresh();
             Rows.ItemOpened += (s, e) => SoaViewer.Show(e.DTO, AppArgs);
@@ -53,12 +54,12 @@ namespace RentLog.DomainLib45.WithOverduesReport
         public const string TITLE = "With Backrents & Overdue Rights";
 
 
-        public static void Show(AppArguments args)
+        public static void Show(ITenantDBsDir args)
             => new WithOverduesReportVM(args)
                 .Show<WithOverduesReportWindow>();
 
 
-        public static IR2Command CreateLauncherCmd(AppArguments args)
+        public static IR2Command CreateLauncherCmd(ITenantDBsDir args)
             => R2Command.Relay(() => Show(args), null, TITLE);
     }
 }

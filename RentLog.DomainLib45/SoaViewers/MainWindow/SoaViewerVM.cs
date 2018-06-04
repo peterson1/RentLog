@@ -1,6 +1,7 @@
 ﻿using CommonTools.Lib11.DataStructures;
 using CommonTools.Lib45.BaseViewModels;
 using CommonTools.Lib45.ThreadTools;
+using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.Models;
 using RentLog.DomainLib11.ReportRows;
@@ -12,12 +13,12 @@ using System.Threading.Tasks;
 
 namespace RentLog.DomainLib45.SoaViewers.MainWindow
 {
-    public class SoaViewerVM : MainWindowVMBase<AppArguments>
+    public class SoaViewerVM : MainWindowVMBase<ITenantDBsDir>
     {
         protected override string CaptionPrefix => "Statement of Account";
 
 
-        public SoaViewerVM(LeaseDTO leaseDTO, AppArguments appArguments) : base(appArguments)
+        public SoaViewerVM(LeaseDTO leaseDTO, ITenantDBsDir appArguments) : base(appArguments)
         {
             Lease = leaseDTO;
             SetCaption($"[{Lease.Id}]  {Lease.TenantAndStall}");
@@ -65,7 +66,7 @@ namespace RentLog.DomainLib45.SoaViewers.MainWindow
 
     public static class SoaViewer
     {
-        public static void Show(LeaseDTO lse, AppArguments args)
+        public static void Show(LeaseDTO lse, ITenantDBsDir args)
         {
             if (lse == null || args == null) return;
             new SoaViewerVM(lse, args).Show<SoaViewerWindow>();

@@ -1,12 +1,13 @@
 ﻿using CommonTools.Lib45.BaseViewModels;
 using PropertyChanged;
 using RentLog.DomainLib11.Authorization;
+using RentLog.DomainLib11.DataSources;
 using System.Windows;
 
 namespace RentLog.DomainLib45.BaseViewModels
 {
     [AddINotifyPropertyChangedInterface]
-    public abstract class BrandedWindowBase : UpdatedExeVMBase<AppArguments>
+    public abstract class BrandedWindowBase : UpdatedExeVMBase<ITenantDBsDir>
     {
         protected override string CaptionPrefix 
             => $"{AppArgs.MarketState.SystemName} {SubAppName}";
@@ -15,7 +16,7 @@ namespace RentLog.DomainLib45.BaseViewModels
         public abstract string SubAppName { get; }
 
 
-        public BrandedWindowBase(AppArguments appArguments) : base(appArguments)
+        public BrandedWindowBase(ITenantDBsDir tenantDBsDir) : base(tenantDBsDir)
         {
             AccessControlExtensions.OnUnauthorizedAccess = s => ShowNotAllowed(s);
             SetCaption($"as {AppArgs?.Credentials?.NameAndRole ?? "Anonymous"}");

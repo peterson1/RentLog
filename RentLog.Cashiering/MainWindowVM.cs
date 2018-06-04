@@ -6,6 +6,7 @@ using RentLog.Cashiering.MainToolbar;
 using RentLog.Cashiering.OtherCollections;
 using RentLog.Cashiering.SectionTabs;
 using RentLog.DomainLib11.CollectionRepos;
+using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib45;
 using RentLog.DomainLib45.BaseViewModels;
 using System;
@@ -21,7 +22,7 @@ namespace RentLog.Cashiering
         private ICollectionsDB _colxnsDB;
 
 
-        public MainWindowVM(DateTime date, AppArguments appArguments, bool clickRefresh = true) : base(appArguments)
+        public MainWindowVM(DateTime date, ITenantDBsDir tenantDBsDir, bool clickRefresh = true) : base(tenantDBsDir)
         {
             Date          = date;
             _colxnsDB     = AppArgs.Collections.For(Date);

@@ -2,6 +2,7 @@
 using CommonTools.Lib45.BaseViewModels;
 using CommonTools.Lib45.InputDialogs;
 using RentLog.DomainLib11.CollectionRepos;
+using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.Models;
 using System;
@@ -10,13 +11,13 @@ using System.Linq;
 
 namespace RentLog.DomainLib45.SoaViewers.AdjustmentsCRUD
 {
-    public class AdjustmentsListVM : SavedListVMBase<BalanceAdjustmentDTO, AppArguments>
+    public class AdjustmentsListVM : SavedListVMBase<BalanceAdjustmentDTO, ITenantDBsDir>
     {
         private int                     _lseId;
         private IBalanceAdjustmentsRepo _repo;
 
 
-        public AdjustmentsListVM(int leaseId, BillCode billCode, DateTime date, AppArguments args) : base(GetRepo(date, args), args, false)
+        public AdjustmentsListVM(int leaseId, BillCode billCode, DateTime date, ITenantDBsDir args) : base(GetRepo(date, args), args, false)
         {
             _lseId   = leaseId;
             _repo    = GetRepo(date, AppArgs);
@@ -79,7 +80,7 @@ namespace RentLog.DomainLib45.SoaViewers.AdjustmentsCRUD
                                    && _.BillCode == BillCode).ToList();
 
 
-        private static IBalanceAdjustmentsRepo GetRepo(DateTime date, AppArguments args)
+        private static IBalanceAdjustmentsRepo GetRepo(DateTime date, ITenantDBsDir args)
             => args.Collections.For(date).BalanceAdjs;
 
 

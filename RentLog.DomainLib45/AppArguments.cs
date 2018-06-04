@@ -13,7 +13,7 @@ using System;
 
 namespace RentLog.DomainLib45
 {
-    public class AppArguments : ICredentialsProvider, IHasUpdatedCopy, ITenantDBsDir
+    public class AppArguments : ITenantDBsDir
     {
         public AppArguments()
         {

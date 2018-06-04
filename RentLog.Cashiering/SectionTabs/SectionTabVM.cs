@@ -4,6 +4,7 @@ using RentLog.Cashiering.SectionTabs.IntendedCollections;
 using RentLog.Cashiering.SectionTabs.NoOperations;
 using RentLog.Cashiering.SectionTabs.Uncollecteds;
 using RentLog.DomainLib11.CollectionRepos;
+using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib45;
 
@@ -12,14 +13,14 @@ namespace RentLog.Cashiering.SectionTabs
     [AddINotifyPropertyChangedInterface]
     public class SectionTabVM
     {
-        public SectionTabVM(SectionDTO sec, ICollectionsDB db, AppArguments appArguments)
+        public SectionTabVM(SectionDTO sec, ICollectionsDB db, ITenantDBsDir tenantDBsDir)
         {
             Section        = sec;
             Collector      = db.GetCollector(sec);
-            IntendedColxns = new IntendedColxnsVM(db.IntendedColxns[sec.Id], appArguments, this);
-            AmbulantColxns = new AmbulantColxnsVM(db.AmbulantColxns[sec.Id], appArguments);
-            Uncollecteds   = new UncollectedsVM  (db.Uncollecteds  [sec.Id], appArguments);
-            NoOperations   = new NoOperationsVM  (db.NoOperations  [sec.Id], appArguments);
+            IntendedColxns = new IntendedColxnsVM(db.IntendedColxns[sec.Id], tenantDBsDir, this);
+            AmbulantColxns = new AmbulantColxnsVM(db.AmbulantColxns[sec.Id], tenantDBsDir);
+            Uncollecteds   = new UncollectedsVM  (db.Uncollecteds  [sec.Id], tenantDBsDir);
+            NoOperations   = new NoOperationsVM  (db.NoOperations  [sec.Id], tenantDBsDir);
         }
 
 

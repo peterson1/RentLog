@@ -1,6 +1,7 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
 using PropertyChanged;
 using RentLog.Cashiering.CommonControls;
+using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib45;
 using System;
@@ -13,7 +14,7 @@ namespace RentLog.Cashiering.OtherCollections
         protected override string ListTitle => "Other Collections";
 
 
-        public OtherColxnsVM(ISimpleRepo<OtherColxnDTO> repository, AppArguments appArguments) : base(repository, appArguments)
+        public OtherColxnsVM(ISimpleRepo<OtherColxnDTO> repository, ITenantDBsDir tenantDBsDir) : base(repository, tenantDBsDir)
         {
         }
 
