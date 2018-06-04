@@ -13,14 +13,14 @@ namespace RentLog.Cashiering.SectionTabs
     [AddINotifyPropertyChangedInterface]
     public class SectionTabVM
     {
-        public SectionTabVM(SectionDTO sec, ICollectionsDB db, ITenantDBsDir tenantDBsDir)
+        public SectionTabVM(SectionDTO sec, MainWindowVM main)
         {
             Section        = sec;
-            Collector      = db.GetCollector(sec);
-            IntendedColxns = new IntendedColxnsVM(db.IntendedColxns[sec.Id], tenantDBsDir, this);
-            AmbulantColxns = new AmbulantColxnsVM(db.AmbulantColxns[sec.Id], tenantDBsDir);
-            Uncollecteds   = new UncollectedsVM  (db.Uncollecteds  [sec.Id], tenantDBsDir);
-            NoOperations   = new NoOperationsVM  (db.NoOperations  [sec.Id], tenantDBsDir);
+            Collector      = main.ColxnsDB.GetCollector(sec);
+            IntendedColxns = new IntendedColxnsVM(Collector, sec, main);
+            AmbulantColxns = new AmbulantColxnsVM(sec, main);
+            Uncollecteds   = new UncollectedsVM  (sec, main);
+            NoOperations   = new NoOperationsVM  (sec, main);
         }
 
 

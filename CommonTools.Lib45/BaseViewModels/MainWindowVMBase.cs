@@ -37,6 +37,7 @@ namespace CommonTools.Lib45.BaseViewModels
         public bool        IsBusy          { get; private set; }
         public string      BusyText        { get; private set; }
         public bool        ShouldClose     { get; protected set; }
+        public string      WhyShouldClose  { get; protected set; }
         public IR2Command  PrintCmd        { get; }
         public IR2Command  RefreshCmd      { get; }
         public IR2Command  CloseWindowCmd  { get; }
@@ -94,6 +95,13 @@ namespace CommonTools.Lib45.BaseViewModels
         public bool? Show<T>(bool hideWindow = false, bool showModal = false) 
             where T: Window, new()
         {
+            if (ShouldClose)
+            {
+                Alert.ShowModal("Exiting ...", WhyShouldClose);
+                CurrentExe.Shutdown();
+                return false;
+            }
+
             _win = new T();
             ApplyWindowTheme(_win);
             _win.DataContext = this;

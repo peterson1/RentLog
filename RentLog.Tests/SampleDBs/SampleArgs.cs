@@ -1,4 +1,5 @@
-﻿using RentLog.DatabaseLib.DatabaseFinders;
+﻿using CommonTools.Lib11.GoogleTools;
+using RentLog.DatabaseLib.DatabaseFinders;
 using RentLog.DomainLib11.MarketStateRepos;
 using RentLog.DomainLib45;
 
@@ -7,6 +8,13 @@ namespace RentLog.Tests.SampleDBs
     internal class SampleArgs : AppArguments
     {
         internal static string DirName;
+
+        public SampleArgs()
+        {
+            IsValidUser = true;
+            Credentials = new FirebaseCredentials();
+            Credentials.Roles = "Supervisor";
+        }
 
 
         protected override MarketStateDB GetMarketStateDB()

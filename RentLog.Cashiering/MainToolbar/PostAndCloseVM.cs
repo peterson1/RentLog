@@ -15,40 +15,38 @@ namespace RentLog.Cashiering.MainToolbar
     [AddINotifyPropertyChangedInterface]
     public class PostAndCloseVM
     {
-        private MainWindowVM _main;
-
-
         public PostAndCloseVM(MainWindowVM mainWindowVM)
         {
-            _main           = mainWindowVM;
+            Main           = mainWindowVM;
             PostAndCloseCmd = R2Command.Relay(DoPostAndClose, _ => CanPostAndClose(), "Post & Close");
         }
 
 
-        public decimal  TotalDeposits     { get; private set; }
-        public decimal  TotalCollections  { get; private set; }
-        public decimal  TotalDifference   { get; private set; }
-        public bool     IsBalanced        { get; private set; }
-        public bool     HasDeposits       { get; private set; }
+        public MainWindowVM  Main              { get; }
+        public decimal       TotalDeposits     { get; private set; }
+        public decimal       TotalCollections  { get; private set; }
+        public decimal       TotalDifference   { get; private set; }
+        public bool          IsBalanced        { get; private set; }
+        public bool          HasDeposits       { get; private set; }
 
         public IR2Command  PostAndCloseCmd  { get; }
-        public IR2Command  RefreshCmd => _main.RefreshCmd;
+        public IR2Command  RefreshCmd => Main.RefreshCmd;
 
 
         private bool CanPostAndClose()
         {
-            if (_main.IsBusy) return false;
-            if (!IsBalanced) return false;
-            return _main.AppArgs.CanPostAndClose(false);
+            if (!Main.CanReview) return false;
+            if (Main.IsBusy) return false;
+            return IsBalanced;
         }
 
 
         public void UpdateTotals()
         {
-            TotalDeposits    = _main.BankDeposits.TotalSum;
-            TotalCollections = _main.SectionTabs.Sum(_ => _.SectionTotal)
-                             + _main.CashierColxns.TotalSum
-                             + _main.OtherColxns.TotalSum;
+            TotalDeposits    = Main.BankDeposits.TotalSum;
+            TotalCollections = Main.SectionTabs.Sum(_ => _.SectionTotal)
+                             + Main.CashierColxns.TotalSum
+                             + Main.OtherColxns.TotalSum;
             TotalDifference  = Math.Abs(TotalDeposits - TotalCollections);
             IsBalanced       = TotalDeposits == TotalCollections;
             HasDeposits      = TotalDeposits != 0;
@@ -59,19 +57,19 @@ namespace RentLog.Cashiering.MainToolbar
             => Alert.Confirm("Please Confirm",
                 "Are you sure you want to close this day and open the next?", async () =>
                 {
-                    _main.StartBeingBusy("Posting and Closing ...");
+                    Main.StartBeingBusy("Posting and Closing ...");
 
                     await Task.Run(() =>
                     {
-                        var jobs = MarketDayCloser.GetActions(_main.AppArgs);
+                        var jobs = MarketDayCloser.GetActions(Main.AppArgs);
                         Parallel.Invoke(jobs.ToArray());
                     });
 
-                    MessageBox.Show($"Successfully posted collections for {_main.Date:d-MMM-yyyy}{L.F}"
-                             + $"The next market day [{_main.Date.AddDays(1):d-MMM-yyyy}] is now open for encoding.",
+                    MessageBox.Show($"Successfully posted collections for {Main.Date:d-MMM-yyyy}{L.F}"
+                             + $"The next market day [{Main.Date.AddDays(1):d-MMM-yyyy}] is now open for encoding.",
                             "   Operation Successful", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                    _main.CloseWindow();
+                    Main.CloseWindow();
                 });
     }
 }

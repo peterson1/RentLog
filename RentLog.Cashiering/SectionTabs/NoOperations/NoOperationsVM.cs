@@ -14,7 +14,8 @@ namespace RentLog.Cashiering.SectionTabs.NoOperations
         protected override string ListTitle => "Did Not Operate";
 
 
-        public NoOperationsVM(ISimpleRepo<UncollectedLeaseDTO> repository, ITenantDBsDir appArguments) : base(repository, appArguments)
+        public NoOperationsVM(SectionDTO sec, MainWindowVM main) 
+            : base(main.ColxnsDB.NoOperations[sec.Id], main)
         {
             CanAddRows    = false;
             TotalVisible = false;

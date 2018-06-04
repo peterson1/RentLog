@@ -19,12 +19,9 @@ namespace RentLog.Tests.TestTools
         public IBalanceDB      Balances    => MoqBalanceDB.Object;
 
 
-
-
-        public bool IsValidUser => throw new System.NotImplementedException();
-        public FirebaseCredentials Credentials => throw new System.NotImplementedException();
-        public string UpdatedCopyPath => throw new System.NotImplementedException();
-
-        public SectionDTO CurrentSection { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public bool                 IsValidUser      { get; set; } = true;
+        public FirebaseCredentials  Credentials      { get; set; } = new FirebaseCredentials();
+        public string               UpdatedCopyPath  { get; set; }
+        public SectionDTO           CurrentSection   { get; set; }
     }
 }

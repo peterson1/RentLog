@@ -26,8 +26,8 @@ namespace RentLog.DomainLib45
 
 
         public string               UpdatedCopyPath  { get; private set; }
-        public bool                 IsValidUser      { get; private set; }
-        public FirebaseCredentials  Credentials      { get; private set; }
+        public bool                 IsValidUser      { get; protected set; }
+        public FirebaseCredentials  Credentials      { get; protected set; }
         public string               CurrentUser      { get; }
 
         public string               DbFilePath       { get; private set; }
@@ -49,6 +49,10 @@ namespace RentLog.DomainLib45
                 out FirebaseCredentials creds, out string err);
 
             Credentials = creds;
+
+#if DEBUG
+            //Credentials.Roles = "Cashier";
+#endif
         }
 
 

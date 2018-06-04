@@ -5,13 +5,12 @@ using RentLog.Cashiering.CashierCollections;
 using RentLog.Cashiering.MainToolbar;
 using RentLog.Cashiering.OtherCollections;
 using RentLog.Cashiering.SectionTabs;
+using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DataSources;
-using RentLog.DomainLib45;
 using RentLog.DomainLib45.BaseViewModels;
 using System;
 using System.Collections.Generic;
-using System.Windows;
 
 namespace RentLog.Cashiering
 {
@@ -19,22 +18,20 @@ namespace RentLog.Cashiering
     public class MainWindowVM : BrandedWindowBase
     {
         public override string SubAppName => $"Cashiering  :  Collections for {Date:MMMM d, yyyy}";
-        private ICollectionsDB _colxnsDB;
 
 
         public MainWindowVM(DateTime date, ITenantDBsDir tenantDBsDir, bool clickRefresh = true) : base(tenantDBsDir)
         {
-            Date          = date;
-            _colxnsDB     = AppArgs.Collections.For(Date);
-            if (_colxnsDB == null)
-            {
-                MessageBox.Show("Nothing to review yet.");
-                Application.Current.Shutdown();
-                return;
-            }
-            CashierColxns = new CashierColxnsVM(_colxnsDB.CashierColxns, AppArgs);
-            OtherColxns   = new OtherColxnsVM(_colxnsDB.OtherColxns, AppArgs);
-            BankDeposits  = new BankDepositsVM(_colxnsDB.BankDeposits, AppArgs);
+            CanReview = AppArgs.CanPostAndClose(false);
+            CanEncode = AppArgs.CanEncodeCollections(false);
+            if (!IsPrivilegedUser()) return;
+
+            ColxnsDB = CheckIfDbExists(Date = date);
+            if (ColxnsDB == null) return;
+
+            CashierColxns = new CashierColxnsVM(this);
+            OtherColxns   = new OtherColxnsVM(this);
+            BankDeposits  = new BankDepositsVM(this);
             PostAndClose  = new PostAndCloseVM(this);
             if (clickRefresh) ClickRefresh();
             SetCaption("");
@@ -42,11 +39,33 @@ namespace RentLog.Cashiering
 
 
         public DateTime              Date             { get; }
+        public ICollectionsDB        ColxnsDB         { get; }
+        public bool                  CanReview        { get; }
+        public bool                  CanEncode        { get; }
         public UIList<SectionTabVM>  SectionTabs      { get; } = new UIList<SectionTabVM>();
         public CashierColxnsVM       CashierColxns    { get; }
         public OtherColxnsVM         OtherColxns      { get; }
         public BankDepositsVM        BankDeposits     { get; }
         public PostAndCloseVM        PostAndClose     { get; }
+
+
+        private bool IsPrivilegedUser()
+        {
+            if (CanReview || CanEncode) return true;
+            WhyShouldClose = "User cannot Encode and cannot Review";
+            ShouldClose = true;
+            return false;
+        }
+
+
+        private ICollectionsDB CheckIfDbExists(DateTime date)
+        {
+            var db = AppArgs.Collections.For(date);
+            if (db != null) return db;
+            ShouldClose = true;
+            WhyShouldClose = "Nothing to review yet.";
+            return null;
+        }
 
 
         protected override void OnRefreshClicked()
@@ -65,7 +84,7 @@ namespace RentLog.Cashiering
             var all  = AppArgs.MarketState.Sections.GetAll();
 
             foreach (var sec in all)
-                list.Add(new SectionTabVM(sec, _colxnsDB, AppArgs));
+                list.Add(new SectionTabVM(sec, this));
 
             AsUI(() => SectionTabs.SetItems(list));
 

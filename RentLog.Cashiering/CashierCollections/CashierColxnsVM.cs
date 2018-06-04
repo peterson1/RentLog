@@ -1,9 +1,6 @@
-﻿using CommonTools.Lib11.DatabaseTools;
-using PropertyChanged;
+﻿using PropertyChanged;
 using RentLog.Cashiering.CommonControls;
-using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
-using RentLog.DomainLib45;
 using System;
 
 namespace RentLog.Cashiering.CashierCollections
@@ -14,7 +11,7 @@ namespace RentLog.Cashiering.CashierCollections
         protected override string ListTitle => "Tenant Payments to Office";
 
 
-        public CashierColxnsVM(ISimpleRepo<CashierColxnDTO> repository, ITenantDBsDir tenantDBsDir) : base(repository, tenantDBsDir)
+        public CashierColxnsVM(MainWindowVM main) : base(main.ColxnsDB.CashierColxns, main)
         {
         }
 

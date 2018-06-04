@@ -79,9 +79,8 @@
     <Compile Include="BillRowComposerTests\BillRowComposerBaseFacts.cs" />
     <Compile Include="BillRowComposerTests\RentBillComposerFacts.cs" />
     <Compile Include="BillRowComposerTests\RightsBillComposerFacts.cs" />
-    <Compile Include="CashieringVMTests\EncoderVMFacts.cs" />
     <Compile Include="CashieringVMTests\ReviewerVMFacts1.cs" />
-    <Compile Include="CashieringVMTests\ReviewerVMFacts2.cs" />
+    <Compile Include="CashieringVMTests\CashieringVMFacts.cs" />
     <Compile Include="CollectionsDirTests\CollectionsDirFacts.cs" />
     <Compile Include="ColxnSummaryTests\ColxnSummaryFacts.cs" />
     <Compile Include="DailyBillsRepoTests\DailyBillsRepo1Facts.cs" />

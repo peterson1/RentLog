@@ -14,7 +14,8 @@ namespace RentLog.Cashiering.SectionTabs.AmbulantCollections
         protected override string ListTitle => "Ambulant Collections";
 
 
-        public AmbulantColxnsVM(ISimpleRepo<AmbulantColxnDTO> repository, ITenantDBsDir appArguments) : base(repository, appArguments)
+        public AmbulantColxnsVM(SectionDTO sec, MainWindowVM main) 
+            : base(main.ColxnsDB.AmbulantColxns[sec.Id], main)
         {
             TotalVisible = false;
         }

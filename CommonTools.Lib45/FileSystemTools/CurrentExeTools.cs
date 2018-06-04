@@ -50,7 +50,7 @@ namespace CommonTools.Lib45.FileSystemTools
 
         public static void Shutdown()
             => UIThread.Run(() 
-                => Application.Current.Shutdown());
+                => Application.Current?.Shutdown());
 
 
         public static void RelaunchApp()

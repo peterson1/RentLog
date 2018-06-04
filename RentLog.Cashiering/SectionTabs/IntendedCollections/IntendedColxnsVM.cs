@@ -14,10 +14,11 @@ namespace RentLog.Cashiering.SectionTabs.IntendedCollections
         protected override string ListTitle => "Lease Collections";
 
 
-        public IntendedColxnsVM(ISimpleRepo<IntendedColxnDTO> repository, ITenantDBsDir appArguments, SectionTabVM sectionTab) : base(repository, appArguments)
+        public IntendedColxnsVM(CollectorDTO collector, SectionDTO sec, MainWindowVM main) 
+            : base(main.ColxnsDB.IntendedColxns[sec.Id], main)
         {
             CanAddRows = false;
-            Caption    = $"{ListTitle} by {sectionTab.Collector}";
+            Caption    = $"{ListTitle} by {collector}";
         }
 
 

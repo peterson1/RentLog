@@ -27,6 +27,8 @@ namespace CommonTools.Lib45.BaseViewModels
         public SavedListVMBase(ISimpleRepo<TDTO> repository, TArg appArguments, bool doReload = true)
         {
             _repo      = repository;
+            if (_repo == null) return;
+
             AppArgs    = appArguments;
             AddNewCmd  = R2Command.Relay(AddNewItem, null, "Add New Item");
             RefreshCmd = R2Command.Relay(ReloadFromDB, null, "Refresh");

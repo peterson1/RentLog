@@ -1,9 +1,6 @@
-﻿using CommonTools.Lib11.DatabaseTools;
-using PropertyChanged;
+﻿using PropertyChanged;
 using RentLog.Cashiering.CommonControls;
-using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
-using RentLog.DomainLib45;
 using System;
 
 namespace RentLog.Cashiering.SectionTabs.Uncollecteds
@@ -14,7 +11,8 @@ namespace RentLog.Cashiering.SectionTabs.Uncollecteds
         protected override string ListTitle => "Uncollecteds";
 
 
-        public UncollectedsVM(ISimpleRepo<UncollectedLeaseDTO> repository, ITenantDBsDir appArguments) : base(repository, appArguments)
+        public UncollectedsVM(SectionDTO sec, MainWindowVM main) 
+            : base(main.ColxnsDB.Uncollecteds[sec.Id], main)
         {
             CanAddRows    = false;
             TotalVisible = false;

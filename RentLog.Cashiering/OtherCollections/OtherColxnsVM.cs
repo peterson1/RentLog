@@ -14,7 +14,7 @@ namespace RentLog.Cashiering.OtherCollections
         protected override string ListTitle => "Other Collections";
 
 
-        public OtherColxnsVM(ISimpleRepo<OtherColxnDTO> repository, ITenantDBsDir tenantDBsDir) : base(repository, tenantDBsDir)
+        public OtherColxnsVM(MainWindowVM main) : base(main.ColxnsDB.OtherColxns, main)
         {
         }
 

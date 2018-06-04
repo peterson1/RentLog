@@ -1,10 +1,8 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
 using CommonTools.Lib11.DTOs;
 using CommonTools.Lib45.BaseViewModels;
-using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
-using RentLog.DomainLib45;
 using System;
 using System.Collections.Generic;
 
@@ -13,15 +11,17 @@ namespace RentLog.Cashiering.CommonControls
     public abstract class EncoderListVMBase<TDTO> : SavedListVMBase<TDTO, ITenantDBsDir>
         where TDTO : IDocumentDTO
     {
-        public EncoderListVMBase(ISimpleRepo<TDTO> repository, ITenantDBsDir tenantDBsDir) : base(repository, tenantDBsDir, false)
+        public EncoderListVMBase(ISimpleRepo<TDTO> repository, MainWindowVM mainWindowVM) : base(repository, mainWindowVM.AppArgs, false)
         {
-            CanAddRows = AppArgs.CanEncodeCollections(false);
+            Main       = mainWindowVM;
+            CanAddRows = Main.CanEncode;
             Caption    = ListTitle;
         }
 
 
-        public bool  CanAddRows    { get; protected set; }
-        public bool  TotalVisible  { get; protected set; } = true;
+        public MainWindowVM  Main          { get; }
+        public bool          CanAddRows    { get; protected set; }
+        public bool          TotalVisible  { get; protected set; } = true;
 
 
         protected override IEnumerable<TDTO> PostProcessQueried(IEnumerable<TDTO> items)

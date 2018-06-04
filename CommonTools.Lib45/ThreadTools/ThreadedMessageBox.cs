@@ -33,10 +33,21 @@ namespace CommonTools.Lib45.ThreadTools
                                 MessageBoxButton messageBoxButton = MessageBoxButton.OK)
             => new Thread(new ThreadStart(delegate
             {
-                var longCap = $"   {caption}  [{DateTime.Now.ToShortTimeString()}]  -  {GetExeInfo()}";
-                MessageBox.Show(message, longCap, messageBoxButton, messageBoxImage);
+                //var longCap = $"   {caption}  [{DateTime.Now.ToShortTimeString()}]  -  {GetExeInfo()}";
+                //MessageBox.Show(message, longCap, messageBoxButton, messageBoxImage);
+                ShowModal(caption, message, messageBoxImage, messageBoxButton);
             }
             )).Start();
+
+
+        public static void ShowModal(string caption,
+                                     string message,
+                                     MessageBoxImage messageBoxImage = MessageBoxImage.Information,
+                                     MessageBoxButton messageBoxButton = MessageBoxButton.OK)
+        {
+            var longCap = $"   {caption}  [{DateTime.Now.ToShortTimeString()}]  -  {GetExeInfo()}";
+            MessageBox.Show(message, longCap, messageBoxButton, messageBoxImage);
+        }
 
 
         private static string GetExeInfo()
