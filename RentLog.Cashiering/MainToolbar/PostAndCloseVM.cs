@@ -52,11 +52,15 @@ namespace RentLog.Cashiering.MainToolbar
                 {
                     _main.StartBeingBusy("Posting and Closing ...");
 
-                    await Task.Run(() => MarketDayCloser.Run(_main.AppArgs));
+                    await Task.Run(() =>
+                    {
+                        var jobs = MarketDayCloser.GetActions(_main.AppArgs);
+                        Parallel.Invoke(jobs.ToArray());
+                    });
 
-                    UIThread.Run(() => MessageBox.Show($"Successfully posted collections for {_main.Date:d-MMM-yyyy}{L.F}"
+                    MessageBox.Show($"Successfully posted collections for {_main.Date:d-MMM-yyyy}{L.F}"
                              + $"The next market day [{_main.Date.AddDays(1):d-MMM-yyyy}] is now open for encoding.",
-                            "   Operation Successful", MessageBoxButton.OK, MessageBoxImage.Information));
+                            "   Operation Successful", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     _main.CloseWindow();
                 });

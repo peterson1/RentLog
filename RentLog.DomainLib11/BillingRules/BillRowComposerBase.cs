@@ -36,19 +36,25 @@ namespace RentLog.DomainLib11.BillingRules
 
 
         public List<BillAdjustment> ReadAdjustments(LeaseDTO lse, DateTime date)
-            => _colxnsDir.For(date, false).BalanceAdjs.GetAll()
+        {
+            var db = _colxnsDir.For(date, false);
+            if (db == null) return new List<BillAdjustment>();
+            return db.BalanceAdjs.GetAll()
                 .Where(_ => _.LeaseId  == lse.Id
                          && _.BillCode == this.BillCode)
                 .Select(_ => _.ToBillAdjustment()).ToList();
+        }
 
 
         public List<DailyBillDTO.BillPayment> ReadPayments(LeaseDTO lse, DateTime date)
         {
-            var db      = _colxnsDir.For(date, false);
-            var sec     = lse.Stall.Section;
+            var db = _colxnsDir.For(date, false);
+            if (db == null) return new List<BillPayment>();
+            var sec = lse.Stall.Section;
+
             var fromCol = db.IntendedColxns[sec.Id].GetAll()
                             .Where(_ => _.Lease.Id == lse.Id
-                                     && _.Actuals.For(this.BillCode).HasValue)
+                                && _.Actuals.For(this.BillCode).HasValue)
                             .Select(_ => ToPayment(_, db));
 
             var fromCas = db.CashierColxns.GetAll()

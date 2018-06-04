@@ -23,29 +23,54 @@ namespace RentLog.DomainLib11.BalanceRepos
         }
 
 
+        //public void UpdateFrom(DateTime date)
+        //    => BillCodes.Collected().ForEach(_ => UpdateFrom(date, _));
+
+
         public void UpdateFrom(DateTime date)
-            => BillCodes.Collected().ForEach(_ => UpdateFrom(date, _));
-
-
-        public void UpdateFrom(DateTime date, BillCode billCode)
         {
-            var minID      = date.ToBillID();
-            var affctd     = _repo.Find    (_ => _.Id >= minID)
-                                  .OrderBy (_ => _.Id).ToList();
+            var dtos = GetRecomputedFrom(date);
+            _repo.Update(dtos, true);
+        }
 
-            var openingBal = Find(date.AddDays(-1).ToBillID(), false)
-                            ?.For(billCode)?.ClosingBalance;
 
-            foreach (var dto in affctd)
+        private List<DailyBillDTO> GetRecomputedFrom(DateTime date)
+        {
+            var minID  = date.ToBillID();
+            var affctd = _repo.Find   (_ => _.Id >= minID)
+                              .OrderBy(_ => _.Id).ToList();
+
+            foreach (var billCode in BillCodes.Collected())
             {
-                var rowDate  = dto.GetBillDate();
-                var newState = _billr.ComputeBill(billCode, _lse, rowDate, openingBal);
-                dto.Bills.RemoveAll(_ => _.BillCode == billCode);
-                dto.Bills.Add(newState);
+                var openingBal = Find(date.AddDays(-1).ToBillID(), false)
+                                    ?.For(billCode)?.ClosingBalance;
 
-                openingBal = newState.ClosingBalance;
+                foreach (var dto in affctd)
+                {
+                    var rowDate  = dto.GetBillDate();
+                    var newState = _billr.ComputeBill(billCode, _lse, rowDate, openingBal);
+                    if (dto.Bills == null) dto.Bills = new List<DailyBillDTO.BillState>();
+                    dto.Bills.RemoveAll(_ => _.BillCode == billCode);
+                    dto.Bills.Add(newState);
+
+                    openingBal = newState.ClosingBalance;
+                }
             }
-            _repo.Update(affctd, true);
+            return affctd;
+        }
+
+
+        public void OpenNextDay(DateTime unclosedDate)
+        {
+            var nextDay = unclosedDate.AddDays(1);
+            Upsert(DailyBillDTO.CreateFor(nextDay));
+
+            var dtos = GetRecomputedFrom(unclosedDate);
+
+            foreach (var billCode in BillCodes.Collected())
+                dtos.Last().For(billCode).ClosingBalance = null;
+
+            _repo.Update(dtos, true);
         }
 
 

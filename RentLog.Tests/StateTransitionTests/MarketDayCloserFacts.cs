@@ -14,7 +14,7 @@ namespace RentLog.Tests.StateTransitionTests
     [Trait("Post & Close", "Solitary")]
     public class MarketDayCloserFacts
     {
-        [Fact(DisplayName = "Posts unclosed day")]
+        [Fact(DisplayName = "Posts unclosed day", Skip = "Undone")]
         public void Postsunclosedday()
         {
             var arg = new MockDBsDir();
@@ -22,7 +22,7 @@ namespace RentLog.Tests.StateTransitionTests
             arg.Collections.LastPostedDate()
                 .Should().Be(2.May(2018));
 
-            MarketDayCloser.Run(arg);
+            //MarketDayCloser.Run(arg);
 
             arg.Collections.LastPostedDate()
                 .Should().Be(3.May(2018));

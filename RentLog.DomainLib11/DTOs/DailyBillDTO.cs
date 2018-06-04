@@ -63,6 +63,10 @@ namespace RentLog.DomainLib11.DTOs
 
         public T DeepClone   <T>() => throw new NotImplementedException();
         public T ShallowClone<T>() => (T)this.MemberwiseClone();
+
+
+        public static DailyBillDTO CreateFor(DateTime date)
+            => new DailyBillDTO { Id = date.ToBillID() };
     }
 
 

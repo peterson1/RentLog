@@ -3,6 +3,7 @@ using CommonTools.Lib11.DTOs;
 using CommonTools.Lib11.ExceptionTools;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,6 +12,7 @@ namespace RentLog.DomainLib11.CollectionRepos
     public class CollectionsDB1 : ICollectionsDB
     {
         private const string POST_DATE     = "PostDate";
+        private const string DATE_FMT      = "yyyy-MM-dd";
         private const string COLLECTOR_KEY = "Section{0}_CollectorID";
 
         private ISimpleRepo<KeyValuePairDTO> _meta;
@@ -59,5 +61,13 @@ namespace RentLog.DomainLib11.CollectionRepos
 
 
         public bool IsPosted() => _meta.HasName(POST_DATE);
+
+
+        public void MarkAsPosted()
+            => _meta.Insert(new KeyValuePairDTO
+            {
+                Name  = POST_DATE,
+                Value = DateTime.Now.ToString(DATE_FMT)
+            });
     }
 }

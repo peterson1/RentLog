@@ -82,6 +82,7 @@
     <Compile Include="CashieringVMTests\CashieringVMFacts.cs" />
     <Compile Include="CollectionsDirTests\CollectionsDirFacts.cs" />
     <Compile Include="ColxnSummaryTests\ColxnSummaryFacts.cs" />
+    <Compile Include="DailyBillsRepoTests\DailyBillsRepo1Facts.cs" />
     <Compile Include="DailyColxnsTests\DailyColxnsFacts.cs" />
     <Compile Include="LeasesRepoTests\ActiveLeasesRepoReaderFacts.cs" />
     <Compile Include="LeasesRepoTests\ActiveLeasesRepoWriterFacts.cs" />

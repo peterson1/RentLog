@@ -1,6 +1,5 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
 using RentLog.DomainLib11.BalanceRepos;
-using RentLog.DomainLib11.BillingRules;
 using RentLog.DomainLib11.DTOs;
 using System;
 
@@ -24,7 +23,6 @@ namespace RentLog.DomainLib11.CollectionRepos
 
 
         protected override void ExecuteAfterSave(BalanceAdjustmentDTO record) 
-            => _balDB.GetRepo(record.LeaseId)
-                     .UpdateFrom(Date, record.BillCode);
+            => _balDB.GetRepo(record.LeaseId).UpdateFrom(Date);
     }
 }

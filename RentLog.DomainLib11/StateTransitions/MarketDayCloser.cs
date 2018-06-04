@@ -1,29 +1,28 @@
 ﻿using RentLog.DomainLib11.DataSources;
-using RentLog.DomainLib11.DTOs;
 using System;
+using System.Collections.Generic;
 
 namespace RentLog.DomainLib11.StateTransitions
 {
     public class MarketDayCloser
     {
-        public static void Run(ITenantDBsDir dir)
+        public static List<Action> GetActions(ITenantDBsDir dir)
         {
+            var actions = new List<Action>();
             var unclosd = dir.Collections.UnclosedDate();
             var activs  = dir.MarketState.ActiveLeases.GetAll();
+
             foreach (var lse in activs)
-            {
-                var repo = dir.Balances.GetRepo(lse);
-                
-                //todo: test this: inserts record for next day
-                repo.Upsert(BillRowForNextDay(unclosd));
+                actions.Add(() => dir.Balances.GetRepo(lse)
+                                    .OpenNextDay(unclosd));
 
-                repo.UpdateFrom(unclosd);
-            }
+            actions.Add(() 
+                => dir.Collections.For(unclosd.AddDays(1), true));
 
-            throw new NotImplementedException();
+            actions.Add(()
+                => dir.Collections.For(unclosd, false).MarkAsPosted());
+
+            return actions;
         }
-
-        private static DailyBillDTO BillRowForNextDay(DateTime unclosd) 
-            => new DailyBillDTO { Id = unclosd.AddDays(1).ToBillID() };
     }
 }
