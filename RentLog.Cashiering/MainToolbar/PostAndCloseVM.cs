@@ -3,6 +3,7 @@ using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.ThreadTools;
 using PropertyChanged;
+using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.StateTransitions;
 using System;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace RentLog.Cashiering.MainToolbar
         public PostAndCloseVM(MainWindowVM mainWindowVM)
         {
             _main           = mainWindowVM;
-            PostAndCloseCmd = R2Command.Relay(DoPostAndClose, _ => IsBalanced, "Post & Close");
+            PostAndCloseCmd = R2Command.Relay(DoPostAndClose, _ => CanPostAndClose(), "Post & Close");
         }
 
 
@@ -32,6 +33,14 @@ namespace RentLog.Cashiering.MainToolbar
 
         public IR2Command  PostAndCloseCmd  { get; }
         public IR2Command  RefreshCmd => _main.RefreshCmd;
+
+
+        private bool CanPostAndClose()
+        {
+            if (_main.IsBusy) return false;
+            if (!IsBalanced) return false;
+            return _main.AppArgs.CanPostAndClose(false);
+        }
 
 
         public void UpdateTotals()
