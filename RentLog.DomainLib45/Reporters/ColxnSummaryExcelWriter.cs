@@ -183,10 +183,11 @@ namespace RentLog.DomainLib45.Reporters
         public static void Launch(AppArguments args)
         {
             var now = DateTime.Now.Date;
-            var bgn = new DateTime(now.Year, now.Month - 1, 1);
-            var end = bgn.MonthLastDay();
+            var bgn = new DateTime(now.Year, now.Month, 1);
+            var end = args.Collections.LastPostedDate();
 
             if (!PopUpInput.TryGetDateRange("Dates covered by Collection Summary Report", out (DateTime Start, DateTime End) rng, bgn, end)) return;
+
             new ColxnSummaryReport(rng.Start, rng.End, args).ToExcel();
         }
     }

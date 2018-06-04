@@ -16,9 +16,10 @@ namespace RentLog.DomainLib11.Reporters
         public ColxnSummaryReport(DateTime startDate, DateTime endDate, ITenantDBsDir tenantDBsDir)
         {
             this.StartDate = startDate;
-            this.EndDate   = endDate;
+            this.EndDate   = LimitToPostedDate(endDate, tenantDBsDir);
             GenerateFrom(tenantDBsDir);
         }
+
 
         public DateTime  StartDate  { get; }
         public DateTime  EndDate    { get; }
@@ -33,6 +34,13 @@ namespace RentLog.DomainLib11.Reporters
         public string   DateRangeText    => $"{StartDate.ToString(LONG_FMT)}  to  {EndDate.ToString(LONG_FMT)}";
         public decimal  TotalCollections => this.Sum(_ => _.CollectionsSum);
         public decimal  TotalDeposits    => this.Sum(_ => _.DepositsSum);
+
+
+        private DateTime LimitToPostedDate(DateTime endDate, ITenantDBsDir tenantDBsDir)
+        {
+            var postd = tenantDBsDir.Collections.LastPostedDate();
+            return endDate > postd ? postd : endDate;
+        }
 
 
         private void GenerateFrom(ITenantDBsDir dir)

@@ -34,6 +34,9 @@ namespace RentLog.DomainLib11.Reporters
 
         private void GenerateFrom(ITenantDBsDir dir)
         {
+            if (Date > dir.Collections.LastPostedDate())
+                throw Bad.Arg("Daily Colxns Date", $"{Date:d MMM yyyy}");
+
             FillSectionCollections(dir);
             FillOtherCollections(dir);
             DepositsSum = GetTotalDeposits(dir);
@@ -59,7 +62,7 @@ namespace RentLog.DomainLib11.Reporters
         {
             Others.Clear();
 
-            var othrColxns = dir.Collections.For(Date).OtherColxns
+            var othrColxns = dir.Collections.For(Date, false).OtherColxns
                                 .GetAll().GroupBy(_ => _.GetGLId());
 
             foreach (var othr in othrColxns)
@@ -68,6 +71,6 @@ namespace RentLog.DomainLib11.Reporters
 
 
         private decimal GetTotalDeposits(ITenantDBsDir dir)
-            => dir.Collections.For(Date).BankDeposits.GetAll().Sum(_ => _.Amount);
+            => dir.Collections.For(Date, false).BankDeposits.GetAll().Sum(_ => _.Amount);
     }
 }
