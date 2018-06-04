@@ -59,10 +59,10 @@ namespace RentLog.DatabaseLib.DatabaseFinders
         }
 
 
-        public override ICollectionsDB For (DateTime date, bool createIfMissing)
+        public override ICollectionsDB For (DateTime date)
         {
             var file = AsFilePath(date);
-            if (!File.Exists(file) && !createIfMissing) return null;
+            if (!File.Exists(file)) return null;
 
             var db                 = new SharedLiteDB(file, _mkt.CurrentUser);
             var colxnsDB           = new CollectionsDB1(db.Metadata, _mkt);

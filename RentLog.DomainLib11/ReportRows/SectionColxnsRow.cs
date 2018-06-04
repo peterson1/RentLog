@@ -14,7 +14,7 @@ namespace RentLog.DomainLib11.ReportRows
         public SectionColxnsRow(SectionDTO sec, DateTime date, ITenantDBsDir dir)
         {
             Section    = sec;
-            var db     = dir.Collections.For(date, false);
+            var db     = dir.Collections.For(date);
             Collector  = GetSectionCollector(sec, db);
             var colxns = GetLeaseColxns(sec, date, db, dir);
             Rent       = colxns.Sum(_ => _.Rent ?? 0);

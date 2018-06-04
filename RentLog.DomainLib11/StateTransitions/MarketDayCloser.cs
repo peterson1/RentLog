@@ -15,12 +15,8 @@ namespace RentLog.DomainLib11.StateTransitions
             foreach (var lse in activs)
                 actions.Add(() => dir.Balances.GetRepo(lse)
                                     .OpenNextDay(unclosd));
-
-            actions.Add(() 
-                => dir.Collections.For(unclosd.AddDays(1), true));
-
             actions.Add(()
-                => dir.Collections.For(unclosd, false).MarkAsPosted());
+                => dir.Collections.For(unclosd).MarkAsPosted());
 
             return actions;
         }

@@ -10,6 +10,7 @@ using RentLog.DomainLib45;
 using RentLog.DomainLib45.BaseViewModels;
 using System;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace RentLog.Cashiering
 {
@@ -23,7 +24,13 @@ namespace RentLog.Cashiering
         public MainWindowVM(DateTime date, AppArguments appArguments, bool clickRefresh = true) : base(appArguments)
         {
             Date          = date;
-            _colxnsDB     = AppArgs.Collections.For(Date, false);
+            _colxnsDB     = AppArgs.Collections.For(Date);
+            if (_colxnsDB == null)
+            {
+                MessageBox.Show("Nothing to review yet.");
+                Application.Current.Shutdown();
+                return;
+            }
             CashierColxns = new CashierColxnsVM(_colxnsDB.CashierColxns, AppArgs);
             OtherColxns   = new OtherColxnsVM(_colxnsDB.OtherColxns, AppArgs);
             BankDeposits  = new BankDepositsVM(_colxnsDB.BankDeposits, AppArgs);
