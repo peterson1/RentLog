@@ -8,6 +8,6 @@ namespace RentLog.DomainLib11.CollectionRepos
         DateTime                      LastPostedDate ();
         DateTime                      UnclosedDate   ();
         IOrderedEnumerable<DateTime>  AllDates       ();
-        ICollectionsDB                For            (DateTime date);
+        ICollectionsDB                For            (DateTime date, bool createIfMissing);
     }
 }

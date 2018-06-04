@@ -23,7 +23,7 @@ namespace RentLog.Cashiering
         public MainWindowVM(DateTime date, AppArguments appArguments, bool clickRefresh = true) : base(appArguments)
         {
             Date          = date;
-            _colxnsDB     = AppArgs.Collections.For(Date);
+            _colxnsDB     = AppArgs.Collections.For(Date, false);
             CashierColxns = new CashierColxnsVM(_colxnsDB.CashierColxns, AppArgs);
             OtherColxns   = new OtherColxnsVM(_colxnsDB.OtherColxns, AppArgs);
             BankDeposits  = new BankDepositsVM(_colxnsDB.BankDeposits, AppArgs);

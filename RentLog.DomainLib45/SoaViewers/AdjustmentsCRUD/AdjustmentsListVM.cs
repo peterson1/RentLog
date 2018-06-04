@@ -80,7 +80,7 @@ namespace RentLog.DomainLib45.SoaViewers.AdjustmentsCRUD
 
 
         private static IBalanceAdjustmentsRepo GetRepo(DateTime date, AppArguments args)
-            => args.Collections.For(date).BalanceAdjs;
+            => args.Collections.For(date, false).BalanceAdjs;
 
 
         protected override Func<BalanceAdjustmentDTO, decimal> SummedAmount => _ => _.AmountOffset;
