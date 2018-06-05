@@ -64,6 +64,12 @@ namespace RentLog.Cashiering.MainToolbar
                         var jobs = MarketDayCloser.GetActions(Main.AppArgs);
                         Parallel.Invoke(jobs.ToArray());
                     });
+                    //await Task.Delay(1);
+                    //var jobs = MarketDayCloser.GetActions(Main.AppArgs);
+                    //foreach (var job in jobs)
+                    //{
+                    //    job.Invoke();
+                    //}
 
                     MessageBox.Show($"Successfully posted collections for {Main.Date:d-MMM-yyyy}{L.F}"
                              + $"The next market day [{Main.Date.AddDays(1):d-MMM-yyyy}] is now open for encoding.",

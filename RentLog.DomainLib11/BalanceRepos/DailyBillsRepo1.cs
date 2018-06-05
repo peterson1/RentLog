@@ -63,7 +63,8 @@ namespace RentLog.DomainLib11.BalanceRepos
         public void OpenNextDay(DateTime unclosedDate)
         {
             var nextDay = unclosedDate.AddDays(1);
-            Upsert(DailyBillDTO.CreateFor(nextDay));
+            Delete(nextDay.ToBillID());
+            Insert(DailyBillDTO.CreateFor(nextDay));
 
             var dtos = GetRecomputedFrom(unclosedDate);
 

@@ -87,6 +87,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BankDeposits\BankDepCrudVM.cs" />
+    <Compile Include="BankDeposits\BankDepositEditWindow.xaml.cs">
+      <DependentUpon>BankDepositEditWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BankDeposits\BankDepositsTable.xaml.cs">
       <DependentUpon>BankDepositsTable.xaml</DependentUpon>
     </Compile>
@@ -148,6 +152,10 @@
       <DependentUpon>UncollectedsUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="SectionTabs\Uncollecteds\UncollectedsVM.cs" />
+    <Page Include="BankDeposits\BankDepositEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="BankDeposits\BankDepositsTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

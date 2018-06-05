@@ -17,5 +17,7 @@ namespace RentLog.Cashiering.BankDeposits
 
 
         protected override Func<BankDepositDTO, decimal> SummedAmount => _ => _.Amount;
+
+
     }
 }

@@ -51,6 +51,8 @@
 
                 <Button Style="{StaticResource squareBtnPlus}"
                         Visibility="{Binding CanAddRows, Converter={StaticResource visIfTrue}}"
+                        Command="{Binding AddNewCmd}"
+                        ToolTip="{Binding AddNewCmd.CurrentLabel}"
                         Margin="15 0 0 0" />
             </StackPanel>
             
