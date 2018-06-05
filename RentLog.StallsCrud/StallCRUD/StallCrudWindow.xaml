@@ -147,7 +147,7 @@
             </StackPanel>
         </StackPanel>
 
-        <TextBox Text="{Binding Draft.Remarks}"
+        <TextBox Text="{Binding Draft.Remarks, UpdateSourceTrigger=PropertyChanged}"
                     mat:HintAssist.Hint="remarks" />
 
         <TextBlock Text="{Binding WhyInvalid}"
