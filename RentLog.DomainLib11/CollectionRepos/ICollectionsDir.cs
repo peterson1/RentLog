@@ -9,5 +9,6 @@ namespace RentLog.DomainLib11.CollectionRepos
         DateTime                      UnclosedDate   ();
         IOrderedEnumerable<DateTime>  AllDates       ();
         ICollectionsDB                For            (DateTime date);
+        ICollectionsDB                CreateFor      (DateTime date);
     }
 }

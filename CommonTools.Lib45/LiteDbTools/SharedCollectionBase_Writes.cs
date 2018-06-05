@@ -144,6 +144,13 @@ namespace CommonTools.Lib45.LiteDbTools
         }
 
 
+        public void Drop()
+        {
+            using (var db = _db.OpenWrite())
+                db.DropCollection(GetCollection(db).Name);
+        }
+
+
         protected void SetCurrentFields(IDocumentDTO model)
         {
             model.Author    = _db.CurrentUser;

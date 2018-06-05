@@ -81,10 +81,12 @@
     <Compile Include="BillRowComposerTests\RightsBillComposerFacts.cs" />
     <Compile Include="CashieringVMTests\ReviewerVMFacts1.cs" />
     <Compile Include="CashieringVMTests\CashieringVMFacts.cs" />
+    <Compile Include="CollectionsDirTests\CollectionsDirBaseFacts.cs" />
     <Compile Include="CollectionsDirTests\CollectionsDirFacts.cs" />
     <Compile Include="ColxnSummaryTests\ColxnSummaryFacts.cs" />
     <Compile Include="DailyBillsRepoTests\DailyBillsRepo1Facts.cs" />
     <Compile Include="DailyColxnsTests\DailyColxnsFacts.cs" />
+    <Compile Include="DailyStatusTests\DailyStatusReportFacts.cs" />
     <Compile Include="LeasesRepoTests\ActiveLeasesRepoReaderFacts.cs" />
     <Compile Include="LeasesRepoTests\ActiveLeasesRepoWriterFacts.cs" />
     <Compile Include="LeasesRepoTests\InactiveLeasesRepoWriterFacts.cs" />
@@ -92,6 +94,7 @@
     <Compile Include="SampleDBs\SampleArgs.cs" />
     <Compile Include="SampleDBs\SampleDBsDir.cs" />
     <Compile Include="SectionsRepoTests\SectionsRepoFacts.cs" />
+    <Compile Include="StallsInventoryTests\StallsInventoryReportFacts.cs" />
     <Compile Include="StallsRepoTests\StallsRepoReaderFacts.cs" />
     <Compile Include="StallsRepoTests\StallsRepoWriterFacts.cs" />
     <Compile Include="StateTransitionTests\LeaseDeactivatorFacts.cs" />

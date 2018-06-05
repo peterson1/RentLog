@@ -18,6 +18,7 @@ namespace CommonTools.Lib11.DatabaseTools
         Dictionary<int, T> ToDictionary();
 
         int     Insert   (T newRecord);
+        void    Insert   (IEnumerable<T> records, bool doValidate);
                          
         bool    Update   (T changedRecord);
         void    Update   (IEnumerable<T> records, bool doValidate);
@@ -25,5 +26,7 @@ namespace CommonTools.Lib11.DatabaseTools
         bool    Upsert   (T record);
         bool    Delete   (T record);
         bool    Delete   (int recordId);
+
+        void    Drop     ();
     }
 }

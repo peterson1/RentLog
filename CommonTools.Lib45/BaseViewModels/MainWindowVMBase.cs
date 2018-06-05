@@ -5,6 +5,7 @@ using CommonTools.Lib45.ThreadTools;
 using CommonTools.Lib45.UIExtensions;
 using PropertyChanged;
 using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -86,9 +87,11 @@ namespace CommonTools.Lib45.BaseViewModels
             StopBeingBusy();
         }
 
+        protected virtual void ApplyWindowTheme     (Window win) { }
         protected virtual void OnRefreshClicked     () { }
         protected virtual void OnPrintClicked       () => PrintClicked?.Invoke(this, EventArgs.Empty);
         protected virtual Task OnRefreshClickedAsync() => Task.Delay(0);
+        protected virtual void OnWindowClosing      (CancelEventArgs cancelEvtArgs) { }
         public void ClickRefresh() => RefreshCmd.ExecuteIfItCan();
 
 
@@ -108,6 +111,7 @@ namespace CommonTools.Lib45.BaseViewModels
             _win.MakeDraggable();
             _win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             _win.SnapsToDevicePixels = true;
+            _win.Closing += (s, e) => OnWindowClosing(e);
 
             #if DEBUG
             _win.SetToCloseOnEscape();
@@ -124,11 +128,6 @@ namespace CommonTools.Lib45.BaseViewModels
                 if (hideWindow) _win.Hide();
                 return null;
             }
-        }
-
-
-        protected virtual void ApplyWindowTheme(Window win)
-        {
         }
 
 

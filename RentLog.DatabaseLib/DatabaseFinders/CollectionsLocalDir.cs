@@ -59,22 +59,27 @@ namespace RentLog.DatabaseLib.DatabaseFinders
         }
 
 
-        public override ICollectionsDB For (DateTime date)
+        protected override ICollectionsDB ConnectToDB(DateTime date, string file)
         {
-            var file = AsFilePath(date);
-            if (!File.Exists(file)) return null;
-
             var db                 = new SharedLiteDB(file, _mkt.CurrentUser);
             var colxnsDB           = new CollectionsDB1(db.Metadata, _mkt);
             SetIntendedColxns(colxnsDB.IntendedColxns, db);
             SetAmbulantColxns(colxnsDB.AmbulantColxns, db);
             SetUncollecteds  (colxnsDB.Uncollecteds  , db);
             SetNoOperations  (colxnsDB.NoOperations  , db);
+            SetVacantStalls  (colxnsDB.VacantStalls  , db);
             colxnsDB.CashierColxns = new CashierColxnsRepo1(new CashierColxnsCollection(db));
             colxnsDB.OtherColxns   = new OtherColxnsRepo1(new OtherColxnsCollection(db));
             colxnsDB.BankDeposits  = new BankDepositsRepo1(new BankDepositsCollection(db));
             colxnsDB.BalanceAdjs   = new BalanceAdjsRepo1(date, new BalanceAdjsCollection(db), _mkt.Balances);
             return colxnsDB;
+        }
+
+
+        protected override bool TryFindDB(DateTime date, out string path)
+        {
+            path = AsFilePath(date);
+            return File.Exists(path);
         }
 
 
@@ -117,6 +122,17 @@ namespace RentLog.DatabaseLib.DatabaseFinders
             {
                 var colxn = new NoOperationsCollection(sec, db);
                 var repo  = new NoOperationsRepo1(colxn);
+                dict.Add(sec.Id, repo);
+            }
+        }
+
+
+        private void SetVacantStalls(Dictionary<int, IVacantStallsRepo> dict, SharedLiteDB db)
+        {
+            foreach (var sec in _mkt.Sections.GetAll())
+            {
+                var colxn = new VacantStallsCollection(sec, db);
+                var repo  = new VacantStallsRepo1(colxn);
                 dict.Add(sec.Id, repo);
             }
         }

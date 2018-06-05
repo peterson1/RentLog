@@ -33,7 +33,11 @@ namespace RentLog.DomainLib11.MarketStateRepos
         }
 
 
+        public List<StallDTO> ForSection(int sectionID)
+            => ToSortedList(_repo.GetAll().Where(_ => _.Section.Id == sectionID));
+
+
         public List<StallDTO> ForSection(SectionDTO section)
-            => ToSortedList(_repo.GetAll().Where(_ => _.Section.Id == section.Id));
+            => ForSection(section.Id);
     }
 }

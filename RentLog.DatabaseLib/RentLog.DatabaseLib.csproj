@@ -53,6 +53,7 @@
     <Compile Include="DailyColxnsRepository\NoOperationsCollection.cs" />
     <Compile Include="DailyColxnsRepository\OtherColxnsCollection.cs" />
     <Compile Include="DailyColxnsRepository\UncollectedsCollection.cs" />
+    <Compile Include="DailyColxnsRepository\VacantStallsCollection.cs" />
     <Compile Include="DatabaseFinders\BalancesLocalDir.cs" />
     <Compile Include="DatabaseFinders\CollectionsLocalDir.cs" />
     <Compile Include="DatabaseFinders\MarketStateDBFile.cs" />

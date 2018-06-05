@@ -95,10 +95,13 @@ namespace RentLog.Tests.CashieringVMTests
         }
 
 
-        [Fact(DisplayName = "Encoding newly closed creates DB file for next day", Skip = "Undone")]
-        public void TestMethod()
+        [Fact(DisplayName = "Encoding newly closed won't exit")]
+        public void EncodingnewlyclosedcreatesDBfilefornextday()
         {
-
+            var args = new MockDBsDir();
+            args.Credentials.Roles = "Cashier";
+            var sut  = new MainWindowVM(3.May(2018), args);
+            sut.ShouldClose.Should().BeFalse();
         }
     }
 }

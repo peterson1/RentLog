@@ -6,12 +6,11 @@ namespace RentLog.DomainLib11.CollectionRepos
 {
     public abstract class CollectionsDirBase : ICollectionsDir
     {
-        public IOrderedEnumerable<DateTime> AllDates()
-            => FindAllDates().OrderBy(_ => _);
             
 
-        public    abstract ICollectionsDB         For           (DateTime dateTime);
         protected abstract IEnumerable<DateTime>  FindAllDates  ();
+        protected abstract ICollectionsDB         ConnectToDB   (DateTime date, string path);
+        protected abstract bool                   TryFindDB     (DateTime date, out string path);
 
 
         public DateTime LastPostedDate()
@@ -30,7 +29,26 @@ namespace RentLog.DomainLib11.CollectionRepos
         }
 
 
-        public DateTime UnclosedDate() => LastPostedDate().AddDays(1);
+        public ICollectionsDB For(DateTime date)
+        {
+            if (!TryFindDB(date, out string path)) return null;
+            return ConnectToDB(date, path);
+        }
+
+
+        public ICollectionsDB CreateFor(DateTime date)
+        {
+            TryFindDB(date, out string file);
+            return ConnectToDB(date, file);
+        }
+
+
+        public DateTime UnclosedDate() 
+            => LastPostedDate().AddDays(1);
+
+
+        public IOrderedEnumerable<DateTime> AllDates() 
+            => FindAllDates().OrderBy(_ => _);
     }
 }
 

@@ -1,5 +1,4 @@
 ﻿using CommonTools.Lib11.GoogleTools;
-using CommonTools.Lib45.FileSystemTools;
 using CommonTools.Lib45.LicenseTools;
 using CommonTools.Lib45.ThreadTools;
 using Mono.Options;
@@ -51,7 +50,7 @@ namespace RentLog.DomainLib45
             Credentials = creds;
 
 #if DEBUG
-            //Credentials.Roles = "Cashier";
+            Credentials.Roles = "Cashier";
 #endif
         }
 

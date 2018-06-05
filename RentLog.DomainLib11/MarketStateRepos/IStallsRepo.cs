@@ -7,5 +7,6 @@ namespace RentLog.DomainLib11.MarketStateRepos
     public interface IStallsRepo : ISimpleRepo<StallDTO>
     {
         List<StallDTO> ForSection(SectionDTO section);
+        List<StallDTO> ForSection(int sectionID);
     }
 }

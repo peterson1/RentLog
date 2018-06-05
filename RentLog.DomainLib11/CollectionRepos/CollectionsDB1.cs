@@ -30,6 +30,7 @@ namespace RentLog.DomainLib11.CollectionRepos
         public Dictionary<int, IAmbulantColxnsRepo> AmbulantColxns { get; } = new Dictionary<int, IAmbulantColxnsRepo>();
         public Dictionary<int, IUncollectedsRepo  > Uncollecteds   { get; } = new Dictionary<int, IUncollectedsRepo  >();
         public Dictionary<int, INoOperationsRepo  > NoOperations   { get; } = new Dictionary<int, INoOperationsRepo  >();
+        public Dictionary<int, IVacantStallsRepo  > VacantStalls   { get; } = new Dictionary<int, IVacantStallsRepo  >();
 
         public ICashierColxnsRepo       CashierColxns   { get; set; }
         public IOtherColxnsRepo         OtherColxns     { get; set; }

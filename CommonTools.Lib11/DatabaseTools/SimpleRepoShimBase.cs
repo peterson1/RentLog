@@ -37,6 +37,7 @@ namespace CommonTools.Lib11.DatabaseTools
         public T                  Latest       ()                                         => _repo.Latest();
         public bool               HasId        (int recordId)                             => _repo.HasId(recordId);
         public bool               HasName      (string recordName, string field = "Name") => _repo.HasName(recordName, field);
+        public void               Drop         ()                                         => _repo.Drop();
         public Dictionary<int, T> ToDictionary ()                                         => _repo.ToDictionary();
 
 
@@ -84,6 +85,15 @@ namespace CommonTools.Lib11.DatabaseTools
 
 
         public bool Delete(int recordId) => _repo.Delete(recordId);
+
+
+        public void Insert(IEnumerable<T> records, bool doValidate)
+        {
+            if (doValidate)
+                records.ForEach(_ => ValidateBeforeInsert(_));
+
+            _repo.Insert(records, doValidate);
+        }
 
 
         public void Update(IEnumerable<T> records, bool doValidate)

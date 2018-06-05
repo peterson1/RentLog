@@ -11,6 +11,7 @@ using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib45.BaseViewModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace RentLog.Cashiering
 {
@@ -62,6 +63,10 @@ namespace RentLog.Cashiering
         {
             var db = AppArgs.Collections.For(date);
             if (db != null) return db;
+
+            if (CanEncode)
+                return AppArgs.Collections.CreateFor(date);
+
             ShouldClose = true;
             WhyShouldClose = "Nothing to review yet.";
             return null;
@@ -90,6 +95,13 @@ namespace RentLog.Cashiering
 
             foreach (var tab in SectionTabs)
                 tab.ReloadAll();
+        }
+
+
+        protected override void OnWindowClosing(CancelEventArgs cancelEvtArgs)
+        {
+            if (CanEncode)
+                ColxnsDB.VacantStalls.UpdateAllLists(AppArgs.MarketState);
         }
     }
 }
