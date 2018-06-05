@@ -1,5 +1,6 @@
 ﻿using CommonTools.Lib11.ExceptionTools;
 using CommonTools.Lib45.LiteDbTools;
+using RentLog.DatabaseLib.BankAccountsRepository;
 using RentLog.DatabaseLib.CollectorsRepository;
 using RentLog.DatabaseLib.GLAccountsRepository;
 using RentLog.DatabaseLib.LeasesRepository;
@@ -35,6 +36,7 @@ namespace RentLog.DatabaseLib.DatabaseFinders
                            
             Stalls         = new StallsRepo1(new StallsCollection(mktDb), this);
             Collectors     = new CollectorsRepo1(new CollectorsCollection(mktDb), this);
+            BankAccounts   = new BankAccountsRepo1(new BankAccountsCollection(mktDb), this);
             Sections       = new SectionsRepo1(new SectionsCollection(mktDb), this);
             ActiveLeases   = new ActiveLeasesRepo1(new ActiveLeasesCollection(mktDb), this);
             InactiveLeases = new InactiveLeasesRepo1(new InactiveLeasesCollection(mktDb), this);

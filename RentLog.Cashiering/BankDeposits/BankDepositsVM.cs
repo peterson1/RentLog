@@ -8,16 +8,17 @@ namespace RentLog.Cashiering.BankDeposits
     [AddINotifyPropertyChangedInterface]
     public class BankDepositsVM : EncoderListVMBase<BankDepositDTO>
     {
-        protected override string ListTitle => "Bank Deposits";
+        private BankDepCrudVM _crud;
 
 
         public BankDepositsVM(MainWindowVM main) : base(main.ColxnsDB.BankDeposits, main)
         {
+            _crud = new BankDepCrudVM(main.ColxnsDB?.BankDeposits, main.AppArgs);
         }
 
 
+        protected override string ListTitle    => "Bank Deposits";
+        protected override void   AddNewItem() => _crud.EncodeNewDraftCmd.ExecuteIfItCan();
         protected override Func<BankDepositDTO, decimal> SummedAmount => _ => _.Amount;
-
-
     }
 }

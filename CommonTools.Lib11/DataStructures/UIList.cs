@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommonTools.Lib11.CollectionTools;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -60,8 +61,7 @@ namespace CommonTools.Lib11.DataStructures
         {
             this.Clear();
 
-            foreach (var item in items)
-                this.Add(item);
+            items?.ForEach(_ => this.Add(_));
 
             ItemsReplaced?.Invoke(this, EventArgs.Empty);
         }

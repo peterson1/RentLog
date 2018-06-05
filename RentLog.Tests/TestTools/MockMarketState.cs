@@ -10,6 +10,7 @@ namespace RentLog.Tests.TestTools
         {
             MoqStalls         = new Mock<IStallsRepo>();
             MoqSections       = new Mock<ISectionsRepo>();
+            MoqBankAccounts   = new Mock<IBankAccountsRepo>();
             MoqActiveLeases   = new Mock<IActiveLeasesRepo>();
             MoqInactiveLeases = new Mock<IInactiveLeasesRepo>();
             MoqBalanceDB      = new Mock<IBalanceDB>();
@@ -17,6 +18,7 @@ namespace RentLog.Tests.TestTools
 
         public Mock<IStallsRepo>          MoqStalls         { get; }
         public Mock<ISectionsRepo>        MoqSections       { get; }
+        public Mock<IBankAccountsRepo>    MoqBankAccounts   { get; }
         public Mock<IActiveLeasesRepo>    MoqActiveLeases   { get; }
         public Mock<IInactiveLeasesRepo>  MoqInactiveLeases { get; }
         public Mock<IBalanceDB>           MoqBalanceDB      { get; }
@@ -27,5 +29,6 @@ namespace RentLog.Tests.TestTools
         public override IActiveLeasesRepo   ActiveLeases   => MoqActiveLeases.Object;
         public override IInactiveLeasesRepo InactiveLeases => MoqInactiveLeases.Object;
         public override IBalanceDB          Balances       => MoqBalanceDB.Object;
+        public override IBankAccountsRepo   BankAccounts   => MoqBankAccounts.Object;
     }
 }

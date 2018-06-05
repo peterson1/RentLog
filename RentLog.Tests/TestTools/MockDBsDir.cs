@@ -12,11 +12,11 @@ namespace RentLog.Tests.TestTools
     {
         public Mock<ICollectionsDir> MoqCollectionsDir { get; } = new Mock<ICollectionsDir>();
         public Mock<IBalanceDB>      MoqBalanceDB      { get; } = new Mock<IBalanceDB>();
+        public MockMarketState       MoqMarketState    { get; } = new MockMarketState();
 
-        public MarketStateDB   MarketState { get; } = new MockMarketState();
-
-        public ICollectionsDir Collections => MoqCollectionsDir.Object;
-        public IBalanceDB      Balances    => MoqBalanceDB.Object;
+        public MarketStateDB    MarketState  => MoqMarketState;
+        public ICollectionsDir  Collections  => MoqCollectionsDir.Object;
+        public IBalanceDB       Balances     => MoqBalanceDB.Object;
 
 
         public bool                 IsValidUser      { get; set; } = true;

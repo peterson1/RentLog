@@ -3,8 +3,10 @@ using FluentAssertions.Extensions;
 using Moq;
 using RentLog.Cashiering;
 using RentLog.DomainLib11.CollectionRepos;
+using RentLog.DomainLib11.DTOs;
 using RentLog.Tests.TestTools;
 using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace RentLog.Tests.CashieringVMTests
@@ -19,6 +21,9 @@ namespace RentLog.Tests.CashieringVMTests
             var date = 2.May(2018);
 
             args.Credentials.Roles = "Supervisor";
+
+            //args.MoqMarketState.MoqBankAccounts.Setup(_ 
+            //    => _.GetAll()).Returns(new List<BankAccountDTO>());
 
             args.MoqCollectionsDir.Setup(_ 
                 => _.For(date))

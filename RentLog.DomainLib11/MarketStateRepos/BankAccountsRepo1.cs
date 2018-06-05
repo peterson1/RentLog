@@ -4,19 +4,18 @@ using RentLog.DomainLib11.Validations;
 
 namespace RentLog.DomainLib11.MarketStateRepos
 {
-    public class CollectorsRepo1 : MarketStateRepoShimBase<CollectorDTO>, ICollectorsRepo
+    public class BankAccountsRepo1 : MarketStateRepoShimBase<BankAccountDTO>, IBankAccountsRepo
     {
-        public CollectorsRepo1(ISimpleRepo<CollectorDTO> simpleRepo, MarketStateDB marketStateDB) : base(simpleRepo, marketStateDB)
+        public BankAccountsRepo1(ISimpleRepo<BankAccountDTO> simpleRepo, MarketStateDB marketStateDB) : base(simpleRepo, marketStateDB)
         {
         }
 
-
-        protected override void ValidateBeforeInsert(CollectorDTO newRecord)
+        protected override void ValidateBeforeInsert(BankAccountDTO newRecord)
             => this.RejectDuplicateRecord(_ => _.Name == newRecord.Name,
                     nameof(newRecord.Name), newRecord);
 
 
-        protected override void ValidateBeforeUpdate(CollectorDTO changedRecord)
+        protected override void ValidateBeforeUpdate(BankAccountDTO changedRecord)
             => this.RejectDuplicateRecord(_ => _.Name == changedRecord.Name,
                     nameof(changedRecord.Name), changedRecord, _ => _.Id);
     }

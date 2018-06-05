@@ -1,18 +1,10 @@
-﻿using CommonTools.Lib11.DataStructures;
-using CommonTools.Lib11.DTOs;
-using CommonTools.Lib11.ReflectionTools;
-using RentLog.DomainLib11.Models;
+﻿using RentLog.DomainLib11.Models;
 using System;
 
 namespace RentLog.DomainLib11.DTOs
 {
-    public class LeaseDTO : IDocumentDTO, ICloneable
+    public class LeaseDTO : DocumentDTOBase
     {
-        public int        Id           { get; set; }
-        public string     Author       { get; set; }
-        public DateTime   Timestamp    { get; set; }
-        public string     Remarks      { get; set; }
-
         public TenantModel   Tenant                { get; set; }
         public StallDTO      Stall                 { get; set; }
         public DateTime      ContractStart         { get; set; }
@@ -27,9 +19,5 @@ namespace RentLog.DomainLib11.DTOs
         public DateTime FirstRentDueDate  => ContractStart.AddDays(Rent?.GracePeriodDays ?? 0);
         public DateTime RightsDueDate     => ContractStart.AddDays(Rights?.SettlementDays ?? 0);
         public override string ToString() => TenantAndStall;
-
-
-        public T DeepClone<T>() => throw new NotImplementedException();
-        public T ShallowClone<T>() => (T)this.MemberwiseClone();
     }
 }

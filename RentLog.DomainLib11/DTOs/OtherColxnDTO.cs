@@ -13,23 +13,14 @@ namespace RentLog.DomainLib11.DTOs
         Other          = 4
     }
 
-    public class OtherColxnDTO : IDocumentDTO, ICloneable
+    public class OtherColxnDTO : DocumentDTOBase
     {
-        public int        Id         { get; set; }
-        public string     Author     { get; set; }
-        public DateTime   Timestamp  { get; set; }
-        public string     Remarks    { get; set; }
-
         public string         DocumentRef  { get; set; }
         public CollectorDTO   Collector    { get; set; }
         public decimal        Amount       { get; set; }
                               
         public OtherCode      OtherCode    { get; set; }
         public GLAccountDTO   GLAccount    { get; set; }
-
-
-        public T DeepClone   <T>() => throw new NotImplementedException();
-        public T ShallowClone<T>() => (T)this.MemberwiseClone();
     }
 
 

@@ -12,6 +12,7 @@ namespace RentLog.DomainLib11.MarketStateRepos
         public virtual IStallsRepo          Stalls          { get; set; }
         public virtual ISectionsRepo        Sections        { get; set; }
         public virtual ICollectorsRepo      Collectors      { get; set; }
+        public virtual IBankAccountsRepo    BankAccounts    { get; set; }
         public virtual IActiveLeasesRepo    ActiveLeases    { get; set; }
         public virtual IInactiveLeasesRepo  InactiveLeases  { get; set; }
         public virtual IGLAccountsRepo      GLAccounts      { get; set; }
