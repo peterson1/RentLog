@@ -41,6 +41,7 @@ namespace CommonTools.Lib45.BaseViewModels
         protected virtual void   UpdateRecord       (TDraft record) { }
         protected virtual Task   UpdateRecordAsync  (TDraft record) => Task.Delay(0);
         protected virtual TDraft GetNewDraft        () => new TDraft();
+        protected virtual void   ModifyDraftForEditing(TDraft draft) { }
 
         protected virtual void OnSaveCompleted    () { }
 
@@ -73,6 +74,7 @@ namespace CommonTools.Lib45.BaseViewModels
         {
             SaveDraftCmd = R2Command.Async(ExecuteUpdateRecord, _ => CanSave(), $"Save {TypeDescription}");
             Draft = CreateDraftFromRecord(currentItem);
+            ModifyDraftForEditing(Draft);
             return this.Show<TWindow>(showModal: true);
         }
 

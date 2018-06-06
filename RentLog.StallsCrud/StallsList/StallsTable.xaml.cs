@@ -11,9 +11,7 @@ namespace RentLog.StallsCrud.StallsList
             InitializeComponent();
             Loaded += (a, b) =>
             {
-                dg.ConfirmToDelete<StallRow>(
-                    _ => $"Are you sure you want to delete the entry for “{_.DTO.Name}”?");
-
+                dg.ConfirmToDelete<StallRow>(_ => _.DTO.Name);
                 dg.EnableOpenCurrent<StallRow>();
                 dg.ScrollToEndOnChange();
             };

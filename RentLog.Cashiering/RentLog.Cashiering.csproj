@@ -104,6 +104,10 @@
       <DependentUpon>BankDepositsUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="BankDeposits\BankDepositsVM.cs" />
+    <Compile Include="CashierCollections\CashierColxnCrudVM.cs" />
+    <Compile Include="CashierCollections\CashierColxnCrudWindow.xaml.cs">
+      <DependentUpon>CashierColxnCrudWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CashierCollections\CashierColxnsTable.xaml.cs">
       <DependentUpon>CashierColxnsTable.xaml</DependentUpon>
     </Compile>
@@ -167,6 +171,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BankDeposits\BankDepositsUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CashierCollections\CashierColxnCrudWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

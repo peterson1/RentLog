@@ -22,5 +22,9 @@ namespace RentLog.DomainLib11.DTOs
             Remarks   = this.Remarks,
             Collector = CollectorDTO.Office(),
         };
+
+
+        public override string ToString()
+            => $"‹CashierColxn› from [{Lease}]";
     }
 }

@@ -14,6 +14,6 @@ namespace RentLog.DomainLib11.DTOs
 
 
         public override string ToString()
-            => $"‹Bank Deposit› to {BankAccount}";
+            => $"P{Amount:N2} ‹Bank Deposit› ({DocumentRef})";
     }
 }

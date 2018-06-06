@@ -1,28 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using CommonTools.Lib45.UIExtensions;
+using RentLog.DomainLib11.DTOs;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace RentLog.Cashiering.CashierCollections
 {
-    /// <summary>
-    /// Interaction logic for CashierColxnsTable.xaml
-    /// </summary>
     public partial class CashierColxnsTable : UserControl
     {
         public CashierColxnsTable()
         {
             InitializeComponent();
+            Loaded += (a, b) =>
+            {
+                dg.ConfirmToDelete<CashierColxnDTO>(_ => _.ToString());
+                dg.EnableOpenCurrent<CashierColxnDTO>();
+                dg.ScrollToEndOnChange();
+            };
         }
     }
 }

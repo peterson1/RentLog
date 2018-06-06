@@ -18,7 +18,6 @@ namespace RentLog.Cashiering.BankDeposits
         public BankDepCrudVM(IBankDepositsRepo repository, ITenantDBsDir dir) : base(repository, dir)
         {
             BankAccounts.SetItems(dir.MarketState.BankAccounts.GetAll());
-            
         }
 
 
@@ -32,6 +31,10 @@ namespace RentLog.Cashiering.BankDeposits
                 Description = Descriptions.First(),
                 DepositDate = DateTime.Now.AddDays(-1).Date,
             };
+
+
+        protected override void ModifyDraftForEditing(BankDepositDTO draft)
+            => draft.BankAccount = BankAccounts.SingleOrDefault(_ => _.Id == draft.BankAccount.Id);
 
 
         protected override bool IsValidDraft(BankDepositDTO draft, out string whyInvalid)
@@ -50,7 +53,7 @@ namespace RentLog.Cashiering.BankDeposits
 
             if (draft.DocumentRef.IsBlank())
             {
-                whyInvalid = "Document Ref # should not be blank.";
+                whyInvalid = "Deposit slip # should not be blank.";
                 return false;
             }
 

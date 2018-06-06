@@ -8,24 +8,19 @@ namespace RentLog.Cashiering.CashierCollections
     [AddINotifyPropertyChangedInterface]
     public class CashierColxnsVM : EncoderListVMBase<CashierColxnDTO>
     {
-        protected override string ListTitle => "Tenant Payments to Office";
+        private CashierColxnCrudVM _crud;
 
 
         public CashierColxnsVM(MainWindowVM main) : base(main.ColxnsDB.CashierColxns, main)
         {
+            _crud = new CashierColxnCrudVM(main.ColxnsDB?.CashierColxns, main.AppArgs);
         }
 
 
-        //protected override IEnumerable<CashierColxnDTO> PostProcessQueried(IEnumerable<CashierColxnDTO> items)
-        //{
-        //    foreach (var item in items)
-        //        AppArgs.MarketState.RefreshStall(item.Lease);
-        //
-        //    return items;
-        //}
-
-
+        protected override string ListTitle => "Tenant Payments to Office";
         protected override Func<CashierColxnDTO, LeaseDTO> LeaseGetter => _ => _.Lease;
         protected override Func<CashierColxnDTO, decimal>  SummedAmount => _ => _.Amount;
+        protected override void AddNewItem() => _crud.EncodeNewDraftCmd.ExecuteIfItCan();
+        protected override void OnItemOpened(CashierColxnDTO e) => _crud.EditCurrentRecord(e);
     }
 }

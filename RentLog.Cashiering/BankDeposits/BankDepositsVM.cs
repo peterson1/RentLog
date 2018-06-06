@@ -19,6 +19,7 @@ namespace RentLog.Cashiering.BankDeposits
 
         protected override string ListTitle    => "Bank Deposits";
         protected override void   AddNewItem() => _crud.EncodeNewDraftCmd.ExecuteIfItCan();
+        protected override void OnItemOpened(BankDepositDTO e) => _crud.EditCurrentRecord(e);
         protected override Func<BankDepositDTO, decimal> SummedAmount => _ => _.Amount;
     }
 }
