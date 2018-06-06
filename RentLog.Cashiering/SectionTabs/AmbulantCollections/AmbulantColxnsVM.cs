@@ -1,9 +1,7 @@
-﻿using CommonTools.Lib11.DatabaseTools;
-using PropertyChanged;
+﻿using PropertyChanged;
 using RentLog.Cashiering.CommonControls;
-using RentLog.DomainLib11.DataSources;
+using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DTOs;
-using RentLog.DomainLib45;
 using System;
 
 namespace RentLog.Cashiering.SectionTabs.AmbulantCollections
@@ -11,16 +9,21 @@ namespace RentLog.Cashiering.SectionTabs.AmbulantCollections
     [AddINotifyPropertyChangedInterface]
     public class AmbulantColxnsVM : EncoderListVMBase<AmbulantColxnDTO>
     {
-        protected override string ListTitle => "Ambulant Collections";
+        private AmbulantColxnCrudVM _crud;
 
 
-        public AmbulantColxnsVM(SectionDTO sec, MainWindowVM main) 
-            : base(main.ColxnsDB.AmbulantColxns[sec.Id], main)
+        public AmbulantColxnsVM(SectionDTO sec, MainWindowVM main)
+            : base(GetRepo(sec, main), main)
         {
             TotalVisible = false;
+            _crud = new AmbulantColxnCrudVM(sec, GetRepo(sec, main), main.AppArgs);
         }
 
 
+        private static IAmbulantColxnsRepo GetRepo(SectionDTO sec, MainWindowVM main)
+            => main.ColxnsDB.AmbulantColxns[sec.Id];
+
         protected override Func<AmbulantColxnDTO, decimal> SummedAmount => _ => _.Amount;
+        protected override string ListTitle => "Ambulant Collections";
     }
 }

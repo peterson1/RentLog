@@ -28,5 +28,9 @@ namespace CommonTools.Lib11.DatabaseTools
         bool    Delete   (int recordId);
 
         void    Drop     ();
+
+        bool  IsValidForInsert  (T draft, out string whyInvalid);
+        bool  IsValidForUpdate  (T record, out string whyInvalid);
+        bool  IsValidForDelete  (T record, out string whyInvalid);
     }
 }

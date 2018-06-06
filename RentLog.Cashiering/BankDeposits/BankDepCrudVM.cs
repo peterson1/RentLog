@@ -35,6 +35,7 @@ namespace RentLog.Cashiering.BankDeposits
 
         protected override bool IsValidDraft(BankDepositDTO draft, out string whyInvalid)
         {
+            //_repo.IsValidForInsert()
             if (draft.Amount <= 0)
             {
                 whyInvalid = "Amount should be greater than zero.";

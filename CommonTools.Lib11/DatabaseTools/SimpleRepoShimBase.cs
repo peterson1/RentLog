@@ -103,5 +103,36 @@ namespace CommonTools.Lib11.DatabaseTools
 
             _repo.Update(records, doValidate);
         }
+
+
+        public virtual bool IsValidForInsert(T draft, out string whyInvalid)
+        {
+            whyInvalid = string.Empty;
+            return true;
+        }
+
+        public virtual bool IsValidForUpdate(T record, out string whyInvalid)
+        {
+            //if (!HasValidId(record, out whyInvalid)) return false;
+            whyInvalid = string.Empty;
+            return true;
+        }
+
+        public virtual bool IsValidForDelete(T record, out string whyInvalid)
+        {
+            whyInvalid = string.Empty;
+            return true;
+        }
+
+
+        //private bool HasValidId(T record, out string whyInvalid)
+        //{
+        //    if (!(record is IDocumentDTO doc))
+        //    {
+        //        whyInvalid = string.Empty;
+        //        return true;
+        //    }
+        //    if (doc.Id)
+        //}
     }
 }
