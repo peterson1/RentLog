@@ -123,6 +123,10 @@
       <DependentUpon>MainToolbarUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainToolbar\PostAndCloseVM.cs" />
+    <Compile Include="OtherCollections\OtherColxnCrudVM.cs" />
+    <Compile Include="OtherCollections\OtherColxnCrudWindow.xaml.cs">
+      <DependentUpon>OtherColxnCrudWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="OtherCollections\OtherColxnsTable.xaml.cs">
       <DependentUpon>OtherColxnsTable.xaml</DependentUpon>
     </Compile>
@@ -206,6 +210,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="OtherCollections\OtherColxnCrudWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="OtherCollections\OtherColxnsTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

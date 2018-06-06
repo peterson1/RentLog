@@ -11,14 +11,18 @@ namespace RentLog.Cashiering.OtherCollections
     [AddINotifyPropertyChangedInterface]
     public class OtherColxnsVM : EncoderListVMBase<OtherColxnDTO>
     {
-        protected override string ListTitle => "Other Collections";
+        private OtherColxnCrudVM _crud;
 
 
         public OtherColxnsVM(MainWindowVM main) : base(main.ColxnsDB.OtherColxns, main)
         {
+            _crud = new OtherColxnCrudVM(main.ColxnsDB?.OtherColxns, main.AppArgs);
         }
 
 
         protected override Func<OtherColxnDTO, decimal> SummedAmount => _ => _.Amount;
+        protected override string ListTitle => "Other Collections";
+        protected override void AddNewItem() => _crud.EncodeNewDraftCmd.ExecuteIfItCan();
+        protected override void OnItemOpened(OtherColxnDTO e) => _crud.EditCurrentRecord(e);
     }
 }

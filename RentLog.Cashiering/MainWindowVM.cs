@@ -18,7 +18,8 @@ namespace RentLog.Cashiering
     [AddINotifyPropertyChangedInterface]
     public class MainWindowVM : BrandedWindowBase
     {
-        public override string SubAppName => $"Cashiering  :  Collections for {Date:MMMM d, yyyy}";
+        private string UserTask => CanReview ? "Reviewing" : "Encoding";
+        public override string SubAppName => $"Cashiering  :  {UserTask} Collections for {Date:MMMM d, yyyy}";
 
 
         public MainWindowVM(DateTime date, ITenantDBsDir tenantDBsDir, bool clickRefresh = true) : base(tenantDBsDir)

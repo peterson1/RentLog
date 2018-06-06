@@ -11,10 +11,6 @@ namespace RentLog.Cashiering.BankDeposits
 {
     public class BankDepCrudVM : RepoCrudWindowVMBase<IBankDepositsRepo, BankDepositDTO, BankDepositEditWindow, ITenantDBsDir>
     {
-        public    override string TypeDescription => "Bank Deposit";
-        protected override string CaptionPrefix   => "Bank Deposit";
-
-
         public BankDepCrudVM(IBankDepositsRepo repository, ITenantDBsDir dir) : base(repository, dir)
         {
             BankAccounts.SetItems(dir.MarketState.BankAccounts.GetAll());
@@ -60,5 +56,9 @@ namespace RentLog.Cashiering.BankDeposits
             whyInvalid = "";
             return true;
         }
+
+
+        public    override string TypeDescription => "Bank Deposit";
+        protected override string CaptionPrefix   => "Bank Deposit";
     }
 }
