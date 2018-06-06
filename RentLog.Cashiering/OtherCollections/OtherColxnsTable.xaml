@@ -14,11 +14,11 @@
             <DataGridTextColumn Header="PR #" Width="10*"
                                 Binding="{Binding DocumentRef}" 
                                 ElementStyle="{StaticResource colSmallWrapCenter}" />
-            <DataGridTextColumn Header="received from" Width="55*"
+            <DataGridTextColumn Header="received from" Width="45*"
                                 Binding="{Binding Collector.Name}" 
                                 ElementStyle="{StaticResource colSmallWrapCenter}" />
-            <DataGridTextColumn Header="payment" Width="15*"
-                                Binding="{Binding OtherCode}" 
+            <DataGridTextColumn Header="payment" Width="25*"
+                                Binding="{Binding PaymentFor}" 
                                 ElementStyle="{StaticResource colSmallWrapCenter}" />
             <DataGridTextColumn Header="amount" Width="20*"
                                 Binding="{Binding Amount, StringFormat=N2}" 

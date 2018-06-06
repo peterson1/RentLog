@@ -21,6 +21,12 @@ namespace RentLog.DomainLib11.DTOs
                               
         public OtherCode      OtherCode    { get; set; }
         public GLAccountDTO   GLAccount    { get; set; }
+
+        public string PaymentFor => GLAccount?.Name ?? OtherCode.ToString();
+
+
+        public override string ToString()
+            => $"P{Amount:N2} ‹Other Colxn› for “{PaymentFor}”";
     }
 
 
