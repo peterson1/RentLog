@@ -1,4 +1,6 @@
-﻿namespace RentLog.DomainLib11.DTOs
+﻿using CommonTools.Lib11.DTOs;
+
+namespace RentLog.DomainLib11.DTOs
 {
     public class SectionDTO : DocumentDTOBase
     {

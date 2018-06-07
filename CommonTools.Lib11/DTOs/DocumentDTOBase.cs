@@ -1,8 +1,7 @@
-﻿using CommonTools.Lib11.DTOs;
-using CommonTools.Lib11.ReflectionTools;
+﻿using CommonTools.Lib11.ReflectionTools;
 using System;
 
-namespace RentLog.DomainLib11.DTOs
+namespace CommonTools.Lib11.DTOs
 {
     public abstract class DocumentDTOBase : IDocumentDTO, ICloneable
     {

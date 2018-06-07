@@ -1,4 +1,5 @@
-﻿using RentLog.DomainLib11.Models;
+﻿using CommonTools.Lib11.DTOs;
+using RentLog.DomainLib11.Models;
 using static RentLog.DomainLib11.DTOs.DailyBillDTO;
 
 namespace RentLog.DomainLib11.DTOs
