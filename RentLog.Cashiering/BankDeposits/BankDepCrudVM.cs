@@ -33,32 +33,6 @@ namespace RentLog.Cashiering.BankDeposits
             => draft.BankAccount = BankAccounts.SingleOrDefault(_ => _.Id == draft.BankAccount.Id);
 
 
-        protected override bool IsValidDraft(BankDepositDTO draft, out string whyInvalid)
-        {
-            //_repo.IsValidForInsert()
-            if (draft.Amount <= 0)
-            {
-                whyInvalid = "Amount should be greater than zero.";
-                return false;
-            }
-
-            if (draft.BankAccount == null)
-            {
-                whyInvalid = "Bank Account should have a value.";
-                return false;
-            }
-
-            if (draft.DocumentRef.IsBlank())
-            {
-                whyInvalid = "Deposit slip # should not be blank.";
-                return false;
-            }
-
-            whyInvalid = "";
-            return true;
-        }
-
-
         public    override string TypeDescription => "Bank Deposit";
         protected override string CaptionPrefix   => "Bank Deposit";
     }

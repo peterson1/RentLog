@@ -1,4 +1,5 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
+using CommonTools.Lib11.DTOs;
 using CommonTools.Lib11.GoogleTools;
 using PropertyChanged;
 using System.Windows;
@@ -28,5 +29,24 @@ namespace CommonTools.Lib45.BaseViewModels
 
         protected override void UpdateRecord(TDraft record)
             => _repo.Update(record);
+
+
+        protected override bool IsValidDraft(TDraft draft, out string whyInvalid)
+        {
+            if (draft is IDocumentDTO doc)
+            {
+                if (doc.Id == 0)
+                {
+                    if (!_repo.IsValidForInsert(draft, out whyInvalid)) return false;
+                }
+                else
+                {
+                    if (!_repo.IsValidForUpdate(draft, out whyInvalid)) return false;
+                }
+            }
+
+            whyInvalid = string.Empty;
+            return true;
+        }
     }
 }

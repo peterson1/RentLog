@@ -1,5 +1,6 @@
 ﻿using CommonTools.Lib11.CollectionTools;
 using CommonTools.Lib11.DTOs;
+using CommonTools.Lib11.StringTools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -113,26 +114,30 @@ namespace CommonTools.Lib11.DatabaseTools
 
         public virtual bool IsValidForUpdate(T record, out string whyInvalid)
         {
-            //if (!HasValidId(record, out whyInvalid)) return false;
+            if (!HasValidId(record, out whyInvalid)) return false;
             whyInvalid = string.Empty;
             return true;
         }
 
         public virtual bool IsValidForDelete(T record, out string whyInvalid)
         {
+            if (!HasValidId(record, out whyInvalid)) return false;
             whyInvalid = string.Empty;
             return true;
         }
 
 
-        //private bool HasValidId(T record, out string whyInvalid)
-        //{
-        //    if (!(record is IDocumentDTO doc))
-        //    {
-        //        whyInvalid = string.Empty;
-        //        return true;
-        //    }
-        //    if (doc.Id)
-        //}
+        private bool HasValidId(T record, out string whyInvalid)
+        {
+            if (!(record is IDocumentDTO doc))
+            {
+                whyInvalid = string.Empty;
+                return true;
+            }
+            whyInvalid = doc.Id > 0 ? string.Empty
+                       : $"‹{typeof(T).Name}› Id should be greater than zero, but was [{doc.Id}].";
+
+            return whyInvalid.IsBlank();
+        }
     }
 }
