@@ -42,7 +42,7 @@ namespace RentLog.LeasesCrud.LeasesList
 
         private void AddStallToTenant()
         {
-            if (!TryGetPickedRow(out LeaseDTO lse)) return;
+            if (!TryGetPickedItem(out LeaseDTO lse)) return;
             Crud.TenantTemplate = lse.Tenant.ShallowClone();
             Crud.DraftBirthDate = lse.Tenant.BirthDate;
             Crud.EncodeNewDraftCmd.ExecuteIfItCan();
@@ -51,14 +51,14 @@ namespace RentLog.LeasesCrud.LeasesList
 
         private void EditThisLease()
         {
-            if (!TryGetPickedRow(out LeaseDTO lse)) return;
+            if (!TryGetPickedItem(out LeaseDTO lse)) return;
             Crud.EditCurrentRecord(lse);
         }
 
 
         private void TerminateThisLease()
         {
-            if (!TryGetPickedRow(out LeaseDTO lse)) return;
+            if (!TryGetPickedItem(out LeaseDTO lse)) return;
 
             var resp = MessageBox.Show($"Are you sure you want to terminate the lease for {L.f} {lse}?",
                 "   Confirm Termination", MessageBoxButton.YesNo, MessageBoxImage.Question);

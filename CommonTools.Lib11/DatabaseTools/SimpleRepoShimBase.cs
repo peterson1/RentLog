@@ -31,7 +31,7 @@ namespace CommonTools.Lib11.DatabaseTools
         protected List<T> ToSortedList(IEnumerable<T> items) => ToSorted(items).ToList();
 
 
-        public virtual List<T>    GetAll       ()                                         => ToSortedList(_repo.GetAll());
+        public List<T>            GetAll       ()                                         => ToSortedList(_repo.GetAll());
         public List<T>            Find         (Expression<Func<T, bool>> predicate)      => ToSortedList(_repo.Find(predicate));
         public T                  Find         (int recordId, bool errorIfMissing)        => _repo.Find(recordId, errorIfMissing);
         public T                  Earliest     ()                                         => _repo.Earliest();

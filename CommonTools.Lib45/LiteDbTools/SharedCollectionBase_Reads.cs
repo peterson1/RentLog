@@ -37,6 +37,12 @@ namespace CommonTools.Lib45.LiteDbTools
 
         public List<T> Find(Expression<Func<T, bool>> predicate)
         {
+            if (_hasCustomIndeces)
+            {
+                using (var db = _db.OpenWrite())
+                    EnsureIndeces(GetCollection(db));
+            }
+
             using (var db = _db.OpenRead())
                 return GetCollection(db).Find(predicate).ToList();
         }

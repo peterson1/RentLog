@@ -24,7 +24,7 @@ namespace RentLog.DatabaseLib.DatabaseFinders
             ActiveRequests   = new FundRequestsRepo1(new ActiveRequestsCollection(pbkDb));
             InactiveRequests = new FundRequestsRepo1(new InactiveRequestsCollection(pbkDb));
             PreparedCheques  = new PreparedChequesRepo1(new ChequeVouchersCollection(pbkDb));
-            IssuedCheques    = new IssuedChequesRepo1(new ChequeVouchersCollection(pbkDb));
+            //IssuedCheques    = new IssuedChequesRepo1(new ChequeVouchersCollection(pbkDb));
         }
 
 

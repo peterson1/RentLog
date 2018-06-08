@@ -11,10 +11,12 @@ namespace CommonTools.Lib45.LiteDbTools
         where T : IDocumentDTO
     {
         public event EventHandler<T> ContentChanged;
+        private bool _hasCustomIndeces = true;
 
 
         protected virtual void EnsureIndeces(LiteCollection<T> coll)
         {
+            _hasCustomIndeces = false;
         }
 
 

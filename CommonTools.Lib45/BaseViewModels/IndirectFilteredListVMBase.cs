@@ -54,7 +54,7 @@ namespace CommonTools.Lib45.BaseViewModels
         }
 
 
-        protected bool TryGetPickedRow(out TDTO dto)
+        protected override bool TryGetPickedItem(out TDTO dto)
         {
             dto = Rows.CurrentItem?.DTO;
             return dto != null;

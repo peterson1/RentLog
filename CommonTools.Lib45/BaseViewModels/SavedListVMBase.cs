@@ -103,6 +103,11 @@ namespace CommonTools.Lib45.BaseViewModels
             => db.GetAll();
 
 
+        protected virtual bool TryGetPickedItem(out TDTO dto)
+        {
+            dto = ItemsList.CurrentItem;
+            return dto != null;
+        }
 
 
         protected void UpdateTotalSum()
