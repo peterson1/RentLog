@@ -109,10 +109,19 @@
     <Compile Include="VoucherReqsTab\FundRequests\FundReqsTable.xaml.cs">
       <DependentUpon>FundReqsTable.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VoucherReqsTab\IssuedCheques\IssuedChequesFilterUI.xaml.cs">
+      <DependentUpon>IssuedChequesFilterUI.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VoucherReqsTab\IssuedCheques\IssuedChequesListUI.xaml.cs">
       <DependentUpon>IssuedChequesListUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="VoucherReqsTab\IssuedCheques\IssuedChequesListVM.cs" />
+    <Compile Include="VoucherReqsTab\IssuedCheques\IssuedChequesTable.xaml.cs">
+      <DependentUpon>IssuedChequesTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VoucherReqsTab\PreparedCheques\PreparedChequesFilterUI.xaml.cs">
+      <DependentUpon>PreparedChequesFilterUI.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VoucherReqsTab\PreparedCheques\PreparedChequesListUI.xaml.cs">
       <DependentUpon>PreparedChequesListUI.xaml</DependentUpon>
     </Compile>
@@ -160,7 +169,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="VoucherReqsTab\IssuedCheques\IssuedChequesFilterUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="VoucherReqsTab\IssuedCheques\IssuedChequesListUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VoucherReqsTab\IssuedCheques\IssuedChequesTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VoucherReqsTab\PreparedCheques\PreparedChequesFilterUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

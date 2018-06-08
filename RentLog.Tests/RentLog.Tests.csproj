@@ -105,6 +105,7 @@
     <Compile Include="TestTools\MockDBsDir.cs" />
     <Compile Include="TestTools\MockMarketState.cs" />
     <Compile Include="TotalOverduesTests\TotalOverduesFacts.cs" />
+    <Compile Include="VoucherTabVMTests\FundReqsListVMFacts.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -125,6 +126,10 @@
     <ProjectReference Include="..\RentLog.Cashiering\RentLog.Cashiering.csproj">
       <Project>{1c8f1fad-7ea6-40c6-bc43-69a9dc070d03}</Project>
       <Name>RentLog.Cashiering</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RentLog.ChequeVouchers\RentLog.ChequeVouchers.csproj">
+      <Project>{2967913e-cab8-479c-b1a5-93dab1afbb1e}</Project>
+      <Name>RentLog.ChequeVouchers</Name>
     </ProjectReference>
     <ProjectReference Include="..\RentLog.DatabaseLib\RentLog.DatabaseLib.csproj">
       <Project>{a1aaa1a9-81d2-4db6-8bd1-d7de5f57ccb2}</Project>

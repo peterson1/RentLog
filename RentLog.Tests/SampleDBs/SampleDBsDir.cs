@@ -27,14 +27,14 @@ namespace RentLog.Tests.SampleDBs
     internal static class SampleDir
     {
         internal const string LEASE_197  = "2018-05-12 Lease 197 - DRY 008";
-        internal const string MAY_19_GARAY = "2018-05-19 F_Garay";
+        internal const string MAY_19_F_GRY = "2018-05-19 F_GRY";
 
 
         internal static SampleDBsDir Lease197(out LeaseDTO lse)
             => Load(LEASE_197, 197, out lse);
 
 
-        internal static SampleDBsDir May_19_F_Garay() => Load(MAY_19_GARAY);
+        internal static SampleDBsDir May_19_F_GRY() => Load(MAY_19_F_GRY);
 
 
         internal static string FindDB(string folderName)

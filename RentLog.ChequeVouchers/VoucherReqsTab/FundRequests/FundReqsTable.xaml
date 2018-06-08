@@ -10,7 +10,7 @@
               ItemsSource="{Binding }"
               DataContext="{Binding ItemsList}">
         <DataGrid.Columns>
-            <DataGridTextColumn Width="08*" Header="req #"     Binding="{Binding SerialNum, StringFormat=000#}" ElementStyle="{StaticResource colCenter}" />
+            <DataGridTextColumn Width="08*" Header="req #"     Binding="{Binding SerialNum, StringFormat=000#}" ElementStyle="{StaticResource colSmallWrapCenter}" />
             <DataGridTextColumn Width="15*" Header="requested" Binding="{Binding RequestDate, StringFormat=d MMM yyyy}" ElementStyle="{StaticResource colSmallWrapCenter}" />
             <DataGridTextColumn Width="20*" Header="payee"     Binding="{Binding Payee}" ElementStyle="{StaticResource colSmallWrapRightBold}" />
             <DataGridTextColumn Width="39*" Header="purpose"   Binding="{Binding Purpose}" ElementStyle="{StaticResource colSmallWrapLeft}" />

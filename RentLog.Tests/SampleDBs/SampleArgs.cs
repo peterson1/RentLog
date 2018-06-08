@@ -29,5 +29,12 @@ namespace RentLog.Tests.SampleDBs
             SampleArgs.DirName = SampleDir.LEASE_197;
             return new SampleArgs();
         }
+
+
+        internal static SampleArgs May19_GRY()
+        {
+            SampleArgs.DirName = SampleDir.MAY_19_F_GRY;
+            return new SampleArgs();
+        }
     }
 }
