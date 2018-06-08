@@ -1,8 +1,7 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
-using CommonTools.Lib11.DataStructures;
 using CommonTools.Lib11.DTOs;
 using CommonTools.Lib11.GoogleTools;
-using CommonTools.Lib45.LiteDbTools;
+using CommonTools.Lib45.ThreadTools;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -36,7 +35,7 @@ namespace CommonTools.Lib45.BaseViewModels
         {
             var list = _queried.ToList();
             Filter.RemoveNonMatches(ref list);
-            ItemsList.SetItems(list);
+            UIThread.Run(() => ItemsList.SetItems(list));
         }
     }
 }

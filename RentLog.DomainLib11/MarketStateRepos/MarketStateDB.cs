@@ -9,6 +9,8 @@ namespace RentLog.DomainLib11.MarketStateRepos
     {
         public virtual string               DatabasePath    { get; set; }
         public virtual string               CurrentUser     { get; set; }
+        public virtual string               SystemName      { get; set; }
+        public virtual string               BranchName      { get; set; }
         public virtual IStallsRepo          Stalls          { get; set; }
         public virtual ISectionsRepo        Sections        { get; set; }
         public virtual ICollectorsRepo      Collectors      { get; set; }
@@ -16,8 +18,6 @@ namespace RentLog.DomainLib11.MarketStateRepos
         public virtual IActiveLeasesRepo    ActiveLeases    { get; set; }
         public virtual IInactiveLeasesRepo  InactiveLeases  { get; set; }
         public virtual IGLAccountsRepo      GLAccounts      { get; set; }
-        public virtual string               SystemName      { get; set; }
-        public virtual string               BranchName      { get; set; }
 
         public virtual IBalanceDB           Balances        { get; set; }
         public virtual ICollectionsDir      Collections     { get; set; }

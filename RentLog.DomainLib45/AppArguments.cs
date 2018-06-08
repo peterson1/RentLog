@@ -4,6 +4,7 @@ using CommonTools.Lib45.ThreadTools;
 using Mono.Options;
 using RentLog.DatabaseLib.DatabaseFinders;
 using RentLog.DomainLib11.BalanceRepos;
+using RentLog.DomainLib11.ChequeVoucherRepos;
 using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
@@ -19,6 +20,7 @@ namespace RentLog.DomainLib45
             Parse(Environment.GetCommandLineArgs());
             CurrentUser = Credentials?.HumanName ?? "Anonymous";
             MarketState = GetMarketStateDB();
+            Vouchers    = GetChequeVouchersDB(MarketState);
             Balances    = new BalancesLocalDir    (MarketState);
             Collections = new CollectionsLocalDir (MarketState);
         }
@@ -33,6 +35,7 @@ namespace RentLog.DomainLib45
         public string               Param1           { get; private set; }
 
         public MarketStateDB        MarketState      { get; }
+        public ChequeVouchersDB     Vouchers         { get; }
         public ICollectionsDir      Collections      { get; }
         public IBalanceDB           Balances         { get; }
         public SectionDTO           CurrentSection   { get; set; }
@@ -40,6 +43,10 @@ namespace RentLog.DomainLib45
 
         protected virtual MarketStateDB GetMarketStateDB() 
             => new MarketStateDBFile(DbFilePath, CurrentUser);
+
+
+        protected ChequeVouchersDB GetChequeVouchersDB(MarketStateDB marketState)
+            => new PassbookDBFile(marketState);
 
 
         private void SetCredentials(string key)
@@ -50,7 +57,7 @@ namespace RentLog.DomainLib45
             Credentials = creds;
 
 #if DEBUG
-            Credentials.Roles = "Cashier";
+            //Credentials.Roles = "Cashier";
 #endif
         }
 

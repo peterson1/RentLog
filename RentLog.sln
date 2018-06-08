@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentLog.Cashiering", "RentL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentLog.ReportLauncher", "RentLog.ReportLauncher\RentLog.ReportLauncher.csproj", "{E7E0032E-DAE6-45FC-9F54-0D8C324DEAC3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentLog.ChequeVouchers", "RentLog.ChequeVouchers\RentLog.ChequeVouchers.csproj", "{2967913E-CAB8-479C-B1A5-93DAB1AFBB1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{E7E0032E-DAE6-45FC-9F54-0D8C324DEAC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7E0032E-DAE6-45FC-9F54-0D8C324DEAC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7E0032E-DAE6-45FC-9F54-0D8C324DEAC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2967913E-CAB8-479C-B1A5-93DAB1AFBB1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2967913E-CAB8-479C-B1A5-93DAB1AFBB1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2967913E-CAB8-479C-B1A5-93DAB1AFBB1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2967913E-CAB8-479C-B1A5-93DAB1AFBB1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

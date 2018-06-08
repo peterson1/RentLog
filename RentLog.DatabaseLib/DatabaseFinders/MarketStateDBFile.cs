@@ -16,9 +16,6 @@ namespace RentLog.DatabaseLib.DatabaseFinders
     {
         private const string SYSTEM_NAME_KEY = "SystemName";
         private const string BRANCH_NAME_KEY = "BranchName";
-        private const string PASSBOOKDB_FILE = "Passbooks.ldb";
-
-
         private string _mktDbPath;
         private string _currUsr;
 
@@ -52,12 +49,13 @@ namespace RentLog.DatabaseLib.DatabaseFinders
 
         private T TryLoadPassbookDB<T>(Func<MarketStateDB, T> getter)
         {
-            var dir    = Path.GetDirectoryName(_mktDbPath);
-            var dbPath = Path.Combine(dir, PASSBOOKDB_FILE);
+            //var dir    = Path.GetDirectoryName(_mktDbPath);
+            //var dbPath = Path.Combine(dir, PassbookDBFile.FILENAME);
+            //
+            //if (!File.Exists(dbPath))
+            //    throw Missing.File(dbPath, "Passbook DB file");
 
-            if (!File.Exists(dbPath))
-                throw Missing.File(dbPath, "Passbook DB file");
-
+            var dbPath = PassbookDBFile.GetDbPath(this);
             var pbkDb  = new SharedLiteDB(dbPath, _currUsr);
             GLAccounts = new GLAccountsRepo1(new GLAccountsCollection(pbkDb), this);
             return getter(this);
