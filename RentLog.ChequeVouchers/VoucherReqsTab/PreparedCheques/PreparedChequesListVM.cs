@@ -1,4 +1,5 @@
-﻿using CommonTools.Lib45.BaseViewModels;
+﻿using System;
+using CommonTools.Lib45.BaseViewModels;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 
@@ -9,6 +10,10 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.PreparedCheques
         public PreparedChequesListVM(ITenantDBsDir dir) 
             : base(dir.Vouchers.PreparedCheques, dir, false)
         {
+            Caption = "Prepared Cheques";
         }
+
+
+        protected override Func<ChequeVoucherDTO, decimal> SummedAmount => _ => _.Request.Amount ?? 0;
     }
 }

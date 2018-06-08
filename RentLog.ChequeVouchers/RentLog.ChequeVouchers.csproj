@@ -117,6 +117,9 @@
       <DependentUpon>PreparedChequesListUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="VoucherReqsTab\PreparedCheques\PreparedChequesListVM.cs" />
+    <Compile Include="VoucherReqsTab\PreparedCheques\PreparedChequesTable.xaml.cs">
+      <DependentUpon>PreparedChequesTable.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VoucherReqsTab\VoucherReqsTabUI.xaml.cs">
       <DependentUpon>VoucherReqsTabUI.xaml</DependentUpon>
     </Compile>
@@ -162,6 +165,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VoucherReqsTab\PreparedCheques\PreparedChequesListUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VoucherReqsTab\PreparedCheques\PreparedChequesTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
