@@ -1,6 +1,6 @@
-﻿using CommonTools.Lib11.StringTools;
-using Newtonsoft.Json;
-using System;
+﻿using CommonTools.Lib11.ExceptionTools;
+using CommonTools.Lib11.StringTools;
+using System.IO;
 
 namespace CommonTools.Lib11.JsonTools
 {
@@ -10,19 +10,26 @@ namespace CommonTools.Lib11.JsonTools
         {
             try
             {
-                return JsonConvert.DeserializeObject<T>(json);
+                return json.ReadJson_Unsafe<T>();
             }
-            catch (Exception ex)
+            catch (FileNotFoundException ex)
             {
-                throw new InvalidCastException(ex.Message);
+                throw Missing.File(ex.FileName, "Json Serializer library");
             }
         }
 
 
         public static string ToJson(this object obj, bool indented = false)
-            => JsonConvert.SerializeObject(obj, 
-                indented ? Formatting.Indented : Formatting.None);
-
+        {
+            try
+            {
+                return obj.ToJson_Unsafe(indented);
+            }
+            catch (FileNotFoundException ex)
+            {
+                throw Missing.File(ex.FileName, "Json Serializer library");
+            }
+        }
 
         public static string SHA1OfJson(this object obj)
             => obj.ToJson().SHA1ForUTF8();
