@@ -6,7 +6,20 @@
              xmlns:local="clr-namespace:RentLog.ChequeVouchers.VoucherReqsTab.PreparedCheques"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ContextMenu x:Key="rowCtxMenu">
+            <MenuItem Header ="{Binding MainMethodCmd.CurrentLabel}" 
+                      Command="{Binding MainMethodCmd}"
+                      DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+        </ContextMenu>
+
+        <Style TargetType="DataGridRow"
+               BasedOn="{StaticResource MaterialDesignDataGridRow}">
+            <Setter Property="ContextMenu" Value="{StaticResource rowCtxMenu}" />
+        </Style>
+    </UserControl.Resources>
     <DataGrid x:Name="dg" Style="{StaticResource dgReadOnly}"
+              SelectedItem="{Binding CurrentItem}"
               ItemsSource="{Binding }"
               DataContext="{Binding ItemsList}">
         <DataGrid.Columns>

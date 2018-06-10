@@ -29,9 +29,10 @@ namespace CommonTools.Lib45.BaseViewModels
             _repo      = repository;
             if (_repo == null) return;
 
-            AppArgs    = appArguments;
-            AddNewCmd  = R2Command.Relay(AddNewItem, null, "Add New Item");
-            RefreshCmd = R2Command.Relay(ReloadFromDB, null, "Refresh");
+            AppArgs       = appArguments;
+            AddNewCmd     = R2Command.Relay(AddNewItem, null, "Add New Item");
+            RefreshCmd    = R2Command.Relay(ReloadFromDB, null, "Refresh");
+            MainMethodCmd = R2Command.Relay(RunMainMethod, _ => PrivateCanRunMain(), MainMethodCmdLabel);
 
             _repo.ContentChanged        += (s, e) => ReloadFromDB();
             ItemsList.ItemDeleted       += (s, e) => ExecuteDeleteRecord(e);
@@ -42,15 +43,17 @@ namespace CommonTools.Lib45.BaseViewModels
         }
 
 
-        public TArg          AppArgs     { get; }
-        public IR2Command    AddNewCmd   { get; }
-        public IR2Command    RefreshCmd  { get; }
-        public UIList<TDTO>  ItemsList   { get; } = new UIList<TDTO>();
-        public TDTO          Selected    { get; set; }
-        public decimal       TotalSum    { get; private set; }
-        public string        Caption     { get; protected set; }
+        public TArg          AppArgs         { get; }
+        public IR2Command    AddNewCmd       { get; }
+        public IR2Command    MainMethodCmd   { get; }
+        public IR2Command    RefreshCmd      { get; }
+        public UIList<TDTO>  ItemsList       { get; } = new UIList<TDTO>();
+        public TDTO          Selected        { get; set; }
+        public decimal       TotalSum        { get; private set; }
+        public string        Caption         { get; protected set; }
 
 
+        protected virtual string MainMethodCmdLabel => "Main Method";
         protected virtual Func<TDTO, decimal> SummedAmount { get; }
         protected virtual void AddNewItem          () { }
         protected virtual bool CanDeletetRecord    (TDTO rec) => true;
@@ -58,6 +61,25 @@ namespace CommonTools.Lib45.BaseViewModels
         protected virtual void LoadRecordForEditing(TDTO rec) { }
         protected virtual IEnumerable<TDTO> PostProcessQueried(IEnumerable<TDTO> items) => items;
         protected virtual void OnSelectedChanged() => SelectedChanged?.Invoke(this, Selected);
+
+
+        protected virtual bool  CanRunMainMethod  () => true;
+        protected virtual void  RunMainMethod     () { }
+
+
+        private bool PrivateCanRunMain()
+        {
+            if (!CanRunMainMethod()) return false;
+            MainMethodCmd.CurrentLabel = MainMethodCmdLabel;
+            return true;
+        }
+
+
+        protected bool CantDo(string whyNot)
+        {
+            MainMethodCmd.CurrentLabel = $"{MainMethodCmdLabel} -- {whyNot}";
+            return false;
+        }
 
 
         protected void ExecuteDeleteRecord(TDTO dto)

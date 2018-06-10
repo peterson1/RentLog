@@ -7,6 +7,7 @@ namespace CommonTools.Lib11.InputCommands
     public interface IR2Command : ICommand
     {
         string    CurrentLabel      { get; set; }
+        string    OriginalLabel     { get; }
         bool      IsBusy            { get; }
         bool      IsCheckable       { get; set; }
         bool      IsChecked         { get; set; }

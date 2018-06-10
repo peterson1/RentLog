@@ -1,6 +1,5 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
 using CommonTools.Lib45.LiteDbTools;
-using LiteDB;
 using RentLog.DomainLib11.DTOs;
 
 namespace RentLog.DatabaseLib.ChequeVouchersRepository
@@ -15,10 +14,8 @@ namespace RentLog.DatabaseLib.ChequeVouchersRepository
         }
 
 
-        protected override void EnsureIndeces(LiteCollection<ChequeVoucherDTO> coll)
-        {
-            coll.EnsureIndex(_ => _.IssuedDate, false);
-            //coll.EnsureIndex(_ => _.ChequeNumber, false);
-        }
+        // LiteDB currently doesn't support indexing Nullable<DateTime>
+        //protected override void EnsureIndeces(LiteCollection<ChequeVoucherDTO> coll)
+        //    => coll.EnsureIndex(_ => _.IssuedDate, false);
     }
 }

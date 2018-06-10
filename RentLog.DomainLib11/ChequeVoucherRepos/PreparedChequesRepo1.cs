@@ -15,17 +15,13 @@ namespace RentLog.DomainLib11.ChequeVoucherRepos
 
 
         public List<ChequeVoucherDTO> GetIssuedCheques()
-            => Find(_ => _.IssuedDate.HasValue);
-            //=> Find(_ => _.ChequeNumber <= 2000);
+            //=> Find(_ => _.IssuedDate.HasValue);
+            => GetAll().Where(_ => _.IssuedDate.HasValue).ToList();
 
 
         public List<ChequeVoucherDTO> GetNonIssuedCheques()
-            => Find(_ => !_.IssuedDate.HasValue);
-            //=> Find(_ => _.ChequeNumber > 2000);
-
-
-        //public override List<ChequeVoucherDTO> GetAll()
-        //    => base.GetAll().Where(_ => !_.IssuedDate.HasValue).ToList();
+            //=> Find(_ => !_.IssuedDate.HasValue);
+            => GetAll().Where(_ => !_.IssuedDate.HasValue).ToList();
 
 
         public override bool IsValidForInsert(ChequeVoucherDTO draft, out string whyInvalid)

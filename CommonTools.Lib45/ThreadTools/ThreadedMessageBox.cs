@@ -57,8 +57,9 @@ namespace CommonTools.Lib45.ThreadTools
         }
 
 
-        public static void Confirm(string caption, string message,
+        public static void Confirm(string message,
                                    Action action,
+                                   string caption = "Please Confirm",
                                    MessageBoxImage messageBoxImage = MessageBoxImage.Question,
                                    MessageBoxButton messageBoxButton = MessageBoxButton.YesNo)
         {

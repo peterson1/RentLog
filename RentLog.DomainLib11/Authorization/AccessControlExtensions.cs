@@ -10,7 +10,16 @@ namespace RentLog.DomainLib11.Authorization
 
 
         public static bool CanInputChequeDetails(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
-            "Input Cheque Details", "Admin", "Supervisor");
+            "Input Cheque Details", "Supervisor", "Admin");
+
+        public static bool CanIssueChequeToPayee(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
+            "Issue Cheque to Payee", "Supervisor", "Admin");
+
+        public static bool CanTakeBackIssuedCheque(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
+            "Issue Cheque to Payee", "Cashier", "Supervisor", "Admin");
+
+        public static bool CanMarkChequeAsCleared(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
+            "Mark Cheque as “Cleared”", "Admin", "Supervisor");
 
 
 

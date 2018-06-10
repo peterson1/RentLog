@@ -36,6 +36,8 @@ namespace CommonTools.Lib45.InputCommands
 
         public Func<object, Task>  AsyncTask  { get; }
 
+        public string OriginalLabel => _origLabel;
+
         public Task RunAsync(object arg = null) => AsyncTask(arg);
 
 
