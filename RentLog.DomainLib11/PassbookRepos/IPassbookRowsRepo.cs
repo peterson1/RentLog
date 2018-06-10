@@ -6,7 +6,7 @@ namespace RentLog.DomainLib11.PassbookRepos
     public interface IPassbookRowsRepo
     {
         int BankAccountID { get; }
-        void InsertClearedCheque(ChequeVoucherDTO cheque, DateTime date);
+        void InsertClearedCheque(ChequeVoucherDTO cheque, DateTime clearedDate);
         void RecomputeBalancesFrom(DateTime date);
     }
 }

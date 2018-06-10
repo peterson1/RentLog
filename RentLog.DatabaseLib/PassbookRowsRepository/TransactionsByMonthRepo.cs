@@ -26,7 +26,7 @@ namespace RentLog.DatabaseLib.PassbookRowsRepository
             var dbPath = GetDbPath(date);
             var txnDB  = new SharedLiteDB(dbPath, _usr);
             var colxn  = new PassbookRowCollection(BankAccountID, txnDB);
-            return new PassbookRowsSimpleRepo(BankAccountID, colxn);
+            return new PassbookRowsSimpleRepo(colxn);
         }
 
 

@@ -1,5 +1,6 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
 using CommonTools.Lib11.ExceptionTools;
+using CommonTools.Lib11.StringTools;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.StateTransitions;
 using System;
@@ -18,15 +19,35 @@ namespace RentLog.DomainLib11.PassbookRepos
         public int BankAccountID { get; }
 
 
-        public void InsertClearedCheque(ChequeVoucherDTO cheque, DateTime date)
+        public void InsertClearedCheque(ChequeVoucherDTO cheque, DateTime clearedDate)
         {
-            var repo = FindRepo(date);
-            var row  = cheque.ToPassbookRow();
+            var whyNot = GetWhyInvalid(cheque);
+            if (!whyNot.IsBlank())
+                throw Bad.Insert(cheque, whyNot);
 
-            if (!repo.IsValidForInsert(row, out string whyNot))
+            var repo = FindRepo(clearedDate);
+            var row  = cheque.ToPassbookRow(clearedDate);
+            if (!repo.IsValidForInsert(row, out whyNot))
                 throw Bad.Insert(row, whyNot);
 
             repo.Insert(row);
+        }
+
+
+        private string GetWhyInvalid(ChequeVoucherDTO cheque)
+        {
+            var req = cheque.Request;
+
+            if (req == null)
+                return "Request object should not be NULL.";
+
+            if (req.BankAccountId != BankAccountID)
+                return $"Expected Bank Acct ID to be [{BankAccountID}] but was [{req.BankAccountId}]";
+
+            if (!req.Amount.HasValue)
+                return "Requested amount should not be blank.";
+
+            return string.Empty;
         }
 
 
