@@ -1,4 +1,5 @@
-﻿using CommonTools.Lib11.DTOs;
+﻿using CommonTools.Lib11.DateTimeTools;
+using CommonTools.Lib11.DTOs;
 using RentLog.DomainLib11.Models;
 using System;
 using System.Collections.Generic;
@@ -60,7 +61,7 @@ namespace RentLog.DomainLib11.DTOs
 
 
         public static DailyBillDTO CreateFor(DateTime date)
-            => new DailyBillDTO { Id = date.ToBillID() };
+            => new DailyBillDTO { Id = date.DaysSinceMin() };
     }
 
 
@@ -70,7 +71,7 @@ namespace RentLog.DomainLib11.DTOs
             => DateTime.MinValue.AddDays(dto.Id);
 
 
-        public static int ToBillID(this DateTime businessDate)
-            => (businessDate - DateTime.MinValue).Days;
+        //public static int ToBillID(this DateTime businessDate)
+        //    => (businessDate - DateTime.MinValue).Days;
     }
 }

@@ -2,6 +2,7 @@
 using Moq;
 using RentLog.DomainLib11.ChequeVoucherRepos;
 using RentLog.DomainLib11.DTOs;
+using RentLog.DomainLib11.PassbookRepos;
 using System;
 using Xunit;
 
@@ -61,6 +62,30 @@ namespace RentLog.Tests.ChequeVouchersDBTests
             chq.IssuedDate.Should().BeNull();
             chq.IssuedTo  .Should().BeNullOrWhiteSpace();
             repo.Verify(_ => _.Update(chq), Times.Once);
+        }
+
+
+        [Fact(DisplayName = "Set As Cleared")]
+        public void SetAsCleared()
+        {
+            var chqDb = new Mock<IChequeVouchersRepo>();
+            var pbkDb = new Mock<IPassbookDB>();
+            var pRepo = new Mock<IPassbookRowsRepo>();
+            var chq   = CreateValidVoucher();
+            var date  = DateTime.Now;
+            var sut = new ChequeVouchersDB
+            {
+                PreparedCheques = chqDb.Object,
+                PassbookRows    = pbkDb.Object
+            };
+            pbkDb.Setup(_ => _.GetRepo(It.IsAny<int>()))
+                 .Returns(pRepo.Object);
+
+            sut.SetAs_Cleared(chq, date);
+
+            pRepo.Verify(_ => _.InsertClearedCheque(chq, date), Times.Once);
+            pRepo.Verify(_ => _.RecomputeBalancesFrom(date), Times.Once);
+            chqDb.Verify(_ => _.Delete(chq), Times.Once);
         }
 
 

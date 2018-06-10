@@ -16,14 +16,14 @@ namespace RentLog.Tests.PreparedChequesRepoTests
         {
             var moq = new Mock<ISimpleRepo<ChequeVoucherDTO>>();
             var sut = new PreparedChequesRepo1(moq.Object);
-            var obj = ValidDraft();
+            var obj = ValidCheque();
 
             obj.Request = null;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
-            obj.Request = new FundRequestDTO { Amount = 123 };
+            obj.Request = ValidRequest();
             sut.IsValidForInsert(obj, out why).Should().BeTrue();
             sut.IsValidForUpdate(obj, out why).Should().BeTrue();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
@@ -35,7 +35,7 @@ namespace RentLog.Tests.PreparedChequesRepoTests
         {
             var moq = new Mock<ISimpleRepo<ChequeVoucherDTO>>();
             var sut = new PreparedChequesRepo1(moq.Object);
-            var obj = ValidDraft();
+            var obj = ValidCheque();
 
             obj.Request.Amount = null;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
@@ -49,12 +49,36 @@ namespace RentLog.Tests.PreparedChequesRepoTests
         }
 
 
+        [Fact(DisplayName = "Rejects invalid bank acct Id")]
+        public void RejectsinvalidbankacctId()
+        {
+            var moq = new Mock<ISimpleRepo<ChequeVoucherDTO>>();
+            var sut = new PreparedChequesRepo1(moq.Object);
+            var obj = ValidCheque();
+
+            obj.Request.BankAccountId = 0;
+            sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            sut.IsValidForUpdate(obj, out why).Should().BeFalse();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+
+            obj.Request.BankAccountId = -123;
+            sut.IsValidForInsert(obj, out why).Should().BeFalse();
+            sut.IsValidForUpdate(obj, out why).Should().BeFalse();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+
+            obj.Request.BankAccountId = 1234;
+            sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            sut.IsValidForUpdate(obj, out why).Should().BeTrue();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+        }
+
+
         [Fact(DisplayName = "Rejects invalid Cheque Number")]
         public void RejectsinvalidChequeNumber()
         {
             var moq = new Mock<ISimpleRepo<ChequeVoucherDTO>>();
             var sut = new PreparedChequesRepo1(moq.Object);
-            var obj = ValidDraft();
+            var obj = ValidCheque();
 
             obj.ChequeNumber = 0;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
@@ -78,7 +102,7 @@ namespace RentLog.Tests.PreparedChequesRepoTests
         {
             var moq = new Mock<ISimpleRepo<ChequeVoucherDTO>>();
             var sut = new PreparedChequesRepo1(moq.Object);
-            var obj = ValidDraft();
+            var obj = ValidCheque();
 
             obj.ChequeDate = DateTime.MinValue;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
@@ -92,16 +116,20 @@ namespace RentLog.Tests.PreparedChequesRepoTests
         }
 
 
-        private ChequeVoucherDTO ValidDraft()
+        private ChequeVoucherDTO ValidCheque()
             => new ChequeVoucherDTO
             {
-                Id = 123,
-                Request = new FundRequestDTO
-                {
-                    Amount = 1234
-                },
-                ChequeDate = DateTime.Now,
+                Id           = 123,
+                Request      = ValidRequest(),
+                ChequeDate   = DateTime.Now,
                 ChequeNumber = 12345
             };
+
+        private static FundRequestDTO ValidRequest() 
+            => new FundRequestDTO
+        {
+            Amount        = 1234,
+            BankAccountId = 1,
+        };
     }
 }

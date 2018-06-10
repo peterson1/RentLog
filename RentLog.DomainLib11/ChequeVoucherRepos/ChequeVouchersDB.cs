@@ -1,4 +1,5 @@
 ﻿using RentLog.DomainLib11.DTOs;
+using RentLog.DomainLib11.PassbookRepos;
 using System;
 
 namespace RentLog.DomainLib11.ChequeVoucherRepos
@@ -8,7 +9,7 @@ namespace RentLog.DomainLib11.ChequeVoucherRepos
         public virtual IFundRequestsRepo    ActiveRequests    { get; set; }
         public virtual IFundRequestsRepo    InactiveRequests  { get; set; }
         public virtual IChequeVouchersRepo  PreparedCheques   { get; set; }
-
+        public virtual IPassbookDB          PassbookRows      { get; set; }
 
         public void SetAs_Prepared(FundRequestDTO request, 
             DateTime chequeDate, int chequeNumber)
@@ -36,7 +37,10 @@ namespace RentLog.DomainLib11.ChequeVoucherRepos
 
         public void SetAs_Cleared(ChequeVoucherDTO chq, DateTime date)
         {
-            throw new NotImplementedException();
+            var passbk = PassbookRows.GetRepo(chq.Request.BankAccountId);
+            passbk.InsertClearedCheque(chq, date);
+            passbk.RecomputeBalancesFrom(date);
+            PreparedCheques.Delete(chq);
         }
 
 

@@ -1,5 +1,6 @@
 ﻿using CommonTools.Lib11.CollectionTools;
 using CommonTools.Lib11.DatabaseTools;
+using CommonTools.Lib11.DateTimeTools;
 using RentLog.DomainLib11.BillingRules;
 using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DTOs;
@@ -36,13 +37,13 @@ namespace RentLog.DomainLib11.BalanceRepos
 
         private List<DailyBillDTO> GetRecomputedFrom(DateTime date)
         {
-            var minID  = date.ToBillID();
+            var minID  = date.DaysSinceMin();
             var affctd = _repo.Find   (_ => _.Id >= minID)
                               .OrderBy(_ => _.Id).ToList();
 
             foreach (var billCode in BillCodes.Collected())
             {
-                var openingBal = Find(date.AddDays(-1).ToBillID(), false)
+                var openingBal = Find(date.AddDays(-1).DaysSinceMin(), false)
                                     ?.For(billCode)?.ClosingBalance;
 
                 foreach (var dto in affctd)
@@ -63,7 +64,7 @@ namespace RentLog.DomainLib11.BalanceRepos
         public void OpenNextDay(DateTime unclosedDate)
         {
             var nextDay = unclosedDate.AddDays(1);
-            Delete(nextDay.ToBillID());
+            Delete(nextDay.DaysSinceMin());
             Insert(DailyBillDTO.CreateFor(nextDay));
 
             var dtos = GetRecomputedFrom(unclosedDate);

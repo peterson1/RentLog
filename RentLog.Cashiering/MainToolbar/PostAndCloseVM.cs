@@ -54,8 +54,7 @@ namespace RentLog.Cashiering.MainToolbar
 
 
         private void DoPostAndClose()
-            => Alert.Confirm("Please Confirm",
-                "Are you sure you want to close this day and open the next?", async () =>
+            => Alert.Confirm("Are you sure you want to close this day and open the next?", async () =>
                 {
                     Main.StartBeingBusy("Posting and Closing ...");
 

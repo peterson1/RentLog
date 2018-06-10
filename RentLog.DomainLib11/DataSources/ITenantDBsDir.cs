@@ -5,6 +5,7 @@ using RentLog.DomainLib11.ChequeVoucherRepos;
 using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
+using RentLog.DomainLib11.PassbookRepos;
 
 namespace RentLog.DomainLib11.DataSources
 {
@@ -14,6 +15,7 @@ namespace RentLog.DomainLib11.DataSources
         ChequeVouchersDB  Vouchers         { get; }
         ICollectionsDir   Collections      { get; }
         IBalanceDB        Balances         { get; }
+        IPassbookDB       Passbooks        { get; }
 
         SectionDTO        CurrentSection   { get; set; }
     }

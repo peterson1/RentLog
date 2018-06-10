@@ -9,6 +9,7 @@ using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
+using RentLog.DomainLib11.PassbookRepos;
 using System;
 
 namespace RentLog.DomainLib45
@@ -20,9 +21,10 @@ namespace RentLog.DomainLib45
             Parse(Environment.GetCommandLineArgs());
             CurrentUser = Credentials?.HumanName ?? "Anonymous";
             MarketState = GetMarketStateDB();
-            Vouchers    = GetChequeVouchersDB(MarketState);
-            Balances    = new BalancesLocalDir    (MarketState);
-            Collections = new CollectionsLocalDir (MarketState);
+            Vouchers    = GetChequeVouchersDB        (MarketState);
+            Balances    = new BalancesLocalDir       (MarketState);
+            Collections = new CollectionsLocalDir    (MarketState);
+            Passbooks   = new TransactionsByMonthDir (MarketState);
         }
 
 
@@ -38,6 +40,7 @@ namespace RentLog.DomainLib45
         public ChequeVouchersDB     Vouchers         { get; }
         public ICollectionsDir      Collections      { get; }
         public IBalanceDB           Balances         { get; }
+        public IPassbookDB          Passbooks        { get; }
         public SectionDTO           CurrentSection   { get; set; }
 
 

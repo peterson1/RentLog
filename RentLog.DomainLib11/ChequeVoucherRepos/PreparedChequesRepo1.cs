@@ -48,6 +48,9 @@ namespace RentLog.DomainLib11.ChequeVoucherRepos
             if (!dto.Request.Amount.HasValue)
                 return "Requested Amount should have a value.";
 
+            if (dto.Request.BankAccountId <= 0)
+                return "Bank Account ID should be greater than zero.";
+
             if (dto.ChequeNumber <= 0)
                 return "Cheque Number should be greater than zero.";
 

@@ -1,4 +1,5 @@
-﻿using CommonTools.Lib11.MathTools;
+﻿using CommonTools.Lib11.DateTimeTools;
+using CommonTools.Lib11.MathTools;
 using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
@@ -22,7 +23,7 @@ namespace RentLog.DomainLib11.BalanceRepos
         public DailyBillDTO GetBill(LeaseDTO lse, DateTime date)
         {
             var repo = GetRepo(lse);
-            var id   = date.ToBillID();
+            var id   = date.DaysSinceMin();
             return repo.Find(id, false);
         }
 
@@ -85,7 +86,7 @@ namespace RentLog.DomainLib11.BalanceRepos
         {
             var repo = GetRepo(lse);
             var bals = date.HasValue
-                     ? repo.Find(date.Value.ToBillID(), false)
+                     ? repo.Find(date.Value.DaysSinceMin(), false)
                      : repo.Latest();
             if (bals == null) return null;
 
