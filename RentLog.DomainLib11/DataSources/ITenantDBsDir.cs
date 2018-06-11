@@ -18,5 +18,6 @@ namespace RentLog.DomainLib11.DataSources
         IPassbookDB       Passbooks        { get; }
 
         SectionDTO        CurrentSection   { get; set; }
+        BankAccountDTO    CurrentBankAcct  { get; set; }
     }
 }

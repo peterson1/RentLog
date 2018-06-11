@@ -26,7 +26,7 @@ namespace RentLog.Cashiering.OtherCollections
         public UIList<GLAccountDTO>  GLAccounts  { get; } = new UIList<GLAccountDTO>();
 
 
-        protected override void ModifyDraftForEditing(OtherColxnDTO draft)
+        protected override void ModifyDraftForUpdating(OtherColxnDTO draft)
         {
             draft.Collector = Collectors.SingleOrDefault(_ => _.Id == draft.Collector.Id);
             draft.GLAccount = GLAccounts.SingleOrDefault(_ => _.Id == draft.GLAccount.Id);

@@ -4,12 +4,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RentLog.ChequeVouchers.MainToolbar"
+             xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:butns="clr-namespace:CommonTools.Lib45.StyledButtons;assembly=CommonTools.Lib45"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel Orientation="Horizontal">
 
-        
-        <butns:RefreshButtonWhite Margin="10 0 0 0" />
+        <ComboBox Style="{StaticResource MaterialDesignComboBox}"
+                  DataContext="{Binding BankAcctPicker}"
+                  ItemsSource="{Binding BankAccounts}"
+                  SelectedItem="{Binding SelectedBankAccount, UpdateSourceTrigger=PropertyChanged}"
+                  Foreground="White"
+                  x:Name="cmbBnkAccts"
+                  VerticalAlignment="Center" />
+
+        <butns:RefreshButtonWhite Margin="10 0 0 0"
+                                  VerticalAlignment="Center" />
     </StackPanel>
 </UserControl>

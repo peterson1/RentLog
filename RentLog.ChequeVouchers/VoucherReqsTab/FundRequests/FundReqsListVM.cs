@@ -4,6 +4,7 @@ using CommonTools.Lib45.BaseViewModels;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.InputDialogs;
 using CommonTools.Lib45.ThreadTools;
+using RentLog.ChequeVouchers.VoucherReqsTab.FundRequests.FundRequestCrud;
 using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
@@ -16,7 +17,12 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.FundRequests
             : base(dir.Vouchers.ActiveRequests, dir, false)
         {
             Caption = "For Cheque Preparation";
+            Crud    = new FundRequestCrudVM(dir);
         }
+
+
+        public FundRequestCrudVM  Crud  { get; }
+
 
 
         protected override bool CanRunMainMethod()

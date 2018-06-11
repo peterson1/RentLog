@@ -29,7 +29,7 @@ namespace RentLog.Cashiering.BankDeposits
             };
 
 
-        protected override void ModifyDraftForEditing(BankDepositDTO draft)
+        protected override void ModifyDraftForUpdating(BankDepositDTO draft)
             => draft.BankAccount = BankAccounts.SingleOrDefault(_ => _.Id == draft.BankAccount.Id);
 
 

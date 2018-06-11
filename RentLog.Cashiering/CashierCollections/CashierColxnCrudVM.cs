@@ -30,7 +30,7 @@ namespace RentLog.Cashiering.CashierCollections
             => AppArgs?.MarketState?.ActiveLeases?.GetAll()?.OrderBy(_ => _.Stall?.Name);
 
 
-        protected override void ModifyDraftForEditing(CashierColxnDTO draft)
+        protected override void ModifyDraftForUpdating(CashierColxnDTO draft)
             => draft.Lease = Leases.SingleOrDefault(_ => _.Id == draft.Lease.Id);
 
 

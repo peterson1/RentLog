@@ -1,6 +1,8 @@
 ﻿using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.PassbookRepos;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RentLog.DomainLib11.ChequeVoucherRepos
 {
@@ -11,6 +13,16 @@ namespace RentLog.DomainLib11.ChequeVoucherRepos
         public virtual IChequeVouchersRepo  PreparedCheques   { get; set; }
         public virtual IPassbookDB          PassbookRows      { get; set; }
 
+
+        public List<string> GetPayees()
+            => ActiveRequests.GetPayees ()
+                             .Concat    (InactiveRequests.GetPayees())
+                             .GroupBy   (_ => _)
+                             .Select    (_ => _.First())
+                             .OrderBy   (_ => _)
+                             .ToList    ();
+
+
         public void SetAs_Prepared(FundRequestDTO request, 
             DateTime chequeDate, int chequeNumber)
         {
@@ -20,10 +32,8 @@ namespace RentLog.DomainLib11.ChequeVoucherRepos
                 ChequeDate   = chequeDate,
                 ChequeNumber = chequeNumber,
             });
-
             InactiveRequests.Insert(request);
-
-            ActiveRequests.Delete(request);
+            ActiveRequests  .Delete(request);
         }
 
 

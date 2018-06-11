@@ -56,7 +56,8 @@ namespace RentLog.DomainLib11.PassbookRepos
 
         public void RecomputeBalancesFrom(DateTime date)
         {
-            throw new NotImplementedException();
+            //todo: implement this
+            //throw new NotImplementedException();
         }
     }
 }

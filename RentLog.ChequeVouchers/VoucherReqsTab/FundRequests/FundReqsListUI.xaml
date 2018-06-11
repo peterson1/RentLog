@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:butns="clr-namespace:CommonTools.Lib45.StyledButtons;assembly=CommonTools.Lib45"
              xmlns:local="clr-namespace:RentLog.ChequeVouchers.VoucherReqsTab.FundRequests"
              xmlns:common="clr-namespace:RentLog.ChequeVouchers.CommonControls"
              mc:Ignorable="d" 
@@ -12,7 +13,13 @@
             <common:LightColorZone />
             <local:FundReqsFilterUI DataContext="{Binding Filter}" />
         </StackPanel>
-        
-        <local:FundReqsTable x:Name="tbl" />
+
+        <Grid>
+            <local:FundReqsTable x:Name="tbl" />
+            <butns:EncodeNewDraftBtn1 DataContext="{Binding Crud}"
+                                      HorizontalAlignment="Right"
+                                      VerticalAlignment="Bottom"
+                                      Margin="0 0 20 20" />
+        </Grid>
     </DockPanel>
 </UserControl>

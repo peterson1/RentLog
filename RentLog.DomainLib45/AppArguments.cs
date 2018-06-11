@@ -42,6 +42,7 @@ namespace RentLog.DomainLib45
         public IBalanceDB           Balances         { get; }
         public IPassbookDB          Passbooks        { get; }
         public SectionDTO           CurrentSection   { get; set; }
+        public BankAccountDTO       CurrentBankAcct  { get; set; }
 
 
         protected virtual MarketStateDB GetMarketStateDB() 

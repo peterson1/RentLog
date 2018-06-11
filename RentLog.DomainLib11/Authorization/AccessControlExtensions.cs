@@ -9,6 +9,9 @@ namespace RentLog.DomainLib11.Authorization
         public static Action<string> OnUnauthorizedAccess;
 
 
+        public static bool CanAddVoucherRequest(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
+            "Create Voucher Request", "Supervisor", "Admin");
+
         public static bool CanInputChequeDetails(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
             "Input Cheque Details", "Supervisor", "Admin");
 

@@ -30,7 +30,7 @@ namespace CommonTools.Lib45.BaseViewModels
             if (_repo == null) return;
 
             AppArgs       = appArguments;
-            AddNewCmd     = R2Command.Relay(AddNewItem, null, "Add New Item");
+            AddNewCmd     = R2Command.Relay(AddNewItem, _ => CanAddNewItem(), "Add New Item");
             RefreshCmd    = R2Command.Relay(ReloadFromDB, null, "Refresh");
             MainMethodCmd = R2Command.Relay(RunMainMethod, _ => PrivateCanRunMain(), MainMethodCmdLabel);
 
@@ -56,6 +56,7 @@ namespace CommonTools.Lib45.BaseViewModels
         protected virtual string MainMethodCmdLabel => "Main Method";
         protected virtual Func<TDTO, decimal> SummedAmount { get; }
         protected virtual void AddNewItem          () { }
+        protected virtual bool CanAddNewItem       () => true;
         protected virtual bool CanDeletetRecord    (TDTO rec) => true;
         public    virtual bool CanEditRecord       (TDTO rec) => true;
         protected virtual void LoadRecordForEditing(TDTO rec) { }

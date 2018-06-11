@@ -1,28 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
+﻿using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace RentLog.ChequeVouchers.MainToolbar
 {
-    /// <summary>
-    /// Interaction logic for MainToolbarUI.xaml
-    /// </summary>
     public partial class MainToolbarUI : UserControl
     {
         public MainToolbarUI()
         {
             InitializeComponent();
+            Loaded += (a, b) =>
+            {
+                cmbBnkAccts.DropDownOpened += (c, d)
+                    => cmbBnkAccts.Foreground = Brushes.Black;
+
+                cmbBnkAccts.DropDownClosed += (c, d)
+                    => cmbBnkAccts.Foreground = Brushes.White;
+            };
         }
     }
 }
