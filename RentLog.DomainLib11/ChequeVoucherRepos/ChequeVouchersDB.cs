@@ -37,6 +37,18 @@ namespace RentLog.DomainLib11.ChequeVoucherRepos
         }
 
 
+        public int GetNextRequestSerial()
+        {
+            var activesMax  = ActiveRequests  .GetMaxSerial();
+            var inactivsMax = InactiveRequests.GetMaxSerial();
+            return Math.Max(activesMax, inactivsMax) + 1;
+        }
+
+
+        public DateTime GetNextRequestDate()
+            => ActiveRequests.GetMaxRequestDate();
+
+
         public void SetAs_Issued(ChequeVoucherDTO dto, DateTime issuedDate, string issuedTo)
         {
             dto.IssuedDate = issuedDate;

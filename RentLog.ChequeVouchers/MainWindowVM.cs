@@ -13,10 +13,9 @@ namespace RentLog.ChequeVouchers
     {
         public MainWindowVM(ITenantDBsDir tenantDBsDir) : base(tenantDBsDir)
         {
-            BankAcctPicker = new BankAccountPickerVM(tenantDBsDir);
             VoucherReqs    = new VoucherReqsTabVM(tenantDBsDir);
             DcdrReport     = new DcdrTabVM();
-            ClickRefresh();
+            BankAcctPicker = new BankAccountPickerVM(this);
         }
 
 

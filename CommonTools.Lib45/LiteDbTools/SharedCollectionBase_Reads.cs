@@ -92,6 +92,20 @@ namespace CommonTools.Lib45.LiteDbTools
         }
 
 
+        public int Max(Expression<Func<T, int>> getter)
+        {
+            using (var db = _db.OpenRead())
+                return GetCollection(db).Max(getter);
+        }
+
+
+        public DateTime Max(Expression<Func<T, DateTime>> getter)
+        {
+            using (var db = _db.OpenRead())
+                return GetCollection(db).Max(getter);
+        }
+
+
         public int Count(Expression<Func<T, bool>> predicate)
         {
             using (var db = _db.OpenRead())

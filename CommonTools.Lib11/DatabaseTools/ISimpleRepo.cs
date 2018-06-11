@@ -8,13 +8,17 @@ namespace CommonTools.Lib11.DatabaseTools
     {
         event EventHandler<T> ContentChanged;
 
-        List<T> GetAll   ();
-        T       Find     (int recordId, bool errorIfMissing);
-        List<T> Find     (Expression<Func<T, bool>> predicate);
-        T       Earliest ();
-        T       Latest   ();
-        bool    HasId    (int recordId);
-        bool    HasName  (string recordName, string field = "Name");
+        bool      Any      ();
+        List<T>   GetAll   ();
+        T         Find     (int recordId, bool errorIfMissing);
+        List<T>   Find     (Expression<Func<T, bool>> predicate);
+        T         Earliest ();
+        T         Latest   ();
+        int       Max      (Expression<Func<T, int>> getter);
+        DateTime  Max      (Expression<Func<T, DateTime>> getter);
+        bool      HasId    (int recordId);
+        bool      HasName  (string recordName, string field = "Name");
+
         Dictionary<int, T> ToDictionary();
 
         int     Insert   (T newRecord);

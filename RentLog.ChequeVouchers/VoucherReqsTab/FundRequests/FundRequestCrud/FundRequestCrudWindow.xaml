@@ -60,6 +60,9 @@
                          mat:HintAssist.Hint="req. #" />
                 <DatePicker SelectedDate="{Binding Draft.RequestDate, UpdateSourceTrigger=PropertyChanged}"
                             mat:HintAssist.Hint="request date" />
+                <TextBox Text="{Binding AppArgs.CurrentBankAcct.Name}"
+                         Style="{StaticResource txtReadOnly}"
+                         mat:HintAssist.Hint="bank account" />
             </StackPanel>
 
             <StackPanel Margin="50 0 0 0">

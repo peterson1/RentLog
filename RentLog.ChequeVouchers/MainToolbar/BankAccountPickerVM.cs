@@ -11,10 +11,12 @@ namespace RentLog.ChequeVouchers.MainToolbar
     public class BankAccountPickerVM
     {
         private ITenantDBsDir _dir;
+        private MainWindowVM  _main;
 
-        public BankAccountPickerVM(ITenantDBsDir tenantDBsDir)
+        public BankAccountPickerVM(MainWindowVM mainWindowVM)
         {
-            _dir = tenantDBsDir;
+            _main = mainWindowVM;
+            _dir  = _main.AppArgs;
 
             BankAccounts.SetItems
                 (_dir.MarketState.BankAccounts.GetAll());
@@ -27,7 +29,10 @@ namespace RentLog.ChequeVouchers.MainToolbar
         public BankAccountDTO          SelectedBankAccount  { get; set; }
 
 
-        public void OnSelectedBankAccountChanged() 
-            => _dir.CurrentBankAcct = SelectedBankAccount;
+        public void OnSelectedBankAccountChanged()
+        {
+            _dir.CurrentBankAcct = SelectedBankAccount;
+            _main.ClickRefresh();
+        }
     }
 }

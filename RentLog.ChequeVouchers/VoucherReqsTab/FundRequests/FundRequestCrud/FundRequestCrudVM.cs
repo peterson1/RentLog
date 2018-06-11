@@ -5,6 +5,7 @@ using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.ChequeVoucherRepos;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -23,8 +24,9 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.FundRequests.FundRequestCrud
 
         protected override void ModifyDraftForInserting(FundRequestDTO draft)
         {
-            //todo: set app-wide BankAccountId
-            //draft.BankAccountId = 
+            draft.BankAccountId = AppArgs.CurrentBankAcct.Id;
+            draft.RequestDate   = AppArgs.Vouchers.GetNextRequestDate();
+            draft.SerialNum     = AppArgs.Vouchers.GetNextRequestSerial();
         }
 
 
