@@ -1,5 +1,4 @@
 ﻿using CommonTools.Lib11.DataStructures;
-using CommonTools.Lib45.ThreadTools;
 using PropertyChanged;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;

@@ -11,10 +11,10 @@ using Xunit;
 
 namespace RentLog.Tests.StateTransitionTests
 {
-    [Trait("Post & Close", "Solitary")]
+    //[Trait("Post & Close", "Solitary")]
     public class MarketDayCloserFacts
     {
-        [Fact(DisplayName = "Posts unclosed day", Skip = "Undone")]
+        //[Fact(DisplayName = "Posts unclosed day", Skip = "Undone")]
         public void Postsunclosedday()
         {
             var arg = new MockDBsDir();

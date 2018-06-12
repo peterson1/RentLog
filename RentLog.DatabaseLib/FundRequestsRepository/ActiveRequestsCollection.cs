@@ -1,5 +1,6 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
 using CommonTools.Lib45.LiteDbTools;
+using LiteDB;
 using RentLog.DomainLib11.DTOs;
 
 namespace RentLog.DatabaseLib.FundRequestsRepository
@@ -11,6 +12,12 @@ namespace RentLog.DatabaseLib.FundRequestsRepository
 
         internal ActiveRequestsCollection(SharedLiteDB sharedLiteDB) : base(COLXN_NAME, sharedLiteDB)
         {
+        }
+
+
+        protected override void EnsureIndeces(LiteCollection<FundRequestDTO> coll)
+        {
+            coll.EnsureIndex(_ => _.RequestDate);
         }
     }
 }

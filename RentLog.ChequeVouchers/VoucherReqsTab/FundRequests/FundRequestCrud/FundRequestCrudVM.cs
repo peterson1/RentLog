@@ -1,16 +1,18 @@
 ﻿using CommonTools.Lib11.DataStructures;
 using CommonTools.Lib45.BaseViewModels;
 using CommonTools.Lib45.ThreadTools;
+using PropertyChanged;
 using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.ChequeVoucherRepos;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using static RentLog.DomainLib11.DTOs.FundRequestDTO;
 
 namespace RentLog.ChequeVouchers.VoucherReqsTab.FundRequests.FundRequestCrud
 {
+    [AddINotifyPropertyChangedInterface]
     public class FundRequestCrudVM : RepoCrudWindowVMBase<IFundRequestsRepo, FundRequestDTO, FundRequestCrudWindow, ITenantDBsDir>
     {
         public FundRequestCrudVM(ITenantDBsDir dir) : base(dir.Vouchers.ActiveRequests, dir)
@@ -27,6 +29,9 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.FundRequests.FundRequestCrud
             draft.BankAccountId = AppArgs.CurrentBankAcct.Id;
             draft.RequestDate   = AppArgs.Vouchers.GetNextRequestDate();
             draft.SerialNum     = AppArgs.Vouchers.GetNextRequestSerial();
+            draft.Allocations   = new List<AccountAllocation>();
+
+            Allocations.SetHost(draft.Allocations, AppArgs.CurrentBankAcct);
         }
 
 

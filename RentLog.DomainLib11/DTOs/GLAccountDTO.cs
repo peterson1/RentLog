@@ -19,5 +19,12 @@ namespace RentLog.DomainLib11.DTOs
 
         public override string ToString() 
             => $"{Name}  [{AccountType}]";
+
+
+        public static GLAccountDTO CashInBank(BankAccountDTO bankAccount) => new GLAccountDTO
+        {
+            AccountType = GLAcctType.Asset,
+            Name        = $"Cash in Bank: {bankAccount.Name}"
+        };
     }
 }

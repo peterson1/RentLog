@@ -69,7 +69,7 @@ namespace CommonTools.Lib45.BaseViewModels
         }
 
 
-        protected virtual void ShowModalWindow()
+        protected virtual bool? ShowModalWindow()
             => this.Show<TWindow>(showModal: true);
 
 
@@ -78,7 +78,8 @@ namespace CommonTools.Lib45.BaseViewModels
             SaveDraftCmd = R2Command.Async(ExecuteUpdateRecord, _ => CanSave(), $"Save {TypeDescription}");
             Draft = CreateDraftFromRecord(currentItem);
             ModifyDraftForUpdating(Draft);
-            return this.Show<TWindow>(showModal: true);
+            //return this.Show<TWindow>(showModal: true);
+            return ShowModalWindow();
         }
 
 

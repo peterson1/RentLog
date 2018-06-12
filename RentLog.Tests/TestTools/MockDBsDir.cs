@@ -27,6 +27,7 @@ namespace RentLog.Tests.TestTools
         public FirebaseCredentials  Credentials      { get; set; } = new FirebaseCredentials();
         public string               UpdatedCopyPath  { get; set; }
         public SectionDTO           CurrentSection   { get; set; }
+        public BankAccountDTO       CurrentBankAcct  { get; set; }
 
     }
 }

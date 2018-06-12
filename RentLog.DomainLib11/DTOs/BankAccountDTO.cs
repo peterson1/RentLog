@@ -7,5 +7,9 @@ namespace RentLog.DomainLib11.DTOs
         public string    Name    { get; set; }
 
         public override string ToString() => Name;
+
+
+        public static BankAccountDTO Named(string name)
+            => new BankAccountDTO { Name = name };
     }
 }

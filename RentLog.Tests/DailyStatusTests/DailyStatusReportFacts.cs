@@ -5,10 +5,10 @@ using Xunit;
 
 namespace RentLog.Tests.DailyStatusTests
 {
-    [Trait("Daily Status", "Sample DBs")]
+    //[Trait("Daily Status", "Sample DBs")]
     public class DailyStatusReportFacts
     {
-        [Fact(DisplayName = "May 4", Skip = "Undone")]
+        //[Fact(DisplayName = "May 4", Skip = "Undone")]
         public void May4()
         {
             var arg = SampleArgs.Lease197();

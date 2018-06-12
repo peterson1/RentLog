@@ -56,21 +56,37 @@
     <StackPanel Margin="30">
         <StackPanel Orientation="Horizontal">
             <StackPanel VerticalAlignment="Top">
+                
                 <TextBox Text="{Binding Draft.SerialNum, StringFormat=000#, UpdateSourceTrigger=PropertyChanged}"
                          mat:HintAssist.Hint="req. #" />
+                
                 <DatePicker SelectedDate="{Binding Draft.RequestDate, UpdateSourceTrigger=PropertyChanged}"
                             mat:HintAssist.Hint="request date" />
+                
                 <TextBox Text="{Binding AppArgs.CurrentBankAcct.Name}"
                          Style="{StaticResource txtReadOnly}"
                          mat:HintAssist.Hint="bank account" />
             </StackPanel>
 
             <StackPanel Margin="50 0 0 0">
+                
                 <ComboBox x:Name="cmbPayee"
                           ItemsSource="{Binding Payees}"
                           Text="{Binding Draft.Payee}"
                           IsEditable="True"
                           mat:HintAssist.Hint="payee" />
+                
+                <TextBox Text="{Binding Draft.Purpose, UpdateSourceTrigger=PropertyChanged}"
+                         AcceptsReturn="True"
+                         mat:HintAssist.Hint="purpose" />
+
+                <TextBox Text="{Binding Draft.Amount, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
+                         TextChanged="AmountTextBox_TextChanged"
+                         mat:HintAssist.Hint="amount">
+                    <int:Interaction.Behaviors>
+                        <txbhv:SelectAllOnFocusBehavior />
+                    </int:Interaction.Behaviors>
+                </TextBox>
 
             </StackPanel>
         </StackPanel>

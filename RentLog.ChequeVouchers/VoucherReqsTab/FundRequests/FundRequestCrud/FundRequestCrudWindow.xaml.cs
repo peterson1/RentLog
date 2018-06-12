@@ -1,27 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace RentLog.ChequeVouchers.VoucherReqsTab.FundRequests.FundRequestCrud
 {
-    /// <summary>
-    /// Interaction logic for FundRequestCrudWindow.xaml
-    /// </summary>
     public partial class FundRequestCrudWindow : Window
     {
         public FundRequestCrudWindow()
         {
             InitializeComponent();
         }
+
+
+        private void AmountTextBox_TextChanged(object sender, TextChangedEventArgs e)
+            => VM.Allocations.OnAmountChanged(VM.Draft.Amount);
+
+
+        private FundRequestCrudVM VM => DataContext as FundRequestCrudVM;
     }
 }
