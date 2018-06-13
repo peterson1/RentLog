@@ -20,6 +20,14 @@ namespace RentLog.StallsCrud
 
             Sections.SelectedChanged += (s, e) => ClickRefresh();
             Sections.Selected = Sections.ItemsList.FirstOrDefault();
+
+
+            //var sec    = AppArgs.CurrentSection;
+            //var stalls = AppArgs.MarketState.Stalls.ForSection(sec);
+            //foreach (var stall in stalls)
+            //{
+            //    AppArgs.MarketState.Stalls.Delete(stall);
+            //}
         }
 
 

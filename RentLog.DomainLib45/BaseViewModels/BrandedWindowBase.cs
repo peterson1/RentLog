@@ -10,7 +10,7 @@ namespace RentLog.DomainLib45.BaseViewModels
     public abstract class BrandedWindowBase : UpdatedExeVMBase<ITenantDBsDir>
     {
         protected override string CaptionPrefix 
-            => $"{AppArgs.MarketState.SystemName} {SubAppName}";
+            => $"{AppArgs?.MarketState?.SystemName} {SubAppName}";
 
 
         public abstract string SubAppName { get; }
