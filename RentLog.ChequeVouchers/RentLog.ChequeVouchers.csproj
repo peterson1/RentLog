@@ -116,7 +116,16 @@
     <Compile Include="VoucherReqsTab\FundRequests\FundReqsTable.xaml.cs">
       <DependentUpon>FundReqsTable.xaml</DependentUpon>
     </Compile>
-    <Compile Include="VoucherReqsTab\FundRequests\FundRequestCrud\AllocationsListVM.cs" />
+    <Compile Include="VoucherReqsTab\FundRequests\FundRequestCrud\AllocationsList\AllocationsListVM.cs" />
+    <Compile Include="VoucherReqsTab\FundRequests\FundRequestCrud\AllocationsList\AllocationsListUI.xaml.cs">
+      <DependentUpon>AllocationsListUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VoucherReqsTab\FundRequests\FundRequestCrud\AllocationsList\AllocationsTable.xaml.cs">
+      <DependentUpon>AllocationsTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VoucherReqsTab\FundRequests\FundRequestCrud\AllocationsList\AllocationTotals.xaml.cs">
+      <DependentUpon>AllocationTotals.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VoucherReqsTab\FundRequests\FundRequestCrud\FundRequestCrudVM.cs" />
     <Compile Include="VoucherReqsTab\FundRequests\FundRequestCrud\FundRequestCrudWindow.xaml.cs">
       <DependentUpon>FundRequestCrudWindow.xaml</DependentUpon>
@@ -178,6 +187,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VoucherReqsTab\FundRequests\FundReqsTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VoucherReqsTab\FundRequests\FundRequestCrud\AllocationsList\AllocationsListUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VoucherReqsTab\FundRequests\FundRequestCrud\AllocationsList\AllocationsTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VoucherReqsTab\FundRequests\FundRequestCrud\AllocationsList\AllocationTotals.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RentLog.ChequeVouchers.VoucherReqsTab.FundRequests.FundRequestCrud"
+        xmlns:alloc="clr-namespace:RentLog.ChequeVouchers.VoucherReqsTab.FundRequests.FundRequestCrud.AllocationsList"
         mc:Ignorable="d"
         Title="{Binding Caption}" 
         SizeToContent="WidthAndHeight"
@@ -89,6 +90,10 @@
                 </TextBox>
 
             </StackPanel>
+
+
+            <alloc:AllocationsListUI DataContext="{Binding Allocations}"
+                                     Margin="0 0 0 0" />
         </StackPanel>
 
         <TextBox Text="{Binding Draft.Remarks, UpdateSourceTrigger=PropertyChanged}"

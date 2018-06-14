@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using RentLog.ChequeVouchers.VoucherReqsTab.FundRequests.FundRequestCrud;
+using RentLog.ChequeVouchers.VoucherReqsTab.FundRequests.FundRequestCrud.AllocationsList;
 using RentLog.DomainLib11.DTOs;
 using System.Collections.Generic;
 using Xunit;
@@ -48,10 +48,22 @@ namespace RentLog.Tests.AllocationsListVMTests
         }
 
 
-        [Fact(DisplayName = "Has Item, amount changed: updates item", Skip ="undone")]
+        [Fact(DisplayName = "Has bank Item, amount changed: updates bank item")]
         public void HasItemamountchangedupdatesitem()
         {
+            var sut  = new AllocationsListVM();
+            var bank = BankAccountDTO.Named("test bank acct");
+            var item = new AccountAllocation { Account = GLAccountDTO.CashInBank(bank), SubAmount = 123 };
+            var host = new List<AccountAllocation> { item };
+            var amt  = 456;
+            sut.SetHost(host, bank);
 
+            sut.OnAmountChanged(amt);
+
+            sut.Should().HaveCount(1);
+            sut[0].Account.Name.Should().Contain("Cash in Bank");
+            sut[0].Account.Name.Should().Contain(bank.Name);
+            sut[0].SubAmount.Should().Be(amt);
         }
     }
 }

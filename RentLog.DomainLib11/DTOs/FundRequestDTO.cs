@@ -20,6 +20,12 @@ namespace RentLog.DomainLib11.DTOs
         {
             public GLAccountDTO  Account    { get; set; }
             public decimal       SubAmount  { get; set; }
+
+            public bool IsDebit  => SubAmount < 0;
+            public bool IsCredit => SubAmount > 0;
+
+            public decimal? AsDebit  => IsDebit  ? SubAmount * -1M : (decimal?)null;
+            public decimal? AsCredit => IsCredit ? SubAmount       : (decimal?)null;
         }
     }
 }

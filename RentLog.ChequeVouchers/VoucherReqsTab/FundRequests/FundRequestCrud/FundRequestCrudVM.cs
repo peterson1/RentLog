@@ -2,6 +2,7 @@
 using CommonTools.Lib45.BaseViewModels;
 using CommonTools.Lib45.ThreadTools;
 using PropertyChanged;
+using RentLog.ChequeVouchers.VoucherReqsTab.FundRequests.FundRequestCrud.AllocationsList;
 using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.ChequeVoucherRepos;
 using RentLog.DomainLib11.DataSources;
