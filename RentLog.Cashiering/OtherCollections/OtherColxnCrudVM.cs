@@ -33,37 +33,6 @@ namespace RentLog.Cashiering.OtherCollections
         }
 
 
-        protected override bool IsValidDraft(OtherColxnDTO draft, out string whyInvalid)
-        {
-            if (draft.DocumentRef.IsBlank())
-            {
-                whyInvalid = "PR # should not be blank";
-                return false;
-            }
-
-            if (draft.Amount <= 0)
-            {
-                whyInvalid = "Amount should be greater than zero";
-                return false;
-            }
-
-            if (draft.Collector == null)
-            {
-                whyInvalid = "“Collector” should not be blank";
-                return false;
-            }
-
-            if (draft.GLAccount == null)
-            {
-                whyInvalid = "“Payment For” should not be blank";
-                return false;
-            }
-
-            whyInvalid = "";
-            return true;
-        }
-
-
         public    override string TypeDescription => "Other Collection";
         protected override string CaptionPrefix   => "Other Collection";
     }

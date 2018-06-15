@@ -84,6 +84,7 @@
     <Compile Include="BillRowComposerTests\BillRowComposerBaseFacts.cs" />
     <Compile Include="BillRowComposerTests\RentBillComposerFacts.cs" />
     <Compile Include="BillRowComposerTests\RightsBillComposerFacts.cs" />
+    <Compile Include="CashierColxnsRepoTests\CashierColxnsRepoFacts.cs" />
     <Compile Include="CashieringVMTests\ReviewerVMFacts1.cs" />
     <Compile Include="CashieringVMTests\CashieringVMFacts.cs" />
     <Compile Include="ChequeVouchersDBTests\ChequeVouchersDBFacts.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="LeasesRepoTests\ActiveLeasesRepoReaderFacts.cs" />
     <Compile Include="LeasesRepoTests\ActiveLeasesRepoWriterFacts.cs" />
     <Compile Include="LeasesRepoTests\InactiveLeasesRepoWriterFacts.cs" />
+    <Compile Include="OtherColxnsRepoTests\OtherColxnsRepoFacts.cs" />
     <Compile Include="PassbookRowsRepoTests\PassbookRowsRepoFacts.cs" />
     <Compile Include="PreparedChequesRepoTests\PreparedChequesRepoFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
