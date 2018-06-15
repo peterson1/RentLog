@@ -20,12 +20,6 @@ namespace RentLog.Cashiering.SectionTabs.AmbulantCollections
         public SectionDTO Section { get; }
 
 
-        protected override bool IsValidDraft(AmbulantColxnDTO draft, out string whyInvalid)
-        {
-            throw new NotImplementedException();
-        }
-
-
         public override string  TypeDescription => $"{Section} Ambulant Collection";
         protected override string CaptionPrefix => $"{Section} Ambulant Collection";
     }

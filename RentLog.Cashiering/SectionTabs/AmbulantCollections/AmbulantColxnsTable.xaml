@@ -9,6 +9,7 @@
     <DataGrid DataContext="{Binding ItemsList}"
               ItemsSource="{Binding }"
               HeadersVisibility="None"
+              x:Name="dg"
               Style="{StaticResource dgReadOnly}">
         <DataGrid.Columns>
             <DataGridTextColumn Width="7*" Header="received from" Binding="{Binding ReceivedFrom           }" ElementStyle="{StaticResource colSmallWrapLeft}" />

@@ -36,7 +36,7 @@ namespace CommonTools.Lib45.BaseViewModels
 
             _repo.ContentChanged        += (s, e) => ReloadFromDB();
             ItemsList.ItemDeleted       += (s, e) => ExecuteDeleteRecord(e);
-            ItemsList.CollectionChanged += (s, e) => UpdateTotalSum();
+            ItemsList.CollectionChanged += (s, e) => OnCollectionChanged();
             ItemsList.ItemOpened        += ItemsList_ItemOpened;
 
             if (doReload) ReloadFromDB();
@@ -66,6 +66,12 @@ namespace CommonTools.Lib45.BaseViewModels
 
         protected virtual bool  CanRunMainMethod  () => true;
         protected virtual void  RunMainMethod     () { }
+
+
+        protected virtual void OnCollectionChanged()
+        {
+            UpdateTotalSum();
+        }
 
 
         private bool PrivateCanRunMain()

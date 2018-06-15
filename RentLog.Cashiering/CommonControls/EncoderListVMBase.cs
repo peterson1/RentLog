@@ -16,6 +16,7 @@ namespace RentLog.Cashiering.CommonControls
             Main       = mainWindowVM;
             CanAddRows = Main.CanEncode;
             Caption    = ListTitle;
+            TotalSumChanged += (s, e) => Main.ClickRefresh();
         }
 
 

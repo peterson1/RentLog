@@ -25,5 +25,7 @@ namespace RentLog.Cashiering.SectionTabs.AmbulantCollections
 
         protected override Func<AmbulantColxnDTO, decimal> SummedAmount => _ => _.Amount;
         protected override string ListTitle => "Ambulant Collections";
+        protected override void AddNewItem() => _crud.EncodeNewDraftCmd.ExecuteIfItCan();
+        protected override void OnItemOpened(AmbulantColxnDTO e) => _crud.EditCurrentRecord(e);
     }
 }
