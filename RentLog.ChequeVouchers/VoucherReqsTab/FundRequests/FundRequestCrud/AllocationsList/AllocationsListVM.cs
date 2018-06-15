@@ -6,6 +6,7 @@ using CommonTools.Lib45.InputDialogs;
 using PropertyChanged;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.Models;
+using RentLog.DomainLib11.VoucherRules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -87,12 +88,12 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.FundRequests.FundRequestCrud.All
         {
             if (!amount.HasValue) return;
 
-            if (!_list.Any())
-                _list.Add(AccountAllocation.DefaultCashInBank(_bank, amount.Value));
-
-            var matches = _list.Where(_ => _.Account.Id == 0 && _.IsCredit);
-            if (matches.Count() == 1)
-                matches.Single().SubAmount = amount.Value;
+            var cib = _list.GetCashInBankEntry();
+            if (cib == null)
+                _list.Insert(0, AccountAllocation
+                    .DefaultCashInBank(_bank, amount.Value));
+            else
+                cib.SubAmount = amount.Value;
 
             UpdateUILists();
         }

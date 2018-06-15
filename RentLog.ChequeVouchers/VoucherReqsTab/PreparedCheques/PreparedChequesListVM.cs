@@ -19,6 +19,20 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.PreparedCheques
         }
 
 
+        protected override void OnItemOpened(ChequeVoucherDTO e)
+        {
+            if (!PopUpInput.TryGetDate("Cheque Date",
+                out DateTime date, e.ChequeDate)) return;
+
+            if (!PopUpInput.TryGetInt("Cheque Number",
+                out int num, e.ChequeNumber)) return;
+
+            e.ChequeDate   = date;
+            e.ChequeNumber = num;
+            AppArgs.Vouchers.PreparedCheques.Update(e);
+        }
+
+
         protected override bool CanRunMainMethod()
         {
             if (!AppArgs.CanIssueChequeToPayee(false))
@@ -46,7 +60,7 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.PreparedCheques
 
 
         protected override List<ChequeVoucherDTO> QueryItems(ISimpleRepo<ChequeVoucherDTO> db)
-            => (db as IChequeVouchersRepo)?.GetNonIssuedCheques();
+            => (db as IChequeVouchersRepo)?.GetNonIssuedCheques(AppArgs.CurrentBankAcct.Id);
 
 
         protected override string MainMethodCmdLabel => "Issue Cheque to Payee";

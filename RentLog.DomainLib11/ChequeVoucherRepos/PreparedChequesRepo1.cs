@@ -14,14 +14,14 @@ namespace RentLog.DomainLib11.ChequeVoucherRepos
         }
 
 
-        public List<ChequeVoucherDTO> GetIssuedCheques()
-            //=> Find(_ => _.IssuedDate.HasValue);
-            => GetAll().Where(_ => _.IssuedDate.HasValue).ToList();
+        public List<ChequeVoucherDTO> GetIssuedCheques(int bankAcctID)
+            => GetAll().Where(_ => _.Request.BankAccountId == bankAcctID 
+                               &&  _.IssuedDate.HasValue).ToList();
 
 
-        public List<ChequeVoucherDTO> GetNonIssuedCheques()
-            //=> Find(_ => !_.IssuedDate.HasValue);
-            => GetAll().Where(_ => !_.IssuedDate.HasValue).ToList();
+        public List<ChequeVoucherDTO> GetNonIssuedCheques(int bankAcctID)
+            => GetAll().Where(_ => _.Request.BankAccountId == bankAcctID
+                               && !_.IssuedDate.HasValue).ToList();
 
 
         public override bool IsValidForInsert(ChequeVoucherDTO draft, out string whyInvalid)

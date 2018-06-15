@@ -6,7 +6,7 @@ namespace RentLog.DomainLib11.ChequeVoucherRepos
 {
     public interface IChequeVouchersRepo : ISimpleRepo<ChequeVoucherDTO>
     {
-        List<ChequeVoucherDTO> GetNonIssuedCheques();
-        List<ChequeVoucherDTO> GetIssuedCheques();
+        List<ChequeVoucherDTO>  GetNonIssuedCheques (int bankAcctID);
+        List<ChequeVoucherDTO>  GetIssuedCheques    (int bankAcctID);
     }
 }

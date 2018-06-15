@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using CommonTools.Lib11.DatabaseTools;
 using CommonTools.Lib11.InputCommands;
 using CommonTools.Lib45.BaseViewModels;
 using CommonTools.Lib45.InputCommands;
@@ -23,6 +26,13 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.FundRequests
 
         public FundRequestCrudVM  Crud  { get; }
 
+
+        protected override List<FundRequestDTO> QueryItems(ISimpleRepo<FundRequestDTO> db)
+            => db.Find(_ => _.BankAccountId == AppArgs.CurrentBankAcct.Id);
+
+
+        protected override void OnItemOpened(FundRequestDTO e)
+            => Crud.EditCurrentRecord(e);
 
 
         protected override bool CanRunMainMethod()

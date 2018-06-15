@@ -26,6 +26,20 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.IssuedCheques
         public IR2Command  TakeBackIssuedCmd  { get; }
 
 
+        protected override void OnItemOpened(ChequeVoucherDTO e)
+        {
+            if (!PopUpInput.TryGetDate("Issued Date",
+                out DateTime date, e.IssuedDate)) return;
+
+            if (!PopUpInput.TryGetString("Issued To",
+                out string issuedTo, e.IssuedTo)) return;
+
+            e.IssuedDate = date;
+            e.IssuedTo   = issuedTo;
+            AppArgs.Vouchers.PreparedCheques.Update(e);
+        }
+
+
         protected override bool CanRunMainMethod()
         {
             if (!AppArgs.CanMarkChequeAsCleared(false))
@@ -76,7 +90,7 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.IssuedCheques
 
 
         protected override List<ChequeVoucherDTO> QueryItems(ISimpleRepo<ChequeVoucherDTO> db)
-            => (db as IChequeVouchersRepo)?.GetIssuedCheques();
+            => (db as IChequeVouchersRepo)?.GetIssuedCheques(AppArgs.CurrentBankAcct.Id);
 
 
         protected override string MainMethodCmdLabel => "Mark Cheque as “Cleared”";

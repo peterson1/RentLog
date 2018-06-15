@@ -9,6 +9,7 @@ using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.Models;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace RentLog.ChequeVouchers.VoucherReqsTab.FundRequests.FundRequestCrud
@@ -36,8 +37,16 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.FundRequests.FundRequestCrud
         }
 
 
+        protected override void ModifyDraftForUpdating(FundRequestDTO draft)
+        {
+            Allocations.SetHost(draft.Allocations, AppArgs.CurrentBankAcct, AppArgs.MarketState.GLAccounts);
+            Allocations.OnAmountChanged(draft.Amount);
+        }
+
+
         protected override async void OnWindowLoaded()
         {
+            if (Draft.Id != 0) return;
             List<string> items = null;
             await Task.Run(() => items = AppArgs.Vouchers.GetPayees());
             UIThread  .Run(() => Payees.SetItems(items));

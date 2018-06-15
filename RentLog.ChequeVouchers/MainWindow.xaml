@@ -31,7 +31,7 @@
                     <dragz:InterTabController />
                 </dragz:TabablzControl.InterTabController>
 
-                <TabItem Header="Voucher Requests">
+                <TabItem Header="Cheque Vouchers">
                     <reqs:VoucherReqsTabUI DataContext="{Binding VoucherReqs}" />
                 </TabItem>
                 
