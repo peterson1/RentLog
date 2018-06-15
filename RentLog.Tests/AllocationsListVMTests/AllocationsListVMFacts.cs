@@ -1,9 +1,9 @@
 ﻿using FluentAssertions;
 using RentLog.ChequeVouchers.VoucherReqsTab.FundRequests.FundRequestCrud.AllocationsList;
 using RentLog.DomainLib11.DTOs;
+using RentLog.DomainLib11.Models;
 using System.Collections.Generic;
 using Xunit;
-using static RentLog.DomainLib11.DTOs.FundRequestDTO;
 
 namespace RentLog.Tests.AllocationsListVMTests
 {
@@ -24,7 +24,7 @@ namespace RentLog.Tests.AllocationsListVMTests
             sut.Add(new AccountAllocation());
             sut.Add(new AccountAllocation());
 
-            sut.SetHost(list, null);
+            sut.SetHost(list, null, null);
 
             sut.Should().HaveCount(3);
         }
@@ -37,7 +37,7 @@ namespace RentLog.Tests.AllocationsListVMTests
             var host = new List<AccountAllocation>();
             var bank = BankAccountDTO.Named("test bank acct");
             var amt  = 123;
-            sut.SetHost(host, bank);
+            sut.SetHost(host, bank, null);
 
             sut.OnAmountChanged(amt);
 
@@ -56,7 +56,7 @@ namespace RentLog.Tests.AllocationsListVMTests
             var item = new AccountAllocation { Account = GLAccountDTO.CashInBank(bank), SubAmount = 123 };
             var host = new List<AccountAllocation> { item };
             var amt  = 456;
-            sut.SetHost(host, bank);
+            sut.SetHost(host, bank, null);
 
             sut.OnAmountChanged(amt);
 

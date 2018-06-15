@@ -7,9 +7,9 @@ using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.ChequeVoucherRepos;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
+using RentLog.DomainLib11.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using static RentLog.DomainLib11.DTOs.FundRequestDTO;
 
 namespace RentLog.ChequeVouchers.VoucherReqsTab.FundRequests.FundRequestCrud
 {
@@ -32,7 +32,7 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.FundRequests.FundRequestCrud
             draft.SerialNum     = AppArgs.Vouchers.GetNextRequestSerial();
             draft.Allocations   = new List<AccountAllocation>();
 
-            Allocations.SetHost(draft.Allocations, AppArgs.CurrentBankAcct);
+            Allocations.SetHost(draft.Allocations, AppArgs.CurrentBankAcct, AppArgs.MarketState.GLAccounts);
         }
 
 

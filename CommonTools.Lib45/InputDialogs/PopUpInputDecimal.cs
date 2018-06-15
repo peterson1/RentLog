@@ -1,28 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CommonTools.Lib45.InputDialogs
+﻿namespace CommonTools.Lib45.InputDialogs
 {
     internal class PopUpInputDecimal : PopUpInput<decimal, PopUpInputDecimalWindow>
     {
-        internal PopUpInputDecimal(string caption, string message, decimal? defaultVal) : base(caption, message)
+        internal PopUpInputDecimal(string caption, string message, decimal? defaultVal, bool allowZero) : base(caption, message)
         {
-            Draft = defaultVal;
+            Draft         = defaultVal;
+            IsZeroAllowed = allowZero;
         }
 
 
-        public decimal? Draft { get; set; }
+        public decimal?  Draft          { get; set; }
+        public bool      IsZeroAllowed  { get; }
 
 
         public override bool TryParseValue(out decimal parsed)
         {
+            parsed = 0;
             if (!Draft.HasValue)
             {
-                parsed     = 0;
                 WhyInvalid = "Value should not be blank.";
+                return false;
+            }
+            if (!IsZeroAllowed && Draft.Value == 0)
+            {
+                WhyInvalid = "Value should not be zero.";
                 return false;
             }
             parsed = Draft.Value;

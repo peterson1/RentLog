@@ -6,7 +6,21 @@
              xmlns:local="clr-namespace:RentLog.ChequeVouchers.VoucherReqsTab.FundRequests.FundRequestCrud.AllocationsList"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    <DataGrid ItemsSource="{Binding SummaryRows}"
+              Width="450"
+              Style="{StaticResource dgTotals}">
+        <DataGrid.Columns>
+            <DataGridTextColumn Width="60*"
+                                Binding="{Binding Account, TargetNullValue=total}"
+                                ElementStyle="{StaticResource totalsRowLabel}" />
+
+            <DataGridTextColumn Width="20*"
+                                Binding="{Binding AsDebit, StringFormat=N2}"
+                                ElementStyle="{StaticResource totalsRow}" />
+
+            <DataGridTextColumn Width="20*"
+                                Binding="{Binding AsCredit, StringFormat=N2}"
+                                ElementStyle="{StaticResource totalsRowEnd}" />
+        </DataGrid.Columns>
+    </DataGrid>
 </UserControl>

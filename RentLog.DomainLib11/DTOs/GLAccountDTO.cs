@@ -21,6 +21,12 @@ namespace RentLog.DomainLib11.DTOs
             => $"{Name}  [{AccountType}]";
 
 
+        public static GLAccountDTO Named(string name) => new GLAccountDTO
+        {
+            Name = name
+        };
+
+
         public static GLAccountDTO CashInBank(BankAccountDTO bankAccount) => new GLAccountDTO
         {
             AccountType = GLAcctType.Asset,

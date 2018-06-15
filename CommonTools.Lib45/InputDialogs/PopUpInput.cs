@@ -94,8 +94,8 @@ namespace CommonTools.Lib45.InputDialogs
 
         public static bool TryGetDecimal(string message, 
             out decimal input, decimal? defaultVal = null, 
-            string caption = "Please enter a number")
-            => new PopUpInputDecimal(caption, message, defaultVal)
+            bool allowZero = false, string caption = "Please enter a number")
+            => new PopUpInputDecimal(caption, message, defaultVal, allowZero)
                 .TryGetValidInput(out input);
 
 

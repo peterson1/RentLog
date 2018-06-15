@@ -12,8 +12,10 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.FundRequests.FundRequestCrud
 
 
         private void AmountTextBox_TextChanged(object sender, TextChangedEventArgs e)
-            => VM.Allocations.OnAmountChanged(VM.Draft.Amount);
-
+        {
+            allocs.IsEnabled = VM.Draft.Amount.HasValue;
+            VM.Allocations.OnAmountChanged(VM.Draft.Amount);
+        }
 
         private FundRequestCrudVM VM => DataContext as FundRequestCrudVM;
     }
