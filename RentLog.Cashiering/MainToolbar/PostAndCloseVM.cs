@@ -18,7 +18,7 @@ namespace RentLog.Cashiering.MainToolbar
         public PostAndCloseVM(MainWindowVM mainWindowVM)
         {
             Main           = mainWindowVM;
-            PostAndCloseCmd = R2Command.Relay(DoPostAndClose, _ => CanPostAndClose(), "Post & Close");
+            PostAndCloseCmd = R2Command.Relay(ConfirmExecution, _ => CanPostAndClose(), "Post & Close");
         }
 
 
@@ -53,28 +53,26 @@ namespace RentLog.Cashiering.MainToolbar
         }
 
 
-        private void DoPostAndClose()
-            => Alert.Confirm("Are you sure you want to close this day and open the next?", async () =>
-                {
-                    Main.StartBeingBusy("Posting and Closing ...");
+        private void ConfirmExecution()
+            => Alert.Confirm("Are you sure you want to close this day and open the next?", 
+                async () => await RunPostAndClose());
 
-                    await Task.Run(() =>
-                    {
-                        var jobs = MarketDayCloser.GetActions(Main.AppArgs);
-                        Parallel.Invoke(jobs.ToArray());
-                    });
-                    //await Task.Delay(1);
-                    //var jobs = MarketDayCloser.GetActions(Main.AppArgs);
-                    //foreach (var job in jobs)
-                    //{
-                    //    job.Invoke();
-                    //}
 
-                    MessageBox.Show($"Successfully posted collections for {Main.Date:d-MMM-yyyy}{L.F}"
-                             + $"The next market day [{Main.Date.AddDays(1):d-MMM-yyyy}] is now open for encoding.",
-                            "   Operation Successful", MessageBoxButton.OK, MessageBoxImage.Information);
+        private async Task RunPostAndClose()
+        {
+            Main.StartBeingBusy("Posting and Closing ...");
 
-                    Main.CloseWindow();
-                });
+            await Task.Run(() =>
+            {
+                var jobs = MarketDayCloser.GetActions(Main.AppArgs);
+                Parallel.Invoke(jobs.ToArray());
+            });
+
+            MessageBox.Show($"Successfully posted collections for {Main.Date:d-MMM-yyyy}{L.F}"
+                        + $"The next market day [{Main.Date.AddDays(1):d-MMM-yyyy}] is now open for encoding.",
+                    "   Operation Successful", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            Main.CloseWindow();
+        }
     }
 }
