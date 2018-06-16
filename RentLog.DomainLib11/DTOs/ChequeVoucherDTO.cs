@@ -10,5 +10,8 @@ namespace RentLog.DomainLib11.DTOs
         public int             ChequeNumber  { get; set; }
         public string          IssuedTo      { get; set; }
         public DateTime?       IssuedDate    { get; set; }
+
+
+        public override string ToString() => Request?.ToString();
     }
 }

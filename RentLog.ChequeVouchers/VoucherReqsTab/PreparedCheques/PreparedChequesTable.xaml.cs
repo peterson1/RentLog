@@ -12,6 +12,7 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.PreparedCheques
             Loaded += (s, e) =>
             {
                 dg.EnableOpenCurrent<ChequeVoucherDTO>();
+                dg.ConfirmToDelete<ChequeVoucherDTO>(_ => _.ToString());
             };
         }
     }

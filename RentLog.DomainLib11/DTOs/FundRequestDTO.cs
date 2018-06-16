@@ -20,5 +20,9 @@ namespace RentLog.DomainLib11.DTOs
         public decimal TotalDebit  => Allocations?.Sum(_ => _.AsDebit  ?? 0) ?? 0;
         public decimal TotalCredit => Allocations?.Sum(_ => _.AsCredit ?? 0) ?? 0;
         public bool    IsBalanced  => TotalCredit == TotalDebit;
+
+
+        public override string ToString()
+            => $"CV# {SerialNum:0000} for “{Payee}”";
     }
 }

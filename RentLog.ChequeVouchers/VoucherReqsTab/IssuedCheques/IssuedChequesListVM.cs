@@ -74,20 +74,24 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.IssuedCheques
 
         private bool CanTakeBackIssuedCheque()
         {
-            bool CmdCantDo(string whyNot)
-            {
-                var cmd = TakeBackIssuedCmd;
-                cmd.CurrentLabel = cmd.OriginalLabel + $"  --  {whyNot}";
-                return false;
-            }
+            if (!AppArgs.CanTakeBackIssuedCheque(false)) return false;
 
-            if (!AppArgs.CanTakeBackIssuedCheque(false))
-                return CmdCantDo($"[{AppArgs.Credentials.Roles}] NOT authorized");
+            return TryGetPickedItem(out ChequeVoucherDTO dto);
 
-            if (!TryGetPickedItem(out ChequeVoucherDTO dto))
-                return CmdCantDo("No selected item");
+            //bool CmdCantDo(string whyNot)
+            //{
+            //    var cmd = TakeBackIssuedCmd;
+            //    cmd.CurrentLabel = cmd.OriginalLabel + $"  --  {whyNot}";
+            //    return false;
+            //}
 
-            return true;
+            //if (!AppArgs.CanTakeBackIssuedCheque(false))
+            //    return CmdCantDo($"[{AppArgs.Credentials.Roles}] NOT authorized");
+
+            //if (!TryGetPickedItem(out ChequeVoucherDTO dto))
+            //    return CmdCantDo("No selected item");
+
+            //return true;
         }
 
 
