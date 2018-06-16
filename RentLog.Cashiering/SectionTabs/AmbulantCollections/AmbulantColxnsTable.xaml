@@ -12,7 +12,8 @@
               x:Name="dg"
               Style="{StaticResource dgReadOnly}">
         <DataGrid.Columns>
-            <DataGridTextColumn Width="7*" Header="received from" Binding="{Binding ReceivedFrom           }" ElementStyle="{StaticResource colSmallWrapLeft}" />
+            <DataGridTextColumn Width="3*" Header="PR #"          Binding="{Binding PRNumber               }" ElementStyle="{StaticResource colSmallWrapCenter}" />
+            <DataGridTextColumn Width="4*" Header="received from" Binding="{Binding ReceivedFrom           }" ElementStyle="{StaticResource colSmallWrapLeft}" />
             <DataGridTextColumn Width="3*" Header="amount"        Binding="{Binding Amount, StringFormat=N2}" ElementStyle="{StaticResource colSmallWrapRightBold}" />
         </DataGrid.Columns>
     </DataGrid>
