@@ -8,9 +8,18 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <ContextMenu x:Key="rowCtxMenu">
+            <MenuItem Header ="{Binding ViewVoucherCmd.CurrentLabel}" 
+                      Command="{Binding ViewVoucherCmd}"
+                      DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+
+            <MenuItem Header ="{Binding EditIssuanceCmd.CurrentLabel}" 
+                      Command="{Binding EditIssuanceCmd}"
+                      DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+            
             <MenuItem Header ="{Binding MainMethodCmd.CurrentLabel}" 
                       Command="{Binding MainMethodCmd}"
                       DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+            
             <MenuItem Header ="{Binding TakeBackIssuedCmd.CurrentLabel}" 
                       Command="{Binding TakeBackIssuedCmd}"
                       DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />

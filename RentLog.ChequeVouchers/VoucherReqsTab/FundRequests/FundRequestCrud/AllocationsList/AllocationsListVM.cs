@@ -90,8 +90,7 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.FundRequests.FundRequestCrud.All
 
             var cib = _list.GetCashInBankEntry();
             if (cib == null)
-                _list.Insert(0, AccountAllocation
-                    .DefaultCashInBank(_bank, amount.Value));
+                _list.AddCashInBankEntry(_bank, amount.Value);
             else
                 cib.SubAmount = amount.Value;
 

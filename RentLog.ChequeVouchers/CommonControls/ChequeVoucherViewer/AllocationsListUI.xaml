@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="RentLog.ChequeVouchers.CommonControls.ChequeVoucherViewer.AllocationsListUI"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RentLog.ChequeVouchers.CommonControls.ChequeVoucherViewer"
+             xmlns:labl="clr-namespace:CommonTools.Lib45.TextLabels;assembly=CommonTools.Lib45"
+             mc:Ignorable="d" 
+             xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <mat:Card MinHeight="150">
+        <DockPanel>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        DockPanel.Dock="Bottom"
+                        Margin="0 10 10 10">
+                <labl:DualText Text1="Total Debits"
+                               Text2="{Binding TotalDebit, StringFormat=N2}" />
+                <labl:DualText Text1="Total Credits"
+                               Text2="{Binding TotalCredit, StringFormat=N2}"
+                               Margin="30 0 0 0" />
+            </StackPanel>
+
+            <DataGrid ItemsSource="{Binding Allocations}"
+                      Width="450"
+                      Style="{StaticResource dgReadOnly}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="GL Account"
+                                        Width="60*"
+                                        Binding="{Binding Account.Name}"
+                                        ElementStyle="{StaticResource colLabel}" />
+
+                    <DataGridTextColumn Header="Debit"
+                                        Width="20*"
+                                        Binding="{Binding AsDebit, StringFormat=N2}"
+                                        ElementStyle="{StaticResource colRight}" />
+
+                    <DataGridTextColumn Header="Credit"
+                                        Width="20*"
+                                        Binding="{Binding AsCredit, StringFormat=N2}"
+                                        ElementStyle="{StaticResource colRightEnd}" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </DockPanel>
+    </mat:Card>
+</UserControl>

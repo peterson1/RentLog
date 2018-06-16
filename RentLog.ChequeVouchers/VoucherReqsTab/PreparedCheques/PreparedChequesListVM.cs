@@ -1,6 +1,9 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
+using CommonTools.Lib11.InputCommands;
 using CommonTools.Lib45.BaseViewModels;
+using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.InputDialogs;
+using RentLog.ChequeVouchers.CommonControls.ChequeVoucherViewer;
 using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.ChequeVoucherRepos;
 using RentLog.DomainLib11.DataSources;
@@ -15,12 +18,20 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.PreparedCheques
         public PreparedChequesListVM(ITenantDBsDir dir) 
             : base(dir.Vouchers.PreparedCheques, dir, false)
         {
-            Caption = "Prepared Cheques";
+            Caption        = "Prepared Cheques";
+            ViewVoucherCmd = R2Command.Relay(_ => OnItemOpened(ItemsList.CurrentItem), null, "View Voucher Details");
+            EditChequeCmd  = R2Command.Relay(EditChequeDetails, _ => AppArgs.CanInputChequeDetails(false), "Edit Cheque Details");
         }
 
 
-        protected override void OnItemOpened(ChequeVoucherDTO e)
+        public IR2Command  ViewVoucherCmd  { get; }
+        public IR2Command  EditChequeCmd   { get; }
+
+
+        private void EditChequeDetails()
         {
+            var e = ItemsList.CurrentItem;
+
             if (!PopUpInput.TryGetDate("Cheque Date",
                 out DateTime date, e.ChequeDate)) return;
 
@@ -31,6 +42,10 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.PreparedCheques
             e.ChequeNumber = num;
             AppArgs.Vouchers.PreparedCheques.Update(e);
         }
+
+
+        protected override void OnItemOpened(ChequeVoucherDTO e)
+            => ChequeVoucherViewerVM.Show(ItemsList.CurrentItem, AppArgs);
 
 
         protected override bool CanRunMainMethod()

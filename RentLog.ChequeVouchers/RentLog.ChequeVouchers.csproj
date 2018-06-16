@@ -93,6 +93,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CommonControls\ChequeVoucherViewer\AllocationsListUI.xaml.cs">
+      <DependentUpon>AllocationsListUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CommonControls\ChequeVoucherViewer\ChequeVoucherViewerVM.cs" />
+    <Compile Include="CommonControls\ChequeVoucherViewer\ChequeVoucherViewerWindow.xaml.cs">
+      <DependentUpon>ChequeVoucherViewerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CommonControls\LightColorZone.xaml.cs">
       <DependentUpon>LightColorZone.xaml</DependentUpon>
     </Compile>
@@ -154,6 +161,14 @@
       <DependentUpon>VoucherReqsTabUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="VoucherReqsTab\VoucherReqsTabVM.cs" />
+    <Page Include="CommonControls\ChequeVoucherViewer\AllocationsListUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CommonControls\ChequeVoucherViewer\ChequeVoucherViewerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CommonControls\LightColorZone.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -1,0 +1,86 @@
+﻿<Window x:Class="RentLog.ChequeVouchers.CommonControls.ChequeVoucherViewer.ChequeVoucherViewerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RentLog.ChequeVouchers.CommonControls.ChequeVoucherViewer"
+        mc:Ignorable="d"
+        Title="{Binding Caption}" 
+        SizeToContent="WidthAndHeight"
+        xmlns:int="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:cnv="clr-namespace:CommonTools.Lib45.ValueConverters;assembly=CommonTools.Lib45"
+        xmlns:txbhv="clr-namespace:CommonTools.Lib45.UIBehaviors.TextBoxBehaviors;assembly=CommonTools.Lib45"
+        xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <Window.Resources>
+        <Style TargetType="TextBox"
+               BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+            <Setter Property="Margin" Value="10 10 10 10" />
+            <Setter Property="MinWidth" Value="150" />
+            <Setter Property="IsReadOnly" Value="True" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkBrush}" />
+        </Style>
+    </Window.Resources>
+    <StackPanel Margin="30">
+        <StackPanel Orientation="Horizontal">
+            <StackPanel VerticalAlignment="Top">
+
+                <TextBox Text="{Binding DTO.Request.SerialNum, StringFormat=000#}"
+                         mat:HintAssist.Hint="req. #" />
+
+                <TextBox Text="{Binding DTO.Request.RequestDate, StringFormat=d MMMM yyyy}"
+                         mat:HintAssist.Hint="request date" />
+
+                <TextBox Text="{Binding AppArgs.CurrentBankAcct.Name}"
+                         mat:HintAssist.Hint="bank account" />
+            </StackPanel>
+
+            <StackPanel Margin="50 0 0 0">
+
+                <TextBox Text="{Binding DTO.Request.Payee}"
+                         mat:HintAssist.Hint="payee" />
+
+                <TextBox Text="{Binding DTO.Request.Purpose}"
+                         mat:HintAssist.Hint="purpose" />
+
+                <TextBox Text="{Binding DTO.Request.Amount, StringFormat=N2}"
+                         mat:HintAssist.Hint="amount" />
+            </StackPanel>
+
+            <local:AllocationsListUI DataContext="{Binding DTO.Request}"
+                                     Margin="50 0 0 0" />
+        </StackPanel>
+
+        <DockPanel Margin="0 10 0 0">
+            <TextBox DockPanel.Dock="Left"
+                     Text="{Binding DTO.Remarks}"
+                     MinWidth="300"
+                     mat:HintAssist.Hint="remarks" />
+
+            <StackPanel DockPanel.Dock="Right">
+                <TextBox Text="{Binding DTO.ChequeDate, StringFormat=d MMMM yyyy}"
+                         mat:HintAssist.Hint="cheque date" />
+
+                <TextBox Text="{Binding DTO.IssuedDate, StringFormat=d MMMM yyyy}"
+                         mat:HintAssist.Hint="issued date" />
+            </StackPanel>
+
+            <StackPanel HorizontalAlignment="Right"
+                        Margin="0 0 20 0">
+                <TextBox Text="{Binding DTO.ChequeNumber}"
+                         mat:HintAssist.Hint="cheque #" />
+
+                <TextBox Text="{Binding DTO.IssuedTo}"
+                         mat:HintAssist.Hint="issued to" />
+            </StackPanel>
+        </DockPanel>
+
+    </StackPanel>
+</Window>

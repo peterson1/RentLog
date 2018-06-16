@@ -4,6 +4,7 @@ using CommonTools.Lib45.BaseViewModels;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.InputDialogs;
 using CommonTools.Lib45.ThreadTools;
+using RentLog.ChequeVouchers.CommonControls.ChequeVoucherViewer;
 using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.ChequeVoucherRepos;
 using RentLog.DomainLib11.DataSources;
@@ -19,15 +20,21 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.IssuedCheques
             : base(dir.Vouchers.PreparedCheques, dir, false)
         {
             Caption           = "Issued Cheques";
+            ViewVoucherCmd    = R2Command.Relay(_ => OnItemOpened(ItemsList.CurrentItem), null, "View Voucher Details");
+            EditIssuanceCmd   = R2Command.Relay(EditIssuanceDetails, _ => AppArgs.CanIssueChequeToPayee(false), "Edit Issuance Details");
             TakeBackIssuedCmd = R2Command.Relay(TakeBackIssuedCheque, _ => CanTakeBackIssuedCheque(), "Take Back Issued Cheque");
         }
 
 
+        public IR2Command  ViewVoucherCmd     { get; }
+        public IR2Command  EditIssuanceCmd    { get; }
         public IR2Command  TakeBackIssuedCmd  { get; }
 
 
-        protected override void OnItemOpened(ChequeVoucherDTO e)
+        private void EditIssuanceDetails()
         {
+            var e = ItemsList.CurrentItem;
+
             if (!PopUpInput.TryGetDate("Issued Date",
                 out DateTime date, e.IssuedDate)) return;
 
@@ -38,6 +45,10 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.IssuedCheques
             e.IssuedTo   = issuedTo;
             AppArgs.Vouchers.PreparedCheques.Update(e);
         }
+
+
+        protected override void OnItemOpened(ChequeVoucherDTO e)
+            => ChequeVoucherViewerVM.Show(ItemsList.CurrentItem, AppArgs);
 
 
         protected override bool CanRunMainMethod()
