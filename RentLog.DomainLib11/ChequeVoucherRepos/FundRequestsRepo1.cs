@@ -69,7 +69,7 @@ namespace RentLog.DomainLib11.ChequeVoucherRepos
                 return $"Debits should match Credits (diff: {(dto.TotalCredit - dto.TotalDebit):N2})";
 
             if (!dto.HasCashInBankEntry())
-                return "Voucher should have at least 1 “Cash in Bank” credit entry.";
+                return "Voucher should have at least 1 “Cash in Bank” entry.";
 
             return string.Empty;
         }

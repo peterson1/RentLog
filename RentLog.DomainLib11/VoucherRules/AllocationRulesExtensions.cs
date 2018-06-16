@@ -18,7 +18,6 @@ namespace RentLog.DomainLib11.VoucherRules
         public static AccountAllocation GetCashInBankEntry(this List<AccountAllocation> allocations)
             => allocations?.FirstOrDefault(_
                 => _.Account.Id == 0
-                && _.Account.Name.Contains("Cash in Bank")
-                && _.IsCredit);
+                && _.Account.Name.Contains("Cash in Bank"));
     }
 }
