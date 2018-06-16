@@ -1,4 +1,6 @@
-﻿using RentLog.DomainLib11.ReportRows;
+﻿using CommonTools.Lib45.ThreadTools;
+using CommonTools.Lib45.UIExtensions;
+using RentLog.DomainLib11.ReportRows;
 using RentLog.LeasesCrud.LeasesList;
 using System.Collections.Generic;
 using System.Windows;
@@ -15,6 +17,9 @@ namespace RentLog.LeasesCrud
             {
                 tabs.SelectionChanged += (c, d) => SetCurrentLists();
                 SetCurrentLists();
+                
+                actives  .tbl.dg.EnableOpenCurrent<LeaseBalanceRow>();
+                inactives.tbl.dg.EnableOpenCurrent<LeaseBalanceRow>();
             };
         }
 

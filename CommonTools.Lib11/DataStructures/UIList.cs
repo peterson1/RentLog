@@ -7,8 +7,14 @@ using System.Linq;
 namespace CommonTools.Lib11.DataStructures
 {
     public class UIList<T> : ObservableCollection<T>
-    {                                              
+    {
         public event EventHandler<T> ItemOpened    = delegate { };
+        //private      EventHandler<T> _itemOpened;
+        //public event EventHandler<T>  ItemOpened
+        //{
+        //    add    { _itemOpened -= value; _itemOpened += value; }
+        //    remove { _itemOpened -= value; }
+        //}
         public event EventHandler<T> ItemDeleted   = delegate { };
         public event EventHandler    ItemsReplaced = delegate { };
         //public event EventHandler<T> DeleteCurrentConfirmed = delegate { };
