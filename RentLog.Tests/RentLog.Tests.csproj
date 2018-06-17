@@ -116,6 +116,7 @@
     <Compile Include="TestTools\MockDBsDir.cs" />
     <Compile Include="TestTools\MockMarketState.cs" />
     <Compile Include="TotalOverduesTests\TotalOverduesFacts.cs" />
+    <Compile Include="UncollectedsRepoTests\UncollectedsRepoFacts.cs" />
     <Compile Include="VoucherTabVMTests\FundReqsListVMFacts.cs" />
   </ItemGroup>
   <ItemGroup>

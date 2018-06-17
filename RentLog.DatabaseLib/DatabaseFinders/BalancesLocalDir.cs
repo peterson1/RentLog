@@ -25,6 +25,7 @@ namespace RentLog.DatabaseLib.DatabaseFinders
         {
             _dir = tenantDBsDir;
             _mkt = _dir.MarketState;
+            //_mkt = marketStateDB;
             _foldrPath = FindBalancesDir(_mkt.DatabasePath);
             _mkt.Balances = this;
         }

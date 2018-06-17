@@ -1,5 +1,6 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
 using RentLog.DomainLib11.DTOs;
+using RentLog.DomainLib11.Models;
 using System.Collections.Generic;
 
 namespace RentLog.DomainLib11.CollectionRepos
@@ -9,5 +10,7 @@ namespace RentLog.DomainLib11.CollectionRepos
         List<UncollectedLeaseDTO> InferUncollecteds
             (IEnumerable<IntendedColxnDTO>    intendedColxns, 
              IEnumerable<UncollectedLeaseDTO> didNotOperate);
+
+        decimal? GetDue(LeaseDTO lse, BillCode billCode);
     }
 }

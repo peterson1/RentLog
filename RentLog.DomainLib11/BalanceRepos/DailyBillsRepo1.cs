@@ -22,6 +22,7 @@ namespace RentLog.DomainLib11.BalanceRepos
         {
             _lse   = lease;
             _billr = tenantDBsDir.DailyBiller;
+            //_billr = new DailyBiller1(collectionsDir);
         }
 
 
