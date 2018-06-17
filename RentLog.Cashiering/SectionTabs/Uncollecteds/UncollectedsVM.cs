@@ -35,9 +35,9 @@ namespace RentLog.Cashiering.SectionTabs.Uncollecteds
         }
 
 
-        //protected override List<UncollectedLeaseDTO> QueryItems(ISimpleRepo<UncollectedLeaseDTO> db)
-        //    => Main.CanEncode ? GetUpdatedUncollecteds(db)
-        //                      : base.QueryItems(db);
+        protected override List<UncollectedLeaseDTO> QueryItems(ISimpleRepo<UncollectedLeaseDTO> db)
+            => Main.CanEncode ? GetUpdatedUncollecteds(db)
+                              : base.QueryItems(db);
 
 
         private static ISimpleRepo<UncollectedLeaseDTO> GetRepo(SectionTabVM tab, MainWindowVM main)

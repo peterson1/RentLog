@@ -5,6 +5,7 @@ using CommonTools.Lib45.LiteDbTools;
 using RentLog.DatabaseLib.DailyColxnsRepository;
 using RentLog.DomainLib11.BalanceRepos;
 using RentLog.DomainLib11.CollectionRepos;
+using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
 using System;
@@ -19,14 +20,16 @@ namespace RentLog.DatabaseLib.DatabaseFinders
         private const string COLLECTIONS_DIR = "Collections";
         private const string FILENAME_FMT    = "{0:yyyy-MM-dd}_Solo.ldb";
 
-        private string        _dir;
+        private string        _foldrPath;
         private MarketStateDB _mkt;
+        private ITenantDBsDir _dir;
 
 
-        public CollectionsLocalDir(MarketStateDB marketStateDB)
+        public CollectionsLocalDir(ITenantDBsDir tenantDBsDir)
         {
-            _mkt             = marketStateDB;
-            _dir             = FindCollectionsDir(_mkt.DatabasePath);
+            _dir             = tenantDBsDir;
+            _mkt             = _dir.MarketState;
+            _foldrPath       = FindCollectionsDir(_mkt.DatabasePath);
             _mkt.Collections = this;
         }
 
@@ -43,7 +46,7 @@ namespace RentLog.DatabaseLib.DatabaseFinders
 
 
         protected override IEnumerable<DateTime> FindAllDates()
-            => Directory.EnumerateFiles (_dir, "*.ldb")
+            => Directory.EnumerateFiles (_foldrPath, "*.ldb")
                         .Select         (_ => AsDate(_));
 
 
@@ -110,7 +113,7 @@ namespace RentLog.DatabaseLib.DatabaseFinders
             foreach (var sec in _mkt.Sections.GetAll())
             {
                 var colxn = new UncollectedsCollection(sec, db);
-                var repo  = new UncollectedsRepo1(colxn);
+                var repo  = new UncollectedsRepo1(colxn, _dir);
                 dict.Add(sec.Id, repo);
             }
         }
@@ -139,6 +142,6 @@ namespace RentLog.DatabaseLib.DatabaseFinders
 
 
         private string AsFilePath(DateTime date)
-            => Path.Combine(_dir, string.Format(FILENAME_FMT, date));
+            => Path.Combine(_foldrPath, string.Format(FILENAME_FMT, date));
     }
 }

@@ -16,7 +16,7 @@ namespace RentLog.DomainLib11.CollectionRepos
         //private DateTime      _asOfDate;
 
 
-        public UncollectedsRepo1(ISimpleRepo<UncollectedLeaseDTO> simpleRepo) : base(simpleRepo)
+        public UncollectedsRepo1(ISimpleRepo<UncollectedLeaseDTO> simpleRepo, ITenantDBsDir tenantDBsDir) : base(simpleRepo)
         {
             //_dir      = tenantDBsDir;
             //_asOfDate = _dir.Collections.UnclosedDate();

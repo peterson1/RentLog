@@ -23,9 +23,10 @@ namespace RentLog.DomainLib45
             CurrentUser = Credentials?.HumanName ?? "Anonymous";
             MarketState = GetMarketStateDB();
             Vouchers    = GetChequeVouchersDB        (MarketState);
-            Balances    = new BalancesLocalDir       (MarketState);
-            Collections = new CollectionsLocalDir    (MarketState);
+            Balances    = new BalancesLocalDir       (this);
+            Collections = new CollectionsLocalDir    (this);
             Passbooks   = new TransactionsByMonthDir (MarketState);
+            DailyBiller = new DailyBiller1           (Collections);
         }
 
 
@@ -63,7 +64,7 @@ namespace RentLog.DomainLib45
             Credentials = creds;
 
 #if DEBUG
-            Credentials.Roles = "Cashier";
+            //Credentials.Roles = "Cashier";
 #endif
         }
 

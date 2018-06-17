@@ -3,6 +3,7 @@ using CommonTools.Lib11.DatabaseTools;
 using CommonTools.Lib11.DateTimeTools;
 using RentLog.DomainLib11.BillingRules;
 using RentLog.DomainLib11.CollectionRepos;
+using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.Models;
 using System;
@@ -17,10 +18,10 @@ namespace RentLog.DomainLib11.BalanceRepos
         private IDailyBiller _billr;
 
 
-        public DailyBillsRepo1(LeaseDTO lease, ISimpleRepo<DailyBillDTO> simpleRepo, ICollectionsDir collectionsDir) : base(simpleRepo)
+        public DailyBillsRepo1(LeaseDTO lease, ISimpleRepo<DailyBillDTO> simpleRepo, ITenantDBsDir tenantDBsDir) : base(simpleRepo)
         {
             _lse   = lease;
-            _billr = new DailyBiller1(collectionsDir);
+            _billr = tenantDBsDir.DailyBiller;
         }
 
 

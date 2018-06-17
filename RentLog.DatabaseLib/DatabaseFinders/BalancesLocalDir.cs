@@ -3,6 +3,7 @@ using CommonTools.Lib45.LiteDbTools;
 using RentLog.DatabaseLib.DailyBillsRepository;
 using RentLog.DatabaseLib.LeasesRepository;
 using RentLog.DomainLib11.BalanceRepos;
+using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
 using System;
@@ -15,24 +16,26 @@ namespace RentLog.DatabaseLib.DatabaseFinders
         private const string BALANCES_DIR = "Balances";
         private const string FILENAME_FMT = "Lease{0:0000#}_Balance.ldb";
 
-        private string        _dir;
+        private string        _foldrPath;
         private MarketStateDB _mkt;
+        private ITenantDBsDir _dir;
 
 
-        public BalancesLocalDir(MarketStateDB marketStateDB)
+        public BalancesLocalDir(ITenantDBsDir tenantDBsDir)
         {
-            _mkt = marketStateDB;
-            _dir = FindBalancesDir(_mkt.DatabasePath);
+            _dir = tenantDBsDir;
+            _mkt = _dir.MarketState;
+            _foldrPath = FindBalancesDir(_mkt.DatabasePath);
             _mkt.Balances = this;
         }
 
 
         public override IDailyBillsRepo GetRepo(int lseID)
         {
-            var file = Path.Combine(_dir, GetFilename(lseID));
+            var file = Path.Combine(_foldrPath, GetFilename(lseID));
             var db   = new SharedLiteDB(file, _mkt.CurrentUser);
             var lse  = _mkt.FindLease(lseID);
-            return new DailyBillsRepo1(lse, new DailyBillsCollection(db), _mkt.Collections);
+            return new DailyBillsRepo1(lse, new DailyBillsCollection(db), _dir);
         }
 
 
