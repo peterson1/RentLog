@@ -24,7 +24,7 @@ namespace RentLog.DomainLib11.BillingRules
         protected abstract decimal        GetRegularDue    (LeaseDTO lse, BillState billState, DateTime date);
 
 
-        public decimal TotalDue(LeaseDTO lse, BillState state, DateTime date)
+        public decimal GetTotalDue(LeaseDTO lse, BillState state, DateTime date)
             => (state.OpeningBalance ?? 0)
               + state.TotalPenalties
               + state.TotalAdjustments
@@ -32,7 +32,7 @@ namespace RentLog.DomainLib11.BillingRules
 
 
         public decimal ComputeClosingBalance(LeaseDTO lse, BillState billState, DateTime date)
-            => TotalDue(lse, billState, date) - billState.TotalPayments;
+            => GetTotalDue(lse, billState, date) - billState.TotalPayments;
 
 
         public List<BillAdjustment> ReadAdjustments(LeaseDTO lse, DateTime date)

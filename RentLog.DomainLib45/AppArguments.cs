@@ -42,7 +42,7 @@ namespace RentLog.DomainLib45
         public ChequeVouchersDB     Vouchers         { get; }
         public ICollectionsDir      Collections      { get; }
         public IBalanceDB           Balances         { get; }
-        public IDailyBiller         DailyBiller      { get; } //todo: use this instance for all
+        public IDailyBiller         DailyBiller      { get; }
         public IPassbookDB          Passbooks        { get; }
         public SectionDTO           CurrentSection   { get; set; }
         public BankAccountDTO       CurrentBankAcct  { get; set; }
@@ -64,7 +64,7 @@ namespace RentLog.DomainLib45
             Credentials = creds;
 
 #if DEBUG
-            //Credentials.Roles = "Cashier";
+            Credentials.Roles = "Cashier";
 #endif
         }
 

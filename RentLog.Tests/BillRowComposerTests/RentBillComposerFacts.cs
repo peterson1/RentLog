@@ -20,7 +20,7 @@ namespace RentLog.Tests.BillRowComposerTests
             var sut = new RentBillComposer1(null);
             var lse = SampleLease(out DateTime date);
             var bil = SampleBillState();
-            var val = sut.TotalDue(lse, bil, date);
+            var val = sut.GetTotalDue(lse, bil, date);
             val.Should().Be(lse.Rent.RegularRate);
         }
 
@@ -32,7 +32,7 @@ namespace RentLog.Tests.BillRowComposerTests
             var lse = SampleLease(out DateTime date);
             var bil = SampleBillState();
             bil.OpeningBalance = 123;
-            var val = sut.TotalDue(lse, bil, date);
+            var val = sut.GetTotalDue(lse, bil, date);
             val.Should().Be(bil.OpeningBalance + lse.Rent.RegularRate);
         }
 
@@ -44,7 +44,7 @@ namespace RentLog.Tests.BillRowComposerTests
             var lse = SampleLease(out DateTime date);
             var bil = SampleBillState();
             bil.Penalties[0].Amount = 456;
-            var val = sut.TotalDue(lse, bil, date);
+            var val = sut.GetTotalDue(lse, bil, date);
             val.Should().Be(bil.TotalPenalties + lse.Rent.RegularRate);
         }
 
@@ -56,7 +56,7 @@ namespace RentLog.Tests.BillRowComposerTests
             var lse = SampleLease(out DateTime date);
             var bil = SampleBillState();
             bil.Adjustments[0].AmountOffset = 789;
-            var val = sut.TotalDue(lse, bil, date);
+            var val = sut.GetTotalDue(lse, bil, date);
             val.Should().Be(bil.TotalAdjustments + lse.Rent.RegularRate);
         }
 
@@ -69,11 +69,11 @@ namespace RentLog.Tests.BillRowComposerTests
             var lse = SampleLease(out DateTime date);
             lse.Rent.GracePeriodDays = 3;
 
-            sut.TotalDue(lse, bil, 1.May(2018)).Should().Be(0);
-            sut.TotalDue(lse, bil, 2.May(2018)).Should().Be(0);
-            sut.TotalDue(lse, bil, 3.May(2018)).Should().Be(0);
-            sut.TotalDue(lse, bil, 4.May(2018)).Should().Be(0);
-            sut.TotalDue(lse, bil, 5.May(2018)).Should().Be(120);
+            sut.GetTotalDue(lse, bil, 1.May(2018)).Should().Be(0);
+            sut.GetTotalDue(lse, bil, 2.May(2018)).Should().Be(0);
+            sut.GetTotalDue(lse, bil, 3.May(2018)).Should().Be(0);
+            sut.GetTotalDue(lse, bil, 4.May(2018)).Should().Be(0);
+            sut.GetTotalDue(lse, bil, 5.May(2018)).Should().Be(120);
         }
 
 
@@ -84,7 +84,7 @@ namespace RentLog.Tests.BillRowComposerTests
             var lse = SampleLease(out DateTime date);
             lse.ContractEnd = 2.May(2018);
             var bil = SampleBillState();
-            var val = sut.TotalDue(lse, bil, 3.May(2018));
+            var val = sut.GetTotalDue(lse, bil, 3.May(2018));
             val.Should().Be(0);
         }
 

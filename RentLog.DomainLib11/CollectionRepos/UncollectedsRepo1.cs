@@ -14,12 +14,14 @@ namespace RentLog.DomainLib11.CollectionRepos
     public class UncollectedsRepo1 : SimpleRepoShimBase<UncollectedLeaseDTO>, IUncollectedsRepo
     {
         private ITenantDBsDir _dir;
+        private DateTime      _date;
 
 
-        public UncollectedsRepo1(ISimpleRepo<UncollectedLeaseDTO> simpleRepo, ITenantDBsDir tenantDBsDir) : base(simpleRepo)
+        public UncollectedsRepo1(DateTime date, ISimpleRepo<UncollectedLeaseDTO> simpleRepo, ITenantDBsDir tenantDBsDir) : base(simpleRepo)
         {
-            _dir      = tenantDBsDir;
-            //_dir.Collections.UnclosedDate();
+            _dir  = tenantDBsDir;
+            _date = date;
+            //_dir.Collections.UnclosedDate(); <-- throws StackOverflow exception
         }
 
 
@@ -68,12 +70,10 @@ namespace RentLog.DomainLib11.CollectionRepos
         };
 
 
-        //todo: test this directly using sample DBs
         public decimal? GetDue(LeaseDTO lse, BillCode billCode)
         {
-            //var bill = _dir.Balances.GetBill(lse, _asOfDate).For(billCode);
-            //return _dir.DailyBiller.GetBillComposer(billCode).GetTotalDue(lse, bill, _asOfDate);
-            throw new NotImplementedException();
+            var bill = _dir.Balances.GetBill(lse, _date).For(billCode);
+            return _dir.DailyBiller.GetBillComposer(billCode).GetTotalDue(lse, bill, _date);
         }
 
 

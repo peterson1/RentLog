@@ -1,4 +1,5 @@
 ﻿using RentLog.DomainLib11.DTOs;
+using System;
 using System.Collections.Generic;
 
 namespace RentLog.DomainLib11.CollectionRepos
@@ -11,6 +12,7 @@ namespace RentLog.DomainLib11.CollectionRepos
         Dictionary<int, INoOperationsRepo>   NoOperations   { get; }
         Dictionary<int, IVacantStallsRepo>   VacantStalls   { get; }
 
+        DateTime                 Date            { get; }
         ICashierColxnsRepo       CashierColxns   { get; }
         IOtherColxnsRepo         OtherColxns     { get; }
         IBankDepositsRepo        BankDeposits    { get; }

@@ -99,6 +99,7 @@
     <Compile Include="LeasesRepoTests\ActiveLeasesRepoReaderFacts.cs" />
     <Compile Include="LeasesRepoTests\ActiveLeasesRepoWriterFacts.cs" />
     <Compile Include="LeasesRepoTests\InactiveLeasesRepoWriterFacts.cs" />
+    <Compile Include="MainWindowTests\MainWindowFacts.cs" />
     <Compile Include="OtherColxnsRepoTests\OtherColxnsRepoFacts.cs" />
     <Compile Include="PassbookRowsRepoTests\PassbookRowsRepoFacts.cs" />
     <Compile Include="PreparedChequesRepoTests\PreparedChequesRepoFacts.cs" />

@@ -19,10 +19,11 @@ namespace RentLog.DomainLib11.CollectionRepos
         private MarketStateDB                _mkt;
 
 
-        public CollectionsDB1(ISimpleRepo<KeyValuePairDTO> metadataRepo, MarketStateDB marketStateDB)
+        public CollectionsDB1(DateTime date, ISimpleRepo<KeyValuePairDTO> metadataRepo, MarketStateDB marketStateDB)
         {
             _meta = metadataRepo;
             _mkt  = marketStateDB;
+            Date  = date;
         }
 
 
@@ -32,6 +33,7 @@ namespace RentLog.DomainLib11.CollectionRepos
         public Dictionary<int, INoOperationsRepo  > NoOperations   { get; } = new Dictionary<int, INoOperationsRepo  >();
         public Dictionary<int, IVacantStallsRepo  > VacantStalls   { get; } = new Dictionary<int, IVacantStallsRepo  >();
 
+        public DateTime                 Date            { get; }
         public ICashierColxnsRepo       CashierColxns   { get; set; }
         public IOtherColxnsRepo         OtherColxns     { get; set; }
         public IBankDepositsRepo        BankDeposits    { get; set; }

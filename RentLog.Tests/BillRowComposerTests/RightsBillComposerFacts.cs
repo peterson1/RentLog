@@ -19,9 +19,9 @@ namespace RentLog.Tests.BillRowComposerTests
             var bil = SampleBillState();
             var sut = new RightsBillComposer1(null);
 
-            sut.TotalDue(lse, bil, 1.May(2018)).Should().Be(0);
-            sut.TotalDue(lse, bil, 2.May(2018)).Should().Be(lse.Rights.TotalAmount);
-            sut.TotalDue(lse, bil, 3.May(2018)).Should().Be(0);
+            sut.GetTotalDue(lse, bil, 1.May(2018)).Should().Be(0);
+            sut.GetTotalDue(lse, bil, 2.May(2018)).Should().Be(lse.Rights.TotalAmount);
+            sut.GetTotalDue(lse, bil, 3.May(2018)).Should().Be(0);
         }
 
 

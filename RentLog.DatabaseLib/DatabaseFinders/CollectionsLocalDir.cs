@@ -66,10 +66,10 @@ namespace RentLog.DatabaseLib.DatabaseFinders
         protected override ICollectionsDB ConnectToDB(DateTime date, string file)
         {
             var db                 = new SharedLiteDB(file, _mkt.CurrentUser);
-            var colxnsDB           = new CollectionsDB1(db.Metadata, _mkt);
+            var colxnsDB           = new CollectionsDB1(date, db.Metadata, _mkt);
             SetIntendedColxns(colxnsDB.IntendedColxns, db);
             SetAmbulantColxns(colxnsDB.AmbulantColxns, db);
-            SetUncollecteds  (colxnsDB.Uncollecteds  , db);
+            SetUncollecteds  (colxnsDB.Uncollecteds  , db, date);
             SetNoOperations  (colxnsDB.NoOperations  , db);
             SetVacantStalls  (colxnsDB.VacantStalls  , db);
             colxnsDB.CashierColxns = new CashierColxnsRepo1(new CashierColxnsCollection(db));
@@ -109,12 +109,12 @@ namespace RentLog.DatabaseLib.DatabaseFinders
         }
 
 
-        private void SetUncollecteds(Dictionary<int, IUncollectedsRepo> dict, SharedLiteDB db)
+        private void SetUncollecteds(Dictionary<int, IUncollectedsRepo> dict, SharedLiteDB db, DateTime date)
         {
             foreach (var sec in _mkt.Sections.GetAll())
             {
                 var colxn = new UncollectedsCollection(sec, db);
-                var repo  = new UncollectedsRepo1(colxn, _dir);
+                var repo  = new UncollectedsRepo1(date, colxn, _dir);
                 dict.Add(sec.Id, repo);
             }
         }
