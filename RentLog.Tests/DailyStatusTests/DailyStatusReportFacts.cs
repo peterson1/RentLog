@@ -11,7 +11,7 @@ namespace RentLog.Tests.DailyStatusTests
         //[Fact(DisplayName = "May 4", Skip = "Undone")]
         public void May4()
         {
-            var arg = SampleArgs.Lease197();
+            var arg = SampleDir.Lease197();
             var sut = new DailyStatusReport(4.May(2018), arg);
 
         }

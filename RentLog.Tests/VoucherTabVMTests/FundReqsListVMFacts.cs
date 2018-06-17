@@ -13,7 +13,7 @@ namespace RentLog.Tests.VoucherTabVMTests
         [Fact(DisplayName = "Fund Requests List")]
         public void FundRequestsList()
         {
-            var dir = SampleArgs.May19_GRY();
+            var dir = SampleDir.May19_GRY();
             var sut = new FundReqsListVM(dir);
             sut.ReloadFromDB();
             sut.ItemsList.Count.Should().Be(17);
@@ -24,7 +24,7 @@ namespace RentLog.Tests.VoucherTabVMTests
         [Fact(DisplayName = "Prepared Cheques List")]
         public void PreparedChequesList()
         {
-            var dir = SampleArgs.May19_GRY();
+            var dir = SampleDir.May19_GRY();
             var sut = new PreparedChequesListVM(dir);
             sut.ReloadFromDB();
             sut.ItemsList.Count.Should().Be(9);
@@ -35,7 +35,7 @@ namespace RentLog.Tests.VoucherTabVMTests
         [Fact(DisplayName = "Issued Cheques List")]
         public void IssuedChequesList()
         {
-            var dir = SampleArgs.May19_GRY();
+            var dir = SampleDir.May19_GRY();
             var sut = new IssuedChequesListVM(dir);
             sut.ReloadFromDB();
             sut.ItemsList.Count.Should().Be(175);

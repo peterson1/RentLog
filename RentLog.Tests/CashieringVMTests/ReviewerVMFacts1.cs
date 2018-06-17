@@ -13,7 +13,7 @@ namespace RentLog.Tests.CashieringVMTests
         [Fact(DisplayName = "Review May 12")]
         public async Task ReviewMay12()
         {
-            var args = SampleArgs.Lease197();
+            var args = SampleDir.Lease197();
             var sut  = new MainWindowVM(12.May(2018), args, false);
             await sut.RefreshCmd.RunAsync();
 
@@ -60,7 +60,7 @@ namespace RentLog.Tests.CashieringVMTests
         [Fact(DisplayName = "Review May 8")]
         public async Task ReviewMay8()
         {
-            var args = SampleArgs.Lease197();
+            var args = SampleDir.Lease197();
             var sut  = new MainWindowVM(8.May(2018), args, false);
             await sut.RefreshCmd.RunAsync();
 

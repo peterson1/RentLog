@@ -17,7 +17,7 @@ namespace RentLog.Tests.CollectionsDirTests
         [Fact(DisplayName = "Unclosed Date")]
         public void UnclosedDate()
         {
-            var arg = SampleDir.Lease197(out LeaseDTO lse);
+            var arg = SampleDir.Lease197();
             arg.Collections.UnclosedDate().Should().Be(13.May(2018));
         }
 
@@ -25,7 +25,7 @@ namespace RentLog.Tests.CollectionsDirTests
         [Fact(DisplayName = "Last Posted Date")]
         public void LastPostedDate()
         {
-            var arg = SampleDir.Lease197(out LeaseDTO lse);
+            var arg = SampleDir.Lease197();
             arg.Collections.LastPostedDate().Should().Be(12.May(2018));
         }
     }

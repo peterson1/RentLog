@@ -19,7 +19,8 @@ namespace RentLog.Tests.BillRowComposerTests
         [Fact(DisplayName = "Reads Adjustments")]
         public void ReadsAdjustments()
         {
-            var arg = SampleDir.Lease197(out LeaseDTO lse);
+            var arg = SampleDir.Lease197();
+            var lse = arg.MarketState.ActiveLeases.Find(197, true);
             var sut = new SampleComposer(arg.Collections);
 
             sut._billCode = BillCode.Rent;
@@ -35,7 +36,8 @@ namespace RentLog.Tests.BillRowComposerTests
         [Fact(DisplayName = "Reads Payments")]
         public void ReadsPayments()
         {
-            var arg = SampleDir.Lease197(out LeaseDTO lse);
+            var arg = SampleDir.Lease197();
+            var lse = arg.MarketState.ActiveLeases.Find(197, true);
             var sut = new SampleComposer(arg.Collections);
 
             sut._billCode = BillCode.Rent;

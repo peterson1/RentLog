@@ -22,7 +22,7 @@ namespace RentLog.Tests.DailyColxnsTests
         [Fact(DisplayName = "May 4")]
         public void May4()
         {
-            var arg = SampleArgs.Lease197();
+            var arg = SampleDir.Lease197();
             var sut = new DailyColxnsReport(4.May(2018), arg);
 
             sut.Should().HaveCount(4);

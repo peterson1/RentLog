@@ -1,8 +1,11 @@
 ﻿using CommonTools.Lib11.GoogleTools;
+using FluentAssertions;
 using RentLog.DatabaseLib.DatabaseFinders;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
 using RentLog.DomainLib45;
+using System;
+using System.IO;
 
 namespace RentLog.Tests.SampleDBs
 {
@@ -12,34 +15,26 @@ namespace RentLog.Tests.SampleDBs
 
         public SampleArgs()
         {
-            IsValidUser = true;
-            Credentials = new FirebaseCredentials();
+            IsValidUser       = true;
+            Credentials       = new FirebaseCredentials();
             Credentials.Roles = "Supervisor";
-            CurrentBankAcct = new BankAccountDTO
-            {
-                Id = 1,
-            };
+            CurrentBankAcct   = new BankAccountDTO { Id = 1 };
         }
 
 
         protected override MarketStateDB GetMarketStateDB()
         {
-            var dbPath = SampleDir.FindDB(DirName);
+            var dbPath = FindDB(DirName);
             return new MarketStateDBFile(dbPath, "Test Runner");
         }
 
 
-        internal static SampleArgs Lease197()
+        private static string FindDB(string folderName)
         {
-            SampleArgs.DirName = SampleDir.LEASE_197;
-            return new SampleArgs();
-        }
-
-
-        internal static SampleArgs May19_GRY()
-        {
-            SampleArgs.DirName = SampleDir.MAY_19_F_GRY;
-            return new SampleArgs();
+            var dbPath = Path.Combine(@"..\..\SampleDBs",
+                            folderName, "MarketState.ldb");
+            File.Exists(dbPath).Should().BeTrue();
+            return dbPath;
         }
     }
 }

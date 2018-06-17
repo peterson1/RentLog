@@ -26,7 +26,7 @@ namespace RentLog.Tests.ColxnSummaryTests
         [Fact(DisplayName = "May 4 to 6")]
         public void May4to7()
         {
-            var arg = SampleArgs.Lease197();
+            var arg = SampleDir.Lease197();
             var sut = new ColxnSummaryReport(4.May(2018), 6.May(2018), arg);
             sut.Count.Should().Be(3);
             sut.DateRangeText.Should().Be("May 4, 2018  to  May 6, 2018");
@@ -61,7 +61,7 @@ namespace RentLog.Tests.ColxnSummaryTests
         [Fact(DisplayName = "Colxn Summary To Excel")]
         public void ColxnSummaryToExcel()
         {
-            var arg = SampleArgs.Lease197();
+            var arg = SampleDir.Lease197();
             var bgn = 3.May(2018);
             var end = 12.May(2018);
 

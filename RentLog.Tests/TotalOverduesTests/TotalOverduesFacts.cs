@@ -13,7 +13,7 @@ namespace RentLog.Tests.TotalOverduesTests
         [Fact(DisplayName = "May 19 Total Overdues")]
         public void May19TotalOverdues()
         {
-            var dir = SampleDir.May_19_F_GRY();
+            var dir = SampleDir.May19_GRY();
             var bal = dir.Balances.TotalOverdues(19.May(2018));
             bal.Rent.Should().BeApproximately(223_540.52M, 0.1M);
             bal.Rights.Should().Be(0M);

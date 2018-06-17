@@ -17,7 +17,7 @@ namespace RentLog.Tests.StallsInventoryTests
         [Fact(DisplayName = "May 4")]
         public void May4()
         {
-            var arg = SampleArgs.Lease197();
+            var arg = SampleDir.Lease197();
             var sut = new StallsInventoryReport(4.May(2018), arg);
 
             sut.Count.Should().Be(3);
