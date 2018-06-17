@@ -101,8 +101,16 @@ namespace RentLog.Cashiering
 
         protected override void OnWindowClosing(CancelEventArgs cancelEvtArgs)
         {
-            if (CanEncode)
-                ColxnsDB.VacantStalls.UpdateAllLists(AppArgs.MarketState);
+            if (CanEncode) UpdateDatabasesBeforeExit();
+        }
+
+
+        private void UpdateDatabasesBeforeExit()
+        {
+            ColxnsDB.VacantStalls.UpdateAllLists(AppArgs.MarketState);
+
+            foreach (var secTab in SectionTabs)
+                secTab.Uncollecteds.PersistUIList(true);
         }
     }
 }

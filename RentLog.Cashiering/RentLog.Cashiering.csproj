@@ -163,6 +163,10 @@
       <DependentUpon>SectionTabUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="SectionTabs\SectionTabVM.cs" />
+    <Compile Include="SectionTabs\Uncollecteds\UncollectedsFilterUI.xaml.cs">
+      <DependentUpon>UncollectedsFilterUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SectionTabs\Uncollecteds\UncollectedsFilterVM.cs" />
     <Compile Include="SectionTabs\Uncollecteds\UncollectedsTable.xaml.cs">
       <DependentUpon>UncollectedsTable.xaml</DependentUpon>
     </Compile>
@@ -255,6 +259,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SectionTabs\SectionTabUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SectionTabs\Uncollecteds\UncollectedsFilterUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

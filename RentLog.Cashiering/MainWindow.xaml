@@ -22,7 +22,8 @@
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{DynamicResource MaterialDesignFont}">
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        FocusManager.FocusedElement="{Binding ElementName=tabs}">
     <DockPanel>
         <butns:UpdatedExeNotifierBar DataContext="{Binding UpdateNotifier}"
                                      DockPanel.Dock="Top" />
@@ -59,6 +60,7 @@
             <GridSplitter Grid.Column="1" Style="{StaticResource vSplit}" />
 
             <dragz:TabablzControl Grid.Column="2" x:Name="tabs"
+                                  TabIndex="0"
                                   ItemsSource="{Binding SectionTabs}"
                                   FixedHeaderCount="{Binding SectionTabs.Count}">
 

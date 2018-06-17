@@ -154,8 +154,13 @@ namespace CommonTools.Lib45.BaseViewModels
         public IEnumerator<TDTO> GetEnumerator() => ((IEnumerable<TDTO>)ItemsList).GetEnumerator();
         IEnumerator IEnumerable .GetEnumerator() => ((IEnumerable<TDTO>)ItemsList).GetEnumerator();
 
-
         //public void RaisePropertyChanged(object sender, PropertyChangedEventArgs e)
         //    => PropertyChanged?.Invoke(sender, e);
+
+        public virtual void PersistUIList(bool doValidate)
+        {
+            _repo.Drop();
+            _repo.Insert(ItemsList, doValidate);
+        }
     }
 }

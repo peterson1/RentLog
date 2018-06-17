@@ -10,7 +10,8 @@
              xmlns:local="clr-namespace:RentLog.Cashiering.SectionTabs"
              xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             FocusManager.FocusedElement="{Binding ElementName=uncol}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="210" />
@@ -28,6 +29,7 @@
             </Grid.RowDefinitions>
             
             <uncol:UncollectedsUI Grid.Row="0"
+                                  x:Name="uncol"
                                   DataContext="{Binding Uncollecteds}" />
             
             <GridSplitter Grid.Row="1" Style="{StaticResource hSplit}" />

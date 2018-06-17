@@ -58,6 +58,14 @@
                         Content="{Binding PostAndCloseCmd.CurrentLabel}"
                         Height="25" />
             </Grid>
+
+            <Grid Visibility="{Binding Main.CanEncode, Converter={StaticResource visIfTrue}}">
+                <Button Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                        Visibility="{Binding IsBalanced, Converter={StaticResource visIfTrue}}"
+                        Command="{Binding Main.CloseWindowCmd}"
+                        Content="Submit"
+                        Height="25" />
+            </Grid>
         </StackPanel>
         
         <butns:RefreshButtonWhite Margin="10 0 0 0" />

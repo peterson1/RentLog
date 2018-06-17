@@ -15,13 +15,15 @@ namespace RentLog.DomainLib11.CollectionRepos
     {
         private ITenantDBsDir _dir;
         private DateTime      _date;
+        private SectionDTO    _sec;
 
 
-        public UncollectedsRepo1(DateTime date, ISimpleRepo<UncollectedLeaseDTO> simpleRepo, ITenantDBsDir tenantDBsDir) : base(simpleRepo)
+        public UncollectedsRepo1(SectionDTO sectionDTO, DateTime date, ISimpleRepo<UncollectedLeaseDTO> simpleRepo, ITenantDBsDir tenantDBsDir) : base(simpleRepo)
         {
+            _sec  = sectionDTO;
             _dir  = tenantDBsDir;
             _date = date;
-            //_dir.Collections.UnclosedDate(); <-- throws StackOverflow exception
+            //_dir.Collections.UnclosedDate();// <-- throws StackOverflow exception
         }
 
 
@@ -30,14 +32,16 @@ namespace RentLog.DomainLib11.CollectionRepos
             IEnumerable<UncollectedLeaseDTO> didNotOperate)
         {
             var asOfDate    = _dir.Collections.UnclosedDate();
-            var intendedIDs = intendedColxns.Select(_ => _.Id).ToList();
-            var noOpsIDs    = didNotOperate.Select(_ => _.Id).ToList();
+            var intendedIDs = intendedColxns.Select(_ => _.Lease.Id).ToList();
+            var noOpsIDs    = didNotOperate.Select(_ => _.Lease.Id).ToList();
             var actives     = GetUncollecteds(GetActiveLeases(), 
                                 asOfDate, intendedIDs, noOpsIDs);
             var inactvs     = GetUncollecteds(GetInactiveLeases(),
                                 asOfDate, intendedIDs, noOpsIDs);
 
-            return actives.Concat(inactvs).ToList();
+            return actives.Concat(inactvs)
+                          .OrderBy(_ => _.Lease.Stall.Name)
+                          .ToList();
         }
 
 
@@ -55,8 +59,9 @@ namespace RentLog.DomainLib11.CollectionRepos
             IEnumerable<int> intendedColxns, 
             IEnumerable<int> didNotOperate)
         {
-            if (intendedColxns.Contains(lse.Id)) return false;
+            if (lse.Stall.Section.Id != _sec.Id) return false;
             if (didNotOperate.Contains(lse.Id)) return false;
+            if (intendedColxns.Contains(lse.Id)) return false;
             return lse.IsActive(asOfDate);
         }
 
