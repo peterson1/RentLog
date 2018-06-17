@@ -4,6 +4,7 @@ using CommonTools.Lib45.ThreadTools;
 using Mono.Options;
 using RentLog.DatabaseLib.DatabaseFinders;
 using RentLog.DomainLib11.BalanceRepos;
+using RentLog.DomainLib11.BillingRules;
 using RentLog.DomainLib11.ChequeVoucherRepos;
 using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DataSources;
@@ -40,6 +41,7 @@ namespace RentLog.DomainLib45
         public ChequeVouchersDB     Vouchers         { get; }
         public ICollectionsDir      Collections      { get; }
         public IBalanceDB           Balances         { get; }
+        public IDailyBiller         DailyBiller      { get; } //todo: use this instance for all
         public IPassbookDB          Passbooks        { get; }
         public SectionDTO           CurrentSection   { get; set; }
         public BankAccountDTO       CurrentBankAcct  { get; set; }
@@ -61,7 +63,7 @@ namespace RentLog.DomainLib45
             Credentials = creds;
 
 #if DEBUG
-            //Credentials.Roles = "Cashier";
+            Credentials.Roles = "Cashier";
 #endif
         }
 

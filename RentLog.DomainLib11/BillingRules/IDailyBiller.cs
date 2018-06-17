@@ -7,6 +7,7 @@ namespace RentLog.DomainLib11.BillingRules
 {
     public interface IDailyBiller
     {
-        BillState ComputeBill(BillCode billCode, LeaseDTO lease, DateTime date, decimal? previousBalance);
+        BillState         ComputeBill     (BillCode billCode, LeaseDTO lease, DateTime date, decimal? previousBalance);
+        IBillRowComposer  GetBillComposer (BillCode billCode);
     }
 }

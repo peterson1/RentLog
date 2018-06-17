@@ -26,7 +26,7 @@ namespace RentLog.DomainLib11.BillingRules
 
         public BillState ComputeBill(BillCode billCode, LeaseDTO lease, DateTime date, decimal? previousBalance)
         {
-            var composr = GetRowComposer(billCode);
+            var composr = GetBillComposer(billCode);
             var state   = new BillState
             {
                 BillCode       = billCode,
@@ -40,7 +40,7 @@ namespace RentLog.DomainLib11.BillingRules
         }
 
 
-        private IBillRowComposer GetRowComposer(BillCode billCode)
+        public IBillRowComposer GetBillComposer(BillCode billCode)
         {
             switch (billCode)
             {
