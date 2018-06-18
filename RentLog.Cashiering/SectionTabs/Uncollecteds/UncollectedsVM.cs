@@ -30,6 +30,10 @@ namespace RentLog.Cashiering.SectionTabs.Uncollecteds
         public UncollectedsFilterVM Filter { get; } = new UncollectedsFilterVM();
 
 
+        protected override void OnItemOpened(UncollectedLeaseDTO e) 
+            => _tab.EncodeNewIntendedColxn(e);
+
+
         public override void ReloadFromDB()
         {
             _queried = GetPostProcessedResult().ToList();

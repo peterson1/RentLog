@@ -1,0 +1,164 @@
+﻿<Window x:Class="RentLog.Cashiering.SectionTabs.IntendedCollections.IntendedColxnCrudWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RentLog.Cashiering.SectionTabs.IntendedCollections"
+        mc:Ignorable="d"
+        Title="{Binding Caption}" 
+        SizeToContent="WidthAndHeight"
+        xmlns:int="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:cnv="clr-namespace:CommonTools.Lib45.ValueConverters;assembly=CommonTools.Lib45"
+        xmlns:txbhv="clr-namespace:CommonTools.Lib45.UIBehaviors.TextBoxBehaviors;assembly=CommonTools.Lib45"
+        xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        FocusManager.FocusedElement="{Binding ElementName=txtPRnum}">
+    <Window.Resources>
+        <Style TargetType="TextBox"
+               BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+            <Setter Property="Margin" Value="10 10 10 10" />
+            <Setter Property="MinWidth" Value="150" />
+        </Style>
+
+        <Style TargetType="ComboBox"
+               BasedOn="{StaticResource MaterialDesignFloatingHintComboBox}">
+            <Setter Property="Margin" Value="10 10 10 10" />
+            <Setter Property="MinWidth" Value="150" />
+        </Style>
+
+        <Style TargetType="DatePicker"
+               BasedOn="{StaticResource MaterialDesignFloatingHintDatePicker}">
+            <Setter Property="Margin" Value="10 23 10 10" />
+            <Setter Property="MinWidth" Value="150" />
+        </Style>
+
+        <Style TargetType="CheckBox"
+               BasedOn="{StaticResource MaterialDesignCheckBox}">
+            <Setter Property="Margin" Value="10 10 10 10" />
+            <Setter Property="MinWidth" Value="150" />
+        </Style>
+
+        <Style x:Key="txtReadOnly" TargetType="TextBox"
+               BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+            <Setter Property="Margin" Value="10 10 10 10" />
+            <Setter Property="MinWidth" Value="100" />
+            <Setter Property="IsReadOnly" Value="True" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkBrush}" />
+        </Style>
+
+        <Style x:Key="txtColHeadr" TargetType="TextBlock"
+               BasedOn="{StaticResource MaterialDesignSubheadingTextBlock}">
+            <Setter Property="Margin" Value="0 0 20 0" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkBrush}" />
+        </Style>
+    </Window.Resources>
+    <StackPanel Margin="30">
+
+        <TextBlock Text="{Binding Intention.Lease.TenantAndStall}" 
+                   Style="{StaticResource MaterialDesignHeadlineTextBlock}"
+                   HorizontalAlignment="Right"
+                   Margin="0 0 0 40" />
+
+        <StackPanel Orientation="Horizontal">
+
+            <StackPanel VerticalAlignment="Top"
+                        Margin="0 18 0 0">
+                <TextBox Text="{Binding Draft.PRNumber, UpdateSourceTrigger=PropertyChanged}"
+                         mat:HintAssist.Hint="PR #"
+                         MinWidth="100"
+                         x:Name="txtPRnum">
+                    <int:Interaction.Behaviors>
+                        <txbhv:SelectAllOnFocusBehavior />
+                    </int:Interaction.Behaviors>
+                </TextBox>
+            </StackPanel>
+
+            <StackPanel Margin="40 0 0 0"
+                        DataContext="{Binding Draft.Actuals}">
+
+                <TextBlock Text="Actual Collections" 
+                           Style="{StaticResource txtColHeadr}" />
+
+                <TextBox Text="{Binding Rent, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
+                         mat:HintAssist.Hint="Rent">
+                    <int:Interaction.Behaviors>
+                        <txbhv:SelectAllOnFocusBehavior />
+                    </int:Interaction.Behaviors>
+                </TextBox>
+
+                <TextBox Text="{Binding Rights, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
+                         mat:HintAssist.Hint="Rights">
+                    <int:Interaction.Behaviors>
+                        <txbhv:SelectAllOnFocusBehavior />
+                    </int:Interaction.Behaviors>
+                </TextBox>
+
+                <TextBox Text="{Binding Electric, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
+                         mat:HintAssist.Hint="Electric">
+                    <int:Interaction.Behaviors>
+                        <txbhv:SelectAllOnFocusBehavior />
+                    </int:Interaction.Behaviors>
+                </TextBox>
+
+                <TextBox Text="{Binding Water, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
+                         mat:HintAssist.Hint="Water">
+                    <int:Interaction.Behaviors>
+                        <txbhv:SelectAllOnFocusBehavior />
+                    </int:Interaction.Behaviors>
+                </TextBox>
+
+            </StackPanel>
+
+            <StackPanel Margin="40 0 0 20"
+                        DataContext="{Binding Draft.Targets}">
+
+                <TextBlock Text="Targets" 
+                           Style="{StaticResource txtColHeadr}" />
+
+                <TextBox Text="{Binding Rent, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
+                         Style="{StaticResource txtReadOnly}"
+                         mat:HintAssist.Hint="Rent" />
+
+                <TextBox Text="{Binding Rights, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
+                         Style="{StaticResource txtReadOnly}"
+                         mat:HintAssist.Hint="Rights" />
+                
+                <TextBox Text="{Binding Electric, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
+                         Style="{StaticResource txtReadOnly}"
+                         mat:HintAssist.Hint="Electric" />
+                
+                <TextBox Text="{Binding Water, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
+                         Style="{StaticResource txtReadOnly}"
+                         mat:HintAssist.Hint="Water" />
+            </StackPanel>
+        </StackPanel>
+        
+        <TextBox Text="{Binding Draft.Remarks, UpdateSourceTrigger=PropertyChanged}"
+                 HorizontalAlignment="Right"
+                 MinWidth="310"
+                 mat:HintAssist.Hint="remarks" />
+
+        <DockPanel Margin="0 30 0 0">
+            <Button Command="{Binding SaveDraftCmd}"
+                    Content="{Binding SaveDraftCmd.CurrentLabel}"
+                    DockPanel.Dock="Right"
+                    IsDefault="True"
+                    Margin="20 0 0 0" />
+
+            <TextBlock Text="{Binding WhyInvalid}"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Bottom"
+                       Foreground="Red"
+                       Margin="0 0 0 0" />
+        </DockPanel>
+        
+    </StackPanel>
+</Window>

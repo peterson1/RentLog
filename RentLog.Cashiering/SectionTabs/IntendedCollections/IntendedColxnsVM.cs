@@ -1,6 +1,7 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
 using PropertyChanged;
 using RentLog.Cashiering.CommonControls;
+using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib45;
@@ -24,6 +25,5 @@ namespace RentLog.Cashiering.SectionTabs.IntendedCollections
 
         protected override Func<IntendedColxnDTO, LeaseDTO> LeaseGetter  => _ => _.Lease;
         protected override Func<IntendedColxnDTO, decimal>  SummedAmount => _ => _.Actuals.Total;
-
     }
 }

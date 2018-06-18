@@ -145,6 +145,10 @@
       <DependentUpon>AmbulantColxnsUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="SectionTabs\AmbulantCollections\AmbulantColxnsVM.cs" />
+    <Compile Include="SectionTabs\IntendedCollections\IntendedColxnCrudVM.cs" />
+    <Compile Include="SectionTabs\IntendedCollections\IntendedColxnCrudWindow.xaml.cs">
+      <DependentUpon>IntendedColxnCrudWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SectionTabs\IntendedCollections\IntendedColxnsTable.xaml.cs">
       <DependentUpon>IntendedColxnsTable.xaml</DependentUpon>
     </Compile>
@@ -239,6 +243,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SectionTabs\AmbulantCollections\AmbulantColxnsUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SectionTabs\IntendedCollections\IntendedColxnCrudWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

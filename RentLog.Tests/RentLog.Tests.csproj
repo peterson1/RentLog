@@ -96,6 +96,7 @@
     <Compile Include="DailyColxnsTests\DailyColxnsFacts.cs" />
     <Compile Include="DailyStatusTests\DailyStatusReportFacts.cs" />
     <Compile Include="FundRequestsRepoTests\FundRequestsRepoFacts.cs" />
+    <Compile Include="IntendedColxnsRepoTests\IntendedColxnsRepoFacts.cs" />
     <Compile Include="LeasesRepoTests\ActiveLeasesRepoReaderFacts.cs" />
     <Compile Include="LeasesRepoTests\ActiveLeasesRepoWriterFacts.cs" />
     <Compile Include="LeasesRepoTests\InactiveLeasesRepoWriterFacts.cs" />

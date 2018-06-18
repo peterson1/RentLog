@@ -14,7 +14,8 @@ namespace CommonTools.Lib45.BaseViewModels
     [AddINotifyPropertyChangedInterface]
     public abstract class MainWindowVMBase<TArg>
     {
-        public event EventHandler PrintClicked = delegate { };
+        public event EventHandler PrintClicked     = delegate { };
+        public event EventHandler RefreshCompleted = delegate { };
 
         protected string RefreshingText = "Refreshing list of records...";
         protected abstract string CaptionPrefix { get; }
@@ -85,6 +86,7 @@ namespace CommonTools.Lib45.BaseViewModels
             await Task.Run(() => OnRefreshClickedAsync());
 
             StopBeingBusy();
+            RefreshCompleted?.Invoke(this, EventArgs.Empty);
         }
 
         protected virtual void ApplyWindowTheme     (Window win) { }

@@ -7,8 +7,7 @@
              xmlns:comn="clr-namespace:RentLog.Cashiering.CommonControls"
              xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
-             FocusManager.FocusedElement="{Binding ElementName=filtr}">
+             d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
         <StackPanel DockPanel.Dock="Top">
             <comn:LightColorZone />
@@ -16,7 +15,7 @@
                                         Visibility="{Binding Main.CanEncode, Converter={StaticResource visIfTrue}}" />
         </StackPanel>
 
-        <local:UncollectedsTable />
+        <local:UncollectedsTable x:Name="tbl" />
 
     </DockPanel>
 </UserControl>

@@ -6,8 +6,7 @@
              xmlns:local="clr-namespace:RentLog.Cashiering.SectionTabs.Uncollecteds"
              xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
-             FocusManager.FocusedElement="{Binding ElementName=txtFilter1}">
+             d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <Style TargetType="TextBox" 
                BasedOn="{StaticResource MaterialDesignTextBox}">
@@ -18,6 +17,6 @@
     <Grid DataContext="{Binding Filter}">
         <TextBox Text="{Binding NameAndStallFilter, UpdateSourceTrigger=PropertyChanged}"
                  mat:HintAssist.Hint="filter by tenant/stall"
-                 x:Name="txtFilter1" />
+                 x:Name="txt1" />
     </Grid>
 </UserControl>
