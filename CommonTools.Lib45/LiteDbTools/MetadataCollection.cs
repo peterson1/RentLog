@@ -1,9 +1,9 @@
-﻿using CommonTools.Lib11.DTOs;
-using System;
+﻿using CommonTools.Lib11.DatabaseTools;
+using CommonTools.Lib11.DTOs;
 
 namespace CommonTools.Lib45.LiteDbTools
 {
-    public class MetadataCollection : NamedCollectionBase<KeyValuePairDTO>
+    public class MetadataCollection : NamedCollectionBase<KeyValuePairDTO>, IKeyValueStore
     {
         private const string COLXN_NAME = "DbMetadata";
 
@@ -15,31 +15,48 @@ namespace CommonTools.Lib45.LiteDbTools
         public string this[string key]
         {
             get => ByName(key, false)?.Value;
-            set
-            {
-                if (TryGetName(key, out KeyValuePairDTO rec))
-                {
-                    rec.Value = value;
-                    Update(rec);
-                }
-                else
-                    AddPair(key, value);
-            }
+            set { UpsertByName(key, value); }
         }
-
-
-        private void AddPair(string key, string value) 
-                => Insert(new KeyValuePairDTO(key, value));
 
 
         internal void CreateInitialRecord() 
             => Insert(new KeyValuePairDTO("version", "0.01"));
 
 
-        public void AddIfNone(string key, string value)
+        public bool IsTrue(string key)
         {
-            if (!HasName(key))
-                AddPair(key, value);
+            if (!TryGetName(key, 
+                out KeyValuePairDTO dto)) return false;
+
+            switch (dto.Value.Trim().ToLower())
+            {
+                case "true": return true;
+                case "yes" : return true;
+                case "oo"  : return true;
+                case "1"   : return true;
+                default: return false;
+            }
         }
+
+
+        private void UpsertByName(string key, string value)
+        {
+            if (TryGetName(key, out KeyValuePairDTO rec))
+            {
+                rec.Value = value;
+                Update(rec);
+            }
+            else
+                InsertNewPair(key, value);
+        }
+
+
+        public bool Has     (string key) => HasName(key);
+        public void SetTrue (string key) => this[key] = "true";
+
+
+        private void InsertNewPair(string key, string value) 
+                => Insert(new KeyValuePairDTO(key, value));
+
     }
 }
