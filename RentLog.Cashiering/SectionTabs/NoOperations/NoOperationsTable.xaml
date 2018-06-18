@@ -8,6 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <DataGrid DataContext="{Binding ItemsList}"
               ItemsSource="{Binding }"
+              x:Name="dg"
               HeadersVisibility="None"
               Style="{StaticResource dgReadOnly}">
         <DataGrid.Columns>

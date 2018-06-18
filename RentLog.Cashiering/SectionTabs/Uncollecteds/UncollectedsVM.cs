@@ -41,6 +41,10 @@ namespace RentLog.Cashiering.SectionTabs.Uncollecteds
         }
 
 
+        protected override void DeleteRecord(ISimpleRepo<UncollectedLeaseDTO> db, UncollectedLeaseDTO dto)
+            => Main.ColxnsDB.NoOperations[_tab.Section.Id].Insert(dto);
+
+
         private void ApplyTextFilters()
         {
             var list = _queried.ToList();
@@ -64,6 +68,7 @@ namespace RentLog.Cashiering.SectionTabs.Uncollecteds
             => main.ColxnsDB.Uncollecteds[tab.Section.Id];
 
 
+        protected override bool CanDeletetRecord(UncollectedLeaseDTO rec) => Main.CanEncode;
         protected override string ListTitle => "Uncollecteds";
         protected override Func<UncollectedLeaseDTO, LeaseDTO> LeaseGetter  => _ => _.Lease;
         //protected override Func<UncollectedLeaseDTO, decimal>  SummedAmount => _ => _.Targets.Total;

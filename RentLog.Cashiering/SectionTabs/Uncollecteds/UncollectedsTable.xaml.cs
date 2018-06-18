@@ -12,6 +12,8 @@ namespace RentLog.Cashiering.SectionTabs.Uncollecteds
             Loaded += (s, e) =>
             {
                 dg.EnableOpenCurrent<UncollectedLeaseDTO>();
+                dg.ConfirmToDelete<UncollectedLeaseDTO>(_ => _.Lease.TenantAndStall,
+                    null, "Move [{0}] to “Did-Not-Operate”?", "Please confirm");
             };
         }
     }

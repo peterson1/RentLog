@@ -12,17 +12,24 @@ namespace RentLog.Cashiering.SectionTabs.IntendedCollections
     [AddINotifyPropertyChangedInterface]
     public class IntendedColxnsVM : EncoderListVMBase<IntendedColxnDTO>
     {
-        protected override string ListTitle => "Lease Collections";
+        private SectionTabVM _tab;
 
 
-        public IntendedColxnsVM(CollectorDTO collector, SectionDTO sec, MainWindowVM main) 
+        public IntendedColxnsVM(SectionTabVM sectionTabVM, CollectorDTO collector, SectionDTO sec, MainWindowVM main) 
             : base(main.ColxnsDB.IntendedColxns[sec.Id], main)
         {
+            _tab       = sectionTabVM;
             CanAddRows = false;
             Caption    = $"{ListTitle} by {collector}";
         }
 
 
+        protected override void OnItemOpened(IntendedColxnDTO e)
+            => _tab.EditIntendedColxn(e);
+
+
+        protected override bool CanDeletetRecord(IntendedColxnDTO rec) => Main.CanEncode;
+        protected override string ListTitle => "Lease Collections";
         protected override Func<IntendedColxnDTO, LeaseDTO> LeaseGetter  => _ => _.Lease;
         protected override Func<IntendedColxnDTO, decimal>  SummedAmount => _ => _.Actuals.Total;
     }

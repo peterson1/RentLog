@@ -16,7 +16,7 @@ namespace RentLog.Cashiering.SectionTabs
             Main           = main;
             Section        = sec;
             Collector      = main.ColxnsDB.GetCollector(sec);
-            IntendedColxns = new IntendedColxnsVM(Collector, sec, main);
+            IntendedColxns = new IntendedColxnsVM(this, Collector, sec, main);
             AmbulantColxns = new AmbulantColxnsVM(sec, main);
             NoOperations   = new NoOperationsVM  (sec, main);
             Uncollecteds   = new UncollectedsVM  (this, main);
@@ -50,6 +50,15 @@ namespace RentLog.Cashiering.SectionTabs
             var repo = Main.ColxnsDB.IntendedColxns[Section.Id];
             var vm   = new IntendedColxnCrudVM(dto, repo, Main.AppArgs);
             vm.EncodeNewDraftCmd.ExecuteIfItCan();
+        }
+
+
+        internal void EditIntendedColxn(IntendedColxnDTO dto)
+        {
+            if (!Main.CanEncode) return;
+            var repo = Main.ColxnsDB.IntendedColxns[Section.Id];
+            var vm = new IntendedColxnCrudVM(dto, repo, Main.AppArgs);
+            vm.EditCurrentRecord(dto);
         }
     }
 }
