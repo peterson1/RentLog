@@ -3,6 +3,7 @@ using CommonTools.Lib11.ExceptionTools;
 using CommonTools.Lib11.StringTools;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.StateTransitions;
+using RentLog.DomainLib11.Validations;
 using System;
 
 namespace RentLog.DomainLib11.PassbookRepos
@@ -18,10 +19,12 @@ namespace RentLog.DomainLib11.PassbookRepos
 
         public int BankAccountID { get; }
 
+        protected abstract ISimpleRepo<PassbookRowDTO> FindRepo(DateTime date);
+
 
         public void InsertClearedCheque(ChequeVoucherDTO cheque, DateTime clearedDate)
         {
-            var whyNot = GetWhyInvalid(cheque);
+            var whyNot = cheque.WhyInvalidForSetAsCleared(BankAccountID);
             if (!whyNot.IsBlank())
                 throw Bad.Insert(cheque, whyNot);
 
@@ -34,24 +37,10 @@ namespace RentLog.DomainLib11.PassbookRepos
         }
 
 
-        private string GetWhyInvalid(ChequeVoucherDTO cheque)
+        public void InsertDepositedColxn(BankAccountDTO bankDeposit)
         {
-            var req = cheque.Request;
-
-            if (req == null)
-                return "Request object should not be NULL.";
-
-            if (req.BankAccountId != BankAccountID)
-                return $"Expected Bank Acct ID to be [{BankAccountID}] but was [{req.BankAccountId}]";
-
-            if (!req.Amount.HasValue)
-                return "Requested amount should not be blank.";
-
-            return string.Empty;
+            throw new NotImplementedException();
         }
-
-
-        protected abstract ISimpleRepo<PassbookRowDTO> FindRepo(DateTime date);
 
 
         public void RecomputeBalancesFrom(DateTime date)

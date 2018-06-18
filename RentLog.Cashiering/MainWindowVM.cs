@@ -12,6 +12,7 @@ using RentLog.DomainLib45.BaseViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace RentLog.Cashiering
 {
@@ -22,19 +23,21 @@ namespace RentLog.Cashiering
         public override string SubAppName => $"Cashiering  :  {UserTask} Collections for {Date:MMMM d, yyyy}";
 
 
-        public MainWindowVM(DateTime date, ITenantDBsDir tenantDBsDir, bool clickRefresh = true) : base(tenantDBsDir)
+        public MainWindowVM(DateTime unclosedDate, ITenantDBsDir tenantDBsDir, bool clickRefresh = true) : base(tenantDBsDir)
         {
+            Date      = unclosedDate;
             CanReview = AppArgs.CanPostAndClose(false);
             CanEncode = AppArgs.CanEncodeCollections(false);
             if (!IsPrivilegedUser()) return;
 
-            ColxnsDB = CheckIfDbExists(Date = date);
+            ColxnsDB = CheckIfDbExists(Date);
             if (ColxnsDB == null) return;
 
-            CashierColxns = new CashierColxnsVM(this);
-            OtherColxns   = new OtherColxnsVM(this);
-            BankDeposits  = new BankDepositsVM(this);
-            PostAndClose  = new PostAndCloseVM(this);
+            CashierColxns = new CashierColxnsVM (this);
+            OtherColxns   = new OtherColxnsVM   (this);
+            BankDeposits  = new BankDepositsVM  (this);
+            PostAndClose  = new PostAndCloseVM  (this);
+            NextDayOpener = new NextDayOpenerVM (this);
             if (clickRefresh) ClickRefresh();
             SetCaption("");
         }
@@ -49,6 +52,7 @@ namespace RentLog.Cashiering
         public OtherColxnsVM         OtherColxns      { get; }
         public BankDepositsVM        BankDeposits     { get; }
         public PostAndCloseVM        PostAndClose     { get; }
+        public NextDayOpenerVM       NextDayOpener    { get; set; }
 
 
         private bool IsPrivilegedUser()
@@ -60,13 +64,13 @@ namespace RentLog.Cashiering
         }
 
 
-        private ICollectionsDB CheckIfDbExists(DateTime date)
+        private ICollectionsDB CheckIfDbExists(DateTime unclosedDate)
         {
-            var db = AppArgs.Collections.For(date);
+            var db = AppArgs.Collections.For(unclosedDate);
             if (db != null) return db;
 
             if (CanEncode)
-                return AppArgs.Collections.CreateFor(date);
+                return AppArgs.Collections.CreateFor(unclosedDate);
 
             ShouldClose = true;
             WhyShouldClose = "Nothing to review yet.";
@@ -74,8 +78,9 @@ namespace RentLog.Cashiering
         }
 
 
-        protected override void OnRefreshClicked()
+        protected override async Task OnRefreshClickedAsync()
         {
+            await NextDayOpener.RunIfNeeded();
             ReloadSectionTabs();
             CashierColxns.ReloadFromDB();
             OtherColxns  .ReloadFromDB();

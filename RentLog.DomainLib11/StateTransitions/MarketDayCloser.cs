@@ -1,4 +1,5 @@
-﻿using RentLog.DomainLib11.DataSources;
+﻿using RentLog.DomainLib11.CollectionRepos;
+using RentLog.DomainLib11.DataSources;
 using System;
 using System.Collections.Generic;
 
@@ -6,19 +7,13 @@ namespace RentLog.DomainLib11.StateTransitions
 {
     public class MarketDayCloser
     {
-        public static List<Action> GetActions(ITenantDBsDir dir)
+        public static List<Action> GetActions(ICollectionsDB colxnsDB, ITenantDBsDir dir)
         {
-            var actions = new List<Action>();
-            var unclosd = dir.Collections.UnclosedDate();
-            var activs  = dir.MarketState.ActiveLeases.GetAll();
+            var jobs = new List<Action>();
 
-            foreach (var lse in activs)
-                actions.Add(() => dir.Balances.GetRepo(lse)
-                                    .OpenNextDay(unclosd));
-            actions.Add(()
-                => dir.Collections.For(unclosd).MarkAsPosted());
+            jobs.Add(() => colxnsDB.MarkAsPosted());
 
-            return actions;
+            return jobs;
         }
     }
 }

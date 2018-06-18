@@ -3,7 +3,6 @@ using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.ThreadTools;
 using PropertyChanged;
-using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.StateTransitions;
 using System;
 using System.Linq;
@@ -64,7 +63,7 @@ namespace RentLog.Cashiering.MainToolbar
 
             await Task.Run(() =>
             {
-                var jobs = MarketDayCloser.GetActions(Main.AppArgs);
+                var jobs = MarketDayCloser.GetActions(Main.ColxnsDB, Main.AppArgs);
                 Parallel.Invoke(jobs.ToArray());
             });
 

@@ -8,7 +8,6 @@ namespace RentLog.DomainLib11.BalanceRepos
     public interface IDailyBillsRepo : ISimpleRepo<DailyBillDTO>
     {
         void UpdateFrom  (DateTime date);
-        //void UpdateFrom  (DateTime date, BillCode billCode);
-        void OpenNextDay (DateTime unclosedDate);
+        void ProcessBalancedDay (DateTime balancedDay);
     }
 }

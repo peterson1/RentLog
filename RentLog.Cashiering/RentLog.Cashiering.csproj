@@ -122,6 +122,7 @@
     <Compile Include="MainToolbar\MainToolbarUI.xaml.cs">
       <DependentUpon>MainToolbarUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainToolbar\NextDayOpenerVM.cs" />
     <Compile Include="MainToolbar\PostAndCloseVM.cs" />
     <Compile Include="OtherCollections\OtherColxnCrudVM.cs" />
     <Compile Include="OtherCollections\OtherColxnCrudWindow.xaml.cs">

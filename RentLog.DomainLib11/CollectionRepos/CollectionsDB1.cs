@@ -1,6 +1,7 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
 using CommonTools.Lib11.DTOs;
 using CommonTools.Lib11.ExceptionTools;
+using CommonTools.Lib11.StringTools;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
 using System;
@@ -11,15 +12,16 @@ namespace RentLog.DomainLib11.CollectionRepos
 {
     public class CollectionsDB1 : ICollectionsDB
     {
+        private const string IS_OPENED     = "IsOpened";
         private const string POST_DATE     = "PostDate";
         private const string DATE_FMT      = "yyyy-MM-dd";
         private const string COLLECTOR_KEY = "Section{0}_CollectorID";
 
-        private ISimpleRepo<KeyValuePairDTO> _meta;
-        private MarketStateDB                _mkt;
+        private IKeyValueStore _meta;
+        private MarketStateDB  _mkt;
 
 
-        public CollectionsDB1(DateTime date, ISimpleRepo<KeyValuePairDTO> metadataRepo, MarketStateDB marketStateDB)
+        public CollectionsDB1(DateTime date, IKeyValueStore metadataRepo, MarketStateDB marketStateDB)
         {
             _meta = metadataRepo;
             _mkt  = marketStateDB;
@@ -42,15 +44,16 @@ namespace RentLog.DomainLib11.CollectionRepos
 
         public CollectorDTO GetCollector(SectionDTO sec)
         {
-            var key = string.Format(COLLECTOR_KEY, sec.Id);
-            var dto = _meta.Find(_ => _.Name == key);
+            //var key = string.Format(COLLECTOR_KEY, sec.Id);
+            //var dto = _meta.Find(_ => _.Name == key);
+            var val = _meta[string.Format(COLLECTOR_KEY, sec.Id)];
 
-            if (!dto.Any()) return null;
+            //if (!dto.Any()) return null;
+            //var idText = dto.Single().Value;
+            if (val.IsBlank()) return null;
 
-            var idText = dto.Single().Value;
-
-            if (!int.TryParse(idText, out int id))
-                throw Fault.BadCast(idText, id);
+            if (!int.TryParse(val, out int id))
+                throw Fault.BadCast(val, id);
 
             return _mkt.Collectors.Find(id, true);
         }
@@ -63,14 +66,17 @@ namespace RentLog.DomainLib11.CollectionRepos
         }
 
 
-        public bool IsPosted() => _meta.HasName(POST_DATE);
+        public bool IsPosted     () => _meta.Has(POST_DATE);
+        public bool IsOpened     () => _meta.IsTrue(IS_OPENED);
+        public void MarkAsOpened () => _meta.SetTrue(IS_OPENED);
+        public void MarkAsPosted () => _meta[POST_DATE] = DateTime.Now.ToString(DATE_FMT);
 
+        //public void MarkAsPosted()
+        //    => _meta.Insert(new KeyValuePairDTO
+        //    {
+        //        Name  = POST_DATE,
+        //        Value = DateTime.Now.ToString(DATE_FMT)
+        //    });
 
-        public void MarkAsPosted()
-            => _meta.Insert(new KeyValuePairDTO
-            {
-                Name  = POST_DATE,
-                Value = DateTime.Now.ToString(DATE_FMT)
-            });
     }
 }

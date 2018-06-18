@@ -58,13 +58,13 @@ namespace RentLog.DomainLib11.BalanceRepos
         }
 
 
-        public void OpenNextDay(DateTime unclosedDate)
+        public void ProcessBalancedDay(DateTime balancedDay)
         {
-            var nextDay = unclosedDate.AddDays(1);
+            var nextDay = balancedDay.AddDays(1);
             Delete(nextDay.DaysSinceMin());
             Insert(DailyBillDTO.CreateFor(nextDay));
 
-            var dtos = GetRecomputedFrom(unclosedDate);
+            var dtos = GetRecomputedFrom(balancedDay);
 
             foreach (var billCode in BillCodes.Collected())
                 dtos.Last().For(billCode).ClosingBalance = null;

@@ -19,6 +19,8 @@ namespace RentLog.DomainLib11.CollectionRepos
         IBalanceAdjustmentsRepo  BalanceAdjs     { get; }
 
         bool          IsPosted      ();
+        bool          IsOpened      ();
+        void          MarkAsOpened  ();
         void          MarkAsPosted  ();
         CollectorDTO  GetCollector  (SectionDTO section);
         CollectorDTO  GetCollector  (LeaseDTO lease);
