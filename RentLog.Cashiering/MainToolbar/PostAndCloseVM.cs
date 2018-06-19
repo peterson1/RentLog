@@ -54,23 +54,24 @@ namespace RentLog.Cashiering.MainToolbar
 
         private void ConfirmExecution()
             => Alert.Confirm("Are you sure you want to close this day and open the next?", 
-                async () => await RunPostAndClose());
+                async () =>
+                {
+                    await RunPostAndClose();
+
+                    MessageBox.Show($"Successfully posted collections for {Main.Date:d-MMM-yyyy}{L.F}"
+                                + $"The next market day [{Main.Date.AddDays(1):d-MMM-yyyy}] is now open for encoding.",
+                            "   Operation Successful", MessageBoxButton.OK, MessageBoxImage.Information);
+                });
 
 
-        private async Task RunPostAndClose()
+        public async Task RunPostAndClose()
         {
             Main.StartBeingBusy("Posting and Closing ...");
-
             await Task.Run(() =>
             {
                 var jobs = MarketDayCloser.GetActions(Main.ColxnsDB, Main.AppArgs);
                 Parallel.Invoke(jobs.ToArray());
             });
-
-            MessageBox.Show($"Successfully posted collections for {Main.Date:d-MMM-yyyy}{L.F}"
-                        + $"The next market day [{Main.Date.AddDays(1):d-MMM-yyyy}] is now open for encoding.",
-                    "   Operation Successful", MessageBoxButton.OK, MessageBoxImage.Information);
-
             Main.CloseWindow();
         }
     }

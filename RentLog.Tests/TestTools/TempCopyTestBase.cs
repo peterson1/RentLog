@@ -41,7 +41,8 @@ namespace RentLog.Tests.TestTools
 
         public void Dispose()
         {
-            Directory.Delete(TempDir, true);
+            try   { Directory.Delete(TempDir, true); }
+            catch { }
         }
     }
 }
