@@ -103,7 +103,12 @@ namespace CommonTools.Lib45.LiteDbTools
             EnsureIndecesBeforeRead();
 
             using (var db = _db.OpenRead())
-                return GetCollection(db).Max(getter);
+            {
+                var coll = GetCollection(db);
+                if (coll.Count() == 0) return 0;
+                var bVal = coll.Max(getter);
+                return bVal.IsInt32 ? bVal.AsInt32 : 0;
+            }
         }
 
 
