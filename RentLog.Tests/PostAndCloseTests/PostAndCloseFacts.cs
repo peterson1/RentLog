@@ -1,6 +1,8 @@
 ﻿using FluentAssertions;
+using RentLog.Cashiering;
 using RentLog.Tests.SampleDBs;
 using RentLog.Tests.TestTools;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace RentLog.Tests.PostAndCloseTests
@@ -13,12 +15,21 @@ namespace RentLog.Tests.PostAndCloseTests
 
 
         [Fact(DisplayName = "Post&Close June 17")]
-        public void TestMethod00001()
+        public async Task TestMethod00001()
         {
-            var arg = GetSampleArgs();
+            var arg = GetTempSampleArgs();
             arg.Credentials.Roles = "Supervisor";
+            var mkt = arg.MarketState.DatabasePath;
 
-            //var sut
+            var dte = arg.Collections.UnclosedDate();
+            var vm = new MainWindowVM(dte, arg, false);
+
+            await vm.RefreshCmd.RunAsync();
+
+            vm.CanEncode.Should().BeFalse();
+            vm.CanReview.Should().BeTrue();
+            vm.PostAndClose.IsBalanced.Should().BeTrue();
+            //vm.PostAndClose.PostAndCloseCmd.IsBusy
         }
     }
 }

@@ -19,7 +19,7 @@ namespace RentLog.Tests.TestTools
         protected abstract string SampleDirName { get; }
 
 
-        protected SampleArgs GetSampleArgs()
+        protected SampleArgs GetTempSampleArgs()
         {
             var origDir = SampleArgs.DirPath;
 
