@@ -4,7 +4,9 @@ using RentLog.DomainLib45;
 using RentLog.DomainLib45.BaseViewModels;
 using RentLog.LeasesCrud.LeasesList;
 using RentLog.LeasesCrud.MainToolbar;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace RentLog.LeasesCrud
@@ -37,9 +39,12 @@ namespace RentLog.LeasesCrud
 
         protected override void OnRefreshClicked()
         {
-            MainToolBar   .UpdateAll();
-            ActiveLeases  .ReloadFromDB();
-            InactiveLeases.ReloadFromDB();
+            Parallel.Invoke
+            (
+                () => MainToolBar.UpdateAll(),
+                () => ActiveLeases.ReloadFromDB(),
+                () => InactiveLeases.ReloadFromDB()
+            );
         }
     }
 }

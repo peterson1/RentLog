@@ -23,6 +23,7 @@ namespace RentLog.LeasesCrud.LeasesList
     public class ActiveLeasesVM : IndirectFilteredListVMBase<LeaseBalanceRow, LeaseDTO, LeasesFilterVM, AppArguments>
     {
         public event EventHandler LeaseDeactivated = delegate { };
+        private DateTime _postdDate;
 
 
         public ActiveLeasesVM(AppArguments appArguments) : base(appArguments.MarketState.ActiveLeases, appArguments, false)
@@ -83,16 +84,16 @@ namespace RentLog.LeasesCrud.LeasesList
 
         protected override List<LeaseDTO> QueryItems(ISimpleRepo<LeaseDTO> db)
         {
-            var items = db.GetAll().OrderByDescending(_ => _.Id).ToList();
-            Caption   = $"  Active Leases  ({items.Count:N0})  ";
+            _postdDate = AppArgs.Collections.LastPostedDate();
+            var items  = db.GetAll().OrderByDescending(_ => _.Id).ToList();
+            Caption    = $"  Active Leases  ({items.Count:N0})  ";
             return items;
         }
 
 
         protected override LeaseBalanceRow CastToRow(LeaseDTO lse)
         {
-            var date = AppArgs.Collections.LastPostedDate();
-            var bill = AppArgs.Balances.GetBill(lse, date);
+            var bill = AppArgs.Balances.GetBill(lse, _postdDate);
             return new LeaseBalanceRow(lse, bill);
         }
     }
