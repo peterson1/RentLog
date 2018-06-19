@@ -17,6 +17,12 @@ namespace RentLog.Cashiering.SectionTabs.Uncollecteds
                     null, "Move [{0}] to “Did-Not-Operate”?", "Please confirm");
                 dg.F4ToViewSoA<UncollectedLeaseDTO>(_ => _.Lease, VM.AppArgs);
                 dg.ScrollToEndOnChange();
+
+                dg.GotKeyboardFocus += (a, b) =>
+                {
+                    if (dg.HasItems)
+                        dg.SelectedIndex = 0;
+                };
             };
         }
 

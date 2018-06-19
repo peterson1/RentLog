@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RentLog.Cashiering.SectionTabs.Uncollecteds"
              xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:int="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:txbhv="clr-namespace:CommonTools.Lib45.UIBehaviors.TextBoxBehaviors;assembly=CommonTools.Lib45"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -17,6 +19,10 @@
     <Grid DataContext="{Binding Filter}">
         <TextBox Text="{Binding NameAndStallFilter, UpdateSourceTrigger=PropertyChanged}"
                  mat:HintAssist.Hint="filter by tenant/stall"
-                 x:Name="txt1" />
+                 x:Name="txt1">
+            <int:Interaction.Behaviors>
+                <txbhv:SelectAllOnFocusBehavior />
+            </int:Interaction.Behaviors>
+        </TextBox>
     </Grid>
 </UserControl>
