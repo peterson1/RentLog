@@ -9,8 +9,9 @@ using System.IO;
 
 namespace RentLog.Tests.SampleDBs
 {
-    internal class SampleArgs : AppArguments
+    public class SampleArgs : AppArguments
     {
+        internal static string DirPath = @"..\..\SampleDBs";
         internal static string DirName;
 
         public SampleArgs()
@@ -29,9 +30,9 @@ namespace RentLog.Tests.SampleDBs
         }
 
 
-        private static string FindDB(string folderName)
+        public static string FindDB(string folderName)
         {
-            var dbPath = Path.Combine(@"..\..\SampleDBs",
+            var dbPath = Path.Combine(DirPath,
                             folderName, "MarketState.ldb");
             File.Exists(dbPath).Should().BeTrue();
             return dbPath;

@@ -170,5 +170,33 @@ namespace CommonTools.Lib45.FileSystemTools
             Directory.CreateDirectory(dir);
             File.Create(abs);
         }
+
+
+        //https://stackoverflow.com/a/3822913/3973863
+        public static void CopyDirectoryTo(this string sourcePath, string destinationPath)
+        {
+            Directory.CreateDirectory(destinationPath);
+
+            foreach (string dirPath in Directory.GetDirectories(sourcePath, "*",
+                SearchOption.AllDirectories))
+                Directory.CreateDirectory(dirPath.Replace(sourcePath, destinationPath));
+
+            //Copy all the files & Replaces any files with the same name
+            foreach (string newPath in Directory.GetFiles(sourcePath, "*.*",
+                SearchOption.AllDirectories))
+                File.Copy(newPath, newPath.Replace(sourcePath, destinationPath), true);
+        }
+
+
+        public static string CopyDirectoryToTemp(this string sourcePath)
+        {
+            var tmpNme = Path.GetTempFileName();
+            File.Delete(tmpNme);
+            tmpNme = Path.GetFileNameWithoutExtension(tmpNme);
+
+            var tmpDir = Path.Combine(Path.GetTempPath(), tmpNme);
+            sourcePath.CopyDirectoryTo(tmpDir);
+            return tmpDir;
+        }
     }
 }
