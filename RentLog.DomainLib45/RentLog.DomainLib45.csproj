@@ -117,6 +117,7 @@
     <Compile Include="SoaViewers\MainWindow\RightsColumn\RightsHeader.xaml.cs">
       <DependentUpon>RightsHeader.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SoaViewers\MainWindow\SoaViewerStatic.cs" />
     <Compile Include="SoaViewers\MainWindow\SoaViewerVM.cs" />
     <Compile Include="SoaViewers\MainWindow\SoaViewerWindow.xaml.cs">
       <DependentUpon>SoaViewerWindow.xaml</DependentUpon>

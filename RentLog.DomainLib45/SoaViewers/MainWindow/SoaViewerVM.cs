@@ -62,14 +62,4 @@ namespace RentLog.DomainLib45.SoaViewers.MainWindow
 
         protected override void OnPrintClicked  () => SoaPrintVM.Print(this);
     }
-
-
-    public static class SoaViewer
-    {
-        public static void Show(LeaseDTO lse, ITenantDBsDir args)
-        {
-            if (lse == null || args == null) return;
-            new SoaViewerVM(lse, args).Show<SoaViewerWindow>();
-        }
-    }
 }
