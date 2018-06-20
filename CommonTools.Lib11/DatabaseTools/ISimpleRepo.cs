@@ -31,7 +31,8 @@ namespace CommonTools.Lib11.DatabaseTools
         bool    Delete   (T record);
         bool    Delete   (int recordId);
 
-        void    Drop     ();
+        void  Drop              ();
+        void  DropAndInsert     (IEnumerable<T> records, bool doValidate);
 
         bool  IsValidForInsert  (T draft, out string whyInvalid);
         bool  IsValidForUpdate  (T record, out string whyInvalid);

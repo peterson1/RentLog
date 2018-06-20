@@ -120,29 +120,41 @@ namespace CommonTools.Lib45.LiteDbTools
         }
 
 
-        public void ReplaceAll(IEnumerable<T> newRecords, bool doValidate = true, bool clearIDs = false)
+        //private void ReplaceAll_dep(IEnumerable<T> newRecords, bool doValidate = true, bool clearIDs = false)
+        //{
+        //    foreach (var model in newRecords)
+        //    {
+        //        SetCurrentFields(model);
+        //        if (clearIDs) model.Id = 0;
+        //        if (doValidate) Validate(model, _db);
+        //    }
+
+        //    string colxnName = "";
+        //    using (var db = _db.OpenRead())
+        //        colxnName = GetCollection(db).Name;
+
+        //    using (var db = _db.OpenWrite())
+        //        db.DropCollection(colxnName);
+
+        //    using (var db = _db.OpenWrite())
+        //    {
+        //        var coll = GetCollection(db);
+        //        EnsureIndeces(coll);
+        //        coll.InsertBulk(newRecords);
+        //    }
+        //    ContentChanged?.Invoke(this, default(T));
+        //}
+
+
+        public void DropAndInsert(IEnumerable<T> records, bool doValidate)
         {
-            foreach (var model in newRecords)
+            foreach (var model in records)
             {
                 SetCurrentFields(model);
-                if (clearIDs) model.Id = 0;
                 if (doValidate) Validate(model, _db);
             }
-
-            string colxnName = "";
-            using (var db = _db.OpenRead())
-                colxnName = GetCollection(db).Name;
-
-            using (var db = _db.OpenWrite())
-                db.DropCollection(colxnName);
-
-            using (var db = _db.OpenWrite())
-            {
-                var coll = GetCollection(db);
-                EnsureIndeces(coll);
-                coll.InsertBulk(newRecords);
-            }
-            ContentChanged?.Invoke(this, default(T));
+            Drop();
+            Insert(records, false);
         }
 
 

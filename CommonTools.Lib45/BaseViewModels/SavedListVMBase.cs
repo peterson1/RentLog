@@ -159,8 +159,9 @@ namespace CommonTools.Lib45.BaseViewModels
 
         public virtual void PersistUIList(bool doValidate)
         {
-            _repo.Drop();
-            _repo.Insert(ItemsList, doValidate);
+            //_repo.Drop();
+            //_repo.Insert(ItemsList, doValidate);
+            _repo.DropAndInsert(ItemsList, doValidate);
         }
     }
 }

@@ -24,8 +24,9 @@ namespace RentLog.DomainLib11.CollectionRepos
                 var repo = keyVal.Value;
                 var recs = GetVacantsFor(keyVal.Key, marketState);
 
-                repo.Drop();
-                repo.Insert(recs, true);
+                //repo.Drop();
+                //repo.Insert(recs, true);
+                repo.DropAndInsert(recs, true);
             }
         }
 

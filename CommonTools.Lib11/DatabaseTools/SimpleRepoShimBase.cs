@@ -31,18 +31,19 @@ namespace CommonTools.Lib11.DatabaseTools
         protected List<T> ToSortedList(IEnumerable<T> items) => ToSorted(items).ToList();
 
 
-        public bool               Any          ()                                         => _repo.Any();
-        public List<T>            GetAll       ()                                         => ToSortedList(_repo.GetAll());
-        public List<T>            Find         (Expression<Func<T, bool>> predicate)      => ToSortedList(_repo.Find(predicate));
-        public T                  Find         (int recordId, bool errorIfMissing)        => _repo.Find(recordId, errorIfMissing);
-        public T                  Earliest     ()                                         => _repo.Earliest();
-        public T                  Latest       ()                                         => _repo.Latest();
-        public int                Max          (Expression<Func<T, int>> getter)          => _repo.Max(getter);
-        public DateTime           Max          (Expression<Func<T, DateTime>> getter)     => _repo.Max(getter);
-        public bool               HasId        (int recordId)                             => _repo.HasId(recordId);
-        public bool               HasName      (string recordName, string field = "Name") => _repo.HasName(recordName, field);
-        public void               Drop         ()                                         => _repo.Drop();
-        public Dictionary<int, T> ToDictionary ()                                         => _repo.ToDictionary();
+        public bool               Any           ()                                         => _repo.Any();
+        public List<T>            GetAll        ()                                         => ToSortedList(_repo.GetAll());
+        public List<T>            Find          (Expression<Func<T, bool>> predicate)      => ToSortedList(_repo.Find(predicate));
+        public T                  Find          (int recordId, bool errorIfMissing)        => _repo.Find(recordId, errorIfMissing);
+        public T                  Earliest      ()                                         => _repo.Earliest();
+        public T                  Latest        ()                                         => _repo.Latest();
+        public int                Max           (Expression<Func<T, int>> getter)          => _repo.Max(getter);
+        public DateTime           Max           (Expression<Func<T, DateTime>> getter)     => _repo.Max(getter);
+        public bool               HasId         (int recordId)                             => _repo.HasId(recordId);
+        public bool               HasName       (string recordName, string field = "Name") => _repo.HasName(recordName, field);
+        public void               Drop          ()                                         => _repo.Drop();
+        public void               DropAndInsert (IEnumerable<T> records, bool doValidate)  => _repo.DropAndInsert(records, doValidate);
+        public Dictionary<int, T> ToDictionary  ()                                         => _repo.ToDictionary();
 
 
         public int Insert(T newRecord)
