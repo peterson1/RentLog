@@ -3,6 +3,7 @@ using FluentAssertions.Extensions;
 using RentLog.Cashiering;
 using RentLog.Tests.SampleDBs;
 using RentLog.Tests.TestTools;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -26,7 +27,7 @@ namespace RentLog.Tests.PostAndCloseTests
             arg.Balances.TotalOverdues().Rights.Should().Be(12_000M);
 
             arg.Credentials.Roles = "Supervisor";
-            var vm  = new MainWindowVM(17.June(2018), arg, false);
+            var vm = new MainWindowVM(17.June(2018), arg, false);
 
             await vm.RefreshCmd.RunAsync();
 
@@ -35,9 +36,6 @@ namespace RentLog.Tests.PostAndCloseTests
             vm.PostAndClose.IsBalanced.Should().BeTrue();
 
             await vm.PostAndClose.RunPostAndClose();
-            //var jobs = MarketDayCloser.GetActions(vm.ColxnsDB, vm.AppArgs);
-            //foreach (var job in jobs)
-            //    job.Invoke();
 
             vm = null;
             arg = null;
@@ -55,6 +53,13 @@ namespace RentLog.Tests.PostAndCloseTests
             vm.ColxnsDB.IsOpened().Should().BeTrue();
             arg.Balances.TotalOverdues().Rent.Should().BeApproximately(23_466.93M, 0.02M);
             arg.Balances.TotalOverdues().Rights.Should().Be(12_000M);
+
+            var rows = arg.Passbooks.GetRepo(1).RowsFor(18.June(2018));
+            rows.Should().HaveCount(1);
+            rows.Sum(_ => _.Amount).Should().Be(19_165);
+            rows = arg.Passbooks.GetRepo(2).RowsFor(18.June(2018));
+            rows.Should().HaveCount(1);
+            rows.Sum(_ => _.Amount).Should().Be(582);
 
             vm  = null;
             arg = null;

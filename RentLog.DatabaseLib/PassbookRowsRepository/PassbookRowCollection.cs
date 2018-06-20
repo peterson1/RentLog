@@ -1,4 +1,5 @@
 ﻿using CommonTools.Lib45.LiteDbTools;
+using LiteDB;
 using RentLog.DomainLib11.DTOs;
 
 namespace RentLog.DatabaseLib.PassbookRowsRepository
@@ -13,5 +14,11 @@ namespace RentLog.DatabaseLib.PassbookRowsRepository
 
         private static string GetCollectionName(int bankAcctID)
             => $"Account{bankAcctID}_SoaRows";
+
+
+        protected override void EnsureIndeces(LiteCollection<PassbookRowDTO> coll)
+        {
+            coll.EnsureIndex(_ => _.DateOffset, false);
+        }
     }
 }

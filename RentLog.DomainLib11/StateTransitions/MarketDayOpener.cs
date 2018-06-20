@@ -11,15 +11,31 @@ namespace RentLog.DomainLib11.StateTransitions
         {
             var jobs    = new List<Action>();
             var balancd = colxnsDB.Date.AddDays(-1);
-            var activs  = dir.MarketState.ActiveLeases.GetAll();
+
+            EnqueueBalanceUpdates(jobs, balancd, dir);
+
+            jobs.Add(() => AddDepositsToPassbook(balancd, dir));
+            jobs.Add(() => colxnsDB.MarkAsOpened());
+            return jobs;
+        }
+
+
+        private static void EnqueueBalanceUpdates(List<Action> jobs, DateTime balancd, ITenantDBsDir dir)
+        {
+            var activs = dir.MarketState.ActiveLeases.GetAll();
 
             foreach (var lse in activs)
                 jobs.Add(() => dir.Balances.GetRepo(lse)
                                   .ProcessBalancedDay(balancd));
+        }
 
-            jobs.Add(() => colxnsDB.MarkAsOpened());
 
-            return jobs;
+        private static void AddDepositsToPassbook(DateTime colxnDate, ITenantDBsDir dir)
+        {
+            var deps = dir.Collections.For(colxnDate).BankDeposits.GetAll();
+            foreach (var dep in deps)
+                dir.Passbooks.GetRepo(dep.BankAccount.Id)
+                    .InsertDepositedColxn(dep, colxnDate);
         }
     }
 }
