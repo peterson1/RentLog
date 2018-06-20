@@ -6,6 +6,7 @@
         xmlns:tbar="clr-namespace:RentLog.ChequeVouchers.MainToolbar"
         xmlns:reqs="clr-namespace:RentLog.ChequeVouchers.VoucherReqsTab"
         xmlns:dcdr="clr-namespace:RentLog.ChequeVouchers.DcdrTab"
+        xmlns:setngs="clr-namespace:RentLog.ChequeVouchers.DcdrTab.ReportSettings"
         xmlns:local="clr-namespace:RentLog.ChequeVouchers"
         mc:Ignorable="d"
         Title="{Binding Caption}" 
@@ -41,9 +42,17 @@
 
             </dragz:TabablzControl>
 
-            <tbar:MainToolbarUI VerticalAlignment="Top"
-                                HorizontalAlignment="Right"
-                                Margin="0 4 15 0" />
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Right"
+                        Margin="0 4 15 0">
+
+                <setngs:DateRangePickerUI DataContext="{Binding DcdrReport}"
+                                          Visibility="{Binding IsVisible, Converter={StaticResource visIfTrue}}" />
+                
+                <tbar:MainToolbarUI Margin="30 0 0 0" />
+            </StackPanel>
+            
             <busy:BusyDialog />
         </Grid>
     </DockPanel>

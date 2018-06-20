@@ -13,7 +13,7 @@ namespace RentLog.Cashiering.BankDeposits
             {
                 dg.ConfirmToDelete<BankDepositDTO>(_ => _.ToString());
                 dg.EnableOpenCurrent<BankDepositDTO>();
-                dg.ScrollToEndOnChange();
+                dg.ScrollToEnd();
             };
         }
     }

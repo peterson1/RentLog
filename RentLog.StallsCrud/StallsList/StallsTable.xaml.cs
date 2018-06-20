@@ -13,7 +13,7 @@ namespace RentLog.StallsCrud.StallsList
             {
                 dg.ConfirmToDelete<StallRow>(_ => _.DTO.Name);
                 dg.EnableOpenCurrent<StallRow>();
-                dg.ScrollToEndOnChange();
+                dg.ScrollToEnd();
             };
         }
     }

@@ -1,4 +1,5 @@
-﻿using RentLog.DomainLib11.DTOs;
+﻿using CommonTools.Lib11.DatabaseTools;
+using RentLog.DomainLib11.DTOs;
 using System;
 using System.Collections.Generic;
 
@@ -12,5 +13,6 @@ namespace RentLog.DomainLib11.PassbookRepos
         void  RecomputeBalancesFrom (DateTime date);
 
         List<PassbookRowDTO> RowsFor (DateTime dateTime);
+        List<PassbookRowDTO> RowsFor (DateTime startDate, DateTime endDate);
     }
 }

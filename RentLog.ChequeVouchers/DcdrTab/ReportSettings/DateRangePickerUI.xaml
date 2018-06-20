@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="RentLog.ChequeVouchers.DcdrTab.ReportSettings.DateRangePickerUI"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RentLog.ChequeVouchers.DcdrTab.ReportSettings"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="DatePicker"
+               BasedOn="{StaticResource MaterialDesignDatePicker}">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueLightBrush}" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="15 0 5 2" />
+        </Style>
+    </UserControl.Resources>
+    <StackPanel Orientation="Horizontal"
+                DataContext="{Binding DateRange}">
+        <Label Content="from" />
+        <DatePicker x:Name="dteStart" 
+                    SelectedDate="{Binding Start, UpdateSourceTrigger=PropertyChanged}" />
+
+        <Label Content="to" />
+        <DatePicker x:Name="dteEnd" 
+                    SelectedDate="{Binding End, UpdateSourceTrigger=PropertyChanged}" />
+    </StackPanel>
+</UserControl>

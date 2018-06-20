@@ -17,6 +17,12 @@ namespace RentLog.DomainLib11.DTOs
         public int       DocRefId         { get; set; }
         public string    DocRefJson       { get; set; }
 
+        public bool      IsDeposit       => Amount > 0;
+        public bool      IsWithdrawal    => Amount < 0;
+        public decimal?  Deposit         => IsDeposit ? Amount : (decimal?)null;
+        public decimal?  Withdrawal      => IsWithdrawal ? Math.Abs(Amount) : (decimal?)null;
+        public DateTime  TransactionDate => DateTime.MinValue.AddDays(DateOffset);
+
 
         //public static PassbookRowDTO Deposit(DateTime transactionDate, 
         //    string subject, string description, decimal amount, string transactionRef)

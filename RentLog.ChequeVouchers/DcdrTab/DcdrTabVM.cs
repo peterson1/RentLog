@@ -1,16 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PropertyChanged;
+using RentLog.ChequeVouchers.DcdrTab.PassbookRows;
+using RentLog.ChequeVouchers.DcdrTab.ReportSettings;
+using RentLog.DomainLib11.PassbookRepos;
 
 namespace RentLog.ChequeVouchers.DcdrTab
 {
+    [AddINotifyPropertyChangedInterface]
     public class DcdrTabVM
     {
-        internal void ReloadAll()
+        private MainWindowVM _main;
+
+        public DcdrTabVM(MainWindowVM mainWindowVM)
         {
-            throw new NotImplementedException();
+            _main        = mainWindowVM;
+            DateRange    = new DateRangePickerVM();
+            PassbookRows = new PassbookRowsVM(DateRange, _main.AppArgs);
         }
+
+
+        public DateRangePickerVM  DateRange     { get; }
+        public PassbookRowsVM     PassbookRows  { get; }
+        public bool               IsVisible     { get; set; }
+
+        public IPassbookRowsRepo PassbookRepo
+            => _main.AppArgs.Passbooks.GetRepo(_main.AppArgs.CurrentBankAcct.Id);
+
+        //public bool IsVisible => _main.SelectedIndex == 1;
     }
 }

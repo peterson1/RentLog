@@ -14,7 +14,7 @@ namespace RentLog.ChequeVouchers
         public MainWindowVM(ITenantDBsDir tenantDBsDir) : base(tenantDBsDir)
         {
             VoucherReqs    = new VoucherReqsTabVM(tenantDBsDir);
-            DcdrReport     = new DcdrTabVM();
+            DcdrReport     = new DcdrTabVM(this);
             BankAcctPicker = new BankAccountPickerVM(this);
         }
 
@@ -28,6 +28,12 @@ namespace RentLog.ChequeVouchers
         public override string SubAppName => "Cheque Vouchers  |  DCDR";
 
 
+        public void OnSelectedIndexChanged()
+        {
+            DcdrReport.IsVisible = SelectedIndex == 1;
+            ClickRefresh();
+        }
+
         protected override async Task OnRefreshClickedAsync()
         {
             StartBeingBusy($"Loading Cheque Vouchers ...");
@@ -35,7 +41,7 @@ namespace RentLog.ChequeVouchers
             if (SelectedIndex == 0)
                 await Task.Run(() => VoucherReqs.ReloadAll());
             else
-                await Task.Run(() => DcdrReport.ReloadAll());
+                await Task.Run(() => DcdrReport.PassbookRows.ReloadFromDB());
 
             SetCaption($"for “{AppArgs.CurrentBankAcct}”");
 

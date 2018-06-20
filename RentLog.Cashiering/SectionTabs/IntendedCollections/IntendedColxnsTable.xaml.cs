@@ -15,7 +15,7 @@ namespace RentLog.Cashiering.SectionTabs.IntendedCollections
                 dg.EnableOpenCurrent<IntendedColxnDTO>();
                 dg.ConfirmToDelete<IntendedColxnDTO>(_ => _.ToString());
                 dg.F4ToViewSoA<IntendedColxnDTO>(_ => _.Lease, VM.AppArgs);
-                dg.ScrollToEndOnChange();
+                dg.ScrollToEnd();
             };
         }
 

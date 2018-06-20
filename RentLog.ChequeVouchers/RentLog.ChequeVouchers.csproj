@@ -107,6 +107,21 @@
       <DependentUpon>DcdrTabUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="DcdrTab\DcdrTabVM.cs" />
+    <Compile Include="DcdrTab\PassbookRows\PassbookRowsFilterUI.xaml.cs">
+      <DependentUpon>PassbookRowsFilterUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DcdrTab\PassbookRows\PassbookRowsFilterVM.cs" />
+    <Compile Include="DcdrTab\PassbookRows\PassbookRowsTable.xaml.cs">
+      <DependentUpon>PassbookRowsTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DcdrTab\PassbookRows\PassbookRowsUI.xaml.cs">
+      <DependentUpon>PassbookRowsUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DcdrTab\PassbookRows\PassbookRowsVM.cs" />
+    <Compile Include="DcdrTab\ReportSettings\DateRangePickerUI.xaml.cs">
+      <DependentUpon>DateRangePickerUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DcdrTab\ReportSettings\DateRangePickerVM.cs" />
     <Compile Include="MainToolbar\BankAccountPickerVM.cs" />
     <Compile Include="MainToolbar\MainToolbarUI.xaml.cs">
       <DependentUpon>MainToolbarUI.xaml</DependentUpon>
@@ -174,6 +189,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DcdrTab\DcdrTabUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DcdrTab\PassbookRows\PassbookRowsFilterUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DcdrTab\PassbookRows\PassbookRowsTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DcdrTab\PassbookRows\PassbookRowsUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DcdrTab\ReportSettings\DateRangePickerUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

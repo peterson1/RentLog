@@ -21,16 +21,15 @@ namespace RentLog.DatabaseLib.PassbookRowsRepository
         }
 
 
-        protected override ISimpleRepo<PassbookRowDTO> FindRepo(DateTime date)
+        protected override ISimpleRepo<PassbookRowDTO> ConnectToDB(string dbPath)
         {
-            var dbPath = GetDbPath(date);
             var txnDB  = new SharedLiteDB(dbPath, _usr);
             var colxn  = new PassbookRowCollection(BankAccountID, txnDB);
             return new PassbookRowsSimpleRepo(colxn);
         }
 
 
-        private string GetDbPath(DateTime date)
+        protected override string GetDatabasePath(DateTime date)
             => Path.Combine(_dir, string.Format(DATE_FMT, date));
     }
 }

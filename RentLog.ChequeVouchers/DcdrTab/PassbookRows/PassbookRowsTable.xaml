@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="RentLog.ChequeVouchers.DcdrTab.PassbookRows.PassbookRowsTable"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RentLog.ChequeVouchers.DcdrTab.PassbookRows"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ContextMenu x:Key="rowCtxMenu">
+            <MenuItem Header ="{Binding MainMethodCmd.CurrentLabel}" 
+                      Command="{Binding MainMethodCmd}"
+                      DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+        </ContextMenu>
+
+        <Style TargetType="DataGridRow"
+               BasedOn="{StaticResource MaterialDesignDataGridRow}">
+            <Setter Property="ContextMenu" Value="{StaticResource rowCtxMenu}" />
+        </Style>
+    </UserControl.Resources>
+    <DataGrid x:Name="dg" Style="{StaticResource dgReadOnly}"
+              SelectedItem="{Binding CurrentItem}"
+              ItemsSource="{Binding }"
+              DataContext="{Binding ItemsList}">
+        <DataGrid.Columns>
+            <DataGridTextColumn Width="08*" Header="date"        Binding="{Binding TransactionDate, StringFormat=d MMM}" ElementStyle="{StaticResource colSmallWrapCenter}" />
+            <DataGridTextColumn Width="08*" Header="ref #"       Binding="{Binding TransactionRef}" ElementStyle="{StaticResource colSmallWrapCenter}" />
+            <DataGridTextColumn Width="14*" Header="subject"     Binding="{Binding Subject}" ElementStyle="{StaticResource colSmallWrapRightBold}" />
+            <DataGridTextColumn Width="30*" Header="description" Binding="{Binding Description}" ElementStyle="{StaticResource colSmallWrapLeft}" />
+            <DataGridTextColumn Width="13*" Header="deposit"     Binding="{Binding Deposit, StringFormat=N2}" ElementStyle="{StaticResource colRight}" />
+            <DataGridTextColumn Width="13*" Header="withdrawal"  Binding="{Binding Withdrawal, StringFormat=N2}" ElementStyle="{StaticResource colRight}" />
+            <DataGridTextColumn Width="14*" Header="balance"     Binding="{Binding RunningBalance, StringFormat=N2}" ElementStyle="{StaticResource colRightEnd}" />
+        </DataGrid.Columns>
+    </DataGrid>
+</UserControl>

@@ -13,7 +13,7 @@ namespace RentLog.Cashiering.OtherCollections
             {
                 dg.ConfirmToDelete<OtherColxnDTO>(_ => _.ToString());
                 dg.EnableOpenCurrent<OtherColxnDTO>();
-                dg.ScrollToEndOnChange();
+                dg.ScrollToEnd();
             };
         }
     }

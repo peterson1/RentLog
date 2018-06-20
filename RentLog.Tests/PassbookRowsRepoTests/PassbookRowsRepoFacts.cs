@@ -81,8 +81,11 @@ namespace RentLog.Tests.PassbookRowsRepoTests
             public Mock<ISimpleRepo<PassbookRowDTO>> MoqRepo { get; } = new Mock<ISimpleRepo<PassbookRowDTO>>();
 
 
-            protected override ISimpleRepo<PassbookRowDTO> FindRepo(DateTime date)
+            protected override ISimpleRepo<PassbookRowDTO> ConnectToDB(string databasePath)
                 => new PassbookRowsSimpleRepo(MoqRepo.Object);
+
+
+            protected override string GetDatabasePath(DateTime date) => date.ToShortDateString();
         }
     }
 }

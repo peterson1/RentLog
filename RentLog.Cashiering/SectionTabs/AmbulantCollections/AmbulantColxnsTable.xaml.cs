@@ -13,7 +13,7 @@ namespace RentLog.Cashiering.SectionTabs.AmbulantCollections
             {
                 dg.ConfirmToDelete<AmbulantColxnDTO>(_ => _.ToString());
                 dg.EnableOpenCurrent<AmbulantColxnDTO>();
-                dg.ScrollToEndOnChange();
+                dg.ScrollToEnd();
             };
         }
     }

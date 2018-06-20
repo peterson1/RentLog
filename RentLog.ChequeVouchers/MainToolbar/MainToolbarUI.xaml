@@ -8,8 +8,16 @@
              xmlns:butns="clr-namespace:CommonTools.Lib45.StyledButtons;assembly=CommonTools.Lib45"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueLightBrush}" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="15 0 5 2" />
+        </Style>
+    </UserControl.Resources>
     <StackPanel Orientation="Horizontal">
 
+        <Label Content="bank account" />
         <ComboBox Style="{StaticResource MaterialDesignComboBox}"
                   DataContext="{Binding BankAcctPicker}"
                   ItemsSource="{Binding BankAccounts}"

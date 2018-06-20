@@ -14,7 +14,7 @@ namespace RentLog.Cashiering.CashierCollections
             {
                 dg.ConfirmToDelete<CashierColxnDTO>(_ => _.ToString());
                 dg.EnableOpenCurrent<CashierColxnDTO>();
-                dg.ScrollToEndOnChange();
+                dg.ScrollToEnd();
                 dg.F4ToViewSoA<CashierColxnDTO>(_ => _.Lease, VM.AppArgs);
             };
         }
