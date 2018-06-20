@@ -20,19 +20,19 @@ namespace RentLog.ChequeVouchers.DcdrTab.ReportSettings
             };
         }
 
-        private void DteStart_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        private async void DteStart_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (!Keyboard.IsKeyDown(Key.LeftShift)) return;
-            //VM.PassbookRepo.RecomputeBalancesFrom(VM.DateRange.Start);
+            await VM.RecomputeBalances();
 
-            foreach (var date in VM.DateRange.Start.EachDayUpTo(VM.DateRange.End))
-            {
-                foreach (var dep in VM.AppArgs.Collections.For(date).BankDeposits.GetAll())
-                {
-                    var repo = VM.AppArgs.Passbooks.GetRepo(dep.BankAccount.Id);
-                    repo.InsertDepositedColxn(dep, date);
-                }
-            }
+            //foreach (var date in VM.DateRange.Start.EachDayUpTo(VM.DateRange.End))
+            //{
+            //    foreach (var dep in VM.AppArgs.Collections.For(date).BankDeposits.GetAll())
+            //    {
+            //        var repo = VM.AppArgs.Passbooks.GetRepo(dep.BankAccount.Id);
+            //        repo.InsertDepositedColxn(dep, date);
+            //    }
+            //}
         }
 
 
