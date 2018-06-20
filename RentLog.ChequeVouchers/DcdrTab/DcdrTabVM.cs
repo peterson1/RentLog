@@ -1,6 +1,7 @@
 ﻿using PropertyChanged;
 using RentLog.ChequeVouchers.DcdrTab.PassbookRows;
 using RentLog.ChequeVouchers.DcdrTab.ReportSettings;
+using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.PassbookRepos;
 
 namespace RentLog.ChequeVouchers.DcdrTab
@@ -22,8 +23,9 @@ namespace RentLog.ChequeVouchers.DcdrTab
         public PassbookRowsVM     PassbookRows  { get; }
         public bool               IsVisible     { get; set; }
 
+        public ITenantDBsDir AppArgs => _main.AppArgs;
         public IPassbookRowsRepo PassbookRepo
-            => _main.AppArgs.Passbooks.GetRepo(_main.AppArgs.CurrentBankAcct.Id);
+            => AppArgs.Passbooks.GetRepo(AppArgs.CurrentBankAcct.Id);
 
         //public bool IsVisible => _main.SelectedIndex == 1;
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Controls;
 using System.Windows.Input;
+using CommonTools.Lib11.DateTimeTools;
 using System.Windows.Media;
 
 namespace RentLog.ChequeVouchers.DcdrTab.ReportSettings
@@ -21,8 +22,17 @@ namespace RentLog.ChequeVouchers.DcdrTab.ReportSettings
 
         private void DteStart_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (Keyboard.IsKeyDown(Key.LeftShift))
-                VM.PassbookRepo.RecomputeBalancesFrom(VM.DateRange.Start);
+            if (!Keyboard.IsKeyDown(Key.LeftShift)) return;
+            //VM.PassbookRepo.RecomputeBalancesFrom(VM.DateRange.Start);
+
+            foreach (var date in VM.DateRange.Start.EachDayUpTo(VM.DateRange.End))
+            {
+                foreach (var dep in VM.AppArgs.Collections.For(date).BankDeposits.GetAll())
+                {
+                    var repo = VM.AppArgs.Passbooks.GetRepo(dep.BankAccount.Id);
+                    repo.InsertDepositedColxn(dep, date);
+                }
+            }
         }
 
 
