@@ -9,7 +9,7 @@ namespace CommonTools.Lib45.BaseViewModels
     [AddINotifyPropertyChangedInterface]
     public abstract class RepoCrudWindowVMBase<TRepo, TDraft, TWindow, TArg> 
         : CrudWindowVMBase<TDraft, TWindow, TArg>
-        where TRepo   : ISimpleRepo<TDraft>
+        where TRepo   : IAddEditRepo<TDraft>
         where TWindow : Window, new()
         where TDraft  : Lib11.ReflectionTools.ICloneable, new()
         where TArg    : ICredentialsProvider

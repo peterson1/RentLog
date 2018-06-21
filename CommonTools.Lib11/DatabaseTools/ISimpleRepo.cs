@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace CommonTools.Lib11.DatabaseTools
 {
-    public interface ISimpleRepo<T>
+    public interface ISimpleRepo<T> : IAddEditRepo<T>
     {
         event EventHandler<T> ContentChanged;
 
@@ -21,10 +21,10 @@ namespace CommonTools.Lib11.DatabaseTools
 
         Dictionary<int, T> ToDictionary();
 
-        int     Insert   (T newRecord);
+        //int     Insert   (T newRecord);
         void    Insert   (IEnumerable<T> records, bool doValidate);
                          
-        bool    Update   (T changedRecord);
+        //bool    Update   (T changedRecord);
         void    Update   (IEnumerable<T> records, bool doValidate);
                          
         bool    Upsert   (T record);
@@ -34,8 +34,8 @@ namespace CommonTools.Lib11.DatabaseTools
         void  Drop              ();
         void  DropAndInsert     (IEnumerable<T> records, bool doValidate);
 
-        bool  IsValidForInsert  (T draft, out string whyInvalid);
-        bool  IsValidForUpdate  (T record, out string whyInvalid);
+        //bool  IsValidForInsert  (T draft, out string whyInvalid);
+        //bool  IsValidForUpdate  (T record, out string whyInvalid);
         bool  IsValidForDelete  (T record, out string whyInvalid);
     }
 }
