@@ -37,6 +37,7 @@ namespace RentLog.DomainLib11.PassbookRepos
 
         private decimal GetOpeningBalance(DateTime date)
         {
+            //todo: fix logic error if no prev day has no entry
             var row = RowsFor(date)?.FirstOrDefault();
             if (row == null) return 0;
             return row.RunningBalance - row.Amount;

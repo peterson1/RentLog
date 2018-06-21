@@ -8,6 +8,16 @@ namespace RentLog.DomainLib11.Authorization
     {
         public static Action<string> OnUnauthorizedAccess;
 
+        public static bool CanAddPassbookRow(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
+            "Create Passbook Row", "Cashier", "Supervisor", "Admin");
+
+        public static bool CanEditPassbookRow(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
+            "Edit Passbook Row", "Cashier", "Supervisor", "Admin");
+
+        public static bool CanDeletePassbookRow(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
+            "Delete Passbook Row", "Cashier", "Supervisor", "Admin");
+
+
 
         public static bool CanAddVoucherRequest(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
             "Create Voucher Request", "Supervisor", "Admin");

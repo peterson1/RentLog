@@ -16,7 +16,7 @@ namespace CommonTools.Lib45.BaseViewModels
     {
         public event EventHandler<TDraft> NewRecordSaved = delegate { };
         public event EventHandler<TDraft> RecordUpdated  = delegate { };
-        public event EventHandler         SaveCompleted  = delegate { };
+        public event EventHandler<TDraft> SaveCompleted  = delegate { };
 
 
         public CrudWindowVMBase(TArg appArguments) : base(appArguments)
@@ -115,7 +115,7 @@ namespace CommonTools.Lib45.BaseViewModels
 
         protected virtual void AfterSaveCompleted(TDraft savedRecord)
         {
-            SaveCompleted?.Invoke(this, EventArgs.Empty);
+            SaveCompleted?.Invoke(this, savedRecord);
             ClearDraftAfterSave();
             StopBeingBusy();
             ReturnDialogResult(true);

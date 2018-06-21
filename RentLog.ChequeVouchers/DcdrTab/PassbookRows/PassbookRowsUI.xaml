@@ -4,15 +4,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RentLog.ChequeVouchers.DcdrTab.PassbookRows"
+             xmlns:butns="clr-namespace:CommonTools.Lib45.StyledButtons;assembly=CommonTools.Lib45"
+             xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <DockPanel>
-        <local:PassbookRowsFilterUI DockPanel.Dock="Top" 
-                                    DataContext="{Binding Filter}" />
+    <Grid>
+        <DockPanel>
+            <local:PassbookRowsFilterUI DockPanel.Dock="Top" 
+                                        DataContext="{Binding Filter}" />
 
-        <local:TableFooter DockPanel.Dock="Bottom"
-                           Margin="0 15 30 15" />
+            <local:TableFooter DockPanel.Dock="Bottom"
+                               Margin="0 15 30 15" />
 
-        <local:PassbookRowsTable />
-    </DockPanel>
+            <local:PassbookRowsTable />
+        </DockPanel>
+        
+        <butns:AddNewItemBtn1 HorizontalAlignment="Left"
+                              VerticalAlignment="Bottom"
+                              Margin="60 0 0 40" />
+    </Grid>
 </UserControl>

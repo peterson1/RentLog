@@ -25,7 +25,7 @@ namespace RentLog.DomainLib11.PassbookRepos
                 throw Bad.Insert(cheque, whyNot);
 
             var repo = FindRepo(clearedDate);
-            var row = cheque.ToPassbookRow(clearedDate);
+            var row  = cheque.ToPassbookRow(clearedDate);
             repo.Insert(row);
         }
 
@@ -37,8 +37,22 @@ namespace RentLog.DomainLib11.PassbookRepos
                 throw Bad.Insert(deposit, whyNot);
 
             var repo = FindRepo(deposit.DepositDate);
-            var row = deposit.ToPassbookRow(colxnDate);
+            var row  = deposit.ToPassbookRow(colxnDate);
             repo.Insert(row);
         }
+
+
+        public bool IsValidForInsert(PassbookRowDTO draft, out string whyInvalid)
+            => FindRepo(draft.TransactionDate).IsValidForInsert(draft, out whyInvalid);
+
+        public bool IsValidForUpdate(PassbookRowDTO record, out string whyInvalid)
+            => FindRepo(record.TransactionDate).IsValidForUpdate(record, out whyInvalid);
+
+
+        public int Insert(PassbookRowDTO rec)
+            => FindRepo(rec.TransactionDate).Insert(rec);
+
+        public bool Update(PassbookRowDTO rec)
+            => FindRepo(rec.TransactionDate).Update(rec);
     }
 }
