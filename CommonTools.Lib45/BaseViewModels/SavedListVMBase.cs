@@ -26,19 +26,18 @@ namespace CommonTools.Lib45.BaseViewModels
 
         public SavedListVMBase(ISimpleRepo<TDTO> repository, TArg appArguments, bool doReload = true)
         {
-            _repo      = repository;
-            if (_repo == null) return;
-
+            _repo         = repository;
             AppArgs       = appArguments;
             AddNewCmd     = R2Command.Relay(AddNewItem, _ => CanAddNewItem(), "Add New Item");
             RefreshCmd    = R2Command.Relay(ReloadFromDB, null, "Refresh");
             MainMethodCmd = R2Command.Relay(RunMainMethod, _ => PrivateCanRunMain(), MainMethodCmdLabel);
 
-            _repo.ContentChanged        += (s, e) => ReloadFromDB();
             ItemsList.ItemDeleted       += (s, e) => ExecuteDeleteRecord(e);
             ItemsList.CollectionChanged += (s, e) => OnCollectionChanged();
-            //ItemsList.ItemsReplaced     += (s, e) => OnItemsReplaced();////<--- not working
+            ItemsList.ItemsReplaced     += (s, e) => OnItemsReplaced();
             ItemsList.ItemOpened        += ItemsList_ItemOpened;
+            if (_repo != null)
+                _repo.ContentChanged += (s, e) => ReloadFromDB();
 
             if (doReload) ReloadFromDB();
         }
@@ -62,7 +61,7 @@ namespace CommonTools.Lib45.BaseViewModels
         public    virtual bool CanEditRecord       (TDTO rec) => true;
         protected virtual void LoadRecordForEditing(TDTO rec) { }
         protected virtual IEnumerable<TDTO> PostProcessQueried(IEnumerable<TDTO> items) => items;
-        //protected virtual void OnItemsReplaced     () { }
+        protected virtual void OnItemsReplaced     () { }
         protected virtual void OnSelectedChanged() => SelectedChanged?.Invoke(this, Selected);
 
 
