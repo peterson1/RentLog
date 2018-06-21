@@ -2,6 +2,7 @@
 using RentLog.DomainLib11.DataSources;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RentLog.DomainLib11.StateTransitions
 {
@@ -36,6 +37,9 @@ namespace RentLog.DomainLib11.StateTransitions
             foreach (var dep in deps)
                 dir.Passbooks.GetRepo(dep.BankAccount.Id)
                     .InsertDepositedColxn(dep, colxnDate);
+
+            foreach (var id in deps.Select(_ => _.BankAccount.Id))
+                dir.Passbooks.GetRepo(id).RecomputeBalancesFrom(colxnDate);
         }
     }
 }

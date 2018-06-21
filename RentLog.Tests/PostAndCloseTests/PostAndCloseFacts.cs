@@ -57,9 +57,12 @@ namespace RentLog.Tests.PostAndCloseTests
             var rows = arg.Passbooks.GetRepo(1).RowsFor(18.June(2018));
             rows.Should().HaveCount(1);
             rows.Sum(_ => _.Amount).Should().Be(19_165);
+            rows.Last().RunningBalance.Should().Be(69_031);
+
             rows = arg.Passbooks.GetRepo(2).RowsFor(18.June(2018));
             rows.Should().HaveCount(1);
             rows.Sum(_ => _.Amount).Should().Be(582);
+            rows.Last().RunningBalance.Should().Be(2_289);
 
             vm  = null;
             arg = null;
