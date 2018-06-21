@@ -61,11 +61,13 @@ namespace RentLog.Tests.PassbookRowsRepoTests
             Id            = 1234,
             Amount        = 4567,
             BankAccountId = bankAcctId,
+            Purpose       = "sdaffa"
         };
 
 
         private ChequeVoucherDTO CreateValidCheque(int bankAcctId) => new ChequeVoucherDTO
         {
+            Id      = 123,
             Request = CreateValidRequest(bankAcctId),
         };
 
