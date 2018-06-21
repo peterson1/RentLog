@@ -19,7 +19,8 @@ namespace RentLog.DomainLib11.PassbookRepos
 
                 db.DropAndInsert(rows, true);
 
-                startBal = rows.LastOrDefault()?.RunningBalance ?? 0;
+                if (rows.Any())
+                    startBal = rows.LastOrDefault()?.RunningBalance ?? 0;
             }
         }
 
