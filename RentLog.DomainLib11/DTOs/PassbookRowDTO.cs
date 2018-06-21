@@ -1,11 +1,9 @@
-﻿using CommonTools.Lib11.DateTimeTools;
-using CommonTools.Lib11.DTOs;
-using CommonTools.Lib11.ExceptionTools;
+﻿using CommonTools.Lib11.DTOs;
 using System;
 
 namespace RentLog.DomainLib11.DTOs
 {
-    public class PassbookRowDTO : DocumentDTOBase
+    public class PassbookRowDTO : SerializedDocument
     {
         public string    Subject          { get; set; }
         public string    Description      { get; set; }
@@ -13,9 +11,6 @@ namespace RentLog.DomainLib11.DTOs
         public string    TransactionRef   { get; set; }
         public decimal   Amount           { get; set; }
         public decimal   RunningBalance   { get; set; }//??
-        public string    DocRefType       { get; set; }
-        public int       DocRefId         { get; set; }
-        public string    DocRefJson       { get; set; }
 
         public bool      IsDeposit       => Amount > 0;
         public bool      IsWithdrawal    => Amount < 0;

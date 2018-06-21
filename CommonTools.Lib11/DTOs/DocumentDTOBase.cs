@@ -3,7 +3,7 @@ using System;
 
 namespace CommonTools.Lib11.DTOs
 {
-    public abstract class DocumentDTOBase : IDocumentDTO, ICloneable
+    public class DocumentDTOBase : IDocumentDTO, ICloneable
     {
         public int       Id         { get; set; }
         public string    Author     { get; set; }
