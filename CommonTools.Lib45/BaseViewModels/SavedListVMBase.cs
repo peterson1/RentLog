@@ -37,6 +37,7 @@ namespace CommonTools.Lib45.BaseViewModels
             _repo.ContentChanged        += (s, e) => ReloadFromDB();
             ItemsList.ItemDeleted       += (s, e) => ExecuteDeleteRecord(e);
             ItemsList.CollectionChanged += (s, e) => OnCollectionChanged();
+            //ItemsList.ItemsReplaced     += (s, e) => OnItemsReplaced();////<--- not working
             ItemsList.ItemOpened        += ItemsList_ItemOpened;
 
             if (doReload) ReloadFromDB();
@@ -61,6 +62,7 @@ namespace CommonTools.Lib45.BaseViewModels
         public    virtual bool CanEditRecord       (TDTO rec) => true;
         protected virtual void LoadRecordForEditing(TDTO rec) { }
         protected virtual IEnumerable<TDTO> PostProcessQueried(IEnumerable<TDTO> items) => items;
+        //protected virtual void OnItemsReplaced     () { }
         protected virtual void OnSelectedChanged() => SelectedChanged?.Invoke(this, Selected);
 
 
