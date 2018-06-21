@@ -11,11 +11,11 @@ namespace RentLog.ChequeVouchers
     [AddINotifyPropertyChangedInterface]
     public class MainWindowVM : BrandedWindowBase
     {
-        public MainWindowVM(ITenantDBsDir tenantDBsDir) : base(tenantDBsDir)
+        public MainWindowVM(ITenantDBsDir tenantDBsDir, bool clickRefresh = true) : base(tenantDBsDir)
         {
             VoucherReqs    = new VoucherReqsTabVM(tenantDBsDir);
             DcdrReport     = new DcdrTabVM(this);
-            BankAcctPicker = new BankAccountPickerVM(this);
+            BankAcctPicker = new BankAccountPickerVM(this, clickRefresh);
         }
 
 

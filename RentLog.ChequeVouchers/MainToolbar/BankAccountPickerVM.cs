@@ -12,7 +12,7 @@ namespace RentLog.ChequeVouchers.MainToolbar
         private ITenantDBsDir _dir;
         private MainWindowVM  _main;
 
-        public BankAccountPickerVM(MainWindowVM mainWindowVM)
+        public BankAccountPickerVM(MainWindowVM mainWindowVM, bool selectFirstBankAcct)
         {
             _main = mainWindowVM;
             _dir  = _main.AppArgs;
@@ -20,7 +20,8 @@ namespace RentLog.ChequeVouchers.MainToolbar
             BankAccounts.SetItems
                 (_dir.MarketState.BankAccounts.GetAll());
 
-            SelectedBankAccount = BankAccounts.FirstOrDefault();
+            if (selectFirstBankAcct)
+                SelectedBankAccount = BankAccounts.FirstOrDefault();
         }
 
 

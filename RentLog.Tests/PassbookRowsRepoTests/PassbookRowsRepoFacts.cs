@@ -88,6 +88,12 @@ namespace RentLog.Tests.PassbookRowsRepoTests
 
 
             protected override string GetDatabasePath(DateTime date) => date.ToShortDateString();
+
+
+            protected override string GetPreviousShardDBPath(DateTime date)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

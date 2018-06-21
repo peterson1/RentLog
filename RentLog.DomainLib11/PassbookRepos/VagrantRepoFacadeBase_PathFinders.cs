@@ -1,10 +1,6 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
 using CommonTools.Lib11.DateTimeTools;
-using CommonTools.Lib11.ExceptionTools;
-using CommonTools.Lib11.StringTools;
 using RentLog.DomainLib11.DTOs;
-using RentLog.DomainLib11.StateTransitions;
-using RentLog.DomainLib11.Validations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +10,9 @@ namespace RentLog.DomainLib11.PassbookRepos
     public abstract partial class VagrantRepoFacadeBase
     {
         protected abstract ISimpleRepo<PassbookRowDTO> ConnectToDB(string databasePath);
-        protected abstract string GetDatabasePath(DateTime date);
+
+        protected abstract string  GetDatabasePath        (DateTime date);
+        protected abstract string  GetPreviousShardDBPath (DateTime date);
 
 
         public List<PassbookRowDTO> RowsFor(DateTime date)

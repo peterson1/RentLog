@@ -1,4 +1,5 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
+using CommonTools.Lib11.DateTimeTools;
 using CommonTools.Lib45.LiteDbTools;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.PassbookRepos;
@@ -31,5 +32,12 @@ namespace RentLog.DatabaseLib.PassbookRowsRepository
 
         protected override string GetDatabasePath(DateTime date)
             => Path.Combine(_dir, string.Format(DATE_FMT, date));
+
+
+        protected override string GetPreviousShardDBPath(DateTime date)
+        {
+            var prevDay = date.MonthFirstDay().AddDays(-1);
+            return GetDatabasePath(prevDay);
+        }
     }
 }

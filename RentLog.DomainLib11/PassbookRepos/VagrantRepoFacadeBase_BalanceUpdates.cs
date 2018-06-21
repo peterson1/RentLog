@@ -9,7 +9,7 @@ namespace RentLog.DomainLib11.PassbookRepos
     {
         public void RecomputeBalancesFrom(DateTime startDate)
         {
-            var startBal = GetOpeningBalance(startDate);
+            var startBal = GetPreviousShardBalance(startDate);
             var dbPaths  = GetUniqueDBPaths(startDate, DateTime.Now);
             foreach (var path in dbPaths)
             {
@@ -20,7 +20,7 @@ namespace RentLog.DomainLib11.PassbookRepos
                 db.DropAndInsert(rows, true);
 
                 if (rows.Any())
-                    startBal = rows.LastOrDefault()?.RunningBalance ?? 0;
+                    startBal = rows.Last().RunningBalance;
             }
         }
 
@@ -35,12 +35,11 @@ namespace RentLog.DomainLib11.PassbookRepos
         }
 
 
-        private decimal GetOpeningBalance(DateTime date)
+        private decimal GetPreviousShardBalance(DateTime date)
         {
-            //todo: fix logic error if no prev day has no entry
-            var row = RowsFor(date)?.FirstOrDefault();
-            if (row == null) return 0;
-            return row.RunningBalance - row.Amount;
+            var db = ConnectToDB(GetPreviousShardDBPath(date));
+            if (!db.Any()) return 0;
+            return db.GetAll().Last().RunningBalance;
         }
     }
 }

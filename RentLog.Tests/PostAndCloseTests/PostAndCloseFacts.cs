@@ -20,7 +20,6 @@ namespace RentLog.Tests.PostAndCloseTests
         public async Task TestMethod00001()
         {
             var arg = GetTempSampleArgs();
-            var mkt = arg.MarketState.DatabasePath;
             arg.Collections.LastPostedDate().Should().Be(16.June(2018));
             arg.Collections.UnclosedDate().Should().Be(17.June(2018));
             arg.Balances.TotalOverdues().Rent.Should().Be(22_651.67M);
@@ -57,12 +56,12 @@ namespace RentLog.Tests.PostAndCloseTests
             var rows = arg.Passbooks.GetRepo(1).RowsFor(18.June(2018));
             rows.Should().HaveCount(1);
             rows.Sum(_ => _.Amount).Should().Be(19_165);
-            rows.Last().RunningBalance.Should().Be(69_031);
+            rows.Last().RunningBalance.Should().Be(-13_651_235.56M);
 
             rows = arg.Passbooks.GetRepo(2).RowsFor(18.June(2018));
             rows.Should().HaveCount(1);
             rows.Sum(_ => _.Amount).Should().Be(582);
-            rows.Last().RunningBalance.Should().Be(2_289);
+            rows.Last().RunningBalance.Should().Be(15_754);
 
             vm  = null;
             arg = null;
