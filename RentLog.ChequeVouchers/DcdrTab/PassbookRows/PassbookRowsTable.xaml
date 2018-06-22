@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:RentLog.ChequeVouchers.DcdrTab.PassbookRows"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>
+    <!--<UserControl.Resources>
         <ContextMenu x:Key="rowCtxMenu">
             <MenuItem Header ="{Binding MainMethodCmd.CurrentLabel}" 
                       Command="{Binding MainMethodCmd}"
@@ -17,7 +17,7 @@
                BasedOn="{StaticResource MaterialDesignDataGridRow}">
             <Setter Property="ContextMenu" Value="{StaticResource rowCtxMenu}" />
         </Style>
-    </UserControl.Resources>
+    </UserControl.Resources>-->
     <DataGrid x:Name="dg" Style="{StaticResource dgReadOnly}"
               SelectedItem="{Binding CurrentItem}"
               ItemsSource="{Binding }"

@@ -9,6 +9,7 @@ using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.PassbookRepos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -28,12 +29,24 @@ namespace RentLog.ChequeVouchers.DcdrTab.PassbookRows
         }
 
 
-        public PassbookRowDTO  LastRow      { get; private set; }
+        public PassbookRowDTO   LastRow   { get; private set; }
 
 
-        protected override bool CanAddNewItem() => AppArgs.CanAddPassbookRow(false);
+        protected override bool CanAddNewItem () => AppArgs.CanAddPassbookRow(false);
+        protected override bool CanDeletetRecord(PassbookRowDTO rec)
+        {
+            if (rec.DocRefType != typeof(PassbookRowDTO).FullName) return false;
+            return AppArgs.CanDeletePassbookRow(true);
+        }
 
-        protected override void AddNewItem()
+        public override bool CanEditRecord(PassbookRowDTO rec)
+        {
+            if (rec.DocRefType != typeof(PassbookRowDTO).FullName) return false;
+            return AppArgs.CanEditPassbookRow(true);
+        }
+
+
+        private PassbookRowCrudVM CreateCrud()
         {
             var crud = new PassbookRowCrudVM(Repo, AppArgs);
             crud.SaveCompleted += (s, e) =>
@@ -41,20 +54,33 @@ namespace RentLog.ChequeVouchers.DcdrTab.PassbookRows
                 Repo.RecomputeBalancesFrom(e.TransactionDate);
                 ReloadFromDB();
             };
-            crud.EncodeNewDraftCmd.ExecuteIfItCan();
+            return crud;
         }
+
+
+        protected override void AddNewItem() 
+            => CreateCrud().EncodeNewDraftCmd.ExecuteIfItCan();
+
+
+        protected override void LoadRecordForEditing(PassbookRowDTO rec)
+            => CreateCrud().EditCurrentRecord(rec);
+
+
 
 
         protected override void OnItemsReplaced()
-        {
-            LastRow = ItemsList.LastOrDefault();
-        }
+            => LastRow = ItemsList.LastOrDefault();
 
 
         protected override List<PassbookRowDTO> QueryItems(ISimpleRepo<PassbookRowDTO> db)
             => Repo.RowsFor(_rnge.Start, _rnge.End);
 
 
-        private IPassbookRowsRepo Repo => _dir.Passbooks.GetRepo(_dir.CurrentBankAcct.Id);
+        private IPassbookRowsRepo Repo 
+            => _dir.Passbooks.GetRepo(_dir.CurrentBankAcct.Id);
+
+
+        protected override void DeleteRecord(ISimpleRepo<PassbookRowDTO> db, PassbookRowDTO dto) 
+            => Repo.Delete(dto);
     }
 }

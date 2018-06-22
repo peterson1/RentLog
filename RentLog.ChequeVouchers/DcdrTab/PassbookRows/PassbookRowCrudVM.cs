@@ -28,6 +28,12 @@ namespace RentLog.ChequeVouchers.DcdrTab.PassbookRows
         }
 
 
+        protected override void ModifyDraftForUpdating(PassbookRowDTO draft)
+        {
+            TransactionDate = DateTime.MinValue.AddDays(draft.DateOffset);
+        }
+
+
         public void OnTransactionDateChanged()
         {
             if (Draft != null)

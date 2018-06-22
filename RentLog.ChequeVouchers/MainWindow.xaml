@@ -33,11 +33,13 @@
                 </dragz:TabablzControl.InterTabController>
 
                 <TabItem Header="Cheque Vouchers">
-                    <reqs:VoucherReqsTabUI DataContext="{Binding VoucherReqs}" />
+                    <reqs:VoucherReqsTabUI x:Name="vouchersTab"
+                                           DataContext="{Binding VoucherReqs}" />
                 </TabItem>
                 
                 <TabItem Header="DCDR">
-                    <dcdr:DcdrTabUI DataContext="{Binding DcdrReport}" />
+                    <dcdr:DcdrTabUI x:Name="dcdrTab" 
+                                    DataContext="{Binding DcdrReport}" />
                 </TabItem>
 
             </dragz:TabablzControl>

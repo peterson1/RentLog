@@ -59,10 +59,11 @@ namespace CommonTools.Lib45.BaseViewModels
         protected virtual bool CanAddNewItem       () => true;
         protected virtual bool CanDeletetRecord    (TDTO rec) => true;
         public    virtual bool CanEditRecord       (TDTO rec) => true;
-        protected virtual void LoadRecordForEditing(TDTO rec) { }
+        protected virtual void LoadRecordForEditing(TDTO rec) { }//todo: promote using this
         protected virtual IEnumerable<TDTO> PostProcessQueried(IEnumerable<TDTO> items) => items;
         protected virtual void OnItemsReplaced     () { }
         protected virtual void OnSelectedChanged() => SelectedChanged?.Invoke(this, Selected);
+        protected virtual void DeleteRecord(ISimpleRepo<TDTO> db, TDTO dto) => db.Delete(dto);
 
 
         protected virtual bool  CanRunMainMethod  () => true;
@@ -92,17 +93,14 @@ namespace CommonTools.Lib45.BaseViewModels
 
         protected void ExecuteDeleteRecord(TDTO dto)
         {
-            DeleteRecord(_repo, dto);
-            UpdateTotalSum();
-            TotalSumChanged?.Invoke(this, TotalSum);
-        }
-
-
-        protected virtual void DeleteRecord(ISimpleRepo<TDTO> db, TDTO dto)
-        {
-            if (CanDeletetRecord(dto)) db.Delete(dto);
+            if (CanDeletetRecord(dto))
+                DeleteRecord(_repo, dto);
             ReloadFromDB();
+            UpdateTotalSum();
+            //TotalSumChanged?.Invoke(this, TotalSum);
         }
+
+
 
 
         private void ItemsList_ItemOpened(object sender, TDTO e)

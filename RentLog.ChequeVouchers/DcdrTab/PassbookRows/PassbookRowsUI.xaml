@@ -16,7 +16,7 @@
             <local:TableFooter DockPanel.Dock="Bottom"
                                Margin="0 15 30 15" />
 
-            <local:PassbookRowsTable />
+            <local:PassbookRowsTable x:Name="tbl" />
         </DockPanel>
         
         <butns:AddNewItemBtn1 HorizontalAlignment="Left"

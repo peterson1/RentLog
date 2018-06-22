@@ -45,8 +45,11 @@ namespace RentLog.DomainLib11.PassbookRepos
         public bool IsValidForInsert(PassbookRowDTO draft, out string whyInvalid)
             => FindRepo(draft.TransactionDate).IsValidForInsert(draft, out whyInvalid);
 
-        public bool IsValidForUpdate(PassbookRowDTO record, out string whyInvalid)
-            => FindRepo(record.TransactionDate).IsValidForUpdate(record, out whyInvalid);
+        public bool IsValidForUpdate(PassbookRowDTO rec, out string whyInvalid)
+            => FindRepo(rec.TransactionDate).IsValidForUpdate(rec, out whyInvalid);
+
+        public bool IsValidForDelete(PassbookRowDTO rec, out string whyInvalid)
+            => FindRepo(rec.TransactionDate).IsValidForDelete(rec, out whyInvalid);
 
 
         public int Insert(PassbookRowDTO rec)
@@ -54,5 +57,8 @@ namespace RentLog.DomainLib11.PassbookRepos
 
         public bool Update(PassbookRowDTO rec)
             => FindRepo(rec.TransactionDate).Update(rec);
+
+        public bool Delete(PassbookRowDTO rec)
+            => FindRepo(rec.TransactionDate).Delete(rec);
     }
 }

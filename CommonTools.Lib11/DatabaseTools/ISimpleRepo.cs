@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace CommonTools.Lib11.DatabaseTools
 {
-    public interface ISimpleRepo<T> : IAddEditRepo<T>
+    public interface ISimpleRepo<T> : ISimplerRepo<T>
     {
         event EventHandler<T> ContentChanged;
 
@@ -28,7 +28,6 @@ namespace CommonTools.Lib11.DatabaseTools
         void    Update   (IEnumerable<T> records, bool doValidate);
                          
         bool    Upsert   (T record);
-        bool    Delete   (T record);
         bool    Delete   (int recordId);
 
         void  Drop              ();
@@ -36,6 +35,5 @@ namespace CommonTools.Lib11.DatabaseTools
 
         //bool  IsValidForInsert  (T draft, out string whyInvalid);
         //bool  IsValidForUpdate  (T record, out string whyInvalid);
-        bool  IsValidForDelete  (T record, out string whyInvalid);
     }
 }
