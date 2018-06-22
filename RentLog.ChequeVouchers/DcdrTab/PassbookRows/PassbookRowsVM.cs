@@ -67,6 +67,7 @@ namespace RentLog.ChequeVouchers.DcdrTab.PassbookRows
                     break;
 
                 case "PassbookTally.DomainLib.DTOs.RequestedChequeDTO":
+                case "RentLog.DomainLib11.DTOs.ChequeVoucherDTO":
                     ChequeVoucherViewerVM.Show(rec.As<ChequeVoucherDTO>(), AppArgs);
                     break;
 

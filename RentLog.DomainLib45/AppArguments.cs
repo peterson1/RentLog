@@ -22,10 +22,10 @@ namespace RentLog.DomainLib45
             Parse(Environment.GetCommandLineArgs());
             CurrentUser = Credentials?.HumanName ?? "Anonymous";
             MarketState = GetMarketStateDB();
-            Vouchers    = GetChequeVouchersDB        (MarketState);
+            Passbooks   = new TransactionsByMonthDir (MarketState);
+            Vouchers    = new PassbookDBFile         (this);
             Balances    = new BalancesLocalDir       (this);
             Collections = new CollectionsLocalDir    (this);
-            Passbooks   = new TransactionsByMonthDir (MarketState);
             DailyBiller = new DailyBiller1           (Collections);
         }
 
@@ -52,8 +52,8 @@ namespace RentLog.DomainLib45
             => new MarketStateDBFile(DbFilePath, CurrentUser);
 
 
-        protected ChequeVouchersDB GetChequeVouchersDB(MarketStateDB marketState)
-            => new PassbookDBFile(marketState);
+        //protected ChequeVouchersDB GetChequeVouchersDB(MarketStateDB marketState)
+        //    => new PassbookDBFile(marketState);
 
 
         private void SetCredentials(string key)
