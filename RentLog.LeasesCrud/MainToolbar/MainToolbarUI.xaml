@@ -45,6 +45,9 @@
 
                 <Button Command="{Binding ExportListToExcelCmd}"
                         Content="{Binding ExportListToExcelCmd.CurrentLabel}" />
+
+                <Button Command="{Binding RunAdHocTaskCmd}"
+                        Content="{Binding RunAdHocTaskCmd.CurrentLabel}" />
             </StackPanel>
         </mat:PopupBox>
         

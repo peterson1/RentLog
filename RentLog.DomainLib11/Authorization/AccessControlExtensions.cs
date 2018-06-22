@@ -74,6 +74,11 @@ namespace RentLog.DomainLib11.Authorization
 
 
 
+        public static bool CanRunAdHocTask(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
+            "Run Ad Hoc Job", "Admin");
+
+
+
         private static bool Check(this ICredentialsProvider args,
             bool alertIfNotAllowed, string intendedAction, params string[] allowedRoles)
         {
