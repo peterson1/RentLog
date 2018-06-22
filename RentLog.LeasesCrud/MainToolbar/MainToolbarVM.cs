@@ -59,7 +59,8 @@ namespace RentLog.LeasesCrud.MainToolbar
             _main.StartBeingBusy("Running Ad Hoc task ...");
             await Task.Run(() =>
             {
-                AllLeasesNoRoundOff.Run(_args);
+                //AllLeasesNoRoundOff.Run(_args);
+                NonExpiringLeasesForSome.Run(_args);
             });
             _main.StopBeingBusy();
             _main.ClickRefresh();
