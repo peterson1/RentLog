@@ -24,9 +24,8 @@ namespace RentLog.Cashiering.SectionTabs.IntendedCollections
         }
 
 
-        protected override void OnItemOpened(IntendedColxnDTO e)
-            => _tab.EditIntendedColxn(e);
-
+        //protected override void OnItemOpened(IntendedColxnDTO e) => _tab.EditIntendedColxn(e);
+        protected override void LoadRecordForEditing(IntendedColxnDTO rec) => _tab.EditIntendedColxn(rec);
 
         protected override bool CanDeletetRecord(IntendedColxnDTO rec) => Main.CanEncode;
         protected override string ListTitle => "Lease Collections";

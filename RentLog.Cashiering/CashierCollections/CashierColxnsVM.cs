@@ -21,6 +21,7 @@ namespace RentLog.Cashiering.CashierCollections
         protected override Func<CashierColxnDTO, LeaseDTO> LeaseGetter => _ => _.Lease;
         protected override Func<CashierColxnDTO, decimal>  SummedAmount => _ => _.Amount;
         protected override void AddNewItem() => _crud.EncodeNewDraftCmd.ExecuteIfItCan();
-        protected override void OnItemOpened(CashierColxnDTO e) => _crud.EditCurrentRecord(e);
+        protected override void LoadRecordForEditing(CashierColxnDTO rec) => _crud.EditCurrentRecord(rec);
+
     }
 }

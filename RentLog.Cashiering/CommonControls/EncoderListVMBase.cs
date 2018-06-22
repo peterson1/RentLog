@@ -27,6 +27,8 @@ namespace RentLog.Cashiering.CommonControls
         public bool          CanAddRows    { get; protected set; }
         public bool          TotalVisible  { get; protected set; } = true;
 
+        protected abstract string ListTitle { get; }
+
 
         protected override IEnumerable<TDTO> PostProcessQueried(IEnumerable<TDTO> items)
         {
@@ -40,8 +42,6 @@ namespace RentLog.Cashiering.CommonControls
 
 
         protected virtual Func<TDTO, LeaseDTO> LeaseGetter => null;
-
-
-        protected abstract string ListTitle { get; }
+        public override bool CanEditRecord(TDTO rec) => Main.CanEncode;
     }
 }

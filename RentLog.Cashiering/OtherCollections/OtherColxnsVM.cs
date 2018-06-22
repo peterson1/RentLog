@@ -23,6 +23,6 @@ namespace RentLog.Cashiering.OtherCollections
         protected override Func<OtherColxnDTO, decimal> SummedAmount => _ => _.Amount;
         protected override string ListTitle => "Other Collections";
         protected override void AddNewItem() => _crud.EncodeNewDraftCmd.ExecuteIfItCan();
-        protected override void OnItemOpened(OtherColxnDTO e) => _crud.EditCurrentRecord(e);
+        protected override void LoadRecordForEditing(OtherColxnDTO rec) => _crud.EditCurrentRecord(rec);
     }
 }
