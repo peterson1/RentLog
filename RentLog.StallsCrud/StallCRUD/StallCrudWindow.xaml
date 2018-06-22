@@ -64,10 +64,14 @@
                          mat:HintAssist.Hint="section"
                          Style="{StaticResource txtReadOnly}" />
 
-                <TextBox Text="{Binding Draft.DefaultRent.PenaltyRule}"
+                <!--<TextBox Text="{Binding Draft.DefaultRent.PenaltyRule}"
                          mat:HintAssist.Hint="Rent Penalty Rule"
                          Style="{StaticResource txtReadOnly}"
-                         Margin="10 53 0 0"  />
+                         Margin="10 53 0 0"  />-->
+                <ComboBox ItemsSource="{Binding RentPenaltyRules}"
+                          SelectedItem="{Binding Draft.DefaultRent.PenaltyRule, UpdateSourceTrigger=PropertyChanged}"
+                          mat:HintAssist.Hint="Rent Penalty Rule"
+                          Margin="10 53 0 0"  />
 
                 <TextBox Text="{Binding Draft.DefaultRights.PenaltyRule}"
                          mat:HintAssist.Hint="Rights Penalty Rule"

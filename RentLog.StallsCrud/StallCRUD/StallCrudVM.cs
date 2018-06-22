@@ -1,13 +1,13 @@
-﻿using CommonTools.Lib11.StringTools;
-using CommonTools.Lib45.BaseViewModels;
-using RentLog.DomainLib11.DTOs;
-using RentLog.DomainLib11.Authorization;
-using RentLog.DomainLib45;
-using CommonTools.Lib11.DataStructures;
-using RentLog.DomainLib11.Models;
+﻿using CommonTools.Lib11.DataStructures;
 using CommonTools.Lib11.EnumTools;
+using CommonTools.Lib11.StringTools;
+using CommonTools.Lib45.BaseViewModels;
+using RentLog.DomainLib11.Authorization;
+using RentLog.DomainLib11.BillingRules.RentPenalties;
+using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
-using System;
+using RentLog.DomainLib11.Models;
+using RentLog.DomainLib45;
 using System.Linq;
 
 namespace RentLog.StallsCrud.StallCRUD
@@ -23,8 +23,9 @@ namespace RentLog.StallsCrud.StallCRUD
         }
 
 
-        public LeaseDTO Occupant { get; set; }
-        public UIList<BillInterval> BillIntervals { get; } = new UIList<BillInterval>(EnumTool.List<BillInterval>());
+        public LeaseDTO             Occupant         { get; set; }
+        public UIList<BillInterval> BillIntervals    { get; } = new UIList<BillInterval>(EnumTool.List<BillInterval>());
+        public UIList<string>       RentPenaltyRules { get; } = new UIList<string>(RentPenalty.Rules);
 
 
         public override bool CanEncodeNewDraft() => AppArgs.CanAddStall(false);

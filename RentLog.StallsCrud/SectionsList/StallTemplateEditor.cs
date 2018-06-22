@@ -4,6 +4,7 @@ using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.BaseViewModels;
 using CommonTools.Lib45.InputDialogs;
 using RentLog.DomainLib11.Authorization;
+using RentLog.DomainLib11.BillingRules.RentPenalties;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.Models;
 using RentLog.DomainLib45;
@@ -22,9 +23,10 @@ namespace RentLog.StallsCrud.SectionsList
         }
 
 
-        public SectionDTO           Section       { get; set; }
-        public LeaseDTO             Occupant      { get; set; }
-        public UIList<BillInterval> BillIntervals { get; } = new UIList<BillInterval>(EnumTool.List<BillInterval>());
+        public SectionDTO           Section           { get; set; }
+        public LeaseDTO             Occupant          { get; set; }
+        public UIList<BillInterval> BillIntervals     { get; } = new UIList<BillInterval>(EnumTool.List<BillInterval>());
+        public UIList<string>       RentPenaltyRules  { get; } = new UIList<string>(RentPenalty.Rules);
 
 
         protected override void SaveNewRecord(StallDTO draft)
