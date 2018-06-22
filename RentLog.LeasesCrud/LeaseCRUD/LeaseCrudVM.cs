@@ -1,6 +1,8 @@
-﻿using CommonTools.Lib45.BaseViewModels;
+﻿using CommonTools.Lib11.DataStructures;
+using CommonTools.Lib45.BaseViewModels;
 using PropertyChanged;
 using RentLog.DomainLib11.Authorization;
+using RentLog.DomainLib11.BillingRules.RentPenalties;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
 using RentLog.DomainLib11.Models;
@@ -29,6 +31,7 @@ namespace RentLog.LeasesCrud.LeaseCRUD
         public DateTime?    FirstRentDueDate  { get; private set; }
         public DateTime?    RightsDueDate     { get; private set; }
 
+        public UIList<string> RentPenaltyRules { get; } = new UIList<string>(RentPenalty.Rules);
 
 
 

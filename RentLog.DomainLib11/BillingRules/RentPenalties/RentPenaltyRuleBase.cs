@@ -8,13 +8,6 @@ using static RentLog.DomainLib11.DTOs.DailyBillDTO;
 
 namespace RentLog.DomainLib11.BillingRules.RentPenalties
 {
-    public struct RentPenalty
-    {
-        public const string DailySurcharge            = "Daily Surcharge";
-        public const string DailySurcharge_NoRoundOff = "Daily Surcharge (No Round-off)";
-    }
-
-
     public abstract class RentPenaltyRuleBase : IBillSurcharger
     {
         protected abstract List<BillPenalty> GetPenaltiesList(LeaseDTO lse, DateTime date, decimal? oldBal);

@@ -33,6 +33,14 @@
             <Setter Property="MinWidth" Value="110" />
             <Setter Property="VerticalAlignment" Value="Bottom" />
         </Style>
+
+
+        <Style TargetType="ComboBox"
+               BasedOn="{StaticResource MaterialDesignFloatingHintComboBox}">
+            <Setter Property="Margin" Value="10 10 10 10" />
+            <Setter Property="MinWidth" Value="110" />
+            <Setter Property="VerticalAlignment" Value="Bottom" />
+        </Style>
     </UserControl.Resources>
     <StackPanel>
 
@@ -84,7 +92,12 @@
                      Style="{StaticResource txtReadOnly}" />
         </StackPanel>
 
-        <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
+        <ComboBox ItemsSource="{Binding RentPenaltyRules}"
+                  SelectedItem="{Binding Draft.Rent.PenaltyRule}"
+                  HorizontalAlignment="Left"
+                  mat:HintAssist.Hint="rent penalty rule" />
+
+        <StackPanel Orientation="Horizontal" Margin="0 30 0 0">
             <TextBox Text="{Binding Draft.Rights.TotalAmount, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
                      mat:HintAssist.Hint="total rights" />
 
