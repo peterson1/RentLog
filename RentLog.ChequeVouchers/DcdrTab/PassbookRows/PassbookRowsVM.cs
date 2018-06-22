@@ -4,6 +4,7 @@ using CommonTools.Lib45.BaseViewModels;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.ThreadTools;
 using PropertyChanged;
+using RentLog.ChequeVouchers.CommonControls.ChequeVoucherViewer;
 using RentLog.ChequeVouchers.DcdrTab.ReportSettings;
 using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.DataSources;
@@ -39,12 +40,6 @@ namespace RentLog.ChequeVouchers.DcdrTab.PassbookRows
             return AppArgs.CanDeletePassbookRow(true);
         }
 
-        public override bool CanEditRecord(PassbookRowDTO rec)
-        {
-            if (rec.DocRefType != typeof(PassbookRowDTO).FullName) return false;
-            return AppArgs.CanEditPassbookRow(true);
-        }
-
 
         private PassbookRowCrudVM CreateCrud()
         {
@@ -63,9 +58,21 @@ namespace RentLog.ChequeVouchers.DcdrTab.PassbookRows
 
 
         protected override void LoadRecordForEditing(PassbookRowDTO rec)
-            => CreateCrud().EditCurrentRecord(rec);
+        {
+            switch (rec.DocRefType)
+            {
+                case "RentLog.DomainLib11.DTOs.PassbookRowDTO":
+                    if (AppArgs.CanEditPassbookRow(true))
+                        CreateCrud().EditCurrentRecord(rec);
+                    break;
 
+                case "PassbookTally.DomainLib.DTOs.RequestedChequeDTO":
+                    ChequeVoucherViewerVM.Show(rec.As<ChequeVoucherDTO>(), AppArgs);
+                    break;
 
+                default: break;
+            }
+        }
 
 
         protected override void OnItemsReplaced()
