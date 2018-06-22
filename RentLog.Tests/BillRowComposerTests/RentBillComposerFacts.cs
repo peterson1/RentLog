@@ -106,7 +106,7 @@ namespace RentLog.Tests.BillRowComposerTests
                 Rent          = new RentParams
                 {
                     RegularRate  = 120,
-                    PenaltyRule  = RentDailySurcharger.RULE,
+                    PenaltyRule  = RentPenalty.DailySurcharge,
                     PenaltyRate1 = 0.03M,
                 },
                 Stall = new StallDTO { IsOperational = true }

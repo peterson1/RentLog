@@ -9,16 +9,16 @@ using Xunit;
 
 namespace RentLog.Tests.SurchargerTests.RentSurchargerTests
 {
-    [Trait("Daily Surcharge", "Rent - Solitary")]
-    public class RentDailySurchargeFacts
+    [Trait("Daily Surcharge - No Round-off", "Rent - Solitary")]
+    public class RentDailySurchargeNoRoundOffFacts
     {
         [Fact(DisplayName = "Rate * Balance")]
         public void RateTimesBalance()
         {
-            var sut     = new RentDailySurcharger();
+            var sut     = new RentDailySurchargerNoRoundOff();
             var lse     = LeaseWithPenaltyRate(0.03M);
             var date    = 3.May(2018);
-            var oldBal  = 100;
+            var oldBal  = 100M;
             var charges = sut.GetPenalties(lse, date, oldBal);
             charges.Should().HaveCount(1);
             var penalty = charges.Single();
@@ -27,17 +27,17 @@ namespace RentLog.Tests.SurchargerTests.RentSurchargerTests
         }
 
 
-        [Fact(DisplayName = "Rate * Balance (rounded)")]
+        [Fact(DisplayName = "Rate * Balance (non-rounded)")]
         public void RateTimesBalancerounded()
         {
-            var sut     = new RentDailySurcharger();
+            var sut     = new RentDailySurchargerNoRoundOff();
             var lse     = LeaseWithPenaltyRate(0.03M);
             var date    = 3.May(2018);
-            var oldBal  = 90;
+            var oldBal  = 90M;
             var charges = sut.GetPenalties(lse, date, oldBal);
             charges.Should().HaveCount(1);
             var penalty = charges.Single();
-            penalty.Amount.Should().Be(3);
+            penalty.Amount.Should().Be(90M * 0.03M);
             penalty.Label.Should().Be(sut.RuleName);
         }
 
@@ -45,7 +45,7 @@ namespace RentLog.Tests.SurchargerTests.RentSurchargerTests
         [Fact(DisplayName = "Error if Different Rule")]
         public void ErrorifDifferentRule()
         {
-            var sut = new RentDailySurcharger();
+            var sut = new RentDailySurchargerNoRoundOff();
             var lse = LeaseWithPenaltyRate(0.03M);
             lse.Rent.PenaltyRule = "a different rule";
 
@@ -57,7 +57,7 @@ namespace RentLog.Tests.SurchargerTests.RentSurchargerTests
         [Fact(DisplayName = "Null if inactive lease")]
         public void Nullifinactivelease()
         {
-            var sut     = new RentDailySurcharger();
+            var sut     = new RentDailySurchargerNoRoundOff();
             var lse     = new InactiveLeaseDTO { Rent = new RentParams { PenaltyRule = sut.RuleName } };
             var charges = sut.GetPenalties(lse, 3.May(2018), 123);
             charges.Should().BeNull();
@@ -67,7 +67,7 @@ namespace RentLog.Tests.SurchargerTests.RentSurchargerTests
         [Fact(DisplayName = "Null if negative balance")]
         public void Nullifnegativebalance()
         {
-            var sut     = new RentDailySurcharger();
+            var sut     = new RentDailySurchargerNoRoundOff();
             var lse     = LeaseWithPenaltyRate(0.03M);
             var oldBal  = -123;
             var charges = sut.GetPenalties(lse, 3.May(2018), oldBal);
@@ -78,7 +78,7 @@ namespace RentLog.Tests.SurchargerTests.RentSurchargerTests
         [Fact(DisplayName = "Null if zero balance")]
         public void Nullifzerobalance()
         {
-            var sut     = new RentDailySurcharger();
+            var sut     = new RentDailySurchargerNoRoundOff();
             var lse     = LeaseWithPenaltyRate(0.03M);
             var oldBal  = 0;
             var charges = sut.GetPenalties(lse, 3.May(2018), oldBal);
@@ -89,7 +89,7 @@ namespace RentLog.Tests.SurchargerTests.RentSurchargerTests
         [Fact(DisplayName = "Null if null balance")]
         public void Nullifnullbalance()
         {
-            var sut     = new RentDailySurcharger();
+            var sut     = new RentDailySurchargerNoRoundOff();
             var lse     = LeaseWithPenaltyRate(0.03M);
             var oldBal  = (decimal?)null;
             var charges = sut.GetPenalties(lse, 3.May(2018), oldBal);
@@ -104,7 +104,7 @@ namespace RentLog.Tests.SurchargerTests.RentSurchargerTests
             Stall         = new StallDTO { IsOperational = true },
             Rent          = new RentParams
             {
-                PenaltyRule  = new RentDailySurcharger().RuleName,
+                PenaltyRule  = new RentDailySurchargerNoRoundOff().RuleName,
                 PenaltyRate1 = penaltyRate1
             }
         };

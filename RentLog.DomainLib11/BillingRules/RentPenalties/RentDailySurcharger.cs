@@ -8,14 +8,13 @@ using static RentLog.DomainLib11.DTOs.DailyBillDTO;
 
 namespace RentLog.DomainLib11.BillingRules.RentPenalties
 {
-    public class RentDailySurcharger : IBillSurcharger
+    public class RentDailySurcharger : RentPenaltyRuleBase
     {
-        public const string RULE = "Daily Surcharge";
+        public override string RuleName => RentPenalty.DailySurcharge;
 
 
-        public List<BillPenalty> GetPenalties(LeaseDTO lse, DateTime date, decimal? oldBal)
+        protected override List<BillPenalty> GetPenaltiesList(LeaseDTO lse, DateTime date, decimal? oldBal)
         {
-            ValidatePenaltyRule(lse);
             if ((oldBal ?? 0) <= 0) return null;
             if (!lse.IsActive(date)) return null;
             var rate = lse.Rent.PenaltyRate1;
@@ -23,25 +22,21 @@ namespace RentLog.DomainLib11.BillingRules.RentPenalties
             {
                 new BillPenalty
                 {
-                    Label       = RULE,
-                    Amount      = Math.Round(oldBal.Value * rate, 0),
-                    Computation = "balance * penaltyRate" + L.f
-                                + $"{oldBal:N2} * {rate:N2}" + L.f 
-                                + "(centavos rounded off)"
+                    Label       = RuleName,
+                    Amount      = GetPenaltyAmount (oldBal.Value, rate),
+                    Computation = GetComputation   (oldBal.Value, rate)
                 }
             };
         }
 
 
-        private void ValidatePenaltyRule(LeaseDTO lse)
-        {
-            if (lse?.Rent == null)
-                throw Fault.NullRef("Lease Rent Params");
+        protected virtual decimal GetPenaltyAmount(decimal oldBal, decimal rate) 
+            => Math.Round(oldBal * rate, 0);
 
-            if (lse.Rent.PenaltyRule != RULE)
-                throw Fault.BadKey<LeaseDTO>(RULE, 
-                    lse.Rent.PenaltyRule, 
-                    nameof(lse.Rent.PenaltyRule));
-        }
+
+        protected virtual string GetComputation(decimal oldBal, decimal rate)
+            => "balance * penaltyRate" + L.f
+             + $"{oldBal:N2} * {rate:N2}" + L.f
+             + "(centavos rounded off)";
     }
 }

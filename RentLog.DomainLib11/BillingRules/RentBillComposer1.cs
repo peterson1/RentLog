@@ -24,8 +24,12 @@ namespace RentLog.DomainLib11.BillingRules
         {
             switch (lse.Rent.PenaltyRule)
             {
-                case RentDailySurcharger.RULE:
+                case RentPenalty.DailySurcharge:
                     return new RentDailySurcharger()
+                        .GetPenalties(lse, date, previousBalance);
+
+                case RentPenalty.DailySurcharge_NoRoundOff:
+                    return new RentDailySurchargerNoRoundOff()
                         .GetPenalties(lse, date, previousBalance);
 
                 default:

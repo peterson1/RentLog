@@ -28,6 +28,12 @@ namespace CommonTools.Lib11.ExceptionTools
     }
 
 
+    public struct Null
+    {
+        public static NullReferenceException Ref(string variableName) => Fault.NullRef(variableName);
+    }
+
+
     public struct No
     {
         public static RecordNotFoundException Match<T>(string field, object value)
