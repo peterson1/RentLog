@@ -23,7 +23,7 @@ namespace CommonTools.Lib45.ExcelTools
             {
                 dg.ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader;
                 ApplicationCommands.Copy.Execute(null, dg);
-                clipbrdVal = (string)Clipboard.GetData(DataFormats.Text);
+                clipbrdVal = (string)Clipboard.GetData(DataFormats.CommaSeparatedValue);
             }
             catch (COMException)
             {
@@ -39,7 +39,7 @@ namespace CommonTools.Lib45.ExcelTools
                 filePath = Path.GetTempFileName() + ".csv";
 
             using (var writr = new StreamWriter(filePath))
-                writr.WriteLine(clipbrdVal.Replace(',', ' '));
+                writr.WriteLine(clipbrdVal);
 
             Process.Start(filePath);
         }
