@@ -11,8 +11,12 @@ namespace RentLog.ChequeVouchers
     [AddINotifyPropertyChangedInterface]
     public class MainWindowVM : BrandedWindowBase
     {
+        public override string SubAppName => "Cheque Vouchers  |  DCDR";
+
+
         public MainWindowVM(ITenantDBsDir tenantDBsDir, bool clickRefresh = true) : base(tenantDBsDir)
         {
+            DateRange      = new DateRangePickerVM();
             VoucherReqs    = new VoucherReqsTabVM(tenantDBsDir);
             DcdrReport     = new DcdrTabVM(this);
             BankAcctPicker = new BankAccountPickerVM(this, clickRefresh);
@@ -20,19 +24,18 @@ namespace RentLog.ChequeVouchers
 
 
         public BankAccountPickerVM  BankAcctPicker  { get; }
+        public DateRangePickerVM    DateRange       { get; }
         public VoucherReqsTabVM     VoucherReqs     { get; }
         public DcdrTabVM            DcdrReport      { get; }
         public int                  SelectedIndex   { get; set; }
 
 
-        public override string SubAppName => "Cheque Vouchers  |  DCDR";
-
-
         public void OnSelectedIndexChanged()
         {
-            DcdrReport.IsVisible = SelectedIndex == 1;
+            DateRange.IsVisible = SelectedIndex > 0;
             ClickRefresh();
         }
+
 
         protected override async Task OnRefreshClickedAsync()
         {

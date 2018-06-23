@@ -1,7 +1,7 @@
 ﻿using PropertyChanged;
 using System;
 
-namespace RentLog.ChequeVouchers.DcdrTab.ReportSettings
+namespace RentLog.ChequeVouchers.MainToolbar
 {
     [AddINotifyPropertyChangedInterface]
     public class DateRangePickerVM
@@ -13,7 +13,8 @@ namespace RentLog.ChequeVouchers.DcdrTab.ReportSettings
         }
 
 
-        public DateTime   Start   { get; set; }
-        public DateTime   End     { get; set; }
+        public bool       IsVisible  { get; set; }
+        public DateTime   Start      { get; set; }
+        public DateTime   End        { get; set; }
     }
 }

@@ -1,16 +1,12 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
-using CommonTools.Lib11.InputCommands;
 using CommonTools.Lib45.BaseViewModels;
-using CommonTools.Lib45.InputCommands;
-using CommonTools.Lib45.ThreadTools;
 using PropertyChanged;
 using RentLog.ChequeVouchers.CommonControls.ChequeVoucherViewer;
-using RentLog.ChequeVouchers.DcdrTab.ReportSettings;
+using RentLog.ChequeVouchers.MainToolbar;
 using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.PassbookRepos;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,13 +16,11 @@ namespace RentLog.ChequeVouchers.DcdrTab.PassbookRows
     public class PassbookRowsVM : FilteredSavedListVMBase<PassbookRowDTO, PassbookRowsFilterVM, ITenantDBsDir>
     {
         private DateRangePickerVM _rnge;
-        private ITenantDBsDir     _dir;
 
 
-        public PassbookRowsVM(DateRangePickerVM dateRangePickerVM, ITenantDBsDir tenantDBsDir) : base(null, tenantDBsDir, false)
+        public PassbookRowsVM(MainWindowVM main) : base(null, main.AppArgs, false)
         {
-            _dir  = tenantDBsDir;
-            _rnge = dateRangePickerVM;
+            _rnge = main.DateRange;
         }
 
 
@@ -85,7 +79,7 @@ namespace RentLog.ChequeVouchers.DcdrTab.PassbookRows
 
 
         private IPassbookRowsRepo Repo 
-            => _dir.Passbooks.GetRepo(_dir.CurrentBankAcct.Id);
+            => AppArgs.Passbooks.GetRepo(AppArgs.CurrentBankAcct.Id);
 
 
         protected override void DeleteRecord(ISimpleRepo<PassbookRowDTO> db, PassbookRowDTO dto) 

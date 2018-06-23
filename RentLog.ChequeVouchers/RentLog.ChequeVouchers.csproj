@@ -125,11 +125,27 @@
     <Compile Include="DcdrTab\PassbookRows\TableFooter.xaml.cs">
       <DependentUpon>TableFooter.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DcdrTab\ReportSettings\DateRangePickerUI.xaml.cs">
+    <Compile Include="JournalsTab\JournalsCrud\JournalsCrudVM.cs" />
+    <Compile Include="JournalsTab\JournalsCrud\JournalsCrudWindow.xaml.cs">
+      <DependentUpon>JournalsCrudWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="JournalsTab\JournalsList\JournalsFilterUI.xaml.cs">
+      <DependentUpon>JournalsFilterUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="JournalsTab\JournalsList\JournalsFilterVM.cs" />
+    <Compile Include="JournalsTab\JournalsList\JournalsListUI.xaml.cs">
+      <DependentUpon>JournalsListUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="JournalsTab\JournalsList\JournalsListVM.cs" />
+    <Compile Include="JournalsTab\JournalsTabUI.xaml.cs">
+      <DependentUpon>JournalsTabUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="JournalsTab\JournalsTabVM.cs" />
+    <Compile Include="MainToolbar\BankAccountPickerVM.cs" />
+    <Compile Include="MainToolbar\DateRangePickerUI.xaml.cs">
       <DependentUpon>DateRangePickerUI.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DcdrTab\ReportSettings\DateRangePickerVM.cs" />
-    <Compile Include="MainToolbar\BankAccountPickerVM.cs" />
+    <Compile Include="MainToolbar\DateRangePickerVM.cs" />
     <Compile Include="MainToolbar\MainToolbarUI.xaml.cs">
       <DependentUpon>MainToolbarUI.xaml</DependentUpon>
     </Compile>
@@ -219,7 +235,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DcdrTab\ReportSettings\DateRangePickerUI.xaml">
+    <Page Include="JournalsTab\JournalsCrud\JournalsCrudWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="JournalsTab\JournalsList\JournalsFilterUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="JournalsTab\JournalsList\JournalsListUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="JournalsTab\JournalsTabUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainToolbar\DateRangePickerUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
