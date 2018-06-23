@@ -1,6 +1,7 @@
 ﻿using CommonTools.Lib11.ExceptionTools;
 using CommonTools.Lib11.GoogleTools;
 using CommonTools.Lib11.JsonTools;
+using CommonTools.Lib45.FileSystemTools;
 using Firebase.Auth;
 using Firebase.Database;
 using System;
@@ -60,12 +61,13 @@ namespace CommonTools.Lib45.GoogleTools
 
             public ErrorReport(FirebaseCredentials usr, Exception exception, string context)
             {
-                HumanName = usr.HumanName;
-                Roles     = usr.Roles;
-                Email     = usr.Email;
-                Context   = context;
-                HumanTime = DateTime.Now.ToString("d-MMM-yyyy h:mm tt");
-                Details   = exception.Info(true, true)
+                HumanName  = usr.HumanName;
+                Roles      = usr.Roles;
+                Email      = usr.Email;
+                Context    = context;
+                ExeVersion = CurrentExe.ShortNameAndVersion();
+                HumanTime  = DateTime.Now.ToString("d-MMM-yyyy h:mm tt");
+                Details    = exception.Info(true, true)
                                 .Split(new[] { "\r\n", "\r", "\n" }, 
                                 StringSplitOptions.None).ToList();
             }
@@ -74,6 +76,7 @@ namespace CommonTools.Lib45.GoogleTools
             public string        Roles      { get; set; }
             public string        Email      { get; set; }
             public string        Context    { get; set; }
+            public string        ExeVersion { get; set; }
             public string        HumanTime  { get; set; }
             public List<string>  Details    { get; set; }
         }

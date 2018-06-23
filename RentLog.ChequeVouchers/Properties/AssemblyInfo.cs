@@ -51,5 +51,5 @@ using System.Windows;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.40.0309")]
-[assembly: AssemblyFileVersion("1.0.40.0309")]
+[assembly: AssemblyVersion("1.0.41.0850")]
+[assembly: AssemblyFileVersion("1.0.41.0850")]
