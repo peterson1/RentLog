@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace RentLog.DomainLib11.DTOs
 {
-    public class FundRequestDTO : DocumentDTOBase
+    public class FundRequestDTO : WithAllocations
     {
         public int        SerialNum      { get; set; }
         public int        BankAccountId  { get; set; }
@@ -14,12 +14,6 @@ namespace RentLog.DomainLib11.DTOs
         public string     Purpose        { get; set; }
         public DateTime   RequestDate    { get; set; }
         public decimal?   Amount         { get; set; }
-
-        public List<AccountAllocation>  Allocations  { get; set; }
-
-        public decimal TotalDebit  => Allocations?.Sum(_ => _.AsDebit  ?? 0) ?? 0;
-        public decimal TotalCredit => Allocations?.Sum(_ => _.AsCredit ?? 0) ?? 0;
-        public bool    IsBalanced  => TotalCredit == TotalDebit;
 
 
         public override string ToString()
