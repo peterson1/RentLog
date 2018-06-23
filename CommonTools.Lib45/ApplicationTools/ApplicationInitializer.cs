@@ -10,38 +10,30 @@ namespace CommonTools.Lib45.ApplicationTools
 {
     public static class AppInitializer
     {
+        public static Action<Exception, string> OnError = (ex, ctx) 
+            => Alert.Show(ex, ctx);
+
+
         public static void Initialize<TArg>(this Application app, Action<TArg> actionOnArguments)
             where TArg : new()
         {
             HandleGlobalErrors();
             ThisThread.SetShortDateFormat("d MMM yyyy");
             TArg args = default(TArg);
-            SafeExecute(() => args = new TArg(), "Parsing arguments");
-            SafeExecute(() => actionOnArguments(args), "Consuming arguments");
+            ExitOnError(() => args = new TArg(), "Parsing arguments");
+            ExitOnError(() => actionOnArguments(args), "Consuming arguments");
         }
 
 
-        private static void ShowNotAllowed(string msg)
-            => MessageBox.Show(msg, "  Unauthorized Access", MessageBoxButton.OK, MessageBoxImage.Information);
-
-
-        private static void SafeExecute(Action action, string context)
+        private static void ExitOnError(Action action, string context)
         {
-            try
-            {
-                action.Invoke();
-            }
+            try { action.Invoke(); }
             catch (Exception ex)
             {
-                Alert.Show(ex, context);
+                OnError(ex, context);
                 CurrentExe.Shutdown();
             }
         }
-
-
-        //private static void RunOnExit(ICredentialsProvider args)
-        //{
-        //}
 
 
         private static void HandleGlobalErrors()
@@ -63,12 +55,6 @@ namespace CommonTools.Lib45.ApplicationTools
                 OnError(e.ExceptionObject as Exception, "AppDomain.CurrentDomain");
                 // application terminates after above
             };
-        }
-
-
-        private static void OnError(Exception ex, string context)
-        {
-            Alert.Show(ex, context);
         }
     }
 }

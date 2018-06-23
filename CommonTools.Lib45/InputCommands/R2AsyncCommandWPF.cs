@@ -71,17 +71,16 @@ namespace CommonTools.Lib45.InputCommands
             }
             catch (Exception ex)
             {
-                OnError(ex);
+                OnError(ex, _origLabel);
                 return false;
             }
         }
 
 
-        protected virtual void OnError(Exception error)
-        {
-            //AppInsights.Post(error, _origLabel);
-            Alert.Show(error, _origLabel);
-        }
+        //protected virtual void OnError(Exception error)
+        //    => Alert.Show(error, _origLabel);
+        public static Action<Exception, string> OnError = (ex, ctx)
+            => Alert.Show(ex, ctx);
 
 
         public event EventHandler CanExecuteChanged

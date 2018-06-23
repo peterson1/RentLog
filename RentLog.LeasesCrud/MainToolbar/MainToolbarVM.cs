@@ -3,11 +3,11 @@ using CommonTools.Lib45.ExcelTools;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.PrintTools;
 using PropertyChanged;
-using RentLog.DomainLib11.AdHocJobs;
 using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.Models;
 using RentLog.DomainLib45.WithOverduesReport;
+using System;
 using System.Threading.Tasks;
 
 namespace RentLog.LeasesCrud.MainToolbar
@@ -60,7 +60,8 @@ namespace RentLog.LeasesCrud.MainToolbar
             await Task.Run(() =>
             {
                 //AllLeasesNoRoundOff.Run(_args);
-                NonExpiringLeasesForSome.Run(_args);
+                //NonExpiringLeasesForSome.Run(_args);
+                throw new InvalidCastException("blah!");
             });
             _main.StopBeingBusy();
             _main.ClickRefresh();
