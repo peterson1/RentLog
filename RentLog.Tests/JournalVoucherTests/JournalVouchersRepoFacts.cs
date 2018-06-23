@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace RentLog.Tests.JournalVouchersRepoTests
+namespace RentLog.Tests.JournalVoucherTests
 {
     [Trait("Journal Vouchers Repo", "Solitary")]
     public class JournalVouchersRepoFacts
