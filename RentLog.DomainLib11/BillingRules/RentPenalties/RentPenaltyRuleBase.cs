@@ -8,21 +8,9 @@ using static RentLog.DomainLib11.DTOs.DailyBillDTO;
 
 namespace RentLog.DomainLib11.BillingRules.RentPenalties
 {
-    public abstract class RentPenaltyRuleBase : IBillSurcharger
+    public abstract class RentPenaltyRuleBase : BillSurchargerBase
     {
-        protected abstract List<BillPenalty> GetPenaltiesList(LeaseDTO lse, DateTime date, decimal? oldBal);
-
-        public abstract string RuleName { get; }
-
-
-        public List<BillPenalty> GetPenalties(LeaseDTO lse, DateTime date, decimal? oldBal)
-        {
-            ValidateRuleName(lse);
-            return GetPenaltiesList(lse, date, oldBal);
-        }
-
-
-        private void ValidateRuleName(LeaseDTO lse)
+        protected override void ValidateRuleName(LeaseDTO lse)
         {
             if (lse?.Rent == null)
                 throw Null.Ref("Lease Rent Params");

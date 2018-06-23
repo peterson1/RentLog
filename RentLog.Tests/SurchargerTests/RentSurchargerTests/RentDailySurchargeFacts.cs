@@ -9,7 +9,7 @@ using Xunit;
 
 namespace RentLog.Tests.SurchargerTests.RentSurchargerTests
 {
-    [Trait("Daily Surcharge", "Rent - Solitary")]
+    [Trait("Rent Surcharge", "Solitary")]
     public class RentDailySurchargeFacts
     {
         [Fact(DisplayName = "Rate * Balance")]

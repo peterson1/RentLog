@@ -119,6 +119,7 @@
     <Compile Include="StateTransitionTests\MarketDayCloserFacts.cs" />
     <Compile Include="SurchargerTests\RentSurchargerTests\RentDailySurchargeFacts.cs" />
     <Compile Include="SurchargerTests\RentSurchargerTests\RentDailySurchargeNoRoundOffFacts.cs" />
+    <Compile Include="SurchargerTests\RightsSurchargerTests\RightsDailyAfter90SurchargerFacts.cs" />
     <Compile Include="TestTools\MockDBsDir.cs" />
     <Compile Include="TestTools\MockMarketState.cs" />
     <Compile Include="TestTools\TempCopyTestBase.cs" />
@@ -170,6 +171,7 @@
   <ItemGroup>
     <Analyzer Include="..\packages\xunit.analyzers.0.9.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

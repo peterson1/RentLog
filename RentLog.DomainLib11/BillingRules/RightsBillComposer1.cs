@@ -23,7 +23,7 @@ namespace RentLog.DomainLib11.BillingRules
         {
             switch (lse.Rights.PenaltyRule)
             {
-                case RightsDailyAfter90Surcharger.RULE:
+                case RightsPenalty.DailyAfter90Days:
                     return new RightsDailyAfter90Surcharger()
                         .GetPenalties(lse, date, previousBalance);
 
