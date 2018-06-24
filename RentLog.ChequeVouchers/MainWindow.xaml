@@ -6,6 +6,7 @@
         xmlns:tbar="clr-namespace:RentLog.ChequeVouchers.MainToolbar"
         xmlns:reqs="clr-namespace:RentLog.ChequeVouchers.VoucherReqsTab"
         xmlns:dcdr="clr-namespace:RentLog.ChequeVouchers.DcdrTab"
+        xmlns:jour="clr-namespace:RentLog.ChequeVouchers.JournalsTab"
         xmlns:local="clr-namespace:RentLog.ChequeVouchers"
         mc:Ignorable="d"
         Title="{Binding Caption}" 
@@ -41,6 +42,11 @@
                                     DataContext="{Binding DcdrReport}" />
                 </TabItem>
 
+                <TabItem Header="Journal Vouchers">
+                    <jour:JournalsTabUI x:Name="jourTab"
+                                        DataContext="{Binding Journals}" />
+                </TabItem>
+                
             </dragz:TabablzControl>
 
             <StackPanel Orientation="Horizontal"

@@ -14,6 +14,10 @@ namespace RentLog.ChequeVouchers
                 dcdrTab.rows.tbl.dg.EnableOpenCurrent<PassbookRowDTO>();
                 dcdrTab.rows.tbl.dg.ConfirmToDelete<PassbookRowDTO>(_ => _.Subject);
                 dcdrTab.rows.tbl.dg.ScrollToEndOnReplaced<PassbookRowDTO>();
+
+                jourTab.rows.tbl.dg.EnableOpenCurrent<JournalVoucherDTO>();
+                jourTab.rows.tbl.dg.ConfirmToDelete<JournalVoucherDTO>(_ => _.Description);
+                jourTab.rows.tbl.dg.ScrollToEndOnReplaced<JournalVoucherDTO>();
             };
         }
     }

@@ -137,6 +137,9 @@
       <DependentUpon>JournalsListUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="JournalsTab\JournalsList\JournalsListVM.cs" />
+    <Compile Include="JournalsTab\JournalsList\JournalsTable.xaml.cs">
+      <DependentUpon>JournalsTable.xaml</DependentUpon>
+    </Compile>
     <Compile Include="JournalsTab\JournalsTabUI.xaml.cs">
       <DependentUpon>JournalsTabUI.xaml</DependentUpon>
     </Compile>
@@ -244,6 +247,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="JournalsTab\JournalsList\JournalsListUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="JournalsTab\JournalsList\JournalsTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
