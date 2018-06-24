@@ -42,7 +42,8 @@ namespace CommonTools.Lib45.BaseViewModels
         protected virtual Task   UpdateRecordAsync  (TDraft record) => Task.Delay(0);
         protected virtual TDraft GetNewDraft        () => new TDraft();
 
-        protected virtual void   ModifyDraftForInserting (TDraft draft) { }
+        protected virtual void   ModifyDraftForInserting   (TDraft draft) { }
+        //protected virtual Task   ModifyDraftForInsertAsync (TDraft draft) => Task.Delay(0);
         protected virtual void   ModifyDraftForUpdating  (TDraft draft) { }
 
         protected virtual void OnSaveCompleted    () { }
@@ -61,11 +62,18 @@ namespace CommonTools.Lib45.BaseViewModels
 
         private void EncodeNewDraft()
         {
-            SaveDraftCmd = R2Command.Async(ExecuteSaveDraft, _ => CanSave(), $"Save {TypeDescription}");
+            if (SetupForInsert())
+                ShowModalWindow();
+        }
+
+
+        public bool SetupForInsert()
+        {
             Draft = GetNewDraft();
-            if (Draft == null) return;
+            if (Draft == null) return false;
             ModifyDraftForInserting(Draft);
-            ShowModalWindow();
+            SaveDraftCmd = R2Command.Async(ExecuteSaveDraft, _ => CanSave(), $"Save {TypeDescription}");
+            return true;
         }
 
 

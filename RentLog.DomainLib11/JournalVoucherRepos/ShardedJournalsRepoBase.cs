@@ -4,13 +4,15 @@ using RentLog.DomainLib11.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace RentLog.DomainLib11.JournalVoucherRepos
 {
     public abstract class ShardedJournalsRepoBase : IJournalVouchersRepo
     {
         protected abstract ISimpleRepo<JournalVoucherDTO> ConnectToDB(string databasePath);
-        protected abstract string GetDatabasePath(DateTime date);
+        protected abstract string        GetDatabasePath     (DateTime date);
+        protected abstract List<string>  GetAllDatabasePaths ();
 
 
         public List<JournalVoucherDTO> List(DateTime startDate, DateTime endDate)
@@ -45,5 +47,18 @@ namespace RentLog.DomainLib11.JournalVoucherRepos
 
         private ISimpleRepo<JournalVoucherDTO> GetRepo(JournalVoucherDTO dto)
             => ConnectToDB(GetDatabasePath(dto.TransactionDate));
+
+
+        public async Task<int> GetNextSerialNum()
+        {
+            await Task.Delay(0);
+            //await Task.Run()
+
+            throw new NotImplementedException();
+            foreach (var dbPath in GetAllDatabasePaths())
+            {
+                //var db = ConnectToDB(dbPath);
+            }
+        }
     }
 }

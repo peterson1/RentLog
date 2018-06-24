@@ -1,4 +1,5 @@
-﻿using RentLog.ChequeVouchers;
+﻿using FluentAssertions;
+using RentLog.ChequeVouchers;
 using RentLog.Tests.SampleDBs;
 using RentLog.Tests.TestTools;
 using System.Threading.Tasks;
@@ -12,16 +13,21 @@ namespace RentLog.Tests.JournalVoucherTests
         protected override string SampleDirName => SampleDir.JUN17_BALANCED;
 
 
-        [Fact(DisplayName = "CRUD Walkthrough", Skip ="undone")]
+        [Fact(DisplayName = "CRUD Walkthrough")]
         public async Task TestMethod00001()
         {
             var arg = GetTempSampleArgs();
             arg.Credentials.Roles = "Supervisor";
-            var vm = new MainWindowVM(arg, false);
+            var main = new MainWindowVM(arg, false);
+            var rows = main.Journals.JournalRows;
+            var crud = rows.Crud;
+            main.SelectedIndex = 2;
 
-            await vm.RefreshCmd.RunAsync();
+            await main.RefreshCmd.RunAsync();
 
-            //vm.VoucherReqs
+            rows.Should().HaveCount(0);
+            crud.SetupForInsert();
+            crud.Draft.SerialNum.Should().Be(1);
         }
     }
 }

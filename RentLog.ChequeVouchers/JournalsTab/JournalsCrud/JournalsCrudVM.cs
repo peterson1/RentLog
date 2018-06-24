@@ -4,6 +4,9 @@ using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.JournalVoucherRepos;
+using RentLog.DomainLib11.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace RentLog.ChequeVouchers.JournalsTab.JournalsCrud
 {
@@ -17,10 +20,17 @@ namespace RentLog.ChequeVouchers.JournalsTab.JournalsCrud
         public AllocationsListVM  Allocations  { get; } = new AllocationsListVM();
 
 
-        protected override void ModifyDraftForInserting(JournalVoucherDTO draft)
+        protected override async void ModifyDraftForInserting(JournalVoucherDTO draft)
         {
-            Allocations.SetHost(draft.Allocations, AppArgs.)
+            StartBeingBusy("Getting next serial number ...");
+            await Task.Delay(1000 * 10);
+            draft.SerialNum   = await AppArgs.Journals.GetNextSerialNum();
+            draft.Allocations = new List<AccountAllocation>();
+            Allocations.SetHost(draft.Allocations, AppArgs.MarketState.GLAccounts);
         }
+
+        protected override void ModifyDraftForUpdating(JournalVoucherDTO draft)
+            => Allocations.SetHost(draft.Allocations, AppArgs.MarketState.GLAccounts);
 
 
         public    override bool   CanEncodeNewDraft() => AppArgs.CanAddJournalVoucher(false);

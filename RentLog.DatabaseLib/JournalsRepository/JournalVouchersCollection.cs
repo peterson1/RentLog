@@ -16,6 +16,7 @@ namespace RentLog.DatabaseLib.JournalsRepository
         protected override void EnsureIndeces(LiteCollection<JournalVoucherDTO> coll)
         {
             coll.EnsureIndex(_ => _.DateOffset, false);
+            coll.EnsureIndex(_ => _.SerialNum, true);
         }
     }
 }

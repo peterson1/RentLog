@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using CommonTools.Lib11.DatabaseTools;
 using CommonTools.Lib45.LiteDbTools;
@@ -46,5 +47,11 @@ namespace RentLog.DatabaseLib.JournalsRepository
 
         protected override string GetDatabasePath(DateTime date)
             => Path.Combine(_foldr, string.Format(NAME_FMT, date));
+
+
+        protected override List<string> GetAllDatabasePaths()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

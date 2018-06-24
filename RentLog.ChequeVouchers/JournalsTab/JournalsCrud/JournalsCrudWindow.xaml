@@ -5,8 +5,123 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RentLog.ChequeVouchers.JournalsTab.JournalsCrud"
         mc:Ignorable="d"
-        Title="JournalsCrudWindow" Height="450" Width="800">
+        Title="{Binding Caption}" 
+        SizeToContent="WidthAndHeight"
+        xmlns:busy="clr-namespace:CommonTools.Lib45.BusyIndicators;assembly=CommonTools.Lib45"
+        xmlns:int="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:cnv="clr-namespace:CommonTools.Lib45.ValueConverters;assembly=CommonTools.Lib45"
+        xmlns:txbhv="clr-namespace:CommonTools.Lib45.UIBehaviors.TextBoxBehaviors;assembly=CommonTools.Lib45"
+        xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        FocusManager.FocusedElement="{Binding ElementName=cmbPayee}">
+    <Window.Resources>
+        <Style TargetType="TextBox"
+               BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+            <Setter Property="Margin" Value="10 10 10 10" />
+            <Setter Property="MinWidth" Value="150" />
+        </Style>
+
+        <Style TargetType="ComboBox"
+               BasedOn="{StaticResource MaterialDesignFloatingHintComboBox}">
+            <Setter Property="Margin" Value="10 10 10 10" />
+            <Setter Property="MinWidth" Value="150" />
+        </Style>
+
+        <Style TargetType="DatePicker"
+               BasedOn="{StaticResource MaterialDesignFloatingHintDatePicker}">
+            <Setter Property="Margin" Value="10 23 10 10" />
+            <Setter Property="MinWidth" Value="150" />
+        </Style>
+
+        <Style TargetType="CheckBox"
+               BasedOn="{StaticResource MaterialDesignCheckBox}">
+            <Setter Property="Margin" Value="10 10 10 10" />
+            <Setter Property="MinWidth" Value="150" />
+        </Style>
+
+        <Style x:Key="txtReadOnly" TargetType="TextBox"
+               BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+            <Setter Property="Margin" Value="10 10 10 10" />
+            <Setter Property="MinWidth" Value="150" />
+            <Setter Property="IsReadOnly" Value="True" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkBrush}" />
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <StackPanel Margin="30">
+            <StackPanel Orientation="Horizontal">
+                <!--<StackPanel VerticalAlignment="Top">
+
+                    <TextBox Text="{Binding Draft.SerialNum, StringFormat=000#, UpdateSourceTrigger=PropertyChanged}"
+                             mat:HintAssist.Hint="req. #" />
+
+                    <DatePicker SelectedDate="{Binding Draft.RequestDate, UpdateSourceTrigger=PropertyChanged}"
+                                mat:HintAssist.Hint="request date" />
+
+                    <TextBox Text="{Binding AppArgs.CurrentBankAcct.Name}"
+                             Style="{StaticResource txtReadOnly}"
+                             mat:HintAssist.Hint="bank account" />
+                </StackPanel>
+
+                <StackPanel Margin="50 0 0 0">
+
+                    <ComboBox x:Name="cmbPayee"
+                              ItemsSource="{Binding Payees}"
+                              Text="{Binding Draft.Payee}"
+                              IsEditable="True"
+                              mat:HintAssist.Hint="payee" />
+
+                    <TextBox Text="{Binding Draft.Purpose, UpdateSourceTrigger=PropertyChanged}"
+                             AcceptsReturn="True"
+                             mat:HintAssist.Hint="purpose" />
+
+                    <TextBox Text="{Binding Draft.Amount, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
+                             TextChanged="AmountTextBox_TextChanged"
+                             mat:HintAssist.Hint="amount">
+                        <int:Interaction.Behaviors>
+                            <txbhv:SelectAllOnFocusBehavior />
+                        </int:Interaction.Behaviors>
+                    </TextBox>
+
+                </StackPanel>
+
+
+                <alloc:AllocationsListUI DataContext="{Binding Allocations}"
+                                         x:Name="allocs"
+                                         IsEnabled="False"
+                                         Margin="50 0 0 0" />-->
+            </StackPanel>
+
+            <DockPanel>
+                <TextBox DockPanel.Dock="Left"
+                         Text="{Binding Draft.Remarks, UpdateSourceTrigger=PropertyChanged}"
+                         MinWidth="300"
+                         mat:HintAssist.Hint="remarks" />
+
+                <Button DockPanel.Dock="Right"
+                        Command="{Binding SaveDraftCmd}"
+                        Content="{Binding SaveDraftCmd.CurrentLabel}"
+                        Padding="40 0 40 0"
+                        VerticalAlignment="Bottom"
+                        IsDefault="True" />
+
+                <TextBlock Text="{Binding WhyInvalid}"
+                           VerticalAlignment="Bottom"
+                           HorizontalAlignment="Right"
+                           Margin="0 0 20 0"
+                           Foreground="Red" />
+
+            </DockPanel>
+
+        </StackPanel>
+
+        <busy:BusyDialog />
     </Grid>
 </Window>
