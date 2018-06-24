@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using CommonTools.Lib11.DatabaseTools;
+﻿using CommonTools.Lib11.DatabaseTools;
 using RentLog.DomainLib11.DTOs;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RentLog.DomainLib11.MarketStateRepos
 {
@@ -9,6 +9,18 @@ namespace RentLog.DomainLib11.MarketStateRepos
     {
         public GLAccountsRepo1(ISimpleRepo<GLAccountDTO> simpleRepo, MarketStateDB marketStateDB) : base(simpleRepo, marketStateDB)
         {
+        }
+
+
+        public List<GLAccountDTO> AllWithCashInBanks()
+        {
+            var list = GetAll();
+            var cID  = -1;
+
+            foreach (var bank in _db.BankAccounts.GetAll())
+                list.Add(GLAccountDTO.CashInBank(bank, cID--));
+
+            return ToSortedList(list);
         }
 
 

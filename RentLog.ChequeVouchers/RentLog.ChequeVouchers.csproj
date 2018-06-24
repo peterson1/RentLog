@@ -125,6 +125,10 @@
     <Compile Include="DcdrTab\PassbookRows\TableFooter.xaml.cs">
       <DependentUpon>TableFooter.xaml</DependentUpon>
     </Compile>
+    <Compile Include="JournalsTab\JournalsCrud\AllocationsList\AllocationsListUI.xaml.cs">
+      <DependentUpon>AllocationsListUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="JournalsTab\JournalsCrud\AllocationsList\AllocationsListVM.cs" />
     <Compile Include="JournalsTab\JournalsCrud\JournalsCrudVM.cs" />
     <Compile Include="JournalsTab\JournalsCrud\JournalsCrudWindow.xaml.cs">
       <DependentUpon>JournalsCrudWindow.xaml</DependentUpon>
@@ -235,6 +239,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DcdrTab\PassbookRows\TableFooter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="JournalsTab\JournalsCrud\AllocationsList\AllocationsListUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

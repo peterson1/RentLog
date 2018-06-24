@@ -5,29 +5,36 @@ using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.InputDialogs;
 using PropertyChanged;
 using RentLog.DomainLib11.DTOs;
+using RentLog.DomainLib11.MarketStateRepos;
 using RentLog.DomainLib11.Models;
 using RentLog.DomainLib11.VoucherRules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RentLog.ChequeVouchers.VoucherReqsTab.FundRequests.FundRequestCrud.AllocationsList
+namespace RentLog.ChequeVouchers.JournalsTab.JournalsCrud.AllocationsList
 {
     [AddINotifyPropertyChangedInterface]
     public class AllocationsListVM : UIList<AccountAllocation>
     {
         private List<AccountAllocation> _list;
         private List<GLAccountDTO>      _glAccts;
-        private BankAccountDTO          _bank;
 
 
         public AllocationsListVM()
         {
             AddDebitCmd  = R2Command.Relay(_ => AddEntry(-1), null, "Add Debit entry");
             AddCreditCmd = R2Command.Relay(_ => AddEntry(+1), null, "Add Credit entry");
+            ItemOpened  += AllocationsListVM_ItemOpened;
+            ItemDeleted += AllocationsListVM_ItemDeleted;
+        }
 
-            this.ItemOpened  += AllocationsListVM_ItemOpened;
-            this.ItemDeleted += AllocationsListVM_ItemDeleted;
+
+        public void SetHost(List<AccountAllocation> listHost, IGLAccountsRepo glAcctsRepo)
+        {
+            _list    = listHost;
+            _glAccts = glAcctsRepo.AllWithCashInBanks();
+            UpdateUILists();
         }
 
 
@@ -70,31 +77,6 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.FundRequests.FundRequestCrud.All
         private void AllocationsListVM_ItemDeleted(object sender, AccountAllocation e)
         {
             _list.Remove(e);
-            UpdateUILists();
-        }
-
-
-        public void SetHost(List<AccountAllocation> listHost, BankAccountDTO bankAccount, ISimpleRepo<GLAccountDTO> glAcctsRepo)
-        {
-            _list = listHost;
-            _bank = bankAccount;
-            //todo: use .IncludeCashInBanks()
-            _glAccts = glAcctsRepo?.GetAll();
-            _glAccts?.Insert(0, GLAccountDTO.CashInBank(_bank));
-            UpdateUILists();
-        }
-
-
-        public void OnAmountChanged(decimal? amount)
-        {
-            if (!amount.HasValue) return;
-
-            var cib = _list.GetCashInBankEntry();
-            if (cib == null)
-                _list.AddCashInBankEntry(_bank, amount.Value);
-            else
-                cib.SubAmount = amount.Value;
-
             UpdateUILists();
         }
 

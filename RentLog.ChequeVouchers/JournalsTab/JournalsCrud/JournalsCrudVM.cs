@@ -1,4 +1,5 @@
 ﻿using CommonTools.Lib45.BaseViewModels;
+using RentLog.ChequeVouchers.JournalsTab.JournalsCrud.AllocationsList;
 using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
@@ -10,6 +11,15 @@ namespace RentLog.ChequeVouchers.JournalsTab.JournalsCrud
     {
         public JournalsCrudVM(ITenantDBsDir dir) : base(dir.Journals, dir)
         {
+        }
+
+
+        public AllocationsListVM  Allocations  { get; } = new AllocationsListVM();
+
+
+        protected override void ModifyDraftForInserting(JournalVoucherDTO draft)
+        {
+            Allocations.SetHost(draft.Allocations, AppArgs.)
         }
 
 
