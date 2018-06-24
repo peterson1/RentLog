@@ -3,12 +3,14 @@ using CommonTools.Lib45.LicenseTools;
 using CommonTools.Lib45.ThreadTools;
 using Mono.Options;
 using RentLog.DatabaseLib.DatabaseFinders;
+using RentLog.DatabaseLib.JournalsRepository;
 using RentLog.DomainLib11.BalanceRepos;
 using RentLog.DomainLib11.BillingRules;
 using RentLog.DomainLib11.ChequeVoucherRepos;
 using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
+using RentLog.DomainLib11.JournalVoucherRepos;
 using RentLog.DomainLib11.MarketStateRepos;
 using RentLog.DomainLib11.PassbookRepos;
 using System;
@@ -22,6 +24,7 @@ namespace RentLog.DomainLib45
             Parse(Environment.GetCommandLineArgs());
             CurrentUser = Credentials?.HumanName ?? "Anonymous";
             MarketState = GetMarketStateDB();
+            Journals    = new JournalsByMonthDir     (MarketState);
             Passbooks   = new TransactionsByMonthDir (MarketState);
             Vouchers    = new PassbookDBFile         (this);
             Balances    = new BalancesLocalDir       (this);
@@ -30,30 +33,27 @@ namespace RentLog.DomainLib45
         }
 
 
-        public string               UpdatedCopyPath  { get; private set; }
-        public bool                 IsValidUser      { get; protected set; }
-        public FirebaseCredentials  Credentials      { get; protected set; }
-        public string               CurrentUser      { get; }
-
-        public string               DbFilePath       { get; private set; }
-        public string               Param1           { get; private set; }
-
-        public MarketStateDB        MarketState      { get; }
-        public ChequeVouchersDB     Vouchers         { get; }
-        public ICollectionsDir      Collections      { get; }
-        public IBalanceDB           Balances         { get; }
-        public IDailyBiller         DailyBiller      { get; }
-        public IPassbookDB          Passbooks        { get; }
-        public SectionDTO           CurrentSection   { get; set; }
-        public BankAccountDTO       CurrentBankAcct  { get; set; }
+        public string                UpdatedCopyPath  { get; private set; }
+        public bool                  IsValidUser      { get; protected set; }
+        public FirebaseCredentials   Credentials      { get; protected set; }
+        public string                CurrentUser      { get; }
+                                     
+        public string                DbFilePath       { get; private set; }
+        public string                Param1           { get; private set; }
+                                     
+        public MarketStateDB         MarketState      { get; }
+        public ChequeVouchersDB      Vouchers         { get; }
+        public ICollectionsDir       Collections      { get; }
+        public IBalanceDB            Balances         { get; }
+        public IDailyBiller          DailyBiller      { get; }
+        public IPassbookDB           Passbooks        { get; }
+        public IJournalVouchersRepo  Journals         { get; }
+        public SectionDTO            CurrentSection   { get; set; }
+        public BankAccountDTO        CurrentBankAcct  { get; set; }
 
 
         protected virtual MarketStateDB GetMarketStateDB() 
             => new MarketStateDBFile(DbFilePath, CurrentUser);
-
-
-        //protected ChequeVouchersDB GetChequeVouchersDB(MarketStateDB marketState)
-        //    => new PassbookDBFile(marketState);
 
 
         private void SetCredentials(string key)

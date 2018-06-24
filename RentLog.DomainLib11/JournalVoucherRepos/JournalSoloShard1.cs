@@ -5,9 +5,9 @@ using System;
 
 namespace RentLog.DomainLib11.JournalVoucherRepos
 {
-    public class JournalVouchersRepo1 : SimpleRepoShimBase<JournalVoucherDTO>, IJournalVouchersRepo
+    public class JournalSoloShard1 : SimpleRepoShimBase<JournalVoucherDTO>
     {
-        public JournalVouchersRepo1(ISimpleRepo<JournalVoucherDTO> simpleRepo) : base(simpleRepo)
+        public JournalSoloShard1(ISimpleRepo<JournalVoucherDTO> simpleRepo) : base(simpleRepo)
         {
         }
 

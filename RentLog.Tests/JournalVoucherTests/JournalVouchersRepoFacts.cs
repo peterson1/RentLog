@@ -1,4 +1,5 @@
-﻿using CommonTools.Lib11.DatabaseTools;
+﻿using CommonTools.Lib11.DateTimeTools;
+using CommonTools.Lib11.DatabaseTools;
 using FluentAssertions;
 using Moq;
 using RentLog.DomainLib11.ChequeVoucherRepos;
@@ -18,7 +19,7 @@ namespace RentLog.Tests.JournalVoucherTests
         public void TestMethod00000()
         {
             var moq = new Mock<ISimpleRepo<JournalVoucherDTO>>();
-            var sut = new JournalVouchersRepo1(moq.Object);
+            var sut = new JournalSoloShard1(moq.Object);
             var obj = ValidSampleDTO();
 
             obj.Id = 0;
@@ -42,7 +43,7 @@ namespace RentLog.Tests.JournalVoucherTests
         public void TestMethod00001()
         {
             var moq = new Mock<ISimpleRepo<JournalVoucherDTO>>();
-            var sut = new JournalVouchersRepo1(moq.Object);
+            var sut = new JournalSoloShard1(moq.Object);
             var obj = ValidSampleDTO();
 
             obj.SerialNum = 0;
@@ -66,7 +67,7 @@ namespace RentLog.Tests.JournalVoucherTests
         public void TestMethod00003()
         {
             var moq = new Mock<ISimpleRepo<JournalVoucherDTO>>();
-            var sut = new JournalVouchersRepo1(moq.Object);
+            var sut = new JournalSoloShard1(moq.Object);
             var obj = ValidSampleDTO();
 
             obj.Description = null;
@@ -85,15 +86,15 @@ namespace RentLog.Tests.JournalVoucherTests
         public void TestMethod00005()
         {
             var moq = new Mock<ISimpleRepo<JournalVoucherDTO>>();
-            var sut = new JournalVouchersRepo1(moq.Object);
+            var sut = new JournalSoloShard1(moq.Object);
             var obj = ValidSampleDTO();
 
-            obj.TransactionDate = DateTime.MinValue;
+            obj.DateOffset = 0;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
-            obj.TransactionDate = DateTime.Now;
+            obj.DateOffset = DateTime.Now.DaysSinceMin();
             sut.IsValidForInsert(obj, out why).Should().BeTrue();
             sut.IsValidForUpdate(obj, out why).Should().BeTrue();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
@@ -104,7 +105,7 @@ namespace RentLog.Tests.JournalVoucherTests
         public void TestMethod00006()
         {
             var moq = new Mock<ISimpleRepo<JournalVoucherDTO>>();
-            var sut = new JournalVouchersRepo1(moq.Object);
+            var sut = new JournalSoloShard1(moq.Object);
             var obj = ValidSampleDTO();
 
             obj.Amount = 0;
@@ -128,7 +129,7 @@ namespace RentLog.Tests.JournalVoucherTests
         public void TestMethod00007()
         {
             var moq = new Mock<ISimpleRepo<JournalVoucherDTO>>();
-            var sut = new JournalVouchersRepo1(moq.Object);
+            var sut = new JournalSoloShard1(moq.Object);
             var obj = ValidSampleDTO();
 
             obj.Allocations[1].SubAmount = -788;
@@ -145,12 +146,12 @@ namespace RentLog.Tests.JournalVoucherTests
 
         private JournalVoucherDTO ValidSampleDTO() => new JournalVoucherDTO
         {
-            Id              = 101,
-            SerialNum       = 123,
-            Description     = "sample JV",
-            TransactionDate = DateTime.Now,
-            Amount          = 789,
-            Allocations     = new List<AccountAllocation>
+            Id          = 101,
+            SerialNum   = 123,
+            Description = "sample JV",
+            DateOffset  = DateTime.Now.DaysSinceMin(),
+            Amount      = 789,
+            Allocations = new List<AccountAllocation>
             {
                 AccountAllocation.NewCredit(GLAccountDTO.Named("test GL 1"), 789),
                 AccountAllocation.NewDebit (GLAccountDTO.Named("test GL 2"), 789),
