@@ -68,7 +68,7 @@ namespace RentLog.Cashiering.SectionTabs.Uncollecteds
             => main.ColxnsDB.Uncollecteds[tab.Section.Id];
 
 
-        protected override bool CanDeletetRecord(UncollectedLeaseDTO rec) => Main.CanEncode;
+        protected override bool CanDeleteRecord(UncollectedLeaseDTO rec) => Main.CanEncode;
         protected override string ListTitle => "Uncollecteds";
         protected override Func<UncollectedLeaseDTO, LeaseDTO> LeaseGetter  => _ => _.Lease;
         //protected override Func<UncollectedLeaseDTO, decimal>  SummedAmount => _ => _.Targets.Total;

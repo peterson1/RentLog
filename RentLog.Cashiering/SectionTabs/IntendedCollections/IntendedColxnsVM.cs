@@ -27,7 +27,7 @@ namespace RentLog.Cashiering.SectionTabs.IntendedCollections
         //protected override void OnItemOpened(IntendedColxnDTO e) => _tab.EditIntendedColxn(e);
         protected override void LoadRecordForEditing(IntendedColxnDTO rec) => _tab.EditIntendedColxn(rec);
 
-        protected override bool CanDeletetRecord(IntendedColxnDTO rec) => Main.CanEncode;
+        protected override bool CanDeleteRecord(IntendedColxnDTO rec) => Main.CanEncode;
         protected override string ListTitle => "Lease Collections";
         protected override Func<IntendedColxnDTO, LeaseDTO> LeaseGetter  => _ => _.Lease;
         protected override Func<IntendedColxnDTO, decimal>  SummedAmount => _ => _.Actuals.Total;

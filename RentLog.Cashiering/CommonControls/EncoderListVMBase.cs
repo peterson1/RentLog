@@ -43,6 +43,6 @@ namespace RentLog.Cashiering.CommonControls
 
         protected virtual Func<TDTO, LeaseDTO> LeaseGetter => null;
         public    override bool CanEditRecord    (TDTO rec) => Main.CanEncode;
-        protected override bool CanDeletetRecord (TDTO rec) => Main.CanEncode;
+        protected override bool CanDeleteRecord (TDTO rec) => Main.CanEncode;
     }
 }

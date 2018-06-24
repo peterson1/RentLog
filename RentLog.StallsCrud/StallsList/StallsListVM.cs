@@ -72,7 +72,7 @@ namespace RentLog.StallsCrud.StallsList
             => AppArgs.CanEditStall(true);
 
 
-        protected override bool CanDeletetRecord(StallDTO rec)
+        protected override bool CanDeleteRecord(StallDTO rec)
         {
             if (!AppArgs.CanDeleteStall(true)) return false;
             if (_stallIdToLeases.TryGetValue(rec.Id, out LeaseDTO lse))
