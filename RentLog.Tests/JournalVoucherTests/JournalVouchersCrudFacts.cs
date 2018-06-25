@@ -16,8 +16,7 @@ namespace RentLog.Tests.JournalVoucherTests
         [Fact(DisplayName = "CRUD Walkthrough")]
         public async Task TestMethod00001()
         {
-            var arg = GetTempSampleArgs();
-            arg.Credentials.Roles = "Supervisor";
+            var arg  = GetTempSampleArgs("Supervisor");
             var main = new MainWindowVM(arg, false);
             var rows = main.Journals.JournalRows;
             var crud = rows.Crud;

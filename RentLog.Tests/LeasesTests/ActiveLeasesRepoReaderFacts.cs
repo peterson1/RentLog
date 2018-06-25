@@ -3,7 +3,7 @@ using RentLog.DomainLib11.DTOs;
 using RentLog.Tests.SampleDBs;
 using Xunit;
 
-namespace RentLog.Tests.LeasesRepoTests
+namespace RentLog.Tests.LeasesTests
 {
     [Trait("Active Leases Repo", "Sample Dir")]
     public class ActiveLeasesRepoReaderFacts

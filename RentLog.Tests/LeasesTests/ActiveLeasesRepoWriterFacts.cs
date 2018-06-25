@@ -7,7 +7,7 @@ using RentLog.DomainLib11.MarketStateRepos;
 using RentLog.Tests.TestTools;
 using Xunit;
 
-namespace RentLog.Tests.LeasesRepoTests
+namespace RentLog.Tests.LeasesTests
 {
     [Trait("Active Leases Repo", "Solitary")]
     public class ActiveLeasesRepoWriterFacts

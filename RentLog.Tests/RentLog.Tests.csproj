@@ -99,9 +99,10 @@
     <Compile Include="IntendedColxnsRepoTests\IntendedColxnsRepoFacts.cs" />
     <Compile Include="JournalVoucherTests\JournalVouchersRepoFacts.cs" />
     <Compile Include="JournalVoucherTests\JournalVouchersCrudFacts.cs" />
-    <Compile Include="LeasesRepoTests\ActiveLeasesRepoReaderFacts.cs" />
-    <Compile Include="LeasesRepoTests\ActiveLeasesRepoWriterFacts.cs" />
-    <Compile Include="LeasesRepoTests\InactiveLeasesRepoWriterFacts.cs" />
+    <Compile Include="LeasesTests\ActiveLeasesRepoReaderFacts.cs" />
+    <Compile Include="LeasesTests\ActiveLeasesRepoWriterFacts.cs" />
+    <Compile Include="LeasesTests\InactiveLeasesRepoWriterFacts.cs" />
+    <Compile Include="LeasesTests\LeaseCrudWalkthrough.cs" />
     <Compile Include="MainWindowTests\MainWindowFacts.cs" />
     <Compile Include="OtherColxnsRepoTests\OtherColxnsRepoFacts.cs" />
     <Compile Include="PassbookRowsRepoTests\PassbookRowsRepoFacts.cs" />
@@ -164,6 +165,10 @@
     <ProjectReference Include="..\RentLog.DomainLib45\RentLog.DomainLib45.csproj">
       <Project>{d789ffc5-112e-4e95-8d86-e46da7ee54ff}</Project>
       <Name>RentLog.DomainLib45</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RentLog.LeasesCrud\RentLog.LeasesCrud.csproj">
+      <Project>{ad025f09-f180-45d9-868c-5f0274d32555}</Project>
+      <Name>RentLog.LeasesCrud</Name>
     </ProjectReference>
     <ProjectReference Include="..\RentLog.StallsCrud\RentLog.StallsCrud.csproj">
       <Project>{dc75e044-9366-4801-ad04-e31fb653abfe}</Project>

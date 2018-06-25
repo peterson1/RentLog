@@ -19,13 +19,12 @@ namespace RentLog.Tests.PostAndCloseTests
         [Fact(DisplayName = "Post&Close June 17")]
         public async Task TestMethod00001()
         {
-            var arg = GetTempSampleArgs();
+            var arg = GetTempSampleArgs("Supervisor");
             arg.Collections.LastPostedDate().Should().Be(16.June(2018));
             arg.Collections.UnclosedDate().Should().Be(17.June(2018));
             arg.Balances.TotalOverdues().Rent.Should().Be(22_651.67M);
             arg.Balances.TotalOverdues().Rights.Should().Be(12_000M);
 
-            arg.Credentials.Roles = "Supervisor";
             var vm = new MainWindowVM(17.June(2018), arg, false);
 
             await vm.RefreshCmd.RunAsync();
@@ -38,11 +37,10 @@ namespace RentLog.Tests.PostAndCloseTests
 
             vm = null;
             arg = null;
-            arg = GetTempSampleArgs();
+            arg = GetTempSampleArgs("Cashier");
             arg.Collections.LastPostedDate().Should().Be(17.June(2018));
             arg.Collections.UnclosedDate().Should().Be(18.June(2018));
 
-            arg.Credentials.Roles = "Cashier";
             vm = new MainWindowVM(18.June(2018), arg, false);
             vm.ShouldClose.Should().BeFalse();
             vm.ColxnsDB.IsOpened().Should().BeFalse();

@@ -5,7 +5,7 @@ namespace RentLog.Tests.SampleDBs
 {
     internal class TempCopyOf
     {
-        internal static SampleArgs Jun17_Balanced()
+        internal static SampleArgs Jun17_Balanced(string roles)
         {
             var origDB  = SampleArgs.FindDB(SampleDir.JUN17_BALANCED);
             var srcDir  = Path.GetDirectoryName(origDB);
@@ -15,7 +15,7 @@ namespace RentLog.Tests.SampleDBs
             SampleArgs.DirPath = destDir;
             SampleArgs.DirName = "";
 
-            var args = new SampleArgs();
+            var args = new SampleArgs(roles);
             SampleArgs.DirPath = origDir;
             return args;
         }

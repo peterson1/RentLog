@@ -4,7 +4,6 @@ using RentLog.DatabaseLib.DatabaseFinders;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
 using RentLog.DomainLib45;
-using System;
 using System.IO;
 
 namespace RentLog.Tests.SampleDBs
@@ -14,11 +13,11 @@ namespace RentLog.Tests.SampleDBs
         internal static string DirPath = @"..\..\SampleDBs";
         internal static string DirName;
 
-        public SampleArgs()
+        public SampleArgs(string roles)
         {
             IsValidUser       = true;
             Credentials       = new FirebaseCredentials();
-            Credentials.Roles = "Supervisor";
+            Credentials.Roles = roles;
             CurrentBankAcct   = new BankAccountDTO { Id = 1 };
         }
 

@@ -17,14 +17,14 @@ namespace RentLog.LeasesCrud
         public override string SubAppName => "Leases";
 
 
-        public MainWindowVM(AppArguments appArguments) : base(appArguments)
+        public MainWindowVM(AppArguments appArguments, bool clickRefresh = true) : base(appArguments)
         {
             MainToolBar    = new MainToolbarVM(this);
             ActiveLeases   = new ActiveLeasesVM(appArguments);
             InactiveLeases = new InactiveLeasesVM(appArguments);
             ActiveLeases.Crud.SaveCompleted += (s, e) => ClickRefresh();
             ActiveLeases.LeaseDeactivated   += (s, e) => ClickRefresh();
-            ClickRefresh();
+            if (clickRefresh) ClickRefresh();
         }
 
 
