@@ -34,6 +34,10 @@ namespace RentLog.ChequeVouchers.JournalsTab.JournalsList
             => AppArgs.Journals.List(_rnge.Start, _rnge.End);
 
 
+        protected override void DeleteRecord(ISimpleRepo<JournalVoucherDTO> db, JournalVoucherDTO dto)
+            => AppArgs.Journals.Delete(dto);
+
+
         public    override bool CanEditRecord        (JournalVoucherDTO rec) => AppArgs.CanEditJournalVoucher   (true);
         protected override bool CanDeleteRecord      (JournalVoucherDTO rec) => AppArgs.CanDeleteJournalVoucher (true);
         protected override void LoadRecordForEditing (JournalVoucherDTO rec) => Crud   .EditCurrentRecord       (rec);

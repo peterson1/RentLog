@@ -12,6 +12,8 @@ namespace RentLog.ChequeVouchers.JournalsTab.JournalsList
         public string  FilterDescription      { get; set; }
         public string  FilterAmount           { get; set; }
         public string  FilterRemarks          { get; set; }
+        public string  FilterDebitAccounts    { get; set; }
+        public string  FilterCreditAccounts   { get; set; }
 
 
         protected override Dictionary<string, Func<JournalVoucherDTO, string>> FilterProperties => new Dictionary<string, Func<JournalVoucherDTO, string>>
@@ -21,6 +23,8 @@ namespace RentLog.ChequeVouchers.JournalsTab.JournalsList
             { nameof(FilterDescription    ), _ => _.Description                            },
             { nameof(FilterAmount         ), _ => _.Amount         .ToString()             },
             { nameof(FilterRemarks        ), _ => _.Remarks                                },
+            { nameof(FilterDebitAccounts  ), _ => _.DebitAccounts                          },
+            { nameof(FilterCreditAccounts ), _ => _.CreditAccounts                         },
         };
     }
 }

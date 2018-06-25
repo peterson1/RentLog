@@ -11,11 +11,13 @@
               ItemsSource="{Binding }"
               DataContext="{Binding ItemsList}">
         <DataGrid.Columns>
-            <DataGridTextColumn Width="01*" Header="JV #" Binding="{Binding SerialNum, StringFormat=0000}" ElementStyle="{StaticResource colCenter}" />
-            <DataGridTextColumn Width="01*" Header="date" Binding="{Binding TransactionDate, StringFormat=d MMM yyyy}" ElementStyle="{StaticResource colCenter}" />
-            <DataGridTextColumn Width="04*" Header="description" Binding="{Binding Description}" ElementStyle="{StaticResource colLabel}" />
-            <DataGridTextColumn Width="01*" Header="amount" Binding="{Binding Amount, StringFormat=N2}" ElementStyle="{StaticResource colRightEnd}" />
-            <DataGridTextColumn Width="03*" Header="remarks" Binding="{Binding Remarks}" ElementStyle="{StaticResource colLeft}" />
+            <DataGridTextColumn Width="05*" Header="JV #" Binding="{Binding SerialNum, StringFormat=0000}" ElementStyle="{StaticResource colCenter}" />
+            <DataGridTextColumn Width="10*" Header="date" Binding="{Binding TransactionDate, StringFormat=d MMM yyyy}" ElementStyle="{StaticResource colCenter}" />
+            <DataGridTextColumn Width="25*" Header="description" Binding="{Binding Description}" ElementStyle="{StaticResource colLabel}" />
+            <DataGridTextColumn Width="10*" Header="amount" Binding="{Binding Amount, StringFormat=N2}" ElementStyle="{StaticResource colRightEnd}" />
+            <DataGridTextColumn Width="20*" Header="debit accts" Binding="{Binding DebitAccounts}" ElementStyle="{StaticResource colLeft}" />
+            <DataGridTextColumn Width="20*" Header="credit accts" Binding="{Binding CreditAccounts}" ElementStyle="{StaticResource colLeft}" />
+            <DataGridTextColumn Width="10*" Header="remarks" Binding="{Binding Remarks}" ElementStyle="{StaticResource colLeft}" />
         </DataGrid.Columns>
     </DataGrid>
 </UserControl>
