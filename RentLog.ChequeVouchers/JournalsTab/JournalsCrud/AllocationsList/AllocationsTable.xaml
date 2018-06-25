@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="RentLog.ChequeVouchers.JournalsTab.JournalsCrud.AllocationsList.AllocationsTable"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RentLog.ChequeVouchers.JournalsTab.JournalsCrud.AllocationsList"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <DataGrid ItemsSource="{Binding }"
+              Width="450"
+              x:Name="dg"
+              Style="{StaticResource dgReadOnly}">
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="GL Account"
+                                Width="60*"
+                                Binding="{Binding Account.Name}"
+                                ElementStyle="{StaticResource colLabel}" />
+
+            <DataGridTextColumn Header="Debit"
+                                Width="20*"
+                                Binding="{Binding AsDebit, StringFormat=N2}"
+                                ElementStyle="{StaticResource colRight}" />
+
+            <DataGridTextColumn Header="Credit"
+                                Width="20*"
+                                Binding="{Binding AsCredit, StringFormat=N2}"
+                                ElementStyle="{StaticResource colRightEnd}" />
+        </DataGrid.Columns>
+    </DataGrid>
+</UserControl>

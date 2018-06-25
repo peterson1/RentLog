@@ -129,6 +129,12 @@
       <DependentUpon>AllocationsListUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="JournalsTab\JournalsCrud\AllocationsList\AllocationsListVM.cs" />
+    <Compile Include="JournalsTab\JournalsCrud\AllocationsList\AllocationsTable.xaml.cs">
+      <DependentUpon>AllocationsTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="JournalsTab\JournalsCrud\AllocationsList\AllocationTotals.xaml.cs">
+      <DependentUpon>AllocationTotals.xaml</DependentUpon>
+    </Compile>
     <Compile Include="JournalsTab\JournalsCrud\JournalsCrudVM.cs" />
     <Compile Include="JournalsTab\JournalsCrud\JournalsCrudWindow.xaml.cs">
       <DependentUpon>JournalsCrudWindow.xaml</DependentUpon>
@@ -243,6 +249,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="JournalsTab\JournalsCrud\AllocationsList\AllocationsListUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="JournalsTab\JournalsCrud\AllocationsList\AllocationsTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="JournalsTab\JournalsCrud\AllocationsList\AllocationTotals.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -37,10 +37,12 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.FundRequests.FundRequestCrud.All
 
         private void AddEntry(decimal multiplier)
         {
-            if (!PopUpInput.TryGetIndex("GL Account", 
+            var typ = multiplier < 0 ? "Debit" : "Credit";
+
+            if (!PopUpInput.TryGetIndex($"GL Account for {typ}",
                 out int idx, _glAccts)) return;
 
-            if (!PopUpInput.TryGetDecimal("Amount",
+            if (!PopUpInput.TryGetDecimal($"{typ} Amount",
                 out decimal amt, allowZero: false)) return;
 
             _list.Add(AccountAllocation
