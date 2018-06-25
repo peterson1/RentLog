@@ -14,9 +14,10 @@ namespace CommonTools.Lib45.BaseViewModels
         where TDraft  : Lib11.ReflectionTools.ICloneable, new()
         where TArg    : ICredentialsProvider
     {
-        public event EventHandler<TDraft> NewRecordSaved = delegate { };
-        public event EventHandler<TDraft> RecordUpdated  = delegate { };
-        public event EventHandler<TDraft> SaveCompleted  = delegate { };
+        public event EventHandler<TDraft> NewRecordSaved          = delegate { };
+        public event EventHandler<TDraft> RecordUpdated           = delegate { };
+        public event EventHandler<TDraft> SaveCompleted           = delegate { };
+        public event EventHandler<TDraft> SetupForInsertCompleted = delegate { };
 
 
         public CrudWindowVMBase(TArg appArguments) : base(appArguments)
@@ -43,13 +44,13 @@ namespace CommonTools.Lib45.BaseViewModels
         protected virtual TDraft GetNewDraft        () => new TDraft();
 
         protected virtual void   ModifyDraftForInserting   (TDraft draft) { }
-        //protected virtual Task   ModifyDraftForInsertAsync (TDraft draft) => Task.Delay(0);
+        protected virtual Task   ModifyDraftForInsertAsync (TDraft draft) => Task.Delay(0);
         protected virtual void   ModifyDraftForUpdating  (TDraft draft) { }
 
         protected virtual void OnSaveCompleted    () { }
 
 
-        private bool CanSave()
+        public bool CanSave()
         {
             if (IsBusy) return false;
             if (!AllFieldsValid()) return false;
@@ -62,18 +63,21 @@ namespace CommonTools.Lib45.BaseViewModels
 
         private void EncodeNewDraft()
         {
-            if (SetupForInsert())
-                ShowModalWindow();
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            SetupForInsert();
+#pragma warning restore CS4014
+            ShowModalWindow();
         }
 
 
-        public bool SetupForInsert()
+        public async Task SetupForInsert()
         {
             Draft = GetNewDraft();
-            if (Draft == null) return false;
+            if (Draft == null) return;
             ModifyDraftForInserting(Draft);
+            await ModifyDraftForInsertAsync(Draft);
             SaveDraftCmd = R2Command.Async(ExecuteSaveDraft, _ => CanSave(), $"Save {TypeDescription}");
-            return true;
+            SetupForInsertCompleted?.Invoke(this, Draft);
         }
 
 

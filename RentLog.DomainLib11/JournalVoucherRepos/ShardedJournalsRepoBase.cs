@@ -13,6 +13,7 @@ namespace RentLog.DomainLib11.JournalVoucherRepos
         protected abstract ISimpleRepo<JournalVoucherDTO> ConnectToDB(string databasePath);
         protected abstract string        GetDatabasePath     (DateTime date);
         protected abstract List<string>  GetAllDatabasePaths ();
+        protected abstract Task<List<int>> GetParallelResults(List<Func<int>> jobs);
 
 
         public List<JournalVoucherDTO> List(DateTime startDate, DateTime endDate)
@@ -25,7 +26,8 @@ namespace RentLog.DomainLib11.JournalVoucherRepos
                 rows.AddRange(ConnectToDB(path)
                     .Find(_ => _.DateOffset >= min
                             && _.DateOffset <= max));
-            return rows;
+
+            return rows.OrderBy(_ => _.SerialNum).ToList();
         }
 
 
@@ -49,16 +51,19 @@ namespace RentLog.DomainLib11.JournalVoucherRepos
             => ConnectToDB(GetDatabasePath(dto.TransactionDate));
 
 
+        private int GetMaxSerial(string dbPath)
+            => ConnectToDB(dbPath).Max(_ => _.SerialNum);
+
+
         public async Task<int> GetNextSerialNum()
         {
-            await Task.Delay(0);
-            //await Task.Run()
+            var jobs = new List<Func<int>>();
 
-            throw new NotImplementedException();
             foreach (var dbPath in GetAllDatabasePaths())
-            {
-                //var db = ConnectToDB(dbPath);
-            }
+                jobs.Add(() => GetMaxSerial(dbPath));
+
+            var results = await GetParallelResults(jobs);
+            return results.Max() + 1;
         }
     }
 }

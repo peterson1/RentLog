@@ -26,8 +26,17 @@ namespace RentLog.Tests.JournalVoucherTests
             await main.RefreshCmd.RunAsync();
 
             rows.Should().HaveCount(0);
-            crud.SetupForInsert();
+            await crud.SetupForInsert();
             crud.Draft.SerialNum.Should().Be(1);
+
+            crud.CanSave().Should().BeFalse();
+            crud.Draft.Description = "some desc";
+            crud.Draft.Amount = 1234;
+            crud.CanSave().Should().BeTrue(crud.WhyInvalid);
+
+            await crud.SaveDraftCmd.RunAsync();
+
+            rows.Should().HaveCount(1);
         }
     }
 }

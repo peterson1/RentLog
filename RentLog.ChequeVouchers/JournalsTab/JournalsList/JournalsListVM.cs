@@ -13,6 +13,7 @@ using System.Linq;
 
 namespace RentLog.ChequeVouchers.JournalsTab.JournalsList
 {
+    [AddINotifyPropertyChangedInterface]
     public class JournalsListVM : FilteredSavedListVMBase<JournalVoucherDTO, JournalsFilterVM, ITenantDBsDir>
     {
         private DateRangePickerVM _rnge;
@@ -21,6 +22,7 @@ namespace RentLog.ChequeVouchers.JournalsTab.JournalsList
         public JournalsListVM(MainWindowVM main) : base(null, main.AppArgs, false)
         {
             Crud  = new JournalsCrudVM(AppArgs);
+            Crud.SaveCompleted += (s, e) => main.ClickRefresh();
             _rnge = main.DateRange;
         }
 

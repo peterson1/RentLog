@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:alloc="clr-namespace:RentLog.ChequeVouchers.JournalsTab.JournalsCrud.AllocationsList"
         xmlns:local="clr-namespace:RentLog.ChequeVouchers.JournalsTab.JournalsCrud"
         mc:Ignorable="d"
         Title="{Binding Caption}" 
@@ -19,7 +20,7 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        FocusManager.FocusedElement="{Binding ElementName=cmbPayee}">
+        FocusManager.FocusedElement="{Binding ElementName=ctrlFocus1}">
     <Window.Resources>
         <Style TargetType="TextBox"
                BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
@@ -57,33 +58,23 @@
     <Grid>
         <StackPanel Margin="30">
             <StackPanel Orientation="Horizontal">
-                <!--<StackPanel VerticalAlignment="Top">
+                <StackPanel VerticalAlignment="Top">
 
-                    <TextBox Text="{Binding Draft.SerialNum, StringFormat=000#, UpdateSourceTrigger=PropertyChanged}"
-                             mat:HintAssist.Hint="req. #" />
+                    <TextBox x:Name="txtSerial" 
+                             Text="{Binding Draft.SerialNum, StringFormat=000#, UpdateSourceTrigger=PropertyChanged}"
+                             mat:HintAssist.Hint="voucher #" />
 
-                    <DatePicker SelectedDate="{Binding Draft.RequestDate, UpdateSourceTrigger=PropertyChanged}"
-                                mat:HintAssist.Hint="request date" />
-
-                    <TextBox Text="{Binding AppArgs.CurrentBankAcct.Name}"
-                             Style="{StaticResource txtReadOnly}"
-                             mat:HintAssist.Hint="bank account" />
+                    <DatePicker SelectedDate="{Binding TransactionDate, UpdateSourceTrigger=PropertyChanged}"
+                                mat:HintAssist.Hint="transaction date" />
                 </StackPanel>
 
                 <StackPanel Margin="50 0 0 0">
-
-                    <ComboBox x:Name="cmbPayee"
-                              ItemsSource="{Binding Payees}"
-                              Text="{Binding Draft.Payee}"
-                              IsEditable="True"
-                              mat:HintAssist.Hint="payee" />
-
-                    <TextBox Text="{Binding Draft.Purpose, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBox Text="{Binding Draft.Description, UpdateSourceTrigger=PropertyChanged}"
                              AcceptsReturn="True"
-                             mat:HintAssist.Hint="purpose" />
+                             mat:HintAssist.Hint="description"
+                             x:Name="ctrlFocus1" />
 
                     <TextBox Text="{Binding Draft.Amount, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
-                             TextChanged="AmountTextBox_TextChanged"
                              mat:HintAssist.Hint="amount">
                         <int:Interaction.Behaviors>
                             <txbhv:SelectAllOnFocusBehavior />
@@ -96,7 +87,7 @@
                 <alloc:AllocationsListUI DataContext="{Binding Allocations}"
                                          x:Name="allocs"
                                          IsEnabled="False"
-                                         Margin="50 0 0 0" />-->
+                                         Margin="50 0 0 0" />
             </StackPanel>
 
             <DockPanel>

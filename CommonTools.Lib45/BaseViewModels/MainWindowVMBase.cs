@@ -128,7 +128,7 @@ namespace CommonTools.Lib45.BaseViewModels
             {
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 _win.ShowTemporarilyOnTop();
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+#pragma warning restore CS4014
                 if (hideWindow) _win.Hide();
                 return null;
             }

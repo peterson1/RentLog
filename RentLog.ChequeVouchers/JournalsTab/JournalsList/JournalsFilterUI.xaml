@@ -14,15 +14,17 @@
     </UserControl.Resources>
     <Grid DataContext="{Binding }">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="02*" />
-            <ColumnDefinition Width="02*" />
+            <ColumnDefinition Width="01*" />
+            <ColumnDefinition Width="01*" />
             <ColumnDefinition Width="04*" />
-            <ColumnDefinition Width="02*" />
+            <ColumnDefinition Width="01*" />
+            <ColumnDefinition Width="03*" />
         </Grid.ColumnDefinitions>
 
         <TextBox Grid.Column="0" Text="{Binding FilterSerialNum      , UpdateSourceTrigger=PropertyChanged}" />
         <TextBox Grid.Column="1" Text="{Binding FilterTransactionDate, UpdateSourceTrigger=PropertyChanged}" />
         <TextBox Grid.Column="2" Text="{Binding FilterDescription    , UpdateSourceTrigger=PropertyChanged}" />
         <TextBox Grid.Column="3" Text="{Binding FilterAmount         , UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="4" Text="{Binding FilterRemarks        , UpdateSourceTrigger=PropertyChanged}" />
     </Grid>
 </UserControl>

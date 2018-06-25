@@ -1,7 +1,9 @@
-﻿using RentLog.ChequeVouchers.JournalsTab.JournalsList;
+﻿using PropertyChanged;
+using RentLog.ChequeVouchers.JournalsTab.JournalsList;
 
 namespace RentLog.ChequeVouchers.JournalsTab
 {
+    [AddINotifyPropertyChangedInterface]
     public class JournalsTabVM
     {
         public JournalsTabVM(MainWindowVM main)

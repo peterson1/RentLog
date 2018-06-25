@@ -11,10 +11,11 @@
               ItemsSource="{Binding }"
               DataContext="{Binding ItemsList}">
         <DataGrid.Columns>
-            <DataGridTextColumn Width="02*" Header="JV #" Binding="{Binding SerialNum, StringFormat=0000}" ElementStyle="{StaticResource colCenter}" />
-            <DataGridTextColumn Width="02*" Header="date" Binding="{Binding TransactionDate, StringFormat=d MMM yyyy}" ElementStyle="{StaticResource colCenter}" />
+            <DataGridTextColumn Width="01*" Header="JV #" Binding="{Binding SerialNum, StringFormat=0000}" ElementStyle="{StaticResource colCenter}" />
+            <DataGridTextColumn Width="01*" Header="date" Binding="{Binding TransactionDate, StringFormat=d MMM yyyy}" ElementStyle="{StaticResource colCenter}" />
             <DataGridTextColumn Width="04*" Header="description" Binding="{Binding Description}" ElementStyle="{StaticResource colLabel}" />
-            <DataGridTextColumn Width="02*" Header="amount" Binding="{Binding Amount, StringFormat=N2}" ElementStyle="{StaticResource colRightEnd}" />
+            <DataGridTextColumn Width="01*" Header="amount" Binding="{Binding Amount, StringFormat=N2}" ElementStyle="{StaticResource colRightEnd}" />
+            <DataGridTextColumn Width="03*" Header="remarks" Binding="{Binding Remarks}" ElementStyle="{StaticResource colLeft}" />
         </DataGrid.Columns>
     </DataGrid>
 </UserControl>

@@ -206,6 +206,7 @@
     <Compile Include="UIBehaviors\TextBoxBehaviors\SelectAllOnFocusBehavior.cs" />
     <Compile Include="UIExtensions\ConfirmToDeleteExtensions.cs" />
     <Compile Include="UIExtensions\CurrentItemDataGridExtensions.cs" />
+    <Compile Include="UIExtensions\ForceBindingUpdaters.cs" />
     <Compile Include="UIExtensions\ListScrollerExtensions.cs" />
     <Compile Include="UIExtensions\StylePropertySetters.cs" />
     <Compile Include="UIExtensions\UIValidationExtensions.cs" />

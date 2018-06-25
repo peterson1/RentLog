@@ -1,18 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using CommonTools.Lib11.DatabaseTools;
+﻿using CommonTools.Lib11.DatabaseTools;
 using CommonTools.Lib45.LiteDbTools;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.JournalVoucherRepos;
 using RentLog.DomainLib11.MarketStateRepos;
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace RentLog.DatabaseLib.JournalsRepository
 {
     public class JournalsByMonthDir : ShardedJournalsRepoBase
     {
-        private const string DIR_NAME = "Journals";
-        private const string NAME_FMT = "{0:yyyy-MM}_JVs_Shard.ldb";
+        private const string DIR_NAME  = "Journals";
+        private const string JV_SUFFIX = "_JVs_Shard.ldb";
+        private const string NAME_FMT  = "{0:yyyy-MM}" + JV_SUFFIX;
 
         private string _foldr;
         private string _usr;
@@ -50,8 +54,24 @@ namespace RentLog.DatabaseLib.JournalsRepository
 
 
         protected override List<string> GetAllDatabasePaths()
+            => Directory.GetFiles(_foldr, $"*{JV_SUFFIX}").ToList();
+
+
+        protected override async Task<List<int>> GetParallelResults(List<Func<int>> jobs)
         {
-            throw new NotImplementedException();
+            var bag = new ConcurrentBag<int>();
+
+            await Task.Run(() 
+                => Parallel.ForEach(jobs, job 
+                    => bag.Add(job.Invoke())));
+
+            return bag.ToList();
         }
+
+
+        //private void SomeMethod()
+        //{
+        //    Parallel.ForEach()
+        //}
     }
 }
