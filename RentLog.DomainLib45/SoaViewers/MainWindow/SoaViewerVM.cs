@@ -30,7 +30,7 @@ namespace RentLog.DomainLib45.SoaViewers.MainWindow
         public LeaseDTO               Lease     { get; }
         public BillCode               BillCode  { get; set; } = BillCode.Other;
         public UIList<DailyBillsRow>  Rows      { get; } = new UIList<DailyBillsRow>();
-        public DailyBillsRow          FirstRow  => Rows.FirstOrDefault();
+        public DailyBillsRow          FirstRow  { get; private set; }
 
 
         private IEnumerable<DailyBillsRow> GetBillRows()
@@ -58,6 +58,7 @@ namespace RentLog.DomainLib45.SoaViewers.MainWindow
             IEnumerable<DailyBillsRow> rows = null;
             await Task.Run(() => rows = GetBillRows());
             UIThread.Run(() => Rows.SetItems(rows));
+            FirstRow = Rows.FirstOrDefault();
         }
 
         protected override void OnPrintClicked  () => SoaPrintVM.Print(this);

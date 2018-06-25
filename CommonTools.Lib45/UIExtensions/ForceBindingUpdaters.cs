@@ -9,6 +9,10 @@ namespace CommonTools.Lib45.UIExtensions
             => ctrl.ForceUpdateTarget(TextBox.TextProperty);
 
 
+        public static void ForceUpdateTarget(this TextBlock ctrl)
+            => ctrl.ForceUpdateTarget(TextBlock.TextProperty);
+
+
         public static void ForceUpdateTarget(this FrameworkElement ctrl, DependencyProperty dependencyProperty)
             => ctrl.GetBindingExpression(dependencyProperty).UpdateTarget();
     }

@@ -1,27 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace RentLog.DomainLib45.SoaViewers.MainWindow
 {
-    /// <summary>
-    /// Interaction logic for SoaViewerWindow.xaml
-    /// </summary>
     public partial class SoaViewerWindow : Window
     {
         public SoaViewerWindow()
         {
             InitializeComponent();
+            //Loaded += async (a, b) =>
+            //{
+            //    await Task.Delay(500);
+            //    VM.ClickRefresh();
+            //};
         }
+
+
+        //private SoaViewerVM VM => DataContext as SoaViewerVM;
     }
 }

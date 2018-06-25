@@ -1,28 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using CommonTools.Lib45.UIExtensions;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace RentLog.DomainLib45.SoaViewers.MainWindow.RentColumn
 {
-    /// <summary>
-    /// Interaction logic for RentHeader.xaml
-    /// </summary>
     public partial class RentHeader : UserControl
     {
         public RentHeader()
         {
             InitializeComponent();
+            //Loaded += async (a, b) =>
+            //{
+            //    await Task.Delay(1000 * 5);
+            //    var p = Parent;
+            //    var vm = DataContext;
+            //    txtBal.ForceUpdateTarget();
+            //};
         }
     }
 }

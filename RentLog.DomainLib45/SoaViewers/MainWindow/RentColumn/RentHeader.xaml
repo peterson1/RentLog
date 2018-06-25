@@ -21,7 +21,8 @@
             <TextBlock Text="balance" Style="{DynamicResource soaHdrLabel}" />
             <TextBlock Text="{Binding Rent.OpeningBalance, StringFormat=N2}" 
                        Style="{DynamicResource soaHdrValue}"
-                       FontWeight="Bold" />
+                       FontWeight="Bold"
+                       x:Name="txtBal" />
         </StackPanel>
 
     </StackPanel>
