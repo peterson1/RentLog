@@ -50,6 +50,12 @@ namespace RentLog.DomainLib11.MarketStateRepos
             if (dto.Tenant.FirstName.IsBlank())
                 return $"‹First Name› should not be blank.";
 
+            if (dto.Tenant.MiddleName.IsBlank())
+                return $"‹Middle Name› should not be blank.";
+
+            if (dto.Tenant.LastName.IsBlank())
+                return $"‹Last Name› should not be blank.";
+
             return string.Empty;
         }
     }

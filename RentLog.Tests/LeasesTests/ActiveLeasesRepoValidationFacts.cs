@@ -71,6 +71,159 @@ namespace RentLog.Tests.LeasesTests
         }
 
 
+        [Fact(DisplayName = "Rejects Blank Middle Name")]
+        public void TestMethod00004()
+        {
+            var sut = CreateSUT(out LeaseDTO obj);
+
+            obj.Tenant.MiddleName = null;
+            sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            sut.IsValidForUpdate(obj, out why).Should().BeFalse();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+
+            obj.Tenant.MiddleName = "Some name";
+            sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            sut.IsValidForUpdate(obj, out why).Should().BeTrue();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+        }
+
+
+        [Fact(DisplayName = "Rejects Blank Last Name")]
+        public void TestMethod00005()
+        {
+            var sut = CreateSUT(out LeaseDTO obj);
+
+            obj.Tenant.LastName = null;
+            sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            sut.IsValidForUpdate(obj, out why).Should().BeFalse();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+
+            obj.Tenant.LastName = "Some name";
+            sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            sut.IsValidForUpdate(obj, out why).Should().BeTrue();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+        }
+
+
+        [Fact(DisplayName = "Rejects Invalid Birthdate")]
+        public void TestMethod00006()
+        {
+            var sut = CreateSUT(out LeaseDTO obj);
+
+            obj.Tenant.BirthDate = DateTime.MinValue;
+            sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            sut.IsValidForUpdate(obj, out why).Should().BeFalse();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+
+            obj.Tenant.BirthDate = DateTime.Now;
+            sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            sut.IsValidForUpdate(obj, out why).Should().BeTrue();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+        }
+
+
+        [Fact(DisplayName = "Rejects Blank Phone # 1")]
+        public void TestMethod00007()
+        {
+            var sut = CreateSUT(out LeaseDTO obj);
+
+            obj.Tenant.Phone1 = null;
+            sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            sut.IsValidForUpdate(obj, out why).Should().BeFalse();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+
+            obj.Tenant.Phone1 = "123";
+            sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            sut.IsValidForUpdate(obj, out why).Should().BeTrue();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+        }
+
+
+        [Fact(DisplayName = "Rejects Blank Lot #")]
+        public void TestMethod00008()
+        {
+            var sut = CreateSUT(out LeaseDTO obj);
+
+            obj.Tenant.LotNumber = null;
+            sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            sut.IsValidForUpdate(obj, out why).Should().BeFalse();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+
+            obj.Tenant.LotNumber = "#13";
+            sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            sut.IsValidForUpdate(obj, out why).Should().BeTrue();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+        }
+
+
+        [Fact(DisplayName = "Rejects Blank Street name")]
+        public void TestMethod00009()
+        {
+            var sut = CreateSUT(out LeaseDTO obj);
+
+            obj.Tenant.StreetName = null;
+            sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            sut.IsValidForUpdate(obj, out why).Should().BeFalse();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+
+            obj.Tenant.StreetName = "#13";
+            sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            sut.IsValidForUpdate(obj, out why).Should().BeTrue();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+        }
+
+
+        [Fact(DisplayName = "Rejects Blank Barangay")]
+        public void TestMethod00010()
+        {
+            var sut = CreateSUT(out LeaseDTO obj);
+
+            obj.Tenant.Barangay = null;
+            sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            sut.IsValidForUpdate(obj, out why).Should().BeFalse();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+
+            obj.Tenant.Barangay = "#13";
+            sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            sut.IsValidForUpdate(obj, out why).Should().BeTrue();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+        }
+
+
+        [Fact(DisplayName = "Rejects Blank Municipality")]
+        public void TestMethod00011()
+        {
+            var sut = CreateSUT(out LeaseDTO obj);
+
+            obj.Tenant.Municipality = null;
+            sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            sut.IsValidForUpdate(obj, out why).Should().BeFalse();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+
+            obj.Tenant.Municipality = "#13";
+            sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            sut.IsValidForUpdate(obj, out why).Should().BeTrue();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+        }
+
+
+        [Fact(DisplayName = "Rejects Blank Province")]
+        public void TestMethod00012()
+        {
+            var sut = CreateSUT(out LeaseDTO obj);
+
+            obj.Tenant.Province = null;
+            sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            sut.IsValidForUpdate(obj, out why).Should().BeFalse();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+
+            obj.Tenant.Province = "#13";
+            sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            sut.IsValidForUpdate(obj, out why).Should().BeTrue();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+        }
+
+
         //todo: ContractStart >= draft.ContractEnd
 
         private ActiveLeasesRepo1 CreateSUT(out LeaseDTO validSample)
