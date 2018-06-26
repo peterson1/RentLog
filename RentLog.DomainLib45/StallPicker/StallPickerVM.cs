@@ -1,4 +1,5 @@
 ﻿using CommonTools.Lib11.DataStructures;
+using CommonTools.Lib11.ExceptionTools;
 using CommonTools.Lib11.InputCommands;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.UIExtensions;
@@ -23,7 +24,8 @@ namespace RentLog.DomainLib45.StallPicker
         {
             _mkt = marketStateDB;
             _win = window;
-            _win.DataContext = this;
+            if (_win != null)
+                _win.DataContext = this;
             _occupiedIDs = GetOccupiedStallIDs();
             Sections.SetItems(marketStateDB.Sections.GetAll());
             ContinueCmd = R2Command.Relay(DoContinue, _ => CanContinue(), "Continue");
@@ -64,6 +66,19 @@ namespace RentLog.DomainLib45.StallPicker
             var res = win.ShowDialog();
             stall   = vm.PickedStall;
             return res == true && stall != null;
+        }
+
+
+        public static StallDTO PickFirstVacant(MarketStateDB mkt)
+        {
+            var vm = new StallPickerVM(mkt, null);
+            foreach (var sec in vm.Sections)
+            {
+                vm.PickedSection = sec;
+                if (vm.Stalls.Any())
+                    return vm.Stalls.First();
+            }
+            throw No.Match<StallDTO>("state", "vacant");
         }
 
 

@@ -1,8 +1,7 @@
-﻿using CommonTools.Lib11.DateTimeTools;
-using CommonTools.Lib11.DatabaseTools;
+﻿using CommonTools.Lib11.DatabaseTools;
+using CommonTools.Lib11.DateTimeTools;
 using FluentAssertions;
 using Moq;
-using RentLog.DomainLib11.ChequeVoucherRepos;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.JournalVoucherRepos;
 using RentLog.DomainLib11.Models;

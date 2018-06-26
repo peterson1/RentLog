@@ -71,6 +71,8 @@ namespace RentLog.Tests.LeasesTests
         }
 
 
+        //todo: ContractStart >= draft.ContractEnd
+
         private ActiveLeasesRepo1 CreateSUT(out LeaseDTO validSample)
         {
             var mkt     = new Mock<IMarketStateDB>();

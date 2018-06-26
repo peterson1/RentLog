@@ -17,6 +17,7 @@ namespace RentLog.LeasesCrud.LeaseCRUD
     {
         public    override string TypeDescription => "Lease";
         protected override string CaptionPrefix   => "Lease Editor";
+        private StallDTO _pickedStall;
 
 
         public LeaseCrudVM(IActiveLeasesRepo repository, AppArguments appArguments) : base(repository, appArguments)
@@ -37,8 +38,11 @@ namespace RentLog.LeasesCrud.LeaseCRUD
 
         protected override LeaseDTO GetNewDraft()
         {
-            if (!StallPicker.TryPick(AppArgs
-                .MarketState, out StallDTO stall)) return null;
+            if (_pickedStall == null)
+            {
+                if (!StallPicker.TryPick(AppArgs
+                    .MarketState, out _pickedStall)) return null;
+            }
 
             var start  = DateTime.Now.Date;
             WhyInvalid = "Please fill up all required fields.";
@@ -47,9 +51,9 @@ namespace RentLog.LeasesCrud.LeaseCRUD
             {
                 ContractStart = start,
                 ContractEnd   = start.AddYears(1),
-                Stall         = stall,
-                Rent          = stall.DefaultRent.ShallowClone(),
-                Rights        = stall.DefaultRights.ShallowClone(),
+                Stall         = _pickedStall,
+                Rent          = _pickedStall.DefaultRent.ShallowClone(),
+                Rights        = _pickedStall.DefaultRights.ShallowClone(),
             };
             draft.Tenant = TenantTemplate?.ShallowClone()
                          ?? new TenantModel { Country = "Philippines" };
@@ -87,6 +91,10 @@ namespace RentLog.LeasesCrud.LeaseCRUD
         }
 
 
+        public void SetPickedStall(StallDTO stallDTO)
+            => _pickedStall = stallDTO;
+
+
         public void UpdateDerivatives()
         {
             ContractSpanDays = (Draft?.ContractEnd - Draft?.ContractStart)?.TotalDays;
@@ -95,16 +103,17 @@ namespace RentLog.LeasesCrud.LeaseCRUD
         }
 
 
-        protected override bool IsValidDraft(LeaseDTO draft, out string whyInvalid)
-        {
-            if (draft.ContractStart >= draft.ContractEnd)
-            {
-                whyInvalid = "“Contract End” date should be later than “Contract Start” date.";
-                return false;
-            }
-            whyInvalid = "";
-            return true;
-        }
+        //protected override bool IsValidDraft(LeaseDTO draft, out string whyInvalid)
+        //{
+        //    if (!base.IsValidDraft(draft, out whyInvalid)) return false;
+        //    if (draft.ContractStart >= draft.ContractEnd)
+        //    {
+        //        whyInvalid = "“Contract End” date should be later than “Contract Start” date.";
+        //        return false;
+        //    }
+        //    whyInvalid = "";
+        //    return true;
+        //}
 
 
         public override bool CanEncodeNewDraft() => AppArgs.CanAddLease(false);

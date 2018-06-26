@@ -5,7 +5,7 @@ using RentLog.DomainLib11.DTOs;
 
 namespace RentLog.DomainLib11.MarketStateRepos
 {
-    public class MarketStateDB
+    public class MarketStateDB : IMarketStateDB
     {
         public virtual string               DatabasePath    { get; set; }
         public virtual string               CurrentUser     { get; set; }

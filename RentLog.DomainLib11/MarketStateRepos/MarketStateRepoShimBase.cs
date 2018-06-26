@@ -4,10 +4,10 @@ namespace RentLog.DomainLib11.MarketStateRepos
 {
     public abstract class MarketStateRepoShimBase<T> : SimpleRepoShimBase<T>
     {
-        protected MarketStateDB _db;
+        protected IMarketStateDB _db;
 
 
-        public MarketStateRepoShimBase(ISimpleRepo<T> simpleRepo, MarketStateDB marketStateDB) : base(simpleRepo)
+        public MarketStateRepoShimBase(ISimpleRepo<T> simpleRepo, IMarketStateDB marketStateDB) : base(simpleRepo)
         {
             _db = marketStateDB;
         }

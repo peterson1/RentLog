@@ -17,7 +17,7 @@ namespace RentLog.Tests.RecomputeRunningBalTests
         [Fact(DisplayName = "Recompute RunningBal")]
         public void TestMethod00002()
         {
-            var arg = GetTempSampleArgs();
+            var arg = GetTempSampleArgs("Cashier");
 
             var sut = arg.Passbooks.GetRepo(1);
             var row = sut.RowsFor(1.June(2018)).Single();
