@@ -26,23 +26,7 @@ namespace RentLog.DomainLib11.PassbookRepos
                     .ThenBy  (_ => _.Id);
 
 
-        public override bool IsValidForInsert(PassbookRowDTO draft, out string whyInvalid)
-        {
-            if (!base.IsValidForInsert(draft, out whyInvalid)) return false;
-            whyInvalid = GetWhyInvalid(draft);
-            return whyInvalid.IsBlank();
-        }
-
-
-        public override bool IsValidForUpdate(PassbookRowDTO record, out string whyInvalid)
-        {
-            if (!base.IsValidForUpdate(record, out whyInvalid)) return false;
-            whyInvalid = GetWhyInvalid(record);
-            return whyInvalid.IsBlank();
-        }
-
-
-        private string GetWhyInvalid(PassbookRowDTO dto)
+        protected override string GetWhyInvalid(PassbookRowDTO dto)
         {
             if (dto.Amount == 0)
                 return "Amount should not be zero.";

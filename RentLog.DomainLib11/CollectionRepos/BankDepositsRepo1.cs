@@ -11,23 +11,7 @@ namespace RentLog.DomainLib11.CollectionRepos
         }
 
 
-        public override bool IsValidForInsert(BankDepositDTO draft, out string whyInvalid)
-        {
-            if (!base.IsValidForInsert(draft, out whyInvalid)) return false;
-            whyInvalid = GetWhyInvalid(draft);
-            return whyInvalid.IsBlank();
-        }
-
-
-        public override bool IsValidForUpdate(BankDepositDTO record, out string whyInvalid)
-        {
-            if (!base.IsValidForUpdate(record, out whyInvalid)) return false;
-            whyInvalid = GetWhyInvalid(record);
-            return whyInvalid.IsBlank();
-        }
-
-
-        private string GetWhyInvalid(BankDepositDTO dto)
+        protected override string GetWhyInvalid(BankDepositDTO dto)
         {
             if (dto.BankAccount == null)
                 return "Bank Account should have a value.";

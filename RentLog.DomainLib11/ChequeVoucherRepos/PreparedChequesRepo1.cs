@@ -24,23 +24,7 @@ namespace RentLog.DomainLib11.ChequeVoucherRepos
                                && !_.IssuedDate.HasValue).ToList();
 
 
-        public override bool IsValidForInsert(ChequeVoucherDTO draft, out string whyInvalid)
-        {
-            if (!base.IsValidForInsert(draft, out whyInvalid)) return false;
-            whyInvalid = GetWhyInvalid(draft);
-            return whyInvalid.IsBlank();
-        }
-
-
-        public override bool IsValidForUpdate(ChequeVoucherDTO record, out string whyInvalid)
-        {
-            if (!base.IsValidForUpdate(record, out whyInvalid)) return false;
-            whyInvalid = GetWhyInvalid(record);
-            return whyInvalid.IsBlank();
-        }
-
-
-        private string GetWhyInvalid(ChequeVoucherDTO dto)
+        protected override string GetWhyInvalid(ChequeVoucherDTO dto)
         {
             if (dto.Request == null)
                 return "Fund Request should NOT be null.";

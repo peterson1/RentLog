@@ -22,10 +22,11 @@ namespace CommonTools.Lib11.DatabaseTools
         }
 
 
-        protected virtual void ValidateBeforeInsert(T newRecord) { }
-        protected virtual void ValidateBeforeUpdate(T changedRecord) { }
-        protected virtual void ValidateBeforeDelete(T record) { }
-        protected virtual void ExecuteAfterSave    (T record) { }
+        protected virtual void   ValidateBeforeInsert(T newRecord) { }
+        protected virtual void   ValidateBeforeUpdate(T changedRecord) { }
+        protected virtual void   ValidateBeforeDelete(T record) { }
+        protected virtual void   ExecuteAfterSave    (T record) { }
+        protected virtual string GetWhyInvalid       (T dto) => string.Empty;
         protected virtual IEnumerable<T> ToSorted(IEnumerable<T> items) => items;
 
         protected List<T> ToSortedList(IEnumerable<T> items) => ToSorted(items).ToList();
@@ -112,15 +113,15 @@ namespace CommonTools.Lib11.DatabaseTools
 
         public virtual bool IsValidForInsert(T draft, out string whyInvalid)
         {
-            whyInvalid = string.Empty;
-            return true;
+            whyInvalid = GetWhyInvalid(draft);
+            return whyInvalid.IsBlank();
         }
 
         public virtual bool IsValidForUpdate(T record, out string whyInvalid)
         {
             if (!HasValidId(record, out whyInvalid)) return false;
-            whyInvalid = string.Empty;
-            return true;
+            whyInvalid = GetWhyInvalid(record);
+            return whyInvalid.IsBlank();
         }
 
         public virtual bool IsValidForDelete(T record, out string whyInvalid)

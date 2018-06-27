@@ -11,23 +11,7 @@ namespace RentLog.DomainLib11.CollectionRepos
         }
 
 
-        public override bool IsValidForInsert(IntendedColxnDTO draft, out string whyInvalid)
-        {
-            if (!base.IsValidForInsert(draft, out whyInvalid)) return false;
-            whyInvalid = GetWhyInvalid(draft);
-            return whyInvalid.IsBlank();
-        }
-
-
-        public override bool IsValidForUpdate(IntendedColxnDTO record, out string whyInvalid)
-        {
-            if (!base.IsValidForUpdate(record, out whyInvalid)) return false;
-            whyInvalid = GetWhyInvalid(record);
-            return whyInvalid.IsBlank();
-        }
-
-
-        private string GetWhyInvalid(IntendedColxnDTO dto)
+        protected override string GetWhyInvalid(IntendedColxnDTO dto)
         {
             if (dto.PRNumber <= 0)
                 return "PR # should be greater than zero.";

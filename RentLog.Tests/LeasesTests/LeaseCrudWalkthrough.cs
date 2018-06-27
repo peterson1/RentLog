@@ -24,6 +24,7 @@ namespace RentLog.Tests.LeasesTests
             var rows  = main.ActiveLeases.Rows;
             var crud  = main.ActiveLeases.Crud;
             var stall = StallPicker.PickFirstVacant(arg.MarketState);
+            stall.DefaultRent.RegularRate.Should().Be(160);
 
             await main.RefreshCmd.RunAsync();
             rows.Should().HaveCount(113);
@@ -42,13 +43,16 @@ namespace RentLog.Tests.LeasesTests
             crud.Draft.Tenant.Barangay = "brgy";
             crud.Draft.Tenant.Municipality = "muni";
             crud.Draft.Tenant.Province = "prov";
+            crud.Draft.Rent.RegularRate = 200;
             crud.CanSave().Should().BeTrue(crud.WhyInvalid);
 
             await crud.SaveDraftCmd.RunAsync();
             await main.RefreshCmd.RunAsync();
             rows.Should().HaveCount(114);
-
+            rows.First().DTO.Stall.Id  .Should().Be(stall.Id);
             rows.First().DTO.Stall.Name.Should().Be(stall.Name);
+            arg.MarketState.Stalls.Find(stall.Id, true)
+                .DefaultRent.RegularRate.Should().Be(200);
         }
     }
 }

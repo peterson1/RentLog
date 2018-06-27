@@ -21,17 +21,17 @@ namespace RentLog.Tests.LeasesTests
             var sut = CreateSUT(out LeaseDTO obj);
 
             obj.Id = 0;
-            sut.IsValidForInsert(obj, out string why).Should().BeTrue();
+            sut.IsValidForInsert(obj, out string why).Should().BeTrue(why);
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeFalse();
 
             obj.Id = 123;
-            sut.IsValidForInsert(obj, out why).Should().BeTrue();
-            sut.IsValidForUpdate(obj, out why).Should().BeTrue();
-            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+            sut.IsValidForInsert(obj, out why).Should().BeTrue(why);
+            sut.IsValidForUpdate(obj, out why).Should().BeTrue(why);
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
 
             obj.Id = -456;
-            sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            sut.IsValidForInsert(obj, out why).Should().BeTrue(why);
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeFalse();
         }
@@ -45,12 +45,12 @@ namespace RentLog.Tests.LeasesTests
             obj.Tenant = null;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
-            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
 
             obj.Tenant = ValidTenant();
-            sut.IsValidForInsert(obj, out why).Should().BeTrue();
-            sut.IsValidForUpdate(obj, out why).Should().BeTrue();
-            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+            sut.IsValidForInsert(obj, out why).Should().BeTrue(why);
+            sut.IsValidForUpdate(obj, out why).Should().BeTrue(why);
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
         }
 
 
@@ -62,12 +62,12 @@ namespace RentLog.Tests.LeasesTests
             obj.Tenant.FirstName = null;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
-            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
 
             obj.Tenant.FirstName = "Some name";
-            sut.IsValidForInsert(obj, out why).Should().BeTrue();
-            sut.IsValidForUpdate(obj, out why).Should().BeTrue();
-            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+            sut.IsValidForInsert(obj, out why).Should().BeTrue(why);
+            sut.IsValidForUpdate(obj, out why).Should().BeTrue(why);
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
         }
 
 
@@ -79,12 +79,12 @@ namespace RentLog.Tests.LeasesTests
             obj.Tenant.MiddleName = null;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
-            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
 
             obj.Tenant.MiddleName = "Some name";
-            sut.IsValidForInsert(obj, out why).Should().BeTrue();
-            sut.IsValidForUpdate(obj, out why).Should().BeTrue();
-            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+            sut.IsValidForInsert(obj, out why).Should().BeTrue(why);
+            sut.IsValidForUpdate(obj, out why).Should().BeTrue(why);
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
         }
 
 
@@ -96,12 +96,12 @@ namespace RentLog.Tests.LeasesTests
             obj.Tenant.LastName = null;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
-            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
 
             obj.Tenant.LastName = "Some name";
-            sut.IsValidForInsert(obj, out why).Should().BeTrue();
-            sut.IsValidForUpdate(obj, out why).Should().BeTrue();
-            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+            sut.IsValidForInsert(obj, out why).Should().BeTrue(why);
+            sut.IsValidForUpdate(obj, out why).Should().BeTrue(why);
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
         }
 
 
@@ -113,12 +113,12 @@ namespace RentLog.Tests.LeasesTests
             obj.Tenant.BirthDate = DateTime.MinValue;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
-            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
 
             obj.Tenant.BirthDate = DateTime.Now;
-            sut.IsValidForInsert(obj, out why).Should().BeTrue();
-            sut.IsValidForUpdate(obj, out why).Should().BeTrue();
-            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+            sut.IsValidForInsert(obj, out why).Should().BeTrue(why);
+            sut.IsValidForUpdate(obj, out why).Should().BeTrue(why);
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
         }
 
 
@@ -130,12 +130,12 @@ namespace RentLog.Tests.LeasesTests
             obj.Tenant.Phone1 = null;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
-            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
 
             obj.Tenant.Phone1 = "123";
-            sut.IsValidForInsert(obj, out why).Should().BeTrue();
-            sut.IsValidForUpdate(obj, out why).Should().BeTrue();
-            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+            sut.IsValidForInsert(obj, out why).Should().BeTrue(why);
+            sut.IsValidForUpdate(obj, out why).Should().BeTrue(why);
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
         }
 
 
@@ -147,12 +147,12 @@ namespace RentLog.Tests.LeasesTests
             obj.Tenant.LotNumber = null;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
-            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
 
             obj.Tenant.LotNumber = "#13";
-            sut.IsValidForInsert(obj, out why).Should().BeTrue();
-            sut.IsValidForUpdate(obj, out why).Should().BeTrue();
-            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+            sut.IsValidForInsert(obj, out why).Should().BeTrue(why);
+            sut.IsValidForUpdate(obj, out why).Should().BeTrue(why);
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
         }
 
 
@@ -164,12 +164,12 @@ namespace RentLog.Tests.LeasesTests
             obj.Tenant.StreetName = null;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
-            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
 
             obj.Tenant.StreetName = "#13";
-            sut.IsValidForInsert(obj, out why).Should().BeTrue();
-            sut.IsValidForUpdate(obj, out why).Should().BeTrue();
-            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+            sut.IsValidForInsert(obj, out why).Should().BeTrue(why);
+            sut.IsValidForUpdate(obj, out why).Should().BeTrue(why);
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
         }
 
 
@@ -181,12 +181,12 @@ namespace RentLog.Tests.LeasesTests
             obj.Tenant.Barangay = null;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
-            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
 
             obj.Tenant.Barangay = "#13";
-            sut.IsValidForInsert(obj, out why).Should().BeTrue();
-            sut.IsValidForUpdate(obj, out why).Should().BeTrue();
-            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+            sut.IsValidForInsert(obj, out why).Should().BeTrue(why);
+            sut.IsValidForUpdate(obj, out why).Should().BeTrue(why);
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
         }
 
 
@@ -198,12 +198,12 @@ namespace RentLog.Tests.LeasesTests
             obj.Tenant.Municipality = null;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
-            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
 
             obj.Tenant.Municipality = "#13";
-            sut.IsValidForInsert(obj, out why).Should().BeTrue();
-            sut.IsValidForUpdate(obj, out why).Should().BeTrue();
-            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+            sut.IsValidForInsert(obj, out why).Should().BeTrue(why);
+            sut.IsValidForUpdate(obj, out why).Should().BeTrue(why);
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
         }
 
 
@@ -215,16 +215,65 @@ namespace RentLog.Tests.LeasesTests
             obj.Tenant.Province = null;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
-            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
 
             obj.Tenant.Province = "#13";
-            sut.IsValidForInsert(obj, out why).Should().BeTrue();
-            sut.IsValidForUpdate(obj, out why).Should().BeTrue();
-            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+            sut.IsValidForInsert(obj, out why).Should().BeTrue(why);
+            sut.IsValidForUpdate(obj, out why).Should().BeTrue(why);
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
         }
 
 
-        //todo: ContractStart >= draft.ContractEnd
+        [Fact(DisplayName = "Rejects Blank ProductToSell")]
+        public void TestMethod00013()
+        {
+            var sut = CreateSUT(out LeaseDTO obj);
+
+            obj.ProductToSell = null;
+            sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            sut.IsValidForUpdate(obj, out why).Should().BeFalse();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
+
+            obj.ProductToSell = "some product";
+            sut.IsValidForInsert(obj, out why).Should().BeTrue(why);
+            sut.IsValidForUpdate(obj, out why).Should().BeTrue(why);
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
+        }
+
+
+        [Fact(DisplayName = "Rejects invalid Contract Start")]
+        public void TestMethod00014()
+        {
+            var sut = CreateSUT(out LeaseDTO obj);
+
+            obj.ContractStart = DateTime.MinValue;
+            sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            sut.IsValidForUpdate(obj, out why).Should().BeFalse();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
+
+            obj.ContractStart = 2.May(2018);
+            sut.IsValidForInsert(obj, out why).Should().BeTrue(why);
+            sut.IsValidForUpdate(obj, out why).Should().BeTrue(why);
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
+        }
+
+
+        [Fact(DisplayName = "Rejects invalid Contract End")]
+        public void TestMethod00015()
+        {
+            var sut = CreateSUT(out LeaseDTO obj);
+
+            obj.ContractEnd = 1.May(2018);
+            sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            sut.IsValidForUpdate(obj, out why).Should().BeFalse();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
+
+            obj.ContractEnd = 2.May(2018);
+            sut.IsValidForInsert(obj, out why).Should().BeTrue(why);
+            sut.IsValidForUpdate(obj, out why).Should().BeTrue(why);
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
+        }
+
 
         private ActiveLeasesRepo1 CreateSUT(out LeaseDTO validSample)
         {
@@ -258,7 +307,7 @@ namespace RentLog.Tests.LeasesTests
             StreetName   = "Any Street",
             Barangay     = "Brgy. Anywhere",
             Municipality = "Some City",
-            Country      = "Philippines"
+            Province     = "Some Province"
         };
     }
 }

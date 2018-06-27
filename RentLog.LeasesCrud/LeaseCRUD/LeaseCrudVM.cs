@@ -49,11 +49,11 @@ namespace RentLog.LeasesCrud.LeaseCRUD
 
             var draft = new LeaseDTO
             {
-                ContractStart = start,
-                ContractEnd   = start.AddYears(1),
-                Stall         = _pickedStall,
-                Rent          = _pickedStall.DefaultRent.ShallowClone(),
-                Rights        = _pickedStall.DefaultRights.ShallowClone(),
+                ContractStart        = start,
+                ContractEnd          = start.AddYears(1),
+                Stall                = _pickedStall,
+                Rent                 = _pickedStall.DefaultRent.ShallowClone(),
+                Rights               = _pickedStall.DefaultRights.ShallowClone(),
             };
             draft.Tenant = TenantTemplate?.ShallowClone()
                          ?? new TenantModel { Country = "Philippines" };
@@ -61,25 +61,17 @@ namespace RentLog.LeasesCrud.LeaseCRUD
         }
 
 
+        public void OnDraftBirthDateChanged()
+        {
+            if (Draft?.Tenant == null) return;
+            Draft.Tenant.BirthDate = DraftBirthDate ?? DateTime.MinValue;
+        }
+
+
         protected override LeaseDTO CreateDraftFromRecord(LeaseDTO record)
         {
             DraftBirthDate = record.Tenant.BirthDate;
             return base.CreateDraftFromRecord(record);
-        }
-
-
-        protected override void SaveNewRecord(LeaseDTO draft)
-        {
-            draft.Tenant.BirthDate     = DraftBirthDate.Value.Date;
-            draft.ApplicationSubmitted = draft.ContractStart;
-            base.SaveNewRecord(draft);
-        }
-
-
-        protected override void UpdateRecord(LeaseDTO record)
-        {
-            record.Tenant.BirthDate = DraftBirthDate.Value.Date;
-            base.UpdateRecord(record);
         }
 
 

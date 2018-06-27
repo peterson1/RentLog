@@ -3,6 +3,7 @@ using CommonTools.Lib11.ExceptionTools;
 using CommonTools.Lib11.StringTools;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,23 +27,7 @@ namespace RentLog.DomainLib11.MarketStateRepos
         }
 
 
-        public override bool IsValidForInsert(LeaseDTO draft, out string whyInvalid)
-        {
-            if (!base.IsValidForInsert(draft, out whyInvalid)) return false;
-            whyInvalid = GetWhyInvalid(draft);
-            return whyInvalid.IsBlank();
-        }
-
-
-        public override bool IsValidForUpdate(LeaseDTO record, out string whyInvalid)
-        {
-            if (!base.IsValidForUpdate(record, out whyInvalid)) return false;
-            whyInvalid = GetWhyInvalid(record);
-            return whyInvalid.IsBlank();
-        }
-
-
-        private string GetWhyInvalid(LeaseDTO dto)
+        protected override string GetWhyInvalid(LeaseDTO dto)
         {
             if (dto.Tenant == null)
                 return $"‹{typeof(TenantModel).Name}› should not be NULL.";
@@ -55,6 +40,36 @@ namespace RentLog.DomainLib11.MarketStateRepos
 
             if (dto.Tenant.LastName.IsBlank())
                 return $"‹Last Name› should not be blank.";
+
+            if (dto.Tenant.BirthDate == DateTime.MinValue)
+                return $"‹Birth Date› should not be blank.";
+
+            if (dto.Tenant.Phone1.IsBlank())
+                return $"‹Primary Phone Number› should not be blank.";
+
+            if (dto.Tenant.LotNumber.IsBlank())
+                return $"‹Lot #› should not be blank.";
+
+            if (dto.Tenant.StreetName.IsBlank())
+                return $"‹Street Name› should not be blank.";
+
+            if (dto.Tenant.Barangay.IsBlank())
+                return $"‹Barangay› should not be blank.";
+
+            if (dto.Tenant.Municipality.IsBlank())
+                return $"‹Municipality› should not be blank.";
+
+            if (dto.Tenant.Province.IsBlank())
+                return $"‹Province› should not be blank.";
+
+            if (dto.ProductToSell.IsBlank())
+                return $"‹Product-to-Sell› should not be blank.";
+
+            if (dto.ContractStart == DateTime.MinValue)
+                return $"‹Contract-Start› should not be blank.";
+
+            if (dto.ContractEnd < dto.ContractStart)
+                return $"‹Contract-End› should be later than ‹Contract-Start›.";
 
             return string.Empty;
         }

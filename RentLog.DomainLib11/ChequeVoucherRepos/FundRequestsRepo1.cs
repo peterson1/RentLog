@@ -29,23 +29,7 @@ namespace RentLog.DomainLib11.ChequeVoucherRepos
                        .ToList  ();
 
 
-        public override bool IsValidForInsert(FundRequestDTO draft, out string whyInvalid)
-        {
-            if (!base.IsValidForInsert(draft, out whyInvalid)) return false;
-            whyInvalid = GetWhyInvalid(draft);
-            return whyInvalid.IsBlank();
-        }
-
-
-        public override bool IsValidForUpdate(FundRequestDTO record, out string whyInvalid)
-        {
-            if (!base.IsValidForUpdate(record, out whyInvalid)) return false;
-            whyInvalid = GetWhyInvalid(record);
-            return whyInvalid.IsBlank();
-        }
-
-
-        private string GetWhyInvalid(FundRequestDTO dto)
+        protected override string GetWhyInvalid(FundRequestDTO dto)
         {
             if (dto.SerialNum <= 0)
                 return "Voucher Number should be greater than zero.";
