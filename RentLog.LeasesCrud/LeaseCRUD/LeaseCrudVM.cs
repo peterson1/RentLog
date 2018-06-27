@@ -79,6 +79,7 @@ namespace RentLog.LeasesCrud.LeaseCRUD
         {
             DraftBirthDate = null;
             TenantTemplate = null;
+            _pickedStall   = null;
             base.ClearDraftAfterSave();
         }
 

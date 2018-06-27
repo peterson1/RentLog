@@ -3,11 +3,9 @@ using CommonTools.Lib11.DateTimeTools;
 using FluentAssertions;
 using Moq;
 using RentLog.DomainLib11.DTOs;
-using RentLog.DomainLib11.JournalVoucherRepos;
 using RentLog.DomainLib11.MarketStateRepos;
 using RentLog.DomainLib11.Models;
 using System;
-using System.Collections.Generic;
 using Xunit;
 
 namespace RentLog.Tests.LeasesTests
@@ -273,6 +271,9 @@ namespace RentLog.Tests.LeasesTests
             sut.IsValidForUpdate(obj, out why).Should().BeTrue(why);
             sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
         }
+
+
+        //todo: test: Rejects occupied stall
 
 
         private ActiveLeasesRepo1 CreateSUT(out LeaseDTO validSample)
