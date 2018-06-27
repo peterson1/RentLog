@@ -22,7 +22,7 @@ namespace RentLog.DomainLib11.CollectionRepos
         public DateTime Date { get; }
 
 
-        protected override void ExecuteAfterSave(BalanceAdjustmentDTO record) 
+        protected override void ExecuteAfterSave(BalanceAdjustmentDTO record, bool operationIsDelete) 
             => _balDB.GetRepo(record.LeaseId).UpdateFrom(Date);
     }
 }

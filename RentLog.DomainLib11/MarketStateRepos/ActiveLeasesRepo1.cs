@@ -73,5 +73,15 @@ namespace RentLog.DomainLib11.MarketStateRepos
 
             return string.Empty;
         }
+
+
+        protected override void ExecuteAfterSave(LeaseDTO lse, bool operationIsDelete)
+        {
+            if (operationIsDelete) return;
+            var stallRec           = _db.Stalls.Find(lse.Stall.Id, true);
+            stallRec.DefaultRent   = lse.Rent;
+            stallRec.DefaultRights = lse.Rights;
+            _db.Stalls.Update(stallRec);
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace CommonTools.Lib11.DatabaseTools
         protected virtual void   ValidateBeforeInsert(T newRecord) { }
         protected virtual void   ValidateBeforeUpdate(T changedRecord) { }
         protected virtual void   ValidateBeforeDelete(T record) { }
-        protected virtual void   ExecuteAfterSave    (T record) { }
+        protected virtual void   ExecuteAfterSave    (T record, bool operationIsDelete) { }
         protected virtual string GetWhyInvalid       (T dto) => string.Empty;
         protected virtual IEnumerable<T> ToSorted(IEnumerable<T> items) => items;
 
@@ -51,7 +51,7 @@ namespace CommonTools.Lib11.DatabaseTools
         {
             ValidateBeforeInsert(newRecord);
             var id = _repo.Insert(newRecord);
-            ExecuteAfterSave(newRecord);
+            ExecuteAfterSave(newRecord, false);
             return id;
         }
 
@@ -60,7 +60,7 @@ namespace CommonTools.Lib11.DatabaseTools
         {
             ValidateBeforeUpdate(changedRecord);
             var ok = _repo.Update(changedRecord);
-            ExecuteAfterSave(changedRecord);
+            ExecuteAfterSave(changedRecord, false);
             return ok;
         }
 
@@ -72,7 +72,7 @@ namespace CommonTools.Lib11.DatabaseTools
             else
             {
                 var ok = _repo.Upsert(record);
-                ExecuteAfterSave(record);
+                ExecuteAfterSave(record, false);
                 return ok;
             }
         }
@@ -85,7 +85,7 @@ namespace CommonTools.Lib11.DatabaseTools
         {
             ValidateBeforeDelete(record);
             var ok = _repo.Delete(record);
-            ExecuteAfterSave(record);
+            ExecuteAfterSave(record, true);
             return ok;
         }
 

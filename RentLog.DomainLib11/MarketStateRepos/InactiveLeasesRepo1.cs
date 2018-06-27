@@ -18,8 +18,10 @@ namespace RentLog.DomainLib11.MarketStateRepos
         }
 
 
-        protected override void ExecuteAfterSave(InactiveLeaseDTO lse)
+        protected override void ExecuteAfterSave(InactiveLeaseDTO lse, bool operationIsDelete)
         {
+            //if (operationIsDelete) return;
+
             _db.ActiveLeases.Delete(lse.Id);
 
             if (_db.ActiveLeases.HasId(lse.Id))
