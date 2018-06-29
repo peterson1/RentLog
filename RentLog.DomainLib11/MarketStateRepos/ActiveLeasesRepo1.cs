@@ -71,9 +71,19 @@ namespace RentLog.DomainLib11.MarketStateRepos
             if (dto.ContractEnd < dto.ContractStart)
                 return $"‹Contract-End› should be later than ‹Contract-Start›.";
 
+            //if (IsOccupied(dto.Stall))
+            //    return $"Stall “{dto.Stall}” is already occupied.";
+
             return string.Empty;
         }
 
+
+        private bool IsOccupied(StallDTO stall)
+        {
+            if (!Any()) return false;
+            return GetAll().Select(_ => _.Stall.Id)
+                           .Contains(stall.Id);
+        }
 
         protected override void ExecuteAfterSave(LeaseDTO lse, bool operationIsDelete)
         {

@@ -6,6 +6,7 @@ using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
 using RentLog.DomainLib11.Models;
 using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace RentLog.Tests.LeasesTests
@@ -13,6 +14,8 @@ namespace RentLog.Tests.LeasesTests
     [Trait("Active Leases Repo", "Solitary")]
     public class ActiveLeasesRepoValidationFacts
     {
+        const int VACANT_STALL_ID = 123;
+
         [Fact(DisplayName = "Rejects invalid Id")]
         public void TestMethod00000()
         {
@@ -273,7 +276,21 @@ namespace RentLog.Tests.LeasesTests
         }
 
 
-        //todo: test: Rejects occupied stall
+        [Fact(DisplayName = "Rejects Occupied Stall")]
+        public void TestMethod00016()
+        {
+            var sut = CreateSUT(out LeaseDTO obj);
+
+            obj.Stall.Id = 456;
+            sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            sut.IsValidForUpdate(obj, out why).Should().BeFalse();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
+
+            obj.Stall.Id = VACANT_STALL_ID;
+            sut.IsValidForInsert(obj, out why).Should().BeTrue(why);
+            sut.IsValidForUpdate(obj, out why).Should().BeTrue(why);
+            sut.IsValidForDelete(obj, out why).Should().BeTrue(why);
+        }
 
 
         private ActiveLeasesRepo1 CreateSUT(out LeaseDTO validSample)
@@ -282,6 +299,11 @@ namespace RentLog.Tests.LeasesTests
             var moq     = new Mock<ISimpleRepo<LeaseDTO>>();
             var sut     = new ActiveLeasesRepo1(moq.Object, mkt.Object);
             validSample = ValidSampleDTO();
+
+            moq.Setup(_ => _.GetAll())
+                .Returns(new List<LeaseDTO>
+                    { new LeaseDTO { Id = 456 } });
+
             return sut;
         }
 
@@ -290,7 +312,7 @@ namespace RentLog.Tests.LeasesTests
         {
             Id            = 101,
             Tenant        = ValidTenant(),
-            Stall         = new StallDTO { Id = 123 },
+            Stall         = new StallDTO { Id = VACANT_STALL_ID },
             ContractStart = 2.May(2018),
             ContractEnd   = 1.May(2019),
             ProductToSell = "some product"
