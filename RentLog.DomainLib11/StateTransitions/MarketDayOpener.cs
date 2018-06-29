@@ -33,7 +33,10 @@ namespace RentLog.DomainLib11.StateTransitions
 
         private static void AddDepositsToPassbook(DateTime colxnDate, ITenantDBsDir dir)
         {
-            var deps = dir.Collections.For(colxnDate).BankDeposits.GetAll();
+            var db = dir.Collections.For(colxnDate);
+            if (db == null) return;
+
+            var deps = db.BankDeposits.GetAll();
             foreach (var dep in deps)
                 dir.Passbooks.GetRepo(dep.BankAccount.Id)
                     .InsertDepositedColxn(dep, colxnDate);
