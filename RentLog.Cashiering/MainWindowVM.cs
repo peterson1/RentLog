@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace RentLog.Cashiering
 {
@@ -121,15 +122,18 @@ namespace RentLog.Cashiering
             AppArgs.CurrentSection = SectionTabs.FirstOrDefault()?.Section;
             CurrentTabIndex = SectionTabs.Any() ? 0 : -1;
 
-            //foreach (var tab in SectionTabs)
-            //    tab.ReloadAll();
             Parallel.ForEach(SectionTabs, _ => _.ReloadAll());
         }
 
 
-        protected override void OnWindowClosing(CancelEventArgs cancelEvtArgs)
+        protected override async void OnWindowClosing(CancelEventArgs cancelEvtArgs)
         {
-            if (CanEncode) UpdateDatabasesBeforeExit();
+            if (!CanEncode) return;
+            cancelEvtArgs.Cancel = true;
+            StartBeingBusy("Updating Vacants & Uncollecteds ...");
+            await Task.Run(() => UpdateDatabasesBeforeExit());
+            StopBeingBusy();
+            Application.Current.Shutdown();
         }
 
 
