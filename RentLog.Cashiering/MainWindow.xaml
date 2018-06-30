@@ -62,6 +62,7 @@
             <dragz:TabablzControl Grid.Column="2" x:Name="tabs"
                                   TabIndex="0"
                                   ItemsSource="{Binding SectionTabs}"
+                                  SelectedIndex="{Binding CurrentTabIndex, UpdateSourceTrigger=PropertyChanged}"
                                   FixedHeaderCount="{Binding SectionTabs.Count}">
 
                 <dragz:TabablzControl.Resources>

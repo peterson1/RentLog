@@ -12,6 +12,7 @@ using RentLog.DomainLib45.BaseViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace RentLog.Cashiering
@@ -52,7 +53,12 @@ namespace RentLog.Cashiering
         public OtherColxnsVM         OtherColxns      { get; }
         public BankDepositsVM        BankDeposits     { get; }
         public PostAndCloseVM        PostAndClose     { get; }
-        public NextDayOpenerVM       NextDayOpener    { get; set; }
+        public NextDayOpenerVM       NextDayOpener    { get; }
+        public int                   CurrentTabIndex  { get; set; }
+
+
+        public void OnCurrentTabIndexChanged()
+            => AppArgs.CurrentSection = SectionTabs[CurrentTabIndex].Section;
 
 
         private bool IsPrivilegedUser()
@@ -81,15 +87,29 @@ namespace RentLog.Cashiering
         protected override async Task OnRefreshClickedAsync()
         {
             await NextDayOpener.RunIfNeeded();
-            ReloadSectionTabs();
+            ReloadAllSectionTabs();
             CashierColxns.ReloadFromDB();
             OtherColxns  .ReloadFromDB();
             BankDeposits .ReloadFromDB();
-            PostAndClose .UpdateTotals();
+            PostAndClose.UpdateTotals();
         }
 
 
-        private void ReloadSectionTabs()
+        //public async Task ReloadCurrentSectionTab()
+        //{
+        //    if (IsBusy) return;
+        //    StartBeingBusy($"Reloading “{AppArgs.CurrentSection}”...");
+        //    await Task.Run(() =>
+        //    {
+        //        SectionTabs[CurrentTabIndex].ReloadAll();
+        //        PostAndClose.UpdateTotals();
+        //    });
+        //    StopBeingBusy();
+        //}
+        //public SectionTabVM CurrentSectionTab => SectionTabs[CurrentTabIndex];
+
+
+        private void ReloadAllSectionTabs()
         {
             var list = new List<SectionTabVM>();
             var all  = AppArgs.MarketState.Sections.GetAll();
@@ -98,6 +118,8 @@ namespace RentLog.Cashiering
                 list.Add(new SectionTabVM(sec, this));
 
             AsUI(() => SectionTabs.SetItems(list));
+            AppArgs.CurrentSection = SectionTabs.FirstOrDefault()?.Section;
+            CurrentTabIndex = SectionTabs.Any() ? 0 : -1;
 
             foreach (var tab in SectionTabs)
                 tab.ReloadAll();
