@@ -1,10 +1,6 @@
-﻿using CommonTools.Lib11.DatabaseTools;
-using PropertyChanged;
+﻿using PropertyChanged;
 using RentLog.Cashiering.CommonControls;
-using RentLog.DomainLib11.CollectionRepos;
-using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
-using RentLog.DomainLib45;
 using System;
 
 namespace RentLog.Cashiering.SectionTabs.IntendedCollections
@@ -24,9 +20,7 @@ namespace RentLog.Cashiering.SectionTabs.IntendedCollections
         }
 
 
-        //protected override void OnItemOpened(IntendedColxnDTO e) => _tab.EditIntendedColxn(e);
         protected override void LoadRecordForEditing(IntendedColxnDTO rec) => _tab.EditIntendedColxn(rec);
-
         protected override bool CanDeleteRecord(IntendedColxnDTO rec) => Main.CanEncode;
         protected override string ListTitle => "Lease Collections";
         protected override Func<IntendedColxnDTO, LeaseDTO> LeaseGetter  => _ => _.Lease;

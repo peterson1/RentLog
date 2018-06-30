@@ -87,10 +87,10 @@ namespace RentLog.Cashiering
         protected override async Task OnRefreshClickedAsync()
         {
             await NextDayOpener.RunIfNeeded();
-            ReloadAllSectionTabs();
-            CashierColxns.ReloadFromDB();
-            OtherColxns  .ReloadFromDB();
-            BankDeposits .ReloadFromDB();
+            Parallel.Invoke(() => ReloadAllSectionTabs(),
+                            () => CashierColxns.ReloadFromDB(),
+                            () => OtherColxns.ReloadFromDB(),
+                            () => BankDeposits.ReloadFromDB());
             PostAndClose.UpdateTotals();
         }
 
@@ -121,8 +121,9 @@ namespace RentLog.Cashiering
             AppArgs.CurrentSection = SectionTabs.FirstOrDefault()?.Section;
             CurrentTabIndex = SectionTabs.Any() ? 0 : -1;
 
-            foreach (var tab in SectionTabs)
-                tab.ReloadAll();
+            //foreach (var tab in SectionTabs)
+            //    tab.ReloadAll();
+            Parallel.ForEach(SectionTabs, _ => _.ReloadAll());
         }
 
 

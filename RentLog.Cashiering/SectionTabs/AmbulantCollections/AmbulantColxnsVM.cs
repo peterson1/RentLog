@@ -23,6 +23,7 @@ namespace RentLog.Cashiering.SectionTabs.AmbulantCollections
         private static IAmbulantColxnsRepo GetRepo(SectionDTO sec, MainWindowVM main)
             => main.ColxnsDB.AmbulantColxns[sec.Id];
 
+
         protected override Func<AmbulantColxnDTO, decimal> SummedAmount => _ => _.Amount;
         protected override string ListTitle => "Ambulant Collections";
         protected override void AddNewItem() => _crud.EncodeNewDraftCmd.ExecuteIfItCan();

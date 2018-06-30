@@ -4,7 +4,7 @@ using RentLog.Cashiering.SectionTabs.IntendedCollections;
 using RentLog.Cashiering.SectionTabs.NoOperations;
 using RentLog.Cashiering.SectionTabs.Uncollecteds;
 using RentLog.DomainLib11.DTOs;
-using System;
+using System.Threading.Tasks;
 
 namespace RentLog.Cashiering.SectionTabs
 {
@@ -37,9 +37,9 @@ namespace RentLog.Cashiering.SectionTabs
 
         internal void ReloadAll()
         {
-            IntendedColxns.ReloadFromDB();
-            AmbulantColxns.ReloadFromDB();
-            NoOperations  .ReloadFromDB();
+            Parallel.Invoke(() => IntendedColxns.ReloadFromDB(),
+                            () => AmbulantColxns.ReloadFromDB(),
+                            () => NoOperations  .ReloadFromDB());
             Uncollecteds  .ReloadFromDB();
         }
 
