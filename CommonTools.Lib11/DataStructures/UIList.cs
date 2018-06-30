@@ -9,20 +9,11 @@ namespace CommonTools.Lib11.DataStructures
     public class UIList<T> : ObservableCollection<T>
     {
         public event EventHandler<T> ItemOpened    = delegate { };
-        //private      EventHandler<T> _itemOpened;
-        //public event EventHandler<T>  ItemOpened
-        //{
-        //    add    { _itemOpened -= value; _itemOpened += value; }
-        //    remove { _itemOpened -= value; }
-        //}
         public event EventHandler<T> ItemDeleted   = delegate { };
         public event EventHandler    ItemsReplaced = delegate { };
-        //public event EventHandler<T> DeleteCurrentConfirmed = delegate { };
 
 
-        public UIList()
-        {
-        }
+        public UIList() { }
 
         public UIList(IEnumerable<T> rowItems)
         {
@@ -37,9 +28,9 @@ namespace CommonTools.Lib11.DataStructures
         }
 
 
-        public double  SummaryAmount  { get; set; }
-        //public decimal TotalSum       { get; set; }
-        public T       CurrentItem    { get; set; }
+        public double  SummaryAmount    { get; set; }
+        public T       CurrentItem      { get; set; }
+        public bool    IsReplacingItems { get; private set; }
 
 
         public ObservableCollection<T>  SummaryRows  { get; } = new ObservableCollection<T>();
@@ -65,11 +56,15 @@ namespace CommonTools.Lib11.DataStructures
 
         public void SetItems(IEnumerable<T> items)
         {
+            if (IsReplacingItems) return;
+            IsReplacingItems = true;
+
             this.Clear();
 
             items?.ForEach(_ => this.Add(_));
 
             ItemsReplaced?.Invoke(this, EventArgs.Empty);
+            IsReplacingItems = false;
         }
 
 
