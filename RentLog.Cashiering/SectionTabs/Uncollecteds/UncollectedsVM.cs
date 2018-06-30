@@ -18,7 +18,7 @@ namespace RentLog.Cashiering.SectionTabs.Uncollecteds
 
 
         public UncollectedsVM(SectionTabVM sectionTabVM, MainWindowVM main) 
-            : base(GetRepo(sectionTabVM, main), main, false)
+            : base(GetRepo(sectionTabVM, main), main)
         {
             _tab         = sectionTabVM;
             CanAddRows   = false;
@@ -68,6 +68,7 @@ namespace RentLog.Cashiering.SectionTabs.Uncollecteds
             => main.ColxnsDB.Uncollecteds[tab.Section.Id];
 
 
+        protected override void OnTotalSumChanged() { }
         protected override bool CanDeleteRecord(UncollectedLeaseDTO rec) => Main.CanEncode;
         protected override string ListTitle => "Uncollecteds";
         protected override Func<UncollectedLeaseDTO, LeaseDTO> LeaseGetter  => _ => _.Lease;

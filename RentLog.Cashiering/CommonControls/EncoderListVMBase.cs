@@ -12,14 +12,14 @@ namespace RentLog.Cashiering.CommonControls
         : SavedListVMBase<TDTO, ITenantDBsDir>
         where TDTO : IDocumentDTO
     {
-        public EncoderListVMBase(ISimpleRepo<TDTO> repository, MainWindowVM mainWindowVM, bool refreshMainOnUpdatedTotal = true) : base(repository, mainWindowVM.AppArgs, false)
+        public EncoderListVMBase(ISimpleRepo<TDTO> repository, MainWindowVM mainWindowVM) : base(repository, mainWindowVM.AppArgs, false)
         {
             Main       = mainWindowVM;
             CanAddRows = Main.CanEncode;
             Caption    = ListTitle;
 
-            if (refreshMainOnUpdatedTotal)
-                TotalSumChanged += (s, e) => Main.ClickRefresh();
+            //if (refreshMainOnUpdatedTotal)
+            TotalSumChanged += (s, e) => OnTotalSumChanged();
         }
 
 
@@ -28,6 +28,8 @@ namespace RentLog.Cashiering.CommonControls
         public bool          TotalVisible  { get; protected set; } = true;
 
         protected abstract string ListTitle { get; }
+
+        protected virtual void OnTotalSumChanged() => Main.ClickRefresh();
 
 
         protected override IEnumerable<TDTO> PostProcessQueried(IEnumerable<TDTO> items)
