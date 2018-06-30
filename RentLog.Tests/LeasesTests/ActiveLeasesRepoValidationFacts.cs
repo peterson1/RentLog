@@ -300,9 +300,11 @@ namespace RentLog.Tests.LeasesTests
             var sut     = new ActiveLeasesRepo1(moq.Object, mkt.Object);
             validSample = ValidSampleDTO();
 
+            moq.Setup(_ => _.Any()).Returns(true);
+
             moq.Setup(_ => _.GetAll())
                 .Returns(new List<LeaseDTO>
-                    { new LeaseDTO { Id = 456 } });
+                    { new LeaseDTO { Stall = new StallDTO{ Id = 456 } } });
 
             return sut;
         }
