@@ -59,7 +59,8 @@ namespace RentLog.Cashiering
 
 
         public void OnCurrentTabIndexChanged()
-            => AppArgs.CurrentSection = SectionTabs[CurrentTabIndex].Section;
+            => AppArgs.CurrentSection = CurrentTabIndex == -1 ? null 
+                                      : SectionTabs[CurrentTabIndex].Section;
 
 
         private bool IsPrivilegedUser()

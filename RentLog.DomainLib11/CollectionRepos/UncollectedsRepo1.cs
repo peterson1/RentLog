@@ -1,8 +1,6 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
-using RentLog.DomainLib11.BillingRules;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
-using RentLog.DomainLib11.MarketStateRepos;
 using RentLog.DomainLib11.Models;
 using RentLog.DomainLib11.StateTransitions;
 using System;
@@ -16,6 +14,7 @@ namespace RentLog.DomainLib11.CollectionRepos
         private ITenantDBsDir _dir;
         private DateTime      _date;
         private SectionDTO    _sec;
+        private Dictionary<int, DailyBillDTO> _soaRowsByLseID;
 
 
         public UncollectedsRepo1(SectionDTO sectionDTO, DateTime date, ISimpleRepo<UncollectedLeaseDTO> simpleRepo, ITenantDBsDir tenantDBsDir) : base(simpleRepo)
@@ -27,6 +26,17 @@ namespace RentLog.DomainLib11.CollectionRepos
         }
 
 
+        private Dictionary<int, DailyBillDTO> CreateSoaRowsDictionary()
+        {
+            var dict = new Dictionary<int, DailyBillDTO>();
+
+            foreach (var lse in GetActiveLeases())
+                dict.Add(lse.Id, _dir.Balances.GetBill(lse, _date));
+
+            return dict;
+        }
+
+
         public List<UncollectedLeaseDTO> InferUncollecteds(
             IEnumerable<IntendedColxnDTO> intendedColxns, 
             IEnumerable<UncollectedLeaseDTO> didNotOperate)
@@ -34,6 +44,10 @@ namespace RentLog.DomainLib11.CollectionRepos
             var asOfDate    = _dir.Collections.UnclosedDate();
             var intendedIDs = intendedColxns.Select(_ => _.Lease.Id).ToList();
             var noOpsIDs    = didNotOperate.Select(_ => _.Lease.Id).ToList();
+
+            if (_soaRowsByLseID == null)
+                _soaRowsByLseID = CreateSoaRowsDictionary();
+
             var actives     = GetUncollecteds(GetActiveLeases(), 
                                 asOfDate, intendedIDs, noOpsIDs);
             var inactvs     = GetUncollecteds(GetInactiveLeases(),
@@ -47,11 +61,21 @@ namespace RentLog.DomainLib11.CollectionRepos
 
         private List<UncollectedLeaseDTO> GetUncollecteds(
             List<LeaseDTO> leases, DateTime asOfDate,
-            IEnumerable<int> intendedColxns, 
+            IEnumerable<int> intendedColxns,
             IEnumerable<int> didNotOperate)
-            => leases.Where (_ => IsUncollected(_, asOfDate, intendedColxns, didNotOperate))
-                     .Select(_ => CreateUncollected(_))
-                     .ToList();
+        {
+            var uncolLses = GetUncollectedLeases(leases, asOfDate, intendedColxns, didNotOperate);
+            var list      = new List<UncollectedLeaseDTO>();
+
+            foreach (var lse in uncolLses)
+                list.Add(CreateUncollected(lse));
+
+            return list;
+        }
+
+
+        private List<LeaseDTO> GetUncollectedLeases(List<LeaseDTO> leases, DateTime asOfDate, IEnumerable<int> intendedColxns, IEnumerable<int> didNotOperate) 
+            => leases.Where(_ => IsUncollected(_, asOfDate, intendedColxns, didNotOperate)).ToList();
 
 
         private bool IsUncollected(
@@ -77,7 +101,13 @@ namespace RentLog.DomainLib11.CollectionRepos
 
         public decimal? GetDue(LeaseDTO lse, BillCode billCode)
         {
-            var bill = _dir.Balances.GetBill(lse, _date).For(billCode);
+            if (_soaRowsByLseID == null)
+                _soaRowsByLseID = CreateSoaRowsDictionary();
+
+            if (!_soaRowsByLseID.TryGetValue(lse.Id, out DailyBillDTO row))
+                row = _dir.Balances.GetBill(lse, _date);
+            
+            var bill = row.For(billCode);
             return _dir.DailyBiller.GetBillComposer(billCode).GetTotalDue(lse, bill, _date);
         }
 
@@ -90,12 +120,15 @@ namespace RentLog.DomainLib11.CollectionRepos
 
 
         private List<LeaseDTO> GetActiveLeases()
-            => _dir.MarketState.ActiveLeases.GetAll();
+            => _dir.MarketState.ActiveLeases.GetAll()
+                   .Where(_ => _.Stall.Section.Id == _sec.Id)
+                   .ToList();
 
 
         private List<LeaseDTO> GetInactiveLeases()
             => _dir.MarketState
                    .InactiveLeases.GetAll()
+                   .Where(_ => _.Stall.Section.Id == _sec.Id)
                    .Select(_ => _ as LeaseDTO)
                    .ToList();
     }
