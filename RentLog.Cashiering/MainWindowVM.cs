@@ -113,15 +113,16 @@ namespace RentLog.Cashiering
 
         private void ReloadAllSectionTabs()
         {
-            var list = new List<SectionTabVM>();
-            var all  = AppArgs.MarketState.Sections.GetAll();
+            var lastIndx = CurrentTabIndex;
+            var list     = new List<SectionTabVM>();
+            var all      = AppArgs.MarketState.Sections.GetAll();
 
             foreach (var sec in all)
                 list.Add(new SectionTabVM(sec, this));
 
             AsUI(() => SectionTabs.SetItems(list));
             AppArgs.CurrentSection = SectionTabs.FirstOrDefault()?.Section;
-            CurrentTabIndex = SectionTabs.Any() ? 0 : -1;
+            CurrentTabIndex = SectionTabs.Any() ? lastIndx : -1;
 
             Parallel.ForEach(SectionTabs, _ => _.ReloadAll());
         }
