@@ -15,8 +15,8 @@ namespace RentLog.Cashiering.SectionTabs
         {
             Main           = main;
             Section        = sec;
-            Collector      = main.ColxnsDB.GetCollector(sec);
-            IntendedColxns = new IntendedColxnsVM(this, Collector, sec, main);
+            //Collector      = main.ColxnsDB.GetCollector(sec);
+            IntendedColxns = new IntendedColxnsVM(this, sec, main);
             AmbulantColxns = new AmbulantColxnsVM(sec, main);
             NoOperations   = new NoOperationsVM  (sec, main);
             Uncollecteds   = new UncollectedsVM  (this, main);
@@ -25,12 +25,12 @@ namespace RentLog.Cashiering.SectionTabs
 
         public MainWindowVM         Main             { get; }
         public SectionDTO           Section          { get; }
-        public CollectorDTO         Collector        { get; }
         public IntendedColxnsVM     IntendedColxns   { get; }
         public AmbulantColxnsVM     AmbulantColxns   { get; }
         public NoOperationsVM       NoOperations     { get; }
         public UncollectedsVM       Uncollecteds     { get; }
 
+        public CollectorDTO Collector => IntendedColxns?.CurrentCollector;
 
         public decimal SectionTotal => IntendedColxns.TotalSum
                                      + AmbulantColxns.TotalSum;

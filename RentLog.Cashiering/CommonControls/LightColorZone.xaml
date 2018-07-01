@@ -22,6 +22,11 @@
             <Setter Property="Padding" Value="0" />
         </Style>
 
+        <Style TargetType="ComboBox"
+               BasedOn="{StaticResource MaterialDesignComboBox}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        
     </UserControl.Resources>
     <mat:ColorZone Mode="PrimaryLight"
                    Padding="15 8 15 8">
@@ -31,9 +36,17 @@
                         MinHeight="20">
                 <TextBlock Text="{Binding Caption}" 
                            Style="{StaticResource txtCaption}" />
+
+                <ComboBox Visibility="{Binding ShowCollectors, Converter={StaticResource visIfTrue}}"
+                          ItemsSource="{Binding Collectors}"
+                          SelectedItem="{Binding CurrentCollector, UpdateSourceTrigger=PropertyChanged, TargetNullValue='select a collector'}"
+                          IsEnabled="{Binding Main.CanEncode}"
+                          Margin="5 0 0 0" />
+                
                 <TextBlock Text="{Binding ItemsList.Count, StringFormat={}({0:N0})}" 
                            Style="{StaticResource txtCaption}"
                            Margin="5 0 0 0" />
+
             </StackPanel>
 
             <StackPanel Orientation="Horizontal"

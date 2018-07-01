@@ -11,12 +11,16 @@ namespace RentLog.Cashiering.SectionTabs.IntendedCollections
         private SectionTabVM _tab;
 
 
-        public IntendedColxnsVM(SectionTabVM sectionTabVM, CollectorDTO collector, SectionDTO sec, MainWindowVM main) 
+        public IntendedColxnsVM(SectionTabVM sectionTabVM, SectionDTO sec, MainWindowVM main) 
             : base(main.ColxnsDB.IntendedColxns[sec.Id], main)
         {
             _tab       = sectionTabVM;
             CanAddRows = false;
-            Caption    = $"{ListTitle} by {collector}";
+            Caption    = $"{ListTitle} by ";
+            FillCollectorsList(main.ColxnsDB.GetCollector(sec));
+
+            CurrentCollectorChanged += (s, e) 
+                => main.ColxnsDB.SetCollector(sec, e);
         }
 
 

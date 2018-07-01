@@ -22,7 +22,8 @@ namespace RentLog.DomainLib11.CollectionRepos
         bool          IsOpened      ();
         void          MarkAsOpened  ();
         void          MarkAsPosted  ();
-        CollectorDTO  GetCollector  (SectionDTO section);
         CollectorDTO  GetCollector  (LeaseDTO lease);
+        CollectorDTO  GetCollector  (SectionDTO section);
+        void          SetCollector  (SectionDTO section, CollectorDTO collector);
     }
 }

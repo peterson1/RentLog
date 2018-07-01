@@ -44,12 +44,7 @@ namespace RentLog.DomainLib11.CollectionRepos
 
         public CollectorDTO GetCollector(SectionDTO sec)
         {
-            //var key = string.Format(COLLECTOR_KEY, sec.Id);
-            //var dto = _meta.Find(_ => _.Name == key);
             var val = _meta[string.Format(COLLECTOR_KEY, sec.Id)];
-
-            //if (!dto.Any()) return null;
-            //var idText = dto.Single().Value;
             if (val.IsBlank()) return null;
 
             if (!int.TryParse(val, out int id))
@@ -63,6 +58,13 @@ namespace RentLog.DomainLib11.CollectionRepos
         {
             _mkt.RefreshStall(lease);
             return GetCollector(lease.Stall.Section);
+        }
+
+
+        public void SetCollector(SectionDTO section, CollectorDTO collector)
+        {
+            var key = string.Format(COLLECTOR_KEY, section.Id);
+            _meta[key] = collector.Id.ToString();
         }
 
 
