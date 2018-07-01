@@ -15,6 +15,7 @@ namespace RentLog.Cashiering.SectionTabs.IntendedCollections
 
 
         public UncollectedLeaseDTO  Intention  { get; }
+        public decimal              UITotal    { get; private set; }
 
 
         protected override void ModifyDraftForInserting(IntendedColxnDTO draft)
@@ -22,6 +23,13 @@ namespace RentLog.Cashiering.SectionTabs.IntendedCollections
             draft.Lease   = Intention.Lease;
             draft.Targets = Intention.Targets;
             draft.Actuals = new BillAmounts();
+        }
+
+
+        protected override bool IsValidDraft(IntendedColxnDTO draft, out string whyInvalid)
+        {
+            UITotal = draft.Actuals.Total;
+            return base.IsValidDraft(draft, out whyInvalid);
         }
 
 

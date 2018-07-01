@@ -81,13 +81,13 @@
                 </TextBox>
             </StackPanel>
 
-            <StackPanel Margin="40 0 0 0"
-                        DataContext="{Binding Draft.Actuals}">
+            <StackPanel Margin="40 0 0 0">
 
                 <TextBlock Text="Actual Collections" 
                            Style="{StaticResource txtColHeadr}" />
 
                 <TextBox Text="{Binding Rent, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
+                         DataContext="{Binding Draft.Actuals}"
                          mat:HintAssist.Hint="Rent">
                     <int:Interaction.Behaviors>
                         <txbhv:SelectAllOnFocusBehavior />
@@ -95,6 +95,7 @@
                 </TextBox>
 
                 <TextBox Text="{Binding Rights, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
+                         DataContext="{Binding Draft.Actuals}"
                          mat:HintAssist.Hint="Rights">
                     <int:Interaction.Behaviors>
                         <txbhv:SelectAllOnFocusBehavior />
@@ -102,6 +103,7 @@
                 </TextBox>
 
                 <TextBox Text="{Binding Electric, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
+                         DataContext="{Binding Draft.Actuals}"
                          mat:HintAssist.Hint="Electric">
                     <int:Interaction.Behaviors>
                         <txbhv:SelectAllOnFocusBehavior />
@@ -109,11 +111,17 @@
                 </TextBox>
 
                 <TextBox Text="{Binding Water, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
+                         DataContext="{Binding Draft.Actuals}"
                          mat:HintAssist.Hint="Water">
                     <int:Interaction.Behaviors>
                         <txbhv:SelectAllOnFocusBehavior />
                     </int:Interaction.Behaviors>
                 </TextBox>
+
+                <TextBox Text="{Binding UITotal, StringFormat=N2, Mode=OneWay}"
+                         Style="{StaticResource txtReadOnly}"
+                         mat:HintAssist.Hint="Total" />
+
 
             </StackPanel>
 
