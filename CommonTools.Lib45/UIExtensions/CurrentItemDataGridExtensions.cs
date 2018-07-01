@@ -13,7 +13,11 @@ namespace CommonTools.Lib45.UIExtensions
             dg.MouseDoubleClick += (s, e) => act.Invoke();
             dg.PreviewKeyDown   += (s, e) =>
             {
-                if (e.Key == Key.Enter) act.Invoke();
+                if (e.Key == Key.Enter)
+                {
+                    e.Handled = true;
+                    act.Invoke();
+                }
             };
         }
 
