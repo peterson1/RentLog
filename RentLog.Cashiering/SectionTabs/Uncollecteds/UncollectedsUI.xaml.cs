@@ -9,8 +9,8 @@ namespace RentLog.Cashiering.SectionTabs.Uncollecteds
             InitializeComponent();
             Loaded += (a, b) =>
             {
-                VM.ItemsList.ItemOpened  += (c, d) => TryFocusOnFilter();
-                VM.Main.RefreshCompleted += (c, d) => TryFocusOnFilter();
+                VM.ItemsList.ItemOpened  += (c, d) => TryFocusOnTable();
+                VM.Main.RefreshCompleted += (c, d) => TryFocusOnTable();
             };
         }
 
@@ -19,6 +19,13 @@ namespace RentLog.Cashiering.SectionTabs.Uncollecteds
         {
             if (!filtr.IsVisible) return;
             filtr.txt1.Focus();
+        }
+
+
+        private void TryFocusOnTable()
+        {
+            if (!tbl.IsVisible) return;
+            tbl.dg.Focus();
         }
 
 
