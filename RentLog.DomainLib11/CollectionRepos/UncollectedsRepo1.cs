@@ -107,7 +107,7 @@ namespace RentLog.DomainLib11.CollectionRepos
             if (!_soaRowsByLseID.TryGetValue(lse.Id, out DailyBillDTO row))
                 row = _dir.Balances.GetBill(lse, _date);
             
-            var bill = row.For(billCode);
+            var bill = row?.For(billCode);
             return _dir.DailyBiller.GetBillComposer(billCode).GetTotalDue(lse, bill, _date);
         }
 

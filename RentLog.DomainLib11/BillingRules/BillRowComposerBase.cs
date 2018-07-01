@@ -25,11 +25,15 @@ namespace RentLog.DomainLib11.BillingRules
 
 
         public decimal GetTotalDue(LeaseDTO lse, BillState state, DateTime date)
-            => (state.OpeningBalance ?? 0)
-              + state.TotalPenalties
-              + state.TotalAdjustments
-              + GetRegularDue(lse, state, date);
-
+        {
+            if (state == null)
+                return GetRegularDue(lse, state, date);
+            else
+            return (state.OpeningBalance ?? 0)
+                  + state.TotalPenalties
+                  + state.TotalAdjustments
+                  + GetRegularDue(lse, state, date);
+        }
 
         public decimal ComputeClosingBalance(LeaseDTO lse, BillState billState, DateTime date)
             => GetTotalDue(lse, billState, date) - billState.TotalPayments;
