@@ -166,6 +166,7 @@
     <Compile Include="InputDialogs\PopUpInputStringWindow.xaml.cs">
       <DependentUpon>PopUpInputStringWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InputExtensions\KeyExtensions.cs" />
     <Compile Include="LicenseTools\SeatLicenser.cs" />
     <Compile Include="LiteDbTools\MetadataCollection.cs" />
     <Compile Include="LiteDbTools\NamedCollectionBase.cs" />
