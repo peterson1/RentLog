@@ -16,7 +16,6 @@ namespace RentLog.Cashiering.SectionTabs.Uncollecteds
                 dg.ConfirmToDelete<UncollectedLeaseDTO>(_ => _.Lease.TenantAndStall,
                     null, "Move [{0}] to “Did-Not-Operate”?", "Please confirm");
                 dg.F4ToViewSoA<UncollectedLeaseDTO>(_ => _.Lease, VM.AppArgs);
-                //dg.ScrollToEnd();
 
                 dg.GotKeyboardFocus += (a, b) =>
                 {
