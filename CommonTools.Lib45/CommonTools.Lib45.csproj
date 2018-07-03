@@ -222,6 +222,7 @@
     <Compile Include="ValueConverters\VisibleIfFalseConverter.cs" />
     <Compile Include="ValueConverters\VisibleIfNotNullConverter.cs" />
     <Compile Include="ValueConverters\VisibleIfNotZeroConverter.cs" />
+    <Compile Include="ValueConverters\VisibleIfNullConverter.cs" />
     <Compile Include="ValueConverters\VisibleIfTrueConverter.cs" />
     <Page Include="BusyIndicators\BusyDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
