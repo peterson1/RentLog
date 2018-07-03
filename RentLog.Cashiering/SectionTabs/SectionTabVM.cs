@@ -32,6 +32,8 @@ namespace RentLog.Cashiering.SectionTabs
 
         public CollectorDTO Collector => IntendedColxns?.CurrentCollector;
 
+        public bool HasCollector => Collector != null;
+
         public decimal SectionTotal => IntendedColxns.TotalSum
                                      + AmbulantColxns.TotalSum;
 

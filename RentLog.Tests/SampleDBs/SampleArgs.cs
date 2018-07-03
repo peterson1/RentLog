@@ -5,6 +5,7 @@ using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
 using RentLog.DomainLib45;
 using System.IO;
+using System.Threading;
 
 namespace RentLog.Tests.SampleDBs
 {
@@ -33,6 +34,10 @@ namespace RentLog.Tests.SampleDBs
         {
             var dbPath = Path.Combine(DirPath,
                             folderName, "MarketState.ldb");
+
+            while (!File.Exists(dbPath))
+                Thread.Sleep(100);
+
             File.Exists(dbPath).Should().BeTrue();
             return dbPath;
         }

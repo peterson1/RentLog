@@ -10,28 +10,34 @@ using Xunit;
 namespace RentLog.Tests.PostAndCloseTests
 {
     [Trait("Post&Close", "Temp Copy")]
-    public class PostAndCloseFacts : TempCopyTestBase
+    public class PostAndCloseFacts2 : TempCopyTestBase
     {
         protected override string SampleDirName 
-            => SampleDir.JUN17_BALANCED;
+            => SampleDir.JUN29_F_MEY;
 
 
-        [Fact(DisplayName = "Post&Close June 17")]
+        [Fact(DisplayName = "Post&Close June 29", Skip ="undone")]
         public async Task TestMethod00001()
         {
             var arg = GetTempSampleArgs("Supervisor");
-            arg.Collections.LastPostedDate().Should().Be(16.June(2018));
-            arg.Collections.UnclosedDate().Should().Be(17.June(2018));
-            arg.Balances.TotalOverdues().Rent.Should().Be(22_651.67M);
-            arg.Balances.TotalOverdues().Rights.Should().Be(12_000M);
+            //arg.Collections.LastPostedDate().Should().Be(16.June(2018));
+            //arg.Collections.UnclosedDate().Should().Be(17.June(2018));
+            //arg.Balances.TotalOverdues().Rent.Should().Be(22_651.67M);
+            //arg.Balances.TotalOverdues().Rights.Should().Be(12_000M);
 
-            var vm = new MainWindowVM(17.June(2018), arg, false);
+            var vm = new MainWindowVM(29.June(2018), arg, false);
 
             await vm.RefreshCmd.RunAsync();
 
             vm.CanEncode.Should().BeFalse();
             vm.CanReview.Should().BeTrue();
-            vm.PostAndClose.IsBalanced.Should().BeTrue();
+            vm.PostAndClose.CanPostAndClose().Should().BeFalse();
+
+            var dudes = vm.SectionTabs[0].IntendedColxns.Collectors;
+            vm.SectionTabs[0].IntendedColxns.CurrentCollector = dudes[0];
+            vm.SectionTabs[1].IntendedColxns.CurrentCollector = dudes[0];
+            vm.SectionTabs[2].IntendedColxns.CurrentCollector = dudes[0];
+            vm.PostAndClose.CanPostAndClose().Should().BeTrue();
 
             await vm.PostAndClose.RunPostAndClose();
 

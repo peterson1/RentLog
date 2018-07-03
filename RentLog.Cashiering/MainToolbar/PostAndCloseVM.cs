@@ -32,10 +32,11 @@ namespace RentLog.Cashiering.MainToolbar
         public IR2Command  RefreshCmd => Main.RefreshCmd;
 
 
-        private bool CanPostAndClose()
+        public bool CanPostAndClose()
         {
             if (!Main.CanReview) return false;
             if (Main.IsBusy) return false;
+            if (!Main.SectionTabs.All(_ => _.HasCollector)) return false;
             return IsBalanced;
         }
 

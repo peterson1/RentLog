@@ -37,11 +37,18 @@
                 <TextBlock Text="{Binding Caption}" 
                            Style="{StaticResource txtCaption}" />
 
-                <ComboBox Visibility="{Binding ShowCollectors, Converter={StaticResource visIfTrue}}"
-                          ItemsSource="{Binding Collectors}"
-                          SelectedItem="{Binding CurrentCollector, UpdateSourceTrigger=PropertyChanged, TargetNullValue='select a collector'}"
-                          IsEnabled="{Binding Main.CanEncode}"
-                          Margin="5 0 0 0" />
+                <StackPanel Orientation="Horizontal"
+                            Visibility="{Binding ShowCollectors, Converter={StaticResource visIfTrue}}"
+                            Margin="5 0 0 0">
+                    <ComboBox ItemsSource="{Binding Collectors}"
+                              SelectedItem="{Binding CurrentCollector, UpdateSourceTrigger=PropertyChanged}"
+                              IsEnabled="{Binding Main.CanEncode}" />
+                    <TextBlock Text="select a collector" 
+                               Foreground="Red"
+                               VerticalAlignment="Center"
+                               Visibility="{Binding CurrentCollector, Converter={StaticResource visIfNull}}"
+                               Margin="5 0 20 0" />
+                </StackPanel>
                 
                 <TextBlock Text="{Binding ItemsList.Count, StringFormat={}({0:N0})}" 
                            Style="{StaticResource txtCaption}"
