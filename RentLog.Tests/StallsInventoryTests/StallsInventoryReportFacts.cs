@@ -18,7 +18,9 @@ namespace RentLog.Tests.StallsInventoryTests
         public void May4()
         {
             var arg = SampleDir.Lease197();
-            var sut = new StallsInventoryReport(4.May(2018), arg);
+            var db  = arg.Collections.For(4.May(2018));
+            var mkt = arg.MarketState;
+            var sut = new StallsInventoryReport(db, mkt);
 
             sut.Count.Should().Be(3);
             sut.ContainsKey(DRY).Should().BeTrue();
@@ -51,6 +53,48 @@ namespace RentLog.Tests.StallsInventoryTests
             sut[WET].Vacants.Count.Should().Be(19);
             sut[WET].VacantRent.Should().Be(1560);
             sut[WET].VacantRate.Should().BeApproximately(0.19M, 0.01M);
+        }
+
+
+        [Fact(DisplayName = "Jul 3")]
+        public void Jul3()
+        {
+            var arg = SampleDir.Jul3_GRY();
+            var db  = arg.Collections.For(3.July(2018));
+            var mkt = arg.MarketState;
+            var sut = new StallsInventoryReport(db, mkt);
+
+            sut.Count.Should().Be(3);
+            sut.ContainsKey(DRY).Should().BeTrue();
+            sut.ContainsKey(FRZ).Should().BeTrue();
+            sut.ContainsKey(WET).Should().BeTrue();
+
+            sut[DRY].TotalCount.Should().Be(68);
+            sut[DRY].TotalRent.Should().Be(11767);
+            sut[DRY].Occupieds.Count.Should().Be(38);
+            sut[DRY].OccupiedRent.Should().Be(6615);
+            sut[DRY].OccupiedRate.Should().BeApproximately(0.56M, 0.01M);
+            sut[DRY].Vacants.Count.Should().Be(30);
+            sut[DRY].VacantRent.Should().Be(5152);
+            sut[DRY].VacantRate.Should().BeApproximately(0.44M, 0.01M);
+
+            sut[FRZ].TotalCount.Should().Be(8);
+            sut[FRZ].TotalRent.Should().Be(0);
+            sut[FRZ].Occupieds.Count.Should().Be(0);
+            sut[FRZ].OccupiedRent.Should().Be(0);
+            sut[FRZ].OccupiedRate.Should().BeApproximately(0, 0.01M);
+            sut[FRZ].Vacants.Count.Should().Be(8);
+            sut[FRZ].VacantRent.Should().Be(0);
+            sut[FRZ].VacantRate.Should().BeApproximately(1, 0.01M);
+
+            sut[WET].TotalCount.Should().Be(104);
+            sut[WET].TotalRent.Should().Be(8720);
+            sut[WET].Occupieds.Count.Should().Be(71);
+            sut[WET].OccupiedRent.Should().Be(6030);
+            sut[WET].OccupiedRate.Should().BeApproximately(0.68M, 0.01M);
+            sut[WET].Vacants.Count.Should().Be(33);
+            sut[WET].VacantRent.Should().Be(2690);
+            sut[WET].VacantRate.Should().BeApproximately(0.32M, 0.01M);
         }
     }
 }

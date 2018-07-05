@@ -1,19 +1,37 @@
-﻿using FluentAssertions.Extensions;
+﻿using FluentAssertions;
+using FluentAssertions.Extensions;
 using RentLog.DomainLib11.Reporters;
 using RentLog.Tests.SampleDBs;
 using Xunit;
 
 namespace RentLog.Tests.DailyStatusTests
 {
-    //[Trait("Daily Status", "Sample DBs")]
+    [Trait("Daily Status", "Sample DBs")]
     public class DailyStatusReportFacts
     {
-        //[Fact(DisplayName = "May 4", Skip = "Undone")]
+        const int DRY = 2;
+        const int FRZ = 3;
+        const int WET = 1;
+        const int OFC = 0;
+
+
+        [Fact(DisplayName = "Jul 3")]
         public void May4()
         {
-            var arg = SampleDir.Lease197();
-            var sut = new DailyStatusReport(4.May(2018), arg);
+            var arg = SampleDir.Jul3_GRY();
+            var sut = new DailyStatusReport(3.July(2018), arg);
 
+            sut.StallsInventory.Should().HaveCount(3);
+
+            sut.SectionColxns.Should().HaveCount(4);
+
+            sut.OtherColxns.Should().HaveCount(1);
+            sut.OtherColxns.SummaryRows.Should().HaveCount(1);
+            sut.OtherColxns.SummaryRows[0].Amount.Should().Be(434);
+
+            sut.BankDeposits.Should().HaveCount(2);
+            sut.BankDeposits.SummaryRows.Should().HaveCount(1);
+            sut.BankDeposits.SummaryRows[0].Amount.Should().Be(14135);
         }
     }
 }
