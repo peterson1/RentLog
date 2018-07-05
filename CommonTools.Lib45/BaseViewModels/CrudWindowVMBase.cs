@@ -88,11 +88,16 @@ namespace CommonTools.Lib45.BaseViewModels
 
         public bool? EditCurrentRecord(TDraft currentItem)
         {
+            SetupForUpdate(currentItem);
+            return ShowModalWindow();
+        }
+
+
+        public void SetupForUpdate(TDraft currentItem)
+        {
             SaveDraftCmd = R2Command.Async(ExecuteUpdateRecord, _ => CanSave(), $"Save {TypeDescription}");
             Draft = CreateDraftFromRecord(currentItem);
             ModifyDraftForUpdating(Draft);
-            //return this.Show<TWindow>(showModal: true);
-            return ShowModalWindow();
         }
 
 
