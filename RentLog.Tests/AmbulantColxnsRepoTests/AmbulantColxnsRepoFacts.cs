@@ -24,12 +24,12 @@ namespace RentLog.Tests.AmbulantColxnsRepoTests
             sut.IsValidForDelete(obj, out why).Should().BeFalse();
 
             obj.Id = 123;
-            sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            sut.IsValidForInsert(obj, out why).Should().BeFalse();
             sut.IsValidForUpdate(obj, out why).Should().BeTrue();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.Id = -456;
-            sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            sut.IsValidForInsert(obj, out why).Should().BeFalse();
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeFalse();
         }
@@ -43,12 +43,16 @@ namespace RentLog.Tests.AmbulantColxnsRepoTests
             var obj = ValidSampleDTO();
 
             obj.PRNumber = null;
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.PRNumber = 456;
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeTrue();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
         }
@@ -62,12 +66,16 @@ namespace RentLog.Tests.AmbulantColxnsRepoTests
             var obj = ValidSampleDTO();
 
             obj.Amount = 0;
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            obj.Id = 101;
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.Amount = 123;
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            obj.Id = 101;
             sut.IsValidForUpdate(obj, out why).Should().BeTrue();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
@@ -86,12 +94,16 @@ namespace RentLog.Tests.AmbulantColxnsRepoTests
             var obj = ValidSampleDTO();
 
             obj.ReceivedFrom = "";
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.ReceivedFrom = "Someone";
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeTrue();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
         }

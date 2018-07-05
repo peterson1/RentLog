@@ -22,16 +22,21 @@ namespace RentLog.Tests.FundRequestsRepoTests
 
             obj.SerialNum = 0;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.SerialNum = 123;
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeTrue();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.SerialNum = -456;
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out why).Should().BeFalse();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
         }
@@ -46,16 +51,21 @@ namespace RentLog.Tests.FundRequestsRepoTests
 
             obj.BankAccountId = 0;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.BankAccountId = 123;
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeTrue();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.BankAccountId = -456;
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out why).Should().BeFalse();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
         }
@@ -70,11 +80,14 @@ namespace RentLog.Tests.FundRequestsRepoTests
 
             obj.Payee = null;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.Payee = "Someone";
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeTrue();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
         }
@@ -89,11 +102,14 @@ namespace RentLog.Tests.FundRequestsRepoTests
 
             obj.Purpose = null;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.Purpose = "reason";
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeTrue();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
         }
@@ -108,11 +124,14 @@ namespace RentLog.Tests.FundRequestsRepoTests
 
             obj.RequestDate = DateTime.MinValue;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.RequestDate = DateTime.Now;
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeTrue();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
         }
@@ -127,21 +146,28 @@ namespace RentLog.Tests.FundRequestsRepoTests
 
             obj.Amount = null;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.Amount = 0;
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out why).Should().BeFalse();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.Amount = 123;
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeTrue();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.Amount = -456;
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out why).Should().BeFalse();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
         }
@@ -156,11 +182,14 @@ namespace RentLog.Tests.FundRequestsRepoTests
 
             obj.Allocations[1].SubAmount = -788;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.Allocations[1].SubAmount = -789;
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeTrue();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
         }
@@ -175,11 +204,14 @@ namespace RentLog.Tests.FundRequestsRepoTests
 
             obj.Allocations[0].Account.Id = 123;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.Allocations[0].Account.Id = 0;
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeTrue();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
         }
@@ -187,7 +219,7 @@ namespace RentLog.Tests.FundRequestsRepoTests
 
         private FundRequestDTO ValidSampleDTO() => new FundRequestDTO
         {
-            Id            = 101,
+            Id            = 0,
             SerialNum     = 123,
             BankAccountId = 456,
             Payee         = "Mr. Payee Dude",

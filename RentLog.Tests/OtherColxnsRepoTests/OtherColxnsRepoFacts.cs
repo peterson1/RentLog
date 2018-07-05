@@ -24,12 +24,12 @@ namespace RentLog.Tests.OtherColxnsRepoTests
             sut.IsValidForDelete(obj, out why).Should().BeFalse();
 
             obj.Id = 123;
-            sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            sut.IsValidForInsert(obj, out why).Should().BeFalse();
             sut.IsValidForUpdate(obj, out why).Should().BeTrue();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.Id = -456;
-            sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            sut.IsValidForInsert(obj, out why).Should().BeFalse();
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeFalse();
         }
@@ -44,11 +44,14 @@ namespace RentLog.Tests.OtherColxnsRepoTests
 
             obj.DocumentRef = "";
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.DocumentRef = "efg";
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeTrue();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
         }
@@ -63,16 +66,21 @@ namespace RentLog.Tests.OtherColxnsRepoTests
 
             obj.Amount = 0;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.Amount = 123;
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeTrue();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.Amount = -456;
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out why).Should().BeFalse();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
         }
@@ -87,11 +95,14 @@ namespace RentLog.Tests.OtherColxnsRepoTests
 
             obj.Collector = null;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.Collector = new CollectorDTO();
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeTrue();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
         }
@@ -106,11 +117,14 @@ namespace RentLog.Tests.OtherColxnsRepoTests
 
             obj.GLAccount = null;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.GLAccount = new GLAccountDTO();
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeTrue();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
         }
@@ -119,7 +133,7 @@ namespace RentLog.Tests.OtherColxnsRepoTests
         private OtherColxnDTO ValidSampleDTO() 
             => new OtherColxnDTO
             {
-                Id          = 123,
+                Id          = 0,
                 Amount      = 456,
                 DocumentRef = "abc",
                 Collector   = new CollectorDTO(),

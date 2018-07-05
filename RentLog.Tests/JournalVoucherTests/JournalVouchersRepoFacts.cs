@@ -27,12 +27,12 @@ namespace RentLog.Tests.JournalVoucherTests
             sut.IsValidForDelete(obj, out why).Should().BeFalse();
 
             obj.Id = 123;
-            sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            sut.IsValidForInsert(obj, out why).Should().BeFalse();
             sut.IsValidForUpdate(obj, out why).Should().BeTrue();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.Id = -456;
-            sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            sut.IsValidForInsert(obj, out why).Should().BeFalse();
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeFalse();
         }
@@ -47,16 +47,21 @@ namespace RentLog.Tests.JournalVoucherTests
 
             obj.SerialNum = 0;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.SerialNum = 123;
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeTrue();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.SerialNum = -456;
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out why).Should().BeFalse();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
         }
@@ -71,11 +76,14 @@ namespace RentLog.Tests.JournalVoucherTests
 
             obj.Description = null;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.Description = "some desc";
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeTrue();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
         }
@@ -90,11 +98,14 @@ namespace RentLog.Tests.JournalVoucherTests
 
             obj.DateOffset = 0;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.DateOffset = DateTime.Now.DaysSinceMin();
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeTrue();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
         }
@@ -109,16 +120,21 @@ namespace RentLog.Tests.JournalVoucherTests
 
             obj.Amount = 0;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.Amount = 123;
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeTrue();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.Amount = -456;
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out why).Should().BeFalse();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
         }
@@ -133,11 +149,14 @@ namespace RentLog.Tests.JournalVoucherTests
 
             obj.Allocations[1].SubAmount = -788;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
             obj.Allocations[1].SubAmount = -789;
+            obj.Id = 0;
             sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeTrue();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
         }
@@ -145,7 +164,7 @@ namespace RentLog.Tests.JournalVoucherTests
 
         private JournalVoucherDTO ValidSampleDTO() => new JournalVoucherDTO
         {
-            Id          = 101,
+            Id          = 0,
             SerialNum   = 123,
             Description = "sample JV",
             DateOffset  = DateTime.Now.DaysSinceMin(),

@@ -113,26 +113,42 @@ namespace CommonTools.Lib11.DatabaseTools
 
         public virtual bool IsValidForInsert(T draft, out string whyInvalid)
         {
+            if (!IsIdZero(draft, out whyInvalid)) return false;
             whyInvalid = GetWhyInvalid(draft);
             return whyInvalid.IsBlank();
         }
 
+
         public virtual bool IsValidForUpdate(T record, out string whyInvalid)
         {
-            if (!HasValidId(record, out whyInvalid)) return false;
+            if (!HasValidRecordId(record, out whyInvalid)) return false;
             whyInvalid = GetWhyInvalid(record);
             return whyInvalid.IsBlank();
         }
 
         public virtual bool IsValidForDelete(T record, out string whyInvalid)
         {
-            if (!HasValidId(record, out whyInvalid)) return false;
+            if (!HasValidRecordId(record, out whyInvalid)) return false;
             whyInvalid = string.Empty;
             return true;
         }
 
 
-        private bool HasValidId(T record, out string whyInvalid)
+        private bool IsIdZero(T draft, out string whyInvalid)
+        {
+            if (!(draft is IDocumentDTO doc))
+            {
+                whyInvalid = string.Empty;
+                return true;
+            }
+            whyInvalid = doc.Id == 0 ? string.Empty
+                       : $"‹{typeof(T).Name}› Id for insert should be zero, but was [{doc.Id}].";
+
+            return whyInvalid.IsBlank();
+        }
+
+
+        private bool HasValidRecordId(T record, out string whyInvalid)
         {
             if (!(record is IDocumentDTO doc))
             {
