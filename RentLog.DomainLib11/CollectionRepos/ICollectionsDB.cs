@@ -12,18 +12,20 @@ namespace RentLog.DomainLib11.CollectionRepos
         Dictionary<int, INoOperationsRepo>   NoOperations   { get; }
         Dictionary<int, IVacantStallsRepo>   VacantStalls   { get; }
 
-        DateTime                 Date            { get; }
-        ICashierColxnsRepo       CashierColxns   { get; }
-        IOtherColxnsRepo         OtherColxns     { get; }
-        IBankDepositsRepo        BankDeposits    { get; }
-        IBalanceAdjustmentsRepo  BalanceAdjs     { get; }
+        DateTime                 Date              { get; }
+        ICashierColxnsRepo       CashierColxns     { get; }
+        IOtherColxnsRepo         OtherColxns       { get; }
+        IBankDepositsRepo        BankDeposits      { get; }
+        IBalanceAdjustmentsRepo  BalanceAdjs       { get; }
+        List<SectionDTO>         SectionsSnapshot  { get; }
 
-        bool          IsPosted      ();
-        bool          IsOpened      ();
-        void          MarkAsOpened  ();
-        void          MarkAsPosted  ();
-        CollectorDTO  GetCollector  (LeaseDTO lease);
-        CollectorDTO  GetCollector  (SectionDTO section);
-        void          SetCollector  (SectionDTO section, CollectorDTO collector);
+        bool          IsPosted             ();
+        bool          IsOpened             ();
+        void          MarkAsOpened         ();
+        void          MarkAsPosted         ();
+        CollectorDTO  GetCollector         (LeaseDTO lease);
+        CollectorDTO  GetCollector         (SectionDTO section);
+        void          SetCollector         (SectionDTO section, CollectorDTO collector);
+        void          TakeSectionsSnapshot (List<SectionDTO> currentSections);
     }
 }

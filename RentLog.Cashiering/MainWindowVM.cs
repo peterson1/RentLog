@@ -128,19 +128,22 @@ namespace RentLog.Cashiering
         }
 
 
-        protected override async void OnWindowClosing(CancelEventArgs cancelEvtArgs)
+        public override async Task OnWindowClosing(CancelEventArgs cancelEvtArgs)
         {
             if (!CanEncode) return;
             cancelEvtArgs.Cancel = true;
             StartBeingBusy("Updating Vacants & Uncollecteds ...");
             await Task.Run(() => UpdateDatabasesBeforeExit());
             StopBeingBusy();
-            Application.Current.Shutdown();
+            Application.Current?.Shutdown();
         }
 
 
         private void UpdateDatabasesBeforeExit()
         {
+            ColxnsDB.TakeSectionsSnapshot
+                (AppArgs.MarketState.Sections.GetAll());
+
             ColxnsDB.VacantStalls.UpdateAllLists(AppArgs.MarketState);
 
             foreach (var secTab in SectionTabs)

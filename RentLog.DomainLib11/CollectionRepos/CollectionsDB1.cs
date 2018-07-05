@@ -1,6 +1,7 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
 using CommonTools.Lib11.DTOs;
 using CommonTools.Lib11.ExceptionTools;
+using CommonTools.Lib11.JsonTools;
 using CommonTools.Lib11.StringTools;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
@@ -16,6 +17,7 @@ namespace RentLog.DomainLib11.CollectionRepos
         private const string POST_DATE     = "PostDate";
         private const string DATE_FMT      = "yyyy-MM-dd";
         private const string COLLECTOR_KEY = "Section{0}_CollectorID";
+        private const string SEC_SNAPS_KEY = "SectionSnapshots";
 
         private IKeyValueStore _meta;
         private MarketStateDB  _mkt;
@@ -23,9 +25,10 @@ namespace RentLog.DomainLib11.CollectionRepos
 
         public CollectionsDB1(DateTime date, IKeyValueStore metadataRepo, MarketStateDB marketStateDB)
         {
-            _meta = metadataRepo;
-            _mkt  = marketStateDB;
-            Date  = date;
+            _meta            = metadataRepo;
+            _mkt             = marketStateDB;
+            Date             = date;
+            SectionsSnapshot = LoadSectionsSnapshot();
         }
 
 
@@ -35,11 +38,12 @@ namespace RentLog.DomainLib11.CollectionRepos
         public Dictionary<int, INoOperationsRepo  > NoOperations   { get; } = new Dictionary<int, INoOperationsRepo  >();
         public Dictionary<int, IVacantStallsRepo  > VacantStalls   { get; } = new Dictionary<int, IVacantStallsRepo  >();
 
-        public DateTime                 Date            { get; }
-        public ICashierColxnsRepo       CashierColxns   { get; set; }
-        public IOtherColxnsRepo         OtherColxns     { get; set; }
-        public IBankDepositsRepo        BankDeposits    { get; set; }
-        public IBalanceAdjustmentsRepo  BalanceAdjs     { get; set; }
+        public DateTime                 Date              { get; }
+        public List<SectionDTO>         SectionsSnapshot  { get; }
+        public ICashierColxnsRepo       CashierColxns     { get; set; }
+        public IOtherColxnsRepo         OtherColxns       { get; set; }
+        public IBankDepositsRepo        BankDeposits      { get; set; }
+        public IBalanceAdjustmentsRepo  BalanceAdjs       { get; set; }
 
 
         public CollectorDTO GetCollector(SectionDTO sec)
@@ -73,12 +77,16 @@ namespace RentLog.DomainLib11.CollectionRepos
         public void MarkAsOpened () => _meta.SetTrue(IS_OPENED);
         public void MarkAsPosted () => _meta[POST_DATE] = DateTime.Now.ToString(DATE_FMT);
 
-        //public void MarkAsPosted()
-        //    => _meta.Insert(new KeyValuePairDTO
-        //    {
-        //        Name  = POST_DATE,
-        //        Value = DateTime.Now.ToString(DATE_FMT)
-        //    });
 
+        private List<SectionDTO> LoadSectionsSnapshot()
+        {
+            var json = _meta[SEC_SNAPS_KEY];
+            if (json.IsBlank()) return null;
+            return json.ReadJson<List<SectionDTO>>();
+        }
+
+
+        public void TakeSectionsSnapshot(List<SectionDTO> currentSections)
+            => _meta[SEC_SNAPS_KEY] = currentSections.ToJson();
     }
 }

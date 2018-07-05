@@ -86,6 +86,7 @@
     <Compile Include="BillRowComposerTests\RentBillComposerFacts.cs" />
     <Compile Include="BillRowComposerTests\RightsBillComposerFacts.cs" />
     <Compile Include="CashierColxnsRepoTests\CashierColxnsRepoFacts.cs" />
+    <Compile Include="CashieringVMTests\CashieringVMFacts2.cs" />
     <Compile Include="CashieringVMTests\ReviewerVMFacts1.cs" />
     <Compile Include="CashieringVMTests\CashieringVMFacts.cs" />
     <Compile Include="ChequeVouchersDBTests\ChequeVouchersDBFacts.cs" />

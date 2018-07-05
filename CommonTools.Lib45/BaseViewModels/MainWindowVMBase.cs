@@ -94,7 +94,7 @@ namespace CommonTools.Lib45.BaseViewModels
         protected virtual void OnPrintClicked       () => PrintClicked?.Invoke(this, EventArgs.Empty);
         protected virtual Task OnRefreshClickedAsync() => Task.Delay(0);
         protected virtual void OnWindowLoaded       () { }
-        protected virtual void OnWindowClosing      (CancelEventArgs cancelEvtArgs) { }
+        public    virtual Task OnWindowClosing(CancelEventArgs cancelEvtArgs) => Task.Delay(0);
         public void ClickRefresh() => RefreshCmd.ExecuteIfItCan();
 
 
@@ -115,7 +115,7 @@ namespace CommonTools.Lib45.BaseViewModels
             _win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             _win.SnapsToDevicePixels = true;
             _win.Loaded  += (s, e) => OnWindowLoaded();
-            _win.Closing += (s, e) => OnWindowClosing(e);
+            _win.Closing += async (s, e) => await OnWindowClosing(e);
 
             #if DEBUG
             _win.SetToCloseOnEscape();
