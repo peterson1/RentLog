@@ -16,7 +16,7 @@ namespace RentLog.Tests.LeasesTests
         protected override string SampleDirName => SampleDir.JUN17_BALANCED;
 
 
-        [Fact(DisplayName = "CRUD Walkthrough")]
+        [Fact(DisplayName = "Insert new Lease")]
         public async Task TestMethod00001()
         {
             var arg   = GetTempSampleArgs("Supervisor");
@@ -53,6 +53,23 @@ namespace RentLog.Tests.LeasesTests
             rows.First().DTO.Stall.Name.Should().Be(stall.Name);
             arg.MarketState.Stalls.Find(stall.Id, true)
                 .DefaultRent.RegularRate.Should().Be(200);
+        }
+
+
+        [Fact(DisplayName = "Edit Lease")]
+        public async Task TestMethod00002()
+        {
+            var arg   = GetTempSampleArgs("Supervisor");
+            var main  = new MainWindowVM(arg, false);
+            var rows  = main.ActiveLeases.Rows;
+            var crud  = main.ActiveLeases.Crud;
+
+            await main.RefreshCmd.RunAsync();
+            rows.Should().HaveCount(113);
+
+            crud.SetupForUpdate(rows[0].DTO);
+
+            crud.CanSave().Should().BeTrue(crud.WhyInvalid);
         }
     }
 }
