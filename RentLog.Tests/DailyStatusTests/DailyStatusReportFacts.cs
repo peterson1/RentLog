@@ -15,8 +15,8 @@ namespace RentLog.Tests.DailyStatusTests
         const int OFC = 0;
 
 
-        [Fact(DisplayName = "Jul 3")]
-        public void May4()
+        [Fact(DisplayName = "Jul 3", Skip = "Undone")]
+        public void Jul3()
         {
             var arg = SampleDir.Jul3_GRY();
             var sut = new DailyStatusReport(3.July(2018), arg);
@@ -32,6 +32,9 @@ namespace RentLog.Tests.DailyStatusTests
             sut.BankDeposits.Should().HaveCount(2);
             sut.BankDeposits.SummaryRows.Should().HaveCount(1);
             sut.BankDeposits.SummaryRows[0].Amount.Should().Be(14135);
+
+            sut.CollectorsPerf.Should().HaveCount(1);
+            //sut.CollectorsPerf[0].
         }
     }
 }

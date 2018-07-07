@@ -1,4 +1,5 @@
-﻿using RentLog.DomainLib11.DataSources;
+﻿using RentLog.DomainLib11.CollectionRepos;
+using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.ReportRows;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,8 @@ namespace RentLog.DomainLib11.Reporters
 {
     public class CollectorsPerformanceReport : Dictionary<int, CollectorPerformanceRow>
     {
-        public CollectorsPerformanceReport(DateTime date, ITenantDBsDir tenantDBsDir)
+        public CollectorsPerformanceReport(ICollectionsDB db)
         {
-
         }
     }
 }

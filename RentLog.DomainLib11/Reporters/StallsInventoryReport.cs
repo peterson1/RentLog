@@ -9,7 +9,7 @@ namespace RentLog.DomainLib11.Reporters
     {
         public StallsInventoryReport(ICollectionsDB colxns, MarketStateDB mkt)
         {
-            var sections = mkt.Sections.GetAll();
+            var sections = colxns.SectionsSnapshot ?? mkt.Sections.GetAll();
 
             foreach (var sec in sections)
                 this.Add(sec.Id, new StallsInventoryRow(sec, colxns));

@@ -92,6 +92,7 @@
     <Compile Include="ChequeVouchersDBTests\ChequeVouchersDBFacts.cs" />
     <Compile Include="CollectionsDirTests\CollectionsDirBaseFacts.cs" />
     <Compile Include="CollectionsDirTests\CollectionsDirFacts.cs" />
+    <Compile Include="CollectorsPerformanceTests\CollectorsPerformanceFacts.cs" />
     <Compile Include="ColxnSummaryTests\ColxnSummaryFacts.cs" />
     <Compile Include="DailyBillsRepoTests\DailyBillsRepo1Facts.cs" />
     <Compile Include="DailyColxnsTests\DailyColxnsFacts.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="LeasesTests\InactiveLeasesRepoWriterFacts.cs" />
     <Compile Include="LeasesTests\LeaseCrudWalkthrough.cs" />
     <Compile Include="MainWindowTests\MainWindowFacts.cs" />
+    <Compile Include="MarketDayOpenerTests\MarketDayOpenerFacts.cs" />
     <Compile Include="OtherColxnsRepoTests\OtherColxnsRepoFacts.cs" />
     <Compile Include="PassbookRowsRepoTests\PassbookRowsRepoFacts.cs" />
     <Compile Include="PostAndCloseTests\PostAndCloseFacts1.cs" />

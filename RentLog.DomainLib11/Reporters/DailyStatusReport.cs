@@ -16,7 +16,7 @@ namespace RentLog.DomainLib11.Reporters
             var mkt         = tenantDBsDir.MarketState;
             SectionColxns   = new DailyColxnsReport(date, tenantDBsDir);
             StallsInventory = new StallsInventoryReport(colxnsDb, mkt);
-            CollectorsPerf  = new CollectorsPerformanceReport(date, tenantDBsDir);
+            CollectorsPerf  = new CollectorsPerformanceReport(colxnsDb);
             OtherColxns     = LoadOtherColxns(colxnsDb);
             BankDeposits    = LoadBankDeposits(colxnsDb);
         }
