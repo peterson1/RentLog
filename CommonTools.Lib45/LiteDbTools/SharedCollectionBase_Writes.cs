@@ -81,6 +81,20 @@ namespace CommonTools.Lib45.LiteDbTools
         }
 
 
+        public bool Delete(List<T> records)
+        {
+            using (var db = _db.OpenWrite())
+            {
+                var coll = GetCollection(db);
+
+                foreach (var rec in records)
+                    coll.Delete(rec.Id);
+            }
+            return true;
+        }
+
+
+
         private TOut Write<TOut>(T record, 
             Func<LiteCollection<T>, T, TOut> func)
         {

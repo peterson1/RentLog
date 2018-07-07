@@ -29,6 +29,7 @@ namespace CommonTools.Lib11.DatabaseTools
                          
         bool    Upsert   (T record);
         bool    Delete   (int recordId);
+        bool    Delete   (List<T> records);
 
         void  Drop              ();
         void  DropAndInsert     (IEnumerable<T> records, bool doValidate);

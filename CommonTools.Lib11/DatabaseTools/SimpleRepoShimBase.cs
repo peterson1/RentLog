@@ -90,6 +90,18 @@ namespace CommonTools.Lib11.DatabaseTools
         }
 
 
+        public bool Delete(List<T> records)
+        {
+            foreach (var rec in records)
+                ValidateBeforeDelete(rec);
+
+            var ok = _repo.Delete(records);
+
+            ExecuteAfterSave(records.Last(), true);
+            return ok;
+        }
+
+
         public bool Delete(int recordId) => _repo.Delete(recordId);
 
 
