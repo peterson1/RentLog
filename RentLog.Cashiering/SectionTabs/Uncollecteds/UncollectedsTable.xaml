@@ -10,6 +10,7 @@
               x:Name="dg"
               ItemsSource="{Binding }"
               HeadersVisibility="None"
+              SelectionMode="Extended"
               Style="{StaticResource dgReadOnly}">
         <DataGrid.Columns>
             <DataGridTextColumn Width="*"

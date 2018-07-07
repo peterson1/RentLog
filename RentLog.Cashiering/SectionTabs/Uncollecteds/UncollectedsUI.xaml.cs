@@ -23,7 +23,8 @@ namespace RentLog.Cashiering.SectionTabs.Uncollecteds
         {
             tbl.dg.PreviewKeyDown += async (s, e) =>
             {
-                if (e.Key.IsLetterOrDigit())
+                if (e.Key.IsLetterOrDigit()
+                && !Keyboard.IsKeyDown(Key.LeftCtrl))
                     await TryFocusOnFilter();
             };
         }

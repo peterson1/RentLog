@@ -45,6 +45,10 @@ namespace RentLog.Cashiering.SectionTabs.Uncollecteds
             => Main.ColxnsDB.NoOperations[_tab.Section.Id].Insert(dto);
 
 
+        protected override void DeleteRecords(ISimpleRepo<UncollectedLeaseDTO> db, List<UncollectedLeaseDTO> items)
+            => Main.ColxnsDB.NoOperations[_tab.Section.Id].Insert(items, true);
+
+
         private void ApplyTextFilters()
         {
             var list = _queried.ToList();

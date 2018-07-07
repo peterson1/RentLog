@@ -79,6 +79,7 @@ namespace CommonTools.Lib45.BaseViewModels
 
         private async Task DoRefresh()
         {
+            if (IsBusy) return;
             StartBeingBusy(RefreshingText);
 
             //OnRefreshClicked();

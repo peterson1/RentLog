@@ -25,6 +25,7 @@ namespace CommonTools.Lib45.UIExtensions
         private static void RaiseItemOpened<T>(DataGrid dg)
         {
             if (dg.SelectedIndex == -1) return;
+            if (dg.SelectedItems.Count != 1) return;
             T item;
             try   { item = (T)dg.SelectedItem; }
             catch (InvalidCastException) { return; }
