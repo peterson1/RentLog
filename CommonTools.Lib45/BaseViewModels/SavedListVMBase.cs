@@ -33,6 +33,7 @@ namespace CommonTools.Lib45.BaseViewModels
             MainMethodCmd = R2Command.Relay(RunMainMethod, _ => PrivateCanRunMain(), MainMethodCmdLabel);
 
             ItemsList.ItemDeleted       += (s, e) => ExecuteDeleteRecord(e);
+            ItemsList.ItemsDeleted      += (s, e) => ExecuteDeleteRecords(e);
             ItemsList.CollectionChanged += (s, e) => OnCollectionChanged();
             ItemsList.ItemsReplaced     += (s, e) => OnItemsReplaced();
             ItemsList.ItemOpened        += ItemsList_ItemOpened;
@@ -63,7 +64,8 @@ namespace CommonTools.Lib45.BaseViewModels
         protected virtual IEnumerable<TDTO> PostProcessQueried(IEnumerable<TDTO> items) => items;
         protected virtual void OnItemsReplaced     () { }
         protected virtual void OnSelectedChanged() => SelectedChanged?.Invoke(this, Selected);
-        protected virtual void DeleteRecord(ISimpleRepo<TDTO> db, TDTO dto) => db.Delete(dto);
+        protected virtual void DeleteRecord  (ISimpleRepo<TDTO> db, TDTO dto) => db.Delete(dto);
+        protected virtual void DeleteRecords (ISimpleRepo<TDTO> db, List<TDTO> items) => db.Delete(items);
 
 
         protected virtual bool  CanRunMainMethod  () => true;
@@ -97,10 +99,19 @@ namespace CommonTools.Lib45.BaseViewModels
                 DeleteRecord(_repo, dto);
             ReloadFromDB();
             UpdateTotalSum();
-            //TotalSumChanged?.Invoke(this, TotalSum);
         }
 
 
+        private void ExecuteDeleteRecords(List<TDTO> recordsToDelete)
+        {
+            var deletables = recordsToDelete.Where(_ 
+                => CanDeleteRecord(_)).ToList();
+
+            DeleteRecords(_repo, deletables);
+
+            ReloadFromDB();
+            UpdateTotalSum();
+        }
 
 
         private void ItemsList_ItemOpened(object sender, TDTO e)

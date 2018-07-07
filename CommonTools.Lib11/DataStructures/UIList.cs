@@ -8,9 +8,10 @@ namespace CommonTools.Lib11.DataStructures
 {
     public class UIList<T> : ObservableCollection<T>
     {
-        public event EventHandler<T> ItemOpened    = delegate { };
-        public event EventHandler<T> ItemDeleted   = delegate { };
-        public event EventHandler    ItemsReplaced = delegate { };
+        public event EventHandler<T>       ItemOpened    = delegate { };
+        public event EventHandler<T>       ItemDeleted   = delegate { };
+        public event EventHandler<List<T>> ItemsDeleted  = delegate { };
+        public event EventHandler          ItemsReplaced = delegate { };
 
 
         public UIList() { }
@@ -47,6 +48,13 @@ namespace CommonTools.Lib11.DataStructures
         {
             if (item != null)
                 ItemDeleted?.Invoke(this, item);
+        }
+
+
+        public void RaiseItemsDeleted(List<T> items)
+        {
+            if (items != null)
+                ItemsDeleted?.Invoke(this, items);
         }
 
 
