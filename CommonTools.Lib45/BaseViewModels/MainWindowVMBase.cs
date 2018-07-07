@@ -79,7 +79,7 @@ namespace CommonTools.Lib45.BaseViewModels
 
         private async Task DoRefresh()
         {
-            if (IsBusy) return;
+            //if (IsBusy) return;//crud test fails with this uncommented
             StartBeingBusy(RefreshingText);
 
             //OnRefreshClicked();
