@@ -32,6 +32,7 @@ namespace RentLog.LeasesCrud.LeasesList
             AddStallToTenantCmd   = R2Command.Relay(AddStallToTenant  , _ => Crud.CanEncodeNewDraft(), "Add another Stall to this Tenant");
             EditThisLeaseCmd      = R2Command.Relay(EditThisLease     , _ => CanEditRecord(Rows.CurrentItem?.DTO), "Edit this Lease");
             TerminateThisLeaseCmd = R2Command.Relay(TerminateThisLease, _ => AppArgs.CanTerminateteLease(false), "Terminate this Lease");
+            //Rows[0].DTO.RightsDueDate
         }
 
 

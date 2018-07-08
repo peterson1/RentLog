@@ -18,12 +18,13 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="12*" />
             <ColumnDefinition Width="09*" />
-            <ColumnDefinition Width="09*" />
-            <ColumnDefinition Width="09*" />
+            <ColumnDefinition Width="07*" />
+            <ColumnDefinition Width="07*" />
             <ColumnDefinition Width="04*" />
             <ColumnDefinition Width="06*" />
-            <ColumnDefinition Width="09*" />
-            <ColumnDefinition Width="08*" />
+            <ColumnDefinition Width="07*" />
+            <ColumnDefinition Width="07*" />
+            <ColumnDefinition Width="07*" />
 
             <ColumnDefinition Width="07*" />
             <ColumnDefinition Width="07*" />
@@ -40,11 +41,12 @@
         <TextBox Grid.Column="5" Text="{Binding RentRateFilter     , UpdateSourceTrigger=PropertyChanged}" />
         <TextBox Grid.Column="6" Text="{Binding TotalRightsFilter  , UpdateSourceTrigger=PropertyChanged}" />
         <TextBox Grid.Column="7" Text="{Binding RightsDueFilter    , UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="8" Text="{Binding RightsDateFilter   , UpdateSourceTrigger=PropertyChanged}" />
 
-        <TextBox Grid.Column="8"    />
         <TextBox Grid.Column="9"    />
+        <TextBox Grid.Column="10"   />
 
-        <TextBox Grid.Column="10" Text="{Binding ProductToSellFilter, UpdateSourceTrigger=PropertyChanged}" />
-        <TextBox Grid.Column="11" Text="{Binding RemarksFilter      , UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="11" Text="{Binding ProductToSellFilter, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="12" Text="{Binding RemarksFilter      , UpdateSourceTrigger=PropertyChanged}" />
     </Grid>
 </UserControl>

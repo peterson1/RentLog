@@ -32,12 +32,13 @@
         <DataGrid.Columns>
             <DataGridTextColumn Width="12*" Header="tenant"          Binding="{Binding DTO.Tenant.FirstAndLastNames}" ElementStyle="{StaticResource colLabel}" />
             <DataGridTextColumn Width="09*" Header="stall"           Binding="{Binding DTO.Stall.Name}" ElementStyle="{StaticResource colCenter}" />
-            <DataGridTextColumn Width="09*" Header="start"           Binding="{Binding DTO.ContractStart, StringFormat=d MMM yyyy}" ElementStyle="{StaticResource colCenter}" />
-            <DataGridTextColumn Width="09*" Header="end"             Binding="{Binding DTO.ContractEnd, StringFormat=d MMM yyyy}" ElementStyle="{StaticResource colCenter}" />
+            <DataGridTextColumn Width="07*" Header="start"           Binding="{Binding DTO.ContractStart, StringFormat=d MMM yyyy}" ElementStyle="{StaticResource colCenter}" />
+            <DataGridTextColumn Width="07*" Header="end"             Binding="{Binding DTO.ContractEnd, StringFormat=d MMM yyyy}" ElementStyle="{StaticResource colCenter}" />
             <DataGridTextColumn Width="04*" Header="interval"        Binding="{Binding DTO.Rent.Interval}" ElementStyle="{StaticResource colCenter}" />
             <DataGridTextColumn Width="06*" Header="rent rate"       Binding="{Binding DTO.Rent.RegularRate, StringFormat=N2}" ElementStyle="{StaticResource colCenter}" />
-            <DataGridTextColumn Width="09*" Header="total rights"    Binding="{Binding DTO.Rights.TotalAmount, StringFormat=N2}" ElementStyle="{StaticResource colCenter}" />
-            <DataGridTextColumn Width="08*" Header="settlement"      Binding="{Binding DTO.Rights.SettlementDays, Converter={StaticResource spanDays}}" ElementStyle="{StaticResource colCenter}" />
+            <DataGridTextColumn Width="07*" Header="total rights"    Binding="{Binding DTO.Rights.TotalAmount, StringFormat=N2}" ElementStyle="{StaticResource colCenter}" />
+            <DataGridTextColumn Width="07*" Header="settlement"      Binding="{Binding DTO.Rights.SettlementDays, Converter={StaticResource spanDays}}" ElementStyle="{StaticResource colCenter}" />
+            <DataGridTextColumn Width="07*" Header="rights due"      Binding="{Binding DTO.RightsDueDate, StringFormat=d MMM yyyy}" ElementStyle="{StaticResource colCenter}" />
 
             <DataGridTextColumn Width="07*" Header="rent balance"    Binding="{Binding Rent, StringFormat=N2}" ElementStyle="{StaticResource colRight}" />
             <DataGridTextColumn Width="07*" Header="rights balance"  Binding="{Binding Rights, StringFormat=N2}" ElementStyle="{StaticResource colRight}" />

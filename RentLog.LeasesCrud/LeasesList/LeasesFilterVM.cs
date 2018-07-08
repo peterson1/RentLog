@@ -18,6 +18,7 @@ namespace RentLog.LeasesCrud.LeasesList
         public string  RentRateFilter        { get; set; }
         public string  TotalRightsFilter     { get; set; }
         public string  RightsDueFilter       { get; set; }
+        public string  RightsDateFilter      { get; set; }
         public string  ProductToSellFilter   { get; set; }
         public string  RemarksFilter         { get; set; }
 
@@ -35,6 +36,7 @@ namespace RentLog.LeasesCrud.LeasesList
                 { nameof(RentRateFilter       ), _ => _.DTO.Rent.RegularRate.ToString()         },
                 { nameof(TotalRightsFilter    ), _ => _.DTO.Rights.TotalAmount.ToString()       },
                 { nameof(RightsDueFilter      ), _ => _.DTO.Rights.SettlementDays.ToString()    },
+                { nameof(RightsDateFilter     ), _ => _.DTO.RightsDueDate.ToString("d MMM yyyy")},
                 { nameof(ProductToSellFilter  ), _ => _.DTO.ProductToSell                       },
                 { nameof(RemarksFilter        ), _ => _.DTO.Remarks                             },
         };
