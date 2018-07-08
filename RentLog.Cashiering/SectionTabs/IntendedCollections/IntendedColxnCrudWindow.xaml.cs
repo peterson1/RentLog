@@ -21,7 +21,15 @@ namespace RentLog.Cashiering.SectionTabs.IntendedCollections
                 SetHandlersForNullable(txtRights  );
                 SetHandlersForNullable(txtElectric);
                 SetHandlersForNullable(txtWater   );
+                btnSave.KeyUp += BtnSave_KeyUp;
             };
+        }
+
+
+        private void BtnSave_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Up)
+                btnSave.MoveFocus(FocusNavigationDirection.Previous);
         }
 
 
@@ -29,6 +37,7 @@ namespace RentLog.Cashiering.SectionTabs.IntendedCollections
         {
             switch (e.Key)
             {
+                case Key.Right:
                 case Key.Return:
                     if (VM.Draft.PRNumber != 0)
                         txtPRnum.MoveFocusToNext();
@@ -42,6 +51,7 @@ namespace RentLog.Cashiering.SectionTabs.IntendedCollections
         private void SetHandlersForNullable(TextBox ctrl)
         {
             ctrl.MoveFocusToNextOnEnterKey();
+            ctrl.MoveFocusOnArrowKeys();
             ctrl.PreviewKeyDown += (s, e) =>
             {
                 if (e.Key == Key.Add)

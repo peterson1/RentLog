@@ -165,6 +165,7 @@
                     Content="{Binding SaveDraftCmd.CurrentLabel}"
                     DockPanel.Dock="Right"
                     IsDefault="False"
+                    x:Name="btnSave"
                     Margin="20 0 0 0" />
 
             <TextBlock Text="{Binding WhyInvalid}"
