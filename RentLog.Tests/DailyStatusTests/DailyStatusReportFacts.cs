@@ -15,7 +15,7 @@ namespace RentLog.Tests.DailyStatusTests
         const int OFC = 0;
 
 
-        [Fact(DisplayName = "Jul 3", Skip = "Undone")]
+        [Fact(DisplayName = "Jul 3")]
         public void Jul3()
         {
             var arg = SampleDir.Jul3_GRY();

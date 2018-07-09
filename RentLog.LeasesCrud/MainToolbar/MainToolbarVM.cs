@@ -3,6 +3,7 @@ using CommonTools.Lib45.ExcelTools;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.PrintTools;
 using PropertyChanged;
+using RentLog.DomainLib11.AdHocJobs;
 using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.Models;
@@ -61,7 +62,8 @@ namespace RentLog.LeasesCrud.MainToolbar
             {
                 //AllLeasesNoRoundOff.Run(_args);
                 //NonExpiringLeasesForSome.Run(_args);
-                throw new InvalidCastException("blah!");
+                //throw new InvalidCastException("blah!");
+                SetSectionSnapshots.Run(_args);
             });
             _main.StopBeingBusy();
             _main.ClickRefresh();

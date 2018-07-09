@@ -17,6 +17,9 @@ namespace RentLog.Tests.CollectorsPerformanceTests
             var sut = new CollectorsPerformanceReport(db);
 
             sut.Should().HaveCount(1);
+            sut[0].Collector.Should().NotBeNull();
+            sut[0].Collector.Name.Should().Contain("Pasalu");
+            sut[0].SectionsText.Should().Be("DRY, WET");
         }
     }
 }
