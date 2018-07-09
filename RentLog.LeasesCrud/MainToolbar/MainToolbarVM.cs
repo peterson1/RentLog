@@ -63,7 +63,8 @@ namespace RentLog.LeasesCrud.MainToolbar
                 //AllLeasesNoRoundOff.Run(_args);
                 //NonExpiringLeasesForSome.Run(_args);
                 //throw new InvalidCastException("blah!");
-                SetSectionSnapshots.Run(_args);
+                //TakeSnapshot.OfSections(_args);
+                TakeSnapshot.OfCollectors(_args);
             });
             _main.StopBeingBusy();
             _main.ClickRefresh();
