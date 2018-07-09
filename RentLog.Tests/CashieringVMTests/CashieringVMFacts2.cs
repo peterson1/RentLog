@@ -3,9 +3,7 @@ using FluentAssertions.Extensions;
 using RentLog.Cashiering;
 using RentLog.Tests.SampleDBs;
 using RentLog.Tests.TestTools;
-using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -18,7 +16,7 @@ namespace RentLog.Tests.CashieringVMTests
             => SampleDir.JUN17_BALANCED;
 
 
-        [Fact(DisplayName = "Creates Sections Snapshot")]
+        [Fact(DisplayName = "Creates meta Snapshots")]
         public async Task TestMethod00002()
         {
             var arg = GetTempSampleArgs("Cashier");
@@ -33,8 +31,12 @@ namespace RentLog.Tests.CashieringVMTests
             arg = null;
             arg = GetTempSampleArgs("Cashier");
             db  = arg.Collections.For(17.June(2018));
+
             db.SectionsSnapshot.Should().NotBeNull();
             db.SectionsSnapshot.Should().HaveCount(3);
+
+            db.CollectorsSnapshot.Should().NotBeNull();
+            db.CollectorsSnapshot.Should().HaveCount(10);
         }
     }
 }

@@ -144,6 +144,9 @@ namespace RentLog.Cashiering
             ColxnsDB.TakeSectionsSnapshot
                 (AppArgs.MarketState.Sections.GetAll());
 
+            ColxnsDB.TakeCollectorsSnapshot
+                (AppArgs.MarketState.Collectors.GetAll());
+
             ColxnsDB.VacantStalls.UpdateAllLists(AppArgs.MarketState);
 
             foreach (var secTab in SectionTabs)
