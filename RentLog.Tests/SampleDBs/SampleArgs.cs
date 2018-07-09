@@ -35,8 +35,11 @@ namespace RentLog.Tests.SampleDBs
             var dbPath = Path.Combine(DirPath,
                             folderName, "MarketState.ldb");
 
-            while (!File.Exists(dbPath))
-                Thread.Sleep(100);
+            if (!File.Exists(dbPath)) Thread.Sleep(100);
+            if (!File.Exists(dbPath)) Thread.Sleep(200);
+            if (!File.Exists(dbPath)) Thread.Sleep(300);
+            if (!File.Exists(dbPath)) Thread.Sleep(400);
+            if (!File.Exists(dbPath)) Thread.Sleep(500);
 
             File.Exists(dbPath).Should().BeTrue();
             return dbPath;

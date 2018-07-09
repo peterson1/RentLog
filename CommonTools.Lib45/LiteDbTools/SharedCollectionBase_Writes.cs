@@ -1,5 +1,4 @@
-﻿using CommonTools.Lib11.DataStructures;
-using CommonTools.Lib11.DTOs;
+﻿using CommonTools.Lib11.DTOs;
 using LiteDB;
 using System;
 using System.Collections.Generic;
@@ -105,7 +104,8 @@ namespace CommonTools.Lib45.LiteDbTools
             {
                 var coll = GetCollection(db);
                 EnsureIndeces(coll);
-                ret = func(coll, record);
+                //ret = func(coll, record);
+                ret = Retry2x(record, func, coll);
             }
             ContentChanged?.Invoke(this, record);
             return ret;
@@ -127,37 +127,12 @@ namespace CommonTools.Lib45.LiteDbTools
             {
                 var coll = GetCollection(db);
                 EnsureIndeces(coll);
-                ret = func(coll, records);
+                //ret = func(coll, records);
+                ret = Retry2x(records, func, coll);
             }
             ContentChanged?.Invoke(this, default(T));
             return ret;
         }
-
-
-        //private void ReplaceAll_dep(IEnumerable<T> newRecords, bool doValidate = true, bool clearIDs = false)
-        //{
-        //    foreach (var model in newRecords)
-        //    {
-        //        SetCurrentFields(model);
-        //        if (clearIDs) model.Id = 0;
-        //        if (doValidate) Validate(model, _db);
-        //    }
-
-        //    string colxnName = "";
-        //    using (var db = _db.OpenRead())
-        //        colxnName = GetCollection(db).Name;
-
-        //    using (var db = _db.OpenWrite())
-        //        db.DropCollection(colxnName);
-
-        //    using (var db = _db.OpenWrite())
-        //    {
-        //        var coll = GetCollection(db);
-        //        EnsureIndeces(coll);
-        //        coll.InsertBulk(newRecords);
-        //    }
-        //    ContentChanged?.Invoke(this, default(T));
-        //}
 
 
         public void DropAndInsert(IEnumerable<T> records, bool doValidate)

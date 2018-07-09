@@ -172,6 +172,7 @@
     <Compile Include="LiteDbTools\NamedCollectionBase.cs" />
     <Compile Include="LiteDbTools\SharedCollectionBase_Connects.cs" />
     <Compile Include="LiteDbTools\SharedCollectionBase_Reads.cs" />
+    <Compile Include="LiteDbTools\SharedCollectionBase_Retry.cs" />
     <Compile Include="LiteDbTools\SharedCollectionBase_Validate.cs" />
     <Compile Include="LiteDbTools\SharedCollectionBase_Writes.cs" />
     <Compile Include="LiteDbTools\SharedLiteDB.cs" />
