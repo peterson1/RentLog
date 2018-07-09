@@ -2,6 +2,7 @@
 using CommonTools.Lib45.ExcelTools;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.PrintTools;
+using CommonTools.Lib45.ThreadTools;
 using PropertyChanged;
 using RentLog.DomainLib11.AdHocJobs;
 using RentLog.DomainLib11.Authorization;
@@ -27,7 +28,7 @@ namespace RentLog.LeasesCrud.MainToolbar
             WithOverduesReportCmd = WithOverduesReport.CreateLauncherCmd(_args);
             PrintCurrentListCmd   = R2Command.Relay(PrintCurrentList, null, "Print Current List");
             ExportListToExcelCmd  = R2Command.Relay(ExportListToExcel, null, "Export List to Excel");
-            RunAdHocTaskCmd       = R2Command.Async(RunAdHocTask, _ => _args.CanRunAdHocTask(false), "Run Ad Hoc Script");
+            RunAdHocTaskCmd       = R2Command.Relay(RunAdHocTask, _ => _args.CanRunAdHocTask(false), "Run Ad Hoc Script");
         }
 
 
@@ -55,19 +56,23 @@ namespace RentLog.LeasesCrud.MainToolbar
             => Overdues = _args.Balances.TotalOverdues();
 
 
-        private async Task RunAdHocTask()
+        private void RunAdHocTask()
         {
-            _main.StartBeingBusy("Running Ad Hoc task ...");
-            await Task.Run(() =>
+            var job = GetAdHocJob(out string desc);
+            Alert.Confirm($"Run Ad Hoc job “{desc}”?", async () =>
             {
-                //AllLeasesNoRoundOff.Run(_args);
-                //NonExpiringLeasesForSome.Run(_args);
-                //throw new InvalidCastException("blah!");
-                //TakeSnapshot.OfSections(_args);
-                TakeSnapshot.OfCollectors(_args);
+                _main.StartBeingBusy("Running Ad Hoc task ...");
+                await Task.Run(() => job.Invoke());
+                _main.StopBeingBusy();
+                _main.ClickRefresh();
             });
-            _main.StopBeingBusy();
-            _main.ClickRefresh();
+        }
+
+
+        private Action GetAdHocJob(out string desc)
+        {
+            desc      = "EnsureGLAccount.MeralcoDeposit";
+            return () => EnsureGLAccount.MeralcoDeposit(_args);
         }
     }
 }
