@@ -1,16 +1,24 @@
 ﻿using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace RentLog.DomainLib11.ReportRows
 {
-    public class CollectorPerformanceRow
+    public class CollectorPerformanceRow : List<CollectorPerfSubRow>
     {
         public CollectorPerformanceRow(CollectorDTO collector, ICollectionsDB db)
         {
             Collector = collector;
-            Sections  = GetSections(collector, db);
+
+            foreach (var sec in db.SectionsSnapshot)
+                AddSubRows(collector, sec, db);
+
+            Sections = this.GroupBy(_ => _.Section.Id)
+                           .Select (_ => _.First())
+                           .Select (_ => _.Section)
+                           .ToList ();
         }
 
 
@@ -20,8 +28,19 @@ namespace RentLog.DomainLib11.ReportRows
         public string Assignment => string.Join(", ", Sections?.Select(_ => _.Name));
 
 
-        private List<SectionDTO> GetSections(CollectorDTO collector, ICollectionsDB db)
-            => db.SectionsSnapshot.Where(sec 
-                => db.GetCollector(sec).Id == collector.Id).ToList();
+        //private List<SectionDTO> GetSections(CollectorDTO collector, ICollectionsDB db)
+        //    => db.SectionsSnapshot.Where(sec 
+        //        => db.GetCollector(sec).Id == collector.Id).ToList();
+
+
+        private void AddSubRows(CollectorDTO collector, SectionDTO sec, ICollectionsDB db)
+        {
+            if (db.GetCollector(sec).Id != collector.Id) return;
+            if (!db.IntendedColxns.TryGetValue(sec.Id, out IIntendedColxnsRepo repo)) return;
+            if (!repo.Any()) return;
+
+            foreach (var colxn in repo.GetAll())
+                this.Add(new CollectorPerfSubRow(colxn, sec));
+        }
     }
 }

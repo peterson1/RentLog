@@ -1,16 +1,18 @@
 ﻿using RentLog.DomainLib11.CollectionRepos;
-using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.ReportRows;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace RentLog.DomainLib11.Reporters
 {
-    public class CollectorsPerformanceReport : Dictionary<int, CollectorPerformanceRow>
+    public class CollectorsPerformanceReport : List<CollectorPerformanceRow>
     {
         public CollectorsPerformanceReport(ICollectionsDB db)
         {
+            foreach (var collector in db.CollectorsSnapshot)
+                this.Add(new CollectorPerformanceRow(collector, db));
+
+            this.RemoveAll(_ => !_.Any());
         }
     }
 }

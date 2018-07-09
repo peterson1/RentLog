@@ -19,6 +19,12 @@ namespace RentLog.DomainLib11.CollectionRepos
             if (dto.Lease == null)
                 return "Lease should not be NULL.";
 
+            if (dto.Lease.Stall == null)
+                return "Stall should not be NULL.";
+
+            if (dto.Lease.Stall.Name.IsBlank())
+                return "Stall Name should not be blank.";
+
             if (dto.Targets == null)
                 return "Targets should not be NULL.";
 

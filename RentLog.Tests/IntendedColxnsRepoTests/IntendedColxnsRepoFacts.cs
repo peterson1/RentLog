@@ -1,4 +1,5 @@
-﻿using CommonTools.Lib11.DatabaseTools;
+﻿using System;
+using CommonTools.Lib11.DatabaseTools;
 using FluentAssertions;
 using Moq;
 using RentLog.DomainLib11.CollectionRepos;
@@ -65,7 +66,7 @@ namespace RentLog.Tests.IntendedColxnsRepoTests
 
 
         [Fact(DisplayName = "Rejects null Lease")]
-        public void RejectsnullBankAccount()
+        public void RejectsnullBankLease()
         {
             var moq = new Mock<ISimpleRepo<IntendedColxnDTO>>();
             var sut = new IntendedColxnsRepo1(moq.Object);
@@ -77,7 +78,51 @@ namespace RentLog.Tests.IntendedColxnsRepoTests
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
-            obj.Lease = new LeaseDTO { Id = 123 };
+            obj.Lease = ValidSampleLease();
+            obj.Id = 0;
+            sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            obj.Id = 123;
+            sut.IsValidForUpdate(obj, out why).Should().BeTrue();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+        }
+
+
+        [Fact(DisplayName = "Rejects null Stall")]
+        public void RejectsnullStall()
+        {
+            var moq = new Mock<ISimpleRepo<IntendedColxnDTO>>();
+            var sut = new IntendedColxnsRepo1(moq.Object);
+            var obj = ValidSampleDTO();
+
+            obj.Lease.Stall = null;
+            sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            obj.Id = 123;
+            sut.IsValidForUpdate(obj, out why).Should().BeFalse();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+
+            obj.Lease.Stall = ValidSampleStall();
+            obj.Id = 0;
+            sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            obj.Id = 123;
+            sut.IsValidForUpdate(obj, out why).Should().BeTrue();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+        }
+
+
+        [Fact(DisplayName = "Rejects blank Stall Name")]
+        public void RejectsblankStallName()
+        {
+            var moq = new Mock<ISimpleRepo<IntendedColxnDTO>>();
+            var sut = new IntendedColxnsRepo1(moq.Object);
+            var obj = ValidSampleDTO();
+
+            obj.Lease.Stall.Name = "";
+            sut.IsValidForInsert(obj, out string why).Should().BeFalse();
+            obj.Id = 123;
+            sut.IsValidForUpdate(obj, out why).Should().BeFalse();
+            sut.IsValidForDelete(obj, out why).Should().BeTrue();
+
+            obj.Lease.Stall = ValidSampleStall();
             obj.Id = 0;
             sut.IsValidForInsert(obj, out why).Should().BeTrue();
             obj.Id = 123;
@@ -164,9 +209,24 @@ namespace RentLog.Tests.IntendedColxnsRepoTests
             {
                 Id       = 0,
                 PRNumber = 456,
-                Lease    = new LeaseDTO { Id = 123 },
+                Lease    = ValidSampleLease(),
                 Actuals  = new BillAmounts { Rent = 456 },
                 Targets  = new BillAmounts { Rent = 456 }
             };
+
+
+        private LeaseDTO ValidSampleLease() => new LeaseDTO
+        {
+            Id    = 123,
+            Stall = ValidSampleStall()
+        };
+
+
+        private StallDTO ValidSampleStall() => new StallDTO
+        {
+            Id      = 123,
+            Name    = "sample stall",
+            Section = new SectionDTO { Id = 456 }
+        };
     }
 }
