@@ -29,6 +29,9 @@ namespace RentLog.DomainLib11.Authorization
         public static bool CanDeletePassbookRow(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
             "Delete Passbook Row", "Cashier", "Supervisor", "Admin");
 
+        public static bool CanDeleteSystemGeneratedPassbookRow(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
+            "Delete System-generated Passbook Row", "Supervisor", "Admin");
+
 
 
         public static bool CanAddVoucherRequest(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,

@@ -30,7 +30,9 @@ namespace RentLog.ChequeVouchers.DcdrTab.PassbookRows
         protected override bool CanAddNewItem () => AppArgs.CanAddPassbookRow(false);
         protected override bool CanDeleteRecord(PassbookRowDTO rec)
         {
-            if (rec.DocRefType != typeof(PassbookRowDTO).FullName) return false;
+            if (rec.DocRefType != typeof(PassbookRowDTO).FullName)
+                return AppArgs.CanDeleteSystemGeneratedPassbookRow(true);
+
             return AppArgs.CanDeletePassbookRow(true);
         }
 
