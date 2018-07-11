@@ -47,7 +47,10 @@ namespace RentLog.DomainLib11.Authorization
             "Issue Cheque to Payee", "Cashier", "Supervisor", "Admin");
 
         public static bool CanMarkChequeAsCleared(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
-            "Mark Cheque as “Cleared”", "Admin", "Supervisor");
+            "Mark Cheque as “Cleared”", "Supervisor", "Admin");
+
+        public static bool CanEditClearedDate(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
+            "Edit “Cleared” date", "Admin");
 
 
 

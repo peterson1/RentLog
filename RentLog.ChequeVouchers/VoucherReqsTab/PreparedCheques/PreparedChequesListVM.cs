@@ -45,7 +45,7 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.PreparedCheques
 
 
         protected override void OnItemOpened(ChequeVoucherDTO e)
-            => ChequeVoucherViewerVM.Show(ItemsList.CurrentItem, AppArgs);
+            => ChequeVoucherViewerVM.Show(ItemsList.CurrentItem, null, AppArgs);
 
 
         protected override bool CanRunMainMethod()

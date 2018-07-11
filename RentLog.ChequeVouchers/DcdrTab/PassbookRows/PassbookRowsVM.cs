@@ -16,6 +16,7 @@ namespace RentLog.ChequeVouchers.DcdrTab.PassbookRows
     public class PassbookRowsVM : FilteredSavedListVMBase<PassbookRowDTO, PassbookRowsFilterVM, ITenantDBsDir>
     {
         private DateRangePickerVM _rnge;
+        private const string PASSBOOKROW_TYPE = "RentLog.DomainLib11.DTOs.PassbookRowDTO";
 
 
         public PassbookRowsVM(MainWindowVM main) : base(null, main.AppArgs, false)
@@ -30,7 +31,7 @@ namespace RentLog.ChequeVouchers.DcdrTab.PassbookRows
         protected override bool CanAddNewItem () => AppArgs.CanAddPassbookRow(false);
         protected override bool CanDeleteRecord(PassbookRowDTO rec)
         {
-            if (rec.DocRefType != typeof(PassbookRowDTO).FullName)
+            if (rec.DocRefType != PASSBOOKROW_TYPE)
                 return AppArgs.CanDeleteSystemGeneratedPassbookRow(true);
 
             return AppArgs.CanDeletePassbookRow(true);
@@ -57,14 +58,15 @@ namespace RentLog.ChequeVouchers.DcdrTab.PassbookRows
         {
             switch (rec.DocRefType)
             {
-                case "RentLog.DomainLib11.DTOs.PassbookRowDTO":
+                case PASSBOOKROW_TYPE:
                     if (AppArgs.CanEditPassbookRow(true))
                         CreateCrud().EditCurrentRecord(rec);
                     break;
 
                 case "PassbookTally.DomainLib.DTOs.RequestedChequeDTO":
                 case "RentLog.DomainLib11.DTOs.ChequeVoucherDTO":
-                    ChequeVoucherViewerVM.Show(rec.As<ChequeVoucherDTO>(), AppArgs);
+                    var vm = ChequeVoucherViewerVM.Show(rec.As<ChequeVoucherDTO>(), rec.TransactionDate, AppArgs);
+                    vm.ClearedDateUpdated += (s, e) => ReloadFromDB();
                     break;
 
                 default: break;

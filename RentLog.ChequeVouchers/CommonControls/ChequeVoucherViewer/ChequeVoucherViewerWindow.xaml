@@ -70,6 +70,17 @@
 
                 <TextBox Text="{Binding DTO.IssuedDate, StringFormat=d MMMM yyyy}"
                          mat:HintAssist.Hint="issued date" />
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Text="{Binding ClearedDate, StringFormat=d MMMM yyyy, Mode=OneWay}"
+                             mat:HintAssist.Hint="cleared date" />
+                    <Button Content="{mat:PackIcon Pencil}"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            Command="{Binding EditClearedDateCmd}"
+                            ToolTip="{Binding EditClearedDateCmd.CurrentLabel}"
+                            Padding="3 0 3 0"
+                            Margin="0 0 0 0" />
+                </StackPanel>
             </StackPanel>
 
             <StackPanel HorizontalAlignment="Right"
