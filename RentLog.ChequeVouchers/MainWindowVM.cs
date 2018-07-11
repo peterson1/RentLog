@@ -18,7 +18,7 @@ namespace RentLog.ChequeVouchers
 
         public MainWindowVM(ITenantDBsDir tenantDBsDir, bool clickRefresh = true) : base(tenantDBsDir)
         {
-            DateRange      = new DateRangePickerVM();
+            DateRange      = new DateRangePickerVM(this);
             BankAcctPicker = new BankAccountPickerVM(this, clickRefresh);
             VoucherReqs    = new VoucherReqsTabVM(tenantDBsDir);
             DcdrReport     = new DcdrTabVM(this);

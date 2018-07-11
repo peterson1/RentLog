@@ -18,10 +18,10 @@ namespace RentLog.ChequeVouchers.MainToolbar
             };
         }
 
-        private void DteStart_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        private async void DteStart_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            //if (!Keyboard.IsKeyDown(Key.LeftShift)) return;
-            //await VM.RecomputeBalances();
+            if (!Keyboard.IsKeyDown(Key.LeftShift)) return;
+            await VM.Main.DcdrReport.RecomputeBalances();
         }
 
 
@@ -35,6 +35,6 @@ namespace RentLog.ChequeVouchers.MainToolbar
         }
 
 
-        //private DcdrTabVM VM => DataContext as DcdrTabVM;
+        private DateRangePickerVM VM => DataContext as DateRangePickerVM;
     }
 }
