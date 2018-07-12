@@ -1,27 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CommonTools.Lib45.UIExtensions;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace RentLog.Cashiering.SectionTabs.AmbulantCollections
 {
-    /// <summary>
-    /// Interaction logic for AmbulantColxnCrudWindow.xaml
-    /// </summary>
     public partial class AmbulantColxnCrudWindow : Window
     {
         public AmbulantColxnCrudWindow()
         {
             InitializeComponent();
+            Loaded += (s, e) =>
+            {
+                SetHandlers(txtPRnum);
+                SetHandlers(txtAmount);
+                SetHandlers(txtReceivedFrom);
+            };
+        }
+
+
+        private void SetHandlers(FrameworkElement ctrl)
+        {
+            ctrl.MoveFocusToNextOnEnterKey();
+            ctrl.MoveFocusOnArrowKeys();
         }
     }
 }
