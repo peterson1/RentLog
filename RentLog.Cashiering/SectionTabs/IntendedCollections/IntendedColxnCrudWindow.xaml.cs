@@ -21,6 +21,7 @@ namespace RentLog.Cashiering.SectionTabs.IntendedCollections
                 SetHandlersForNullable(txtRights  );
                 SetHandlersForNullable(txtElectric);
                 SetHandlersForNullable(txtWater   );
+                SetHandlersForNullable(txtRemarks );
                 btnSave.KeyUp += BtnSave_KeyUp;
             };
         }

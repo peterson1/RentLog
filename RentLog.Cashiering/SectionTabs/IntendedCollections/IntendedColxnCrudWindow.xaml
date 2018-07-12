@@ -155,8 +155,8 @@
         </StackPanel>
         
         <TextBox Text="{Binding Draft.Remarks, UpdateSourceTrigger=PropertyChanged}"
+                 x:Name="txtRemarks"
                  HorizontalAlignment="Right"
-                 Focusable="False"
                  MinWidth="310"
                  mat:HintAssist.Hint="remarks" />
 
