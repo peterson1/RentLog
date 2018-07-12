@@ -11,7 +11,7 @@ namespace RentLog.DatabaseLib.DatabaseFinders
 {
     public class PassbookDBFile : ChequeVouchersDB
     {
-        private const string FILENAME = "Passbooks.ldb";
+        public const string FILENAME = "Passbooks.ldb";
         private string _pbkDbPath;
 
 
