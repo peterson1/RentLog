@@ -1,5 +1,6 @@
 ﻿using CommonTools.Lib45.UIExtensions;
 using System.Windows;
+using System.Windows.Input;
 
 namespace RentLog.Cashiering.BankDeposits
 {
@@ -10,8 +11,8 @@ namespace RentLog.Cashiering.BankDeposits
             InitializeComponent();
             Loaded += (s, e) =>
             {
-                SetHandlers(cmbDesc);
-                SetHandlers(cmbBankAccts);
+                SetHandlers(cmbDesc, false);
+                SetHandlers(cmbBankAccts, false);
                 SetHandlers(txtAmount);
                 SetHandlers(dteDeposit);
                 SetHandlers(txtDepSlip);
@@ -19,10 +20,23 @@ namespace RentLog.Cashiering.BankDeposits
         }
 
 
-        private void SetHandlers(FrameworkElement ctrl)
+        private void SetHandlers(FrameworkElement ctrl, bool handleArrowKeys = true)
         {
             ctrl.MoveFocusToNextOnEnterKey();
-            ctrl.MoveFocusOnArrowKeys();
+
+            if (handleArrowKeys) ctrl.MoveFocusOnArrowKeys();
+
+            ctrl.PreviewKeyDown += (s, e) =>
+            {
+                if (e.Key == Key.Add)
+                {
+                    e.Handled = true;
+                    VM.SaveDraftCmd.ExecuteIfItCan();
+                }
+            };
         }
+
+
+        private BankDepCrudVM VM => DataContext as BankDepCrudVM;
     }
 }

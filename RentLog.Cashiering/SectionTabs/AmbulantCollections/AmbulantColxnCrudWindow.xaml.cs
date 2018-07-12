@@ -1,5 +1,6 @@
 ﻿using CommonTools.Lib45.UIExtensions;
 using System.Windows;
+using System.Windows.Input;
 
 namespace RentLog.Cashiering.SectionTabs.AmbulantCollections
 {
@@ -21,6 +22,17 @@ namespace RentLog.Cashiering.SectionTabs.AmbulantCollections
         {
             ctrl.MoveFocusToNextOnEnterKey();
             ctrl.MoveFocusOnArrowKeys();
+            ctrl.PreviewKeyDown += (s, e) =>
+            {
+                if (e.Key == Key.Add)
+                {
+                    e.Handled = true;
+                    VM.SaveDraftCmd.ExecuteIfItCan();
+                }
+            };
         }
+
+
+        private AmbulantColxnCrudVM VM => DataContext as AmbulantColxnCrudVM;
     }
 }
