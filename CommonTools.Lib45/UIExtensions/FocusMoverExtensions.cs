@@ -30,12 +30,15 @@ namespace CommonTools.Lib45.UIExtensions
             => ctrl.MoveFocus(FocusNavigationDirection.Right);
 
 
-        public static void MoveFocusToNextOnEnterKey(this TextBox txtbox)
+        public static void MoveFocusToNextOnEnterKey(this FrameworkElement ctrl)
         {
-            txtbox.KeyUp += (s, e) =>
+            ctrl.KeyUp += (s, e) =>
             {
                 if (e.Key == Key.Return)
-                    txtbox.MoveFocusToNext();
+                {
+                    e.Handled = true;
+                    ctrl.MoveFocusToNext();
+                }
             };
         }
 
@@ -44,20 +47,41 @@ namespace CommonTools.Lib45.UIExtensions
         {
             ctrl.KeyUp += (s, e) =>
             {
-                if (e.Key == Key.Up)
-                    ctrl.MoveFocusToUp();
+                //if (e.Key == Key.Up)
+                //    ctrl.MoveFocusToUp();
 
-                else if (e.Key == Key.Up)
-                    ctrl.MoveFocusToUp();
+                //else if (e.Key == Key.Up)
+                //    ctrl.MoveFocusToUp();
 
-                else if (e.Key == Key.Down)
-                    ctrl.MoveFocusToDown();
+                //else if (e.Key == Key.Down)
+                //    ctrl.MoveFocusToDown();
 
-                else if (e.Key == Key.Left)
-                    ctrl.MoveFocusToLeft();
+                //else if (e.Key == Key.Left)
+                //    ctrl.MoveFocusToLeft();
 
-                else if (e.Key == Key.Right)
-                    ctrl.MoveFocusToRight();
+                //else if (e.Key == Key.Right)
+                //    ctrl.MoveFocusToRight();
+                switch (e.Key)
+                {
+                    case Key.Left:
+                        ctrl.MoveFocusToLeft();
+                        e.Handled = true;
+                        break;
+                    case Key.Up:
+                        ctrl.MoveFocusToUp();
+                        e.Handled = true;
+                        break;
+                    case Key.Right:
+                        ctrl.MoveFocusToRight();
+                        e.Handled = true;
+                        break;
+                    case Key.Down:
+                        ctrl.MoveFocusToDown();
+                        e.Handled = true;
+                        break;
+                    default:
+                        break;
+                }
             };
         }
     }

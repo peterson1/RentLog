@@ -1,6 +1,4 @@
-﻿using RentLog.DomainLib11.DataSources;
-using RentLog.DomainLib11.DTOs;
-using System;
+﻿using CommonTools.Lib45.UIExtensions;
 using System.Windows;
 
 namespace RentLog.Cashiering.BankDeposits
@@ -10,6 +8,21 @@ namespace RentLog.Cashiering.BankDeposits
         public BankDepositEditWindow()
         {
             InitializeComponent();
+            Loaded += (s, e) =>
+            {
+                SetHandlers(cmbDesc);
+                SetHandlers(cmbBankAccts);
+                SetHandlers(txtAmount);
+                SetHandlers(dteDeposit);
+                SetHandlers(txtDepSlip);
+            };
+        }
+
+
+        private void SetHandlers(FrameworkElement ctrl)
+        {
+            ctrl.MoveFocusToNextOnEnterKey();
+            ctrl.MoveFocusOnArrowKeys();
         }
     }
 }

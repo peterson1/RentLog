@@ -59,6 +59,7 @@
             <StackPanel VerticalAlignment="Top">
 
                 <ComboBox mat:HintAssist.Hint="description"
+                          x:Name="cmbDesc"
                           ItemsSource="{Binding Descriptions}"
                           Text="{Binding Draft.Description, UpdateSourceTrigger=PropertyChanged}"
                           SelectedItem="{Binding Draft.Description, UpdateSourceTrigger=PropertyChanged}"
@@ -74,16 +75,19 @@
                           SelectedItem="{Binding Draft.BankAccount, UpdateSourceTrigger=PropertyChanged}" />
 
                 <TextBox Text="{Binding Draft.Amount, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
-                         mat:HintAssist.Hint="amount">
+                         mat:HintAssist.Hint="amount"
+                         x:Name="txtAmount">
                     <int:Interaction.Behaviors>
                         <txbhv:SelectAllOnFocusBehavior />
                     </int:Interaction.Behaviors>
                 </TextBox>
 
                 <DatePicker SelectedDate="{Binding Draft.DepositDate, UpdateSourceTrigger=PropertyChanged}"
+                            x:Name="dteDeposit"
                             mat:HintAssist.Hint="date deposited" />
 
                 <TextBox Text="{Binding Draft.DocumentRef, UpdateSourceTrigger=PropertyChanged}"
+                         x:Name="txtDepSlip"
                          mat:HintAssist.Hint="deposit slip #" />
 
             </StackPanel>
@@ -92,6 +96,7 @@
         </StackPanel>
 
         <TextBox Text="{Binding Draft.Remarks, UpdateSourceTrigger=PropertyChanged}"
+                 Focusable="False"
                  mat:HintAssist.Hint="remarks" />
 
         <TextBlock Text="{Binding WhyInvalid}"
@@ -100,7 +105,7 @@
 
         <Button Command="{Binding SaveDraftCmd}"
                 Content="{Binding SaveDraftCmd.CurrentLabel}"
-                IsDefault="True"
+                IsDefault="False"
                 Margin="0 20 0 0" />
     </StackPanel>
 </Window>
