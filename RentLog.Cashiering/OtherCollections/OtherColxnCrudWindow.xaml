@@ -66,6 +66,7 @@
             <StackPanel Margin="50 0 0 0">
 
                 <TextBox Text="{Binding Draft.Amount, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
+                         x:Name="txtAmount"
                          mat:HintAssist.Hint="amount">
                     <int:Interaction.Behaviors>
                         <txbhv:SelectAllOnFocusBehavior />
@@ -74,11 +75,12 @@
 
                 <ComboBox ItemsSource="{Binding Collectors}"
                           SelectedItem="{Binding Draft.Collector, UpdateSourceTrigger=PropertyChanged}"
+                          x:Name="cmbCollector"
                           mat:HintAssist.Hint="received from" />
 
                 <ComboBox ItemsSource="{Binding GLAccounts}"
+                          x:Name="cmbGLAcct"
                           SelectedItem="{Binding Draft.GLAccount, UpdateSourceTrigger=PropertyChanged}"
-                          IsEditable="True"
                           mat:HintAssist.Hint="payment for" />
             </StackPanel>
 
@@ -86,6 +88,7 @@
         </StackPanel>
 
         <TextBox Text="{Binding Draft.Remarks, UpdateSourceTrigger=PropertyChanged}"
+                 Focusable="False"
                  mat:HintAssist.Hint="remarks" />
 
         <TextBlock Text="{Binding WhyInvalid}"
@@ -94,7 +97,7 @@
 
         <Button Command="{Binding SaveDraftCmd}"
                 Content="{Binding SaveDraftCmd.CurrentLabel}"
-                IsDefault="True"
+                IsDefault="False"
                 Margin="0 20 0 0" />
     </StackPanel>
 </Window>
