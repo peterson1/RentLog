@@ -10,7 +10,7 @@ namespace RentLog.Tests.CollectorsPerformanceTests
     [Trait("Collectors Performance", "Sample DBs")]
     public class CollectorsPerformanceFacts
     {
-        [Fact(DisplayName = "Jul 3")]
+        [Fact(DisplayName = "Jul 3", Skip = "Undone")]
         public void Jul3()
         {
             var arg = SampleDir.Jul3_GRY();

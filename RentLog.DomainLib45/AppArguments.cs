@@ -64,7 +64,7 @@ namespace RentLog.DomainLib45
             Credentials = creds;
 
 #if DEBUG
-            Credentials.Roles = "Supervisor";
+            Credentials.Roles = "Cashier";
 #endif
         }
 

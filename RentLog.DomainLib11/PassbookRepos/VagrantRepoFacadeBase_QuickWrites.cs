@@ -1,4 +1,5 @@
-﻿using CommonTools.Lib11.ExceptionTools;
+﻿using CommonTools.Lib11.DatabaseTools;
+using CommonTools.Lib11.ExceptionTools;
 using CommonTools.Lib11.StringTools;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.StateTransitions;
@@ -9,13 +10,17 @@ namespace RentLog.DomainLib11.PassbookRepos
 {
     public abstract partial class VagrantRepoFacadeBase : IPassbookRowsRepo
     {
-        public VagrantRepoFacadeBase(int bankAccountId)
+        private IKeyValueStore _meta;
+
+
+        public VagrantRepoFacadeBase(int bankAccountId, IKeyValueStore dbMetadata)
         {
+            _meta         = dbMetadata;
             BankAccountID = bankAccountId;
         }
 
 
-        public int BankAccountID { get; }
+        public int   BankAccountID   { get; }
 
 
         public void InsertClearedCheque(ChequeVoucherDTO cheque, DateTime clearedDate)

@@ -15,7 +15,7 @@ namespace RentLog.DatabaseLib.PassbookRowsRepository
         private string _usr;
 
 
-        internal TransactionsByMonthRepo(int bankAccountId, string transactionsDir, string currentUser) : base(bankAccountId)
+        internal TransactionsByMonthRepo(int bankAccountId, string transactionsDir, string currentUser, IKeyValueStore dbMetadata) : base(bankAccountId, dbMetadata)
         {
             _dir = transactionsDir;
             _usr = currentUser;

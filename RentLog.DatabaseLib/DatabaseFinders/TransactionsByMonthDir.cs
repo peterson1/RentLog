@@ -13,19 +13,28 @@ namespace RentLog.DatabaseLib.DatabaseFinders
         //private MarketStateDB _mkt;
         private string _dir;
         private string _usr;
+        private string _pbkDbPath;
 
 
         public TransactionsByMonthDir(MarketStateDB marketStateDB)
         {
-            //_mkt = marketStateDB;
-            _dir = GetTransactionsDir(marketStateDB.DatabasePath);
-            _usr = marketStateDB.CurrentUser;
+            _dir       = GetTransactionsDir(marketStateDB.DatabasePath);
+            _usr       = marketStateDB.CurrentUser;
+            _pbkDbPath = GetPassbookDbPath(marketStateDB.DatabasePath);
         }
 
 
-        public IPassbookRowsRepo GetRepo(int bankAccountId) 
-            => new TransactionsByMonthRepo(bankAccountId, _dir, _usr);
+        private string GetPassbookDbPath(string marketStateDbPath)
+            => Path.Combine(Path.GetDirectoryName(marketStateDbPath),
+                            PassbookDBFile.FILENAME);
 
+
+        public IPassbookRowsRepo GetRepo(int bankAccountId)
+        {
+            var pbkDB = new SharedLiteDB(_pbkDbPath, _usr);
+            var meta  = pbkDB.Metadata;
+            return new TransactionsByMonthRepo(bankAccountId, _dir, _usr, meta);
+        }
 
         private static string GetTransactionsDir(string mktDbFilePath)
         {

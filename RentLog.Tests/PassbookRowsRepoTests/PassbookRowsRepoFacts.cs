@@ -75,7 +75,7 @@ namespace RentLog.Tests.PassbookRowsRepoTests
 
         private class TestClass : VagrantRepoFacadeBase
         {
-            public TestClass(int bankAccountId) : base(bankAccountId)
+            public TestClass(int bankAccountId) : base(bankAccountId, Mock.Of<IKeyValueStore>())
             {
             }
 
