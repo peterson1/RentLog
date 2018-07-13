@@ -40,6 +40,10 @@ namespace RentLog.Tests.SampleDBs
             if (!File.Exists(dbPath)) Thread.Sleep(300);
             if (!File.Exists(dbPath)) Thread.Sleep(400);
             if (!File.Exists(dbPath)) Thread.Sleep(500);
+            if (!File.Exists(dbPath)) Thread.Sleep(600);
+            if (!File.Exists(dbPath)) Thread.Sleep(700);
+            if (!File.Exists(dbPath)) Thread.Sleep(800);
+            if (!File.Exists(dbPath)) Thread.Sleep(900);
 
             File.Exists(dbPath).Should().BeTrue();
             return dbPath;

@@ -65,12 +65,21 @@ namespace RentLog.ChequeVouchers.DcdrTab.PassbookRows
 
                 case "PassbookTally.DomainLib.DTOs.RequestedChequeDTO":
                 case "RentLog.DomainLib11.DTOs.ChequeVoucherDTO":
-                    var vm = ChequeVoucherViewerVM.Show(rec.As<ChequeVoucherDTO>(), rec.TransactionDate, AppArgs);
-                    vm.ClearedDateUpdated += (s, e) => ReloadFromDB();
+                    LaunchChequeVoucherViewer(rec);
                     break;
 
                 default: break;
             }
+        }
+
+
+        public ChequeVoucherViewerVM LaunchChequeVoucherViewer(PassbookRowDTO rec, bool launchWindow = true)
+        {
+            var vm = ChequeVoucherViewerVM.Show(rec.As<ChequeVoucherDTO>(), AppArgs, launchWindow);
+            vm.PassbookRow         = rec;
+            vm.PassbookRepo        = Repo;
+            vm.ClearedDateUpdated += (s, e) => ReloadFromDB();
+            return vm;
         }
 
 

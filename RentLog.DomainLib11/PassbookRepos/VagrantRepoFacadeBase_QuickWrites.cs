@@ -61,9 +61,13 @@ namespace RentLog.DomainLib11.PassbookRepos
             => FindRepo(rec.TransactionDate).Insert(rec);
 
         public bool Update(PassbookRowDTO rec)
-            => FindRepo(rec.TransactionDate).Update(rec);
+            => throw new InvalidOperationException("Don't call IPassbookRowsRepo.Update(). Instead, call Delete() then Insert()");
 
         public bool Delete(PassbookRowDTO rec)
-            => FindRepo(rec.TransactionDate).Delete(rec);
+        {
+            var ok = FindRepo(rec.TransactionDate).Delete(rec);
+            if (!ok) throw new Exception("IPassbookRowsRepo.Delete returned False");
+            return ok;
+        }
     }
 }

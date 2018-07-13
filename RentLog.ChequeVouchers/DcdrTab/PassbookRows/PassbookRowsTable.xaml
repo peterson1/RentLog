@@ -23,7 +23,7 @@
               ItemsSource="{Binding }"
               DataContext="{Binding ItemsList}">
         <DataGrid.Columns>
-            <DataGridTextColumn Width="08*" Header="date"        Binding="{Binding TransactionDate, StringFormat=d MMM}" ElementStyle="{StaticResource colSmallWrapCenter}" />
+            <DataGridTextColumn Width="08*" Header="date"        Binding="{Binding TransactionDate, StringFormat=d MMM yyyy}" ElementStyle="{StaticResource colSmallWrapCenter}" />
             <DataGridTextColumn Width="08*" Header="ref #"       Binding="{Binding TransactionRef}" ElementStyle="{StaticResource colSmallWrapCenter}" />
             <DataGridTextColumn Width="14*" Header="subject"     Binding="{Binding Subject}" ElementStyle="{StaticResource colSmallWrapRightBold}" />
             <DataGridTextColumn Width="30*" Header="description" Binding="{Binding Description}" ElementStyle="{StaticResource colSmallWrapLeft}" />

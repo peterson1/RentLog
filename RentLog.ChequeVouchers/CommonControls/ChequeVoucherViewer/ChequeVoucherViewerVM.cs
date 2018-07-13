@@ -19,10 +19,10 @@ namespace RentLog.ChequeVouchers.CommonControls.ChequeVoucherViewer
         public event EventHandler ClearedDateUpdated = delegate { };
 
 
-        public ChequeVoucherViewerVM(ChequeVoucherDTO chequeVoucherDTO, DateTime? clearedDate, ITenantDBsDir tenantDBsDir) : base(tenantDBsDir)
+        public ChequeVoucherViewerVM(ChequeVoucherDTO chequeVoucherDTO, ITenantDBsDir tenantDBsDir) : base(tenantDBsDir)
         {
             DTO                = chequeVoucherDTO;
-            ClearedDate        = clearedDate;
+            //ClearedDate        = clearedDate;
             EditClearedDateCmd = R2Command.Relay(EditClearedDate, _ => CanEditClearedDate(), "Edit Cleared Date");
 
             if (!DTO.Request.HasCashInBankEntry())
@@ -31,50 +31,59 @@ namespace RentLog.ChequeVouchers.CommonControls.ChequeVoucherViewer
 
 
         public ChequeVoucherDTO  DTO                 { get; }
-        public DateTime?         ClearedDate         { get; }
         public IR2Command        EditClearedDateCmd  { get; }
+        public DateTime?         PickedDate          { get; set; }
+        public PassbookRowDTO    PassbookRow         { get; set; }
+        public IPassbookRowsRepo PassbookRepo        { get; set; }
+        public DateTime?         ClearedDate         => PassbookRow?.TransactionDate;
 
 
         protected override string CaptionPrefix => "Cheque Voucher";
 
 
-        private bool CanEditClearedDate() 
-            => ClearedDate.HasValue && AppArgs.CanEditClearedDate(true);
+        public bool CanEditClearedDate() 
+            => PassbookRow != null && PassbookRepo != null 
+            && AppArgs.CanEditClearedDate(false);
 
 
         private void EditClearedDate()
         {
-            if (!PopUpInput.TryGetDate("Cleared Date", out DateTime newDate, ClearedDate)) return;
-            var match = FindPassbookRow(out IPassbookRowsRepo repo);
-            if (match == null) throw No.Match<PassbookRowDTO>("ClearedDate", ClearedDate);
-            match.DateOffset = newDate.DaysSinceMin();
-            repo.Delete(match);
-            match.Id = 0;
-            repo.Insert(match);//todo: test this
-            //repo.Update(match);
-            repo.RecomputeBalancesFrom(ClearedDate.Value);
+            var origDate = PassbookRow.TransactionDate;
+            if (!PickedDate.HasValue)
+            {
+                if (!PopUpInput.TryGetDate("Cleared Date", out DateTime newDate, origDate)) return;
+                PickedDate = newDate;
+            }
+
+            PassbookRepo.Delete(PassbookRow);
+            PassbookRow.Id = 0;
+            PassbookRow.DateOffset = PickedDate.Value.DaysSinceMin();
+            PassbookRepo.Insert(PassbookRow);
+
+            PassbookRepo.RecomputeBalancesFrom(origDate);
             ClearedDateUpdated?.Invoke(this, EventArgs.Empty);
             CloseWindow();
         }
 
 
-        private PassbookRowDTO FindPassbookRow(out IPassbookRowsRepo repo)
-        {
-            var bankId = DTO.Request.BankAccountId;
-            repo       = AppArgs.Passbooks.GetRepo(bankId);
-            var rows   = repo.RowsFor(ClearedDate.Value);
-            if (rows == null) return null;
-            if (!rows.Any()) return null;
-            var match = rows.SingleOrDefault(_ => _.DocRefId == DTO.Id);
-            if (match == null) throw No.Match<ChequeVoucherDTO>("Id", DTO.Id);
-            return match;
-        }
+        //private PassbookRowDTO FindPassbookRow(out IPassbookRowsRepo repo)
+        //{
+        //    var bankId = DTO.Request.BankAccountId;
+        //    repo       = AppArgs.Passbooks.GetRepo(bankId);
+        //    var rows   = repo.RowsFor(ClearedDate.Value);
+        //    if (rows == null) return null;
+        //    if (!rows.Any()) return null;
+        //    var match = rows.SingleOrDefault(_ => _.DocRefId == DTO.Id);
+        //    if (match == null) throw No.Match<ChequeVoucherDTO>("Id", DTO.Id);
+        //    return match;
+        //}
 
 
-        public static ChequeVoucherViewerVM Show(ChequeVoucherDTO dto, DateTime? clearedDate, ITenantDBsDir dir)
+        public static ChequeVoucherViewerVM Show(ChequeVoucherDTO dto, ITenantDBsDir dir, bool launchWindow = true)
         {
-            var vm = new ChequeVoucherViewerVM(dto, clearedDate, dir);
-            vm.Show<ChequeVoucherViewerWindow>();
+            var vm = new ChequeVoucherViewerVM(dto, dir);
+            if (launchWindow)
+                vm.Show<ChequeVoucherViewerWindow>();
             return vm;
         }
     }

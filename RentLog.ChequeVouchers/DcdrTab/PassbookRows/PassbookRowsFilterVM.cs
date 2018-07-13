@@ -19,7 +19,7 @@ namespace RentLog.ChequeVouchers.DcdrTab.PassbookRows
         {
             { nameof(FilterSubject       ), _ => _.Subject },
             { nameof(FilterDescription   ), _ => _.Description },
-            { nameof(FilterDateOffset    ), _ => _.TransactionDate.ToString("d MMM") },
+            { nameof(FilterDateOffset    ), _ => _.TransactionDate.ToString("d MMM yyyy") },
             { nameof(FilterTransactionRef), _ => _.TransactionRef },
             { nameof(FilterDeposit       ), _ => _.Deposit.ToString() },
             { nameof(FilterWithdrawal    ), _ => _.Withdrawal.ToString() },

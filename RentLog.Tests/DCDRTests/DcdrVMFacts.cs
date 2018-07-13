@@ -14,33 +14,61 @@ namespace RentLog.Tests.DCDRTests
         protected override string SampleDirName => SampleDir.JUL09_F_GRY;
 
 
-        [Fact(DisplayName = "Applies Base Balance", Skip = "unnecessary?")]
+        [Fact(DisplayName = "Edit Cleared Date - same month")]
         public async Task TestMethod00001()
         {
-            var arg = GetTempSampleArgs("Supervisor");
-            //arg.Passbooks.GetRepo(1).GetBaseBalance().Should().Be(1_000_000);
+            var arg  = GetTempSampleArgs("Admin");
+            var main = new MainWindowVM(arg, false);
+            var rows = main.DcdrReport.PassbookRows;
+            main.DateRange.Start = 1.March(2017);
+            main.SelectedIndex   = 1; // DC-DR tab
+            await main.RefreshCmd.RunAsync();
+            rows.ItemsList.Should().HaveCount(946);
 
-            var vm  = new MainWindowVM(arg, false);
-            vm.DateRange.Start = 1.March(2017);
-            vm.SelectedIndex   = 1; // DC-DR tab
-            await vm.RefreshCmd.RunAsync();
-            vm.DcdrReport.PassbookRows.ItemsList.Should().HaveCount(946);
-
-            var row = vm.DcdrReport.PassbookRows.ItemsList[0];
+            var row = rows.ItemsList[0];
             row.Subject.Should().Be("Cheque for Restituto Linquico");
+            row.TransactionDate.Should().Be(12.March(2017));
 
-            //vm.DcdrReport.RecomputeBalances
+            var crud = rows.LaunchChequeVoucherViewer(row, false);
+            crud.CanEditClearedDate().Should().BeTrue();
+            crud.PickedDate = 30.March(2017);
+            await crud.EditClearedDateCmd.RunAsync();
+
+            await main.RefreshCmd.RunAsync();
+
+            row = rows.ItemsList[0];
+            row.Subject.Should().Be("Cheque for Restituto Linquico");
+            row.TransactionDate.Should().Be(30.March(2017));
+            rows.ItemsList.Should().HaveCount(946);
         }
 
 
-        [Fact(DisplayName = "Edit Cleared Date - same month", Skip = "Undone")]
+        [Fact(DisplayName = "Edit Cleared Date - diff month")]
         public async Task TestMethod00002()
         {
-            var arg = GetTempSampleArgs("Cashier");
-            var vm = new MainWindowVM(arg, false);
-            await vm.RefreshCmd.RunAsync();
+            var arg = GetTempSampleArgs("Admin");
+            var main = new MainWindowVM(arg, false);
+            var rows = main.DcdrReport.PassbookRows;
+            main.DateRange.Start = 1.March(2017);
+            main.SelectedIndex = 1; // DC-DR tab
+            await main.RefreshCmd.RunAsync();
+            rows.ItemsList.Should().HaveCount(946);
 
-            //vm.DcdrReport.RecomputeBalances
+            var row = rows.ItemsList[0];
+            row.Subject.Should().Be("Cheque for Restituto Linquico");
+            row.TransactionDate.Should().Be(12.March(2017));
+
+            var crud = rows.LaunchChequeVoucherViewer(row, false);
+            crud.CanEditClearedDate().Should().BeTrue();
+            crud.PickedDate = 3.April(2017);
+            await crud.EditClearedDateCmd.RunAsync();
+
+            await main.RefreshCmd.RunAsync();
+
+            row = rows.ItemsList[0];
+            row.Subject.Should().Be("Cheque for Restituto Linquico");
+            row.TransactionDate.Should().Be(3.April(2017));
+            rows.ItemsList.Should().HaveCount(946);
         }
     }
 }

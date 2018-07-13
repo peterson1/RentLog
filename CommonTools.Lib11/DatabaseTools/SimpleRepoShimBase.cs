@@ -60,6 +60,7 @@ namespace CommonTools.Lib11.DatabaseTools
         {
             ValidateBeforeUpdate(changedRecord);
             var ok = _repo.Update(changedRecord);
+            if (!ok) return false;
             ExecuteAfterSave(changedRecord, false);
             return ok;
         }
