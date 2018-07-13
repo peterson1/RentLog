@@ -113,6 +113,7 @@
     <Compile Include="PassbookRowsRepoTests\PassbookRowsRepoFacts.cs" />
     <Compile Include="PostAndCloseTests\PostAndCloseFacts1.cs" />
     <Compile Include="PostAndCloseTests\PostAndCloseFacts2.cs" />
+    <Compile Include="PostAndCloseTests\PostAndCloseValidationFacts.cs" />
     <Compile Include="PreparedChequesRepoTests\PreparedChequesRepoFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecomputeRunningBalTests\RecomputeRunningBalFacts.cs" />

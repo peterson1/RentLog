@@ -38,7 +38,7 @@ namespace RentLog.ChequeVouchers.DcdrTab.PassbookRows
         }
 
 
-        private PassbookRowCrudVM CreateCrud()
+        public PassbookRowCrudVM CreateCrud()
         {
             var crud = new PassbookRowCrudVM(Repo, AppArgs);
             crud.SaveCompleted += (s, e) =>
