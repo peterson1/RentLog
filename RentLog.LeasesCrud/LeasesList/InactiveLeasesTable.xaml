@@ -6,8 +6,22 @@
              xmlns:local="clr-namespace:RentLog.LeasesCrud.LeasesList"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <DataGrid x:Name="dg" ItemsSource="{Binding }"
-              Style="{StaticResource dgReadOnly}">
+    <UserControl.Resources>
+        <ContextMenu x:Key="rowCtxMenu">
+            <MenuItem Header ="{Binding MainMethodCmd.CurrentLabel}" 
+                      Command="{Binding MainMethodCmd}"
+                      DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+        </ContextMenu>
+
+        <Style TargetType="DataGridRow"
+               BasedOn="{StaticResource MaterialDesignDataGridRow}">
+            <Setter Property="ContextMenu" Value="{StaticResource rowCtxMenu}" />
+        </Style>
+    </UserControl.Resources>
+    <DataGrid x:Name="dg" Style="{StaticResource dgReadOnly}"
+              ItemsSource ="{Binding }"
+              DataContext ="{Binding Rows}"
+              SelectedItem="{Binding CurrentItem}">
         <DataGrid.Columns>
             <DataGridTextColumn Width="12*" Header="tenant"          Binding="{Binding DTO.Tenant.FirstAndLastNames}" ElementStyle="{StaticResource colLabel}" />
             <DataGridTextColumn Width="09*" Header="stall"           Binding="{Binding DTO.Stall.Name}" ElementStyle="{StaticResource colCenter}" />

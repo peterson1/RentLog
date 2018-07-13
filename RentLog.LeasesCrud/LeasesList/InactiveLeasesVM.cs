@@ -1,10 +1,12 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
 using CommonTools.Lib45.BaseViewModels;
 using PropertyChanged;
+using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.ReportRows;
 using RentLog.DomainLib45;
 using RentLog.DomainLib45.SoaViewers.MainWindow;
+using RentLog.LeasesCrud.LeaseCRUD;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -29,11 +31,24 @@ namespace RentLog.LeasesCrud.LeasesList
             return items;
         }
 
+
         protected override LeaseBalanceRow CastToRow(InactiveLeaseDTO lse)
         {
             var repo = AppArgs.Balances.GetRepo(lse);
             var bill = repo.Latest();
             return new LeaseBalanceRow(lse, bill);
+        }
+
+
+        protected override string MainMethodCmdLabel => "Add Stall to this Tenant";
+        protected override bool   CanRunMainMethod() => AppArgs.CanAddLease(false);
+        protected override void   RunMainMethod()
+        {
+            if (!TryGetPickedItem(out InactiveLeaseDTO lse)) return;
+            var crud = new LeaseCrudVM(AppArgs.MarketState.ActiveLeases, AppArgs);
+            crud.TenantTemplate = lse.Tenant.ShallowClone();
+            crud.DraftBirthDate = lse.Tenant.BirthDate;
+            crud.EncodeNewDraftCmd.ExecuteIfItCan();
         }
     }
 }
