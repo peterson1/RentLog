@@ -32,10 +32,11 @@ namespace RentLog.Cashiering.SectionTabs
 
         public CollectorDTO Collector => IntendedColxns?.CurrentCollector;
 
-        public bool HasCollector => Collector != null;
-
+        public bool    HasCollector => Collector != null;
+        public bool    VacantsSaved => Main.ColxnsDB.HasVacantsTable(Section);
         public decimal SectionTotal => IntendedColxns.TotalSum
                                      + AmbulantColxns.TotalSum;
+
 
         internal void ReloadAll()
         {

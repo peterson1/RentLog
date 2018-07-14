@@ -81,21 +81,6 @@ namespace RentLog.DomainLib11.CollectionRepos
         public void MarkAsPosted () => _meta[POST_DATE] = DateTime.Now.ToString(DATE_FMT);
 
 
-        //private List<SectionDTO> LoadSectionsSnapshot()
-        //{
-        //    var json = _meta[SEC_SNAPS_KEY];
-        //    if (json.IsBlank()) return null;
-        //    return json.ReadJson<List<SectionDTO>>();
-        //}
-
-
-        //private List<CollectorDTO> LoadCollectorsSnapshot()
-        //{
-        //    var json = _meta[COL_SNAPS_KEY];
-        //    if (json.IsBlank()) return null;
-        //    return json.ReadJson<List<CollectorDTO>>();
-        //}
-
         private List<T> LoadSnapshot<T>(string metaKey)
         {
             var json = _meta[metaKey];
@@ -110,5 +95,12 @@ namespace RentLog.DomainLib11.CollectionRepos
 
         public void TakeCollectorsSnapshot(List<CollectorDTO> currentCollectors)
             => _meta[COL_SNAPS_KEY] = currentCollectors.ToJson();
+
+
+        public bool HasVacantsTable(SectionDTO sec)
+        {
+            if (!VacantStalls.TryGetValue(sec.Id, out IVacantStallsRepo repo)) return false;
+            return repo.TableExists();
+        }
     }
 }

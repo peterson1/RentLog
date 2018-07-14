@@ -29,5 +29,6 @@ namespace RentLog.DomainLib11.CollectionRepos
         void          SetCollector           (SectionDTO section, CollectorDTO collector);
         void          TakeSectionsSnapshot   (List<SectionDTO> currentSections);
         void          TakeCollectorsSnapshot (List<CollectorDTO> currentCollectors);
+        bool          HasVacantsTable        (SectionDTO section);
     }
 }

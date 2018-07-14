@@ -9,7 +9,7 @@ namespace RentLog.Tests.PostAndCloseTests
     [Trait("Post&Close", "Sample Dir")]
     public class PostAndCloseValidationFacts
     {
-        [Fact(DisplayName = "Rejects missing Vacants table", Skip = "Undone")]
+        [Fact(DisplayName = "Rejects missing Vacants table")]
         public async Task TestMethod00001()
         {
             var arg  = SampleDBs.SampleDir.Jul9_GRY_Open();
@@ -18,6 +18,7 @@ namespace RentLog.Tests.PostAndCloseTests
 
             await vm.RefreshCmd.RunAsync();
             vm.CanPostAndClose().Should().BeFalse();
+            vm.PostAndCloseCmd.CurrentLabel.Should().Contain("Submit");
         }
     }
 }

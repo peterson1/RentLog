@@ -37,6 +37,12 @@ namespace RentLog.Cashiering.MainToolbar
             if (!Main.CanReview) return false;
             if (Main.IsBusy) return false;
             if (!Main.SectionTabs.All(_ => _.HasCollector)) return false;
+            if (!Main.SectionTabs.All(_ => _.VacantsSaved))
+            {
+                PostAndCloseCmd.CurrentLabel = "Missing Vacants table. Cashier should do another “Submit”.";
+                return false;
+            }
+            PostAndCloseCmd.CurrentLabel = "Post & Close";
             return IsBalanced;
         }
 
