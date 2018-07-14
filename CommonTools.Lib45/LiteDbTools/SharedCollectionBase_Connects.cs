@@ -22,5 +22,7 @@ namespace CommonTools.Lib45.LiteDbTools
 
         public virtual LiteCollection<T> GetCollection(LiteDatabase db)
             => db.GetCollection<T>();
+
+        public abstract bool TableExists();
     }
 }

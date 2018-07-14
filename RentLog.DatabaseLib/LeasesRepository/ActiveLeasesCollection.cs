@@ -22,5 +22,9 @@ namespace RentLog.DatabaseLib.LeasesRepository
             => db.GetCollection<LeaseDTO>(COLXN_NAME)
                     .Include(_ => _.Stall)
                     .Include(_ => _.Stall.Section);
+
+
+        public override bool TableExists()
+            => _db.OpenRead().CollectionExists(COLXN_NAME);
     }
 }

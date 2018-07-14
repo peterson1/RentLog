@@ -45,6 +45,7 @@ namespace CommonTools.Lib11.DatabaseTools
         public void               Drop          ()                                         => _repo.Drop();
         public void               DropAndInsert (IEnumerable<T> records, bool doValidate)  => _repo.DropAndInsert(records, doValidate);
         public Dictionary<int, T> ToDictionary  ()                                         => _repo.ToDictionary();
+        public bool               TableExists   ()                                         => _repo.TableExists();
 
 
         public int Insert(T newRecord)

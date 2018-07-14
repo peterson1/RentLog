@@ -36,5 +36,6 @@ namespace CommonTools.Lib11.DatabaseTools
 
         //bool  IsValidForInsert  (T draft, out string whyInvalid);
         //bool  IsValidForUpdate  (T record, out string whyInvalid);
+        bool TableExists();
     }
 }

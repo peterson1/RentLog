@@ -57,6 +57,5 @@ namespace CommonTools.Lib45.LiteDbTools
 
         private void InsertNewPair(string key, string value) 
                 => Insert(new KeyValuePairDTO(key, value));
-
     }
 }

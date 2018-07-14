@@ -17,5 +17,9 @@ namespace CommonTools.Lib45.LiteDbTools
 
         public override LiteCollection<T> GetCollection(LiteDatabase db)
             => db.GetCollection<T>(CollectionName);
+
+
+        public override bool TableExists()
+            => _db.OpenRead().CollectionExists(CollectionName);
     }
 }
