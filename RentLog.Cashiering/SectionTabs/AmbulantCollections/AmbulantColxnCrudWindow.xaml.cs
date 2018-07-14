@@ -13,6 +13,7 @@ namespace RentLog.Cashiering.SectionTabs.AmbulantCollections
             {
                 SetHandlers(txtPRnum);
                 SetHandlers(txtAmount);
+                SetHandlers(txtRemarks);
                 SetHandlers(txtReceivedFrom);
             };
         }

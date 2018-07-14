@@ -88,7 +88,7 @@
         </StackPanel>
 
         <TextBox Text="{Binding Draft.Remarks, UpdateSourceTrigger=PropertyChanged}"
-                 Focusable="False"
+                 x:Name="txtRemarks"
                  mat:HintAssist.Hint="remarks" />
 
         <TextBlock Text="{Binding WhyInvalid}"

@@ -11,8 +11,9 @@ namespace RentLog.Cashiering.OtherCollections
             InitializeComponent();
             Loaded += (s, e) =>
             {
-                SetHandlers(txtPRnum );
-                SetHandlers(txtAmount);
+                SetHandlers(txtPRnum  );
+                SetHandlers(txtAmount );
+                SetHandlers(txtRemarks);
                 SetHandlers(cmbCollector, false);
                 SetHandlers(cmbGLAcct   , false);
             };

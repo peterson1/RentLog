@@ -16,6 +16,7 @@ namespace RentLog.Cashiering.BankDeposits
                 SetHandlers(txtAmount);
                 SetHandlers(dteDeposit);
                 SetHandlers(txtDepSlip);
+                SetHandlers(txtRemarks);
             };
         }
 

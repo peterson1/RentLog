@@ -13,6 +13,7 @@ namespace RentLog.Cashiering.CashierCollections
             {
                 SetHandlers(txtPRnum   );
                 SetHandlers(txtAmount  );
+                SetHandlers(txtRemarks );
                 SetHandlers(cmbLease   , false);
                 SetHandlers(cmbBillCode, false);
             };
