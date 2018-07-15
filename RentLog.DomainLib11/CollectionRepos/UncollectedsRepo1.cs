@@ -114,8 +114,9 @@ namespace RentLog.DomainLib11.CollectionRepos
 
         private UncollectedLeaseDTO CreateUncollected(LeaseDTO lse) => new UncollectedLeaseDTO
         {
-            Lease   = lse,
-            Targets = GetTarget(lse)
+            Lease         = lse,
+            StallSnapshot = lse.Stall,
+            Targets       = GetTarget(lse)
         };
 
 

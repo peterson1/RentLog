@@ -20,9 +20,10 @@ namespace RentLog.Cashiering.SectionTabs.IntendedCollections
 
         protected override void ModifyDraftForInserting(IntendedColxnDTO draft)
         {
-            draft.Lease   = Intention.Lease;
-            draft.Targets = Intention.Targets;
-            draft.Actuals = new BillAmounts();
+            draft.Lease         = Intention.Lease;
+            draft.StallSnapshot = Intention.StallSnapshot;
+            draft.Targets       = Intention.Targets;
+            draft.Actuals       = new BillAmounts();
         }
 
 

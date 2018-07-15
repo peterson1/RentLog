@@ -21,7 +21,7 @@ namespace RentLog.DomainLib11.ReportRows
         public CollectorPerfCell  Rights   { get; }
 
         public LeaseDTO  Lease  => _colxn.Lease;
-        public StallDTO  Stall  => Lease?.Stall;
+        public StallDTO  Stall  => _colxn.StallSnapshot ?? Lease?.Stall;
 
 
         private CollectorPerfCell CreateCell(IntendedColxnDTO colxn, BillCode billCode)
