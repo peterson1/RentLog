@@ -5,6 +5,8 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security.AccessControl;
+using System.Security.Principal;
 using System.Text;
 
 namespace CommonTools.Lib45.FileSystemTools
@@ -197,6 +199,23 @@ namespace CommonTools.Lib45.FileSystemTools
             var tmpDir = Path.Combine(Path.GetTempPath(), tmpNme);
             sourcePath.CopyDirectoryTo(tmpDir);
             return tmpDir;
+        }
+
+
+        //https://stackoverflow.com/a/16216587/3973863
+        public static void GrantEveryoneFullControl(this string filePath)
+        {
+            if (!File.Exists(filePath))
+                throw Missing.File(filePath, "Target file for GrantEveryoneFullControl()");
+
+            var info = new FileInfo(filePath);
+            var fSec = info.GetAccessControl();
+            var user = new SecurityIdentifier(WellKnownSidType.WorldSid, null);
+            var rule = new FileSystemAccessRule(user,
+                        FileSystemRights.FullControl,
+                        AccessControlType.Allow);
+            fSec.AddAccessRule(rule);
+            File.SetAccessControl(filePath, fSec);
         }
     }
 }

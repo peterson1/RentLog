@@ -134,6 +134,7 @@ namespace RentLog.Cashiering
             cancelEvtArgs.Cancel = true;
             StartBeingBusy("Updating Vacants & Uncollecteds ...");
             await Task.Run(() => UpdateDatabasesBeforeExit());
+            await Task.Delay(1000);
             StopBeingBusy();
             Application.Current?.Shutdown();
         }

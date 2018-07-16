@@ -26,8 +26,8 @@ namespace CommonTools.Lib45.LiteDbTools
 
             InitializeCommons(currentUser);
 
-            if (!File.Exists(DbPath))
-                Metadata.CreateInitialRecord();
+            //if (!File.Exists(DbPath))
+            //    Metadata.CreateInitialRecord();
 
             InitializeFileWatcher();
         }
@@ -44,27 +44,21 @@ namespace CommonTools.Lib45.LiteDbTools
         public MetadataCollection  Metadata     { get; private set; }
 
 
-        public LiteDatabase OpenRead()
-            => Connect(LiteDB.FileMode.ReadOnly);
-
-
-        public bool IsInMemory => _mem != null;
-
-
-        public LiteDatabase OpenWrite()
-            => Connect(LiteDB.FileMode.Shared);
+        public bool         IsInMemory  => _mem != null;
+        public LiteDatabase OpenRead()  => Connect(LiteDB.FileMode.ReadOnly);
+        public LiteDatabase OpenWrite() => Connect(LiteDB.FileMode.Shared);
 
 
         private LiteDatabase Connect(LiteDB.FileMode fileMode)
             => _mem != null
-              ? new LiteDatabase(_mem)
-              : new LiteDatabase(new ConnectionString
-              {
-                  Filename = DbPath,
-                  Journal = false,
-                  Mode = fileMode,
-                  LimitSize = long.MaxValue
-              });
+            ? new LiteDatabase(_mem)
+            : new LiteDatabase(new ConnectionString
+            {
+                Filename  = DbPath,
+                Journal   = false,
+                Mode      = fileMode,
+                LimitSize = long.MaxValue
+            });
 
 
         private void InitializeFileWatcher()
@@ -92,10 +86,13 @@ namespace CommonTools.Lib45.LiteDbTools
         private void InitializeCommons(string currentUser)
         {
             CurrentUser = currentUser;
-            Metadata = new MetadataCollection(this);
+            Metadata    = new MetadataCollection(this);
 
             if (!File.Exists(DbPath))
+            {
                 Metadata.CreateInitialRecord();
+                DbPath.GrantEveryoneFullControl();
+            }
         }
     }
 }
