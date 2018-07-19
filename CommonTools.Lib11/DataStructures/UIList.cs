@@ -67,13 +67,29 @@ namespace CommonTools.Lib11.DataStructures
             if (IsReplacingItems) return;
             IsReplacingItems = true;
 
-            this.Clear();
+            IgnoreUIErrors(() => this.Clear());
+            if (items != null)
+            {
+                foreach (var item in items)
+                    IgnoreUIErrors(() => this.Add(item));
+            }
 
-            items?.ForEach(_ => this.Add(_));
+            IgnoreUIErrors(() 
+                => ItemsReplaced?.Invoke(this, EventArgs.Empty));
 
-            ItemsReplaced?.Invoke(this, EventArgs.Empty);
             IsReplacingItems = false;
         }
+
+
+        private void IgnoreUIErrors(Action action)
+        {
+            try
+            {
+                action.Invoke();
+            }
+            catch (ArgumentException) { }
+        }
+
 
 
         public void RemoveAll(Predicate<T> match)
