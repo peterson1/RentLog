@@ -95,7 +95,10 @@ namespace RentLog.ChequeVouchers.DcdrTab.PassbookRows
             => AppArgs.Passbooks.GetRepo(AppArgs.CurrentBankAcct.Id);
 
 
-        protected override void DeleteRecord(ISimpleRepo<PassbookRowDTO> db, PassbookRowDTO dto) 
-            => Repo.Delete(dto);
+        protected override void DeleteRecord(ISimpleRepo<PassbookRowDTO> db, PassbookRowDTO dto)
+        {
+            Repo.Delete(dto);
+            Repo.RecomputeBalancesFrom(dto.TransactionDate);
+        }
     }
 }
