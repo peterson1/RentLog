@@ -44,8 +44,9 @@ namespace RentLog.DomainLib11.Reporters
 
             if (CollectionsSum != DepositsSum)
                 throw Bad.Data($"Collections sum ({CollectionsSum:N2}) for [{Date:d-MMM-yyyy}] does not match deposits sum ({DepositsSum:N2}).");
-        }
 
+            this.SetSummary(SectionColxnsRow.GetSummary(this));
+        }
 
 
         private void FillSectionCollections(ITenantDBsDir dir)

@@ -11,6 +11,11 @@ namespace RentLog.DomainLib11.ReportRows
 {
     public class SectionColxnsRow : CollectionAmounts
     {
+        public SectionColxnsRow()
+        {
+        }
+
+
         public SectionColxnsRow(SectionDTO sec, DateTime date, ITenantDBsDir dir)
         {
             Section    = sec;
@@ -25,6 +30,17 @@ namespace RentLog.DomainLib11.ReportRows
 
             Details.SetItems(colxns);
         }
+
+
+        public static SectionColxnsRow GetSummary(IEnumerable<SectionColxnsRow> rows) => new SectionColxnsRow()
+        {
+            Rent     = rows.Sum(_ => _.Rent    ),
+            Rights   = rows.Sum(_ => _.Rights  ),
+            Electric = rows.Sum(_ => _.Electric),
+            Water    = rows.Sum(_ => _.Water   ),
+            Ambulant = rows.Sum(_ => _.Ambulant),
+        };
+
 
         public SectionDTO    Section    { get; set; }
         public CollectorDTO  Collector  { get; set; }
