@@ -71,8 +71,8 @@ namespace RentLog.LeasesCrud.MainToolbar
 
         private Action GetAdHocJob(out string desc)
         {
-            desc      = "EnsureGLAccount.MeralcoDeposit";
-            return () => EnsureGLAccount.MeralcoDeposit(_args);
+            desc      = "ForActiveLeases.SetContractYears 2";
+            return () => ForActiveLeases.SetContractYears(2, _args);
         }
     }
 }
