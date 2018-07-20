@@ -92,7 +92,8 @@
     <Compile Include="ChequeVouchersDBTests\ChequeVouchersDBFacts.cs" />
     <Compile Include="CollectionsDirTests\CollectionsDirBaseFacts.cs" />
     <Compile Include="CollectionsDirTests\CollectionsDirFacts.cs" />
-    <Compile Include="CollectorsPerformanceTests\CollectorsPerformanceFacts.cs" />
+    <Compile Include="CollectorsPerformanceTests\ColPerfMainRowFacts.cs" />
+    <Compile Include="CollectorsPerformanceTests\ColPerfSubRowFacts.cs" />
     <Compile Include="ColxnSummaryTests\ColxnSummaryFacts.cs" />
     <Compile Include="DailyBillsRepoTests\DailyBillsRepo1Facts.cs" />
     <Compile Include="DailyColxnsTests\DailyColxnsFacts.cs" />

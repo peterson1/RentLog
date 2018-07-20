@@ -1,7 +1,8 @@
-﻿using RentLog.DomainLib11.CollectionRepos;
+﻿using CommonTools.Lib11.CollectionTools;
+using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
-using System;
+using RentLog.DomainLib11.Models;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,15 +17,21 @@ namespace RentLog.DomainLib11.ReportRows
             foreach (var sec in db.SectionsSnapshot)
                 AddSubRows(collector, sec, db, fallbackStallsRepo);
 
-            Sections = this.GroupBy(_ => _.Section.Id)
-                           .Select (_ => _.First())
-                           .Select (_ => _.Section)
-                           .ToList ();
+            Sections = this.DistinctBy(_ => _.Section.Id)
+                           .Select    (_ => _.Section)
+                           .ToList    ();
+
+            StallCoverage = new ColPerfStallCoverage(this, db);
+            RentBill      = new ColPerfBillPerformance(BillCode.Rent  , this.Select(_ => _.Rent));
+            RightsBill    = new ColPerfBillPerformance(BillCode.Rights, this.Select(_ => _.Rights));
         }
 
-
-        public CollectorDTO       Collector  { get; }
-        public List<SectionDTO>   Sections   { get; }
+                                                     
+        public CollectorDTO            Collector     { get; }
+        public List<SectionDTO>        Sections      { get; }
+        public ColPerfStallCoverage    StallCoverage { get; }
+        public ColPerfBillPerformance  RentBill      { get; }
+        public ColPerfBillPerformance  RightsBill    { get; }
 
         public string Assignment => string.Join(", ", Sections?.Select(_ => _.Name));
 

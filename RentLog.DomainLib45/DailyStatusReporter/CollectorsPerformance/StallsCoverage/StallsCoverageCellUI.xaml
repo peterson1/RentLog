@@ -13,7 +13,7 @@
         </Style>
     </UserControl.Resources>
     <DockPanel HorizontalAlignment="Center">
-        <TextBlock Text="{Binding NoOperationssCount, StringFormat={}(did not operate: {0:N0})}"
+        <TextBlock Text="{Binding NoOperationsCount, StringFormat={}(did not operate: {0:N0})}"
                    FontStyle="Italic"
                    FontSize="12"
                    TextAlignment="Center"
@@ -30,9 +30,9 @@
             <labl:DualText Text1="active stalls"
                            Text2="{Binding ActiveStallsCount, StringFormat=N0}" />
             <labl:DualText Text1="collected"
-                           Text2="{Binding CollectedCount, StringFormat=N0}" />
+                           Text2="{Binding CollectedsCount, StringFormat=N0}" />
             <labl:DualText Text1="uncollected"
-                           Text2="{Binding UncollectedCount, StringFormat=N0}" />
+                           Text2="{Binding UncollectedsCount, StringFormat=N0}" />
         </StackPanel>
 
     </DockPanel>

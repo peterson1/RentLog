@@ -4,9 +4,32 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RentLog.DomainLib45.DailyStatusReporter.CollectorsPerformance.BillStates"
+             xmlns:labl="clr-namespace:CommonTools.Lib45.TextLabels;assembly=CommonTools.Lib45"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    <UserControl.Resources>
+        <Style TargetType="labl:DualText">
+            <Setter Property="Margin" Value="0 1 0 1" />
+            <Setter Property="Text1Width" Value="105" />
+        </Style>
+    </UserControl.Resources>
+    <StackPanel Orientation="Horizontal">
+        <StackPanel>
+            <labl:DualText Text1="{Binding BillCode, StringFormat={}target {0}}"
+                           Text2="{Binding Target, StringFormat=N2}" />
+            <labl:DualText Text1="{Binding BillCode, StringFormat={}{0} minus excess}"
+                           Text1Size="11"
+                           Text2="{Binding NoExcess, StringFormat=N2}" />
+            <labl:DualText Text1="{Binding UnderpaidCount, StringFormat={}underpaid ({0:N0})}"
+                           Text2="{Binding UnderpaidTotal, StringFormat=N2}"
+                           Margin="0 5 0 0" />
+            <labl:DualText Text1="{Binding OverpaidCount, StringFormat={}overpaid ({0:N0})}"
+                           Text2="{Binding OverpaidTotal, StringFormat=N2}" />
+        </StackPanel>
+
+        <TextBlock Text="{Binding PerfRate, StringFormat=P0}"
+                   Style="{StaticResource MaterialDesignTitleTextBlock}"
+                   Margin="15 0 0 0"
+                   VerticalAlignment="Center"/>
+    </StackPanel>
 </UserControl>

@@ -87,9 +87,6 @@
     <Compile Include="DailyStatusReporter\CollectorsPerformance\BillStates\BillPerformanceCellUI.xaml.cs">
       <DependentUpon>BillPerformanceCellUI.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DailyStatusReporter\CollectorsPerformance\BillStates\BillStatesCellUI.xaml.cs">
-      <DependentUpon>BillStatesCellUI.xaml</DependentUpon>
-    </Compile>
     <Compile Include="DailyStatusReporter\CollectorsPerformance\CollectorsPerformanceUI1.xaml.cs">
       <DependentUpon>CollectorsPerformanceUI1.xaml</DependentUpon>
     </Compile>
@@ -261,10 +258,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DailyStatusReporter\CollectorsPerformance\BillStates\BillPerformanceCellUI.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DailyStatusReporter\CollectorsPerformance\BillStates\BillStatesCellUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

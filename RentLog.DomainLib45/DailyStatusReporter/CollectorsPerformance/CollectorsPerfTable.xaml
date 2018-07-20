@@ -10,7 +10,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DataGrid x:Name="dg" ItemsSource="{Binding }"
-                Style="{StaticResource dgReadOnly}">
+              Background="White"
+              Style="{StaticResource dgReadOnly}">
         <DataGrid.Columns>
 
             <DataGridTemplateColumn Width="16*" Header="Collector">
@@ -24,7 +25,7 @@
             <DataGridTemplateColumn Width="28*" Header="Stall Coverage">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <stallCovr:StallsCoverageCellUI DataContext="{Binding Coverage}" />
+                        <stallCovr:StallsCoverageCellUI DataContext="{Binding StallCoverage}" />
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
@@ -32,7 +33,7 @@
             <DataGridTemplateColumn Width="28*" Header="Rent Collection">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <billState:BillStatesCellUI DataContext="{Binding RentBill}" />
+                        <billState:BillPerformanceCellUI DataContext="{Binding RentBill}" />
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>

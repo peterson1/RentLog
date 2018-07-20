@@ -7,8 +7,8 @@ using Xunit;
 
 namespace RentLog.Tests.CollectorsPerformanceTests
 {
-    [Trait("Collectors Performance", "Sample DBs")]
-    public class CollectorsPerformanceFacts
+    [Trait("ColPerf Sub Row", "Sample DBs")]
+    public class ColPerfSubRowFacts
     {
         [Fact(DisplayName = "Jul 3: Rent")]
         public void Jul3()
@@ -18,9 +18,6 @@ namespace RentLog.Tests.CollectorsPerformanceTests
             var sut = new CollectorsPerformanceReport(db, arg.MarketState);
 
             sut.Should().HaveCount(1);
-            sut[0].Collector.Should().NotBeNull();
-            sut[0].Collector.Name.Should().Contain("Pasalu");
-            sut[0].Assignment.Should().Be("DRY, WET");
             sut[0].Should().HaveCount(94);
 
             // sample exact rent payment
