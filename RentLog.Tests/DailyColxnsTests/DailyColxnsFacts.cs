@@ -2,6 +2,7 @@
 using FluentAssertions.Extensions;
 using RentLog.DomainLib11.Reporters;
 using RentLog.Tests.SampleDBs;
+using System.Linq;
 using Xunit;
 
 namespace RentLog.Tests.DailyColxnsTests
@@ -26,45 +27,49 @@ namespace RentLog.Tests.DailyColxnsTests
             var sut = new DailyColxnsReport(4.May(2018), arg);
 
             sut.Should().HaveCount(4);
-            sut.ContainsKey(DRY).Should().BeTrue();
-            sut.ContainsKey(FRZ).Should().BeTrue();
-            sut.ContainsKey(WET).Should().BeTrue();
-            sut.ContainsKey(OFC).Should().BeTrue();
+            //sut.ContainsKey(DRY).Should().BeTrue();
+            //sut.ContainsKey(FRZ).Should().BeTrue();
+            //sut.ContainsKey(WET).Should().BeTrue();
+            //sut.ContainsKey(OFC).Should().BeTrue();
+            var dry = sut.Single(_ => _.Section.Id == DRY);
+            var frz = sut.Single(_ => _.Section.Id == FRZ);
+            var wet = sut.Single(_ => _.Section.Id == WET);
+            var ofc = sut.Single(_ => _.Section.Id == OFC);
 
-            sut[DRY].Rent.Should().Be(5821);
-            sut[FRZ].Rent.Should().Be(0);
-            sut[WET].Rent.Should().Be(10164);
-            sut[OFC].Rent.Should().Be(0);
+            dry.Rent.Should().Be(5821);
+            frz.Rent.Should().Be(0);
+            wet.Rent.Should().Be(10164);
+            ofc.Rent.Should().Be(0);
             sut.TotalRent.Should().Be(15985);
 
-            sut[DRY].Rights.Should().Be(750);
-            sut[FRZ].Rights.Should().Be(0);
-            sut[WET].Rights.Should().Be(1679);
-            sut[OFC].Rights.Should().Be(0);
+            dry.Rights.Should().Be(750);
+            frz.Rights.Should().Be(0);
+            wet.Rights.Should().Be(1679);
+            ofc.Rights.Should().Be(0);
             sut.TotalRights.Should().Be(2429);
 
-            sut[DRY].Electric.Should().Be(831);
-            sut[FRZ].Electric.Should().Be(0);
-            sut[WET].Electric.Should().Be(965);
-            sut[OFC].Electric.Should().Be(0);
+            dry.Electric.Should().Be(831);
+            frz.Electric.Should().Be(0);
+            wet.Electric.Should().Be(965);
+            ofc.Electric.Should().Be(0);
             sut.TotalElectric.Should().Be(1796);
 
-            sut[DRY].Water.Should().Be(0);
-            sut[FRZ].Water.Should().Be(0);
-            sut[WET].Water.Should().Be(0);
-            sut[OFC].Water.Should().Be(0);
+            dry.Water.Should().Be(0);
+            frz.Water.Should().Be(0);
+            wet.Water.Should().Be(0);
+            ofc.Water.Should().Be(0);
             sut.TotalWater.Should().Be(0);
 
-            sut[DRY].Ambulant.Should().Be(0);
-            sut[FRZ].Ambulant.Should().Be(168);
-            sut[WET].Ambulant.Should().Be(355);
-            sut[OFC].Ambulant.Should().Be(0);
+            dry.Ambulant.Should().Be(0);
+            frz.Ambulant.Should().Be(168);
+            wet.Ambulant.Should().Be(355);
+            ofc.Ambulant.Should().Be(0);
             sut.TotalAmbulant.Should().Be(523);
 
-            sut[DRY].Total.Should().Be(    7_402);
-            sut[FRZ].Total.Should().Be(      168);
-            sut[WET].Total.Should().Be(   13_163);
-            sut[OFC].Total.Should().Be(        0);
+            dry.Total.Should().Be(    7_402);
+            frz.Total.Should().Be(      168);
+            wet.Total.Should().Be(   13_163);
+            ofc.Total.Should().Be(        0);
             sut.SectionsTotal.Should().Be(20_733);
 
             sut.Others.Count.Should().Be(1);

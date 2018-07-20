@@ -1,4 +1,5 @@
-﻿using CommonTools.Lib11.ExceptionTools;
+﻿using CommonTools.Lib11.DataStructures;
+using CommonTools.Lib11.ExceptionTools;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.ReportRows;
@@ -8,7 +9,7 @@ using System.Linq;
 
 namespace RentLog.DomainLib11.Reporters
 {
-    public class DailyColxnsReport : Dictionary<int, SectionColxnsRow>
+    public class DailyColxnsReport : UIList<SectionColxnsRow>
     {
         public DailyColxnsReport(DateTime date, ITenantDBsDir tenantDBsDir)
         {
@@ -18,11 +19,11 @@ namespace RentLog.DomainLib11.Reporters
 
 
         public DateTime  Date           { get; }
-        public decimal   TotalRent      => this.Sum(_ => _.Value.Rent     ?? 0);
-        public decimal   TotalRights    => this.Sum(_ => _.Value.Rights   ?? 0);
-        public decimal   TotalElectric  => this.Sum(_ => _.Value.Electric ?? 0);
-        public decimal   TotalWater     => this.Sum(_ => _.Value.Water    ?? 0);
-        public decimal   TotalAmbulant  => this.Sum(_ => _.Value.Ambulant ?? 0);
+        public decimal   TotalRent      => this.Sum(_ => _.Rent     ?? 0);
+        public decimal   TotalRights    => this.Sum(_ => _.Rights   ?? 0);
+        public decimal   TotalElectric  => this.Sum(_ => _.Electric ?? 0);
+        public decimal   TotalWater     => this.Sum(_ => _.Water    ?? 0);
+        public decimal   TotalAmbulant  => this.Sum(_ => _.Ambulant ?? 0);
         public decimal   SectionsTotal  => TotalRent  + TotalRights + TotalElectric
                                          + TotalWater + TotalAmbulant;
 
@@ -52,9 +53,9 @@ namespace RentLog.DomainLib11.Reporters
             this.Clear();
 
             foreach (var sec in dir.MarketState.Sections.GetAll())
-                this.Add(sec.Id, new SectionColxnsRow(sec, Date, dir));
+                this.Add(new SectionColxnsRow(sec, Date, dir));
 
-            this.Add(0, new OfficeColxnsRow(Date, dir));
+            this.Add(new OfficeColxnsRow(Date, dir));
         }
 
 

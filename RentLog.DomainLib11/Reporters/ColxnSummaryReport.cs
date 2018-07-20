@@ -80,11 +80,11 @@ namespace RentLog.DomainLib11.Reporters
         private CollectionAmounts GetCollectionAmounts(int sectionId)
             => new CollectionAmounts
             {
-                Rent     = this.Sum(_ => _[sectionId].Rent    ),
-                Rights   = this.Sum(_ => _[sectionId].Rights  ),
-                Electric = this.Sum(_ => _[sectionId].Electric),
-                Water    = this.Sum(_ => _[sectionId].Water   ),
-                Ambulant = this.Sum(_ => _[sectionId].Ambulant),
+                Rent     = this.Sum(_ => _.Single(x => x.Section.Id == sectionId).Rent    ),
+                Rights   = this.Sum(_ => _.Single(x => x.Section.Id == sectionId).Rights  ),
+                Electric = this.Sum(_ => _.Single(x => x.Section.Id == sectionId).Electric),
+                Water    = this.Sum(_ => _.Single(x => x.Section.Id == sectionId).Water   ),
+                Ambulant = this.Sum(_ => _.Single(x => x.Section.Id == sectionId).Ambulant),
             };
 
 
