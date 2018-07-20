@@ -1,0 +1,14 @@
+﻿<Window x:Class="RentLog.DomainLib45.DailyStatusReporter.PrintLayouts.PrintWindow1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RentLog.DomainLib45.DailyStatusReporter.PrintLayouts"
+        mc:Ignorable="d"
+        Title="Daily Status Print Preview"
+        Width="1000" SizeToContent="Height"
+        >
+    <StackPanel>
+        <local:PrintLayout1 x:Name="printPanel" />
+    </StackPanel>
+</Window>

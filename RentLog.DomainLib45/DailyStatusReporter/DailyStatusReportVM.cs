@@ -1,10 +1,14 @@
 ﻿using CommonTools.Lib11.InputCommands;
 using CommonTools.Lib45.BaseViewModels;
 using CommonTools.Lib45.InputCommands;
+using CommonTools.Lib45.PrintTools;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.Reporters;
+using RentLog.DomainLib45.DailyStatusReporter.PrintLayouts;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace RentLog.DomainLib45.DailyStatusReporter
 {
@@ -42,6 +46,18 @@ namespace RentLog.DomainLib45.DailyStatusReporter
         {
             MainReport = null;
             MainReport = new DailyStatusReport(ReportDate, AppArgs);
+        }
+
+
+        protected override async void OnPrintClicked()
+        {
+            var win                = new PrintWindow1();
+            win.DataContext        = this.MainReport;
+            win.printPanel.Padding = new Thickness(30, 60, 30, 30);
+            win.Show();
+            await Task.Delay(1000 * 1);
+            PrintPreviewer.FitTo(8.5, 11, win.printPanel);
+            win.Close();
         }
 
 

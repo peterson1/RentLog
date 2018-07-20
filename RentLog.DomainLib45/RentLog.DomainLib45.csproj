@@ -115,6 +115,9 @@
     <Compile Include="DailyStatusReporter\PrintLayouts\PrintLayout1.xaml.cs">
       <DependentUpon>PrintLayout1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DailyStatusReporter\PrintLayouts\PrintWindow1.xaml.cs">
+      <DependentUpon>PrintWindow1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DailyStatusReporter\ReportHeaders\ReportHeaderUI1.xaml.cs">
       <DependentUpon>ReportHeaderUI1.xaml</DependentUpon>
     </Compile>
@@ -294,6 +297,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DailyStatusReporter\PrintLayouts\PrintLayout1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyStatusReporter\PrintLayouts\PrintWindow1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
