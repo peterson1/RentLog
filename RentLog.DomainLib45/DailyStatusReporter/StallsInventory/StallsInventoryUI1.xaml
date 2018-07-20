@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="RentLog.DomainLib45.DailyStatusReporter.StallsInventory.StallsInventoryUI1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RentLog.DomainLib45.DailyStatusReporter.StallsInventory"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <StackPanel>
+        <TextBlock Text="Stalls Inventory" 
+                   Style="{StaticResource MaterialDesignTitleTextBlock}"
+                   HorizontalAlignment="Left"
+                   Margin="20 0 20 10" />
+
+        <local:StallsInventoryTable DataContext="{Binding StallsInventory}" />
+    </StackPanel>
+</UserControl>

@@ -78,6 +78,40 @@
   <ItemGroup>
     <Compile Include="AppArguments.cs" />
     <Compile Include="BaseViewModels\BrandedWindowBase.cs" />
+    <Compile Include="DailyStatusReporter\DailyStatusReportVM.cs" />
+    <Compile Include="DailyStatusReporter\DailyStatusReportWindow.xaml.cs">
+      <DependentUpon>DailyStatusReportWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DailyStatusReporter\OptionsPaneUI.xaml.cs">
+      <DependentUpon>OptionsPaneUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DailyStatusReporter\PrintLayouts\PrintLayout1.xaml.cs">
+      <DependentUpon>PrintLayout1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DailyStatusReporter\ReportHeaders\ReportHeaderUI1.xaml.cs">
+      <DependentUpon>ReportHeaderUI1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DailyStatusReporter\StallsInventory\OccupiedStallsCell.xaml.cs">
+      <DependentUpon>OccupiedStallsCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DailyStatusReporter\StallsInventory\StallsInventoryTable.xaml.cs">
+      <DependentUpon>StallsInventoryTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DailyStatusReporter\StallsInventory\StallsInventoryUI1.xaml.cs">
+      <DependentUpon>StallsInventoryUI1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DailyStatusReporter\StallsInventory\TotalStallsCell.xaml.cs">
+      <DependentUpon>TotalStallsCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DailyStatusReporter\StallsInventory\VacantStallsCell.xaml.cs">
+      <DependentUpon>VacantStallsCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DailyStatusReporter\TenantCollections\TenantCollectionsUI1.xaml.cs">
+      <DependentUpon>TenantCollectionsUI1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DailyStatusReporter\TenantCollections\TenantColxnsTable.xaml.cs">
+      <DependentUpon>TenantColxnsTable.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Reporters\ColxnSummaryExcelWriter.cs" />
     <Compile Include="SoaViewers\AdjustmentsCRUD\AdjustmentsListVM.cs" />
     <Compile Include="SoaViewers\CellViewer\AdjustmentsUI.xaml.cs">
@@ -188,6 +222,50 @@
     <Resource Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="DailyStatusReporter\DailyStatusReportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyStatusReporter\OptionsPaneUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyStatusReporter\PrintLayouts\PrintLayout1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyStatusReporter\ReportHeaders\ReportHeaderUI1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyStatusReporter\StallsInventory\OccupiedStallsCell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyStatusReporter\StallsInventory\StallsInventoryTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyStatusReporter\StallsInventory\StallsInventoryUI1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyStatusReporter\StallsInventory\TotalStallsCell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyStatusReporter\StallsInventory\VacantStallsCell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyStatusReporter\TenantCollections\TenantCollectionsUI1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyStatusReporter\TenantCollections\TenantColxnsTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SoaViewers\CellViewer\AdjustmentsUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -261,6 +339,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.3.0.4\build\Fody.targets" Condition="Exists('..\packages\Fody.3.0.4\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
