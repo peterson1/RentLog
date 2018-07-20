@@ -23,7 +23,9 @@ namespace RentLog.DomainLib11.Reporters
             BankDeposits    = LoadBankDeposits(colxnsDb);
             Overdues        = dir.Balances.TotalOverdues(date);
 
-            //StallsInventory[0].tot
+            //SectionColxns[0].Total
+            //OtherColxns[0].GLAccount
+            //CollectorsPerf[0].Sections
         }
 
 

@@ -36,7 +36,10 @@ namespace RentLog.DomainLib11.ReportRows
 
         private void AddSubRows(CollectorDTO collector, SectionDTO sec, ICollectionsDB db, IStallsRepo stalls)
         {
-            if (db.GetCollector(sec).Id != collector.Id) return;
+            var savedCollectr = db.GetCollector(sec)
+                             ?? new CollectorDTO { Id = 1 };
+
+            if (savedCollectr.Id != collector.Id) return;
             if (!db.IntendedColxns.TryGetValue(sec.Id, out IIntendedColxnsRepo repo)) return;
             if (!repo.Any()) return;
 

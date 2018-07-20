@@ -78,12 +78,42 @@
   <ItemGroup>
     <Compile Include="AppArguments.cs" />
     <Compile Include="BaseViewModels\BrandedWindowBase.cs" />
+    <Compile Include="DailyStatusReporter\BankDeposits\BankDepositsTable.xaml.cs">
+      <DependentUpon>BankDepositsTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DailyStatusReporter\BankDeposits\BankDepositsUI1.xaml.cs">
+      <DependentUpon>BankDepositsUI1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DailyStatusReporter\CollectorsPerformance\BillStates\BillPerformanceCellUI.xaml.cs">
+      <DependentUpon>BillPerformanceCellUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DailyStatusReporter\CollectorsPerformance\BillStates\BillStatesCellUI.xaml.cs">
+      <DependentUpon>BillStatesCellUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DailyStatusReporter\CollectorsPerformance\CollectorsPerformanceUI1.xaml.cs">
+      <DependentUpon>CollectorsPerformanceUI1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DailyStatusReporter\CollectorsPerformance\CollectorsPerfTable.xaml.cs">
+      <DependentUpon>CollectorsPerfTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DailyStatusReporter\CollectorsPerformance\SectionAssignments\SectionDutyCellUI.xaml.cs">
+      <DependentUpon>SectionDutyCellUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DailyStatusReporter\CollectorsPerformance\StallsCoverage\StallsCoverageCellUI.xaml.cs">
+      <DependentUpon>StallsCoverageCellUI.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DailyStatusReporter\DailyStatusReportVM.cs" />
     <Compile Include="DailyStatusReporter\DailyStatusReportWindow.xaml.cs">
       <DependentUpon>DailyStatusReportWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DailyStatusReporter\OptionsPaneUI.xaml.cs">
       <DependentUpon>OptionsPaneUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DailyStatusReporter\OtherCollections\OtherCollectionsUI1.xaml.cs">
+      <DependentUpon>OtherCollectionsUI1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DailyStatusReporter\OtherCollections\OtherColxnsTable.xaml.cs">
+      <DependentUpon>OtherColxnsTable.xaml</DependentUpon>
     </Compile>
     <Compile Include="DailyStatusReporter\PrintLayouts\PrintLayout1.xaml.cs">
       <DependentUpon>PrintLayout1.xaml</DependentUpon>
@@ -222,11 +252,51 @@
     <Resource Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="DailyStatusReporter\BankDeposits\BankDepositsTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyStatusReporter\BankDeposits\BankDepositsUI1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyStatusReporter\CollectorsPerformance\BillStates\BillPerformanceCellUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyStatusReporter\CollectorsPerformance\BillStates\BillStatesCellUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyStatusReporter\CollectorsPerformance\CollectorsPerformanceUI1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyStatusReporter\CollectorsPerformance\CollectorsPerfTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyStatusReporter\CollectorsPerformance\SectionAssignments\SectionDutyCellUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyStatusReporter\CollectorsPerformance\StallsCoverage\StallsCoverageCellUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DailyStatusReporter\DailyStatusReportWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DailyStatusReporter\OptionsPaneUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyStatusReporter\OtherCollections\OtherCollectionsUI1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyStatusReporter\OtherCollections\OtherColxnsTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

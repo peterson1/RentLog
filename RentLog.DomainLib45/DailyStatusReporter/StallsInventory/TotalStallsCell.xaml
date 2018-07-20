@@ -16,7 +16,8 @@
         </Style>
     </UserControl.Resources>
     <StackPanel VerticalAlignment="Center"
-                Margin="0 0 0 0">
+                HorizontalAlignment="Center"
+                Margin="0 4 0 4">
 
         <TextBlock Text="{Binding Section.Name}"
                    FontWeight="Medium"

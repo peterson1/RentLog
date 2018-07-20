@@ -6,7 +6,37 @@
              xmlns:local="clr-namespace:RentLog.DomainLib45.DailyStatusReporter.TenantCollections"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    <StackPanel>
+        <DataGrid x:Name="dg" ItemsSource="{Binding }"
+                  Background="White"
+                  MinRowHeight="35"
+                  Style="{StaticResource dgReadOnly}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="12*" ElementStyle="{StaticResource colLabel}" Header="Section"   Binding="{Binding Section.Name}" />
+                <DataGridTextColumn Width="15*" ElementStyle="{StaticResource colLeft}" Header="Collector" Binding="{Binding Collector.Name}" />
+                <DataGridTextColumn Width="13*" ElementStyle="{StaticResource colRight}" Header="Rent"      Binding="{Binding Rent    , StringFormat=N2}" />
+                <DataGridTextColumn Width="13*" ElementStyle="{StaticResource colRight}" Header="Rights"    Binding="{Binding Rights  , StringFormat=N2}" />
+                <DataGridTextColumn Width="12*" ElementStyle="{StaticResource colRight}" Header="Electric"  Binding="{Binding Electric, StringFormat=N2}" />
+                <DataGridTextColumn Width="11*" ElementStyle="{StaticResource colRight}" Header="Water"     Binding="{Binding Water   , StringFormat=N2}" />
+                <DataGridTextColumn Width="11*" ElementStyle="{StaticResource colRight}" Header="Ambulant"  Binding="{Binding Ambulant, StringFormat=N2}" />
+                <DataGridTextColumn Width="13*" ElementStyle="{StaticResource colRight}" Header="subtotal"  Binding="{Binding Total   , StringFormat=N2}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="smry" ItemsSource="{Binding SummaryRows}"
+                  Background="White"
+                  MinRowHeight="35"
+                  Style="{StaticResource dgTotals}"
+                  HeadersVisibility="None">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="12*" ElementStyle="{StaticResource totalsRow}" Binding="{Binding Section}" />
+                <DataGridTextColumn Width="15*" ElementStyle="{StaticResource totalsRow}" Binding="{Binding Collector, TargetNullValue=total}" FontStyle="Italic" />
+                <DataGridTextColumn Width="13*" ElementStyle="{StaticResource totalsRow}" Binding="{Binding Rent    , StringFormat=N2}" />
+                <DataGridTextColumn Width="13*" ElementStyle="{StaticResource totalsRow}" Binding="{Binding Rights  , StringFormat=N2}" />
+                <DataGridTextColumn Width="12*" ElementStyle="{StaticResource totalsRow}" Binding="{Binding Electric, StringFormat=N2}" />
+                <DataGridTextColumn Width="11*" ElementStyle="{StaticResource totalsRow}" Binding="{Binding Water   , StringFormat=N2}" />
+                <DataGridTextColumn Width="11*" ElementStyle="{StaticResource totalsRow}" Binding="{Binding Ambulant, StringFormat=N2}" />
+                <DataGridTextColumn Width="13*" ElementStyle="{StaticResource totalsRow}" Binding="{Binding Total   , StringFormat=N2}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
 </UserControl>

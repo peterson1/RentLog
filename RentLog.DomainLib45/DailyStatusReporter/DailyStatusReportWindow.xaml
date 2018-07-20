@@ -23,10 +23,10 @@
             <local:OptionsPaneUI DockPanel.Dock="Left"
                                  Margin="30" />
 
-            <ScrollViewer>
+            <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
                 <mat:Card Margin="10">
                     <prints:PrintLayout1 DataContext="{Binding MainReport}"
-                                         Margin="30 60 30 30" />
+                                         Margin="30 60 30 80" />
                 </mat:Card>
             </ScrollViewer>
         </DockPanel>
