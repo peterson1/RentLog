@@ -2,6 +2,7 @@
 using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
+using RentLog.DomainLib11.Models;
 using System;
 using System.Linq;
 
@@ -9,25 +10,35 @@ namespace RentLog.DomainLib11.Reporters
 {
     public class DailyStatusReport
     {
-        public DailyStatusReport(DateTime date, ITenantDBsDir tenantDBsDir)
+        public DailyStatusReport(DateTime date, ITenantDBsDir dir)
         {
             Date            = date;
-            var colxnsDb    = tenantDBsDir.Collections.For(date);
-            var mkt         = tenantDBsDir.MarketState;
-            SectionColxns   = new DailyColxnsReport(date, tenantDBsDir);
+            var colxnsDb    = dir.Collections.For(date);
+            var mkt         = dir.MarketState;
+            BranchName      = mkt.BranchName;
+            SectionColxns   = new DailyColxnsReport(date, dir);
             StallsInventory = new StallsInventoryReport(colxnsDb, mkt);
-            CollectorsPerf  = new CollectorsPerformanceReport(colxnsDb);
+            CollectorsPerf  = new CollectorsPerformanceReport(colxnsDb, mkt);
             OtherColxns     = LoadOtherColxns(colxnsDb);
             BankDeposits    = LoadBankDeposits(colxnsDb);
+            Overdues        = dir.Balances.TotalOverdues(date);
+
+            //StallsInventory[0].tot
         }
 
 
         public DateTime                     Date             { get; }
+        public string                       BranchName       { get; }
         public DailyColxnsReport            SectionColxns    { get; }
         public StallsInventoryReport        StallsInventory  { get; }
         public CollectorsPerformanceReport  CollectorsPerf   { get; }
         public UIList<OtherColxnDTO>        OtherColxns      { get; }
         public UIList<BankDepositDTO>       BankDeposits     { get; }
+        public BillAmounts                  Overdues         { get; }
+
+
+        public decimal? CollectionsTotal => SectionColxns?.SectionsTotal
+                                          + (decimal)OtherColxns?.SummaryAmount;
 
 
         private UIList<OtherColxnDTO> LoadOtherColxns(ICollectionsDB db)
@@ -38,6 +49,7 @@ namespace RentLog.DomainLib11.Reporters
             {
                 Amount = all.Sum(_ => _.Amount)
             });
+            list.SummaryAmount = (double)list.SummaryRows[0].Amount;
             return list;
         }
 
@@ -50,6 +62,7 @@ namespace RentLog.DomainLib11.Reporters
             {
                 Amount = all.Sum(_ => _.Amount)
             });
+            list.SummaryAmount = (double)list.SummaryRows[0].Amount;
             return list;
         }
     }

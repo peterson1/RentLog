@@ -12,7 +12,7 @@ namespace RentLog.DomainLib11.ReportRows
             _colxn  = colxn;
             Section = sectionDTO;
             Rent    = CreateCell(colxn, BillCode.Rent);
-            Rent    = CreateCell(colxn, BillCode.Rights);
+            Rights  = CreateCell(colxn, BillCode.Rights);
         }
 
 
@@ -21,14 +21,14 @@ namespace RentLog.DomainLib11.ReportRows
         public CollectorPerfCell  Rights   { get; }
 
         public LeaseDTO  Lease  => _colxn.Lease;
-        public StallDTO  Stall  => _colxn.StallSnapshot ?? Lease?.Stall;
+        public StallDTO  Stall  => _colxn.StallSnapshot;
 
 
         private CollectorPerfCell CreateCell(IntendedColxnDTO colxn, BillCode billCode)
         {
-            var actual = colxn.Actuals.For(billCode);
-            var target = colxn.Targets.For(billCode);
-            return new CollectorPerfCell(actual, target);
+            var actual = colxn.Actuals.For(billCode) ?? 0;
+            var target = colxn.Targets.For(billCode) ?? 0;
+            return new CollectorPerfCell(actual, target, billCode);
         }
     }
 }
