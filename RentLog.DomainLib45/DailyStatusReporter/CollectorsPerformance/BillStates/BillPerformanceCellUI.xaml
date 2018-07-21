@@ -13,7 +13,8 @@
             <Setter Property="Text1Width" Value="105" />
         </Style>
     </UserControl.Resources>
-    <StackPanel Orientation="Horizontal">
+    <StackPanel Orientation="Horizontal"
+                VerticalAlignment="Center">
         <StackPanel>
             <labl:DualText Text1="{Binding BillCode, StringFormat={}target {0}}"
                            Text2="{Binding Target, StringFormat=N2}" />

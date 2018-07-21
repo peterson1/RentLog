@@ -9,6 +9,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel>
+
+        <butns:SimpleRefreshButton HorizontalAlignment="Right" />
+
         <DatePicker SelectedDate="{Binding ReportDate}"
                     DisplayDateStart="{Binding MinDate, Mode=OneWay}"
                     DisplayDateEnd="{Binding MaxDate, Mode=OneWay}" />
@@ -22,7 +25,7 @@
                     ToolTip="{Binding NextDateCmd.CurrentLabel}" Margin="10 0 0 0" />
         </StackPanel>
 
-        <butns:PrintBtnLabeled Margin="0 50 0 0" />
+        <butns:PrintBtnLabeled Margin="0 100 0 0" />
         
     </StackPanel>
 </UserControl>

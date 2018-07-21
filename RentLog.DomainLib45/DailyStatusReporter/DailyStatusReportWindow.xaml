@@ -21,12 +21,13 @@
     <Grid>
         <DockPanel>
             <local:OptionsPaneUI DockPanel.Dock="Left"
-                                 Margin="30" />
+                                 Margin="50 100 30 0" />
 
-            <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+            <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel"
+                          Background="LightSlateGray">
                 <mat:Card Margin="10">
                     <prints:PrintLayout1 DataContext="{Binding MainReport}"
-                                         Margin="30 60 30 80" />
+                                         Margin="50 70 50 100" />
                 </mat:Card>
             </ScrollViewer>
         </DockPanel>
