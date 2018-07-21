@@ -35,17 +35,31 @@ namespace RentLog.DomainLib11.BalanceRepos
         }
 
 
-        public List<LeaseBalanceRow> GetOverdueLeases (out BillAmounts totals, DateTime? asOfDate = null)
+        public List<LeaseBalanceRow> GetOverdueLeases(out BillAmounts totals, DateTime? asOfDate = null)
+            => FilterOverdueLeases(0, out totals, asOfDate);
+
+
+        public List<LeaseBalanceRow> GetOverdueLeases(out BillAmounts totals, SectionDTO section, DateTime? asOfDate = null)
+            => FilterOverdueLeases(section.Id, out totals, asOfDate);
+
+
+        private List<LeaseBalanceRow> FilterOverdueLeases(int sectionId, out BillAmounts totals, DateTime? asOfDate = null)
         {
             var list = new List<LeaseBalanceRow>();
             var mkt  = GetMarketState();
             var date = asOfDate ?? mkt.Collections.LastPostedDate();
 
             foreach (var lse in mkt.ActiveLeases.GetAll())
-                list.Add(GetBalance(lse, date));
+            {
+                if (sectionId == 0 || lse.Stall.Section.Id == sectionId)
+                    list.Add(GetBalance(lse, date));
+            }
 
             foreach (var lse in mkt.InactiveLeases.GetAll())
-                list.Add(GetBalance(lse, null));
+            {
+                if (sectionId == 0 || lse.Stall.Section.Id == sectionId)
+                    list.Add(GetBalance(lse, null));
+            }
 
             list.RemoveAll(_ => NoOverdue(_, date));
 

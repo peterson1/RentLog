@@ -24,6 +24,7 @@ namespace RentLog.DomainLib11.ReportRows
         public DateTime?        DeactivatedDate  => Inactive?.DeactivatedDate;
         public string           DeactivatedBy    => Inactive?.DeactivatedBy ;
         public string           WhyInactive      => Inactive?.WhyInactive;
+        public string           StatusText       => IsActive ? "Active" : "(terminated)";
 
         InactiveLeaseDTO IHasDTO<InactiveLeaseDTO>.DTO => Inactive;
     }

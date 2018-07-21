@@ -13,5 +13,6 @@ namespace RentLog.DomainLib11.BalanceRepos
         DailyBillDTO           GetBill          (LeaseDTO lse, DateTime date);
         BillAmounts            TotalOverdues    (DateTime? date = null);
         List<LeaseBalanceRow>  GetOverdueLeases (out BillAmounts totals, DateTime? asOfDate = null);
+        List<LeaseBalanceRow>  GetOverdueLeases (out BillAmounts totals, SectionDTO sectionFilter, DateTime? asOfDate = null);
     }
 }

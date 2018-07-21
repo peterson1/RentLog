@@ -16,7 +16,7 @@
             <DataGridTextColumn Header="stall" Binding="{Binding DTO.Stall.Name}"
                                 ElementStyle="{StaticResource colRight}" />
 
-            <DataGridTextColumn Header="is active" Binding="{Binding IsActive}"
+            <DataGridTextColumn Header="status" Binding="{Binding StatusText}"
                                 ElementStyle="{StaticResource colCenter}" />
 
             <DataGridTextColumn Header="rent rate" Binding="{Binding DTO.Rent.RegularRate, StringFormat=N2}"

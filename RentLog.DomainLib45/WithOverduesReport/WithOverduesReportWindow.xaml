@@ -10,6 +10,7 @@
         xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:labl="clr-namespace:CommonTools.Lib45.TextLabels;assembly=CommonTools.Lib45"
         xmlns:butns="clr-namespace:CommonTools.Lib45.StyledButtons;assembly=CommonTools.Lib45"
+        xmlns:busy="clr-namespace:CommonTools.Lib45.BusyIndicators;assembly=CommonTools.Lib45"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -26,23 +27,31 @@
             <Setter Property="Margin" Value="0 2 0 2" />
         </Style>
     </Window.Resources>
-    <DockPanel>
+    <Grid>
+        <DockPanel>
 
-        <StackPanel Orientation="Horizontal"
-                    DockPanel.Dock="Top"
-                    HorizontalAlignment="Right"
-                    Margin="0 10 30 10">
-            <StackPanel >
-                <labl:DualText Text1="Total Back Rent"
-                               Text2="{Binding Totals.Rent, StringFormat=N2}" />
-                <labl:DualText Text1="Total Overdue Rights"
-                               Text2="{Binding Totals.Rights, StringFormat=N2}" />
-            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        DockPanel.Dock="Top"
+                        HorizontalAlignment="Right"
+                        Margin="0 10 30 10">
+
+                <ComboBox ItemsSource="{Binding Sections}"
+                          SelectedItem="{Binding PickedSection, UpdateSourceTrigger=PropertyChanged}" />
+
+                <StackPanel Margin="20 0 0 0">
+                    <labl:DualText Text1="Total Back Rent"
+                                   Text2="{Binding Totals.Rent, StringFormat=N2}" />
+                    <labl:DualText Text1="Total Overdue Rights"
+                                   Text2="{Binding Totals.Rights, StringFormat=N2}" />
+                </StackPanel>
             
-            <butns:PrintBtnLabeled Margin="30 0 0 0" />
-        </StackPanel>
+                <butns:PrintBtnLabeled Margin="30 0 0 0" />
+            </StackPanel>
 
 
-        <local:OverduesTable x:Name="tbl" DataContext="{Binding Rows}" />
-    </DockPanel>
+            <local:OverduesTable x:Name="tbl" DataContext="{Binding Rows}" />
+        </DockPanel>
+
+        <busy:BusyDialog />
+    </Grid>
 </Window>

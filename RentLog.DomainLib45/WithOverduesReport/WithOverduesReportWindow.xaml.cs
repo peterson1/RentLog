@@ -16,7 +16,8 @@ namespace RentLog.DomainLib45.WithOverduesReport
 
         private void PrintThenClose()
         {
-            tbl.dg.AskToPrint(VM.Caption, $"as of {VM.AsOfDate:MMMM d, yyyy}",
+            tbl.dg.AskToPrint($"{WithOverduesReport.TITLE} for “{VM.PickedSection}”", 
+                              $"as of {VM.AsOfDate:MMMM d, yyyy}",
                             VM.TotalsSummary, VM.AppArgs.MarketState.BranchName);
             this.Close();
         }
