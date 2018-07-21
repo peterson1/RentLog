@@ -140,6 +140,10 @@
     <Compile Include="DailyStatusReporter\StallsInventory\VacantStallsCell.xaml.cs">
       <DependentUpon>VacantStallsCell.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DailyStatusReporter\TenantCollections\SectionRowInspectorVM.cs" />
+    <Compile Include="DailyStatusReporter\TenantCollections\SectionRowInspectorWindow.xaml.cs">
+      <DependentUpon>SectionRowInspectorWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DailyStatusReporter\TenantCollections\TenantCollectionsUI1.xaml.cs">
       <DependentUpon>TenantCollectionsUI1.xaml</DependentUpon>
     </Compile>
@@ -333,6 +337,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DailyStatusReporter\StallsInventory\VacantStallsCell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyStatusReporter\TenantCollections\SectionRowInspectorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -29,6 +29,15 @@ namespace RentLog.DomainLib11.ReportRows
             Ambulant   = colxns.Sum(_ => _.Ambulant ?? 0);
 
             Details.SetItems(colxns);
+            Details.SetSummary(new LeaseColxnRow()
+            {
+                Rent     = Rent,
+                Rights   = Rights,
+                Electric = Electric,
+                Water    = Water,
+                Ambulant = Ambulant,
+                Remarks  = this.Total.ToString("N2")
+            });
         }
 
 
@@ -42,10 +51,9 @@ namespace RentLog.DomainLib11.ReportRows
         };
 
 
-        public SectionDTO    Section    { get; set; }
-        public CollectorDTO  Collector  { get; set; }
-
-        public UIList<LeaseColxnRow>  Details  { get; } = new UIList<LeaseColxnRow>();
+        public SectionDTO             Section    { get; set; }
+        public CollectorDTO           Collector  { get; set; }
+        public UIList<LeaseColxnRow>  Details    { get; } = new UIList<LeaseColxnRow>();
 
 
         protected virtual CollectorDTO GetSectionCollector(SectionDTO sec, ICollectionsDB db)

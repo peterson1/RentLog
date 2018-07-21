@@ -13,19 +13,21 @@ namespace RentLog.DomainLib11.Reporters
     {
         public DailyColxnsReport(DateTime date, ITenantDBsDir tenantDBsDir)
         {
-            Date = date;
+            Sources = tenantDBsDir;
+            Date    = date;
             GenerateFrom(tenantDBsDir);
         }
 
 
-        public DateTime  Date           { get; }
-        public decimal   TotalRent      => this.Sum(_ => _.Rent     ?? 0);
-        public decimal   TotalRights    => this.Sum(_ => _.Rights   ?? 0);
-        public decimal   TotalElectric  => this.Sum(_ => _.Electric ?? 0);
-        public decimal   TotalWater     => this.Sum(_ => _.Water    ?? 0);
-        public decimal   TotalAmbulant  => this.Sum(_ => _.Ambulant ?? 0);
-        public decimal   SectionsTotal  => TotalRent  + TotalRights + TotalElectric
-                                         + TotalWater + TotalAmbulant;
+        public ITenantDBsDir  Sources        { get; }
+        public DateTime       Date           { get; }
+        public decimal        TotalRent      => this.Sum(_ => _.Rent     ?? 0);
+        public decimal        TotalRights    => this.Sum(_ => _.Rights   ?? 0);
+        public decimal        TotalElectric  => this.Sum(_ => _.Electric ?? 0);
+        public decimal        TotalWater     => this.Sum(_ => _.Water    ?? 0);
+        public decimal        TotalAmbulant  => this.Sum(_ => _.Ambulant ?? 0);
+        public decimal        SectionsTotal  => TotalRent  + TotalRights + TotalElectric
+                                              + TotalWater + TotalAmbulant;
 
         public Dictionary<int, decimal>  Others  { get; } = new Dictionary<int, decimal>();
 

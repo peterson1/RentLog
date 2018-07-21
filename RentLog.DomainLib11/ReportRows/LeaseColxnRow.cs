@@ -1,10 +1,17 @@
 ﻿using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RentLog.DomainLib11.ReportRows
 {
     public class LeaseColxnRow
     {
+        public LeaseColxnRow()
+        {
+        }
+
+
         public LeaseColxnRow(IntendedColxnDTO dto)
         {
             Lease       = dto.Lease;
