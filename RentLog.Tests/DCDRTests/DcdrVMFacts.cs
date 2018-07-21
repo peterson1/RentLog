@@ -21,7 +21,7 @@ namespace RentLog.Tests.DCDRTests
             var main = new MainWindowVM(arg, false);
             var rows = main.DcdrReport.PassbookRows;
             main.DateRange.Start = 1.March(2017);
-            main.SelectedIndex   = 1; // DC-DR tab
+            main.SelectedTab   =  MainTabs.DcdrReport; // DC-DR tab
             await main.RefreshCmd.RunAsync();
             rows.ItemsList.Should().HaveCount(946);
 
@@ -50,7 +50,7 @@ namespace RentLog.Tests.DCDRTests
             var main = new MainWindowVM(arg, false);
             var rows = main.DcdrReport.PassbookRows;
             main.DateRange.Start = 1.March(2017);
-            main.SelectedIndex = 1; // DC-DR tab
+            main.SelectedTab =  MainTabs.DcdrReport; // DC-DR tab
             await main.RefreshCmd.RunAsync();
             rows.ItemsList.Should().HaveCount(946);
 
@@ -79,7 +79,7 @@ namespace RentLog.Tests.DCDRTests
             var main = new MainWindowVM(arg, false);
             var vm   = main.DcdrReport.PassbookRows;
             main.DateRange.Start = 1.March(2017);
-            main.SelectedIndex = 1; // DC-DR tab
+            main.SelectedTab =  MainTabs.DcdrReport; // DC-DR tab
             await main.RefreshCmd.RunAsync();
             vm.ItemsList.Should().HaveCount(946);
 
@@ -107,7 +107,7 @@ namespace RentLog.Tests.DCDRTests
             var main = new MainWindowVM(arg, false);
             var vm = main.DcdrReport.PassbookRows;
             main.DateRange.Start = 1.March(2017);
-            main.SelectedIndex = 1; // DC-DR tab
+            main.SelectedTab =  MainTabs.DcdrReport; // DC-DR tab
             await main.RefreshCmd.RunAsync();
             vm.ItemsList.Should().HaveCount(946);
 

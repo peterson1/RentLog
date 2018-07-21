@@ -20,7 +20,7 @@ namespace RentLog.Tests.JournalVoucherTests
             var main = new MainWindowVM(arg, false);
             var rows = main.Journals.JournalRows;
             var crud = rows.Crud;
-            main.SelectedIndex = 2;
+            main.SelectedTab = MainTabs.JournalVouchers;
 
             await main.RefreshCmd.RunAsync();
             rows.Should().HaveCount(0);

@@ -10,18 +10,19 @@ namespace RentLog.ChequeVouchers.DcdrTab
     {
         private MainWindowVM _main;
 
+
         public DcdrTabVM(MainWindowVM mainWindowVM)
         {
             _main        = mainWindowVM;
             PassbookRows = new PassbookRowsVM(_main);
+            PrintTrigger = new DcdrPrintTrigger(_main);
         }
 
 
         public PassbookRowsVM     PassbookRows  { get; }
+        public DcdrPrintTrigger   PrintTrigger  { get; }
 
         public ITenantDBsDir AppArgs => _main.AppArgs;
-        //public IPassbookRowsRepo PassbookRepo
-        //    => AppArgs.Passbooks.GetRepo(AppArgs.CurrentBankAcct.Id);
 
 
         public async Task RecomputeBalances()
@@ -34,7 +35,5 @@ namespace RentLog.ChequeVouchers.DcdrTab
             _main.StopBeingBusy();
             _main.ClickRefresh();
         }
-
-        //public bool IsVisible => _main.SelectedIndex == 1;
     }
 }

@@ -1,4 +1,5 @@
-﻿using PropertyChanged;
+﻿using CommonTools.Lib11.ExceptionTools;
+using PropertyChanged;
 using RentLog.ChequeVouchers.DcdrTab;
 using RentLog.ChequeVouchers.JournalsTab;
 using RentLog.ChequeVouchers.MainToolbar;
@@ -10,6 +11,14 @@ using System.Threading.Tasks;
 
 namespace RentLog.ChequeVouchers
 {
+    public enum MainTabs
+    {
+        CheckVouchers   = 0,
+        DcdrReport      = 1,
+        JournalVouchers = 2
+    }
+
+
     [AddINotifyPropertyChangedInterface]
     public class MainWindowVM : BrandedWindowBase
     {
@@ -32,11 +41,16 @@ namespace RentLog.ChequeVouchers
         public DcdrTabVM            DcdrReport      { get; }
         public JournalsTabVM        Journals        { get; }
         public int                  SelectedIndex   { get; set; }
+        public MainTabs             SelectedTab
+        {
+            get => (MainTabs)SelectedIndex;
+            set => SelectedIndex = (int)value;
+        }
 
 
         public void OnSelectedIndexChanged()
         {
-            DateRange.IsVisible = SelectedIndex > 0;
+            DateRange.IsVisible = SelectedTab > MainTabs.CheckVouchers;
             ClickRefresh();
         }
 
@@ -45,11 +59,6 @@ namespace RentLog.ChequeVouchers
         {
             StartBeingBusy($"Loading Cheque Vouchers ...");
 
-            //if (SelectedIndex == 0)
-            //    await Task.Run(() => VoucherReqs.ReloadAll());
-            //else
-            //    await Task.Run(() => DcdrReport.PassbookRows.ReloadFromDB());
-
             await Task.Run(PickRefreshJob());
 
             SetCaption($"for “{AppArgs.CurrentBankAcct}”");
@@ -57,11 +66,12 @@ namespace RentLog.ChequeVouchers
         }
 
 
-        private Action PickRefreshJob() { switch (SelectedIndex)
+        private Action PickRefreshJob() { switch (SelectedTab)
         {
-            case 0:  return () => VoucherReqs.ReloadAll();
-            case 1:  return () => DcdrReport.PassbookRows.ReloadFromDB();
-            default: return () => Journals.JournalRows.ReloadFromDB();
+            case MainTabs.CheckVouchers  : return () => VoucherReqs.ReloadAll();
+            case MainTabs.DcdrReport     : return () => DcdrReport.PassbookRows.ReloadFromDB();
+            case MainTabs.JournalVouchers: return () => Journals.JournalRows.ReloadFromDB();
+            default: throw Bad.Arg("MainTabs(enum)", SelectedIndex);
         }}
     }
 }

@@ -8,9 +8,9 @@ namespace RentLog.ChequeVouchers.MainToolbar
     {
         public DateRangePickerVM(MainWindowVM mainWindowVM)
         {
-            Main  = mainWindowVM;
             End   = DateTime.Now;
             Start = End.AddDays(-100);
+            Main  = mainWindowVM;
         }
 
 
@@ -18,5 +18,17 @@ namespace RentLog.ChequeVouchers.MainToolbar
         public bool          IsVisible  { get; set; }
         public DateTime      Start      { get; set; }
         public DateTime      End        { get; set; }
+
+
+        public void OnStartChanged()
+        {
+            if (IsVisible) Main?.ClickRefresh();
+        }
+
+
+        public void OnEndChanged()
+        {
+            if (IsVisible) Main?.ClickRefresh();
+        }
     }
 }

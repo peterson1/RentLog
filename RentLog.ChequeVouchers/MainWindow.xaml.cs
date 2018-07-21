@@ -18,7 +18,12 @@ namespace RentLog.ChequeVouchers
                 jourTab.rows.tbl.dg.EnableOpenCurrent<JournalVoucherDTO>();
                 jourTab.rows.tbl.dg.ConfirmToDelete<JournalVoucherDTO>(_ => _.Description);
                 jourTab.rows.tbl.dg.ScrollToEndOnReplaced<JournalVoucherDTO>();
+
+                VM.DcdrReport.PrintTrigger.TargetDatagrid = dcdrTab.rows.tbl.dg;
             };
         }
+
+
+        private MainWindowVM VM => DataContext as MainWindowVM;
     }
 }

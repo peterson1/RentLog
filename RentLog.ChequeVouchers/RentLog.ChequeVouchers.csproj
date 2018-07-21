@@ -103,6 +103,7 @@
     <Compile Include="CommonControls\LightColorZone.xaml.cs">
       <DependentUpon>LightColorZone.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DcdrTab\DcdrPrintTrigger.cs" />
     <Compile Include="DcdrTab\DcdrTabUI.xaml.cs">
       <DependentUpon>DcdrTabUI.xaml</DependentUpon>
     </Compile>
