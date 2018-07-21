@@ -7,6 +7,11 @@ namespace RentLog.DomainLib11.ReportRows
     {
         private IntendedColxnDTO _colxn;
 
+        public CollectorPerfSubRow()
+        {
+        }
+
+
         public CollectorPerfSubRow(IntendedColxnDTO colxn, SectionDTO sectionDTO)
         {
             _colxn  = colxn;
@@ -17,11 +22,12 @@ namespace RentLog.DomainLib11.ReportRows
 
 
         public SectionDTO         Section  { get; }
-        public CollectorPerfCell  Rent     { get; }
-        public CollectorPerfCell  Rights   { get; }
+        public CollectorPerfCell  Rent     { get; set; }
+        public CollectorPerfCell  Rights   { get; set; }
 
-        public LeaseDTO  Lease  => _colxn.Lease;
-        public StallDTO  Stall  => _colxn.StallSnapshot;
+        public LeaseDTO  Lease   => _colxn?.Lease;
+        public StallDTO  Stall   => _colxn?.StallSnapshot;
+        public string    Remarks => _colxn?.Remarks;
 
 
         private CollectorPerfCell CreateCell(IntendedColxnDTO colxn, BillCode billCode)

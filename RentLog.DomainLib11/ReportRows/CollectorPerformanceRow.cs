@@ -1,4 +1,5 @@
 ﻿using CommonTools.Lib11.CollectionTools;
+using CommonTools.Lib11.DataStructures;
 using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
@@ -8,7 +9,7 @@ using System.Linq;
 
 namespace RentLog.DomainLib11.ReportRows
 {
-    public class CollectorPerformanceRow : List<CollectorPerfSubRow>
+    public class CollectorPerformanceRow : UIList<CollectorPerfSubRow>
     {
         public CollectorPerformanceRow(CollectorDTO collector, ICollectionsDB db, IStallsRepo fallbackStallsRepo)
         {
@@ -24,6 +25,8 @@ namespace RentLog.DomainLib11.ReportRows
             StallCoverage = new ColPerfStallCoverage(this, db);
             RentBill      = new ColPerfBillPerformance(BillCode.Rent  , this.Select(_ => _.Rent));
             RightsBill    = new ColPerfBillPerformance(BillCode.Rights, this.Select(_ => _.Rights));
+
+            this.SetSummary(new CollectorPerfSubRowsTotal(this));
         }
 
                                                      

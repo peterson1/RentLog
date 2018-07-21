@@ -1,12 +1,12 @@
-﻿using RentLog.DomainLib11.CollectionRepos;
+﻿using CommonTools.Lib11.DataStructures;
+using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.MarketStateRepos;
 using RentLog.DomainLib11.ReportRows;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace RentLog.DomainLib11.Reporters
 {
-    public class CollectorsPerformanceReport : List<CollectorPerformanceRow>
+    public class CollectorsPerformanceReport : UIList<CollectorPerformanceRow>
     {
         public CollectorsPerformanceReport(ICollectionsDB db, MarketStateDB mkt)
         {

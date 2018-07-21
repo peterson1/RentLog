@@ -10,6 +10,7 @@ namespace RentLog.DomainLib11.ReportRows
         {
             BillCode = billCode;
             Target   = cells.Sum(_ => _.Target);
+            Actual   = cells.Sum(_ => _.Actual);
             NoExcess = cells.Sum(_ => _.NoExcess);
             if (Target != 0) PerfRate = NoExcess / Target;
 
@@ -23,6 +24,7 @@ namespace RentLog.DomainLib11.ReportRows
 
         public BillCode  BillCode        { get; }
         public decimal   Target          { get; }
+        public decimal   Actual          { get; }
         public decimal   NoExcess        { get; }
         public decimal   PerfRate        { get; }
         public int       UnderpaidCount  { get; }

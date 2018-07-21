@@ -93,6 +93,10 @@
     <Compile Include="DailyStatusReporter\CollectorsPerformance\CollectorsPerfTable.xaml.cs">
       <DependentUpon>CollectorsPerfTable.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DailyStatusReporter\CollectorsPerformance\MainRowInspector\MainRowInspectorVM.cs" />
+    <Compile Include="DailyStatusReporter\CollectorsPerformance\MainRowInspector\MainRowInspectorWindow.xaml.cs">
+      <DependentUpon>MainRowInspectorWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DailyStatusReporter\CollectorsPerformance\SectionAssignments\SectionDutyCellUI.xaml.cs">
       <DependentUpon>SectionDutyCellUI.xaml</DependentUpon>
     </Compile>
@@ -269,6 +273,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DailyStatusReporter\CollectorsPerformance\CollectorsPerfTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyStatusReporter\CollectorsPerformance\MainRowInspector\MainRowInspectorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

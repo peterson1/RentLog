@@ -6,6 +6,10 @@ namespace RentLog.DomainLib11.ReportRows
 {
     public class CollectorPerfCell
     {
+        public CollectorPerfCell()
+        {
+        }
+
         public CollectorPerfCell(decimal actual, decimal target, BillCode billCode)
         {
             Actual   = actual;
@@ -16,11 +20,11 @@ namespace RentLog.DomainLib11.ReportRows
         }
 
 
-        public decimal   Target    { get; }
-        public decimal   Actual    { get; }
-        public decimal   NoExcess  { get; }
-        public decimal   Overage   { get; }
-        public decimal   Shortage  { get; }
+        public decimal   Target    { get; set; }
+        public decimal   Actual    { get; set; }
+        public decimal   NoExcess  { get; set; }
+        public decimal   Overage   { get; set; }
+        public decimal   Shortage  { get; set; }
         public bool  IsOver    => Overage  != 0;
         public bool  IsShort   => Shortage != 0;
 
