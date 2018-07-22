@@ -83,6 +83,7 @@ namespace RentLog.Cashiering.MainToolbar
                 var jobs = MarketDayCloser.GetActions(Main.ColxnsDB, Main.AppArgs);
                 Parallel.Invoke(jobs.ToArray());
             });
+            await Task.Delay(1000 * 10);//artificial delay to give time for GoogleDrive to catch up
             Main.CloseWindow();
         }
     }
