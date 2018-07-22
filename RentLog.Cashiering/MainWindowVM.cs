@@ -134,6 +134,14 @@ namespace RentLog.Cashiering
             cancelEvtArgs.Cancel = true;
             StartBeingBusy("Updating Vacants & Uncollecteds ...");
             await Task.Run(() => UpdateDatabasesBeforeExit());
+
+            if (PostAndClose.IsCashierSubmitting)
+            {
+                StartBeingBusy("Submitting collections for review ...");
+                await Task.Delay(1000 * 4);//artificial delay for web sync to upload changes
+                MessageBox.Show($"Successfully submitted collections for review.",
+                        "   Operation Successful", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
             await Task.Delay(1000);
             StopBeingBusy();
             Application.Current?.Shutdown();

@@ -21,12 +21,13 @@ namespace RentLog.Cashiering.MainToolbar
         }
 
 
-        public MainWindowVM  Main              { get; }
-        public decimal       TotalDeposits     { get; private set; }
-        public decimal       TotalCollections  { get; private set; }
-        public decimal       TotalDifference   { get; private set; }
-        public bool          IsBalanced        { get; private set; }
-        public bool          HasDeposits       { get; private set; }
+        public MainWindowVM  Main                 { get; }
+        public decimal       TotalDeposits        { get; private set; }
+        public decimal       TotalCollections     { get; private set; }
+        public decimal       TotalDifference      { get; private set; }
+        public bool          IsBalanced           { get; private set; }
+        public bool          HasDeposits          { get; private set; }
+        public bool          IsCashierSubmitting  { get; set; }
 
         public IR2Command  PostAndCloseCmd  { get; }
         public IR2Command  RefreshCmd => Main.RefreshCmd;

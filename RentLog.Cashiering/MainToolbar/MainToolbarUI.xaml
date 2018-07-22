@@ -62,6 +62,7 @@
             <Grid Visibility="{Binding Main.CanEncode, Converter={StaticResource visIfTrue}}">
                 <Button Style="{StaticResource MaterialDesignRaisedAccentButton}"
                         Visibility="{Binding IsBalanced, Converter={StaticResource visIfTrue}}"
+                        Click="Button_Click"
                         Command="{Binding Main.CloseWindowCmd}"
                         Content="Submit"
                         Height="25" />
