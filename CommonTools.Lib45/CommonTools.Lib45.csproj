@@ -109,6 +109,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationTools\ApplicationInitializer.cs" />
+    <Compile Include="Approvals\FileBasedApprovalBase.cs" />
+    <Compile Include="Approvals\FileBasedApprovalRequester.cs" />
+    <Compile Include="Approvals\FileBasedApprovalResponder.cs" />
     <Compile Include="BaseViewModels\CrudWindowVMBase.cs" />
     <Compile Include="BaseViewModels\FilteredSavedListVMBase.cs" />
     <Compile Include="BaseViewModels\IndirectFilteredListVMBase.cs" />
@@ -133,6 +136,7 @@
     <Compile Include="FileSystemTools\JsonFileReader.cs" />
     <Compile Include="FileSystemTools\JsonFileWriter.cs" />
     <Compile Include="FileSystemTools\ReverseLineReader.cs" />
+    <Compile Include="FileSystemTools\TemporaryFileTools.cs" />
     <Compile Include="FileSystemTools\ThrottledFileWatcher1.cs" />
     <Compile Include="FileSystemTools\UpdatedExeNotifier.cs" />
     <Compile Include="FileSystemTools\UpdatedFileNotifier.cs" />

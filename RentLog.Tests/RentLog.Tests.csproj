@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="AllocationsListVMTests\AllocationsListVMFacts.cs" />
     <Compile Include="AmbulantColxnsRepoTests\AmbulantColxnsRepoFacts.cs" />
+    <Compile Include="Approvals\FileBasedApprovalFacts.cs" />
     <Compile Include="BalAdjsRepoTests\BalAdjsRepoFacts.cs" />
     <Compile Include="BankDepositsRepoTests\BankDepositsRepoFacts.cs" />
     <Compile Include="BillRowComposerTests\BillRowComposerBaseFacts.cs" />
