@@ -1,5 +1,6 @@
 ﻿using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.ThreadTools;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -55,7 +56,9 @@ namespace CommonTools.Lib45.FileSystemTools
 
         public static void RelaunchApp()
         {
-            Process.Start(GetFullPath());
+            //Process.Start(GetFullPath());
+            var args = string.Join(" ", Environment.GetCommandLineArgs());
+            Process.Start("cmd.exe", "/c " + args);
             CurrentExe.Shutdown();
         }
 

@@ -24,10 +24,11 @@ namespace RentLog.DomainLib11.CollectionRepos
         private MarketStateDB  _mkt;
 
 
-        public CollectionsDB1(DateTime date, IKeyValueStore metadataRepo, MarketStateDB marketStateDB)
+        public CollectionsDB1(DateTime date, IKeyValueStore metadataRepo, MarketStateDB marketStateDB, string databasePath)
         {
             _meta              = metadataRepo;
             _mkt               = marketStateDB;
+            DatabasePath       = databasePath;
             Date               = date;
             SectionsSnapshot   = LoadSnapshot<SectionDTO>(SEC_SNAPS_KEY);
             CollectorsSnapshot = LoadSnapshot<CollectorDTO>(COL_SNAPS_KEY);
@@ -40,6 +41,8 @@ namespace RentLog.DomainLib11.CollectionRepos
         public Dictionary<int, INoOperationsRepo  > NoOperations   { get; } = new Dictionary<int, INoOperationsRepo  >();
         public Dictionary<int, IVacantStallsRepo  > VacantStalls   { get; } = new Dictionary<int, IVacantStallsRepo  >();
 
+
+        public string                   DatabasePath        { get; }
         public DateTime                 Date                { get; }
         public List<SectionDTO>         SectionsSnapshot    { get; }
         public List<CollectorDTO>       CollectorsSnapshot  { get; }

@@ -12,6 +12,7 @@ namespace RentLog.DomainLib11.CollectionRepos
         Dictionary<int, INoOperationsRepo>   NoOperations   { get; }
         Dictionary<int, IVacantStallsRepo>   VacantStalls   { get; }
 
+        string                   DatabasePath        { get; }
         DateTime                 Date                { get; }
         ICashierColxnsRepo       CashierColxns       { get; }
         IOtherColxnsRepo         OtherColxns         { get; }

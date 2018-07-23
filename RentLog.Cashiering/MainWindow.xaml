@@ -93,6 +93,10 @@
 
             <busy:BusyDialog Grid.RowSpan="5"
                              Grid.ColumnSpan="3" />
+
+            <busy:BusyDialogWithCancel Grid.RowSpan="5"
+                                       Grid.ColumnSpan="3"
+                                       DataContext="{Binding ApprovalAwaiter}" />
         </Grid>
     </DockPanel>
 </Window>

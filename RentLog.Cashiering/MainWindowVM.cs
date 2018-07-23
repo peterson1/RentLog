@@ -35,27 +35,30 @@ namespace RentLog.Cashiering
             ColxnsDB = CheckIfDbExists(Date);
             if (ColxnsDB == null) return;
 
-            CashierColxns = new CashierColxnsVM (this);
-            OtherColxns   = new OtherColxnsVM   (this);
-            BankDeposits  = new BankDepositsVM  (this);
-            PostAndClose  = new PostAndCloseVM  (this);
-            NextDayOpener = new NextDayOpenerVM (this);
+            CashierColxns   = new CashierColxnsVM   (this);
+            OtherColxns     = new OtherColxnsVM     (this);
+            BankDeposits    = new BankDepositsVM    (this);
+            ApprovalAwaiter = new ApprovalRequesterVM(this);
+            PostAndClose    = new PostAndCloseVM    (this);
+            NextDayOpener   = new NextDayOpenerVM   (this);
+
             if (clickRefresh) ClickRefresh();
             SetCaption("");
         }
 
 
-        public DateTime              Date             { get; }
-        public ICollectionsDB        ColxnsDB         { get; }
-        public bool                  CanReview        { get; }
-        public bool                  CanEncode        { get; }
-        public UIList<SectionTabVM>  SectionTabs      { get; } = new UIList<SectionTabVM>();
-        public CashierColxnsVM       CashierColxns    { get; }
-        public OtherColxnsVM         OtherColxns      { get; }
-        public BankDepositsVM        BankDeposits     { get; }
-        public PostAndCloseVM        PostAndClose     { get; }
-        public NextDayOpenerVM       NextDayOpener    { get; }
-        public int                   CurrentTabIndex  { get; set; }
+        public DateTime              Date              { get; }
+        public ICollectionsDB        ColxnsDB          { get; }
+        public bool                  CanReview         { get; }
+        public bool                  CanEncode         { get; }
+        public UIList<SectionTabVM>  SectionTabs       { get; } = new UIList<SectionTabVM>();
+        public CashierColxnsVM       CashierColxns     { get; }
+        public OtherColxnsVM         OtherColxns       { get; }
+        public BankDepositsVM        BankDeposits      { get; }
+        public PostAndCloseVM        PostAndClose      { get; }
+        public NextDayOpenerVM       NextDayOpener     { get; }
+        public ApprovalRequesterVM   ApprovalAwaiter   { get; }
+        public int                   CurrentTabIndex   { get; set; }
 
 
         public void OnCurrentTabIndexChanged()
@@ -137,10 +140,9 @@ namespace RentLog.Cashiering
 
             if (PostAndClose.IsCashierSubmitting)
             {
-                StartBeingBusy("Submitting collections for review ...");
-                await Task.Delay(1000 * 4);//artificial delay for web sync to upload changes
-                MessageBox.Show($"Successfully submitted collections for review.",
-                        "   Operation Successful", MessageBoxButton.OK, MessageBoxImage.Information);
+                PostAndClose.IsCashierSubmitting = false;
+                await ApprovalAwaiter.WaitForApproval();
+                return;
             }
             await Task.Delay(1000);
             StopBeingBusy();

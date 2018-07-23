@@ -14,10 +14,16 @@ namespace RentLog.Cashiering.MainToolbar
     [AddINotifyPropertyChangedInterface]
     public class PostAndCloseVM
     {
+        private ApprovalResponderVM _respondr;
+
+
         public PostAndCloseVM(MainWindowVM mainWindowVM)
         {
             Main           = mainWindowVM;
             PostAndCloseCmd = R2Command.Relay(ConfirmExecution, _ => CanPostAndClose(), "Post & Close");
+
+            if (Main.CanReview)
+                _respondr = new ApprovalResponderVM(Main);
         }
 
 
@@ -47,6 +53,11 @@ namespace RentLog.Cashiering.MainToolbar
                 PostAndCloseCmd.CurrentLabel = "Cashier should do another “Submit”.";
                 return false;
             }
+            if (!_respondr.CanApproveRequest(out string whyNot))
+            {
+                PostAndCloseCmd.CurrentLabel = whyNot;
+                return false;
+            }
             PostAndCloseCmd.CurrentLabel = "Post & Close";
             return IsBalanced;
         }
@@ -66,26 +77,38 @@ namespace RentLog.Cashiering.MainToolbar
 
         private void ConfirmExecution()
             => Alert.Confirm("Are you sure you want to close this day and open the next?", 
-                async () =>
-                {
-                    await RunPostAndClose();
-
-                    MessageBox.Show($"Successfully posted collections for {Main.Date:d-MMM-yyyy}{L.F}"
-                                + $"The next market day [{Main.Date.AddDays(1):d-MMM-yyyy}] is now open for encoding.",
-                            "   Operation Successful", MessageBoxButton.OK, MessageBoxImage.Information);
-                });
+                async () => await VisualizePostAndClose());
 
 
-        public async Task RunPostAndClose()
+        private async Task VisualizePostAndClose()
         {
             Main.StartBeingBusy("Posting and Closing ...");
-            await Task.Run(() =>
-            {
-                var jobs = MarketDayCloser.GetActions(Main.ColxnsDB, Main.AppArgs);
-                Parallel.Invoke(jobs.ToArray());
-            });
+            RunPostAndClose();
             await Task.Delay(1000 * 10);//artificial delay to give time for GoogleDrive to catch up
+
+            UIThread.Run(() => MessageBox.Show(
+                $"Successfully posted collections for {Main.Date:d-MMM-yyyy}{L.F}"
+                + $"The next market day [{Main.Date.AddDays(1):d-MMM-yyyy}] is now open for encoding.",
+            "   Operation Successful", MessageBoxButton.OK, MessageBoxImage.Information));
+
             Main.CloseWindow();
         }
+
+
+        public void RunPostAndClose()
+            => _respondr.ApproveTheRequest();
+
+
+        //public async Task RunPostAndClose()
+        //{
+        //    Main.StartBeingBusy("Posting and Closing ...");
+        //    await Task.Run(() =>
+        //    {
+        //        var jobs = MarketDayCloser.GetActions(Main.ColxnsDB, Main.AppArgs);
+        //        Parallel.Invoke(jobs.ToArray());
+        //    });
+        //    await Task.Delay(1000 * 10);//artificial delay to give time for GoogleDrive to catch up
+        //    Main.CloseWindow();
+        //}
     }
 }

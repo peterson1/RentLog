@@ -43,7 +43,7 @@ namespace RentLog.Tests.MarketDayOpenerTests
             await vm.RefreshCmd.RunAsync();
             vm.PostAndClose.CanPostAndClose().Should().BeTrue();
 
-            await vm.PostAndClose.RunPostAndClose();
+            vm.PostAndClose.RunPostAndClose();
         }
     }
 }

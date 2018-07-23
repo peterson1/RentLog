@@ -1,6 +1,5 @@
 ﻿using CommonTools.Lib11.Approvals;
 using CommonTools.Lib11.FileSystemTools;
-using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.FileSystemTools;
 using System;
 using System.IO;
@@ -44,6 +43,8 @@ namespace CommonTools.Lib45.Approvals
 
         private void _watchr_FileChanged(object sender, EventArgs e)
         {
+            if (_watchr == null) return;
+
             if (!TryGetEnvelope(out ApprovalEnvelope<T> envelope, 
                 _watchr.TargetFile)) return;
 
@@ -56,6 +57,14 @@ namespace CommonTools.Lib45.Approvals
             => TryGetEnvelope(requestKey, out ApprovalEnvelope<T> env);
 
 
+        public void RevokeRequest(string requestKey)
+        {
+            _watchr?.StopWatching();
+            _watchr = null;
+            File.Delete(GetFilePath(requestKey));
+        }
+
+
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
 
@@ -65,7 +74,7 @@ namespace CommonTools.Lib45.Approvals
             {
                 if (disposing)
                 {
-                    _watchr.StopWatching();
+                    _watchr?.StopWatching();
                     _watchr = null;
                 }
 
@@ -75,6 +84,7 @@ namespace CommonTools.Lib45.Approvals
                 disposedValue = true;
             }
         }
+
 
         // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
         // ~FileBasedApprovalRequester() {

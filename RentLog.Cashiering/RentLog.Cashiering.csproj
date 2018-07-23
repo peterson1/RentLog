@@ -119,6 +119,8 @@
     <Compile Include="CommonControls\LightColorZone.xaml.cs">
       <DependentUpon>LightColorZone.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainToolbar\ApprovalRequesterVM.cs" />
+    <Compile Include="MainToolbar\ApprovalResponderVM.cs" />
     <Compile Include="MainToolbar\MainToolbarUI.xaml.cs">
       <DependentUpon>MainToolbarUI.xaml</DependentUpon>
     </Compile>
