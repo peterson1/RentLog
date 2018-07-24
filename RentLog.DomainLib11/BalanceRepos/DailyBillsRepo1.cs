@@ -28,11 +28,45 @@ namespace RentLog.DomainLib11.BalanceRepos
         public void UpdateFrom(DateTime date)
         {
             var dtos = GetRecomputedFrom(date);
-            _repo.Update(dtos, true);
+            //_repo.Update(dtos, true);
+            _repo.Upsert(dtos, true);
         }
 
 
         private List<DailyBillDTO> GetRecomputedFrom(DateTime date)
+        {
+            var minID   = date.DaysSinceMin();
+            var oldRows = _repo.Find(_ => _.Id >= minID)
+                               .OrderBy(_ => _.Id).ToList();
+            var minDate = oldRows.First().GetBillDate();
+            var maxDate = oldRows.Last ().GetBillDate();
+            var newRows = new List<DailyBillDTO>();
+
+            foreach (var billCode in BillCodes.Collected())
+            {
+                var openingBal = Find(date.AddDays(-1).DaysSinceMin(), false)
+                                    ?.For(billCode)?.ClosingBalance;
+
+                foreach (var rowDate in minDate.EachDayUpTo(maxDate))
+                {
+                    var newState = _billr.ComputeBill(billCode, _lse, rowDate, openingBal);
+
+                    var dto = oldRows.SingleOrDefault(_ => _.Id == rowDate.DaysSinceMin())
+                           ?? DailyBillDTO.CreateFor(rowDate);
+
+                    if (dto.Bills == null) dto.Bills = new List<DailyBillDTO.BillState>();
+                    dto.Bills.RemoveAll(_ => _.BillCode == billCode);
+                    dto.Bills.Add(newState);
+
+                    openingBal = newState.ClosingBalance;
+                    newRows.Add(dto);
+                }
+            }
+            return newRows;
+        }
+
+
+        private List<DailyBillDTO> GetRecomputedFrom_deprecate(DateTime date)
         {
             var minID  = date.DaysSinceMin();
             var affctd = _repo.Find   (_ => _.Id >= minID)

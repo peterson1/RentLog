@@ -104,6 +104,7 @@
     <Compile Include="IntendedColxnsRepoTests\IntendedColxnsRepoFacts.cs" />
     <Compile Include="JournalVoucherTests\JournalVouchersRepoFacts.cs" />
     <Compile Include="JournalVoucherTests\JournalVouchersCrudFacts.cs" />
+    <Compile Include="LeaseBalanceTests\LeaseBalanceFacts.cs" />
     <Compile Include="LeasesTests\ActiveLeasesRepoReaderFacts.cs" />
     <Compile Include="LeasesTests\ActiveLeasesRepoValidationFacts.cs" />
     <Compile Include="LeasesTests\ActiveLeasesRepoWriterFacts.cs" />
