@@ -2,6 +2,7 @@
 using LiteDB;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace CommonTools.Lib45.LiteDbTools
@@ -82,6 +83,8 @@ namespace CommonTools.Lib45.LiteDbTools
 
         public bool Delete(List<T> records)
         {
+            if (records == null || !records.Any()) return false;
+
             using (var db = _db.OpenWrite())
             {
                 var coll = GetCollection(db);
@@ -116,6 +119,7 @@ namespace CommonTools.Lib45.LiteDbTools
             Func<LiteCollection<T>, IEnumerable<T>, int> func,
             bool doValidate)
         {
+            if (records == null || !records.Any()) return 0;
             foreach (var model in records)
             {
                 SetCurrentFields(model);

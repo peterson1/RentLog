@@ -94,6 +94,8 @@ namespace CommonTools.Lib11.DatabaseTools
 
         public bool Delete(List<T> records)
         {
+            if (records == null || !records.Any()) return false;
+
             foreach (var rec in records)
                 ValidateBeforeDelete(rec);
 
@@ -109,6 +111,8 @@ namespace CommonTools.Lib11.DatabaseTools
 
         public void Insert(IEnumerable<T> records, bool doValidate)
         {
+            if (records == null || !records.Any()) return;
+
             if (doValidate)
                 records.ForEach(_ => ValidateBeforeInsert(_));
 
@@ -118,6 +122,8 @@ namespace CommonTools.Lib11.DatabaseTools
 
         public void Update(IEnumerable<T> records, bool doValidate)
         {
+            if (records == null || !records.Any()) return;
+
             if (doValidate)
                 records.ForEach(_ => ValidateBeforeUpdate(_));
 
@@ -127,6 +133,8 @@ namespace CommonTools.Lib11.DatabaseTools
 
         public void Upsert(IEnumerable<T> records, bool doValidate)
         {
+            if (records == null || !records.Any()) return;
+
             if (doValidate)
                 records.ForEach(_ => ValidateBeforeUpdate(_));
 
