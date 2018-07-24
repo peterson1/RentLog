@@ -125,6 +125,15 @@ namespace CommonTools.Lib11.DatabaseTools
         }
 
 
+        public void Upsert(IEnumerable<T> records, bool doValidate)
+        {
+            if (doValidate)
+                records.ForEach(_ => ValidateBeforeUpdate(_));
+
+            _repo.Upsert(records, doValidate);
+        }
+
+
         public virtual bool IsValidForInsert(T draft, out string whyInvalid)
         {
             if (!IsIdZero(draft, out whyInvalid)) return false;

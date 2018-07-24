@@ -44,7 +44,7 @@ namespace CommonTools.Lib45.LiteDbTools
             => WriteBulk(records, (c, r) => c.Update(r), doValidate);
 
 
-        public int Upsert(IEnumerable<T> records, bool doValidate = true)
+        public void Upsert(IEnumerable<T> records, bool doValidate = true)
             => WriteBulk(records, (c, r) => c.Upsert(r), doValidate);
 
 
