@@ -215,6 +215,7 @@
       <DependentUpon>DualText.xaml</DependentUpon>
     </Compile>
     <Compile Include="TextLabels\DualText_DependencyProperties.cs" />
+    <Compile Include="ThreadTools\ParallelInvokerExtensions.cs" />
     <Compile Include="ThreadTools\ProcessKiller.cs" />
     <Compile Include="ThreadTools\ThisThread.cs" />
     <Compile Include="ThreadTools\ThreadedMessageBox.cs" />

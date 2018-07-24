@@ -1,4 +1,6 @@
-﻿using CommonTools.Lib11.InputCommands;
+﻿using CommonTools.Lib11.DateTimeTools;
+using CommonTools.Lib11.InputCommands;
+using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.ExcelTools;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.PrintTools;
@@ -10,6 +12,7 @@ using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.Models;
 using RentLog.DomainLib45.WithOverduesReport;
 using System;
+using System.Collections.Concurrent;
 using System.Threading.Tasks;
 
 namespace RentLog.LeasesCrud.MainToolbar
@@ -35,7 +38,7 @@ namespace RentLog.LeasesCrud.MainToolbar
         public IR2Command   WithOverduesReportCmd  { get; }
         public IR2Command   PrintCurrentListCmd    { get; }
         public IR2Command   ExportListToExcelCmd   { get; }
-        public IR2Command   RunAdHocTaskCmd         { get; }
+        public IR2Command   RunAdHocTaskCmd        { get; }
         public BillAmounts  Overdues               { get; private set; }
 
 
@@ -58,21 +61,35 @@ namespace RentLog.LeasesCrud.MainToolbar
 
         private void RunAdHocTask()
         {
-            var job = GetAdHocJob(out string desc);
+            var adhocTask = GetAdHocTask(out string desc);
             Alert.Confirm($"Run Ad Hoc job “{desc}”?", async () =>
             {
                 _main.StartBeingBusy("Running Ad Hoc task ...");
-                await Task.Run(() => job.Invoke());
+
+                await adhocTask;
+                //var jobs = ForAllLeases.RebuildSoaFrom(29.Jun(2018), _args);
+                //foreach (var job in jobs)
+                //    job.Invoke();
+                //await Task.Delay(0);
+
                 _main.StopBeingBusy();
                 _main.ClickRefresh();
             });
         }
 
 
-        private Action GetAdHocJob(out string desc)
+        private Task GetAdHocTask(out string desc)
         {
-            desc      = "ForActiveLeases.SetContractYears 2";
-            return () => ForActiveLeases.SetContractYears(2, _args);
+            desc     = "ForAllLeases.RebuildSoaFrom(29.Jun(2018)";
+            var jobs = ForAllLeases.RebuildSoaFrom(29.Jun(2018), _args);
+            return jobs.AsParallelTask((ok, not, total) =>
+            {
+                var left = total - (ok + not);
+                _main.StartBeingBusy($"success: {ok}"
+                             + L.f + $"failed: {not}"
+                             + L.f + $"total: {total}"
+                             + L.f + $"left: {left}");
+            });
         }
     }
 }

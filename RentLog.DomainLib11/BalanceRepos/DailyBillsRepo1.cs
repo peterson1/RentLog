@@ -36,9 +36,11 @@ namespace RentLog.DomainLib11.BalanceRepos
         private List<DailyBillDTO> GetRecomputedFrom(DateTime date)
         {
             var minID   = date.DaysSinceMin();
-            var oldRows = _repo.Find(_ => _.Id >= minID)
-                               .OrderBy(_ => _.Id).ToList();
-            var minDate = oldRows.First().GetBillDate();
+            var matches = _repo.Find(_ => _.Id >= minID);
+            if (matches == null || !matches.Any()) return null;
+
+            var oldRows = matches.OrderBy(_ => _.Id).ToList();
+            //var minDate = oldRows.First().GetBillDate();
             var maxDate = oldRows.Last ().GetBillDate();
             var newRows = new List<DailyBillDTO>();
 
@@ -47,7 +49,7 @@ namespace RentLog.DomainLib11.BalanceRepos
                 var openingBal = Find(date.AddDays(-1).DaysSinceMin(), false)
                                     ?.For(billCode)?.ClosingBalance;
 
-                foreach (var rowDate in minDate.EachDayUpTo(maxDate))
+                foreach (var rowDate in date.EachDayUpTo(maxDate))
                 {
                     var newState = _billr.ComputeBill(billCode, _lse, rowDate, openingBal);
 
@@ -63,32 +65,6 @@ namespace RentLog.DomainLib11.BalanceRepos
                 }
             }
             return newRows;
-        }
-
-
-        private List<DailyBillDTO> GetRecomputedFrom_deprecate(DateTime date)
-        {
-            var minID  = date.DaysSinceMin();
-            var affctd = _repo.Find   (_ => _.Id >= minID)
-                              .OrderBy(_ => _.Id).ToList();
-
-            foreach (var billCode in BillCodes.Collected())
-            {
-                var openingBal = Find(date.AddDays(-1).DaysSinceMin(), false)
-                                    ?.For(billCode)?.ClosingBalance;
-
-                foreach (var dto in affctd)
-                {
-                    var rowDate  = dto.GetBillDate();
-                    var newState = _billr.ComputeBill(billCode, _lse, rowDate, openingBal);
-                    if (dto.Bills == null) dto.Bills = new List<DailyBillDTO.BillState>();
-                    dto.Bills.RemoveAll(_ => _.BillCode == billCode);
-                    dto.Bills.Add(newState);
-
-                    openingBal = newState.ClosingBalance;
-                }
-            }
-            return affctd;
         }
 
 
