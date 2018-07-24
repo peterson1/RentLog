@@ -57,7 +57,8 @@ namespace CommonTools.Lib45.FileSystemTools
         public static void RelaunchApp()
         {
             //Process.Start(GetFullPath());
-            var args = string.Join(" ", Environment.GetCommandLineArgs());
+            var args = Environment.GetCommandLineArgs()
+                                  .QuotifyCommandLineArgs();
             Process.Start("cmd.exe", "/c " + args);
             CurrentExe.Shutdown();
         }

@@ -129,6 +129,7 @@
     <Compile Include="StateTransitionTests\LeaseDeactivatorFacts.cs" />
     <Compile Include="StateTransitionTests\LeaseIsActiveFacts.cs" />
     <Compile Include="StateTransitionTests\MarketDayCloserFacts.cs" />
+    <Compile Include="StringToolsTests\QuotifyCmdArgsFacts.cs" />
     <Compile Include="SurchargerTests\RentSurchargerTests\RentDailySurchargeFacts.cs" />
     <Compile Include="SurchargerTests\RentSurchargerTests\RentDailySurchargeNoRoundOffFacts.cs" />
     <Compile Include="SurchargerTests\RightsSurchargerTests\RightsDailyAfter90SurchargerFacts.cs" />
