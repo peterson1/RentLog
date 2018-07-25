@@ -78,5 +78,17 @@ namespace RentLog.Tests.DailyColxnsTests
             sut.CollectionsSum.Should().Be(21_198);
             sut.DepositsSum.Should().Be(21_198);
         }
+
+
+        [Fact(DisplayName = "July 15")]
+        public void July15()
+        {
+            var arg = SampleDir.Jul15_MEY();
+            var sut = new DailyColxnsReport(15.July(2018), arg);
+
+            sut.Should().HaveCount(4);
+            var ofc = sut.Single(_ => _.Section.Id == OFC);
+            ofc.Total.Should().Be(550);
+        }
     }
 }

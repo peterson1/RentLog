@@ -24,18 +24,6 @@ namespace RentLog.DomainLib11.ReportRows
         }
 
 
-        public LeaseColxnRow(CashierColxnDTO dto)
-        {
-            Lease       = dto.Lease;
-            DocumentRef = dto.DocumentRef;
-            Rent        = dto.For(BillCode.Rent    );
-            Rights      = dto.For(BillCode.Rights  );
-            Electric    = dto.For(BillCode.Electric);
-            Water       = dto.For(BillCode.Water   );
-            Remarks     = dto.Remarks;
-        }
-
-
         public LeaseColxnRow(SectionDTO sec, AmbulantColxnDTO dto)
         {
             Lease = new LeaseDTO

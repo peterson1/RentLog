@@ -2,6 +2,7 @@
 using CommonTools.Lib45.BaseViewModels;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.PrintTools;
+using CommonTools.Lib45.ThreadTools;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.Reporters;
 using RentLog.DomainLib45.DailyStatusReporter.PrintLayouts;
@@ -45,7 +46,14 @@ namespace RentLog.DomainLib45.DailyStatusReporter
         protected override void OnRefreshClicked()
         {
             MainReport = null;
-            MainReport = new DailyStatusReport(ReportDate, AppArgs);
+            try
+            {
+                MainReport = new DailyStatusReport(ReportDate, AppArgs);
+            }
+            catch (Exception ex)
+            {
+                Alert.Show(ex);
+            }
         }
 
 
