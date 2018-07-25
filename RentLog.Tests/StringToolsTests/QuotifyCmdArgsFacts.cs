@@ -35,6 +35,18 @@ namespace RentLog.Tests.StringToolsTests
         }
 
 
+        [Fact(DisplayName = "exe path + 1 arg (not k=v pair)")]
+        public void TestMethod00002b()
+        {
+            var args = new string[] { @"C:\a\b c\d.exe",
+                                      "non-kvp-arg" };
+
+            var expctd = "\"C:\\a\\b c\\d.exe\" \"non-kvp-arg\"";
+
+            args.QuotifyCommandLineArgs().Should().Be(expctd);
+        }
+
+
         [Fact(DisplayName = "exe path only")]
         public void TestMethod00003()
         {

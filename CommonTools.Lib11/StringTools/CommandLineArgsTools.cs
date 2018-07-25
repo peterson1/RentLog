@@ -18,6 +18,9 @@ namespace CommonTools.Lib11.StringTools
 
         private static string EnquoteCmdArg(string commandLineArg)
         {
+            if (!commandLineArg.Contains("="))
+                return Enquote(commandLineArg);
+
             var ss = commandLineArg.Split('=');
             return $"{ss[0]}={Enquote(ss[1])}";
         }
