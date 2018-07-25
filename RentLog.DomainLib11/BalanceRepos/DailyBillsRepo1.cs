@@ -40,9 +40,8 @@ namespace RentLog.DomainLib11.BalanceRepos
             if (matches == null || !matches.Any()) return null;
 
             var oldRows = matches.OrderBy(_ => _.Id).ToList();
-            //var minDate = oldRows.First().GetBillDate();
             var maxDate = oldRows.Last ().GetBillDate();
-            var newRows = new List<DailyBillDTO>();
+            //var newRows = new List<DailyBillDTO>();
 
             foreach (var billCode in BillCodes.Collected())
             {
@@ -53,18 +52,23 @@ namespace RentLog.DomainLib11.BalanceRepos
                 {
                     var newState = _billr.ComputeBill(billCode, _lse, rowDate, openingBal);
 
-                    var dto = oldRows.SingleOrDefault(_ => _.Id == rowDate.DaysSinceMin())
-                           ?? DailyBillDTO.CreateFor(rowDate);
+                    var dto = oldRows.SingleOrDefault(_ => _.Id == rowDate.DaysSinceMin());
+                    if (dto == null)
+                    {
+                        dto = DailyBillDTO.CreateFor(rowDate);
+                        oldRows.Add(dto);
+                    }
 
                     if (dto.Bills == null) dto.Bills = new List<DailyBillDTO.BillState>();
                     dto.Bills.RemoveAll(_ => _.BillCode == billCode);
                     dto.Bills.Add(newState);
 
                     openingBal = newState.ClosingBalance;
-                    newRows.Add(dto);
+                    //newRows.Add(dto);
                 }
             }
-            return newRows;
+            //return newRows;
+            return oldRows;
         }
 
 
