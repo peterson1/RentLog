@@ -66,7 +66,8 @@ namespace RentLog.Cashiering.MainToolbar
             DoCancel();
             if (envelope.IsApproved != true) return;
 
-            var jobs = MarketDayCloser.GetActions(_main.ColxnsDB, _main.AppArgs);
+            var jobs = MarketDayCloser.GetActions(_main.ColxnsDB, _main.AppArgs, 
+                                                    envelope.ResponderName);
             Parallel.Invoke(jobs.ToArray());
 
             CurrentExe.RelaunchApp();

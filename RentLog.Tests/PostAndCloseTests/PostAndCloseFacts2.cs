@@ -22,7 +22,8 @@ namespace RentLog.Tests.PostAndCloseTests
         {
             var cashierArg = GetTempSampleArgs("Cashier");
             var cashierVm  = new MainWindowVM(29.June(2018), cashierArg, false);
-            var suprvsrArg = GetTempSampleArgs("Supervisor");
+            var suprvsrArg = GetTempSampleArgs("Supervisor", "Mr. Supervisor");
+            suprvsrArg.Credentials.HumanName.Should().Be("Mr. Supervisor");
             var suprvsrVm  = new MainWindowVM(29.June(2018), suprvsrArg, false);
 
             cashierArg.Collections.LastPostedDate().Should().Be(28.June(2018));
@@ -66,6 +67,9 @@ namespace RentLog.Tests.PostAndCloseTests
             cashierArg = GetTempSampleArgs("Cashier");
             cashierArg.Collections.LastPostedDate().Should().Be(29.June(2018));
             cashierArg.Collections.UnclosedDate().Should().Be(30.June(2018));
+            var postdDB = cashierArg.Collections.For(29.June(2018));
+            postdDB.IsPosted().Should().BeTrue();
+            //postdDB.PostedBy().Should().Be("Mr. Supervisor");
 
             cashierVm  = new MainWindowVM(30.June(2018), cashierArg, false);
             cashierVm.ColxnsDB.IsOpened().Should().BeFalse();

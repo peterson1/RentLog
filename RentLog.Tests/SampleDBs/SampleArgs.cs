@@ -13,20 +13,23 @@ namespace RentLog.Tests.SampleDBs
     {
         internal static string DirPath = @"..\..\SampleDBs";
         internal static string DirName;
+        private string _usr;
 
-        public SampleArgs(string roles)
+
+        public SampleArgs(string roles, string humanName = "Mr. Sample User")
         {
-            IsValidUser       = true;
-            Credentials       = new FirebaseCredentials();
-            Credentials.Roles = roles;
-            CurrentBankAcct   = new BankAccountDTO { Id = 1 };
+            IsValidUser           = true;
+            Credentials           = new FirebaseCredentials();
+            Credentials.Roles     = roles;
+            Credentials.HumanName = _usr = humanName;
+            CurrentBankAcct       = new BankAccountDTO { Id = 1 };
         }
 
 
         protected override MarketStateDB GetMarketStateDB()
         {
             var dbPath = FindDB(DirName);
-            return new MarketStateDBFile(dbPath, "Test Runner");
+            return new MarketStateDBFile(dbPath, _usr);
         }
 
 

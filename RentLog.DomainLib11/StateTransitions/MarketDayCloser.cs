@@ -7,11 +7,11 @@ namespace RentLog.DomainLib11.StateTransitions
 {
     public class MarketDayCloser
     {
-        public static List<Action> GetActions(ICollectionsDB colxnsDB, ITenantDBsDir dir)
+        public static List<Action> GetActions(ICollectionsDB colxnsDB, ITenantDBsDir dir, string postedBy)
         {
             var jobs = new List<Action>();
 
-            jobs.Add(() => colxnsDB.MarkAsPosted());
+            jobs.Add(() => colxnsDB.MarkAsPosted(postedBy));
 
             return jobs;
         }

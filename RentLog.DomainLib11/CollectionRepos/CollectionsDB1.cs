@@ -78,10 +78,13 @@ namespace RentLog.DomainLib11.CollectionRepos
         }
 
 
-        public bool IsPosted     () => _meta.Has(POST_DATE);
-        public bool IsOpened     () => _meta.IsTrue(IS_OPENED);
-        public void MarkAsOpened () => _meta.SetTrue(IS_OPENED);
-        public void MarkAsPosted () => _meta[POST_DATE] = DateTime.Now.ToString(DATE_FMT);
+        public bool   IsPosted     () => _meta.Has(POST_DATE);
+        public string PostedBy     () => _meta[POST_DATE];
+        public bool   IsOpened     () => _meta.IsTrue(IS_OPENED);
+        public void   MarkAsOpened () => _meta.SetTrue(IS_OPENED);
+
+        public void MarkAsPosted(string postedBy)
+            => _meta[POST_DATE] = postedBy;
 
 
         private List<T> LoadSnapshot<T>(string metaKey)

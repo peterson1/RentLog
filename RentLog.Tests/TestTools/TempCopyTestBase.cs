@@ -19,14 +19,14 @@ namespace RentLog.Tests.TestTools
         protected abstract string SampleDirName { get; }
 
 
-        protected SampleArgs GetTempSampleArgs(string roles)
+        protected SampleArgs GetTempSampleArgs(string roles, string humanName = "Mr. Sample User")
         {
             var origDir = SampleArgs.DirPath;
 
             SampleArgs.DirPath = TempDir;
             SampleArgs.DirName = "";
 
-            var args = new SampleArgs(roles);
+            var args = new SampleArgs(roles, humanName);
             SampleArgs.DirPath = origDir;
             return args;
         }

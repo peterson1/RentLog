@@ -22,9 +22,10 @@ namespace RentLog.DomainLib11.CollectionRepos
         List<CollectorDTO>       CollectorsSnapshot  { get; }
 
         bool          IsPosted               ();
+        string        PostedBy               ();
         bool          IsOpened               ();
         void          MarkAsOpened           ();
-        void          MarkAsPosted           ();
+        void          MarkAsPosted           (string postedBy);
         CollectorDTO  GetCollector           (LeaseDTO lease);
         CollectorDTO  GetCollector           (SectionDTO section);
         void          SetCollector           (SectionDTO section, CollectorDTO collector);
