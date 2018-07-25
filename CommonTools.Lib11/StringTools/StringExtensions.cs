@@ -15,6 +15,14 @@ namespace CommonTools.Lib11.StringTools
         }
 
 
+        public static string After(this string text, string findThis)
+        {
+            var pos = text.IndexOf(findThis);
+            if (pos == -1) return text;
+            return text.Substring(pos + 1);
+        }
+
+
         public static string Between(this string fullText,
                     string firstString, string lastString,
                     bool seekLastStringFromEnd = false)

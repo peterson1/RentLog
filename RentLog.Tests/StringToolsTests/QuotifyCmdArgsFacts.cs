@@ -14,11 +14,10 @@ namespace RentLog.Tests.StringToolsTests
                                     @"-arg1=C:\a\b c\db.ldb",
                                      "-arg2=abcdefg"};
 
-            var expctd = "\"C:\\a\\b c\\d.exe\""
-                      + " -arg1=\"C:\\a\\b c\\db.ldb\""
-                      + " -arg2=\"abcdefg\"";
-
-            args.QuotifyCommandLineArgs().Should().Be(expctd);
+            args.QuotifyCommandLineArgs().Should().Be(
+                //"\"C:\\a\\b c\\d.exe\""
+                "" + "-arg1=\"C:\\a\\b c\\db.ldb\""
+                + " -arg2=\"abcdefg\"");
         }
 
 
@@ -28,10 +27,9 @@ namespace RentLog.Tests.StringToolsTests
             var args = new string[] { @"C:\a\b c\d.exe",
                                       @"-arg1=C:\a\b c\db.ldb" };
 
-            var expctd = "\"C:\\a\\b c\\d.exe\""
-                      + " -arg1=\"C:\\a\\b c\\db.ldb\"";
-
-            args.QuotifyCommandLineArgs().Should().Be(expctd);
+            args.QuotifyCommandLineArgs().Should().Be(
+                    //"\"C:\\a\\b c\\d.exe\""
+                      "" + "-arg1=\"C:\\a\\b c\\db.ldb\"");
         }
 
 
@@ -41,9 +39,9 @@ namespace RentLog.Tests.StringToolsTests
             var args = new string[] { @"C:\a\b c\d.exe",
                                       "non-kvp-arg" };
 
-            var expctd = "\"C:\\a\\b c\\d.exe\" \"non-kvp-arg\"";
-
-            args.QuotifyCommandLineArgs().Should().Be(expctd);
+            args.QuotifyCommandLineArgs().Should().Be(
+                //"\"C:\\a\\b c\\d.exe\""
+                "" + "\"non-kvp-arg\"");
         }
 
 
@@ -51,9 +49,32 @@ namespace RentLog.Tests.StringToolsTests
         public void TestMethod00003()
         {
             var args   = new string[] { @"C:\a\b c\d.exe" };
-            var expctd = "\"C:\\a\\b c\\d.exe\"";
+            args.QuotifyCommandLineArgs().Should().Be("");
+                //"\"C:\\a\\b c\\d.exe\"");
+        }
 
-            args.QuotifyCommandLineArgs().Should().Be(expctd);
+
+        [Fact(DisplayName = "kvp arg has EQ char")]
+        public void TestMethod00004()
+        {
+            var args = new string[] { @"C:\a\b c\d.exe",
+                                      @"-arg1=abc123=" };
+
+            args.QuotifyCommandLineArgs().Should().Be(
+                //"\"C:\\a\\b c\\d.exe\""
+                      "" + "-arg1=\"abc123=\"");
+        }
+
+
+        [Fact(DisplayName = "kvp arg has 2 EQ chars")]
+        public void TestMethod00005()
+        {
+            var args = new string[] { @"C:\a\b c\d.exe",
+                                      @"-arg1=abc123==" };
+
+            args.QuotifyCommandLineArgs().Should().Be(
+                //"\"C:\\a\\b c\\d.exe\""
+                     "" + "-arg1=\"abc123==\"");
         }
     }
 }
