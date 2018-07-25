@@ -14,6 +14,7 @@ using RentLog.DomainLib45.WithOverduesReport;
 using System;
 using System.Collections.Concurrent;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace RentLog.LeasesCrud.MainToolbar
 {
@@ -61,12 +62,15 @@ namespace RentLog.LeasesCrud.MainToolbar
 
         private void RunAdHocTask()
         {
-            var adhocTask = GetAdHocTask(out string desc);
+            var adhocJob = GetAdHocJob(out string desc);
             Alert.Confirm($"Run Ad Hoc job “{desc}”?", async () =>
             {
                 _main.StartBeingBusy("Running Ad Hoc task ...");
 
-                await adhocTask;
+                await Task.Run(() => adhocJob.Invoke());
+                //await Task.Delay(0);
+                //MessageBox.Show("started?");
+
                 //var jobs = ForAllLeases.RebuildSoaFrom(29.Jun(2018), _args);
                 //foreach (var job in jobs)
                 //    job.Invoke();
@@ -78,11 +82,11 @@ namespace RentLog.LeasesCrud.MainToolbar
         }
 
 
-        private Task GetAdHocTask(out string desc)
+        private Action GetAdHocJob(out string desc)
         {
             desc     = "ForAllLeases.RebuildSoaFrom(29.Jun(2018)";
             var jobs = ForAllLeases.RebuildSoaFrom(29.Jun(2018), _args);
-            return jobs.AsParallelTask((ok, not, total) =>
+            return jobs.AsParallelJob((ok, not, total) =>
             {
                 var left = total - (ok + not);
                 _main.StartBeingBusy($"success: {ok}"

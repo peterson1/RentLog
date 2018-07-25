@@ -11,7 +11,7 @@ namespace CommonTools.Lib45.ThreadTools
         private static ConcurrentBag<bool> _successBag;
         private static ConcurrentBag<bool> _failBag;
 
-        public static Task AsParallelTask(this List<Action> origJobs,
+        public static Action AsParallelJob(this List<Action> origJobs,
             Action<int, int, int> progressHandler = null)
         {
             var newJobs = origJobs.Select(_ 
@@ -20,8 +20,7 @@ namespace CommonTools.Lib45.ThreadTools
             _successBag = new ConcurrentBag<bool>();
             _failBag    = new ConcurrentBag<bool>();
 
-            return Task.Run(() 
-                => Parallel.Invoke(newJobs.ToArray()));
+            return () => Parallel.Invoke(newJobs.ToArray());
         }
 
 
