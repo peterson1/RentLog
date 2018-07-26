@@ -86,8 +86,9 @@ namespace RentLog.DomainLib11.MarketStateRepos
 
             if (lse.Id > 0)
             {
-                var orig = _repo.Find(lse.Id, true);
-                occupieds.Remove(orig.Stall.Id);
+                var orig = _repo.Find(lse.Id, false);
+                if (orig != null)
+                    occupieds.Remove(orig.Stall.Id);
             }
 
             return occupieds.Contains(lse.Stall.Id);
