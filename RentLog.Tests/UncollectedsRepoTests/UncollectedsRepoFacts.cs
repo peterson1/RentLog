@@ -57,5 +57,16 @@ namespace RentLog.Tests.UncollectedsRepoTests
             win.SectionTabs[1].Uncollecteds.Should().HaveCount(0);
             win.SectionTabs[2].Uncollecteds.Should().HaveCount(3);
         }
+
+
+        [Fact(DisplayName = "No Uncollecteds")]
+        public void TestMethod00005()
+        {
+            var dir = SampleDir.Jul21_NoUncol();
+            var db = dir.Collections.For(21.July(2018));
+            db.Uncollecteds[1].GetAll().Should().BeEmpty();
+            db.Uncollecteds[2].GetAll().Should().BeEmpty();
+            db.Uncollecteds[3].GetAll().Should().HaveCount(4);
+        }
     }
 }

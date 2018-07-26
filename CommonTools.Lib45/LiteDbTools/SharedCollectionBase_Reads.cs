@@ -64,7 +64,14 @@ namespace CommonTools.Lib45.LiteDbTools
         public virtual List<T> GetAll()
         {
             using (var db = _db.OpenRead())
-                return GetCollection(db).FindAll().ToList();
+            {
+                var coll = GetCollection(db);
+                var count = 0;
+                try { count = coll.Count(); }
+                catch (InvalidCastException) { }//https://github.com/mbdavid/LiteDB/issues/641
+                if (count == 0) return new List<T>();
+                return coll.FindAll().ToList();
+            }
         }
 
 
