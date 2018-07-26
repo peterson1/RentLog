@@ -10,6 +10,10 @@ namespace RentLog.DomainLib11.AdHocJobs
             => dir.AddIfNone("Meralco - Deposit", GLAcctType.Asset);
 
 
+        public static void RightsRefund(ITenantDBsDir dir)
+            => dir.AddIfNone("Rights Refund", GLAcctType.Expense);
+
+
         private static void AddIfNone(this ITenantDBsDir dir, string glAcctName, GLAcctType glAcctType)
         {
             var repo    = dir.MarketState.GLAccounts;

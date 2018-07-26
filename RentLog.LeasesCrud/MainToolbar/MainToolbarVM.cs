@@ -68,13 +68,6 @@ namespace RentLog.LeasesCrud.MainToolbar
                 _main.StartBeingBusy("Running Ad Hoc task ...");
 
                 await Task.Run(() => adhocJob.Invoke());
-                //await Task.Delay(0);
-                //MessageBox.Show("started?");
-
-                //var jobs = ForAllLeases.RebuildSoaFrom(29.Jun(2018), _args);
-                //foreach (var job in jobs)
-                //    job.Invoke();
-                //await Task.Delay(0);
 
                 _main.StopBeingBusy();
                 _main.ClickRefresh();
@@ -84,16 +77,19 @@ namespace RentLog.LeasesCrud.MainToolbar
 
         private Action GetAdHocJob(out string desc)
         {
-            desc     = "ForAllLeases.RebuildSoaFrom(29.Jun(2018)";
-            var jobs = ForAllLeases.RebuildSoaFrom(29.Jun(2018), _args);
-            return jobs.AsParallelJob((ok, not, total) =>
-            {
-                var left = total - (ok + not);
-                _main.StartBeingBusy($"success: {ok}"
-                             + L.f + $"failed: {not}"
-                             + L.f + $"total: {total}"
-                             + L.f + $"left: {left}");
-            });
+            //desc     = "ForAllLeases.RebuildSoaFrom(29.Jun(2018)";
+            //var jobs = ForAllLeases.RebuildSoaFrom(29.Jun(2018), _args);
+            //return jobs.AsParallelJob((ok, not, total) =>
+            //{
+            //    var left = total - (ok + not);
+            //    _main.StartBeingBusy($"success: {ok}"
+            //                 + L.f + $"failed: {not}"
+            //                 + L.f + $"total: {total}"
+            //                 + L.f + $"left: {left}");
+            //});
+
+            desc = "EnsureGLAccount.RightsRefund";
+            return () => EnsureGLAccount.RightsRefund(_args);
         }
     }
 }
