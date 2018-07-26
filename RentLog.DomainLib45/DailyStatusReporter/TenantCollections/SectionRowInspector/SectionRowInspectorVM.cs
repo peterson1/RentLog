@@ -3,6 +3,7 @@ using CommonTools.Lib11.InputCommands;
 using CommonTools.Lib45.BaseViewModels;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.InputDialogs;
+using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.ReportRows;
@@ -18,7 +19,7 @@ namespace RentLog.DomainLib45.DailyStatusReporter.TenantCollections
         public SectionRowInspectorVM(SectionColxnsRow sectionColxnsRow, ITenantDBsDir dir) : base(dir)
         {
             MainRow = sectionColxnsRow;
-            EditPRNumberCmd = R2Command.Relay(_ => EditPRNumber(_), null, "Edit PR Number");
+            EditPRNumberCmd = R2Command.Relay(_ => EditPRNumber(_), _ => CanEditPRNumber(), "Edit PR Number");
 
             MainRow.Details.ItemOpened += (s, e) => SoaViewer.Show(e.Lease, dir);
             SetCaption($"Collections from “{MainRow?.Section}” by {MainRow.Collector}");
@@ -28,6 +29,10 @@ namespace RentLog.DomainLib45.DailyStatusReporter.TenantCollections
         public SectionColxnsRow  MainRow  { get; }
 
         public IR2Command  EditPRNumberCmd  { get; }
+
+
+        private bool CanEditPRNumber()
+            => AppArgs.CanEditPostedPRNumber(false);
 
 
         private void EditPRNumber(object seleectedItem)
@@ -43,7 +48,6 @@ namespace RentLog.DomainLib45.DailyStatusReporter.TenantCollections
             SaveUpdatedRow(row.DTO);
             DailyStatusReportVM.Current.ClickRefresh();
             CloseWindow();
-            //todo: trigger main refresh
         }
 
 
