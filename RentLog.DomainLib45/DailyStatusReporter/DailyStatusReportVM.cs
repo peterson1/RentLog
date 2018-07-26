@@ -16,6 +16,7 @@ namespace RentLog.DomainLib45.DailyStatusReporter
     public class DailyStatusReportVM : MainWindowVMBase<ITenantDBsDir>
     {
         protected override string CaptionPrefix => "Daily Status";
+        public static DailyStatusReportVM Current;
 
 
         public DailyStatusReportVM(ITenantDBsDir dir) : base(dir)
@@ -70,6 +71,9 @@ namespace RentLog.DomainLib45.DailyStatusReporter
 
 
         public static void Launch(ITenantDBsDir dir)
-            => new DailyStatusReportVM(dir).Show<DailyStatusReportWindow>();
+        {
+            Current = new DailyStatusReportVM(dir);
+            Current.Show<DailyStatusReportWindow>();
+        }
     }
 }

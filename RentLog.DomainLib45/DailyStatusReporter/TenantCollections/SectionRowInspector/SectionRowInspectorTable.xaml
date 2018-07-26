@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="RentLog.DomainLib45.DailyStatusReporter.TenantCollections.SectionRowInspector.SectionRowInspectorTable"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RentLog.DomainLib45.DailyStatusReporter.TenantCollections.SectionRowInspector"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ContextMenu x:Key="rowCtxMenu">
+            <MenuItem Header ="{Binding EditPRNumberCmd.CurrentLabel}" 
+                      Command="{Binding EditPRNumberCmd}"
+                      DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+        </ContextMenu>
+
+        <Style TargetType="MenuItem">
+            <Setter Property="CommandParameter"
+                    Value="{Binding Path=SelectedItem, 
+                    RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+        </Style>
+        
+        <Style TargetType="DataGridRow"
+               BasedOn="{StaticResource MaterialDesignDataGridRow}">
+            <Setter Property="ContextMenu" Value="{StaticResource rowCtxMenu}" />
+        </Style>
+    </UserControl.Resources>
+
+
+    <DataGrid x:Name="dg" ItemsSource="{Binding }"
+              DataContext="{Binding MainRow.Details}"
+              SelectedItem="{Binding CurrentItem}"
+              Style="{StaticResource dgReadOnly}">
+        <DataGrid.Columns>
+            <DataGridTextColumn Width="09*" Header="PR#"       ElementStyle="{StaticResource colCenter}" Binding="{Binding DocumentRef}" />
+            <DataGridTextColumn Width="20*" Header="tenant"    ElementStyle="{StaticResource colRight}"  Binding="{Binding Lease.Tenant.FirstAndLastNames}" />
+            <DataGridTextColumn Width="17*" Header="stall"     ElementStyle="{StaticResource colLabel}"  Binding="{Binding Lease.Stall.Name}" />
+            <DataGridTextColumn Width="09*" Header="rent"      ElementStyle="{StaticResource colRight}"  Binding="{Binding Rent    , StringFormat=N2}" />
+            <DataGridTextColumn Width="09*" Header="rights"    ElementStyle="{StaticResource colRight}"  Binding="{Binding Rights  , StringFormat=N2}" />
+            <DataGridTextColumn Width="09*" Header="electric"  ElementStyle="{StaticResource colRight}"  Binding="{Binding Electric, StringFormat=N2}" />
+            <DataGridTextColumn Width="09*" Header="water"     ElementStyle="{StaticResource colRight}"  Binding="{Binding Water   , StringFormat=N2}" />
+            <DataGridTextColumn Width="09*" Header="ambulant"  ElementStyle="{StaticResource colRight}"  Binding="{Binding Ambulant, StringFormat=N2}" />
+            <DataGridTextColumn Width="09*" Header="remarks"   ElementStyle="{StaticResource colLeft}"   Binding="{Binding Remarks    }" />
+        </DataGrid.Columns>
+    </DataGrid>
+</UserControl>

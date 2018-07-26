@@ -19,6 +19,7 @@ namespace RentLog.DomainLib11.ReportRows
         public SectionColxnsRow(SectionDTO sec, DateTime date, ITenantDBsDir dir)
         {
             Section    = sec;
+            ColxnDate  = date;
             var db     = dir.Collections.For(date);
             Collector  = GetSectionCollector(sec, db);
             var colxns = GetLeaseColxns(sec, date, db, dir);
@@ -51,6 +52,7 @@ namespace RentLog.DomainLib11.ReportRows
         };
 
 
+        public DateTime               ColxnDate  { get; }
         public SectionDTO             Section    { get; set; }
         public CollectorDTO           Collector  { get; set; }
         public UIList<LeaseColxnRow>  Details    { get; } = new UIList<LeaseColxnRow>();

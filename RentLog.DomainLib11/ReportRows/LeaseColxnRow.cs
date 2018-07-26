@@ -14,6 +14,7 @@ namespace RentLog.DomainLib11.ReportRows
 
         public LeaseColxnRow(IntendedColxnDTO dto)
         {
+            DTO         = dto;
             Lease       = dto.Lease;
             DocumentRef = dto.PRNumber.ToString();
             Rent        = dto.Actuals.Rent;
@@ -37,13 +38,14 @@ namespace RentLog.DomainLib11.ReportRows
         }
 
 
-        public LeaseDTO     Lease         { get; set; }
-        public string       DocumentRef   { get; set; }
-        public decimal?     Rent          { get; set; }
-        public decimal?     Rights        { get; set; }
-        public decimal?     Electric      { get; set; }
-        public decimal?     Water         { get; set; }
-        public decimal?     Ambulant      { get; set; }
-        public string       Remarks       { get; set; }
+        public IntendedColxnDTO  DTO          { get; }
+        public LeaseDTO          Lease        { get; set; }
+        public string            DocumentRef  { get; set; }
+        public decimal?          Rent         { get; set; }
+        public decimal?          Rights       { get; set; }
+        public decimal?          Electric     { get; set; }
+        public decimal?          Water        { get; set; }
+        public decimal?          Ambulant     { get; set; }
+        public string            Remarks      { get; set; }
     }
 }

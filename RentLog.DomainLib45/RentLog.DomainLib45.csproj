@@ -140,8 +140,14 @@
     <Compile Include="DailyStatusReporter\StallsInventory\VacantStallsCell.xaml.cs">
       <DependentUpon>VacantStallsCell.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DailyStatusReporter\TenantCollections\SectionRowInspectorVM.cs" />
-    <Compile Include="DailyStatusReporter\TenantCollections\SectionRowInspectorWindow.xaml.cs">
+    <Compile Include="DailyStatusReporter\TenantCollections\SectionRowInspector\SectionRowInspectorTable.xaml.cs">
+      <DependentUpon>SectionRowInspectorTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DailyStatusReporter\TenantCollections\SectionRowInspector\SectionRowInspectorTotalsRow.xaml.cs">
+      <DependentUpon>SectionRowInspectorTotalsRow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DailyStatusReporter\TenantCollections\SectionRowInspector\SectionRowInspectorVM.cs" />
+    <Compile Include="DailyStatusReporter\TenantCollections\SectionRowInspector\SectionRowInspectorWindow.xaml.cs">
       <DependentUpon>SectionRowInspectorWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DailyStatusReporter\TenantCollections\TenantCollectionsUI1.xaml.cs">
@@ -340,7 +346,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DailyStatusReporter\TenantCollections\SectionRowInspectorWindow.xaml">
+    <Page Include="DailyStatusReporter\TenantCollections\SectionRowInspector\SectionRowInspectorTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyStatusReporter\TenantCollections\SectionRowInspector\SectionRowInspectorTotalsRow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyStatusReporter\TenantCollections\SectionRowInspector\SectionRowInspectorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

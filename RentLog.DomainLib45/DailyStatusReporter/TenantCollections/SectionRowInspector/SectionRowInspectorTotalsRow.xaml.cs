@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace RentLog.DomainLib45.DailyStatusReporter.TenantCollections
+namespace RentLog.DomainLib45.DailyStatusReporter.TenantCollections.SectionRowInspector
 {
     /// <summary>
-    /// Interaction logic for SectionRowInspectorWindow.xaml
+    /// Interaction logic for SectionRowInspectorTotalsRow.xaml
     /// </summary>
-    public partial class SectionRowInspectorWindow : Window
+    public partial class SectionRowInspectorTotalsRow : UserControl
     {
-        public SectionRowInspectorWindow()
+        public SectionRowInspectorTotalsRow()
         {
             InitializeComponent();
         }
