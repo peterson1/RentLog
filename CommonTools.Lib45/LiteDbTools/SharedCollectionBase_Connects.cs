@@ -1,7 +1,8 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
-using CommonTools.Lib11.DataStructures;
 using CommonTools.Lib11.DTOs;
+using CommonTools.Lib45.FileSystemTools;
 using LiteDB;
+using System;
 
 namespace CommonTools.Lib45.LiteDbTools
 {
@@ -21,7 +22,17 @@ namespace CommonTools.Lib45.LiteDbTools
 
 
         public virtual LiteCollection<T> GetCollection(LiteDatabase db)
-            => db.GetCollection<T>();
+        {
+            try
+            {
+                return db.GetCollection<T>();
+            }
+            catch (UnauthorizedAccessException)
+            {
+                _db.DbPath.GrantEveryoneFullControl();
+                return db.GetCollection<T>();
+            }
+        }
 
         public abstract bool TableExists();
     }
