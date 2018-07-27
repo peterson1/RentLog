@@ -147,14 +147,19 @@ namespace CommonTools.Lib45.LiteDbTools
                 if (doValidate) Validate(model, _db);
             }
             Drop();
-            Insert(records, false);
+            if (records.Any())
+                Insert(records, false);
         }
 
 
         public void Drop()
         {
             using (var db = _db.OpenWrite())
-                db.DropCollection(GetCollection(db).Name);
+            {
+                var coll = GetCollection(db);
+                try  { db.DropCollection(coll.Name); }
+                catch (InvalidCastException) { }
+            }
         }
 
 

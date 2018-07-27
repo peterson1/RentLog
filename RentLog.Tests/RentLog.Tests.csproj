@@ -139,6 +139,7 @@
     <Compile Include="TestTools\TempCopyTestBase.cs" />
     <Compile Include="TotalOverduesTests\TotalOverduesFacts.cs" />
     <Compile Include="UncollectedsRepoTests\UncollectedsRepoFacts.cs" />
+    <Compile Include="UncollectedsRepoTests\UncollectedsRepoFacts2.cs" />
     <Compile Include="VoucherTabVMTests\FundReqsListVMFacts.cs" />
   </ItemGroup>
   <ItemGroup>
