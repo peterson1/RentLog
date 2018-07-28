@@ -1,4 +1,6 @@
-﻿using CommonTools.Lib11.DatabaseTools;
+﻿using System;
+using System.Linq;
+using CommonTools.Lib11.DatabaseTools;
 using CommonTools.Lib11.DTOs;
 
 namespace CommonTools.Lib45.LiteDbTools
@@ -14,8 +16,17 @@ namespace CommonTools.Lib45.LiteDbTools
 
         public string this[string key]
         {
-            get => ByName(key, false)?.Value;
+            //get => ByName(key, false)?.Value;
+            get => GetLatestByName(key);
             set { UpsertByName(key, value); }
+        }
+
+
+        private string GetLatestByName(string key)
+        {
+            var matches = Find(_ => _.Name == key);
+            if (matches == null || !matches.Any()) return null;
+            return matches.OrderBy(_ => _.Id).Last().Value;
         }
 
 
