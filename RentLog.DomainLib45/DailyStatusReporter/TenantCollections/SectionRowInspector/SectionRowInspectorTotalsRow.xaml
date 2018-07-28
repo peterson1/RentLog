@@ -9,15 +9,16 @@
     <DataGrid ItemsSource="{Binding SummaryRows}"
               Style="{StaticResource dgTotals}">
         <DataGrid.Columns>
-            <DataGridTextColumn Width="09*" ElementStyle="{StaticResource totalsRow}" Binding="{Binding DocumentRef}" />
+            <DataGridTextColumn Width="07*" ElementStyle="{StaticResource totalsRow}" Binding="{Binding DocumentRef}" />
             <DataGridTextColumn Width="20*" ElementStyle="{StaticResource totalsRow}" Binding="{Binding Lease}" />
             <DataGridTextColumn Width="17*" ElementStyle="{StaticResource totalsRowLabel}" Binding="{Binding Lease, TargetNullValue=Totals}" />
-            <DataGridTextColumn Width="09*" ElementStyle="{StaticResource totalsRow}" Binding="{Binding Rent    , StringFormat=N2}" />
-            <DataGridTextColumn Width="09*" ElementStyle="{StaticResource totalsRow}" Binding="{Binding Rights  , StringFormat=N2}" />
-            <DataGridTextColumn Width="09*" ElementStyle="{StaticResource totalsRow}" Binding="{Binding Electric, StringFormat=N2}" />
-            <DataGridTextColumn Width="09*" ElementStyle="{StaticResource totalsRow}" Binding="{Binding Water   , StringFormat=N2}" />
-            <DataGridTextColumn Width="09*" ElementStyle="{StaticResource totalsRow}" Binding="{Binding Ambulant, StringFormat=N2}" />
-            <DataGridTextColumn Width="09*" ElementStyle="{StaticResource totalsRow}" Binding="{Binding Remarks    }" />
+            <DataGridTextColumn Width="08*" ElementStyle="{StaticResource totalsRow}" Binding="{Binding Rent    , StringFormat=N2}" />
+            <DataGridTextColumn Width="08*" ElementStyle="{StaticResource totalsRow}" Binding="{Binding Rights  , StringFormat=N2}" />
+            <DataGridTextColumn Width="08*" ElementStyle="{StaticResource totalsRow}" Binding="{Binding Electric, StringFormat=N2}" />
+            <DataGridTextColumn Width="08*" ElementStyle="{StaticResource totalsRow}" Binding="{Binding Water   , StringFormat=N2}" />
+            <DataGridTextColumn Width="08*" ElementStyle="{StaticResource totalsRow}" Binding="{Binding Ambulant, StringFormat=N2}" />
+            <DataGridTextColumn Width="09*" ElementStyle="{StaticResource totalsRow}" Binding="{Binding Total   , StringFormat=N2}" />
+            <DataGridTextColumn Width="07*" ElementStyle="{StaticResource totalsRow}" Binding="{Binding Remarks    }" />
         </DataGrid.Columns>
     </DataGrid>
 </UserControl>

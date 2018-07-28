@@ -1,7 +1,5 @@
 ﻿using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.Models;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace RentLog.DomainLib11.ReportRows
 {
@@ -47,5 +45,12 @@ namespace RentLog.DomainLib11.ReportRows
         public decimal?          Water        { get; set; }
         public decimal?          Ambulant     { get; set; }
         public string            Remarks      { get; set; }
+
+
+        public decimal Total => (Rent     ?? 0)
+                              + (Rights   ?? 0)
+                              + (Electric ?? 0)
+                              + (Water    ?? 0)
+                              + (Ambulant ?? 0);
     }
 }

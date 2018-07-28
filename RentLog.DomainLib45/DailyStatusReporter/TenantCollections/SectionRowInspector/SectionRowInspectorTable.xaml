@@ -31,15 +31,16 @@
               SelectedItem="{Binding CurrentItem}"
               Style="{StaticResource dgReadOnly}">
         <DataGrid.Columns>
-            <DataGridTextColumn Width="09*" Header="PR#"       ElementStyle="{StaticResource colCenter}" Binding="{Binding DocumentRef}" />
+            <DataGridTextColumn Width="07*" Header="PR#"       ElementStyle="{StaticResource colCenter}" Binding="{Binding DocumentRef}" />
             <DataGridTextColumn Width="20*" Header="tenant"    ElementStyle="{StaticResource colRight}"  Binding="{Binding Lease.Tenant.FirstAndLastNames}" />
             <DataGridTextColumn Width="17*" Header="stall"     ElementStyle="{StaticResource colLabel}"  Binding="{Binding Lease.Stall.Name}" />
-            <DataGridTextColumn Width="09*" Header="rent"      ElementStyle="{StaticResource colRight}"  Binding="{Binding Rent    , StringFormat=N2}" />
-            <DataGridTextColumn Width="09*" Header="rights"    ElementStyle="{StaticResource colRight}"  Binding="{Binding Rights  , StringFormat=N2}" />
-            <DataGridTextColumn Width="09*" Header="electric"  ElementStyle="{StaticResource colRight}"  Binding="{Binding Electric, StringFormat=N2}" />
-            <DataGridTextColumn Width="09*" Header="water"     ElementStyle="{StaticResource colRight}"  Binding="{Binding Water   , StringFormat=N2}" />
-            <DataGridTextColumn Width="09*" Header="ambulant"  ElementStyle="{StaticResource colRight}"  Binding="{Binding Ambulant, StringFormat=N2}" />
-            <DataGridTextColumn Width="09*" Header="remarks"   ElementStyle="{StaticResource colLeft}"   Binding="{Binding Remarks    }" />
+            <DataGridTextColumn Width="08*" Header="rent"      ElementStyle="{StaticResource colRight}"  Binding="{Binding Rent    , StringFormat=N2}" />
+            <DataGridTextColumn Width="08*" Header="rights"    ElementStyle="{StaticResource colRight}"  Binding="{Binding Rights  , StringFormat=N2}" />
+            <DataGridTextColumn Width="08*" Header="electric"  ElementStyle="{StaticResource colRight}"  Binding="{Binding Electric, StringFormat=N2}" />
+            <DataGridTextColumn Width="08*" Header="water"     ElementStyle="{StaticResource colRight}"  Binding="{Binding Water   , StringFormat=N2}" />
+            <DataGridTextColumn Width="08*" Header="ambulant"  ElementStyle="{StaticResource colRight}"  Binding="{Binding Ambulant, StringFormat=N2}" />
+            <DataGridTextColumn Width="09*" Header="total"      ElementStyle="{StaticResource colRight}" Binding="{Binding Total   , StringFormat=N2}" />
+            <DataGridTextColumn Width="07*" Header="remarks"   ElementStyle="{StaticResource colLeft}"   Binding="{Binding Remarks    }" />
         </DataGrid.Columns>
     </DataGrid>
 </UserControl>

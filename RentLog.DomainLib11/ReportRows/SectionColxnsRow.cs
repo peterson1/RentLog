@@ -37,7 +37,6 @@ namespace RentLog.DomainLib11.ReportRows
                 Electric = Electric,
                 Water    = Water,
                 Ambulant = Ambulant,
-                Remarks  = this.Total.ToString("N2")
             });
         }
 
