@@ -217,5 +217,16 @@ namespace CommonTools.Lib45.FileSystemTools
             fSec.AddAccessRule(rule);
             File.SetAccessControl(filePath, fSec);
         }
+
+
+        public static bool TryGrantEveryoneFullControl(this string filePath)
+        {
+            try
+            {
+                filePath.GrantEveryoneFullControl();
+                return true;
+            }
+            catch (Exception) { return false; }
+        }
     }
 }
