@@ -88,8 +88,8 @@ namespace RentLog.LeasesCrud.MainToolbar
             //                 + L.f + $"left: {left}");
             //});
 
-            desc = "EnsureGLAccount.RightsRefund";
-            return () => EnsureGLAccount.RightsRefund(_args);
+            desc = "ForSpecificLease.RebuildSoaFrom(11.Jul(2018), 349";
+            return () => ForSpecificLease.RebuildSoaFrom(11.Jul(2018), 349, _args);
         }
     }
 }
