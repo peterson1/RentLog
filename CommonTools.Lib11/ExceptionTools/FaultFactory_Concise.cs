@@ -48,4 +48,11 @@ namespace CommonTools.Lib11.ExceptionTools
 
         public static FileNotFoundException  Dir   (string foldrPath) => Fault.MissingDir(foldrPath);
     }
+
+
+    public struct Locked
+    {
+        public static LockedFileException File(string filePath)
+            => new LockedFileException(filePath);
+    }
 }

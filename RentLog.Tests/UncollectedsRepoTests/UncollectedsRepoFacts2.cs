@@ -3,7 +3,6 @@ using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.Models;
 using RentLog.Tests.SampleDBs;
 using RentLog.Tests.TestTools;
-using System;
 using System.Collections.Generic;
 using Xunit;
 
@@ -15,7 +14,7 @@ namespace RentLog.Tests.UncollectedsRepoTests
         protected override string SampleDirName => SampleDir.JUL21_NO_UNCOL;
 
 
-        [Fact(DisplayName = "Can DropAndInsert")]
+        [Fact(DisplayName = "Can DropAndInsert", Skip = "LiteDB Open Issue")]
         public void TestMethod00001()
         {
             var dir = GetTempSampleArgs("Cashier");

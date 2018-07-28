@@ -1,5 +1,6 @@
 ﻿using CommonTools.Lib11.DTOs;
 using CommonTools.Lib11.ExceptionTools;
+using CommonTools.Lib45.FileSystemTools;
 using LiteDB;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,17 @@ namespace CommonTools.Lib45.LiteDbTools
         {
             using (var db = _db.OpenRead())
             {
-                var rec = GetCollection(db).FindById(recordId);
+                var coll = GetCollection(db);
+                T rec = default(T);
+                try
+                {
+                    rec = coll.FindById(recordId);
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    if (!_db.DbPath.TryGrantEveryoneFullControl())
+                        throw Locked.File(_db.DbPath);
+                }
 
                 if (rec == null && errorIfMissing)
                     throw RecordNotFoundException.For<T>("Id", recordId);
