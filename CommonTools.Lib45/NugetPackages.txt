@@ -10,6 +10,8 @@ Install-Package System.ValueTuple
 Install-Package System.Windows.Interactivity.WPF
 Install-Package MaterialDesignThemes
 Install-Package EPPlus
+Install-Package FirebaseDatabase.net
+Install-Package FirebaseAuthentication.net
 
 
 for each exe:
