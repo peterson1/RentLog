@@ -14,6 +14,10 @@ namespace RentLog.DomainLib11.AdHocJobs
             => dir.AddIfNone("Rights Refund", GLAcctType.Expense);
 
 
+        public static void AR_BK_Garay(ITenantDBsDir dir)
+            => dir.AddIfNone("A/R BK Norzagaray", GLAcctType.Asset);
+
+
         private static void AddIfNone(this ITenantDBsDir dir, string glAcctName, GLAcctType glAcctType)
         {
             var repo    = dir.MarketState.GLAccounts;
