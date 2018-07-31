@@ -6,6 +6,7 @@ using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using System;
 using System.Linq;
+using static RentLog.Cashiering.Properties.Settings;
 
 namespace RentLog.Cashiering.BankDeposits
 {
@@ -14,11 +15,12 @@ namespace RentLog.Cashiering.BankDeposits
         public BankDepCrudVM(IBankDepositsRepo repository, ITenantDBsDir dir) : base(repository, dir)
         {
             BankAccounts.SetItems(dir.MarketState.BankAccounts.GetAll());
+            Descriptions.SetItems(Default.DepositDescriptions.Cast<string>());
         }
 
 
         public UIList<BankAccountDTO>  BankAccounts  { get; } = new UIList<BankAccountDTO>();
-        public UIList<string>          Descriptions  { get; } = new UIList<string> { "Rental Collection", "Rights Collection", "Electricity Collection", "Parking Fees", "CR Fees", "Other Collections" };
+        public UIList<string>          Descriptions  { get; } = new UIList<string>();
 
 
         protected override BankDepositDTO GetNewDraft()
