@@ -1,5 +1,4 @@
-﻿using CommonTools.Lib11.CollectionTools;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -88,6 +87,7 @@ namespace CommonTools.Lib11.DataStructures
                 action.Invoke();
             }
             catch (ArgumentException) { }
+            catch (NotSupportedException) { }
         }
 
 
