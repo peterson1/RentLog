@@ -116,6 +116,7 @@
     <Compile Include="BaseViewModels\FilteredSavedListVMBase.cs" />
     <Compile Include="BaseViewModels\IndirectFilteredListVMBase.cs" />
     <Compile Include="BaseViewModels\MainWindowVMBase.cs" />
+    <Compile Include="BaseViewModels\PrintPreviewVMBase.cs" />
     <Compile Include="BaseViewModels\RepoCrudWindowVMBase.cs" />
     <Compile Include="BaseViewModels\SavedListVMBase.cs" />
     <Compile Include="BaseViewModels\TextFilterBase.cs" />

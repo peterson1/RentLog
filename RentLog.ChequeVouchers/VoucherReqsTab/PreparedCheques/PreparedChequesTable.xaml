@@ -12,6 +12,10 @@
                       Command="{Binding ViewVoucherCmd}"
                       DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
 
+            <MenuItem Header ="{Binding PrintVoucherCmd.CurrentLabel}" 
+                      Command="{Binding PrintVoucherCmd}"
+                      DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+
             <MenuItem Header ="{Binding EditChequeCmd.CurrentLabel}" 
                       Command="{Binding EditChequeCmd}"
                       DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />

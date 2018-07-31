@@ -1,5 +1,4 @@
-﻿using CommonTools.Lib11.DatabaseTools;
-using CommonTools.Lib11.DataStructures;
+﻿using CommonTools.Lib11.DataStructures;
 using CommonTools.Lib11.InputCommands;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.InputDialogs;
@@ -7,10 +6,8 @@ using PropertyChanged;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
 using RentLog.DomainLib11.Models;
-using RentLog.DomainLib11.VoucherRules;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace RentLog.ChequeVouchers.JournalsTab.JournalsCrud.AllocationsList
 {
@@ -87,19 +84,6 @@ namespace RentLog.ChequeVouchers.JournalsTab.JournalsCrud.AllocationsList
         {
             SetItems(_list);
             SetSummary(new AllocationsTotal(this));
-        }
-
-
-        public class AllocationsTotal : AccountAllocation
-        {
-            public AllocationsTotal(IEnumerable<AccountAllocation> items)
-            {
-                AsDebit  = items.Sum(_ => _.AsDebit  ?? 0);
-                AsCredit = items.Sum(_ => _.AsCredit ?? 0);
-            }
-
-            public override decimal? AsDebit  { get; }
-            public override decimal? AsCredit { get; }
         }
     }
 }

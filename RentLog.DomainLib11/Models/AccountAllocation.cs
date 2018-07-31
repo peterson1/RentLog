@@ -1,5 +1,7 @@
 ﻿using RentLog.DomainLib11.DTOs;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RentLog.DomainLib11.Models
 {
@@ -29,5 +31,18 @@ namespace RentLog.DomainLib11.Models
             Account   = glAccount,
             SubAmount = Math.Abs(unsignedAmount) * multiplier
         };
+    }
+
+
+    public class AllocationsTotal : AccountAllocation
+    {
+        public AllocationsTotal(IEnumerable<AccountAllocation> items)
+        {
+            AsDebit  = items.Sum(_ => _.AsDebit  ?? 0);
+            AsCredit = items.Sum(_ => _.AsCredit ?? 0);
+        }
+
+        public override decimal? AsDebit  { get; }
+        public override decimal? AsCredit { get; }
     }
 }

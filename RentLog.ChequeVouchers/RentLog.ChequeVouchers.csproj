@@ -163,6 +163,28 @@
     <Compile Include="MainToolbar\MainToolbarUI.xaml.cs">
       <DependentUpon>MainToolbarUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VoucherReqsTab\ChequeVoucherPrints\AllocationsTable.xaml.cs">
+      <DependentUpon>AllocationsTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VoucherReqsTab\ChequeVoucherPrints\OptionsPanelUI.xaml.cs">
+      <DependentUpon>OptionsPanelUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VoucherReqsTab\ChequeVoucherPrints\PrintLayout1.xaml.cs">
+      <DependentUpon>PrintLayout1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VoucherReqsTab\ChequeVoucherPrints\PrintPreviewWindowVM.cs" />
+    <Compile Include="VoucherReqsTab\ChequeVoucherPrints\PrintPreviewWindow.xaml.cs">
+      <DependentUpon>PrintPreviewWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VoucherReqsTab\ChequeVoucherPrints\SignatureFields.xaml.cs">
+      <DependentUpon>SignatureFields.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VoucherReqsTab\ChequeVoucherPrints\VoucherHeaders.xaml.cs">
+      <DependentUpon>VoucherHeaders.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VoucherReqsTab\ChequeVoucherPrints\VoucherMainFields.xaml.cs">
+      <DependentUpon>VoucherMainFields.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VoucherReqsTab\FundRequests\FundReqsFilterUI.xaml.cs">
       <DependentUpon>FundReqsFilterUI.xaml</DependentUpon>
     </Compile>
@@ -301,6 +323,34 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="VoucherReqsTab\ChequeVoucherPrints\AllocationsTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VoucherReqsTab\ChequeVoucherPrints\OptionsPanelUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VoucherReqsTab\ChequeVoucherPrints\PrintLayout1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VoucherReqsTab\ChequeVoucherPrints\PrintPreviewWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VoucherReqsTab\ChequeVoucherPrints\SignatureFields.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VoucherReqsTab\ChequeVoucherPrints\VoucherHeaders.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VoucherReqsTab\ChequeVoucherPrints\VoucherMainFields.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="VoucherReqsTab\FundRequests\FundReqsFilterUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

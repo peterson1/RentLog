@@ -99,6 +99,9 @@ namespace CommonTools.Lib45.BaseViewModels
         public void ClickRefresh() => RefreshCmd.ExecuteIfItCan();
 
 
+        public Window GetWindowInstance() => _win;
+
+
         public bool? Show<T>(bool hideWindow = false, bool showModal = false) 
             where T: Window, new()
         {
