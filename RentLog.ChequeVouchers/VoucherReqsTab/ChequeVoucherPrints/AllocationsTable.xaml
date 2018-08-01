@@ -9,6 +9,7 @@
     <StackPanel>
         <DataGrid ItemsSource="{Binding CurrentItem.Request.Allocations}"
                   Background="White"
+                  x:Name="dgMain"
                   Style="{StaticResource dgReadOnly}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="GL account"
@@ -31,6 +32,7 @@
 
         <DataGrid ItemsSource="{Binding AllocationTotals}"
                   Background="White"
+                  x:Name="dgTotal"
                   Style="{StaticResource dgTotals}">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="300"

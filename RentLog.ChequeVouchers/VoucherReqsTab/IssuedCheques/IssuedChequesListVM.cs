@@ -5,6 +5,7 @@ using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.InputDialogs;
 using CommonTools.Lib45.ThreadTools;
 using RentLog.ChequeVouchers.CommonControls.ChequeVoucherViewer;
+using RentLog.ChequeVouchers.VoucherReqsTab.ChequeVoucherPrints;
 using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.ChequeVoucherRepos;
 using RentLog.DomainLib11.DataSources;
@@ -21,14 +22,20 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.IssuedCheques
         {
             Caption           = "Issued Cheques";
             ViewVoucherCmd    = R2Command.Relay(_ => OnItemOpened(ItemsList.CurrentItem), null, "View Voucher Details");
+            PrintVoucherCmd   = R2Command.Relay(PrintVoucher, null, "Print Cheque Voucher");
             EditIssuanceCmd   = R2Command.Relay(EditIssuanceDetails, _ => AppArgs.CanIssueChequeToPayee(false), "Edit Issuance Details");
             TakeBackIssuedCmd = R2Command.Relay(TakeBackIssuedCheque, _ => CanTakeBackIssuedCheque(), "Take Back Issued Cheque");
         }
 
 
         public IR2Command  ViewVoucherCmd     { get; }
+        public IR2Command  PrintVoucherCmd    { get; }
         public IR2Command  EditIssuanceCmd    { get; }
         public IR2Command  TakeBackIssuedCmd  { get; }
+
+
+        private void PrintVoucher()
+            => ChequeVoucherPrint.Preview(ItemsList.CurrentItem, AppArgs);
 
 
         private void EditIssuanceDetails()

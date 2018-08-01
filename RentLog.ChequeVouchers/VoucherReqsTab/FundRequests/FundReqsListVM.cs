@@ -7,6 +7,7 @@ using CommonTools.Lib45.BaseViewModels;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.InputDialogs;
 using CommonTools.Lib45.ThreadTools;
+using RentLog.ChequeVouchers.VoucherReqsTab.ChequeVoucherPrints;
 using RentLog.ChequeVouchers.VoucherReqsTab.FundRequests.FundRequestCrud;
 using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.DataSources;
@@ -19,12 +20,18 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.FundRequests
         public FundReqsListVM(ITenantDBsDir dir) 
             : base(dir.Vouchers.ActiveRequests, dir, false)
         {
-            Caption = "For Cheque Preparation";
-            Crud    = new FundRequestCrudVM(dir);
+            Caption         = "For Cheque Preparation";
+            Crud            = new FundRequestCrudVM(dir);
+            PrintVoucherCmd = R2Command.Relay(PrintVoucher, null, "Print Voucher Request");
         }
 
 
-        public FundRequestCrudVM  Crud  { get; }
+        public FundRequestCrudVM  Crud             { get; }
+        public IR2Command         PrintVoucherCmd  { get; }
+
+
+        private void PrintVoucher()
+            => ChequeVoucherPrint.Preview(ItemsList.CurrentItem, AppArgs);
 
 
         protected override List<FundRequestDTO> QueryItems(ISimpleRepo<FundRequestDTO> db)

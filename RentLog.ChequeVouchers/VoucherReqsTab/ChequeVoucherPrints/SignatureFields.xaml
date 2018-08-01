@@ -6,6 +6,30 @@
              xmlns:local="clr-namespace:RentLog.ChequeVouchers.VoucherReqsTab.ChequeVoucherPrints"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="sigStackP" TargetType="StackPanel">
+            <Setter Property="Margin" Value="20 0 20 0" />
+        </Style>
+        <Style x:Key="labelBy" TargetType="TextBlock"
+               BasedOn="{StaticResource MaterialDesignCaptionTextBlock}">
+            <Setter Property="FontStyle" Value="Italic" />
+        </Style>
+        <Style x:Key="labelDate" TargetType="TextBlock"
+               BasedOn="{StaticResource MaterialDesignCaptionTextBlock}">
+            <Setter Property="FontStyle" Value="Italic" />
+            <Setter Property="Margin" Value="0 7 0 0" />
+            <Setter Property="Text" Value="date:" />
+        </Style>
+        <Style x:Key="txtName" TargetType="TextBox"
+               BasedOn="{StaticResource MaterialDesignTextBox}">
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0 20 0 0" />
+        </Style>
+        <Style x:Key="bordr" TargetType="Border">
+            <Setter Property="BorderThickness" Value="0 1 0 0" />
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="25*" />
@@ -14,37 +38,45 @@
             <ColumnDefinition Width="25*" />
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0">
-            <TextBlock Text="prepared by:" />
-            <Border BorderThickness="0 1 0 0">
-                <TextBlock Text="{Binding CurrentItem.Request.Author}" />
+        <StackPanel Grid.Column="0" Style="{StaticResource sigStackP}">
+            <TextBlock Text="Prepared by:"
+                       Style="{StaticResource labelBy}" />
+            <Border Style="{StaticResource bordr}">
+                <TextBox Text="{Binding CurrentItem.Request.Author}"
+                         Style="{StaticResource txtName}" />
             </Border>
-            <TextBlock Text="{Binding CurrentItem.Request.RequestDate, StringFormat= d MMM yyyy}" />
+            <TextBlock Style="{StaticResource labelDate}" />
         </StackPanel>
 
-        <StackPanel Grid.Column="1">
-            <TextBlock Text="prepared by:" />
-            <Border BorderThickness="0 1 0 0">
-                <TextBlock Text="{Binding CurrentItem.Request.Author}" />
+        <StackPanel Grid.Column="1" Style="{StaticResource sigStackP}">
+            <TextBlock Text="Reviewed by:"
+                       Style="{StaticResource labelBy}" />
+            <Border Style="{StaticResource bordr}">
+                <TextBox Text="{Binding ReviewerName}"
+                         Style="{StaticResource txtName}"  />
             </Border>
-            <TextBlock Text="{Binding CurrentItem.Request.RequestDate, StringFormat= d MMM yyyy}" />
+            <TextBlock Style="{StaticResource labelDate}" />
         </StackPanel>
 
 
-        <StackPanel Grid.Column="2">
-            <TextBlock Text="prepared by:" />
-            <Border BorderThickness="0 1 0 0">
-                <TextBlock Text="{Binding CurrentItem.Request.Author}" />
+        <StackPanel Grid.Column="2" Style="{StaticResource sigStackP}">
+            <TextBlock Text="Approved by:"
+                       Style="{StaticResource labelBy}" />
+            <Border Style="{StaticResource bordr}">
+                <TextBox Text="{Binding ApproverName}"
+                         Style="{StaticResource txtName}"  />
             </Border>
-            <TextBlock Text="{Binding CurrentItem.Request.RequestDate, StringFormat= d MMM yyyy}" />
+            <TextBlock Style="{StaticResource labelDate}" />
         </StackPanel>
 
-        <StackPanel Grid.Column="3">
-            <TextBlock Text="prepared by:" />
-            <Border BorderThickness="0 1 0 0">
-                <TextBlock Text="{Binding CurrentItem.Request.Author}" />
+        <StackPanel Grid.Column="3" Style="{StaticResource sigStackP}">
+            <TextBlock Text="Received by:"
+                       Style="{StaticResource labelBy}" />
+            <Border Style="{StaticResource bordr}">
+                <TextBox Text=""
+                          Style="{StaticResource txtName}"  />
             </Border>
-            <TextBlock Text="{Binding CurrentItem.Request.RequestDate, StringFormat= d MMM yyyy}" />
+            <TextBlock Style="{StaticResource labelDate}" />
         </StackPanel>
     </Grid>
 </UserControl>

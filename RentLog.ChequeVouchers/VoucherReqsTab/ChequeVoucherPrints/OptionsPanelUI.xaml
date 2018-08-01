@@ -13,7 +13,7 @@
 
         <butns:SimpleRefreshButton HorizontalAlignment="Right" />
 
-        <labl:DualText Text1="Check Voucher #"
+        <labl:DualText Text1="CV #"
                        Text2="{Binding CurrentItem.Request.SerialNum, StringFormat=0000}" />
 
         <StackPanel Orientation="Horizontal" Margin="0 10 0 0">

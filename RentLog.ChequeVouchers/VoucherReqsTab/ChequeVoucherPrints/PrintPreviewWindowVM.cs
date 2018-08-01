@@ -7,6 +7,7 @@ using RentLog.DomainLib11.Models;
 using System;
 using System.Collections.Generic;
 using System.Windows;
+using static RentLog.ChequeVouchers.Properties.Settings;
 
 namespace RentLog.ChequeVouchers.VoucherReqsTab.ChequeVoucherPrints
 {
@@ -16,10 +17,16 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.ChequeVoucherPrints
         {
             
             AllocationTotals.SetItems(GetAllocationsSummary(dto));
+            ReviewerName = Default.ReviewerName;
+            ApproverName = Default.ApproverName;
         }
 
 
-        public string AmountInWords => CurrentItem.Request.Amount?.ToPesoWords();
+        public int?       CheckNumberOrNull => CurrentItem.ChequeNumber == 0 ? (int?)null : CurrentItem.ChequeNumber;
+        public DateTime?  CheckDateOrNull   => CurrentItem.ChequeDate == DateTime.MinValue ? (DateTime?)null : CurrentItem.ChequeDate;
+        public string     ReviewerName    { get; set; }
+        public string     ApproverName    { get; set; }
+        public string     AmountInWords  => CurrentItem.Request.Amount?.ToPesoWords();
         public UIList<AccountAllocation> AllocationTotals { get; } = new UIList<AccountAllocation>();
 
 
@@ -39,5 +46,9 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.ChequeVoucherPrints
     {
         public static void Preview(ChequeVoucherDTO dto, ITenantDBsDir dir) 
             => new PrintPreviewWindowVM(dto, dir).Show();
+
+
+        public static void Preview(FundRequestDTO req, ITenantDBsDir dir)
+            => Preview(new ChequeVoucherDTO { Request = req }, dir);
     }
 }

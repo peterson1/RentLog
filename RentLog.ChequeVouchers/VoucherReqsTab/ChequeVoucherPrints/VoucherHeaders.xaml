@@ -8,11 +8,15 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel>
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="Check Voucher" Margin="0 0 5 0" />
-            <TextBlock Text="{Binding CurrentItem.Request.SerialNum, StringFormat=# {0:0000}}" />
+            <TextBlock Text="Check Voucher" Margin="0 0 10 0"
+                       Style="{StaticResource MaterialDesignTitleTextBlock}" />
+            <TextBlock Text="{Binding CurrentItem.Request.SerialNum, StringFormat=# {0:0000}}"
+                       Style="{StaticResource MaterialDesignTitleTextBlock}" />
         </StackPanel>
 
-        <TextBlock Text="{Binding AppArgs.MarketState.BranchName}" />
+        <TextBlock Text="{Binding AppArgs.MarketState.BranchName}"
+                   Style="{StaticResource MaterialDesignSubheadingTextBlock}"
+                   Margin="0 5 0 0" />
 
     </StackPanel>
 </UserControl>

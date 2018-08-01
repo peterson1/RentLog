@@ -11,6 +11,9 @@
             <MenuItem Header ="{Binding MainMethodCmd.CurrentLabel}" 
                       Command="{Binding MainMethodCmd}"
                       DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+            <MenuItem Header ="{Binding PrintVoucherCmd.CurrentLabel}" 
+                      Command="{Binding PrintVoucherCmd}"
+                      DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
         </ContextMenu>
 
         <Style TargetType="DataGridRow"

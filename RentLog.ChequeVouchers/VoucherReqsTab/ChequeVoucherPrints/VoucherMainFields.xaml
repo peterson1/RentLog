@@ -7,25 +7,30 @@
              xmlns:labl="clr-namespace:CommonTools.Lib45.TextLabels;assembly=CommonTools.Lib45"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="labl:DualText">
+            <Setter Property="Text1Width" Value="80" />
+            <Setter Property="Margin" Value="0 5 0 5" />
+        </Style>
+    </UserControl.Resources>
     <StackPanel>
-        
         <labl:DualText Text1="purpose"
-                       Text2="{Binding Request.Purpose}" />
+                       Text2="{Binding CurrentItem.Request.Purpose}"
+                       Width="500" />
 
         <labl:DualText Text1="amount"
-                       Text2="{Binding Request.Amount, StringFormat=N2}" />
+                       Text2="{Binding CurrentItem.Request.Amount, StringFormat=N2}" />
 
         <labl:DualText Text1="payee"
-                       Text2="{Binding Request.Payee}" />
+                       Text2="{Binding CurrentItem.Request.Payee}" />
 
         <labl:DualText Text1="requested"
-                       Text2="{Binding Request.RequestDate, StringFormat=d MMM yyyy}" />
+                       Text2="{Binding CurrentItem.Request.RequestDate, StringFormat=MMMM d\, yyyy}" />
 
         <labl:DualText Text1="check number"
-                       Text2="{Binding ChequeNumber}" />
+                       Text2="{Binding CheckNumberOrNull}" />
 
         <labl:DualText Text1="check date"
-                       Text2="{Binding ChequeDate, StringFormat=d MMM yyyy}" />
-
+                       Text2="{Binding CheckDateOrNull, StringFormat=MMMM d\, yyyy}" />
     </StackPanel>
 </UserControl>

@@ -25,7 +25,7 @@
             <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel"
                           Background="LightSlateGray">
                 <mat:Card Margin="10">
-                    <StackPanel Margin="50 70 50 100">
+                    <StackPanel>
                         <local:PrintLayout1 x:Name="printable" />
                     </StackPanel>
                 </mat:Card>
