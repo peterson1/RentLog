@@ -9,6 +9,31 @@ namespace RentLog.DomainLib11.AdHocJobs
 {
     public class ForAllLeases
     {
+        public static List<Action> NoGraceThenRebuild(DateTime minDate, ITenantDBsDir dir)
+        {
+            var mkt = dir.MarketState;
+            var jobs = new List<Action>();
+
+            foreach (var lse in mkt.ActiveLeases.GetAll())
+                jobs.Add(() =>
+                {
+                    lse.Rent.GracePeriodDays = 0;
+                    mkt.ActiveLeases.Update(lse);
+                    RebuildSoaFor(lse, minDate, dir);
+                });
+
+            foreach (var lse in mkt.InactiveLeases.GetAll())
+                jobs.Add(() =>
+                {
+                    lse.Rent.GracePeriodDays = 0;
+                    mkt.InactiveLeases.Update(lse);
+                    RebuildSoaFor(lse, minDate, dir);
+                });
+
+            return jobs;
+        }
+
+
         public static List<Action> RebuildSoaFrom(DateTime minDate, ITenantDBsDir dir)
         {
             var mkt  = dir.MarketState;
