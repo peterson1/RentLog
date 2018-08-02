@@ -95,7 +95,8 @@
     <Compile Include="CollectionsDirTests\CollectionsDirFacts.cs" />
     <Compile Include="CollectorsPerformanceTests\ColPerfMainRowFacts.cs" />
     <Compile Include="CollectorsPerformanceTests\ColPerfSubRowFacts.cs" />
-    <Compile Include="ColxnSummaryTests\ColxnSummaryFacts.cs" />
+    <Compile Include="ColxnSummaryTests\ColxnSummaryFacts1.cs" />
+    <Compile Include="ColxnSummaryTests\ColxnSummaryFacts2.cs" />
     <Compile Include="DailyBillsRepoTests\DailyBillsRepo1Facts.cs" />
     <Compile Include="DailyColxnsTests\DailyColxnsFacts.cs" />
     <Compile Include="DailyStatusTests\DailyStatusReportFacts.cs" />

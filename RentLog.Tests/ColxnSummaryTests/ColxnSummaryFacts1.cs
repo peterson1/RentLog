@@ -10,7 +10,7 @@ using Xunit;
 namespace RentLog.Tests.ColxnSummaryTests
 {
     [Trait("Colxns Summary", "Sample DBs")]
-    public class ColxnSummaryFacts
+    public class ColxnSummaryFacts1
     {
         const int DRY = 2;
         const int FRZ = 3;

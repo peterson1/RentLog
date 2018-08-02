@@ -5,6 +5,7 @@ using RentLog.DomainLib11.Models;
 using RentLog.DomainLib11.Reporters;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RentLog.DomainLib45.Reporters
 {
@@ -96,7 +97,11 @@ namespace RentLog.DomainLib45.Reporters
 
             _xl.MoveTo(N1_ROW, null);
             foreach (var row in _src)
-                _xl.WriteNumber(getter(row[secID]));
+            {
+                var colxn = row.Single(_ => _.Section.Id == secID);
+                var val   = getter(colxn);
+                _xl.WriteNumber(val);
+            }
 
             var total = getter(_src.SectionTotals[secID]);
             _xl.WriteNumber(total).SetBold();
