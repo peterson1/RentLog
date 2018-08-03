@@ -136,7 +136,9 @@ namespace RentLog.Cashiering
             if (!CanEncode) return;
             cancelEvtArgs.Cancel = true;
             StartBeingBusy("Updating Vacants & Uncollecteds ...");
+            await Task.Delay(500);
             await Task.Run(() => UpdateDatabasesBeforeExit());
+            await Task.Delay(500);
 
             if (PostAndClose.IsCashierSubmitting)
             {
