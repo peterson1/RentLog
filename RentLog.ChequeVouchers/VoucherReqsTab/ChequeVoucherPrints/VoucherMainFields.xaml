@@ -16,7 +16,7 @@
     <StackPanel>
         <labl:DualText Text1="purpose"
                        Text2="{Binding CurrentItem.Request.Purpose}"
-                       Width="500" />
+                       Text2Width="320" />
 
         <labl:DualText Text1="amount"
                        Text2="{Binding CurrentItem.Request.Amount, StringFormat=N2}" />

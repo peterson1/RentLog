@@ -7,14 +7,15 @@
              xmlns:labl="clr-namespace:CommonTools.Lib45.TextLabels;assembly=CommonTools.Lib45"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel Margin="70 50 30 80">
+    <StackPanel Margin="40 50 0 80">
         <StackPanel Orientation="Horizontal">
             <StackPanel>
                 <local:VoucherHeaders />
                 <local:VoucherMainFields Margin="0 30 0 0" />
             </StackPanel>
 
-            <StackPanel VerticalAlignment="Center">
+            <StackPanel VerticalAlignment="Center"
+                        Margin="30 0 0 0">
                 <local:AllocationsTable />
                 <labl:DualText Text1="amount in words"
                                Text1Width="100"

@@ -13,9 +13,9 @@
                   Style="{StaticResource dgReadOnly}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="GL account"
-                                    Width="300"
+                                    Width="200"
                                     Binding="{Binding Account.Name}"
-                                    ElementStyle="{StaticResource colLabel}" />
+                                    ElementStyle="{StaticResource colSmallWrapLeft}" />
             
                 <DataGridTextColumn Header="debit"
                                     Width="80"
@@ -35,7 +35,7 @@
                   x:Name="dgTotal"
                   Style="{StaticResource dgTotals}">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="300"
+                <DataGridTextColumn Width="200"
                                     Binding="{Binding Account, TargetNullValue=total}"
                                     ElementStyle="{StaticResource totalsRowLabel}" />
 
