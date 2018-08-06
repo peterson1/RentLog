@@ -29,7 +29,7 @@ namespace RentLog.ChequeVouchers
         {
             DateRange      = new DateRangePickerVM(this);
             BankAcctPicker = new BankAccountPickerVM(this, clickRefresh);
-            VoucherReqs    = new VoucherReqsTabVM(tenantDBsDir);
+            VoucherReqs    = new VoucherReqsTabVM(this);
             DcdrReport     = new DcdrTabVM(this);
             Journals       = new JournalsTabVM(this);
         }

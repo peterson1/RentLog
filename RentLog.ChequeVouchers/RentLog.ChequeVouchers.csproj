@@ -235,6 +235,10 @@
       <DependentUpon>VoucherReqsTabUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="VoucherReqsTab\VoucherReqsTabVM.cs" />
+    <Compile Include="VoucherReqsTab\VouchersListPrint\VouchersListPrintLayout1.xaml.cs">
+      <DependentUpon>VouchersListPrintLayout1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VoucherReqsTab\VouchersListPrint\VouchersListPrintTrigger.cs" />
     <Page Include="CommonControls\ChequeVoucherViewer\AllocationsListUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -404,6 +408,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VoucherReqsTab\VoucherReqsTabUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VoucherReqsTab\VouchersListPrint\VouchersListPrintLayout1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
