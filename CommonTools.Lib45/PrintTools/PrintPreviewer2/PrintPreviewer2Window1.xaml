@@ -28,6 +28,7 @@
                           Background="LightSlateGray">
                 <mat:Card Margin="10">
                     <StackPanel x:Name="mainPanel"
+                                HorizontalAlignment="Center"
                                 DataContext="{Binding AppArgs}" />
                 </mat:Card>
             </ScrollViewer>

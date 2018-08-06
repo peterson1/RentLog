@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace CommonTools.Lib45.PrintTools.PrintPreviewer2
 {
-    public class PreviewWindowVM<TModel, TView> : MainWindowVMBase<TModel>
+    public class PreviewWindowVM<TModel, TView> : MainWindowVMBase<TModel>, IPrintSettings
         where TView : FrameworkElement, new()
     {
         protected override string CaptionPrefix => "Print Preview";
@@ -20,6 +20,9 @@ namespace CommonTools.Lib45.PrintTools.PrintPreviewer2
             NextItemCmd      = R2Command.Relay(LoadNextItem    , _ => CanLoadNextItem    (_), "Next Item");
         }
 
+
+        public double  InchesWidth   { get; set; } = 8.5;
+        public double  InchesHeight  { get; set; } = 11.0;
 
         public string      CurrentItemLabel  { get; set; }
         public IR2Command  PreviousItemCmd   { get; }
@@ -38,7 +41,7 @@ namespace CommonTools.Lib45.PrintTools.PrintPreviewer2
             ShowWindow();
             await Task.Delay(1000);
             var elm = GetPreviewWindow().mainPanel.Children[0];
-            PrintPreviewer.FitTo(8.5, 11, elm as FrameworkElement);
+            PrintPreviewer.FitTo(InchesWidth, InchesHeight, elm as FrameworkElement);
             CloseWindow();
         }
 
@@ -64,5 +67,13 @@ namespace CommonTools.Lib45.PrintTools.PrintPreviewer2
 
         private PrintPreviewer2Window1 GetPreviewWindow()
             => GetWindowInstance() as PrintPreviewer2Window1;
+
+
+        public IPrintSettings OrientationLandscape()
+        {
+            InchesWidth = 11;
+            InchesHeight = 8.5;
+            return this;
+        }
     }
 }

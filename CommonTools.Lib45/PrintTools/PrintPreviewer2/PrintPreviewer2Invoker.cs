@@ -20,9 +20,12 @@ namespace CommonTools.Lib45.PrintTools.PrintPreviewer2
         }
 
 
-        public void On<TView>()
+        public IPrintSettings On<TView>()
             where TView : FrameworkElement, new()
-            => new PreviewWindowVM<TModel, TView>(_model)
-                .ShowWindow();
+        {
+            var vm = new PreviewWindowVM<TModel, TView>(_model);
+            vm.ShowWindow();
+            return vm;
+        }
     }
 }

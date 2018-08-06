@@ -187,6 +187,7 @@
     <Compile Include="PrintTools\MatelichDataGridPaginator.cs" />
     <Compile Include="PrintTools\PageRangeDocumentPaginator.cs" />
     <Compile Include="PrintTools\PrintPreviewer.cs" />
+    <Compile Include="PrintTools\PrintPreviewer2\IPrintSettings.cs" />
     <Compile Include="PrintTools\PrintPreviewer2\OptionsPanelUI.xaml.cs">
       <DependentUpon>OptionsPanelUI.xaml</DependentUpon>
     </Compile>

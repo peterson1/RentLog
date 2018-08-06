@@ -229,6 +229,18 @@
       <DependentUpon>VoucherReqsTabUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="VoucherReqsTab\VoucherReqsTabVM.cs" />
+    <Compile Include="VoucherReqsTab\VouchersListPrint\ForCheckPreparationTable.xaml.cs">
+      <DependentUpon>ForCheckPreparationTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VoucherReqsTab\VouchersListPrint\ForCheckPreparationUI.xaml.cs">
+      <DependentUpon>ForCheckPreparationUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VoucherReqsTab\VouchersListPrint\OutstandingChecksTable.xaml.cs">
+      <DependentUpon>OutstandingChecksTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VoucherReqsTab\VouchersListPrint\OutstandingChecksUI.xaml.cs">
+      <DependentUpon>OutstandingChecksUI.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VoucherReqsTab\VouchersListPrint\VouchersListPrintLayout1.xaml.cs">
       <DependentUpon>VouchersListPrintLayout1.xaml</DependentUpon>
     </Compile>
@@ -394,6 +406,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VoucherReqsTab\VoucherReqsTabUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VoucherReqsTab\VouchersListPrint\ForCheckPreparationTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VoucherReqsTab\VouchersListPrint\ForCheckPreparationUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VoucherReqsTab\VouchersListPrint\OutstandingChecksTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VoucherReqsTab\VouchersListPrint\OutstandingChecksUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
