@@ -35,21 +35,30 @@ namespace CommonTools.Lib45.PrintTools.PrintPreviewer2
 
         protected override async void OnPrintClicked()
         {
-            this.Show<PrintPreviewer2Window1>();
-            var elm = FillMainPanel();
+            ShowWindow();
             await Task.Delay(1000);
-            PrintPreviewer.FitTo(8.5, 11, elm);
+            var elm = GetPreviewWindow().mainPanel.Children[0];
+            PrintPreviewer.FitTo(8.5, 11, elm as FrameworkElement);
             CloseWindow();
         }
 
 
-        public TView FillMainPanel()
+        public void ShowWindow()
+        {
+            this.Show<PrintPreviewer2Window1>();
+            var win  = GetPreviewWindow();
+            win.Top  = 30;
+            win.Left = 30;
+            FillMainPanel();
+        }
+
+
+        private void FillMainPanel()
         {
             var panl = GetPreviewWindow().mainPanel;
             panl.Children.Clear();
             var ctrl = new TView();
             panl.Children.Add(ctrl);
-            return ctrl;
         }
 
 

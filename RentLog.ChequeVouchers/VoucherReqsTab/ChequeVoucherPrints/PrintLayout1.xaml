@@ -7,7 +7,7 @@
              xmlns:labl="clr-namespace:CommonTools.Lib45.TextLabels;assembly=CommonTools.Lib45"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel Margin="40 50 0 80">
+    <StackPanel Margin="50 50 30 80">
         <StackPanel Orientation="Horizontal">
             <StackPanel>
                 <local:VoucherHeaders />
@@ -24,7 +24,7 @@
             </StackPanel>
         </StackPanel>
 
-        <local:SignatureFields Margin="0 30 0 0" />
+        <local:SignatureFields Width="800" Margin="0 30 0 0" />
 
     </StackPanel>
 </UserControl>

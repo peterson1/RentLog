@@ -22,10 +22,7 @@ namespace CommonTools.Lib45.PrintTools.PrintPreviewer2
 
         public void On<TView>()
             where TView : FrameworkElement, new()
-        {
-            var vm = new PreviewWindowVM<TModel, TView>(_model);
-            vm.Show<PrintPreviewer2Window1>();
-            vm.FillMainPanel();
-        }
+            => new PreviewWindowVM<TModel, TView>(_model)
+                .ShowWindow();
     }
 }
