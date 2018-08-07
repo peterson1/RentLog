@@ -6,15 +6,28 @@
              xmlns:local="clr-namespace:RentLog.ChequeVouchers.VoucherReqsTab.VouchersListPrint"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <DataGrid ItemsSource="{Binding }"
-              Background="White"
-              Style="{StaticResource dgReadOnly}">
-        <DataGrid.Columns>
-            <DataGridTextColumn Width="10*" Header="CV#"       Binding="{Binding SerialNum, StringFormat=0000}"         ElementStyle="{StaticResource colSmallWrapCenter}" />
-            <DataGridTextColumn Width="10*" Header="req. date" Binding="{Binding RequestDate, StringFormat=d MMM yyyy}" ElementStyle="{StaticResource colSmallWrapCenter}" />
-            <DataGridTextColumn Width="25*" Header="payee"     Binding="{Binding Payee}"                                ElementStyle="{StaticResource colSmallWrapRightBold}" />
-            <DataGridTextColumn Width="40*" Header="purpose"   Binding="{Binding Purpose}"                              ElementStyle="{StaticResource colSmallWrapLeft}" />
-            <DataGridTextColumn Width="15*" Header="amount"    Binding="{Binding Amount, StringFormat=N2}"              ElementStyle="{StaticResource colRightEnd}" />
-        </DataGrid.Columns>
-    </DataGrid>
+    <StackPanel>
+        <DataGrid ItemsSource="{Binding }"
+                  Background="White"
+                  Style="{StaticResource dgReadOnly}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="10*" Header="CV#"       Binding="{Binding SerialNum, StringFormat=0000}"         ElementStyle="{StaticResource colSmallWrapCenter}" />
+                <DataGridTextColumn Width="10*" Header="req. date" Binding="{Binding RequestDate, StringFormat=d MMM yyyy}" ElementStyle="{StaticResource colSmallWrapCenter}" />
+                <DataGridTextColumn Width="25*" Header="payee"     Binding="{Binding Payee}"                                ElementStyle="{StaticResource colSmallWrapRightBold}" />
+                <DataGridTextColumn Width="40*" Header="purpose"   Binding="{Binding Purpose}"                              ElementStyle="{StaticResource colSmallWrapLeft}" />
+                <DataGridTextColumn Width="15*" Header="amount"    Binding="{Binding Amount, StringFormat=N2}"              ElementStyle="{StaticResource colRightEnd}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid ItemsSource="{Binding SummaryRows}"
+                  Background="White"
+                  Style="{StaticResource dgTotals}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="10*" Binding="{Binding Payee}"         ElementStyle="{StaticResource colSmallWrapCenter}" />
+                <DataGridTextColumn Width="10*" Binding="{Binding Payee}" ElementStyle="{StaticResource colSmallWrapCenter}" />
+                <DataGridTextColumn Width="25*" Binding="{Binding Payee}"                                ElementStyle="{StaticResource colSmallWrapRightBold}" />
+                <DataGridTextColumn Width="40*" Binding="{Binding Purpose, TargetNullValue=total}"                              ElementStyle="{StaticResource totalsRowLabel}" />
+                <DataGridTextColumn Width="15*" Binding="{Binding Amount, StringFormat=N2}"              ElementStyle="{StaticResource totalsRowEnd}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
 </UserControl>

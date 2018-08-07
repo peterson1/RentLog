@@ -39,8 +39,9 @@ namespace CommonTools.Lib45.PrintTools.PrintPreviewer2
         protected override async void OnPrintClicked()
         {
             ShowWindow();
-            await Task.Delay(1000);
+            await Task.Delay(500);
             var elm = GetPreviewWindow().mainPanel.Children[0];
+            await Task.Delay(500);
             PrintPreviewer.FitTo(InchesWidth, InchesHeight, elm as FrameworkElement);
             CloseWindow();
         }

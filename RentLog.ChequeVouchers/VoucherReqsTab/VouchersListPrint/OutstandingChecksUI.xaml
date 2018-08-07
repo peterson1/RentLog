@@ -8,8 +8,10 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
         <TextBlock Text="{Binding Outstandings.Count, StringFormat=Outstanding Checks ({0})}"
+                   Style="{StaticResource MaterialDesignTitleTextBlock}"
                    DockPanel.Dock="Top" />
 
-        <local:OutstandingChecksTable DataContext="{Binding Outstandings}" />
+        <local:OutstandingChecksTable DataContext="{Binding Outstandings}"
+                                      Margin="0 10 0 0" />
     </DockPanel>
 </UserControl>

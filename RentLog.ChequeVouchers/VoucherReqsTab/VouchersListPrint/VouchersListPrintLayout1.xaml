@@ -4,12 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RentLog.ChequeVouchers.VoucherReqsTab.VouchersListPrint"
-             Width="900" Height="1000">
+             Width="900">
     <StackPanel Margin="30 40 20 50">
-        <TextBlock Text="{Binding MarketState.BranchName}" />
+        <local:VouchersListReportHeaderUI />
 
-        <local:OutstandingChecksUI Margin="0 50 0 0" />
+        <local:OutstandingChecksUI Margin="0 30 0 0" />
         
-        <local:ForCheckPreparationUI Margin="0 50 0 0" />
+        <local:ForCheckPreparationUI Margin="0 40 0 50" />
     </StackPanel>
 </UserControl>

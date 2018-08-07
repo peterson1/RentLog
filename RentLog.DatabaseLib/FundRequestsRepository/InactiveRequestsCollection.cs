@@ -17,6 +17,7 @@ namespace RentLog.DatabaseLib.FundRequestsRepository
 
         protected override void EnsureIndeces(LiteCollection<FundRequestDTO> coll)
         {
+            //todo: move this to AfterSave()
             coll.EnsureIndex(_ => _.SerialNum);
             coll.EnsureIndex(_ => _.RequestDate);
             coll.EnsureIndex(_ => _.BankAccountId);
