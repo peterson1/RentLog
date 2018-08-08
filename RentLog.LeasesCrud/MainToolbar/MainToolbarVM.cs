@@ -77,19 +77,19 @@ namespace RentLog.LeasesCrud.MainToolbar
 
         private Action GetAdHocJob(out string desc)
         {
-            desc = "ForAllLeases.RebuildSoaFrom(29.Jun(2018)";
-            var jobs = ForAllLeases.RebuildSoaFrom(29.Jun(2018), _args);
-            return jobs.AsParallelJob((ok, not, total) =>
-            {
-                var left = total - (ok + not);
-                _main.StartBeingBusy($"success: {ok}"
-                             + L.f + $"failed: {not}"
-                             + L.f + $"total: {total}"
-                             + L.f + $"left: {left}");
-            });
+            //desc = "ForAllLeases.RebuildSoaFrom(29.Jun(2018)";
+            //var jobs = ForAllLeases.RebuildSoaFrom(29.Jun(2018), _args);
+            //return jobs.AsParallelJob((ok, not, total) =>
+            //{
+            //    var left = total - (ok + not);
+            //    _main.StartBeingBusy($"success: {ok}"
+            //                 + L.f + $"failed: {not}"
+            //                 + L.f + $"total: {total}"
+            //                 + L.f + $"left: {left}");
+            //});
 
-            //desc = "ForAllLeases.NoGraceThenRebuild_serial(29.Jun(2018";
-            //return () => ForAllLeases.NoGraceThenRebuild_serial(29.Jun(2018), _args);
+            desc = "MoveAllRecords.ToNewInactiveRequests";
+            return () => MoveAllRecords.ToNewInactiveRequests(_args);
         }
     }
 }
