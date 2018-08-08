@@ -21,7 +21,7 @@ namespace RentLog.Tests.ChequeVouchersDBTests
             var sut     = new ChequeVouchersDB
             {
                 ActiveRequests   = activs.Object,
-                InactiveRequests = inactvs.Object,
+                InactiveRequests_old = inactvs.Object,
                 PreparedCheques  = cheques.Object
             };
 

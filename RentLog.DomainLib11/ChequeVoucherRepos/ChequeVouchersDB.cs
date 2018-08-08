@@ -9,14 +9,15 @@ namespace RentLog.DomainLib11.ChequeVoucherRepos
     public class ChequeVouchersDB
     {
         public virtual IFundRequestsRepo    ActiveRequests    { get; set; }
-        public virtual IFundRequestsRepo    InactiveRequests  { get; set; }
+        public virtual IFundRequestsRepo    InactiveRequests_old  { get; set; }
+        public virtual IFundRequestsRepo    InactiveRequests_new  { get; set; }
         public virtual IChequeVouchersRepo  PreparedCheques   { get; set; }
         public virtual IPassbookDB          PassbookRows      { get; set; }
 
 
         public List<string> GetPayees()
             => ActiveRequests.GetPayees ()
-                             .Concat    (InactiveRequests.GetPayees())
+                             .Concat    (InactiveRequests_old.GetPayees())
                              .GroupBy   (_ => _)
                              .Select    (_ => _.First())
                              .OrderBy   (_ => _)
@@ -32,7 +33,7 @@ namespace RentLog.DomainLib11.ChequeVoucherRepos
                 ChequeDate   = chequeDate,
                 ChequeNumber = chequeNumber,
             });
-            InactiveRequests.Insert(request);
+            InactiveRequests_old.Insert(request);
             ActiveRequests  .Delete(request);
         }
 
@@ -40,7 +41,7 @@ namespace RentLog.DomainLib11.ChequeVoucherRepos
         public int GetNextRequestSerial()
         {
             var activesMax  = ActiveRequests  .GetMaxSerial();
-            var inactivsMax = InactiveRequests.GetMaxSerial();
+            var inactivsMax = InactiveRequests_old.GetMaxSerial();
             return Math.Max(activesMax, inactivsMax) + 1;
         }
 

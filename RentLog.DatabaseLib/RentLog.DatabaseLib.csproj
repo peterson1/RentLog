@@ -57,6 +57,7 @@
     <Compile Include="DailyColxnsRepository\VacantStallsCollection.cs" />
     <Compile Include="DatabaseFinders\BalancesLocalDir.cs" />
     <Compile Include="DatabaseFinders\CollectionsLocalDir.cs" />
+    <Compile Include="DatabaseFinders\InactivesLocalDir.cs" />
     <Compile Include="JournalsRepository\JournalsByMonthDir.cs" />
     <Compile Include="DatabaseFinders\MarketStateDBFile.cs" />
     <Compile Include="DatabaseFinders\PassbookDBFile.cs" />
