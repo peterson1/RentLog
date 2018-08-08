@@ -88,8 +88,8 @@ namespace RentLog.LeasesCrud.MainToolbar
             //                 + L.f + $"left: {left}");
             //});
 
-            desc = "MoveAllRecords.ToNewInactiveRequests";
-            return () => MoveAllRecords.ToNewInactiveRequests(_args);
+            desc = "EnsureGLAccount.AR_BK_Garay";
+            return () => EnsureGLAccount.AR_BK_Garay(_args);
         }
     }
 }

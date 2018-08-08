@@ -22,8 +22,8 @@ namespace RentLog.DatabaseLib.DatabaseFinders
             var inactvDb     = InactivesLocalDir.GetRequestsDB(dir);
 
             ActiveRequests   = new FundRequestsRepo1(new ActiveRequestsCollection(pbkDb));
-            InactiveRequests_old = new FundRequestsRepo1(new InactiveRequestsCollection(pbkDb));
-            InactiveRequests_new = new FundRequestsRepo1(new InactiveRequestsCollection(inactvDb));
+            //InactiveRequests_old = new FundRequestsRepo1(new InactiveRequestsCollection(pbkDb));
+            InactiveRequests = new FundRequestsRepo1(new InactiveRequestsCollection(inactvDb));
             PreparedCheques  = new PreparedChequesRepo1(new ChequeVouchersCollection(pbkDb));
             PassbookRows     = dir.Passbooks;
         }
