@@ -11,13 +11,6 @@ namespace CommonTools.Lib45.LiteDbTools
         where T : IDocumentDTO
     {
         public event EventHandler<T> ContentChanged;
-        private bool _hasCustomIndeces = true;
-
-
-        protected virtual void EnsureIndeces(LiteCollection<T> coll)
-        {
-            _hasCustomIndeces = false;
-        }
 
 
         protected virtual void Validate(T model, SharedLiteDB db)
@@ -109,6 +102,7 @@ namespace CommonTools.Lib45.LiteDbTools
                 EnsureIndeces(coll);
                 //ret = func(coll, record);
                 ret = Retry2x(record, func, coll);
+                EnsureIndecesAfterWrite(coll);
             }
             ContentChanged?.Invoke(this, record);
             return ret;
@@ -133,6 +127,8 @@ namespace CommonTools.Lib45.LiteDbTools
                 EnsureIndeces(coll);
                 //ret = func(coll, records);
                 ret = Retry2x(records, func, coll);
+
+                EnsureIndecesAfterWrite(coll);
             }
             ContentChanged?.Invoke(this, default(T));
             return ret;

@@ -48,24 +48,16 @@ namespace CommonTools.Lib45.LiteDbTools
 
         public List<T> Find(Expression<Func<T, bool>> predicate)
         {
-            EnsureIndecesBeforeRead();
+            //EnsureIndecesBeforeRead();
 
             using (var db = _db.OpenRead())
                 return GetCollection(db).Find(predicate).ToList();
         }
 
-        private void EnsureIndecesBeforeRead()
-        {
-            if (!_hasCustomIndeces) return;
-
-            using (var db = _db.OpenWrite())
-                EnsureIndeces(GetCollection(db));
-        }
-
 
         private List<T> Find(Query query)
         {
-            EnsureIndecesBeforeRead();
+            //EnsureIndecesBeforeRead();
 
             using (var db = _db.OpenRead())
                 return GetCollection(db).Find(query).ToList();
@@ -118,7 +110,7 @@ namespace CommonTools.Lib45.LiteDbTools
 
         public int Max(Expression<Func<T, int>> getter)
         {
-            EnsureIndecesBeforeRead();
+            //EnsureIndecesBeforeRead();
 
             using (var db = _db.OpenRead())
             {
@@ -132,7 +124,7 @@ namespace CommonTools.Lib45.LiteDbTools
 
         public DateTime Max(Expression<Func<T, DateTime>> getter)
         {
-            EnsureIndecesBeforeRead();
+            //EnsureIndecesBeforeRead();
 
             using (var db = _db.OpenRead())
             {
@@ -144,7 +136,7 @@ namespace CommonTools.Lib45.LiteDbTools
 
         public int Count(Expression<Func<T, bool>> predicate)
         {
-            EnsureIndecesBeforeRead();
+            //EnsureIndecesBeforeRead();
 
             using (var db = _db.OpenRead())
                 return GetCollection(db).Count(predicate);
