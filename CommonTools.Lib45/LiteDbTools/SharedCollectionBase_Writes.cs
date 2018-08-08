@@ -155,6 +155,7 @@ namespace CommonTools.Lib45.LiteDbTools
                 var coll = GetCollection(db);
                 try  { db.DropCollection(coll.Name); }
                 catch (InvalidCastException) { }
+                db.Shrink();
             }
         }
 
