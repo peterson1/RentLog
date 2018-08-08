@@ -88,8 +88,8 @@ namespace RentLog.LeasesCrud.MainToolbar
             //                 + L.f + $"left: {left}");
             //});
 
-            desc = "EnsureGLAccount.AR_BK_Garay";
-            return () => EnsureGLAccount.AR_BK_Garay(_args);
+            desc = "EnsureGLAccount.All_AR_Others";
+            return () => EnsureGLAccount.All_AR_Others(_args);
         }
     }
 }

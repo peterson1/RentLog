@@ -18,6 +18,19 @@ namespace RentLog.DomainLib11.AdHocJobs
             => dir.AddIfNone("A/R BK Norzagaray", GLAcctType.Asset);
 
 
+        public static void All_AR_Others(ITenantDBsDir dir)
+        {
+            dir.AddIfNone("A/R Others - Fortune Balagtas", GLAcctType.Asset);
+            dir.AddIfNone("A/R Others - Fortune Marilao", GLAcctType.Asset);
+            dir.AddIfNone("A/R Others - Fortune Norzagaray", GLAcctType.Asset);
+            dir.AddIfNone("A/R Others - Fortune Meycauayan", GLAcctType.Asset);
+            dir.AddIfNone("A/R Others - Fortune Bignay", GLAcctType.Asset);
+            dir.AddIfNone("A/R Others - BK Balagtas", GLAcctType.Asset);
+            dir.AddIfNone("A/R Others - BK Meycauayan", GLAcctType.Asset);
+            dir.AddIfNone("A/R Others - BK Bignay", GLAcctType.Asset);
+        }
+
+
         private static void AddIfNone(this ITenantDBsDir dir, string glAcctName, GLAcctType glAcctType)
         {
             var repo    = dir.MarketState.GLAccounts;
