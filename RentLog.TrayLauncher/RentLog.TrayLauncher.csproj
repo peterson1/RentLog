@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AD025F09-F180-45D9-868C-5F0274D32555}</ProjectGuid>
+    <ProjectGuid>{31A137B1-B912-4125-A2FE-CAB3F8BC7170}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>RentLog.LeasesCrud</RootNamespace>
-    <AssemblyName>RL.Leases</AssemblyName>
+    <RootNamespace>RentLog.TrayLauncher</RootNamespace>
+    <AssemblyName>RentLog.TrayLauncher</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -27,27 +27,16 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>embedded</DebugType>
+    <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\..\Google Drive\MSA\Fortune Market\Tenants %28aka MSA%29\MSA_Deploy\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DebugSymbols>true</DebugSymbols>
-    <ShouldCreateLogs>True</ShouldCreateLogs>
-    <AdvancedSettingsExpanded>False</AdvancedSettingsExpanded>
-    <UpdateAssemblyVersion>True</UpdateAssemblyVersion>
-    <UpdateAssemblyFileVersion>True</UpdateAssemblyFileVersion>
-    <UpdateAssemblyInfoVersion>False</UpdateAssemblyInfoVersion>
-    <AssemblyVersionSettings>None.None.Increment.TimeStamp</AssemblyVersionSettings>
-    <UpdatePackageVersion>False</UpdatePackageVersion>
-    <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
-    <InheritWinAppVersionFrom>None</InheritWinAppVersionFrom>
-    <AssemblyFileVersionSettings>None.None.Increment.TimeStamp</AssemblyFileVersionSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Dragablz, Version=0.0.3.203, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dragablz.0.0.3.203\lib\net45\Dragablz.dll</HintPath>
+    <Reference Include="Hardcodet.Wpf.TaskbarNotification, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.8\lib\net45\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
     </Reference>
     <Reference Include="MaterialDesignColors, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.1.3\lib\net45\MaterialDesignColors.dll</HintPath>
@@ -64,6 +53,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -87,46 +77,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="LeaseCRUD\ContractInfoPane.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="LeaseCRUD\LeaseCrudWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="LeaseCRUD\TenantInfoPane.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="LeasesList\ActiveLeasesFilterUI.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="LeasesList\ActiveLeasesTable.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="LeasesList\ActiveLeasesUI.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="LeasesList\InactiveLeasesFilterUI.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="LeasesList\InactiveLeasesTable.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="LeasesList\InactiveLeasesUI.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainToolbar\MainToolbarUI.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -135,48 +85,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="LeaseCRUD\ContractInfoPane.xaml.cs">
-      <DependentUpon>ContractInfoPane.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="LeaseCRUD\LeaseCrudVM.cs" />
-    <Compile Include="LeaseCRUD\LeaseCrudWindow.xaml.cs">
-      <DependentUpon>LeaseCrudWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="LeaseCRUD\TenantInfoPane.xaml.cs">
-      <DependentUpon>TenantInfoPane.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="LeasesList\ActiveLeasesFilterUI.xaml.cs">
-      <DependentUpon>ActiveLeasesFilterUI.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="LeasesList\ActiveLeasesTable.xaml.cs">
-      <DependentUpon>ActiveLeasesTable.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="LeasesList\ActiveLeasesUI.xaml.cs">
-      <DependentUpon>ActiveLeasesUI.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="LeasesList\InactiveLeasesFilterUI.xaml.cs">
-      <DependentUpon>InactiveLeasesFilterUI.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="LeasesList\InactiveLeasesTable.xaml.cs">
-      <DependentUpon>InactiveLeasesTable.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="LeasesList\InactiveLeasesUI.xaml.cs">
-      <DependentUpon>InactiveLeasesUI.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="LeasesList\InactiveLeasesVM.cs" />
-    <Compile Include="LeasesList\LeasesFilterVM.cs" />
-    <Compile Include="LeasesList\ActiveLeasesVM.cs" />
-    <Compile Include="MainToolbar\MainToolbarUI.xaml.cs">
-      <DependentUpon>MainToolbarUI.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainToolbar\MainToolbarVM.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainWindowVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -211,14 +125,6 @@
     <ProjectReference Include="..\CommonTools.Lib45\CommonTools.Lib45.csproj">
       <Project>{89c1d90f-af50-48b4-8178-9b6cc2e28b11}</Project>
       <Name>CommonTools.Lib45</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RentLog.DomainLib11\RentLog.DomainLib11.csproj">
-      <Project>{d508bbc8-4d2c-46de-a090-cc333d01270f}</Project>
-      <Name>RentLog.DomainLib11</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RentLog.DomainLib45\RentLog.DomainLib45.csproj">
-      <Project>{d789ffc5-112e-4e95-8d86-e46da7ee54ff}</Project>
-      <Name>RentLog.DomainLib45</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
