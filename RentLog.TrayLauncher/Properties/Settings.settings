@@ -1,7 +1,21 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="RentLog.TrayLauncher.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="TrayIconFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Icons/strawberry_29.ico</Value>
+    </Setting>
+    <Setting Name="TrayToolTip" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Launcher Menu</Value>
+    </Setting>
+    <Setting Name="UpdatedExeSource" Type="System.String" Scope="User">
+      <Value Profile="(Default)"> </Value>
+    </Setting>
+    <Setting Name="DatabasesPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\&lt;user_name_here&gt;\Google Drive\&lt;branch_name_here&gt;\TenantDBs</Value>
+    </Setting>
+    <Setting Name="CredentialsKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
 </SettingsFile>

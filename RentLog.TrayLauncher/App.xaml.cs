@@ -1,4 +1,5 @@
-﻿using Hardcodet.Wpf.TaskbarNotification;
+﻿using CommonTools.Lib45.ApplicationTools;
+using Hardcodet.Wpf.TaskbarNotification;
 using System.Drawing;
 using System.Windows;
 
@@ -10,9 +11,8 @@ namespace RentLog.TrayLauncher
         {
             base.OnStartup(e);
 
-            var tbi = new TaskbarIcon();
-            tbi.Icon = new Icon("Icons/strawberry_29.ico");
-            //tbi.IconSource = new BitmapImage(new Uri("Icons/strawberry_29.ico", UriKind.Relative));
+            this.Initialize<LauncherArguments>(_
+                => new MainWindowVM(_).Show<MainWindow>(true));
         }
     }
 }

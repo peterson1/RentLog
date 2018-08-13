@@ -6,10 +6,33 @@
         xmlns:tray="http://www.hardcodet.net/taskbar"
         xmlns:local="clr-namespace:RentLog.TrayLauncher"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <!--<tray:TaskbarIcon IconSource="Icons/strawberry_29.ico"
-                          ToolTipText="abc"
-                          />-->
-    </Grid>
+        Title="{Binding Caption}" 
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <tray:TaskbarIcon x:Name="trayIcon">
+        <tray:TaskbarIcon.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="item 1" />
+                <MenuItem Header="item 2" />
+
+                <Separator />
+
+                <MenuItem Header ="{Binding CloseWindowCmd.CurrentLabel}"
+                          Command="{Binding CloseWindowCmd}" />
+            </ContextMenu>
+        </tray:TaskbarIcon.ContextMenu>
+
+        <tray:TaskbarIcon.TrayToolTip>
+            <TextBlock Text="{Binding Caption}"
+                       Background="White"
+                       Foreground="Black"
+                       FontSize="15"
+                       Padding="25 15 25 15" />
+        </tray:TaskbarIcon.TrayToolTip>
+    </tray:TaskbarIcon>
 </Window>
