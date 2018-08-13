@@ -28,7 +28,7 @@ namespace CommonTools.Lib45.BaseViewModels
             AppArgs        = appArguments;
             PrintCmd       = R2Command.Relay(OnPrintClicked, _ => !IsBusy, "Print");
             RefreshCmd     = R2Command.Async(DoRefresh, _ => !IsBusy, "Refresh");
-            CloseWindowCmd = R2Command.Relay(CloseWindow, null, "Close Window");
+            CloseWindowCmd = R2Command.Relay(CloseWindow, null, "Exit");
             //SetCaption($"as {AppArgs?.Credentials?.NameAndRole ?? "Anonymous"}");
             SetCaption(".");
         }
