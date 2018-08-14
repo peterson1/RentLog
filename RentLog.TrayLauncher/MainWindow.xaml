@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:tray="http://www.hardcodet.net/taskbar"
+        xmlns:labl="clr-namespace:CommonTools.Lib45.TextLabels;assembly=CommonTools.Lib45"
         xmlns:local="clr-namespace:RentLog.TrayLauncher"
         mc:Ignorable="d"
         Title="{Binding Caption}" 
@@ -14,21 +15,31 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
+    <Window.Resources>
+    </Window.Resources>
     <tray:TaskbarIcon x:Name="trayIcon">
         <tray:TaskbarIcon.ContextMenu>
-            <ContextMenu>
-                <MenuItem Header="item 1" />
-                <MenuItem Header="item 2" />
-
-                <Separator />
-
-                <MenuItem Header ="{Binding CloseWindowCmd.CurrentLabel}"
-                          Command="{Binding CloseWindowCmd}" />
+            <ContextMenu x:Name="ctxMenu">
+                <MenuItem Header="{Binding ToolTipText}">
+                    <MenuItem.Resources>
+                        <Style TargetType="labl:DualText">
+                            <Setter Property="Text1Width" Value="100" />
+                            <Setter Property="Text2Width" Value="300" />
+                        </Style>
+                    </MenuItem.Resources>
+                    <MenuItem Header="{Binding Caption}" />
+                    <labl:DualText Text1="logged in as" Text2="{Binding NameAndRole}" />
+                    <labl:DualText Text1="DatabasesPath" Text2="{Binding AppArgs.DatabasesPath}" />
+                    <labl:DualText Text1="UpdatedExeDir" Text2="{Binding AppArgs.UpdatedExeDir}" />
+                    <!--<MenuItem Header="{Binding NameAndRole}" Style="{StaticResource mnuTiny}" />
+                    <MenuItem Header="{Binding AppArgs.DatabasesPath}" Style="{StaticResource mnuTiny}" />
+                    <MenuItem Header="{Binding AppArgs.UpdatedExeDir}" Style="{StaticResource mnuTiny}" />-->
+                </MenuItem>
             </ContextMenu>
         </tray:TaskbarIcon.ContextMenu>
 
         <tray:TaskbarIcon.TrayToolTip>
-            <TextBlock Text="{Binding Caption}"
+            <TextBlock Text="{Binding ToolTipText}"
                        Background="White"
                        Foreground="Black"
                        FontSize="15"
