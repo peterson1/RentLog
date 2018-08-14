@@ -225,6 +225,9 @@
       <DependentUpon>DualText.xaml</DependentUpon>
     </Compile>
     <Compile Include="TextLabels\DualText_DependencyProperties.cs" />
+    <Compile Include="TextLabels\MenuItemHeader1.xaml.cs">
+      <DependentUpon>MenuItemHeader1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ThreadTools\ParallelInvokerExtensions.cs" />
     <Compile Include="ThreadTools\ProcessKiller.cs" />
     <Compile Include="ThreadTools\ThisThread.cs" />
@@ -232,6 +235,7 @@
     <Compile Include="ThreadTools\UIThreadInvoker.cs" />
     <Compile Include="UIBehaviors\TextBoxBehaviors\SelectAllOnFocusBehavior.cs" />
     <Compile Include="UIExtensions\ConfirmToDeleteExtensions.cs" />
+    <Compile Include="UIExtensions\ContextMenuExtensions.cs" />
     <Compile Include="UIExtensions\CurrentItemDataGridExtensions.cs" />
     <Compile Include="UIExtensions\FocusMoverExtensions.cs" />
     <Compile Include="UIExtensions\ForceBindingUpdaters.cs" />
@@ -328,6 +332,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="TextLabels\DualText.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TextLabels\MenuItemHeader1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
