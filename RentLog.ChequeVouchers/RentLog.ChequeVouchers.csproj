@@ -93,6 +93,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AllChequeVouchers\AllChequeVouchersVM.cs" />
+    <Compile Include="AllChequeVouchers\AllChequeVouchersWindow.xaml.cs">
+      <DependentUpon>AllChequeVouchersWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AllChequeVouchers\FiltersUI.xaml.cs">
+      <DependentUpon>FiltersUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AllChequeVouchers\FilterVM.cs" />
+    <Compile Include="AllChequeVouchers\MainListVM.cs" />
+    <Compile Include="AllChequeVouchers\MainTable.xaml.cs">
+      <DependentUpon>MainTable.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CommonControls\ChequeVoucherViewer\AllocationsListUI.xaml.cs">
       <DependentUpon>AllocationsListUI.xaml</DependentUpon>
     </Compile>
@@ -248,6 +260,18 @@
     <Compile Include="VoucherReqsTab\VouchersListPrint\VouchersListReportHeaderUI.xaml.cs">
       <DependentUpon>VouchersListReportHeaderUI.xaml</DependentUpon>
     </Compile>
+    <Page Include="AllChequeVouchers\AllChequeVouchersWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AllChequeVouchers\FiltersUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AllChequeVouchers\MainTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CommonControls\ChequeVoucherViewer\AllocationsListUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -31,5 +31,27 @@
 
         <butns:PrintButtonWhite Margin="10 0 0 0"
                                 VerticalAlignment="Center" />
+
+        <mat:PopupBox PlacementMode="BottomAndAlignRightEdges" 
+                      Margin="10 0 0 0"
+                      StaysOpen="False"
+                      Foreground="White">
+            <Menu MinWidth="200">
+                <Menu.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </Menu.ItemsPanel>
+                <MenuItem DataContext="{Binding AllChkVouchers}" 
+                          Header="{Binding LaunchWindowCmd.CurrentLabel}"
+                          Command="{Binding LaunchWindowCmd}" />
+                <MenuItem Header="{Binding PrintCmd.CurrentLabel}"
+                          Command="{Binding PrintCmd}" />
+                <Separator />
+                <MenuItem Header="{Binding CloseWindowCmd.CurrentLabel}"
+                          Command="{Binding CloseWindowCmd}" />
+            </Menu>
+        </mat:PopupBox>
+        
     </StackPanel>
 </UserControl>

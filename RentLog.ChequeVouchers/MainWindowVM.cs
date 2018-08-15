@@ -1,5 +1,6 @@
 ﻿using CommonTools.Lib11.ExceptionTools;
 using PropertyChanged;
+using RentLog.ChequeVouchers.AllChequeVouchers;
 using RentLog.ChequeVouchers.DcdrTab;
 using RentLog.ChequeVouchers.JournalsTab;
 using RentLog.ChequeVouchers.MainToolbar;
@@ -32,6 +33,9 @@ namespace RentLog.ChequeVouchers
             VoucherReqs    = new VoucherReqsTabVM(this);
             DcdrReport     = new DcdrTabVM(this);
             Journals       = new JournalsTabVM(this);
+            AllChkVouchers = new AllChequeVouchersVM(this);
+
+            PrintCmd.CurrentLabel = "Print “Pending Checks” List";
         }
 
 
@@ -40,6 +44,7 @@ namespace RentLog.ChequeVouchers
         public VoucherReqsTabVM     VoucherReqs     { get; }
         public DcdrTabVM            DcdrReport      { get; }
         public JournalsTabVM        Journals        { get; }
+        public AllChequeVouchersVM  AllChkVouchers  { get; }
         public int                  SelectedIndex   { get; set; }
         public MainTabs             SelectedTab
         {
