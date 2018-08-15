@@ -2,8 +2,7 @@
 using CommonTools.Lib11.GoogleTools;
 using CommonTools.Lib11.JsonTools;
 using CommonTools.Lib45.FileSystemTools;
-using Firebase.Auth;
-using Firebase.Database;
+using CommonTools.Lib45.ThreadTools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,21 +20,12 @@ namespace CommonTools.Lib45.GoogleTools
         }
 
 
-        public async Task Post(Exception exception, string context)
+        public async Task<(bool IsSuccessful, string Response)> Post(Exception exception, string context)
         {
-            var auth = new FirebaseAuthProvider(new FirebaseConfig(_key.ApiKey));
-            var opts = new FirebaseOptions
-            {
-                AuthTokenAsyncFactory = async () =>
-                {
-                    var link = await auth.SignInWithEmailAndPasswordAsync(_key.Email, _key.Password);
-                    return link.FirebaseToken;
-                }
-            };
-            var client = new FirebaseClient(_key.BaseURL, opts);
-            var report = new ErrorReport(_key, exception, context).ToJson();
+            var client = _key.CreateClient();
+            var report = new ErrorReport(_key, exception, context);
             var path   = ToPath(_key.Email);
-            var resp   = await client.Child(path).PostAsync(report);
+            return await client.TryPost(report, path);
         }
 
 
@@ -67,6 +57,7 @@ namespace CommonTools.Lib45.GoogleTools
                 Context    = context;
                 ExeVersion = CurrentExe.ShortNameAndVersion();
                 HumanTime  = DateTime.Now.ToString("d-MMM-yyyy h:mm tt");
+                OneLiner   = exception.Message;
                 Details    = exception.Info(true, true)
                                 .Split(new[] { "\r\n", "\r", "\n" }, 
                                 StringSplitOptions.None).ToList();
@@ -78,6 +69,7 @@ namespace CommonTools.Lib45.GoogleTools
             public string        Context    { get; set; }
             public string        ExeVersion { get; set; }
             public string        HumanTime  { get; set; }
+            public string        OneLiner   { get; set; }
             public List<string>  Details    { get; set; }
         }
     }

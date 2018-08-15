@@ -143,6 +143,7 @@
     <Compile Include="FileSystemTools\ThrottledFileWatcher1.cs" />
     <Compile Include="FileSystemTools\UpdatedExeNotifier.cs" />
     <Compile Include="FileSystemTools\UpdatedFileNotifier.cs" />
+    <Compile Include="GoogleTools\FirebaseCustomExtensions.cs" />
     <Compile Include="GoogleTools\FirebaseSender.cs" />
     <Compile Include="InputCommands\ExeLauncherCommand.cs" />
     <Compile Include="InputCommands\R2AsyncCommandWPF.cs" />
