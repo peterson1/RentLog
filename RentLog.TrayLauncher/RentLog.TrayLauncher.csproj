@@ -7,7 +7,7 @@
     <ProjectGuid>{31A137B1-B912-4125-A2FE-CAB3F8BC7170}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>RentLog.TrayLauncher</RootNamespace>
-    <AssemblyName>RentLog.TrayLauncher</AssemblyName>
+    <AssemblyName>RL.TrayLauncher</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

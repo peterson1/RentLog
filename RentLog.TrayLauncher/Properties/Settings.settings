@@ -3,13 +3,13 @@
   <Profiles />
   <Settings>
     <Setting Name="TrayIconFile" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Icons/strawberry_29.ico</Value>
+      <Value Profile="(Default)">Icons/merchant_16x16.ico</Value>
     </Setting>
     <Setting Name="TrayToolTip" Type="System.String" Scope="User">
       <Value Profile="(Default)">Launcher Menu</Value>
     </Setting>
     <Setting Name="UpdatedExeSource" Type="System.String" Scope="User">
-      <Value Profile="(Default)"> </Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="DatabasesPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\Users\&lt;user_name_here&gt;\Google Drive\&lt;branch_name_here&gt;\TenantDBs</Value>
