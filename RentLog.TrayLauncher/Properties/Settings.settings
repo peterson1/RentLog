@@ -16,11 +16,11 @@
     </Setting>
     <Setting Name="CredentialsKey" Type="System.String" Scope="User">
       <Value Profile="(Default)">{
-"BaseURL"   : "https://fortune-tenants.firebaseio.com/",
-"ApiKey"    : "AIzaSyCQeia4H9rdzzYOsf_zfrjgnDvQsf04XZA",
-"Email"     : "staff.pc-name@fortune.branch",
+"BaseURL"   : "https://some-project.firebaseio.com/",
+"ApiKey"    : "API-key-goes-here",
+"Email"     : "staff.pc-name@brand.branch",
 "Password"  : "firebase-password-here",
-"HumanName" : "Ms. MSA Staff",
+"HumanName" : "Ms. Staff",
 "Roles"     : "Supervisor/Cashier"
 }</Value>
     </Setting>

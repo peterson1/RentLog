@@ -73,14 +73,10 @@ namespace RentLog.TrayLauncher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"{
-""BaseURL""   : ""https://fortune-tenants.firebaseio.com/"",
-""ApiKey""    : ""AIzaSyCQeia4H9rdzzYOsf_zfrjgnDvQsf04XZA"",
-""Email""     : ""staff.pc-name@fortune.branch"",
-""Password""  : ""firebase-password-here"",
-""HumanName"" : ""Ms. MSA Staff"",
-""Roles""     : ""Supervisor/Cashier""
-}")]
+        [global::System.Configuration.DefaultSettingValueAttribute("{\r\n\"BaseURL\"   : \"https://some-project.firebaseio.com/\",\r\n\"ApiKey\"    : \"API-key-" +
+            "goes-here\",\r\n\"Email\"     : \"staff.pc-name@brand.branch\",\r\n\"Password\"  : \"firebas" +
+            "e-password-here\",\r\n\"HumanName\" : \"Ms. Staff\",\r\n\"Roles\"     : \"Supervisor/Cashier" +
+            "\"\r\n}")]
         public string CredentialsKey {
             get {
                 return ((string)(this["CredentialsKey"]));
