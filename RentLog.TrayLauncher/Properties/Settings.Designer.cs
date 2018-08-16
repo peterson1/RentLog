@@ -61,7 +61,7 @@ namespace RentLog.TrayLauncher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\<user_name_here>\\Google Drive\\<branch_name_here>\\TenantDBs")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\__user_name_here__\\Google Drive\\__branch_name_here__\\TenantDBs")]
         public string DatabasesPath {
             get {
                 return ((string)(this["DatabasesPath"]));
@@ -73,7 +73,14 @@ namespace RentLog.TrayLauncher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"{
+""BaseURL""   : ""https://fortune-tenants.firebaseio.com/"",
+""ApiKey""    : ""AIzaSyCQeia4H9rdzzYOsf_zfrjgnDvQsf04XZA"",
+""Email""     : ""staff.pc-name@fortune.branch"",
+""Password""  : ""firebase-password-here"",
+""HumanName"" : ""Ms. MSA Staff"",
+""Roles""     : ""Supervisor/Cashier""
+}")]
         public string CredentialsKey {
             get {
                 return ((string)(this["CredentialsKey"]));

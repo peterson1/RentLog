@@ -1,9 +1,11 @@
 ﻿using CommonTools.Lib11.GoogleTools;
+using CommonTools.Lib11.JsonTools;
 using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.BaseViewModels;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.LicenseTools;
 using CommonTools.Lib45.ThreadTools;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using static RentLog.TrayLauncher.Properties.Settings;
@@ -52,15 +54,36 @@ namespace RentLog.TrayLauncher
 
         protected override async Task OnRefreshClickedAsync()
         {
-            if (!(await TryParseCredentials()))
+            if (!(await TryDecodePublicKey()))
             {
-                Alert.ShowModal("Not Authorized", "Invalid credentials");
+                if (TryParseCredentialsJson(out string pubKey))
+                    Alert.ShowModal("New Public Key", pubKey);
+                else
+                    Alert.ShowModal("Not Authorized", "Invalid credentials");
+
                 CloseWindow();
             }
         }
 
 
-        private async Task<bool> TryParseCredentials()
+        private bool TryParseCredentialsJson(out string pubKey)
+        {
+            try
+            {
+                var creds  = AppArgs.CredentialsKey.ReadJson<FirebaseCredentials>();
+                pubKey = SeatLicenser.GeneratePublicKey(creds);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Alert.Show(ex);
+                pubKey = "";
+                return false;
+            }
+        }
+
+
+        private async Task<bool> TryDecodePublicKey()
         {
             await Task.Delay(0);
             var ok = SeatLicenser.TryGetCredentials(AppArgs.CredentialsKey, 

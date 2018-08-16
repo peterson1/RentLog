@@ -12,10 +12,17 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="DatabasesPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Users\&lt;user_name_here&gt;\Google Drive\&lt;branch_name_here&gt;\TenantDBs</Value>
+      <Value Profile="(Default)">C:\Users\__user_name_here__\Google Drive\__branch_name_here__\TenantDBs</Value>
     </Setting>
     <Setting Name="CredentialsKey" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">{
+"BaseURL"   : "https://fortune-tenants.firebaseio.com/",
+"ApiKey"    : "AIzaSyCQeia4H9rdzzYOsf_zfrjgnDvQsf04XZA",
+"Email"     : "staff.pc-name@fortune.branch",
+"Password"  : "firebase-password-here",
+"HumanName" : "Ms. MSA Staff",
+"Roles"     : "Supervisor/Cashier"
+}</Value>
     </Setting>
   </Settings>
 </SettingsFile>
