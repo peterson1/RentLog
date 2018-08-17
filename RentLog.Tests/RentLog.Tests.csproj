@@ -102,6 +102,7 @@
     <Compile Include="DailyStatusTests\DailyStatusReportFacts.cs" />
     <Compile Include="DCDRTests\DcdrVMFacts.cs" />
     <Compile Include="FundRequestsRepoTests\FundRequestsRepoFacts.cs" />
+    <Compile Include="GLRecapTests\GLRecapFacts1.cs" />
     <Compile Include="IntendedColxnsRepoTests\IntendedColxnsRepoFacts.cs" />
     <Compile Include="JournalVoucherTests\JournalVouchersRepoFacts.cs" />
     <Compile Include="JournalVoucherTests\JournalVouchersCrudFacts.cs" />

@@ -46,5 +46,11 @@ namespace RentLog.DatabaseLib.DatabaseFinders
 
             return txnDir;
         }
+
+
+        public IPassbookRowsRepo AllAccounts()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
