@@ -7,18 +7,17 @@ namespace CommonTools.Lib11.DatabaseTools
 {
     public class CombinedReadOnlyRepo<T> : ISimpleRepo<T>
     {
-        private ISimpleRepo<T> _list1;
-        private ISimpleRepo<T> _list2;
+        private List<ISimpleRepo<T>> _repos;
 
-        public CombinedReadOnlyRepo(ISimpleRepo<T> list1, ISimpleRepo<T> list2)
+
+        public CombinedReadOnlyRepo(params ISimpleRepo<T>[] repos)
         {
-            _list1 = list1;
-            _list2 = list2;
+            _repos = repos.ToList();
         }
 
 
-        public List<T> GetAll() 
-            => _list1.GetAll().Concat(_list2.GetAll()).ToList();
+        public List<T> GetAll()
+            => _repos.SelectMany(_ => _.GetAll()).ToList();
 
 
         public event EventHandler<T> ContentChanged = delegate { };
