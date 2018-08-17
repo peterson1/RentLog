@@ -1,9 +1,13 @@
-﻿using CommonTools.Lib45.LiteDbTools;
+﻿using CommonTools.Lib11.DatabaseTools;
+using CommonTools.Lib45.LiteDbTools;
 using RentLog.DatabaseLib.PassbookRowsRepository;
+using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
 using RentLog.DomainLib11.PassbookRepos;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace RentLog.DatabaseLib.DatabaseFinders
 {
@@ -48,9 +52,12 @@ namespace RentLog.DatabaseLib.DatabaseFinders
         }
 
 
-        public IPassbookRowsRepo AllAccounts()
+        public List<PassbookRowDTO> RowsFromAllAccounts(DateTime startDate, DateTime endDate, MarketStateDB marketStateDB)
         {
-            throw new NotImplementedException();
+            var acctIDs = marketStateDB.BankAccounts.GetAll().Select(_ => _.Id);
+            var repos   = acctIDs.Select(id => GetRepo(id));
+            return repos.SelectMany(r 
+                => r.RowsFor(startDate, endDate)).ToList();
         }
     }
 }

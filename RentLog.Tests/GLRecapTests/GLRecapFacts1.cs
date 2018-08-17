@@ -18,11 +18,16 @@ namespace RentLog.Tests.GLRecapTests
             var sut = new GLRecapReport(Month.July, 2018, dir);
             sut.Should().HaveCount(5);
 
-            var sub = sut.ElementAt(0);
-            sub.AccountType.Should().Be(GLAcctType.Equity);
-            sub.Should().HaveCount(3);
-            sub.SummaryRows[0].TotalDebits.Should().Be(1234);
-            sub.SummaryRows[0].TotalCredits.Should().Be(1234);
+            var equities = sut.ElementAt(0);
+            equities.AccountType.Should().Be(GLAcctType.Equity);
+            equities.Should().HaveCount(1);
+            equities[0].Account.Name.Should().Be("Drawings");
+            equities[0].TotalDebits.Should().Be(1223);
+            equities[0].TotalCredits.Should().Be(1223);
+            equities.SummaryRows[0].TotalDebits.Should().Be(1234);
+            equities.SummaryRows[0].TotalCredits.Should().Be(1234);
+
+            var assets = sut.ElementAt(1);
 
 
             sut.TotalDebits .Should().Be(1412);

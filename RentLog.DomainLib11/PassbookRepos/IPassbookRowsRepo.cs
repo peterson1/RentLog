@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace RentLog.DomainLib11.PassbookRepos
 {
-    public interface IPassbookRowsRepo : ISimplerRepo<PassbookRowDTO>
+    public interface IPassbookRowsRepo : ISimplerRepo<PassbookRowDTO>//, IReadOnlyRepo<PassbookRowDTO>
     {
         int   BankAccountID         { get; }
         void  InsertClearedCheque   (ChequeVoucherDTO cheque, DateTime clearedDate);
