@@ -12,7 +12,7 @@ namespace RentLog.DomainLib11.ReportRows
 
         public LeaseColxnRow(IntendedColxnDTO dto)
         {
-            DTO         = dto;
+            IntendedDTO         = dto;
             Lease       = dto.Lease;
             DocumentRef = dto.PRNumber.ToString();
             Rent        = dto.Actuals.Rent;
@@ -30,13 +30,15 @@ namespace RentLog.DomainLib11.ReportRows
                 Tenant = TenantModel.Named(dto.ReceivedFrom),
                 Stall  = StallDTO.Named($"{sec.Name} Section Ambulant")
             };
+            AmbulantDTO = dto;
             DocumentRef = dto.PRNumber?.ToString();
             Ambulant    = dto.Amount;
             Remarks     = dto.Remarks;
         }
 
 
-        public IntendedColxnDTO  DTO          { get; }
+        public AmbulantColxnDTO  AmbulantDTO  { get; }
+        public IntendedColxnDTO  IntendedDTO  { get; }
         public LeaseDTO          Lease        { get; set; }
         public string            DocumentRef  { get; set; }
         public decimal?          Rent         { get; set; }
@@ -52,5 +54,8 @@ namespace RentLog.DomainLib11.ReportRows
                               + (Electric ?? 0)
                               + (Water    ?? 0)
                               + (Ambulant ?? 0);
+
+
+        public bool IsAmbulant => AmbulantDTO != null;
     }
 }

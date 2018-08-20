@@ -38,24 +38,40 @@ namespace RentLog.DomainLib45.DailyStatusReporter.TenantCollections
         private void EditPRNumber(object seleectedItem)
         {
             if (!(seleectedItem is LeaseColxnRow row)) return;
-            if (row.DTO == null) throw Null.Ref("LeaseColxnRow.DTO");
+            if (row.IntendedDTO == null && row.AmbulantDTO == null)
+                throw Null.Ref("LeaseColxnRow.DTO");
+
+            var oldVal = row.IsAmbulant ? row.AmbulantDTO.PRNumber
+                                        : row.IntendedDTO.PRNumber;
 
             if (!PopUpInput.TryGetInt("PR Number", 
-                out int newVal, row.DTO.PRNumber)) return;
+                out int newVal, oldVal)) return;
 
-            row.DTO.PRNumber = newVal;
+            row.DocumentRef = newVal.ToString();
 
-            SaveUpdatedRow(row.DTO);
+            SaveUpdatedRow(row);
             DailyStatusReportVM.Current.ClickRefresh();
             CloseWindow();
         }
 
 
-        private void SaveUpdatedRow(IntendedColxnDTO dto)
+        private void SaveUpdatedRow(LeaseColxnRow row)
         {
-            var db   = AppArgs.Collections.For(MainRow.ColxnDate);
-            var repo = db.IntendedColxns[MainRow.Section.Id];
-            repo.Update(dto);
+            var db    = AppArgs.Collections.For(MainRow.ColxnDate);
+            //var repo = db.IntendedColxns[MainRow.Section.Id];
+            //repo.Update(dto);
+            var secID = MainRow.Section.Id;
+            if (row.IsAmbulant)
+            {
+                row.AmbulantDTO.PRNumber = int.Parse(row.DocumentRef);
+                db.AmbulantColxns[secID].Update(row.AmbulantDTO);
+            }
+            else
+            {
+                row.IntendedDTO.PRNumber = int.Parse(row.DocumentRef);
+                db.IntendedColxns[secID].Update(row.IntendedDTO);
+            }
+
         }
 
 
