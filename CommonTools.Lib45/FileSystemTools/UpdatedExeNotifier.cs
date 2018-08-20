@@ -1,11 +1,11 @@
-﻿using PropertyChanged;
+﻿using CommonTools.Lib11.StringTools;
+using CommonTools.Lib45.ThreadTools;
+using PropertyChanged;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows;
-using CommonTools.Lib11.StringTools;
-using static System.Environment;
 
 namespace CommonTools.Lib45.FileSystemTools
 {
@@ -23,16 +23,31 @@ namespace CommonTools.Lib45.FileSystemTools
         private void RelaunchInTemp()
         {
             if (WatchedFile.IsBlank()) return;
+            var tmpExe = "";
+            try
+            {
+                tmpExe = WatchedFile.MakeTempCopy(".exe");
+            }
+            catch (Exception ex)
+            {
+                Alert.Show(ex, $"Creating temp copy of {WatchedFile}");
+                return;
+            }
+            CopyCfgToTemp(tmpExe);
+
+            Process.Start(tmpExe, GetCommandLineArgs());
+            Application.Current.Shutdown();
+        }
+
+
+        private static void CopyCfgToTemp(string tmpExe)
+        {
             var exeNow = CurrentExe.GetFullPath();
             var cfgNow = exeNow + ".config";
-            var tmpExe = WatchedFile.MakeTempCopy(".exe");
             var tmpCfg = tmpExe + ".config";
 
             if (File.Exists(cfgNow))
                 File.Copy(cfgNow, tmpCfg, true);
-
-            Process.Start(tmpExe, GetCommandLineArgs());
-            Application.Current.Shutdown();
         }
 
 
