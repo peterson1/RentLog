@@ -2,6 +2,7 @@
 using FluentAssertions;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.Reporters;
+using RentLog.DomainLib45.Reporters;
 using RentLog.Tests.SampleDBs;
 using System.Linq;
 using Xunit;
@@ -22,7 +23,7 @@ namespace RentLog.Tests.GLRecapTests
             equities.AccountType.Should().Be(GLAcctType.Equity);
             equities.Should().HaveCount(1);
             equities[0].Account.Name.Should().Be("Drawings");
-            equities[0].TotalDebits.Should().Be(1223);
+            equities[0].TotalDebits.Should().Be(230730);
             equities[0].TotalCredits.Should().Be(1223);
             equities.SummaryRows[0].TotalDebits.Should().Be(1234);
             equities.SummaryRows[0].TotalCredits.Should().Be(1234);
@@ -32,6 +33,15 @@ namespace RentLog.Tests.GLRecapTests
 
             sut.TotalDebits .Should().Be(1412);
             sut.TotalCredits.Should().Be(1412);
+        }
+
+
+        [Fact(DisplayName = "GL Recap to Excel")]
+        public void TestMethod00002()
+        {
+            var dir = SampleDir.Aug16_GRY();
+            var sut = new GLRecapReport(Month.July, 2018, dir);
+            sut.ToExcel();
         }
     }
 }

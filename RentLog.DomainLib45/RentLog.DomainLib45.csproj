@@ -157,6 +157,10 @@
       <DependentUpon>TenantColxnsTable.xaml</DependentUpon>
     </Compile>
     <Compile Include="Reporters\ColxnSummaryExcelWriter.cs" />
+    <Compile Include="Reporters\GLRecapExcelWriter.cs" />
+    <Compile Include="Reporters\GLRecapExcelWriter_CategoryDetails.cs" />
+    <Compile Include="Reporters\GLRecapExcelWriter_CategorySummary.cs" />
+    <Compile Include="Reporters\GLRecapExcelWriter_ReportSummary.cs" />
     <Compile Include="SoaViewers\AdjustmentsCRUD\AdjustmentsListVM.cs" />
     <Compile Include="SoaViewers\CellViewer\AdjustmentsUI.xaml.cs">
       <DependentUpon>AdjustmentsUI.xaml</DependentUpon>

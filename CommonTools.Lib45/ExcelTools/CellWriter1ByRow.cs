@@ -1,4 +1,5 @@
 ﻿using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -36,7 +37,7 @@ namespace CommonTools.Lib45.ExcelTools
         #region Cell Value Writers
 
 
-        public ExcelRange WriteMergedText(string text, int rowSpan, int colSpan)
+        public ExcelRange WriteMergedText(string text, int rowSpan, int colSpan, ExcelHorizontalAlignment horizontalAlignment = ExcelHorizontalAlignment.Center)
         {
             var rnge = _ws.Cells[_currentRow,
                                  _currentCol,
@@ -48,13 +49,15 @@ namespace CommonTools.Lib45.ExcelTools
             for (int i = 0; i < rowSpan - 1; i++)
                 MoveToNextRow();
 
-            return rnge.AlignCenter();
+            //return rnge.AlignCenter();
+            rnge.Style.HorizontalAlignment = horizontalAlignment;
+            return rnge;
         }
 
         public void WriteMergedH1(string headerText, int rowSpan, int colSpan)
             => WriteMergedText(headerText, rowSpan, colSpan).FormatH1();
 
-        public void WriteMergedH2(string headerText, int rowSpan, int colSpan)
+        public ExcelRange WriteMergedH2(string headerText, int rowSpan, int colSpan)
             => WriteMergedText(headerText, rowSpan, colSpan).FormatH2();
 
         public ExcelRange WriteH1(string headerText)
@@ -209,6 +212,15 @@ namespace CommonTools.Lib45.ExcelTools
             ApplyGlobalCellFormat(_ws.Cells);
             _bordr = new BorderWriter1(_ws);
         }
+
+
+        public int SheetsCount
+            => _pkg?.Workbook?.Worksheets?.Count ?? 0;
+
+
+        public void DeleteSheet(int sheetNumber)
+            => _pkg?.Workbook?.Worksheets?.Delete(sheetNumber);
+
 
         public void FreezePane(int row, int col)
             => _ws.View.FreezePanes(row, col);

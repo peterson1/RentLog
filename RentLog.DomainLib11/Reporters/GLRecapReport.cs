@@ -9,11 +9,15 @@ namespace RentLog.DomainLib11.Reporters
 {
     public class GLRecapReport : UIList<GLRecapCategory>
     {
+        private const string LONG_FMT = "MMMM d, yyyy";
+
+
         public GLRecapReport(Month month, int year, ITenantDBsDir tenantDBsDir)
         {
-            DBsDir    = tenantDBsDir;
-            StartDate = month.FirstDay(year);
-            EndDate   = month.LastDay(year);
+            DBsDir     = tenantDBsDir;
+            BranchName = DBsDir.MarketState.BranchName;
+            StartDate  = month.FirstDay(year);
+            EndDate    = month.LastDay(year);
 
             Add(new GLRecapCategory(GLAcctType.Equity   , this));
             Add(new GLRecapCategory(GLAcctType.Asset    , this));
@@ -23,12 +27,14 @@ namespace RentLog.DomainLib11.Reporters
         }
 
 
-        public ITenantDBsDir  DBsDir     { get; }
-        public DateTime       StartDate  { get; }
-        public DateTime       EndDate    { get; }
+        public string         Title       { get; set; } = "GL Recap";
+        public string         BranchName  { get; }
+        public ITenantDBsDir  DBsDir      { get; }
+        public DateTime       StartDate   { get; }
+        public DateTime       EndDate     { get; }
 
-
-        public decimal? TotalDebits  => this.Sum(_ => _.TotalDebits);
-        public decimal? TotalCredits => this.Sum(_ => _.TotalCredits);
+        public string   DateRangeText => $"{StartDate.ToString(LONG_FMT)}  to  {EndDate.ToString(LONG_FMT)}";
+        public decimal? TotalDebits   => this.Sum(_ => _.TotalDebits);
+        public decimal? TotalCredits  => this.Sum(_ => _.TotalCredits);
     }
 }

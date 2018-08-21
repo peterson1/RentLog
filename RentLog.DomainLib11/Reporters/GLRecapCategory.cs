@@ -48,8 +48,8 @@ namespace RentLog.DomainLib11.Reporters
 
         private void GroupByAccount(List<GLRecapAllocation> allocs, GLRecapReport main)
         {
-            var repo = main.DBsDir.MarketState.GLAccounts;
-            var grpdByAcct = allocs.GroupBy(_ => _.Account.Name);
+            var grpdByAcct = allocs.GroupBy(_ => _.Account.Name)
+                                   .OrderBy(_ => _.Key);
             foreach (var grp in grpdByAcct)
             {
                 var acct = GLAccountDTO.Named(grp.Key);
