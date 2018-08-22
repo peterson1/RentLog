@@ -2,6 +2,7 @@
 using CommonTools.Lib11.DateTimeTools;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
+using RentLog.DomainLib11.ReportRows;
 using System;
 using System.Linq;
 
@@ -24,6 +25,8 @@ namespace RentLog.DomainLib11.Reporters
             Add(new GLRecapCategory(GLAcctType.Liability, this));
             Add(new GLRecapCategory(GLAcctType.Income   , this));
             Add(new GLRecapCategory(GLAcctType.Expense  , this));
+
+            this.LoadIncomeSources();
         }
 
 

@@ -1,6 +1,7 @@
 ﻿using CommonTools.Lib45.ExcelTools;
 using OfficeOpenXml.Style;
 using RentLog.DomainLib11.Reporters;
+using RentLog.DomainLib11.ReportRows;
 using System;
 
 namespace RentLog.DomainLib45.Reporters
@@ -33,11 +34,9 @@ namespace RentLog.DomainLib45.Reporters
         }
 
 
-        private void WriteRepSmryRowLabels(int labelCol, int colSpan)
+        private void WriteRepSmryRowLabels(int colNum, int colSpan)
         {
-            _xl.MoveTo(H2_ROW, labelCol);
-            _xl.WriteMergedH2("account type", 1, colSpan);
-            _xl.MoveTo(N1_ROW, null);
+            WriteMergedColHeader("account type", colNum, colSpan);
 
             foreach (var cat in _src)
             {
@@ -51,11 +50,7 @@ namespace RentLog.DomainLib45.Reporters
         private void WriteRepSmryAmounts(int colNum, string colLabel, 
             Func<GLRecapCategory, decimal?> getter)
         {
-            _xl.MoveTo(H2_ROW, colNum);
-            _xl.CurrentCol.Width = 15;
-            _xl.WriteH2(colLabel);
-
-            _xl.MoveTo(N1_ROW, null);
+            WriteColHeader(colLabel, colNum, 15);
 
             foreach (var cat in _src)
                 _xl.WriteNumber(getter(cat));

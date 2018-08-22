@@ -55,7 +55,7 @@ namespace RentLog.DomainLib45.Reporters
             rng.SetBold();
         }
 
-        private void WriteTotalsRowLabel(int labelCol, int colSpan)
+        private void WriteTotalsRowLabel(int colNum, int colSpan)
         {
             var rng = _xl.WriteMergedText("total  ", 1, colSpan, ExcelHorizontalAlignment.Right);
             rng.Style.Indent = 1;
@@ -77,6 +77,24 @@ namespace RentLog.DomainLib45.Reporters
             _xl.Row(H1_ROW).Height     = 30;
             _xl.Row(H2_ROW).Height     = 27;
             _xl.Row(last).Height       = 27;
+        }
+
+
+        private void WriteColHeader(string label, int colNum, double colWidth)
+        {
+            _xl.MoveTo(H2_ROW, colNum);
+            _xl.CurrentCol.Width = colWidth;
+            _xl.WriteH2(label);
+
+            _xl.MoveTo(N1_ROW, null);
+        }
+
+
+        private void WriteMergedColHeader(string label, int colNum, int colSpan)
+        {
+            _xl.MoveTo(H2_ROW, colNum);
+            _xl.WriteMergedH2(label, 1, colSpan);
+            _xl.MoveTo(N1_ROW, null);
         }
 
 
