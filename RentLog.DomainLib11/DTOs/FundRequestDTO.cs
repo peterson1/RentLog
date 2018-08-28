@@ -1,8 +1,5 @@
-﻿using CommonTools.Lib11.DTOs;
-using RentLog.DomainLib11.Models;
+﻿using RentLog.DomainLib11.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace RentLog.DomainLib11.DTOs
 {
@@ -12,8 +9,12 @@ namespace RentLog.DomainLib11.DTOs
         public int        BankAccountId  { get; set; }
         public string     Payee          { get; set; }
         public string     Purpose        { get; set; }
-        public DateTime   RequestDate    { get; set; }
+        public int        DateOffset     { get; set; }
         public decimal?   Amount         { get; set; }
+
+
+        public DateTime RequestDate 
+            => DateTime.MinValue.AddDays(DateOffset);
 
 
         public override string ToString()

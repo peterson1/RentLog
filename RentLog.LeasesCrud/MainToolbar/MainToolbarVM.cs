@@ -88,8 +88,8 @@ namespace RentLog.LeasesCrud.MainToolbar
             //                 + L.f + $"left: {left}");
             //});
 
-            desc = "AddCollector.DefaultRecords(";
-            return () => AddCollector.DefaultRecords(5, _args);
+            desc = "ForAllRequests.SetDateOffset";
+            return () => ForAllRequests.SetDateOffset(_args);
         }
     }
 }

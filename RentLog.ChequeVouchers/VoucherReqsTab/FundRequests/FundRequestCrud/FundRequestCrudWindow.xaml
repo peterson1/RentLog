@@ -60,8 +60,8 @@
                 
                 <TextBox Text="{Binding Draft.SerialNum, StringFormat=000#, UpdateSourceTrigger=PropertyChanged}"
                          mat:HintAssist.Hint="req. #" />
-                
-                <DatePicker SelectedDate="{Binding Draft.RequestDate, UpdateSourceTrigger=PropertyChanged}"
+
+                <DatePicker SelectedDate="{Binding CrudRequestDate, UpdateSourceTrigger=PropertyChanged}"
                             mat:HintAssist.Hint="request date" />
                 
                 <TextBox Text="{Binding AppArgs.CurrentBankAcct.Name}"

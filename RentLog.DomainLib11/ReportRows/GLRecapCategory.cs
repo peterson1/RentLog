@@ -87,8 +87,6 @@ namespace RentLog.DomainLib11.ReportRows
 
         private void GroupByAccount(List<GLRecapAllocation> allocs, GLRecapReport main)
         {
-            //todo: use request date instead of cleared date
-
             var grpdByAcct = allocs.GroupBy(_ => _.Account.Name)
                                    .OrderBy(_ => _.Key);
             foreach (var grp in grpdByAcct)

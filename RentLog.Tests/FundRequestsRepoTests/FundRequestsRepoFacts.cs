@@ -1,4 +1,5 @@
-﻿using CommonTools.Lib11.DatabaseTools;
+﻿using CommonTools.Lib11.DateTimeTools;
+using CommonTools.Lib11.DatabaseTools;
 using FluentAssertions;
 using Moq;
 using RentLog.DomainLib11.ChequeVoucherRepos;
@@ -122,13 +123,13 @@ namespace RentLog.Tests.FundRequestsRepoTests
             var sut = new FundRequestsRepo1(moq.Object);
             var obj = ValidSampleDTO();
 
-            obj.RequestDate = DateTime.MinValue;
+            obj.DateOffset = 0;
             sut.IsValidForInsert(obj, out string why).Should().BeFalse();
             obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeFalse();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
 
-            obj.RequestDate = DateTime.Now;
+            obj.DateOffset = DateTime.Now.DaysSinceMin();
             obj.Id = 0;
             sut.IsValidForInsert(obj, out why).Should().BeTrue();
             obj.Id = 123;
@@ -210,7 +211,7 @@ namespace RentLog.Tests.FundRequestsRepoTests
 
             obj.Allocations[0].Account.Id = 0;
             obj.Id = 0;
-            sut.IsValidForInsert(obj, out why).Should().BeTrue();
+            sut.IsValidForInsert(obj, out why).Should().BeTrue(why);
             obj.Id = 123;
             sut.IsValidForUpdate(obj, out why).Should().BeTrue();
             sut.IsValidForDelete(obj, out why).Should().BeTrue();
@@ -224,7 +225,7 @@ namespace RentLog.Tests.FundRequestsRepoTests
             BankAccountId = 456,
             Payee         = "Mr. Payee Dude",
             Purpose       = "To be Purposeful",
-            RequestDate   = DateTime.Now,
+            DateOffset    = DateTime.Now.DaysSinceMin(),
             Amount        = 789,
             Allocations   = new List<AccountAllocation>
             {

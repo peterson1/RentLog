@@ -18,7 +18,8 @@ namespace RentLog.DatabaseLib.FundRequestsRepository
         protected override void EnsureIndeces(LiteCollection<FundRequestDTO> coll)
         {
             coll.EnsureIndex(_ => _.SerialNum);
-            coll.EnsureIndex(_ => _.RequestDate);
+            //coll.EnsureIndex(_ => _.RequestDate);
+            coll.EnsureIndex(_ => _.DateOffset);
             coll.EnsureIndex(_ => _.BankAccountId);
         }
     }

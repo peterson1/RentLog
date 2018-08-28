@@ -35,7 +35,7 @@
                 <TextBox Text="{Binding DTO.Request.SerialNum, StringFormat=000#}"
                          mat:HintAssist.Hint="req. #" />
 
-                <TextBox Text="{Binding DTO.Request.RequestDate, StringFormat=d MMMM yyyy}"
+                <TextBox Text="{Binding DTO.Request.RequestDate, Mode=OneWay, StringFormat=d MMMM yyyy}"
                          mat:HintAssist.Hint="request date" />
 
                 <TextBox Text="{Binding AppArgs.CurrentBankAcct.Name}"
