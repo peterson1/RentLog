@@ -15,6 +15,7 @@ namespace RentLog.DomainLib11.DTOs
 
         public DateTime RequestDate 
             => DateTime.MinValue.AddDays(DateOffset);
+        //public DateTime RequestDate { get; set; }
 
 
         public override string ToString()

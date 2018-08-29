@@ -36,8 +36,16 @@ namespace RentLog.DomainLib11.ChequeVoucherRepos
                 ChequeDate   = chequeDate,
                 ChequeNumber = chequeNumber,
             });
-            InactiveRequests.Insert(request);
+            InactiveRequests.Insert(ToInactive(request));
             ActiveRequests  .Delete(request);
+        }
+
+
+        private FundRequestDTO ToInactive(FundRequestDTO orig)
+        {
+            var inactv = orig.ShallowClone<FundRequestDTO>();
+            inactv.Id = 0;
+            return inactv;
         }
 
 

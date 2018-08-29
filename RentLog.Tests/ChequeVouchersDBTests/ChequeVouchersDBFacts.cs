@@ -28,7 +28,7 @@ namespace RentLog.Tests.ChequeVouchersDBTests
             sut.SetAs_Prepared(req, DateTime.Now, 123);
 
             cheques.Verify(_ => _.Insert(It.IsAny<ChequeVoucherDTO>()), Times.Once);
-            inactvs.Verify(_ => _.Insert(req), Times.Once);
+            inactvs.Verify(_ => _.Insert(It.IsAny<FundRequestDTO>()), Times.Once);
             activs .Verify(_ => _.Delete(req), Times.Once);
         }
 
