@@ -30,6 +30,9 @@ namespace RentLog.ReportLauncher
                 case "DAILYSTATUS":
                     DailyStatusReportVM.Launch(args);
                     break;
+                case "GLRECAP":
+                    GLRecapExcelWriter.Launch(args);
+                    break;
                 default: throw Bad.Arg("Param1", args.Param1);
             }
         }

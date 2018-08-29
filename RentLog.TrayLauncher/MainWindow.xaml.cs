@@ -1,12 +1,7 @@
-﻿using CommonTools.Lib11.InputCommands;
-using CommonTools.Lib45.UIExtensions;
-using System;
+﻿using CommonTools.Lib45.UIExtensions;
 using System.Drawing;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Input;
 using static RentLog.TrayLauncher.Properties.Settings;
 
 namespace RentLog.TrayLauncher
@@ -40,6 +35,7 @@ namespace RentLog.TrayLauncher
                 ctxMenu.AddLauncher(VM.OverduesCmd);
                 ctxMenu.AddLauncher(VM.ColxnSummaryCmd);
                 ctxMenu.AddLauncher(VM.DailyStatusCmd);
+                ctxMenu.AddLauncher(VM.GLRecapCmd);
                 ctxMenu.Items.Add(new Separator());
 
                 ctxMenu.Add(VM.CloseWindowCmd);

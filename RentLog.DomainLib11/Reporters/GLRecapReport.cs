@@ -13,12 +13,12 @@ namespace RentLog.DomainLib11.Reporters
         private const string LONG_FMT = "MMMM d, yyyy";
 
 
-        public GLRecapReport(Month month, int year, ITenantDBsDir tenantDBsDir)
+        public GLRecapReport(DateTime startDate, DateTime endDate, ITenantDBsDir tenantDBsDir)
         {
             DBsDir     = tenantDBsDir;
             BranchName = DBsDir.MarketState.BranchName;
-            StartDate  = month.FirstDay(year);
-            EndDate    = month.LastDay(year);
+            StartDate  = startDate;
+            EndDate    = endDate;
 
             Add(new GLRecapCategory(GLAcctType.Equity   , this));
             Add(new GLRecapCategory(GLAcctType.Asset    , this));
@@ -27,6 +27,12 @@ namespace RentLog.DomainLib11.Reporters
             Add(new GLRecapCategory(GLAcctType.Expense  , this));
 
             this.LoadIncomeSources();
+        }
+
+
+        public GLRecapReport(Month month, int year, ITenantDBsDir tenantDBsDir)
+            : this(month.FirstDay(year), month.LastDay(year), tenantDBsDir)
+        {
         }
 
 

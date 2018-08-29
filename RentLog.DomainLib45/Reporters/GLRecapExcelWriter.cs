@@ -1,6 +1,8 @@
 ﻿using System;
 using CommonTools.Lib45.ExcelTools;
+using CommonTools.Lib45.InputDialogs;
 using OfficeOpenXml.Style;
+using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.Reporters;
 
 namespace RentLog.DomainLib45.Reporters
@@ -99,6 +101,18 @@ namespace RentLog.DomainLib45.Reporters
 
 
         public void LaunchExcel() => _xl.LaunchTempSave();
+
+
+        public static void Launch(ITenantDBsDir dir)
+        {
+            var now = DateTime.Now.Date;
+            var bgn = new DateTime(now.Year, now.Month, 1);
+            var end = dir.Collections.LastPostedDate();
+
+            if (!PopUpInput.TryGetDateRange("Dates covered by GL Recap Report", out (DateTime Start, DateTime End) rng, bgn, end)) return;
+
+            new GLRecapReport(rng.Start, rng.End, dir).ToExcel();
+        }
     }
 
 

@@ -1,5 +1,7 @@
-﻿using CommonTools.Lib11.DataStructures;
+﻿using CommonTools.Lib11.DateTimeTools;
+using CommonTools.Lib11.DataStructures;
 using CommonTools.Lib11.JsonTools;
+using RentLog.DomainLib11.ChequeVoucherRepos;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.Models;
@@ -29,9 +31,10 @@ namespace RentLog.DomainLib11.ReportRows
         private void FillWithSubRows(GLRecapReport main)
         {
             var allocs  = new List<GLRecapAllocation>();
-            var allReqs = main.DBsDir.Vouchers.AllRequests.GetAll()
-                              .Where(_ => IsWithinDates(_, main))
-                              .ToList();
+            //var allReqs = main.DBsDir.Vouchers.AllRequests.GetAll()
+            //                  .Where(_ => IsWithinDates(_, main))
+            //                  .ToList();
+            var allReqs = GetCombinedList(main);
 
             foreach (var req in allReqs)
             {
@@ -45,6 +48,24 @@ namespace RentLog.DomainLib11.ReportRows
         }
 
 
+        private List<FundRequestDTO> GetCombinedList(GLRecapReport main)
+        {
+            var repos   = main.DBsDir.Vouchers;
+            var activs  = GetRequestsWithinDates(main, repos.ActiveRequests);
+            var inactvs = GetRequestsWithinDates(main, repos.InactiveRequests);
+            return activs.Concat(inactvs).ToList();
+        }
+
+
+        private List<FundRequestDTO> GetRequestsWithinDates(GLRecapReport main, IFundRequestsRepo repo)
+        {
+            var start = main.StartDate.DaysSinceMin();
+            var end   = main.EndDate.DaysSinceMin();
+            return repo.Find(_ => _.DateOffset >= start
+                               && _.DateOffset <= end);
+        }
+
+
         private bool IsWithinDates(FundRequestDTO req, GLRecapReport main)
         {
             var date = req.RequestDate.Date;
@@ -52,37 +73,6 @@ namespace RentLog.DomainLib11.ReportRows
             if (date > main.EndDate) return false;
             return true;
         }
-
-
-        /*
-        private void FillWithSubRows(GLRecapReport main)
-        {
-            var allocs = new List<GLRecapAllocation>();
-            var mkt    = main.DBsDir.MarketState;
-            var repo   = main.DBsDir.Vouchers.PassbookRows;
-            var rows   = repo.RowsFromAllAccounts(main.StartDate, main.EndDate, mkt);
-
-            foreach (var row in rows)
-            {
-                if (!IsFromChequeVoucher(row)) continue;
-                var vouchr = ToChequeVoucher(row);
-                foreach (var alloc in vouchr.Request.Allocations)
-                {
-                    if (alloc.Account.AccountType == this.AccountType)
-                        allocs.Add(new GLRecapAllocation(row, vouchr, alloc));
-                }
-            }
-            GroupByAccount(allocs, main);
-        }
-
-
-        private ChequeVoucherDTO ToChequeVoucher(PassbookRowDTO row)
-            => row.DocRefJson.ReadJson<ChequeVoucherDTO>();
-
-
-        private bool IsFromChequeVoucher(PassbookRowDTO row)
-            => row.DocRefType == typeof(ChequeVoucherDTO).FullName;
-    */
 
 
         private void GroupByAccount(List<GLRecapAllocation> allocs, GLRecapReport main)

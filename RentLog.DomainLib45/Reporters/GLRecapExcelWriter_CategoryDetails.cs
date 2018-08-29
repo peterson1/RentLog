@@ -70,7 +70,7 @@ namespace RentLog.DomainLib45.Reporters
 
         private void WriteGLAccountsColumn(GLRecapCategory cat, ref int colNum, int colSpan)
         {
-            WriteMergedColHeader("GL Account", colNum, colSpan);
+            WriteMergedColHeader("group", colNum, colSpan);
 
             foreach (var acctGrp in cat)
             {

@@ -15,7 +15,7 @@ namespace RentLog.Tests.GLRecapTests
         [Fact(DisplayName = "Aug 1, GRY")]
         public void TestMethod00001()
         {
-            var dir = SampleDir.Aug16_GRY();
+            var dir = SampleDir.Aug27_GRY();
             var sut = new GLRecapReport(Month.July, 2018, dir);
             sut.Should().HaveCount(5);
 
@@ -23,23 +23,31 @@ namespace RentLog.Tests.GLRecapTests
             equities.AccountType.Should().Be(GLAcctType.Equity);
             equities.Should().HaveCount(1);
             equities[0].Account.Name.Should().Be("Drawings");
-            equities[0].TotalDebits.Should().Be(230730);
-            equities[0].TotalCredits.Should().Be(1223);
-            equities.SummaryRows[0].TotalDebits.Should().Be(1234);
-            equities.SummaryRows[0].TotalCredits.Should().Be(1234);
+            equities[0].TotalDebits.Should().Be(230780);
+            equities[0].TotalCredits.Should().Be(0);
+            equities[0].Should().HaveCount(2);
+            equities.TotalDebits.Should().Be(230780);
+            equities.TotalCredits.Should().Be(0);
 
             var assets = sut.ElementAt(1);
+            assets.AccountType.Should().Be(GLAcctType.Asset);
+            assets.Should().HaveCount(5);
+            assets[1].Account.Name.Should().Be("Advances to Officers and Employees");
+            assets[1].TotalDebits.Should().Be(1135);
+            assets[1].TotalCredits.Should().Be(0);
+            assets[1].Should().HaveCount(1);
+            assets.TotalDebits.Should().Be(111455.83M);
+            assets.TotalCredits.Should().Be(756405.14M);
 
-
-            sut.TotalDebits .Should().Be(1412);
-            sut.TotalCredits.Should().Be(1412);
+            sut.TotalDebits .Should().Be(770000.23M);
+            sut.TotalCredits.Should().Be(770000.23M);
         }
 
 
         [Fact(DisplayName = "GL Recap to Excel")]
         public void TestMethod00002()
         {
-            var dir = SampleDir.Aug16_GRY();
+            var dir = SampleDir.Aug27_GRY();
             var sut = new GLRecapReport(Month.July, 2018, dir);
             sut.ToExcel();
         }

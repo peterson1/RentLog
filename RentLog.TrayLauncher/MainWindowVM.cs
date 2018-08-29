@@ -5,6 +5,7 @@ using CommonTools.Lib45.BaseViewModels;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.LicenseTools;
 using CommonTools.Lib45.ThreadTools;
+using RentLog.DomainLib11.Authorization;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -30,6 +31,7 @@ namespace RentLog.TrayLauncher
             OverduesCmd     = NewCmd("RL.Reports.exe", "Backrentals & Overdue Rights", "Overdues");
             ColxnSummaryCmd = NewCmd("RL.Reports.exe", "Collections Summary Report"  , "ColxnSmry");
             DailyStatusCmd  = NewCmd("RL.Reports.exe", "Daily Status Report"         , "DailyStatus");
+            GLRecapCmd      = NewCmd("RL.Reports.exe", "GL Recap Report"             , "GLRecap");
             ClickRefresh();
         }
 
@@ -47,6 +49,7 @@ namespace RentLog.TrayLauncher
         public ExeLauncherCommand   OverduesCmd      { get; }
         public ExeLauncherCommand   ColxnSummaryCmd  { get; }
         public ExeLauncherCommand   DailyStatusCmd   { get; }
+        public ExeLauncherCommand   GLRecapCmd       { get; }
 
         public string               NameAndRole      { get; private set; } = "verifying ...";
         public string               ArgumentError    { get; private set; }
