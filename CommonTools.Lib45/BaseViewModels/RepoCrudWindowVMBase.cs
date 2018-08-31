@@ -1,6 +1,7 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
 using CommonTools.Lib11.DTOs;
 using CommonTools.Lib11.GoogleTools;
+using CommonTools.Lib45.ThreadTools;
 using PropertyChanged;
 using System.Windows;
 
@@ -28,8 +29,15 @@ namespace CommonTools.Lib45.BaseViewModels
 
 
         protected override void UpdateRecord(TDraft record)
-            => _repo.Update(record);
+        {
+            if (!_repo.Update(record))
+            {
+                var recText = (record is IDocumentDTO dto)
+                            ? $"record ID [{dto.Id}]" : $"“{record}”";
 
+                Alert.ShowModal("Failed to update record.", $"Unable to save {recText}.");
+            }
+        }
 
         protected override bool IsValidDraft(TDraft draft, out string whyInvalid)
         {
