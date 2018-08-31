@@ -23,7 +23,7 @@
             <local:FiltersUI DockPanel.Dock="Top"
                              DataContext="{Binding Filter}" />
 
-            <local:MainTable DataContext="{Binding ItemsList}" />
+            <local:MainTable x:Name="tbl" />
         </DockPanel>
         <busy:BusyDialog />
     </Grid>

@@ -60,6 +60,9 @@ namespace RentLog.DomainLib11.Authorization
         public static bool CanEditClearedDate(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
             "Edit “Cleared” date", "Cashier", "Supervisor", "Admin");
 
+        public static bool CanEditInactiveRequest(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
+            "Edit Inactive Request", "Supervisor", "Admin");
+
 
 
         public static bool CanPostAndClose(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,

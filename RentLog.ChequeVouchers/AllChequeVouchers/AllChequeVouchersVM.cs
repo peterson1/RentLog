@@ -27,7 +27,7 @@ namespace RentLog.ChequeVouchers.AllChequeVouchers
 
 
         public MainListVM  MainList         { get; }
-        public IR2Command  LaunchWindowCmd  { get; set; }
+        public IR2Command  LaunchWindowCmd  { get; }
 
 
         protected override void OnRefreshClicked()

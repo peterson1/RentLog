@@ -1,6 +1,9 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
 using CommonTools.Lib45.BaseViewModels;
 using PropertyChanged;
+using RentLog.ChequeVouchers.CommonControls.ChequeVoucherViewer;
+using RentLog.ChequeVouchers.VoucherReqsTab.FundRequests.FundRequestCrud;
+using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using System.Collections.Generic;
@@ -20,5 +23,13 @@ namespace RentLog.ChequeVouchers.AllChequeVouchers
             => base.QueryItems(db).Where(_ => _.BankAccountId == AppArgs.CurrentBankAcct.Id)
                                   .OrderByDescending(_ => _.SerialNum)
                                   .ToList();
+
+
+        protected override void OnItemOpened(FundRequestDTO e)
+        {
+            if (AppArgs.CanEditInactiveRequest(false))
+                new FundRequestCrudVM(AppArgs)
+                    .EditCurrentRecord(e);
+        }
     }
 }

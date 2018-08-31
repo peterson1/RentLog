@@ -56,6 +56,16 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.FundRequests.FundRequestCrud
         }
 
 
+        protected override void UpdateRecord(FundRequestDTO record)
+        {
+            var match = _repo.Find(record.Id, false);
+            if (match == null)
+                AppArgs.Vouchers.InactiveRequests.Update(record);
+            else
+                base.UpdateRecord(record);
+        }
+
+
         protected override async void OnWindowLoaded()
         {
             if (Draft.Id != 0) return;
