@@ -31,14 +31,15 @@ namespace RentLog.LeasesCrud.LeasesList
             Crud                  = new LeaseCrudVM(AppArgs.MarketState.ActiveLeases, AppArgs);
             AddStallToTenantCmd   = R2Command.Relay(AddStallToTenant  , _ => Crud.CanEncodeNewDraft(), "Add another Stall to this Tenant");
             EditThisLeaseCmd      = R2Command.Relay(EditThisLease     , _ => CanEditRecord(Rows.CurrentItem?.DTO), "Edit this Lease");
+            EditTenantInfoCmd     = R2Command.Relay(EditThisLease     , _ => AppArgs.CanEditTenantInfo(false), "Edit Tenant Info");
             TerminateThisLeaseCmd = R2Command.Relay(TerminateThisLease, _ => AppArgs.CanTerminateteLease(false), "Terminate this Lease");
-            //Rows[0].DTO.RightsDueDate
         }
 
 
         public LeaseCrudVM  Crud                   { get; }
         public IR2Command   AddStallToTenantCmd    { get; }
         public IR2Command   EditThisLeaseCmd       { get; }
+        public IR2Command   EditTenantInfoCmd      { get; }
         public IR2Command   TerminateThisLeaseCmd  { get; }
 
 
@@ -54,6 +55,7 @@ namespace RentLog.LeasesCrud.LeasesList
         private void EditThisLease()
         {
             if (!TryGetPickedItem(out LeaseDTO lse)) return;
+            Crud.AllFieldsEnabled = AppArgs.CanEditLease(false);
             Crud.EditCurrentRecord(lse);
         }
 

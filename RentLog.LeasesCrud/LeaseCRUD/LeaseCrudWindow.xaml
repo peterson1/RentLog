@@ -26,7 +26,7 @@
     <StackPanel Margin="30">
         <StackPanel Orientation="Horizontal">
 
-            <local:ContractInfoPane />
+            <local:ContractInfoPane IsEnabled="{Binding AllFieldsEnabled}" />
 
             <local:TenantInfoPane Margin="90 0 0 0" />
 

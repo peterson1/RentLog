@@ -15,6 +15,9 @@
             <MenuItem Header ="{Binding EditThisLeaseCmd.CurrentLabel}" 
                       Command="{Binding EditThisLeaseCmd}"
                       DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+            <MenuItem Header ="{Binding EditTenantInfoCmd.CurrentLabel}" 
+                      Command="{Binding EditTenantInfoCmd}"
+                      DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
             <MenuItem Header ="{Binding TerminateThisLeaseCmd.CurrentLabel}" 
                       Command="{Binding TerminateThisLeaseCmd}"
                       DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />

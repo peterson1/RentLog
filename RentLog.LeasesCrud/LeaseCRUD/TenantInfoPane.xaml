@@ -28,7 +28,8 @@
         <TextBlock Text="Tenant's Record" 
                    Style="{DynamicResource txtTitle}" />
 
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" 
+                    IsEnabled="{Binding AllFieldsEnabled}">
             <TextBox Tag="Draft.Tenant.FirstName"
                      mat:HintAssist.Hint="first name" />
 

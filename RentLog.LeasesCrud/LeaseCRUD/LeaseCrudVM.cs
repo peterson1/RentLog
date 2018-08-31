@@ -27,7 +27,8 @@ namespace RentLog.LeasesCrud.LeaseCRUD
 
         public DateTime?    DraftBirthDate    { get; set; }
         public TenantModel  TenantTemplate    { get; set; }
-                                              
+        public bool         AllFieldsEnabled  { get; set; }
+
         public double?      ContractSpanDays  { get; private set; }
         public DateTime?    FirstRentDueDate  { get; private set; }
         public DateTime?    RightsDueDate     { get; private set; }
