@@ -24,12 +24,10 @@ namespace RentLog.Tests.StallsInventoryTests
             var sut = new StallsInventoryReport(db, mkt);
 
             sut.Count.Should().Be(3);
-            //sut.ContainsKey(DRY).Should().BeTrue();
-            //sut.ContainsKey(FRZ).Should().BeTrue();
-            //sut.ContainsKey(WET).Should().BeTrue();
-            var dry = sut.Single(_ => _.Section.Id == DRY);
-            var frz = sut.Single(_ => _.Section.Id == FRZ);
-            var wet = sut.Single(_ => _.Section.Id == WET);
+            var dry   = sut.Single(_ => _.Section.Id == DRY);
+            var frz   = sut.Single(_ => _.Section.Id == FRZ);
+            var wet   = sut.Single(_ => _.Section.Id == WET);
+            var total = sut.SummaryRows?.FirstOrDefault();
 
             dry.TotalCount.Should().Be(68);
             dry.TotalRent.Should().Be(11767);
@@ -57,6 +55,16 @@ namespace RentLog.Tests.StallsInventoryTests
             wet.Vacants.Count.Should().Be(19);
             wet.VacantRent.Should().Be(1560);
             wet.VacantRate.Should().BeApproximately(0.19M, 0.01M);
+
+            total.Should().NotBeNull();
+            total.TotalCount.Should().Be(68 + 8 + 102);
+            total.TotalRent.Should().Be(11767 + 0 + 8520);
+            total.Occupieds.Count.Should().Be(50 + 0 + 83);
+            total.OccupiedRent.Should().Be(8651 + 0 + 6960);
+            total.OccupiedRate.Should().BeApproximately(0.747M, 0.01M);
+            total.Vacants.Count.Should().Be(18 + 8 + 19);
+            total.VacantRent.Should().Be(3116 + 0 + 1560);
+            total.VacantRate.Should().BeApproximately(0.26M, 0.01M);
         }
 
 
@@ -69,12 +77,10 @@ namespace RentLog.Tests.StallsInventoryTests
             var sut = new StallsInventoryReport(db, mkt);
 
             sut.Count.Should().Be(3);
-            //sut.ContainsKey(DRY).Should().BeTrue();
-            //sut.ContainsKey(FRZ).Should().BeTrue();
-            //sut.ContainsKey(WET).Should().BeTrue();
-            var dry = sut.Single(_ => _.Section.Id == DRY);
-            var frz = sut.Single(_ => _.Section.Id == FRZ);
-            var wet = sut.Single(_ => _.Section.Id == WET);
+            var dry   = sut.Single(_ => _.Section.Id == DRY);
+            var frz   = sut.Single(_ => _.Section.Id == FRZ);
+            var wet   = sut.Single(_ => _.Section.Id == WET);
+            var total = sut.SummaryRows?.FirstOrDefault();
 
             dry.TotalCount.Should().Be(68);
             dry.TotalRent.Should().Be(11767);
@@ -102,6 +108,16 @@ namespace RentLog.Tests.StallsInventoryTests
             wet.Vacants.Count.Should().Be(33);
             wet.VacantRent.Should().Be(2690);
             wet.VacantRate.Should().BeApproximately(0.32M, 0.01M);
+
+            total.Should().NotBeNull();
+            total.TotalCount.Should().Be(68 + 8 + 104);
+            total.TotalRent.Should().Be(11767 + 0 + 8720);
+            total.Occupieds.Count.Should().Be(38 + 0 + 71);
+            total.OccupiedRent.Should().Be(6615 + 0 + 6030);
+            total.OccupiedRate.Should().BeApproximately(0.606M, 0.01M);
+            total.Vacants.Count.Should().Be(30 + 8 + 33);
+            total.VacantRent.Should().Be(5152 + 0 + 2690);
+            total.VacantRate.Should().BeApproximately(0.394M, 0.01M);
         }
     }
 }

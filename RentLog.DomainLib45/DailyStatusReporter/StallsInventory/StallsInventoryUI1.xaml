@@ -13,5 +13,7 @@
                    Margin="20 0 20 10" />
 
         <local:StallsInventoryTable DataContext="{Binding StallsInventory}" />
+        <local:StallsInventoryTable DataContext="{Binding StallsInventory.SummaryRows}"
+                                    x:Name="tblTotals" />
     </StackPanel>
 </UserControl>

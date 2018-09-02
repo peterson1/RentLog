@@ -10,6 +10,10 @@ namespace RentLog.DomainLib11.ReportRows
 {
     public class StallsInventoryRow
     {
+        public StallsInventoryRow()
+        {
+        }
+
         public StallsInventoryRow(SectionDTO section, ICollectionsDB collectionsDB)
         {
             Section = section;
@@ -18,7 +22,7 @@ namespace RentLog.DomainLib11.ReportRows
         }
 
 
-        public SectionDTO        Section    { get; }
+        public SectionDTO        Section    { get; protected set; }
         public UIList<LeaseDTO>  Occupieds  { get; } = new UIList<LeaseDTO>();
         public UIList<StallDTO>  Vacants    { get; } = new UIList<StallDTO>();
 
