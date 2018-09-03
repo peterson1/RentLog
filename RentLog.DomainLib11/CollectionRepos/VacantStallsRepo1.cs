@@ -39,7 +39,8 @@ namespace RentLog.DomainLib11.CollectionRepos
                                .ToList ();
 
             return mkt.Stalls.ForSection(secID)
-                             .Where     (_ => !occupieds.Contains(_.Id))
+                             .Where     (_ => !occupieds.Contains(_.Id)
+                                           && _.IsOperational)
                              .ToList    ();
         }
     }
