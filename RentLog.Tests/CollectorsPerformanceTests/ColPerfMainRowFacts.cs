@@ -38,13 +38,13 @@ namespace RentLog.Tests.CollectorsPerformanceTests
             rent.PerfRate      .Should().BeApproximately(0.70M, 0.01M);
 
             var rights = sut[0].RightsBill;
-            rights.Target        .Should().Be(142933);
+            rights.Target        .Should().Be(1881);
             rights.NoExcess      .Should().Be(116);
-            rights.UnderpaidCount.Should().Be(33);
-            rights.UnderpaidTotal.Should().Be(142817);
+            rights.UnderpaidCount.Should().Be(31);
+            rights.UnderpaidTotal.Should().Be(1840);
             rights.OverpaidCount .Should().Be(0);
             rights.OverpaidTotal .Should().Be(0);
-            rights.PerfRate      .Should().BeApproximately(0.0M, 0.01M);
+            rights.PerfRate      .Should().BeApproximately(0.06M, 0.01M);
         }
     }
 }

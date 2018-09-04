@@ -56,5 +56,19 @@ namespace RentLog.Tests.CollectorsPerformanceTests
             row.Rent.Shortage.Should().Be(0);
             row.Rent.Overage .Should().Be(90);
         }
+
+
+        [Fact(DisplayName = "Aug. 27 Rights")]
+        public void Aug27Rights()
+        {
+            var dir = SampleDir.Aug27_GRY();
+            var db  = dir.Collections.For(27.August(2018));
+            var sut = new CollectorsPerformanceReport(db, dir.MarketState);
+            sut.Should().HaveCount(1);
+            sut[0].Should().HaveCount(75);
+
+            var row = sut[0].Single(_ => _.Lease.Id == 169); //DRY 056
+            row.Rights.Target.Should().Be(234);
+        }
     }
 }
