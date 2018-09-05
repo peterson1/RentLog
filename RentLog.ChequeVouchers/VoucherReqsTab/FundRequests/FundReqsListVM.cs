@@ -42,6 +42,10 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.FundRequests
             => Crud.EditCurrentRecord(e);
 
 
+        protected override bool CanDeleteRecord(FundRequestDTO rec)
+            => AppArgs.CanDeleteVoucherRequest(true);
+
+
         protected override bool CanRunMainMethod()
         {
             if (!AppArgs.CanInputChequeDetails(false))

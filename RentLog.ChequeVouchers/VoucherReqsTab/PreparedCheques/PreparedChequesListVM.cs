@@ -55,6 +55,10 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.PreparedCheques
             => ChequeVoucherViewerVM.Show(ItemsList.CurrentItem, AppArgs);
 
 
+        protected override bool CanDeleteRecord(ChequeVoucherDTO rec)
+            => AppArgs.CanDeletePreparedCheque(true);
+
+
         protected override bool CanRunMainMethod()
         {
             if (!AppArgs.CanIssueChequeToPayee(false))

@@ -45,8 +45,14 @@ namespace RentLog.DomainLib11.Authorization
         public static bool CanAddVoucherRequest(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
             "Create Voucher Request", "Supervisor", "Admin");
 
+        public static bool CanDeleteVoucherRequest(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
+            "Delete Voucher Request", "Admin");
+
         public static bool CanInputChequeDetails(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
             "Input Cheque Details", "Supervisor", "Admin");
+
+        public static bool CanDeletePreparedCheque(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
+            "Delete Prepared Cheque", "Admin");
 
         public static bool CanIssueChequeToPayee(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
             "Issue Cheque to Payee", "Supervisor", "Admin");
