@@ -46,6 +46,7 @@ namespace RentLog.LeasesCrud.LeaseCRUD
             }
 
             var start  = DateTime.Now.Date;
+            AllFieldsEnabled = true;
             WhyInvalid = "Please fill up all required fields.";
 
             var draft = new LeaseDTO
