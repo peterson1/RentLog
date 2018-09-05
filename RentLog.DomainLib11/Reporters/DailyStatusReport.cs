@@ -12,6 +12,7 @@ namespace RentLog.DomainLib11.Reporters
     {
         public DailyStatusReport(DateTime date, ITenantDBsDir dir)
         {
+            DBsDir          = dir;
             Date            = date;
             var colxnsDb    = dir.Collections.For(date);
             var mkt         = dir.MarketState;
@@ -29,6 +30,7 @@ namespace RentLog.DomainLib11.Reporters
         }
 
 
+        public ITenantDBsDir                DBsDir           { get; }
         public DateTime                     Date             { get; }
         public string                       BranchName       { get; }
         public DailyColxnsReport            SectionColxns    { get; }

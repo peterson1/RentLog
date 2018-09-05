@@ -17,9 +17,10 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
-    <DockPanel DataContext="{Binding AppArgs}">
+    <DockPanel>
 
         <DataGrid DockPanel.Dock="Bottom"
+                  DataContext="{Binding AppArgs}"
                   ItemsSource="{Binding SummaryRows}"
                   Style="{StaticResource dgTotals}">
             <DataGrid.Columns>
@@ -39,6 +40,7 @@
         </DataGrid>
 
         <DataGrid x:Name="dg" ItemsSource="{Binding }"
+                  DataContext="{Binding AppArgs}"
                   Style="{StaticResource dgReadOnly}">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="15*" Header="tenant"          Binding="{Binding Lease.Tenant.FirstAndLastNames}"                ElementStyle="{StaticResource colRight}" />

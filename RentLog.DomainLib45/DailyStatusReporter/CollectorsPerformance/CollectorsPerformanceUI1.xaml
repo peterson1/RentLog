@@ -12,6 +12,6 @@
                    HorizontalAlignment="Left"
                    Margin="20 0 20 10" />
 
-        <local:CollectorsPerfTable DataContext="{Binding CollectorsPerf}" />
+        <local:CollectorsPerfTable />
     </StackPanel>
 </UserControl>

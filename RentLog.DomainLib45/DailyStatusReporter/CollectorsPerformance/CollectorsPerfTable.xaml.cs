@@ -25,8 +25,11 @@ namespace RentLog.DomainLib45.DailyStatusReporter.CollectorsPerformance
         {
             if (dg.SelectedIndex == -1) return;
             if (dg.SelectedItems.Count != 1) return;
+
+            var rep = DataContext as DailyStatusReport;
+
             if (dg.SelectedItem is CollectorPerformanceRow row)
-                MainRowInspectorVM.Launch(row);
+                MainRowInspectorVM.Launch(row, rep.DBsDir);
         }
     }
 }

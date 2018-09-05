@@ -1,27 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CommonTools.Lib45.UIExtensions;
+using RentLog.DomainLib11.ReportRows;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace RentLog.DomainLib45.DailyStatusReporter.CollectorsPerformance.MainRowInspector
 {
-    /// <summary>
-    /// Interaction logic for MainRowInspectorWindow.xaml
-    /// </summary>
     public partial class MainRowInspectorWindow : Window
     {
         public MainRowInspectorWindow()
         {
             InitializeComponent();
+            Loaded += (a, b) =>
+            {
+                dg.EnableOpenCurrent<CollectorPerfSubRow>();
+            };
         }
     }
 }

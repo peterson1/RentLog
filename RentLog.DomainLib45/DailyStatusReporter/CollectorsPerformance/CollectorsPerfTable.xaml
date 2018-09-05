@@ -10,6 +10,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DataGrid x:Name="dg" ItemsSource="{Binding }"
+              DataContext="{Binding CollectorsPerf}"
               Background="White"
               Style="{StaticResource dgReadOnly}">
         <DataGrid.Columns>
