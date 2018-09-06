@@ -3,6 +3,7 @@ using CommonTools.Lib11.InputCommands;
 using CommonTools.Lib45.BaseViewModels;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.InputDialogs;
+using CommonTools.Lib45.ThreadTools;
 using RentLog.ChequeVouchers.CommonControls.ChequeVoucherViewer;
 using RentLog.ChequeVouchers.VoucherReqsTab.ChequeVoucherPrints;
 using RentLog.DomainLib11.Authorization;
@@ -19,16 +20,18 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.PreparedCheques
         public PreparedChequesListVM(ITenantDBsDir dir) 
             : base(dir.Vouchers.PreparedCheques, dir, false)
         {
-            Caption         = "Prepared Cheques";
-            ViewVoucherCmd  = R2Command.Relay(_ => OnItemOpened(ItemsList.CurrentItem), null, "View Voucher Details");
-            PrintVoucherCmd = R2Command.Relay(PrintVoucher, null, "Print Cheque Voucher");
-            EditChequeCmd   = R2Command.Relay(EditChequeDetails, _ => AppArgs.CanInputChequeDetails(false), "Edit Cheque Details");
+            Caption            = "Prepared Cheques";
+            ViewVoucherCmd     = R2Command.Relay(_ => OnItemOpened(ItemsList.CurrentItem), null, "View Voucher Details");
+            PrintVoucherCmd    = R2Command.Relay(PrintVoucher, null, "Print Cheque Voucher");
+            EditChequeCmd      = R2Command.Relay(EditChequeDetails, _ => AppArgs.CanInputChequeDetails(false), "Edit Cheque Details");
+            MarkAsCancelledCmd = R2Command.Relay(MarkAsCancelled, _ => AppArgs.CanMarkChequeAsCancelled(false), "Mark Cheque as “Cancelled”");
         }
 
 
-        public IR2Command  ViewVoucherCmd   { get; }
-        public IR2Command  PrintVoucherCmd  { get; }
-        public IR2Command  EditChequeCmd    { get; }
+        public IR2Command  ViewVoucherCmd      { get; }
+        public IR2Command  PrintVoucherCmd     { get; }
+        public IR2Command  EditChequeCmd       { get; }
+        public IR2Command  MarkAsCancelledCmd  { get; }
 
 
         private void EditChequeDetails()
@@ -68,6 +71,16 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.PreparedCheques
                 return CantDo("No selected item");
 
             return true;
+        }
+
+
+        private void MarkAsCancelled()
+        {
+            Alert.Confirm("Mark cheque as “Cancelled”?", () =>
+            {
+                AppArgs.Vouchers.SetAs_Cancelled(ItemsList.CurrentItem);
+                ReloadFromDB();
+            });
         }
 
 

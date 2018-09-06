@@ -23,6 +23,10 @@
             <MenuItem Header ="{Binding MainMethodCmd.CurrentLabel}" 
                       Command="{Binding MainMethodCmd}"
                       DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+
+            <MenuItem Header ="{Binding MarkAsCancelledCmd.CurrentLabel}" 
+                      Command="{Binding MarkAsCancelledCmd}"
+                      DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
         </ContextMenu>
 
         <Style TargetType="DataGridRow"

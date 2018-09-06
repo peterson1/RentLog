@@ -1,4 +1,5 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
+using CommonTools.Lib11.ExceptionTools;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.PassbookRepos;
 using System;
@@ -74,6 +75,23 @@ namespace RentLog.DomainLib11.ChequeVoucherRepos
             var passbk = PassbookRows.GetRepo(chq.Request.BankAccountId);
             passbk.InsertClearedCheque(chq, date);
             passbk.RecomputeBalancesFrom(date);
+            PreparedCheques.Delete(chq);
+        }
+
+
+        public void SetAs_Cancelled(ChequeVoucherDTO chq)
+        {
+            var matches = InactiveRequests.Find(_ => _.SerialNum == chq.Request.SerialNum);
+
+            if (!matches.Any())
+                throw No.Match<FundRequestDTO>("SerialNum", chq.Request.SerialNum);
+
+            if (matches.Count() > 1)
+                throw DuplicateRecordsException.For(matches, "SerialNum", chq.Request.SerialNum);
+
+            var req = matches.Single();
+            req.ChequeStatus = ChequeState.Cancelled;
+            InactiveRequests.Update(req);
             PreparedCheques.Delete(chq);
         }
 
