@@ -25,7 +25,7 @@ namespace RentLog.Tests.VoucherTabVMTests
         public void PreparedChequesList()
         {
             var dir = SampleDir.May19_GRY();
-            var sut = new PreparedChequesListVM(dir);
+            var sut = new PreparedChequesListVM(dir, null);
             sut.ReloadFromDB();
             sut.ItemsList.Count.Should().Be(9);
             sut.TotalSum.Should().Be(318_275.63M);

@@ -81,6 +81,15 @@ namespace RentLog.DomainLib11.ChequeVoucherRepos
 
         public void SetAs_Cancelled(ChequeVoucherDTO chq)
         {
+            var req = FindInactiveRequest(chq);
+            req.ChequeStatus = ChequeState.Cancelled;
+            InactiveRequests.Update(req);
+            PreparedCheques.Delete(chq);
+        }
+
+
+        private FundRequestDTO FindInactiveRequest(ChequeVoucherDTO chq)
+        {
             var matches = InactiveRequests.Find(_ => _.SerialNum == chq.Request.SerialNum);
 
             if (!matches.Any())
@@ -89,10 +98,17 @@ namespace RentLog.DomainLib11.ChequeVoucherRepos
             if (matches.Count() > 1)
                 throw DuplicateRecordsException.For(matches, "SerialNum", chq.Request.SerialNum);
 
-            var req = matches.Single();
-            req.ChequeStatus = ChequeState.Cancelled;
-            InactiveRequests.Update(req);
+            return matches.Single();
+        }
+
+
+        public void SetAs_Unprepared(ChequeVoucherDTO chq)
+        {
             PreparedCheques.Delete(chq);
+            var req = FindInactiveRequest(chq);
+            InactiveRequests.Delete(req);
+            req.Id = 0;
+            ActiveRequests.Insert(req);
         }
 
 

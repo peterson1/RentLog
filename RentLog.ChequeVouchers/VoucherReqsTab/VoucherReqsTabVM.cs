@@ -16,7 +16,7 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab
             var dir         = mainWindowVM.AppArgs;
             _printr         = new VouchersListPrintTrigger(mainWindowVM);
             FundRequests    = new FundReqsListVM(dir);
-            PreparedCheques = new PreparedChequesListVM(dir);
+            PreparedCheques = new PreparedChequesListVM(dir, this);
             IssuedCheques   = new IssuedChequesListVM(dir);
         }
 

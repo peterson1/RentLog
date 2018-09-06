@@ -58,7 +58,7 @@ namespace RentLog.DomainLib11.Authorization
             "Issue Cheque to Payee", "Supervisor", "Admin");
 
         public static bool CanTakeBackIssuedCheque(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
-            "Issue Cheque to Payee", "Cashier", "Supervisor", "Admin");
+            "Take back Issued Cheque", "Cashier", "Supervisor", "Admin");
 
         public static bool CanMarkChequeAsCleared(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
             "Mark Cheque as “Cleared”", "Cashier", "Supervisor", "Admin");

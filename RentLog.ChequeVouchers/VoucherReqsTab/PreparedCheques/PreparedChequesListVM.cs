@@ -1,5 +1,6 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
 using CommonTools.Lib11.InputCommands;
+using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.BaseViewModels;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.InputDialogs;
@@ -17,20 +18,26 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.PreparedCheques
 {
     public class PreparedChequesListVM : FilteredSavedListVMBase<ChequeVoucherDTO, ChequeVouchersFilterVM, ITenantDBsDir>
     {
-        public PreparedChequesListVM(ITenantDBsDir dir) 
+        private VoucherReqsTabVM _main;
+
+
+        public PreparedChequesListVM(ITenantDBsDir dir, VoucherReqsTabVM vouchersTab) 
             : base(dir.Vouchers.PreparedCheques, dir, false)
         {
-            Caption            = "Prepared Cheques";
-            ViewVoucherCmd     = R2Command.Relay(_ => OnItemOpened(ItemsList.CurrentItem), null, "View Voucher Details");
-            PrintVoucherCmd    = R2Command.Relay(PrintVoucher, null, "Print Cheque Voucher");
-            EditChequeCmd      = R2Command.Relay(EditChequeDetails, _ => AppArgs.CanInputChequeDetails(false), "Edit Cheque Details");
-            MarkAsCancelledCmd = R2Command.Relay(MarkAsCancelled, _ => AppArgs.CanMarkChequeAsCancelled(false), "Mark Cheque as “Cancelled”");
+            _main               = vouchersTab;
+            Caption             = "Prepared Cheques";
+            ViewVoucherCmd      = R2Command.Relay(_ => OnItemOpened(ItemsList.CurrentItem), null, "View Voucher Details");
+            PrintVoucherCmd     = R2Command.Relay(PrintVoucher, null, "Print Cheque Voucher");
+            EditChequeCmd       = R2Command.Relay(EditChequeDetails, _ => AppArgs.CanInputChequeDetails(false), "Edit Cheque Details");
+            RemoveChequeInfoCmd = R2Command.Relay(RemoveChequeInfo, _ => AppArgs.CanInputChequeDetails(false), "Remove Cheque Details");
+            MarkAsCancelledCmd  = R2Command.Relay(MarkAsCancelled, _ => AppArgs.CanMarkChequeAsCancelled(false), "Mark Cheque as “Cancelled”");
         }
 
 
         public IR2Command  ViewVoucherCmd      { get; }
         public IR2Command  PrintVoucherCmd     { get; }
         public IR2Command  EditChequeCmd       { get; }
+        public IR2Command  RemoveChequeInfoCmd { get; }
         public IR2Command  MarkAsCancelledCmd  { get; }
 
 
@@ -47,6 +54,19 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.PreparedCheques
             e.ChequeDate   = date;
             e.ChequeNumber = num;
             AppArgs.Vouchers.PreparedCheques.Update(e);
+        }
+
+
+        private void RemoveChequeInfo()
+        {
+            Alert.Confirm("Are you sure you want to remove the details of the cheque?" 
+                  + L.F + "Doing so will move this voucher" 
+                  + L.f + " back to “For Check Preparation”." 
+                  + L.F + "Do you want to proceed?", () =>
+            {
+                AppArgs.Vouchers.SetAs_Unprepared(ItemsList.CurrentItem);
+                _main.ReloadAll();
+            });
         }
 
 
