@@ -59,7 +59,9 @@
             <StackPanel VerticalAlignment="Top">
                 
                 <TextBox Text="{Binding Draft.SerialNum, StringFormat=000#, UpdateSourceTrigger=PropertyChanged}"
-                         mat:HintAssist.Hint="req. #" />
+                         IsEnabled="False"
+                         FontSize="15" FontWeight="Bold"
+                         mat:HintAssist.Hint="CV #" />
 
                 <DatePicker SelectedDate="{Binding CrudRequestDate, UpdateSourceTrigger=PropertyChanged}"
                             mat:HintAssist.Hint="request date" />
