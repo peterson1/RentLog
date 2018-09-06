@@ -34,7 +34,7 @@ namespace RentLog.DomainLib11.ChequeVoucherRepos
             => items.GroupBy(_ => _.SerialNum)
                     .Where  (_ => _.Count() > 1)
                     .Select (_ => _.First())
-                    .Select (_ => $"Duplicate CV# {_.SerialNum}" )
+                    .Select (_ => $"[{_.Id}] Duplicate CV# {_.SerialNum}" )
                     .ToList ();
     }
 }
