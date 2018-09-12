@@ -1,0 +1,131 @@
+﻿<UserControl x:Class="RentLog.DomainLib45.SoaViewers.MainWindow.LeaseInfoPane"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RentLog.DomainLib45.SoaViewers.MainWindow"
+             xmlns:labl="clr-namespace:CommonTools.Lib45.TextLabels;assembly=CommonTools.Lib45"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="labl:DualText">
+            <Setter Property="Text1Width" Value="120" />
+            <Setter Property="Text2Width" Value="160" />
+            <Setter Property="Text1Weight" Value="Normal" />
+            <Setter Property="Margin" Value="0 3 0 3" />
+        </Style>
+        <Style x:Key="grouperPanel" TargetType="StackPanel">
+            <Setter Property="Margin" Value="0 20 0 0" />
+        </Style>
+    </UserControl.Resources>
+    <StackPanel>
+        
+        <StackPanel Style="{StaticResource grouperPanel}">
+            <labl:DualText Text1="first name"
+                           Text2="{Binding Lease.Tenant.FirstName}" />
+            <labl:DualText Text1="middle name"
+                           Text2="{Binding Lease.Tenant.MiddleName}" />
+            <labl:DualText Text1="last name"
+                           Text2="{Binding Lease.Tenant.LastName}" />
+        </StackPanel>
+
+
+        <StackPanel Style="{StaticResource grouperPanel}">
+            <labl:DualText Text1="birthdate"
+                           Text2="{Binding Lease.Tenant.BirthDate, StringFormat=MMMM d\, yyyy}" />
+            <labl:DualText Text1="SSS #"
+                           Text2="{Binding Lease.Tenant.SssNumber}" />
+            <labl:DualText Text1="TIN #"
+                           Text2="{Binding Lease.Tenant.TinNumber}" />
+            <labl:DualText Text1="spouse's name"
+                           Text2="{Binding Lease.Tenant.SpouseName}" />
+            <labl:DualText Text1="remarks on tenant"
+                           Text2="{Binding Lease.Tenant.Remarks}" />
+        </StackPanel>
+
+
+        <StackPanel Style="{StaticResource grouperPanel}">
+            <labl:DualText Text1="phone #"
+                           Text2="{Binding Lease.Tenant.Phone1}" />
+            <labl:DualText Text1="2nd phone #"
+                           Text2="{Binding Lease.Tenant.Phone2}" />
+            <labl:DualText Text1="email"
+                           Text2="{Binding Lease.Tenant.Email}" />
+        </StackPanel>
+
+
+        <StackPanel Style="{StaticResource grouperPanel}">
+            <labl:DualText Text1="lot #"
+                           Text2="{Binding Lease.Tenant.LotNumber}" />
+            <labl:DualText Text1="street name"
+                           Text2="{Binding Lease.Tenant.StreetName}" />
+            <labl:DualText Text1="barangay/district"
+                           Text2="{Binding Lease.Tenant.Barangay}" />
+            <labl:DualText Text1="city/municipality"
+                           Text2="{Binding Lease.Tenant.Municipality}" />
+            <labl:DualText Text1="province"
+                           Text2="{Binding Lease.Tenant.Province}" />
+            <labl:DualText Text1="postal code"
+                           Text2="{Binding Lease.Tenant.PostalCode}" />
+            <labl:DualText Text1="country"
+                           Text2="{Binding Lease.Tenant.Country}" />
+        </StackPanel>
+
+
+        <StackPanel Style="{StaticResource grouperPanel}">
+            <labl:DualText Text1="contract start"
+                           Text2="{Binding Lease.ContractStart, StringFormat=MMMM d\, yyyy}" />
+            <labl:DualText Text1="contract end"
+                           Text2="{Binding Lease.ContractEnd, StringFormat=MMMM d\, yyyy}" />
+            <labl:DualText Text1="contract span"
+                           Text2="{Binding Lease.ContractSpanDays, StringFormat={}{0} days}" />
+            <labl:DualText Text1="product to sell"
+                           Text2="{Binding Lease.ProductToSell}" />
+            <labl:DualText Text1="remarks on contract"
+                           Text2="{Binding Lease.Remarks}" />
+        </StackPanel>
+
+
+        <StackPanel Style="{StaticResource grouperPanel}">
+            <labl:DualText Text1="rent interval"
+                           Text2="{Binding Lease.Rent.Interval}" />
+            <labl:DualText Text1="rent rate"
+                           Text2="{Binding Lease.Rent.RegularRate, StringFormat=N2}" />
+            <labl:DualText Text1="grace period"
+                           Text2="{Binding Lease.Rent.GracePeriodDays, StringFormat={}{0} days}" />
+            <labl:DualText Text1="first rent due"
+                           Text2="{Binding Lease.FirstRentDueDate, StringFormat=MMMM d\, yyyy}" />
+            <labl:DualText Text1="rent penalty rule"
+                           Text2="{Binding Lease.Rent.PenaltyRule}" />
+            <labl:DualText Text1="rent penalty rate 1"
+                           Text2="{Binding Lease.Rent.PenaltyRate1, StringFormat=N2}" />
+            <labl:DualText Text1="rent penalty rate 2"
+                           Text2="{Binding Lease.Rent.PenaltyRate2, StringFormat=N2}" />
+        </StackPanel>
+
+
+        <StackPanel Style="{StaticResource grouperPanel}">
+            <labl:DualText Text1="total rights"
+                           Text2="{Binding Lease.Rights.TotalAmount, StringFormat=N2}" />
+            <labl:DualText Text1="rights due date"
+                           Text2="{Binding Lease.RightsDueDate, StringFormat=MMMM d\, yyyy}" />
+            <labl:DualText Text1="rights settlement"
+                           Text2="{Binding Lease.Rights.SettlementDays, StringFormat={}{0} days}" />
+            <labl:DualText Text1="rights penalty rule"
+                           Text2="{Binding Lease.Rights.PenaltyRule}" />
+            <labl:DualText Text1="rights penalty rate 1"
+                           Text2="{Binding Lease.Rights.PenaltyRate1, StringFormat=N2}" />
+            <labl:DualText Text1="rights penalty rate 2"
+                           Text2="{Binding Lease.Rights.PenaltyRate2, StringFormat=N2}" />
+        </StackPanel>
+
+
+        <StackPanel Style="{StaticResource grouperPanel}">
+            <labl:DualText Text1="encoded by"
+                           Text2="{Binding Lease.Author}" />
+            <labl:DualText Text1="encoded date"
+                           Text2="{Binding Lease.Timestamp, StringFormat=MMMM d\, yyyy}" />
+        </StackPanel>
+        
+    </StackPanel>
+</UserControl>

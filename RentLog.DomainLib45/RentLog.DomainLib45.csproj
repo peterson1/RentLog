@@ -190,6 +190,9 @@
     <Compile Include="SoaViewers\MainWindow\ElectricColumn\ElectricHeader.xaml.cs">
       <DependentUpon>ElectricHeader.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SoaViewers\MainWindow\LeaseInfoPane.xaml.cs">
+      <DependentUpon>LeaseInfoPane.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SoaViewers\MainWindow\MainToolbar.xaml.cs">
       <DependentUpon>MainToolbar.xaml</DependentUpon>
     </Compile>
@@ -403,6 +406,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SoaViewers\MainWindow\ElectricColumn\ElectricHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SoaViewers\MainWindow\LeaseInfoPane.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

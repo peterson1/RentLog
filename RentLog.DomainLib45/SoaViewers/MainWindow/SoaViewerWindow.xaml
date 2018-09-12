@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:RentLog.DomainLib45.SoaViewers.MainWindow"
         mc:Ignorable="d"
         Title="{Binding Caption}" 
-        SizeToContent="Width" Height="900"
+        SizeToContent="Width" Height="730"
         xmlns:busy="clr-namespace:CommonTools.Lib45.BusyIndicators;assembly=CommonTools.Lib45"
         xmlns:butns="clr-namespace:CommonTools.Lib45.StyledButtons;assembly=CommonTools.Lib45"
         xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -44,12 +44,19 @@
 
     </Window.Resources>
     <Grid>
-        <Grid>
-            <local:DailyBillsTable Margin="0 15 0 0" />
+        <DockPanel>
+            <ScrollViewer DockPanel.Dock="Left">
+                <local:LeaseInfoPane Margin="20 0 10 20" />
+            </ScrollViewer>
+
+            <Grid>
+                <local:DailyBillsTable Margin="0 15 0 0" />
         
-            <local:MainToolbar VerticalAlignment="Top"
-                               Margin="30 10 0 0" />
-        </Grid>
+                <local:MainToolbar VerticalAlignment="Top"
+                                    Margin="30 10 0 0" />
+            </Grid>
+        </DockPanel>
+        
         <busy:BusyDialog />
     </Grid>
 </Window>

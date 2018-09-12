@@ -16,9 +16,10 @@ namespace RentLog.DomainLib11.DTOs
         public string        ProductToSell         { get; set; }
 
 
-        public string TenantAndStall      => $"{Tenant} : {Stall}";
+        public string   TenantAndStall    => $"{Tenant} : {Stall}";
         public DateTime FirstRentDueDate  => ContractStart.AddDays(Rent?.GracePeriodDays ?? 0);
         public DateTime RightsDueDate     => ContractStart.AddDays(Rights?.SettlementDays ?? 0);
+        public int      ContractSpanDays  => (int)(ContractEnd - ContractStart).TotalDays;
         public override string ToString() => TenantAndStall;
     }
 }
