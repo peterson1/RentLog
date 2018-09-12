@@ -22,6 +22,7 @@ namespace RentLog.DomainLib11.CollectionRepos
 
         private IKeyValueStore _meta;
         private MarketStateDB  _mkt;
+        private Dictionary<int, CollectorDTO> _collectorBySecID = new Dictionary<int, CollectorDTO>();
 
 
         public CollectionsDB1(DateTime date, IKeyValueStore metadataRepo, MarketStateDB marketStateDB, string databasePath)
@@ -54,19 +55,25 @@ namespace RentLog.DomainLib11.CollectionRepos
 
         public CollectorDTO GetCollector(SectionDTO sec)
         {
+            if (_collectorBySecID.TryGetValue(sec.Id, out CollectorDTO cachd))
+                return cachd;
+
             var val = _meta[string.Format(COLLECTOR_KEY, sec.Id)];
             if (val.IsBlank()) return null;
 
             if (!int.TryParse(val, out int id))
                 throw Fault.BadCast(val, id);
 
-            return _mkt.Collectors.Find(id, true);
+            cachd = _mkt.Collectors.Find(id, true);
+            _collectorBySecID.Add(sec.Id, cachd);
+            return cachd;
         }
 
 
         public CollectorDTO GetCollector(LeaseDTO lease)
         {
-            _mkt.RefreshStall(lease);
+            if (lease.Stall.Section == null)
+                _mkt.RefreshStall(lease);
             return GetCollector(lease.Stall.Section);
         }
 
