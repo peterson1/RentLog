@@ -137,6 +137,12 @@ namespace CommonTools.Lib45.LiteDbTools
 
         public void DropAndInsert(IEnumerable<T> records, bool doValidate)
         {
+            if (records == null)
+            {
+                Drop();
+                return;
+            }
+
             foreach (var model in records)
             {
                 SetCurrentFields(model);
