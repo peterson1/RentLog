@@ -9,7 +9,7 @@
       <Value Profile="(Default)">Launcher Menu</Value>
     </Setting>
     <Setting Name="UpdatedExeSource" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">C:\Users\__user_name_here__\Google Drive\MSA_Deploy\RL.TrayLauncher.exe</Value>
     </Setting>
     <Setting Name="DatabasesPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\Users\__user_name_here__\Google Drive\__branch_name_here__\TenantDBs</Value>

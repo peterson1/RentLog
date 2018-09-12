@@ -49,7 +49,7 @@ namespace RentLog.TrayLauncher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\__user_name_here__\\Google Drive\\MSA_Deploy\\RL.TrayLauncher.exe")]
         public string UpdatedExeSource {
             get {
                 return ((string)(this["UpdatedExeSource"]));
