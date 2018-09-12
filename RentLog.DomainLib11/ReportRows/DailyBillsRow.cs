@@ -44,6 +44,7 @@ namespace RentLog.DomainLib11.ReportRows
             if (collector == null) return CollectorDTO.Named("--");
             collector.Name = _collectors.TryGetValue(collector.Id, out CollectorDTO match)
                            ? match.Name : $"‹unknown collector [{collector.Id}]›";
+            if (collector.Id == 0) collector.Name = "Office";
             return collector;
         }
 
