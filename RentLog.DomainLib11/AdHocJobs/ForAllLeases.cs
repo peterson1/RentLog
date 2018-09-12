@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace RentLog.DomainLib11.AdHocJobs
 {
-    public class ForAllLeases
+    public partial class ForAllLeases
     {
         public static void NoGraceThenRebuild_serial(DateTime minDate, ITenantDBsDir dir)
         {
@@ -29,37 +29,6 @@ namespace RentLog.DomainLib11.AdHocJobs
         }
 
 
-        //public static List<Action> NoGraceThenRebuild(DateTime minDate, ITenantDBsDir dir)
-        //{
-        //    var mkt = dir.MarketState;
-        //    var jobs = new List<Action>();
-
-        //    foreach (var lse in mkt.ActiveLeases.GetAll())
-        //        jobs.Add(() =>
-        //        {
-        //            if (lse.Rent.GracePeriodDays != 0)
-        //            {
-        //                lse.Rent.GracePeriodDays = 0;
-        //                mkt.ActiveLeases.Update(lse);
-        //                RebuildSoaFor(lse, minDate, dir);
-        //            }
-        //        });
-
-        //    foreach (var lse in mkt.InactiveLeases.GetAll())
-        //        jobs.Add(() =>
-        //        {
-        //            if (lse.Rent.GracePeriodDays != 0)
-        //            {
-        //                lse.Rent.GracePeriodDays = 0;
-        //                mkt.InactiveLeases.Update(lse);
-        //                RebuildSoaFor(lse, minDate, dir);
-        //            }
-        //        });
-
-        //    return jobs;
-        //}
-
-
         public static List<Action> RebuildSoaFrom(DateTime minDate, ITenantDBsDir dir)
         {
             var mkt  = dir.MarketState;
@@ -79,7 +48,7 @@ namespace RentLog.DomainLib11.AdHocJobs
         {
             var repo = dir.Balances.GetRepo(lse);
             DeleteRowsEarlierThan(minDate, repo);
-            repo.UpdateFrom(minDate);
+            repo.RecomputeFrom(minDate);
         }
 
 

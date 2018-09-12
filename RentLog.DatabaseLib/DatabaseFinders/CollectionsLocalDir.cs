@@ -65,7 +65,7 @@ namespace RentLog.DatabaseLib.DatabaseFinders
 
         protected override ICollectionsDB ConnectToDB(DateTime date, string file)
         {
-            var db                 = new SharedLiteDB(file, _mkt.CurrentUser);
+            var db                 = new SharedLiteDB(file, _mkt.CurrentUser, false);
             var colxnsDB           = new CollectionsDB1(date, db.Metadata, _mkt, file);
             SetIntendedColxns(colxnsDB.IntendedColxns, db);
             SetAmbulantColxns(colxnsDB.AmbulantColxns, db);
