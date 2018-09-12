@@ -6,6 +6,6 @@ namespace RentLog.DomainLib11.AdHocJobs
     public class ForSpecificLease
     {
         public static void RebuildSoaFrom(DateTime minDate, int leaseId, ITenantDBsDir dir)
-            => dir.Balances.GetRepo(leaseId).UpdateFrom(minDate);
+            => dir.Balances.GetRepo(leaseId).RecomputeFrom(minDate);
     }
 }

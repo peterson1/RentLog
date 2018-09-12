@@ -7,7 +7,8 @@ namespace RentLog.DomainLib11.BalanceRepos
 {
     public interface IDailyBillsRepo : ISimpleRepo<DailyBillDTO>
     {
-        void UpdateFrom  (DateTime date);
+        void RecomputeFrom      (DateTime date);
+        void RecomputeAll       ();
         void ProcessBalancedDay (DateTime balancedDay);
     }
 }

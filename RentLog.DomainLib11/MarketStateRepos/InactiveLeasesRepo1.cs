@@ -28,7 +28,7 @@ namespace RentLog.DomainLib11.MarketStateRepos
                 throw Bad.State<LeaseDTO>("Deactivated", "Exists-As-Active");
 
             _db.Balances.GetRepo(lse.Id)
-               .UpdateFrom(lse.DeactivatedDate);
+               .RecomputeFrom(lse.DeactivatedDate);
         }
     }
 }

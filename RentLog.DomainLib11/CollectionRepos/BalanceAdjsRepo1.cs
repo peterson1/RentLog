@@ -23,6 +23,6 @@ namespace RentLog.DomainLib11.CollectionRepos
 
 
         protected override void ExecuteAfterSave(BalanceAdjustmentDTO record, bool operationIsDelete) 
-            => _balDB.GetRepo(record.LeaseId).UpdateFrom(Date);
+            => _balDB.GetRepo(record.LeaseId).RecomputeFrom(Date);
     }
 }

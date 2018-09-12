@@ -109,7 +109,7 @@ namespace RentLog.Tests.LeasesTests
             sut.Insert(lse);
 
             bal.Verify(_ => _
-                .UpdateFrom(lse.DeactivatedDate), Times.Once);
+                .RecomputeFrom(lse.DeactivatedDate), Times.Once);
         }
     }
 }

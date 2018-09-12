@@ -21,7 +21,7 @@ namespace RentLog.Tests.LeaseBalanceTests
             var dir  = GetTempSampleArgs("Supervisor");
             var repo = dir.Balances.GetRepo(349); // DRY 030
             repo.GetAll().Count.Should().Be(14);
-            repo.UpdateFrom(28.June(2018));
+            repo.RecomputeFrom(28.June(2018));
             var rows = repo.GetAll();
             rows.Count.Should().Be(16);
 

@@ -25,7 +25,7 @@ namespace RentLog.Tests.BalAdjsRepoTests
             var sut = new BalanceAdjsRepo1(date, mBalRepo.Object, mBalsDB.Object);
             sut.Insert(new BalanceAdjustmentDTO());
             mBillsRepo.Verify(_
-                => _.UpdateFrom(date), Times.Once());
+                => _.RecomputeFrom(date), Times.Once());
         }
 
 
@@ -59,7 +59,7 @@ namespace RentLog.Tests.BalAdjsRepoTests
             var sut = new BalanceAdjsRepo1(date, mBalRepo.Object, mBalsDB.Object);
             sut.Delete(new BalanceAdjustmentDTO());
             mBillsRepo.Verify(_
-                => _.UpdateFrom(date), Times.Once());
+                => _.RecomputeFrom(date), Times.Once());
         }
     }
 }

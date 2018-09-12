@@ -25,11 +25,18 @@ namespace RentLog.DomainLib11.BalanceRepos
         }
 
 
-        public void UpdateFrom(DateTime date)
+        public void RecomputeFrom(DateTime date)
         {
             var dtos = GetRecomputedFrom(date);
             //_repo.Update(dtos, true);
             _repo.Upsert(dtos, true);
+        }
+
+
+        public void RecomputeAll()
+        {
+            var dtos = GetRecomputedFrom(_lse.ContractStart);
+            _repo.DropAndInsert(dtos, false);
         }
 
 

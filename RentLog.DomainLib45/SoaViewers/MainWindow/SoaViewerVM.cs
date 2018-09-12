@@ -45,7 +45,7 @@ namespace RentLog.DomainLib45.SoaViewers.MainWindow
         private void UpdateBalanceFromDate(object cmdParam)
         {
             if (!(cmdParam is DailyBillsRow row)) return;
-            AppArgs.Balances.GetRepo(row.Lease).UpdateFrom(row.Date);
+            AppArgs.Balances.GetRepo(row.Lease).RecomputeFrom(row.Date);
             ClickRefresh();
         }
 
