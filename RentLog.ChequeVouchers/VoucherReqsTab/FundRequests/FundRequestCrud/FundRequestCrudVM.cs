@@ -31,6 +31,7 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.FundRequests.FundRequestCrud
 
         protected override void ModifyDraftForInserting(FundRequestDTO draft)
         {
+            OnCrudRequestDateChanged();
             draft.BankAccountId = AppArgs.CurrentBankAcct.Id;
             //CrudRequestDate     = AppArgs.Vouchers.GetNextRequestDate();
             CrudRequestDate     = DateTime.Now.Date;
