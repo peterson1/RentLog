@@ -77,7 +77,7 @@ namespace RentLog.Tests.PostAndCloseTests
             await Task.Delay(1000 * 3);
 
             cashierVm.ColxnsDB.IsOpened().Should().BeTrue();
-            cashierArg.Balances.TotalOverdues().Rent.Should().BeApproximately(0M, 0.02M);
+            cashierArg.Balances.TotalOverdues().Rent.Should().BeApproximately(200, 0.02M);
             cashierArg.Balances.TotalOverdues().Rights.Should().Be(0M);
 
             var rows = cashierArg.Passbooks.GetRepo(1).RowsFor(DateTime.Now.AddDays(-1));
