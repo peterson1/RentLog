@@ -40,9 +40,17 @@ namespace CommonTools.Lib45.BaseViewModels
 
         public override void ReloadFromDB()
         {
-            var dtos = GetPostProcessedResult().ToList();
-            _cache   = dtos.Select(_ => CastToRow(_)).ToList();
+            //var dtos = GetPostProcessedResult().ToList();
+            //_cache   = dtos.Select(_ => CastToRow(_)).ToList();
+            _cache = GetCacheableList();
             ApplyTextFilters();
+        }
+
+
+        protected virtual List<TRow> GetCacheableList()
+        {
+            var dtos = GetPostProcessedResult().ToList();
+            return dtos.Select(_ => CastToRow(_)).ToList();
         }
 
 
