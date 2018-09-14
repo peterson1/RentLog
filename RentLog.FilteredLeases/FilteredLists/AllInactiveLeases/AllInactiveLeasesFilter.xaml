@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="RentLog.FilteredLeases.FilteredLists.AllInactiveLeases.AllInactiveLeasesFilter"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RentLog.FilteredLeases.FilteredLists.AllInactiveLeases"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="TextBox" 
+               BasedOn="{StaticResource MaterialDesignTextBox}">
+            <Setter Property="Margin" Value="6 0 6 0" />
+            <!--<Setter Property="HorizontalContentAlignment" Value="Center" />-->
+        </Style>
+    </UserControl.Resources>
+    <Grid DataContext="{Binding }">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="12*" />
+            <ColumnDefinition Width="09*" />
+            <ColumnDefinition Width="09*" />
+            <ColumnDefinition Width="09*" />
+            <ColumnDefinition Width="04*" />
+            <ColumnDefinition Width="06*" />
+            <ColumnDefinition Width="09*" />
+            <ColumnDefinition Width="08*" />
+
+            <ColumnDefinition Width="07*" />
+            <ColumnDefinition Width="07*" />
+
+            <ColumnDefinition Width="14*" />
+            <ColumnDefinition Width="06*" />
+        </Grid.ColumnDefinitions>
+
+        <TextBox Grid.Column="0" Text="{Binding TenantFilter       , UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="1" Text="{Binding StallFilter        , UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="2" Text="{Binding ContractStartFilter, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="3" Text="{Binding DeactivatedDateFilter, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="4" Text="{Binding RentIntervalFilter , UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="5" Text="{Binding RentRateFilter     , UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="6" Text="{Binding TotalRightsFilter  , UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="7" Text="{Binding RightsDueFilter    , UpdateSourceTrigger=PropertyChanged}" />
+
+        <TextBox Grid.Column="8"    />
+        <TextBox Grid.Column="9"    />
+
+        <TextBox Grid.Column="10" Text="{Binding ProductToSellFilter, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="11" Text="{Binding WhyInactiveFilter  , UpdateSourceTrigger=PropertyChanged}" />
+    </Grid>
+</UserControl>

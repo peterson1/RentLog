@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="RentLog.FilteredLeases.FilteredLists.AllInactiveLeases.AllInactiveLeasesTable"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RentLog.FilteredLeases.FilteredLists.AllInactiveLeases"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <DataGrid x:Name="dg" Style="{StaticResource dgReadOnly}"
+              ItemsSource ="{Binding }"
+              DataContext ="{Binding Rows}"
+              SelectedItem="{Binding CurrentItem}">
+        <DataGrid.Columns>
+            <DataGridTextColumn Width="12*" Header="tenant"          Binding="{Binding DTO.Tenant.FirstAndLastNames}" ElementStyle="{StaticResource colLabel}" />
+            <DataGridTextColumn Width="09*" Header="stall"           Binding="{Binding DTO.Stall.Name}" ElementStyle="{StaticResource colCenter}" />
+            <DataGridTextColumn Width="09*" Header="start"           Binding="{Binding DTO.ContractStart, StringFormat=d MMM yyyy}" ElementStyle="{StaticResource colCenter}" />
+            <DataGridTextColumn Width="09*" Header="terminated"      Binding="{Binding DeactivatedDate, StringFormat=d MMM yyyy}" ElementStyle="{StaticResource colCenter}" />
+            <DataGridTextColumn Width="04*" Header="interval"        Binding="{Binding DTO.Rent.Interval}" ElementStyle="{StaticResource colCenter}" />
+            <DataGridTextColumn Width="06*" Header="rent rate"       Binding="{Binding DTO.Rent.RegularRate, StringFormat=N2}" ElementStyle="{StaticResource colCenter}" />
+            <DataGridTextColumn Width="09*" Header="total rights"    Binding="{Binding DTO.Rights.TotalAmount, StringFormat=N2}" ElementStyle="{StaticResource colCenter}" />
+            <DataGridTextColumn Width="08*" Header="settlement"      Binding="{Binding DTO.Rights.SettlementDays, Converter={StaticResource spanDays}}" ElementStyle="{StaticResource colCenter}" />
+
+            <DataGridTextColumn Width="07*" Header="rent balance"    Binding="{Binding Rent, StringFormat=N2}" ElementStyle="{StaticResource colRight}" />
+            <DataGridTextColumn Width="07*" Header="rights balance"  Binding="{Binding Rights, StringFormat=N2}" ElementStyle="{StaticResource colRight}" />
+
+            <DataGridTextColumn Width="14*" Header="product to sell" Binding="{Binding DTO.ProductToSell}" />
+            <DataGridTextColumn Width="06*" Header="remarks"         Binding="{Binding WhyInactive}" />
+        </DataGrid.Columns>
+    </DataGrid>
+</UserControl>

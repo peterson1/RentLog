@@ -28,12 +28,13 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
+    <DebugType>embedded</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\..\Google Drive\MSA\Fortune Market\Tenants %28aka MSA%29\MSA_Deploy\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Dragablz, Version=0.0.3.203, Culture=neutral, processorArchitecture=MSIL">
@@ -77,6 +78,30 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="FilteredLists\AllActiveLeases\AllActiveLeasesFilter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FilteredLists\AllActiveLeases\AllActiveLeasesTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FilteredLists\AllActiveLeases\AllActiveLeasesUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FilteredLists\AllInactiveLeases\AllInactiveLeasesFilter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FilteredLists\AllInactiveLeases\AllInactiveLeasesTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FilteredLists\AllInactiveLeases\AllInactiveLeasesUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -85,8 +110,29 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FilteredLists\AllActiveLeases\AllActiveLeasesFilter.xaml.cs">
+      <DependentUpon>AllActiveLeasesFilter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FilteredLists\AllActiveLeases\AllActiveLeasesTable.xaml.cs">
+      <DependentUpon>AllActiveLeasesTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FilteredLists\AllActiveLeases\AllActiveLeasesUI.xaml.cs">
+      <DependentUpon>AllActiveLeasesUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FilteredLists\AllActiveLeases\AllActiveLeasesVM.cs" />
+    <Compile Include="FilteredLists\AllInactiveLeases\AllInactiveLeasesFilter.xaml.cs">
+      <DependentUpon>AllInactiveLeasesFilter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FilteredLists\AllInactiveLeases\AllInactiveLeasesTable.xaml.cs">
+      <DependentUpon>AllInactiveLeasesTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FilteredLists\AllInactiveLeases\AllInactiveLeasesUI.xaml.cs">
+      <DependentUpon>AllInactiveLeasesUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FilteredLists\AllInactiveLeases\AllInactiveLeasesVM.cs" />
     <Compile Include="FilteredLists\CommonTextFilterVM.cs" />
     <Compile Include="FilteredLists\FilteredListVMBase.cs" />
+    <Compile Include="FilteredLists\WithBackRentsOrRights\WithBackRentsOrRightsVM.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

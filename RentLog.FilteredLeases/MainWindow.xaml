@@ -3,6 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:actives="clr-namespace:RentLog.FilteredLeases.FilteredLists.AllActiveLeases"
+        xmlns:inactvs="clr-namespace:RentLog.FilteredLeases.FilteredLists.AllInactiveLeases"
+        xmlns:withdues="clr-namespace:RentLog.FilteredLeases.FilteredLists.WithBackRentsOrRights"
         xmlns:local="clr-namespace:RentLog.FilteredLeases"
         mc:Ignorable="d"
         Title="{Binding Caption}" 
@@ -17,15 +20,30 @@
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{DynamicResource MaterialDesignFont}"
-        FocusManager.FocusedElement="{Binding ElementName=tabs}">
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type actives:AllActiveLeasesVM}">
+            <actives:AllActiveLeasesUI />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type inactvs:AllInactiveLeasesVM}">
+            <inactvs:AllInactiveLeasesUI />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type withdues:WithBackRentsOrRightsVM}">
+            <actives:AllActiveLeasesUI />
+        </DataTemplate>
+    </Window.Resources>
     <DockPanel>
         <butns:UpdatedExeNotifierBar DataContext="{Binding UpdateNotifier}"
                                      DockPanel.Dock="Top" />
         <Grid>
-            <ComboBox ItemsSource="{Binding FilterNames}"
-                      SelectedIndex="{Binding PickedFilterIndex, UpdateSourceTrigger=PropertyChanged}"
-                      />
+            <DockPanel>
+                <ComboBox ItemsSource="{Binding FilterNames}"
+                          SelectedIndex="{Binding PickedFilterIndex, UpdateSourceTrigger=PropertyChanged}"
+                          DockPanel.Dock="Top" />
+
+                <ContentPresenter Content="{Binding PickedList}" />
+
+            </DockPanel>
 
             <busy:BusyDialog />
         </Grid>
