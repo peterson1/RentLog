@@ -4,6 +4,7 @@ using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.BaseViewModels;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.InputDialogs;
+using CommonTools.Lib45.ThreadTools;
 using PropertyChanged;
 using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.DTOs;
@@ -96,7 +97,15 @@ namespace RentLog.LeasesCrud.LeasesList
 
         protected override LeaseBalanceRow CastToRow(LeaseDTO lse)
         {
-            var bill = AppArgs.Balances.GetBill(lse, _postdDate);
+            DailyBillDTO bill = null;
+            try
+            {
+                bill = AppArgs.Balances.GetBill(lse, _postdDate);
+            }
+            catch (Exception ex)
+            {
+                Alert.Show(ex, $"Getting bill for [{lse.Id}] “{lse}”");
+            }
             return new LeaseBalanceRow(lse, bill);
         }
     }
