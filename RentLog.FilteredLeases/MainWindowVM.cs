@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using CommonTools.Lib11.DataStructures;
-using CommonTools.Lib11.ExceptionTools;
-using CommonTools.Lib45.ThreadTools;
+﻿using CommonTools.Lib11.DataStructures;
 using PropertyChanged;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib45.BaseViewModels;
@@ -11,6 +6,9 @@ using RentLog.FilteredLeases.FilteredLists;
 using RentLog.FilteredLeases.FilteredLists.AllActiveLeases;
 using RentLog.FilteredLeases.FilteredLists.AllInactiveLeases;
 using RentLog.FilteredLeases.FilteredLists.WithBackRentsOrRights;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RentLog.FilteredLeases
 {
@@ -24,25 +22,19 @@ namespace RentLog.FilteredLeases
 
         public MainWindowVM(ITenantDBsDir tenantDBsDir) : base(tenantDBsDir)
         {
-            Enlist("All Active Leases", _ => new AllActiveLeasesVM(_));
-            Enlist("All Inactive Leases", _ => new AllInactiveLeasesVM(_));
-            Enlist("With Backrents or Overdue Rights", _ => new WithBackRentsOrRightsVM(_));
-
+            Enlist("All Active Leases", _ => new AllActiveLeasesVM(this, _));
+            Enlist("All Inactive Leases", _ => new AllInactiveLeasesVM(this, _));
+            Enlist("With Backrents or Overdue Rights", _ => new WithBackRentsOrRightsVM(this, _));
+            //todo: "Leases Nearing Rights Expiry"
+            
             PickedFilterIndex = 0;
         }
 
 
-        public UIList<string> FilterNames { get; } = new UIList<string>();
-        //{
-        //    "All Active Leases",
-        //    "All Inactive Leases",
-        //    "With Backrents or Overdue Rights",
-        //    "Leases Nearing Rights Expiry"
-        //};
-
-
+        public UIList<string>      FilterNames        { get; } = new UIList<string>();
         public int                 PickedFilterIndex  { get; set; } = -1;
         public FilteredListVMBase  PickedList         { get; private set; }
+        public string              PickedFilterName   => FilterNames[PickedFilterIndex];
 
 
         private void Enlist(string label, Func<ITenantDBsDir, FilteredListVMBase> constructor)
@@ -52,14 +44,11 @@ namespace RentLog.FilteredLeases
         }
 
 
-        public async void OnPickedFilterIndexChanged()
+        public void OnPickedFilterIndexChanged()
         {
-            await Task.Delay(1);
-            StartBeingBusy($"Loading “{FilterNames[PickedFilterIndex]}”...");
             PickedList = null;
             PickedList = _enlisteds[PickedFilterIndex].Invoke(AppArgs);
-            await Task.Run(() => PickedList.ReloadFromDB());
-            StopBeingBusy();
+            PickedList.PickedSection = PickedList.Sections.FirstOrDefault();
         }
     }
 }

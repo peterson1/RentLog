@@ -2,17 +2,22 @@
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RentLog.FilteredLeases.FilteredLists.AllActiveLeases
 {
     public class AllActiveLeasesVM : FilteredListVMBase
     {
-        public AllActiveLeasesVM(ITenantDBsDir dir) : base(dir)
+        public AllActiveLeasesVM(MainWindowVM main, ITenantDBsDir dir) : base(main, dir)
         {
         }
 
 
-        protected override List<LeaseDTO> GetLeases(MarketStateDB mkt)
-            => mkt.ActiveLeases.GetAll();
+        protected override List<LeaseDTO> GetLeases(MarketStateDB mkt, int secId)
+        {
+            var all   = mkt.ActiveLeases.GetAll();
+            return secId == 0 ? all
+                : all.Where(_ => _.Stall.Section.Id == secId).ToList();
+        }
     }
 }

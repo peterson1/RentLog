@@ -8,15 +8,18 @@ namespace RentLog.FilteredLeases.FilteredLists.AllInactiveLeases
 {
     public class AllInactiveLeasesVM : FilteredListVMBase
     {
-        public AllInactiveLeasesVM(ITenantDBsDir dir) : base(dir)
+        public AllInactiveLeasesVM(MainWindowVM main, ITenantDBsDir dir) : base(main, dir)
         {
         }
 
 
-        protected override List<LeaseDTO> GetLeases(MarketStateDB mkt)
-            => mkt.InactiveLeases
-                  .GetAll()
-                  .Select(_ => _ as LeaseDTO)
-                  .ToList();
+        protected override List<LeaseDTO> GetLeases(MarketStateDB mkt, int secId)
+        {
+            var all = mkt.InactiveLeases.GetAll()
+                         .Select (_ => _ as LeaseDTO)
+                         .ToList ();
+            return secId == 0 ? all
+                : all.Where(_ => _.Stall.Section.Id == secId).ToList();
+        }
     }
 }

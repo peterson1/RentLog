@@ -11,18 +11,25 @@ namespace RentLog.FilteredLeases.FilteredLists.WithBackRentsOrRights
 {
     public class WithBackRentsOrRightsVM : FilteredListVMBase
     {
-        public WithBackRentsOrRightsVM(ITenantDBsDir dir) : base(dir)
+        public WithBackRentsOrRightsVM(MainWindowVM main, ITenantDBsDir dir) : base(main, dir)
         {
         }
 
 
         protected override List<LeaseBalanceRow> GetCacheableList()
-            => AppArgs.Balances.GetOverdueLeases(out BillAmounts totals)
-                               .OrderByDescending(_ => _.Rent)
-                               .ToList();
+        {
+            if (PickedSection.Id == 0)
+                return AppArgs.Balances.GetOverdueLeases(out BillAmounts totals)
+                                       .OrderByDescending(_ => _.Rent)
+                                       .ToList();
+            else
+                return AppArgs.Balances.GetOverdueLeases(out BillAmounts totals, PickedSection)
+                                       .OrderByDescending(_ => _.Rent)
+                                       .ToList();
+        }
 
 
-        protected override List<LeaseDTO> GetLeases(MarketStateDB mkt)
+        protected override List<LeaseDTO> GetLeases(MarketStateDB mkt, int secId)
             => throw new NotImplementedException();
     }
 }
