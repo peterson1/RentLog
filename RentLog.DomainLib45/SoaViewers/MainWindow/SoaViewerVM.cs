@@ -10,6 +10,7 @@ using RentLog.DomainLib11.Models;
 using RentLog.DomainLib11.ReportRows;
 using RentLog.DomainLib45.SoaViewers.CellViewer;
 using RentLog.DomainLib45.SoaViewers.PrintLayouts;
+using RentLog.DomainLib45.SoaViewers.StartBalanceEditor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,10 @@ namespace RentLog.DomainLib45.SoaViewers.MainWindow
 
 
         public IR2Command  UpdateBalanceFromDateCmd  { get; }
+
+
+        protected override void OnWindowLoaded() 
+            => StartBalanceEditorVM.ListenTo(GetWindowInstance());
 
 
         private void UpdateBalanceFromDate(object cmdParam)

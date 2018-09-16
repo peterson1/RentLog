@@ -214,6 +214,7 @@
     <Compile Include="SoaViewers\PrintLayouts\SoaPrintWindow1.xaml.cs">
       <DependentUpon>SoaPrintWindow1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SoaViewers\StartBalanceEditor\StartBalanceEditorVM.cs" />
     <Compile Include="StallPicker\StallPickerVM.cs" />
     <Compile Include="StallPicker\StallPickerWindow.xaml.cs">
       <DependentUpon>StallPickerWindow.xaml</DependentUpon>

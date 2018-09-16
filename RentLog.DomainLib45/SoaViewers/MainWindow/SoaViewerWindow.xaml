@@ -50,7 +50,7 @@
             </ScrollViewer>
 
             <Grid>
-                <local:DailyBillsTable Margin="0 15 0 0" />
+                <local:DailyBillsTable x:Name="tbl" Margin="0 15 0 0" />
         
                 <local:MainToolbar VerticalAlignment="Top"
                                     Margin="30 10 0 0" />

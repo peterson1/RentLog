@@ -12,6 +12,10 @@ namespace RentLog.DomainLib11.Authorization
         public static bool CanForceLeaseBalanceUpdate(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
             "Force Lease Balance Update", "Supervisor", "Admin");
 
+        public static bool CanEditLedgerStartBalance(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
+            "Edit Ledger Start Balance", "Admin");
+
+
 
         public static bool CanEditPostedPRNumber(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
             "Edit posted PR #", "Supervisor", "Admin");
