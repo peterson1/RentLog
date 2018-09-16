@@ -1,28 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CommonTools.Lib45.UIExtensions;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace RentLog.FilteredLeases.FilteredLists.AllActiveLeases
 {
-    /// <summary>
-    /// Interaction logic for AllActiveLeasesTable.xaml
-    /// </summary>
     public partial class AllActiveLeasesTable : UserControl
     {
         public AllActiveLeasesTable()
         {
             InitializeComponent();
+            Loaded += (a, b) =>
+            {
+                dg.EnableToggledColumns(FindColumnHeaderStyle());
+            };
         }
+
+
+        private Style FindColumnHeaderStyle() 
+            => dg?.Style?.Resources?.Values?
+                .OfType<Style>()?.FirstOrDefault();
     }
 }
