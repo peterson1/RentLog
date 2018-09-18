@@ -13,7 +13,7 @@
             <!--<Setter Property="HorizontalContentAlignment" Value="Center" />-->
         </Style>
     </UserControl.Resources>
-    <Grid DataContext="{Binding }">
+    <Grid DataContext="{Binding Filter}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="12*" />
             <ColumnDefinition Width="09*" />

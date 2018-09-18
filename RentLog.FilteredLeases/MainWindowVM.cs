@@ -1,4 +1,7 @@
 ﻿using CommonTools.Lib11.DataStructures;
+using CommonTools.Lib11.InputCommands;
+using CommonTools.Lib45.InputCommands;
+using CommonTools.Lib11.EventHandlerTools;
 using PropertyChanged;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib45.BaseViewModels;
@@ -17,11 +20,15 @@ namespace RentLog.FilteredLeases
     {
         private Dictionary<int, Func<ITenantDBsDir, FilteredListVMBase>> _enlisteds = new Dictionary<int, Func<ITenantDBsDir, FilteredListVMBase>>();
 
+        public event EventHandler ToExcelRequested = delegate { };
+
         public override string SubAppName => "Filtered Leases";
 
 
         public MainWindowVM(ITenantDBsDir tenantDBsDir) : base(tenantDBsDir)
         {
+            ExportToExcelCmd = R2Command.Relay(() => ToExcelRequested.Raise(), null, "Export to Excel");
+
             Enlist("All Active Leases", _ => new AllActiveLeasesVM(this, _));
             Enlist("All Inactive Leases", _ => new AllInactiveLeasesVM(this, _));
             Enlist("With Backrents or Overdue Rights", _ => new WithBackRentsOrRightsVM(this, _));
@@ -31,6 +38,7 @@ namespace RentLog.FilteredLeases
         }
 
 
+        public IR2Command          ExportToExcelCmd   { get; }
         public UIList<string>      FilterNames        { get; } = new UIList<string>();
         public int                 PickedFilterIndex  { get; set; } = -1;
         public FilteredListVMBase  PickedList         { get; private set; }

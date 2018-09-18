@@ -1,4 +1,5 @@
-﻿using RentLog.DomainLib11.DataSources;
+﻿using PropertyChanged;
+using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
 using System.Collections.Generic;

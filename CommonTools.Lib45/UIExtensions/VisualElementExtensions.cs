@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 
@@ -30,7 +31,8 @@ namespace CommonTools.Lib45.UIExtensions
 
 
         // https://stackoverflow.com/a/978352/3973863
-        public static IEnumerable<T> FindVisualChildren<T>(this DependencyObject depObj) where T : DependencyObject
+        public static IEnumerable<T> FindVisualChildren<T>(this DependencyObject depObj) 
+            where T : DependencyObject
         {
             if (depObj != null)
             {
@@ -49,5 +51,10 @@ namespace CommonTools.Lib45.UIExtensions
                 }
             }
         }
+
+
+        public static T FindFirstChild<T>(this DependencyObject ctrl)
+            where T : DependencyObject
+                => ctrl.FindVisualChildren<T>().FirstOrDefault();
     }
 }

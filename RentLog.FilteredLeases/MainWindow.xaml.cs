@@ -1,9 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using CommonTools.Lib45.ExcelTools;
+using CommonTools.Lib45.UIExtensions;
+using RentLog.FilteredLeases.Printing;
 using System.Windows;
 using System.Windows.Controls;
-using CommonTools.Lib45.PrintTools;
-using CommonTools.Lib45.UIExtensions;
 
 namespace RentLog.FilteredLeases
 {
@@ -15,16 +14,12 @@ namespace RentLog.FilteredLeases
             Loaded += (a, b) =>
             {
                 VM.PrintClicked += (c, d) 
-                    => PrintCurrentList();
+                    => VM.Show<ColumnsPickerWindow>(false, true);
+
+                VM.ToExcelRequested += (c, d)
+                    => presentr.FindFirstChild<DataGrid>()
+                        .ExportToExcel();
             };
-        }
-
-
-        private void PrintCurrentList()
-        {
-            var allDGs = presentr.FindVisualChildren<DataGrid>();
-            var dg     = allDGs.Single();
-            dg.AskToPrint(VM.PickedFilterName);
         }
 
 

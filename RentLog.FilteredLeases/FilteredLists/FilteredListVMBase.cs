@@ -1,6 +1,8 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
 using CommonTools.Lib11.DataStructures;
+using CommonTools.Lib11.InputCommands;
 using CommonTools.Lib45.BaseViewModels;
+using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.ThreadTools;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
@@ -19,7 +21,12 @@ namespace RentLog.FilteredLeases.FilteredLists
         private ConcurrentDictionary<int, DailyBillDTO> _bills = new ConcurrentDictionary<int, DailyBillDTO>();
         private MainWindowVM _main;
 
-        public event EventHandler PrintRequested = delegate { };
+        public       EventHandler _printRequested;
+        public event EventHandler  PrintRequested
+        {
+            add    { _printRequested -= value; _printRequested += value; }
+            remove { _printRequested -= value; }
+        }
 
 
         public FilteredListVMBase() : this(null, null)
@@ -30,17 +37,25 @@ namespace RentLog.FilteredLeases.FilteredLists
             : base(null, dir, false)
         {
             _main = mainWindowVM;
+            PrintCmd = R2Command.Relay(DoPrint, null, "Print");
             FillSectionsList();
         }
 
 
         public UIList<SectionDTO>  Sections       { get; } = new UIList<SectionDTO>();
         public SectionDTO          PickedSection  { get; set; }
+        public bool                IsPrinting     { get; set; }
+        public IR2Command          PrintCmd       { get; }
+
 
         protected abstract List<LeaseDTO> GetLeases(MarketStateDB mkt, int sectionId);
 
 
         public void OnPickedSectionChanged() => ReloadFromDB();
+
+
+        private void DoPrint()
+            => _printRequested?.Invoke(this, EventArgs.Empty);
 
 
         public override async void ReloadFromDB()
