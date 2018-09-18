@@ -1,6 +1,8 @@
 ﻿using CommonTools.Lib45.PrintTools;
 using CommonTools.Lib45.UIExtensions;
+using RentLog.DomainLib11.ReportRows;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -11,15 +13,20 @@ namespace RentLog.FilteredLeases.Printing
         public ColumnsPickerWindow()
         {
             InitializeComponent();
-            Loaded += (a, b) =>
+            Loaded += async (a, b) =>
             {
+                await Task.Delay(500);
+                VM.PickedList.IsPrinting = true;
+
                 var dg = presentr.FindFirstChild<DataGrid>();
                 dg.EnableToggledColumns(FindColumnHeaderStyle(dg));
-
-                VM.PickedList.IsPrinting = true;
+                dg.EnableOpenCurrent<LeaseBalanceRow>();
                 VM.PickedList.PrintRequested 
                     += (c, d) => PrintCurrentList();
             };
+
+            Closing += (a, b) 
+                => VM.PickedList.IsPrinting = false;
         }
 
 
@@ -27,7 +34,6 @@ namespace RentLog.FilteredLeases.Printing
         {
             var dg = presentr.FindFirstChild<DataGrid>();
             dg.AskToPrint(VM.PickedFilterName);
-            VM.PickedList.IsPrinting = false;
             Close();
         }
 

@@ -1,4 +1,5 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
+using CommonTools.Lib11.EventHandlerTools;
 using CommonTools.Lib11.DataStructures;
 using CommonTools.Lib11.InputCommands;
 using CommonTools.Lib45.BaseViewModels;
@@ -13,6 +14,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using RentLog.DomainLib45.SoaViewers.MainWindow;
 
 namespace RentLog.FilteredLeases.FilteredLists
 {
@@ -24,7 +26,7 @@ namespace RentLog.FilteredLeases.FilteredLists
         public       EventHandler _printRequested;
         public event EventHandler  PrintRequested
         {
-            add    { _printRequested -= value; _printRequested += value; }
+            add    { _printRequested = null; _printRequested += value; }
             remove { _printRequested -= value; }
         }
 
@@ -37,7 +39,7 @@ namespace RentLog.FilteredLeases.FilteredLists
             : base(null, dir, false)
         {
             _main = mainWindowVM;
-            PrintCmd = R2Command.Relay(DoPrint, null, "Print");
+            PrintCmd = R2Command.Relay(() => _printRequested?.Raise(), null, "Print");
             FillSectionsList();
         }
 
@@ -51,11 +53,8 @@ namespace RentLog.FilteredLeases.FilteredLists
         protected abstract List<LeaseDTO> GetLeases(MarketStateDB mkt, int sectionId);
 
 
-        public void OnPickedSectionChanged() => ReloadFromDB();
-
-
-        private void DoPrint()
-            => _printRequested?.Invoke(this, EventArgs.Empty);
+        public             void OnPickedSectionChanged ()             => ReloadFromDB();
+        protected override void OnItemOpened           (LeaseDTO lse) => SoaViewer.Show(lse, AppArgs);
 
 
         public override async void ReloadFromDB()
@@ -63,6 +62,7 @@ namespace RentLog.FilteredLeases.FilteredLists
             _main.StartBeingBusy($"Loading “{_main.PickedFilterName}”...");
             await Task.Delay(1);
             await Task.Run(() => base.ReloadFromDB());
+            _main.RaisePickedListLoaded();
             _main.StopBeingBusy();
         }
 

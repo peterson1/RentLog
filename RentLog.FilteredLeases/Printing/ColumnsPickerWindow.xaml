@@ -21,8 +21,12 @@
         <mat:ColorZone Mode="Light"
                        DockPanel.Dock="Top">
             <StackPanel Orientation="Horizontal"
-                        Margin="20 6 30 4"
+                        Margin="20 8 30 4"
                         HorizontalAlignment="Right">
+                <TextBlock Text="(Right-click on column header to hide/show a column.)"
+                           Foreground="Gray"
+                           Margin="0 0 10 0"
+                           VerticalAlignment="Bottom" />
                 <butns:PrintBtnLabeled />
             </StackPanel>
         </mat:ColorZone>

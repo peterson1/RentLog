@@ -21,6 +21,7 @@ namespace RentLog.FilteredLeases
         private Dictionary<int, Func<ITenantDBsDir, FilteredListVMBase>> _enlisteds = new Dictionary<int, Func<ITenantDBsDir, FilteredListVMBase>>();
 
         public event EventHandler ToExcelRequested = delegate { };
+        public event EventHandler PickedListLoaded = delegate { };
 
         public override string SubAppName => "Filtered Leases";
 
@@ -33,8 +34,6 @@ namespace RentLog.FilteredLeases
             Enlist("All Inactive Leases", _ => new AllInactiveLeasesVM(this, _));
             Enlist("With Backrents or Overdue Rights", _ => new WithBackRentsOrRightsVM(this, _));
             //todo: "Leases Nearing Rights Expiry"
-            
-            PickedFilterIndex = 0;
         }
 
 
@@ -52,11 +51,20 @@ namespace RentLog.FilteredLeases
         }
 
 
+        protected override void OnWindowLoaded()
+        {
+            PickedFilterIndex = 0;
+        }
+
+
         public void OnPickedFilterIndexChanged()
         {
             PickedList = null;
             PickedList = _enlisteds[PickedFilterIndex].Invoke(AppArgs);
             PickedList.PickedSection = PickedList.Sections.FirstOrDefault();
         }
+
+
+        public void RaisePickedListLoaded() => PickedListLoaded.Raise();
     }
 }
