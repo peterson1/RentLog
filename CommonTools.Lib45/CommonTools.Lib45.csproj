@@ -207,6 +207,9 @@
     <Compile Include="StyledButtons\EncodeNewDraftBtn1.xaml.cs">
       <DependentUpon>EncodeNewDraftBtn1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StyledButtons\ExcelButtonWhite.xaml.cs">
+      <DependentUpon>ExcelButtonWhite.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StyledButtons\PrintBtnLabeled.xaml.cs">
       <DependentUpon>PrintBtnLabeled.xaml</DependentUpon>
     </Compile>
@@ -312,6 +315,10 @@
     <Page Include="StyledButtons\EncodeNewDraftBtn1.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StyledButtons\ExcelButtonWhite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StyledButtons\PrintBtnLabeled.xaml">
       <SubType>Designer</SubType>
