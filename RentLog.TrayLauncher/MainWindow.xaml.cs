@@ -36,6 +36,7 @@ namespace RentLog.TrayLauncher
                 ctxMenu.AddLauncher(VM.ColxnSummaryCmd);
                 ctxMenu.AddLauncher(VM.DailyStatusCmd);
                 ctxMenu.AddLauncher(VM.GLRecapCmd);
+                ctxMenu.AddLauncher(VM.LeaseFiltersCmd);
                 ctxMenu.Items.Add(new Separator());
 
                 ctxMenu.Add(VM.CloseWindowCmd);

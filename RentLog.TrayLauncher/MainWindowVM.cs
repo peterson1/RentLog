@@ -5,7 +5,6 @@ using CommonTools.Lib45.BaseViewModels;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.LicenseTools;
 using CommonTools.Lib45.ThreadTools;
-using RentLog.DomainLib11.Authorization;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -23,15 +22,16 @@ namespace RentLog.TrayLauncher
         public MainWindowVM(LauncherArguments appArguments) : base(appArguments)
         {
             UpdateNotifier.ExecuteOnFileChanged = true;
-            EncoderCmd      = NewCmd("RL.Cashier.exe", "Encode Collections");
-            ReviewerCmd     = NewCmd("RL.Cashier.exe", "Review Collections");
-            StallsCmd       = NewCmd("RL.Stalls.exe" , "Stalls & Sections");
-            LeasesCmd       = NewCmd("RL.Leases.exe" , "Tenants & Leases");
-            ChequesCmd      = NewCmd("RL.Cheques.exe", "Vouchers & DCDR");
-            OverduesCmd     = NewCmd("RL.Reports.exe", "Backrentals & Overdue Rights", "Overdues");
-            ColxnSummaryCmd = NewCmd("RL.Reports.exe", "Collections Summary Report"  , "ColxnSmry");
-            DailyStatusCmd  = NewCmd("RL.Reports.exe", "Daily Status Report"         , "DailyStatus");
-            GLRecapCmd      = NewCmd("RL.Reports.exe", "GL Recap Report"             , "GLRecap");
+            EncoderCmd      = NewCmd("RL.Cashier.exe"     , "Encode Collections");
+            ReviewerCmd     = NewCmd("RL.Cashier.exe"     , "Review Collections");
+            StallsCmd       = NewCmd("RL.Stalls.exe"      , "Stalls & Sections");
+            LeasesCmd       = NewCmd("RL.Leases.exe"      , "Tenants & Leases");
+            ChequesCmd      = NewCmd("RL.Cheques.exe"     , "Vouchers & DCDR");
+            OverduesCmd     = NewCmd("RL.Reports.exe"     , "Backrentals & Overdue Rights", "Overdues");
+            ColxnSummaryCmd = NewCmd("RL.Reports.exe"     , "Collections Summary Report"  , "ColxnSmry");
+            DailyStatusCmd  = NewCmd("RL.Reports.exe"     , "Daily Status Report"         , "DailyStatus");
+            GLRecapCmd      = NewCmd("RL.Reports.exe"     , "GL Recap Report"             , "GLRecap");
+            LeaseFiltersCmd = NewCmd("RL.LeaseFilters.exe", "Filtered Tenants/Leases");
             ClickRefresh();
         }
 
@@ -50,6 +50,7 @@ namespace RentLog.TrayLauncher
         public ExeLauncherCommand   ColxnSummaryCmd  { get; }
         public ExeLauncherCommand   DailyStatusCmd   { get; }
         public ExeLauncherCommand   GLRecapCmd       { get; }
+        public ExeLauncherCommand   LeaseFiltersCmd  { get; }
 
         public string               NameAndRole      { get; private set; } = "verifying ...";
         public string               ArgumentError    { get; private set; }
