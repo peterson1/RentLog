@@ -14,8 +14,8 @@ namespace RentLog.FilteredLeases
             InitializeComponent();
             Loaded += (a, b) =>
             {
-                VM.PrintClicked += (c, d) 
-                    => VM.Show<ColumnsPickerWindow>(false, true);
+                VM.PrintClicked += (c, d)
+                    => OnPrintClicked();
 
                 VM.ToExcelRequested += (c, d)
                     => FindDataGrid().ExportToExcel();
@@ -31,5 +31,12 @@ namespace RentLog.FilteredLeases
 
 
         private MainWindowVM VM => DataContext as MainWindowVM;
+
+
+        private void OnPrintClicked()
+        {
+            VM.PickedList.IsPrinting = true;
+            VM.Show<ColumnsPickerWindow>(false, true);
+        }
     }
 }

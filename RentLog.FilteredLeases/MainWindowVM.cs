@@ -42,6 +42,8 @@ namespace RentLog.FilteredLeases
         public int                 PickedFilterIndex  { get; set; } = -1;
         public FilteredListVMBase  PickedList         { get; private set; }
         public string              PickedFilterName   => FilterNames[PickedFilterIndex];
+        public string              PickedSectionName  => PickedList?.PickedSection?.Name;
+        public string              SectionAndFilter   => $"{PickedSectionName}  :  {PickedFilterName} ({PickedList?.Rows?.Count})";
 
 
         private void Enlist(string label, Func<ITenantDBsDir, FilteredListVMBase> constructor)
@@ -53,7 +55,8 @@ namespace RentLog.FilteredLeases
 
         protected override void OnWindowLoaded()
         {
-            PickedFilterIndex = 0;
+            if (PickedFilterIndex == -1)
+                PickedFilterIndex = 0;
         }
 
 

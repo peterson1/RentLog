@@ -2,6 +2,7 @@
 using CommonTools.Lib11.EventHandlerTools;
 using CommonTools.Lib11.DataStructures;
 using CommonTools.Lib11.InputCommands;
+using CommonTools.Lib11.MathTools;
 using CommonTools.Lib45.BaseViewModels;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.ThreadTools;
@@ -15,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using RentLog.DomainLib45.SoaViewers.MainWindow;
+using CommonTools.Lib11.StringTools;
 
 namespace RentLog.FilteredLeases.FilteredLists
 {
@@ -44,10 +46,10 @@ namespace RentLog.FilteredLeases.FilteredLists
         }
 
 
-        public UIList<SectionDTO>  Sections       { get; } = new UIList<SectionDTO>();
-        public SectionDTO          PickedSection  { get; set; }
-        public bool                IsPrinting     { get; set; }
-        public IR2Command          PrintCmd       { get; }
+        public UIList<SectionDTO>  Sections        { get; } = new UIList<SectionDTO>();
+        public SectionDTO          PickedSection   { get; set; }
+        public bool                IsPrinting      { get; set; }
+        public IR2Command          PrintCmd        { get; }
 
 
         protected abstract List<LeaseDTO> GetLeases(MarketStateDB mkt, int sectionId);
@@ -56,6 +58,20 @@ namespace RentLog.FilteredLeases.FilteredLists
         public             void OnPickedSectionChanged ()             => ReloadFromDB();
         protected override void OnItemOpened           (LeaseDTO lse) => SoaViewer.Show(lse, AppArgs);
 
+
+        public virtual string TopLeftText => _main?.SectionAndFilter;
+
+
+        public virtual string TopRightText
+        {
+            get
+            {
+                var rentBal = Rows.Sum(_ => _.Rent.ZeroIfNullOrNegative());
+                var rightsBal = Rows.Sum(_ => _.Rights.ZeroIfNullOrNegative());
+                return $"Total Rent Balance :  {rentBal:N2}" + L.f
+                     + $"Total Rights Balance :  {rightsBal:N2}";
+            }
+        }
 
         public override async void ReloadFromDB()
         {

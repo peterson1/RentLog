@@ -154,6 +154,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Printing\ColumnsPickerToolbar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Printing\ColumnsPickerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -161,6 +165,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindowVM.cs" />
+    <Compile Include="Printing\ColumnsPickerToolbar.xaml.cs">
+      <DependentUpon>ColumnsPickerToolbar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Printing\ColumnsPickerWindow.xaml.cs">
       <DependentUpon>ColumnsPickerWindow.xaml</DependentUpon>
     </Compile>

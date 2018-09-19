@@ -16,7 +16,6 @@ namespace RentLog.FilteredLeases.Printing
             Loaded += async (a, b) =>
             {
                 await Task.Delay(500);
-                VM.PickedList.IsPrinting = true;
 
                 var dg = presentr.FindFirstChild<DataGrid>();
                 dg.EnableToggledColumns(FindColumnHeaderStyle(dg));
@@ -33,7 +32,9 @@ namespace RentLog.FilteredLeases.Printing
         private void PrintCurrentList()
         {
             var dg = presentr.FindFirstChild<DataGrid>();
-            dg.AskToPrint(VM.PickedFilterName);
+            dg.AskToPrint(VM.PickedList.TopLeftText,
+                          VM.AppArgs.MarketState.BranchName, 
+                          VM.PickedList.TopRightText);
             Close();
         }
 

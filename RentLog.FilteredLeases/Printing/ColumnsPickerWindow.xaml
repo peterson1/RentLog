@@ -20,15 +20,7 @@
     <DockPanel DataContext="{Binding PickedList}">
         <mat:ColorZone Mode="Light"
                        DockPanel.Dock="Top">
-            <StackPanel Orientation="Horizontal"
-                        Margin="20 8 30 4"
-                        HorizontalAlignment="Right">
-                <TextBlock Text="(Right-click on column header to hide/show a column.)"
-                           Foreground="Gray"
-                           Margin="0 0 10 0"
-                           VerticalAlignment="Bottom" />
-                <butns:PrintBtnLabeled />
-            </StackPanel>
+            <local:ColumnsPickerToolbar />
         </mat:ColorZone>
         
         <ContentPresenter x:Name="presentr"
