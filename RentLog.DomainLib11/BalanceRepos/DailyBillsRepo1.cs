@@ -85,6 +85,7 @@ namespace RentLog.DomainLib11.BalanceRepos
             var startId    = _lse.ContractStart.DaysSinceMin();
             var recompDate = _repo.HasId(startId) ? balancedDay : _lse.ContractStart;
             var dtos       = GetRecomputedFrom(recompDate);
+            if (dtos == null) return;
 
             foreach (var billCode in BillCodes.Collected())
                 dtos.Last().For(billCode).ClosingBalance = null;
