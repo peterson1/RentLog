@@ -1,6 +1,5 @@
 ﻿using CommonTools.Lib11.DateTimeTools;
 using CommonTools.Lib11.InputCommands;
-using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.ExcelTools;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.PrintTools;
@@ -12,9 +11,7 @@ using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.Models;
 using RentLog.DomainLib45.WithOverduesReport;
 using System;
-using System.Collections.Concurrent;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace RentLog.LeasesCrud.MainToolbar
 {
@@ -77,16 +74,20 @@ namespace RentLog.LeasesCrud.MainToolbar
 
         private Action GetAdHocJob(out string desc)
         {
-            desc     = "ForAllLeases.RecomputeAllBalances";
-            var jobs = ForAllLeases.RecomputeAllBalances(_args);
-            return jobs.AsParallelJob((ok, not, total) =>
-            {
-                var left = total - (ok + not);
-                _main.StartBeingBusy($"success: {ok}"
-                             + L.f + $"failed: {not}"
-                             + L.f + $"total: {total}"
-                             + L.f + $"left: {left}");
-            });
+            desc = "ForActiveLeases.ResetStart(21.Sep(2018)";
+
+            // multi-job parallel
+            //var jobs = ForAllLeases.RecomputeAllBalances(_args);
+            //return jobs.AsParallelJob((ok, not, total) =>
+            //{
+            //    var left = total - (ok + not);
+            //    _main.StartBeingBusy($"success: {ok}"
+            //                 + L.f + $"failed: {not}"
+            //                 + L.f + $"total: {total}"
+            //                 + L.f + $"left: {left}");
+            //});
+            
+            // multi-job serial
             //return () =>
             //{
             //    foreach (var job in jobs)
@@ -95,8 +96,8 @@ namespace RentLog.LeasesCrud.MainToolbar
             //    }
             //};
 
-            //desc = "ForAllRequests.SetDateOffset";
-            //return () => ForAllRequests.SetDateOffset(_args);
+            // solo task job
+            return () => ForActiveLeases.ResetStart(21.Sep(2018), _args);
         }
     }
 }
