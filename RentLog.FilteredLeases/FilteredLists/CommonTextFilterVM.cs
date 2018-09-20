@@ -28,7 +28,7 @@ namespace RentLog.FilteredLeases.FilteredLists
                 { nameof(TenantFilter         ), _ => _.DTO.Tenant.FirstAndLastNames            },
                 { nameof(StallFilter          ), _ => _.DTO.Stall.Name                          },
                 { nameof(ContractStartFilter  ), _ => _.DTO.ContractStart.ToString("d MMM yyyy")},
-                { nameof(ContractEndFilter    ), _ => _.DTO.ContractEnd.ToString("d MMM yyyy")  },
+                { nameof(ContractEndFilter    ), _ => _.DTO.ContractEnd?.ToString("d MMM yyyy")  },
                 { nameof(DeactivatedDateFilter), _ => _.DeactivatedDate?.ToString("d MMM yyyy") },
                 { nameof(DeactivatedByFilter  ), _ => _.DeactivatedBy                           },
                 { nameof(WhyInactiveFilter    ), _ => _.WhyInactive                             },
