@@ -36,7 +36,7 @@
             <DataGridTextColumn Width="12*" Header="tenant"          Binding="{Binding DTO.Tenant.FirstAndLastNames}" ElementStyle="{StaticResource colLabel}" />
             <DataGridTextColumn Width="09*" Header="stall"           Binding="{Binding DTO.Stall.Name}" ElementStyle="{StaticResource colCenter}" />
             <DataGridTextColumn Width="07*" Header="start"           Binding="{Binding DTO.ContractStart, StringFormat=d MMM yyyy}" ElementStyle="{StaticResource colCenter}" />
-            <DataGridTextColumn Width="07*" Header="end"             Binding="{Binding DTO.ContractEnd, StringFormat=d MMM yyyy}" ElementStyle="{StaticResource colCenter}" />
+            <DataGridTextColumn Width="07*" Header="end"             Binding="{Binding DTO.ContractEnd, StringFormat=d MMM yyyy, TargetNullValue=∞}" ElementStyle="{StaticResource colCenter}" />
             <DataGridTextColumn Width="04*" Header="interval"        Binding="{Binding DTO.Rent.Interval}" ElementStyle="{StaticResource colCenter}" />
             <DataGridTextColumn Width="06*" Header="rent rate"       Binding="{Binding DTO.Rent.RegularRate, StringFormat=N2}" ElementStyle="{StaticResource colCenter}" />
             <DataGridTextColumn Width="07*" Header="total rights"    Binding="{Binding DTO.Rights.TotalAmount, StringFormat=N2}" ElementStyle="{StaticResource colCenter}" />

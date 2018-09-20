@@ -76,7 +76,7 @@
             <labl:DualText Text1="contract start"
                            Text2="{Binding Lease.ContractStart, StringFormat=MMMM d\, yyyy}" />
             <labl:DualText Text1="contract end"
-                           Text2="{Binding Lease.ContractEnd, StringFormat=MMMM d\, yyyy}" />
+                           Text2="{Binding Lease.ContractEnd, StringFormat=MMMM d\, yyyy, TargetNullValue=∞}" />
             <labl:DualText Text1="contract span"
                            Text2="{Binding Lease.ContractSpanDays, StringFormat={}{0} days}" />
             <labl:DualText Text1="product to sell"
