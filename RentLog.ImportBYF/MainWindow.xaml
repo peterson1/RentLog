@@ -3,10 +3,35 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:tbar="clr-namespace:RentLog.ImportBYF.MainToolbar"
         xmlns:local="clr-namespace:RentLog.ImportBYF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="{Binding Caption}" 
+        Width="1360" Height="700" WindowState="Maximized"
+        xmlns:busy="clr-namespace:CommonTools.Lib45.BusyIndicators;assembly=CommonTools.Lib45"
+        xmlns:butns="clr-namespace:CommonTools.Lib45.StyledButtons;assembly=CommonTools.Lib45"
+        xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:dragz="clr-namespace:Dragablz;assembly=Dragablz"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <DockPanel>
+        <butns:UpdatedExeNotifierBar DataContext="{Binding UpdateNotifier}"
+                                     DockPanel.Dock="Top" />
+        <Grid>
+            <DockPanel>
+
+                <tbar:MainToolbarUI DockPanel.Dock="Top" />
+
+                <ContentPresenter x:Name="presentr"
+                                  Content="{Binding PickedList}" />
+            </DockPanel>
+
+            <busy:BusyDialog />
+        </Grid>
+    </DockPanel>
 </Window>
