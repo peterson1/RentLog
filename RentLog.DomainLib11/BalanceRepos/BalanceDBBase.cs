@@ -89,9 +89,11 @@ namespace RentLog.DomainLib11.BalanceRepos
             if ((row.Rent ?? 0) > 0) return false;
             //assume zero backrent from here on
 
-            if (!row.IsActive) return true;
+            //if (!row.IsActive) return true;
             if (date <= row.DTO.RightsDueDate) return true;
-            if ((row.Rights ?? 0) <= 0) return true;
+            if ((row.Rights ?? 0) > 0) return false;
+            //if ((row.Rights ?? 0) <= 0) return true;
+
 
             return false;
         }

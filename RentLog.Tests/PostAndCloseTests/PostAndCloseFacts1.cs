@@ -23,7 +23,7 @@ namespace RentLog.Tests.PostAndCloseTests
             cashierArg.Collections.LastPostedDate().Should().Be(16.June(2018));
             cashierArg.Collections.UnclosedDate().Should().Be(17.June(2018));
             cashierArg.Balances.TotalOverdues().Rent.Should().Be(22_651.67M);
-            cashierArg.Balances.TotalOverdues().Rights.Should().Be(12_000M);
+            cashierArg.Balances.TotalOverdues().Rights.Should().Be(34_000M);
 
             var cashierVm = new MainWindowVM(17.June(2018), cashierArg, false);
             await cashierVm.RefreshCmd.RunAsync();
