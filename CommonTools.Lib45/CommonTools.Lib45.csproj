@@ -139,6 +139,7 @@
     <Compile Include="FileSystemTools\JsonFileReader.cs" />
     <Compile Include="FileSystemTools\JsonFileWriter.cs" />
     <Compile Include="FileSystemTools\ReverseLineReader.cs" />
+    <Compile Include="FileSystemTools\SpecialFolderExtensions.cs" />
     <Compile Include="FileSystemTools\TemporaryFileTools.cs" />
     <Compile Include="FileSystemTools\ThrottledFileWatcher1.cs" />
     <Compile Include="FileSystemTools\UpdatedExeNotifier.cs" />
