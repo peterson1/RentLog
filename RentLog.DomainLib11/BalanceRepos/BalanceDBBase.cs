@@ -1,6 +1,5 @@
 ﻿using CommonTools.Lib11.DateTimeTools;
 using CommonTools.Lib11.MathTools;
-using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
 using RentLog.DomainLib11.Models;
@@ -89,13 +88,13 @@ namespace RentLog.DomainLib11.BalanceRepos
             if ((row.Rent ?? 0) > 0) return false;
             //assume zero backrent from here on
 
-            //if (!row.IsActive) return true;
-            if (date <= row.DTO.RightsDueDate) return true;
+            if (row.IsActive 
+                && date <= row.DTO.RightsDueDate) return true;
+
             if ((row.Rights ?? 0) > 0) return false;
-            //if ((row.Rights ?? 0) <= 0) return true;
+            //assume zero rights balance from here on
 
-
-            return false;
+            return true;
         }
 
 
