@@ -1,4 +1,6 @@
-﻿using RentLog.DomainLib11.DTOs;
+﻿using CommonTools.Lib11.DTOs;
+using RentLog.DomainLib11.DataSources;
+using RentLog.DomainLib11.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +9,18 @@ using System.Threading.Tasks;
 
 namespace RentLog.ImportBYF.Converters.LeaseConverters
 {
-    public class LeaseConverter1 : ConverterBase<ReportModels.Lease, LeaseDTO>
+    public class LeaseConverter1 : ComparisonsListBase
     {
-        public override LeaseDTO Convert(ReportModels.Lease byf) => new LeaseDTO
+        internal override List<object> QueryBYF(string cacheDir)
         {
-            ContractStart = byf.ContractStart,
-            ContractEnd   = byf.ContractEnd,
-        };
+            var dict = CacheReader2.getLeases(cacheDir);
+            throw new NotImplementedException();
+        }
+
+
+        internal override List<object> QueryRNT(ITenantDBsDir appArgs)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using CommonTools.Lib11.DataStructures;
-using CommonTools.Lib45.FileSystemTools;
 using PropertyChanged;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
@@ -7,11 +6,7 @@ using RentLog.DomainLib45.BaseViewModels;
 using RentLog.ImportBYF.Converters;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using static System.Environment;
-
 
 namespace RentLog.ImportBYF
 {
@@ -20,16 +15,18 @@ namespace RentLog.ImportBYF
     {
         public override string SubAppName => "Import BYF";
 
+        private Dictionary<int, Func<ComparisonsListBase>> _enlisteds = new Dictionary<int, Func<ComparisonsListBase>>();
+
 
         public MainWindowVM(ITenantDBsDir tenantDBsDir) : base(tenantDBsDir)
         {
         }
 
 
-        public UIList<string>      ListNames        { get; } = new UIList<string>();
-        public int                 PickedListIndex  { get; set; } = -1;
-        public ConvertedsListBase  PickedList       { get; private set; }
-        public string              PickedListName   => ListNames[PickedListIndex];
+        public UIList<string>       ListNames        { get; } = new UIList<string>();
+        public int                  PickedListIndex  { get; set; } = -1;
+        public ComparisonsListBase  PickedList       { get; private set; }
+        public string               PickedListName   => ListNames[PickedListIndex];
 
 
         protected override void OnWindowLoaded()
@@ -39,16 +36,21 @@ namespace RentLog.ImportBYF
         }
 
 
+        public void OnPickedListIndexChanged()
+        {
+            PickedList = null;
+            PickedList = _enlisteds[PickedListIndex]();
+            ClickRefresh();
+        }
+
+
         protected override async Task OnRefreshClickedAsync()
         {
-            var dir = SpecialFolder.LocalApplicationData.Path();
-
-            IDictionary<long, ReportModels.Lease> byfDict = null;
-            await Task.Run(() 
-                => byfDict = CacheReader2.getLeases(dir));
-
-            //Casted.SetItems(byfDict.Values
-            //    .Select(_ => CastBYF(_)));
+            if (PickedList == null) return;
+            StartBeingBusy($"Loading {PickedListName} ...");
+            await Task.Delay(1);
+            await Task.Run(() => PickedList.ReloadList(AppArgs));
+            StopBeingBusy();
         }
 
 
