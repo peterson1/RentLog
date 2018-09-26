@@ -5,7 +5,7 @@ using RentLog.DomainLib11.DTOs;
 
 namespace RentLog.DatabaseLib.FundRequestsRepository
 {
-    internal class InactiveRequestsCollection : NamedCollectionBase<FundRequestDTO>, ISimpleRepo<FundRequestDTO>
+    internal class InactiveRequestsCollection : NamedCollection<FundRequestDTO>, ISimpleRepo<FundRequestDTO>
     {
         internal const string COLXN_NAME = "FundReqs_Inactive";
 

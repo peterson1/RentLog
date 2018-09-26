@@ -3,7 +3,7 @@ using RentLog.DomainLib11.DTOs;
 
 namespace RentLog.DatabaseLib.DailyColxnsRepository
 {
-    internal class BankDepositsCollection : NamedCollectionBase<BankDepositDTO>
+    internal class BankDepositsCollection : NamedCollection<BankDepositDTO>
     {
         private const string COLXN_NAME = "BankDepositDTO";
 

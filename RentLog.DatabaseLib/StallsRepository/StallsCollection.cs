@@ -6,7 +6,7 @@ using RentLog.DomainLib11.DTOs;
 
 namespace RentLog.DatabaseLib.StallsRepository
 {
-    internal class StallsCollection : NamedCollectionBase<StallDTO>, ISimpleRepo<StallDTO>
+    internal class StallsCollection : NamedCollection<StallDTO>, ISimpleRepo<StallDTO>
     {
         internal const string COLXN_NAME = "StallModel";
 

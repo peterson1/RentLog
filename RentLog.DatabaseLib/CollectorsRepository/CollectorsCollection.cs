@@ -3,7 +3,7 @@ using RentLog.DomainLib11.DTOs;
 
 namespace RentLog.DatabaseLib.CollectorsRepository
 {
-    internal class CollectorsCollection : NamedCollectionBase<CollectorDTO>
+    internal class CollectorsCollection : NamedCollection<CollectorDTO>
     {
         internal const string COLXN_NAME = "CollectorModel";
 

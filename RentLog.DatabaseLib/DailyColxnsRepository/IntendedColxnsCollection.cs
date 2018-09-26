@@ -3,7 +3,7 @@ using RentLog.DomainLib11.DTOs;
 
 namespace RentLog.DatabaseLib.DailyColxnsRepository
 {
-    internal class IntendedColxnsCollection : NamedCollectionBase<IntendedColxnDTO>
+    internal class IntendedColxnsCollection : NamedCollection<IntendedColxnDTO>
     {
         private const string COLXN_NAME_FMT = "Section{0}_FromLeases";
 

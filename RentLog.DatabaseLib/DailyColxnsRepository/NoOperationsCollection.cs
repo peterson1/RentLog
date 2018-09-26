@@ -3,7 +3,7 @@ using RentLog.DomainLib11.DTOs;
 
 namespace RentLog.DatabaseLib.DailyColxnsRepository
 {
-    internal class NoOperationsCollection : NamedCollectionBase<UncollectedLeaseDTO>
+    internal class NoOperationsCollection : NamedCollection<UncollectedLeaseDTO>
     {
         private const string COLXN_NAME_FMT = "Section{0}_NoOperations2";
 

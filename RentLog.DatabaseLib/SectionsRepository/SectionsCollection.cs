@@ -4,7 +4,7 @@ using RentLog.DomainLib11.DTOs;
 
 namespace RentLog.DatabaseLib.SectionsRepository
 {
-    internal class SectionsCollection : NamedCollectionBase<SectionDTO>, ISimpleRepo<SectionDTO>
+    internal class SectionsCollection : NamedCollection<SectionDTO>, ISimpleRepo<SectionDTO>
     {
         internal const string COLXN_NAME = "SectionModel";
 

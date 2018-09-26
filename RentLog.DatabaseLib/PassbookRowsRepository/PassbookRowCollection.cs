@@ -4,7 +4,7 @@ using RentLog.DomainLib11.DTOs;
 
 namespace RentLog.DatabaseLib.PassbookRowsRepository
 {
-    internal class PassbookRowCollection : NamedCollectionBase<PassbookRowDTO>
+    internal class PassbookRowCollection : NamedCollection<PassbookRowDTO>
     {
         internal PassbookRowCollection(int bankAcctID, SharedLiteDB sharedLiteDB) 
             : base(GetCollectionName(bankAcctID), sharedLiteDB)

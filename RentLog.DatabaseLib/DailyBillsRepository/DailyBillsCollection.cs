@@ -3,7 +3,7 @@ using RentLog.DomainLib11.DTOs;
 
 namespace RentLog.DatabaseLib.DailyBillsRepository
 {
-    public class DailyBillsCollection : NamedCollectionBase<DailyBillDTO>
+    public class DailyBillsCollection : NamedCollection<DailyBillDTO>
     {
         private const string COLXN_NAME = "DailyBillDTO";
 

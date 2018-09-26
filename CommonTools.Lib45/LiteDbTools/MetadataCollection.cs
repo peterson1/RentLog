@@ -5,7 +5,7 @@ using CommonTools.Lib11.DTOs;
 
 namespace CommonTools.Lib45.LiteDbTools
 {
-    public class MetadataCollection : NamedCollectionBase<KeyValuePairDTO>, IKeyValueStore
+    public class MetadataCollection : NamedCollection<KeyValuePairDTO>, IKeyValueStore
     {
         private const string COLXN_NAME = "DbMetadata";
 

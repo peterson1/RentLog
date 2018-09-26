@@ -3,7 +3,7 @@ using RentLog.DomainLib11.DTOs;
 
 namespace RentLog.DatabaseLib.DailyColxnsRepository
 {
-    public class BalanceAdjsCollection : NamedCollectionBase<BalanceAdjustmentDTO>
+    public class BalanceAdjsCollection : NamedCollection<BalanceAdjustmentDTO>
     {
         private const string COLXN_NAME = "BalanceAdjustmentDTO";
 

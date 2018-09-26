@@ -4,7 +4,7 @@ using RentLog.DomainLib11.DTOs;
 
 namespace RentLog.DatabaseLib.JournalsRepository
 {
-    internal class JournalVouchersCollection : NamedCollectionBase<JournalVoucherDTO>
+    internal class JournalVouchersCollection : NamedCollection<JournalVoucherDTO>
     {
         internal const string COLXN_NAME = "JournalVoucherDTO";
 

@@ -3,7 +3,7 @@ using RentLog.DomainLib11.DTOs;
 
 namespace RentLog.DatabaseLib.DailyColxnsRepository
 {
-    internal class CashierColxnsCollection : NamedCollectionBase<CashierColxnDTO>
+    internal class CashierColxnsCollection : NamedCollection<CashierColxnDTO>
     {
         private const string COLXN_NAME = "CashierColxnDTO";
 

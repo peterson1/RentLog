@@ -4,7 +4,7 @@ using RentLog.DomainLib11.DTOs;
 
 namespace RentLog.DatabaseLib.GLAccountsRepository
 {
-    internal class GLAccountsCollection : NamedCollectionBase<GLAccountDTO>, ISimpleRepo<GLAccountDTO>
+    internal class GLAccountsCollection : NamedCollection<GLAccountDTO>, ISimpleRepo<GLAccountDTO>
     {
         internal const string COLXN_NAME = "GLAccountDTO";
 

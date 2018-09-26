@@ -3,7 +3,7 @@ using RentLog.DomainLib11.DTOs;
 
 namespace RentLog.DatabaseLib.BankAccountsRepository
 {
-    internal class BankAccountsCollection : NamedCollectionBase<BankAccountDTO>
+    internal class BankAccountsCollection : NamedCollection<BankAccountDTO>
     {
         internal const string COLXN_NAME = "BankAccountModel";
 
