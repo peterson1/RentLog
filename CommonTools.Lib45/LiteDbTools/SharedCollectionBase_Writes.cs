@@ -158,10 +158,12 @@ namespace CommonTools.Lib45.LiteDbTools
         {
             using (var db = _db.OpenWrite())
             {
-                var coll = GetCollection(db);
-                try  { db.DropCollection(coll.Name); }
-                catch (InvalidCastException) { }
-                db.Shrink();
+                var coll = GetCollection(db).Name;
+                if (db.CollectionExists(coll))
+                {
+                    db.DropCollection(coll);
+                    db.Shrink();
+                }
             }
         }
 
