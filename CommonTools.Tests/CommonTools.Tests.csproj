@@ -41,6 +41,9 @@
     <Reference Include="FluentAssertions, Version=5.4.1.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentAssertions.5.4.1\lib\net45\FluentAssertions.dll</HintPath>
     </Reference>
+    <Reference Include="LiteDB, Version=4.1.4.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiteDB.4.1.4\lib\net40\LiteDB.dll</HintPath>
+    </Reference>
     <Reference Include="Moq, Version=4.9.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.9.0\lib\net45\Moq.dll</HintPath>
     </Reference>
@@ -77,10 +80,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseToolsTests\CombinedReadOnlyRepoFacts.cs" />
+    <Compile Include="LiteDbToolsTests\CorruptedTableRemoverFacts.cs" />
+    <Compile Include="LiteDbToolsTests\SampleDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="LiteDbToolsTests\F_MEY_2018-09-24_Solo.ldb" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
