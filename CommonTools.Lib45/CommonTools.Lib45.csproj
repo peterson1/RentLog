@@ -253,6 +253,7 @@
     <Compile Include="UIExtensions\WindowExtensions.cs" />
     <Compile Include="ValidationRules\NotBlankValidationRule.cs" />
     <Compile Include="ValueConverters\DecimalProxyConverter.cs" />
+    <Compile Include="ValueConverters\FirstNCharsConverter.cs" />
     <Compile Include="ValueConverters\FirstLetterConverter.cs" />
     <Compile Include="ValueConverters\SpanDaysConverter.cs" />
     <Compile Include="ValueConverters\TrueIfFalseConverter.cs" />
