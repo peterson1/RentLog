@@ -13,7 +13,7 @@ namespace CommonTools.Lib45.FileSystemTools
         {
             var list = paths.ToList();
             list.Insert(0, foldr.Path());
-            return System.IO.Path.Combine(paths.ToArray());
+            return System.IO.Path.Combine(list.ToArray());
         }
     }
 }
