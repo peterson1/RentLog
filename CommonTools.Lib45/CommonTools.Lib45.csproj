@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationTools\ApplicationInitializer.cs" />
+    <Compile Include="ApplicationTools\DataTemplateRegisterer.cs" />
     <Compile Include="Approvals\FileBasedApprovalBase.cs" />
     <Compile Include="Approvals\FileBasedApprovalRequester.cs" />
     <Compile Include="Approvals\FileBasedApprovalResponder.cs" />
