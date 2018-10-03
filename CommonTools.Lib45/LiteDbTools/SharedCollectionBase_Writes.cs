@@ -31,15 +31,15 @@ namespace CommonTools.Lib45.LiteDbTools
 
 
         public void Insert(IEnumerable<T> records, bool doValidate = true)
-            => WriteBulk(records, (c, r) => c.InsertBulk(r), doValidate);
+            => WriteBulk(records, (c, r) => c.InsertBulk(r), doValidate, true);
 
 
         public void Update(IEnumerable<T> records, bool doValidate = true)
-            => WriteBulk(records, (c, r) => c.Update(r), doValidate);
+            => WriteBulk(records, (c, r) => c.Update(r), doValidate, true);
 
 
         public void Upsert(IEnumerable<T> records, bool doValidate = true)
-            => WriteBulk(records, (c, r) => c.Upsert(r), doValidate);
+            => WriteBulk(records, (c, r) => c.Upsert(r), doValidate, true);
 
 
         public bool Delete(int recordId)
@@ -111,12 +111,12 @@ namespace CommonTools.Lib45.LiteDbTools
 
         private int WriteBulk(IEnumerable<T> records,
             Func<LiteCollection<T>, IEnumerable<T>, int> func,
-            bool doValidate)
+            bool doValidate, bool setCurrentFields)
         {
             if (records == null || !records.Any()) return 0;
             foreach (var model in records)
             {
-                SetCurrentFields(model);
+                if (setCurrentFields) SetCurrentFields(model);
                 if (doValidate) Validate(model, _db);
             }
 
@@ -135,7 +135,7 @@ namespace CommonTools.Lib45.LiteDbTools
         }
 
 
-        public void DropAndInsert(IEnumerable<T> records, bool doValidate)
+        public void DropAndInsert(IEnumerable<T> records, bool doValidate, bool setCurrentFields)
         {
             if (records == null)
             {
@@ -143,14 +143,15 @@ namespace CommonTools.Lib45.LiteDbTools
                 return;
             }
 
-            foreach (var model in records)
-            {
-                SetCurrentFields(model);
-                if (doValidate) Validate(model, _db);
-            }
+            //foreach (var model in records)
+            //{
+            //    if (setCurrentFields) SetCurrentFields(model);
+            //    if (doValidate) Validate(model, _db);
+            //}
             Drop();
             if (records.Any())
-                Insert(records, false);
+                //Insert(records, false);
+                WriteBulk(records, (c, r) => c.InsertBulk(r), doValidate, setCurrentFields);
         }
 
 

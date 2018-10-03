@@ -23,7 +23,7 @@ namespace RentLog.DomainLib11.AdHocJobs
             foreach (var chq in all)
                 SetRequestOffset(chq.Request);
 
-            chqsRepo.DropAndInsert(all, false);
+            chqsRepo.DropAndInsert(all, false, true);
         }
 
 
@@ -34,7 +34,7 @@ namespace RentLog.DomainLib11.AdHocJobs
             foreach (var req in all)
                 SetRequestOffset(req);
 
-            reqsRepo.DropAndInsert(all, false);
+            reqsRepo.DropAndInsert(all, false, true);
         }
 
 

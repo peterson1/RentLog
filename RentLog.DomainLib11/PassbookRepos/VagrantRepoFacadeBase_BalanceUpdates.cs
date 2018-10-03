@@ -17,7 +17,7 @@ namespace RentLog.DomainLib11.PassbookRepos
                 var rows = db.GetAll();
                 UpdateRunningBalances(rows, startBal);
 
-                db.DropAndInsert(rows, true);
+                db.DropAndInsert(rows, true, true);
 
                 if (rows.Any())
                     startBal = rows.Last().RunningBalance;

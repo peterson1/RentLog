@@ -36,7 +36,7 @@ namespace RentLog.DomainLib11.BalanceRepos
         public void RecomputeAll()
         {
             var dtos = GetRecomputedFrom(_lse.ContractStart);
-            _repo.DropAndInsert(dtos, false);
+            _repo.DropAndInsert(dtos, false, true);
         }
 
 

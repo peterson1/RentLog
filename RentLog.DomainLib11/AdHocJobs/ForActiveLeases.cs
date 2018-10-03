@@ -15,7 +15,7 @@ namespace RentLog.DomainLib11.AdHocJobs
             foreach (var lse in lses)
                 lse.Rent.PenaltyRule = RentPenalty.DailySurcharge_NoRoundOff;
 
-            repo.DropAndInsert(lses, true);
+            repo.DropAndInsert(lses, true, true);
         }
 
 
@@ -30,7 +30,7 @@ namespace RentLog.DomainLib11.AdHocJobs
                     lse.ContractEnd = DateTime.MaxValue;
             }
 
-            repo.DropAndInsert(lses, true);
+            repo.DropAndInsert(lses, true, true);
         }
 
 
@@ -42,7 +42,7 @@ namespace RentLog.DomainLib11.AdHocJobs
             foreach (var lse in lses)
                 lse.ContractEnd = lse.ContractStart.AddYears(yearCount);
 
-            repo.DropAndInsert(lses, true);
+            repo.DropAndInsert(lses, true, true);
         }
 
 
@@ -58,7 +58,7 @@ namespace RentLog.DomainLib11.AdHocJobs
                 lse.Rent.GracePeriodDays = 0;
             }
 
-            repo.DropAndInsert(lses, true);
+            repo.DropAndInsert(lses, true, true);
         }
 
 

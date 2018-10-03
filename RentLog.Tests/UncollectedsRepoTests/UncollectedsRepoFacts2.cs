@@ -24,9 +24,9 @@ namespace RentLog.Tests.UncollectedsRepoTests
                 ValidSampleDTO(),
             };
 
-            db.Uncollecteds[1].DropAndInsert(list, false);
-            db.Uncollecteds[2].DropAndInsert(list, false);
-            db.Uncollecteds[3].DropAndInsert(list, false);
+            db.Uncollecteds[1].DropAndInsert(list, false, true);
+            db.Uncollecteds[2].DropAndInsert(list, false, true);
+            db.Uncollecteds[3].DropAndInsert(list, false, true);
         }
 
 

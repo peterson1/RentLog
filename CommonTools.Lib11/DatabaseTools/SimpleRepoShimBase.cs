@@ -43,7 +43,7 @@ namespace CommonTools.Lib11.DatabaseTools
         public bool               HasId         (int recordId)                             => _repo.HasId(recordId);
         public bool               HasName       (string recordName, string field = "Name") => _repo.HasName(recordName, field);
         public void               Drop          ()                                         => _repo.Drop();
-        public void               DropAndInsert (IEnumerable<T> records, bool doValidate)  => _repo.DropAndInsert(records, doValidate);
+        public void               DropAndInsert (IEnumerable<T> records, bool doValidate, bool setCurrentFields)  => _repo.DropAndInsert(records, doValidate, setCurrentFields);
         public Dictionary<int, T> ToDictionary  ()                                         => _repo.ToDictionary();
         public bool               TableExists   ()                                         => _repo.TableExists();
 

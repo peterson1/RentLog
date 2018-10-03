@@ -171,7 +171,7 @@ namespace CommonTools.Lib45.BaseViewModels
         {
             //_repo.Drop();
             //_repo.Insert(ItemsList, doValidate);
-            _repo.DropAndInsert(ItemsList, doValidate);
+            _repo.DropAndInsert(ItemsList, doValidate, true);
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 
 namespace CommonTools.Lib11.DatabaseTools
 {
@@ -17,6 +16,6 @@ namespace CommonTools.Lib11.DatabaseTools
         bool    Delete   (List<T> records);
 
         void  Drop              ();
-        void  DropAndInsert     (IEnumerable<T> records, bool doValidate);
+        void  DropAndInsert     (IEnumerable<T> records, bool doValidate, bool setCurrentFields);
     }
 }

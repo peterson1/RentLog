@@ -26,7 +26,7 @@ namespace RentLog.DomainLib11.CollectionRepos
 
                 //repo.Drop();
                 //repo.Insert(recs, true);
-                repo.DropAndInsert(recs, true);
+                repo.DropAndInsert(recs, true, true);
             }
         }
 

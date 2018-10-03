@@ -26,7 +26,7 @@ namespace CommonTools.Lib11.DatabaseTools
         public bool Delete(List<T> records) => throw new NotImplementedException();
         public bool Delete(T unwantedRecord) => throw new NotImplementedException();
         public void Drop() => throw new NotImplementedException();
-        public void DropAndInsert(IEnumerable<T> records, bool doValidate) => throw new NotImplementedException();
+        public void DropAndInsert(IEnumerable<T> records, bool doValidate, bool setCurrentFields) => throw new NotImplementedException();
         public T Earliest() => throw new NotImplementedException();
         public T Find(int recordId, bool errorIfMissing) => throw new NotImplementedException();
         public List<T> Find(Expression<Func<T, bool>> predicate) => throw new NotImplementedException();
