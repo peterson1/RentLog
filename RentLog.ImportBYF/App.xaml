@@ -1,6 +1,9 @@
 ﻿<Application x:Class="RentLog.ImportBYF.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:cmn="clr-namespace:RentLog.ImportBYF.CommonJsonComparer"
+             xmlns:lse="clr-namespace:RentLog.ImportBYF.Converters.LeaseConverters"
+             xmlns:colctr="clr-namespace:RentLog.ImportBYF.Converters.CollectorConverters"
              xmlns:local="clr-namespace:RentLog.ImportBYF"
              xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
@@ -150,13 +153,23 @@
             </Style>
 
             <cnv:VisibleIfTrueConverter     x:Key="visIfTrue"     />
-            <cnv:VisibleIfNullConverter     x:Key="visIfNull"  />
+            <cnv:VisibleIfNullConverter     x:Key="visIfNull"     />
             <cnv:VisibleIfNotNullConverter  x:Key="visIfNotNull"  />
             <cnv:VisibleIfFalseConverter    x:Key="visIfFalse"    />
             <cnv:VisibleIfNotZeroConverter  x:Key="visIfNotZero"  />
             <cnv:SpanDaysConverter          x:Key="spanDays"      />
             <cnv:UnderscoreToSpaceConverter x:Key="uscoreToSpace" />
-            <cnv:DecimalProxyConverter      x:Key="decimalProxy" />
+            <cnv:DecimalProxyConverter      x:Key="decimalProxy"  />
+            <cnv:First30CharsConverter      x:Key="first30Chars"  />
+            <cnv:First60CharsConverter      x:Key="first60Chars"  />
+
+            <DataTemplate DataType="{x:Type lse:LeaseConverter1}">
+                <cmn:JsComparerTable />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type colctr:CollectorConverter1}">
+                <cmn:JsComparerTable />
+            </DataTemplate>
 
         </ResourceDictionary>
     </Application.Resources>

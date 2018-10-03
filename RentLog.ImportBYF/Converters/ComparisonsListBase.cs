@@ -1,50 +1,68 @@
 ﻿using CommonTools.Lib11.DataStructures;
+using CommonTools.Lib11.DTOs;
+using CommonTools.Lib11.InputCommands;
 using CommonTools.Lib11.JsonTools;
-using CommonTools.Lib45.FileSystemTools;
+using CommonTools.Lib11.StringTools;
+using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.ThreadTools;
 using RentLog.DomainLib11.DataSources;
+using RentLog.DomainLib11.MarketStateRepos;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using static System.Environment;
 
 namespace RentLog.ImportBYF.Converters
 {
     public abstract class ComparisonsListBase : UIList<JsonComparer>
     {
-        private const string CACHE_DIR = "BasicAuthBulkCacheReader";
-
-
-        internal abstract List<object> QueryRNT(ITenantDBsDir appArgs);
-        internal abstract List<object> QueryBYF(string cacheDir);
-
-
-        public void ReloadList(ITenantDBsDir dir)
+        public ComparisonsListBase(MainWindowVM mainWindowVM)
         {
-            var tupl  = QueryBothSources(dir);
-            var items = GetComparisons(tupl);
-
-            UIThread.Run(() => SetItems(items));
+            MainWindow   = mainWindowVM;
+            ImportAllCmd = R2Command.Async(this.ImportAll, _ => CanImportAll(), "Import All");
         }
 
 
-        private (List<object>, List<object>) QueryBothSources(ITenantDBsDir dir)
+        public IR2Command     ImportAllCmd       { get; }
+        public MainWindowVM   MainWindow         { get;}
+        public int            UnexpectedsCount   { get; private set; }
+
+        public abstract List<object>       GetListFromBYF (string cacheDir);
+        public abstract List<IDocumentDTO> GetListFromRNT (ITenantDBsDir dir);
+        public abstract IDocumentDTO       CastByfToDTO   (object byfRecord);
+        public abstract int                GetByfId       (object byfRecord);
+        public abstract void               ReplaceAll     (IEnumerable<IDocumentDTO> documents, MarketStateDB marketStateDB);
+
+        public ITenantDBsDir AppArgs => MainWindow.AppArgs;
+
+
+        public void ReloadList()
         {
-            List<object> byfs  = null;
-            List<object> rnts  = null;
-            Parallel.Invoke(() => byfs = QueryBYF(FindCacheDir()),
-                            () => rnts = QueryRNT(dir));
-            return (byfs, rnts);
+            UIThread.Run(()  => ClearItems());
+            UnexpectedsCount = 0;
+            var tupl         = this.QueryBothSources();
+            var items        = tupl.AlignByIDs();
+            UnexpectedsCount = ComparisonsAligner.UnexpectedsCount;
+            UIThread.Run(()  => SetItems(items));
         }
 
 
-        private IEnumerable<JsonComparer> GetComparisons((List<object>, List<object>) tupl)
+        protected T Cast<T>(object rec)
         {
-            throw new NotImplementedException();
+            if (rec is T casted)
+                return casted;
+            else
+            {
+                var typ = typeof(T).Name;
+                var msg = $"Failed to cast as ‹{typ}›"
+                        + L.F + rec.ToJson();
+                throw new InvalidCastException(msg);
+            }
         }
 
 
-        private string FindCacheDir()
-            => SpecialFolder.LocalApplicationData.Path(CACHE_DIR);
+        private bool CanImportAll()
+        {
+            if (UnexpectedsCount != 0) return false;
+            return true;
+        }
     }
 }

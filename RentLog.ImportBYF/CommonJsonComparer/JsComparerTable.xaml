@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="RentLog.ImportBYF.CommonJsonComparer.JsComparerTable"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RentLog.ImportBYF.CommonJsonComparer"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <DataGrid ItemsSource="{Binding }"
+                  Style="{StaticResource dgReadOnly}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" 
+                                    Binding="{Binding CommonKey}"
+                                    ElementStyle="{StaticResource colCenter}" />
+
+                <DataGridTextColumn Header="BYF" 
+                                    Binding="{Binding Json1, Converter={StaticResource first60Chars}}"
+                                    ElementStyle="{StaticResource colSmallWrapCenter}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="ToolTip" Value="{Binding Json1}" />
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="RNT" 
+                                    Binding="{Binding Json2, Converter={StaticResource first60Chars}}"
+                                    ElementStyle="{StaticResource colSmallWrapCenter}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="ToolTip" Value="{Binding Json2}" />
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                
+                <DataGridTextColumn Header="same" 
+                                    Binding="{Binding IsTheSame}"
+                                    ElementStyle="{StaticResource colCenter}" />
+
+                <DataGridTextColumn Header="diff" 
+                                    Binding="{Binding Difference}"
+                                    ElementStyle="{StaticResource colLeft}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

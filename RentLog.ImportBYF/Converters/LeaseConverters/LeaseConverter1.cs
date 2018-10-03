@@ -1,26 +1,59 @@
 ﻿using CommonTools.Lib11.DTOs;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
-using System;
+using RentLog.DomainLib11.MarketStateRepos;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RentLog.ImportBYF.Converters.LeaseConverters
 {
     public class LeaseConverter1 : ComparisonsListBase
     {
-        internal override List<object> QueryBYF(string cacheDir)
+        public LeaseConverter1(MainWindowVM mainWindowVM) : base(mainWindowVM)
         {
-            var dict = CacheReader2.getLeases(cacheDir);
-            throw new NotImplementedException();
         }
 
 
-        internal override List<object> QueryRNT(ITenantDBsDir appArgs)
+        public override IDocumentDTO CastByfToDTO(object byfRecord)
         {
-            throw new NotImplementedException();
+            var byf = Cast(byfRecord);
+            return new LeaseDTO
+            {
+                Id            = (int)byf.Id.Value,
+                ContractStart = byf.ContractStart,
+                ContractEnd   = byf.ContractEnd,
+                ProductToSell = byf.ProductToSell
+            };
+        }
+
+
+        public override List<IDocumentDTO> GetListFromRNT(ITenantDBsDir appArgs)
+        {
+            var mkt     = appArgs.MarketState;
+            var actives = mkt.ActiveLeases.GetAll()
+                             .Select(_ => _ as IDocumentDTO);
+            var inactvs = mkt.InactiveLeases.GetAll()
+                             .Select(_ => _ as IDocumentDTO);
+            return actives.Concat(inactvs).ToList();
+        }
+
+
+        public override List<object> GetListFromBYF(string cacheDir)
+            => CacheReader2.getLeases(cacheDir).Values
+                .Select(_ => _ as object).ToList();
+
+
+        public override int GetByfId(object byf)
+            => (int)Cast(byf).Id.Value;
+
+
+        private ReportModels.Lease Cast(object rec) 
+            => Cast<ReportModels.Lease>(rec);
+
+
+        public override void ReplaceAll(IEnumerable<IDocumentDTO> records, MarketStateDB mkt)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

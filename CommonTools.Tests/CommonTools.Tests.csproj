@@ -79,6 +79,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComparisonsAlignerTests\ComparisonsAlignerFacts.cs" />
     <Compile Include="DatabaseToolsTests\CombinedReadOnlyRepoFacts.cs" />
     <Compile Include="LiteDbToolsTests\CorruptedTableRemoverFacts.cs" />
     <Compile Include="LiteDbToolsTests\SampleDB.cs" />
