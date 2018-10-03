@@ -4,6 +4,7 @@
              xmlns:cmn="clr-namespace:RentLog.ImportBYF.CommonJsonComparer"
              xmlns:lse="clr-namespace:RentLog.ImportBYF.Converters.LeaseConverters"
              xmlns:colctr="clr-namespace:RentLog.ImportBYF.Converters.CollectorConverters"
+             xmlns:secs="clr-namespace:RentLog.ImportBYF.Converters.SectionConverters"
              xmlns:local="clr-namespace:RentLog.ImportBYF"
              xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
@@ -163,13 +164,17 @@
             <cnv:First30CharsConverter      x:Key="first30Chars"  />
             <cnv:First60CharsConverter      x:Key="first60Chars"  />
 
-            <DataTemplate DataType="{x:Type lse:LeaseConverter1}">
+            <!--<DataTemplate DataType="{x:Type colctr:CollectorConverter1}">
                 <cmn:JsComparerTable />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type colctr:CollectorConverter1}">
+            <DataTemplate DataType="{x:Type secs:SectionConverter1}">
                 <cmn:JsComparerTable />
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type lse:LeaseConverter1}">
+                <cmn:JsComparerTable />
+            </DataTemplate>-->
 
         </ResourceDictionary>
     </Application.Resources>

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CommonTools.Lib11.DTOs;
+﻿using CommonTools.Lib11.DTOs;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RentLog.ImportBYF.Converters.SectionConverters
 {
@@ -19,44 +16,37 @@ namespace RentLog.ImportBYF.Converters.SectionConverters
         public override IDocumentDTO CastByfToDTO(object byfRecord)
         {
             var byf = Cast(byfRecord);
+            var nme = byf.Label.Value.Trim();
             return new SectionDTO
             {
                 Id            = (int)byf.Id.Value,
-                Name          = byf.Label.Value,
-                StallTemplate = CastStallTemplate(byf)
+                Name          = nme,
+                StallTemplate = StallDTO.Named(nme + " {0:000}"),
+                IsActive      = byf.IsOperational
             };
         }
 
 
-        private StallDTO CastStallTemplate(ReportModels.Section byf) => new StallDTO
-        {
-            Name = byf.Label.Value + " {0:000}",
-        };
+        public override List<IDocumentDTO> GetListFromRNT(ITenantDBsDir dir)
+            => dir.MarketState.Sections.GetAll()
+                .Select(_ => _ as IDocumentDTO).ToList();
+
+
+        public override List<object> GetListFromBYF(string cacheDir)
+            => CacheReader2.getSections(cacheDir).Values
+                .Select(_ => _ as object).ToList();
+
+
+        public override void ReplaceAll(IEnumerable<IDocumentDTO> records, MarketStateDB mkt)
+            => mkt.Sections.DropAndInsert(records
+                .Select(_ => _ as SectionDTO), true, false);
 
 
         public override int GetByfId(object byfRecord)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override List<object> GetListFromBYF(string cacheDir)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override List<IDocumentDTO> GetListFromRNT(ITenantDBsDir appArgs)
-        {
-            throw new NotImplementedException();
-        }
+            => (int)Cast(byfRecord).Id.Value;
 
 
         private ReportModels.Section Cast(object rec)
             => Cast<ReportModels.Section>(rec);
-
-
-        public override void ReplaceAll(IEnumerable<IDocumentDTO> records, MarketStateDB mkt)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

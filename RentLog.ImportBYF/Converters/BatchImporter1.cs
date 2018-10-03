@@ -26,7 +26,6 @@ namespace RentLog.ImportBYF.Converters
                 }
             });
             win.StopBeingBusy();
-            //UIThread.Run(() => win.ClickRefresh());
             win.ClickRefresh();
         }
     }

@@ -9,6 +9,7 @@ using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.MarketStateRepos;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RentLog.ImportBYF.Converters
 {
@@ -17,13 +18,16 @@ namespace RentLog.ImportBYF.Converters
         public ComparisonsListBase(MainWindowVM mainWindowVM)
         {
             MainWindow   = mainWindowVM;
-            ImportAllCmd = R2Command.Async(this.ImportAll, _ => CanImportAll(), "Import All");
+            ImportAllCmd = R2Command.Async(this.ImportAll, _ => CanImportAll(), $"Import {MainWindow.PickedListName}");
         }
 
 
         public IR2Command     ImportAllCmd       { get; }
         public MainWindowVM   MainWindow         { get;}
         public int            UnexpectedsCount   { get; private set; }
+        public int            ByfCount           { get; private set; }
+        public int            RntCount           { get; private set; }
+        public int            DiffCount          { get; private set; }
 
         public abstract List<object>       GetListFromBYF (string cacheDir);
         public abstract List<IDocumentDTO> GetListFromRNT (ITenantDBsDir dir);
@@ -40,12 +44,21 @@ namespace RentLog.ImportBYF.Converters
             UnexpectedsCount = 0;
             var tupl         = this.QueryBothSources();
             var items        = tupl.AlignByIDs();
-            UnexpectedsCount = ComparisonsAligner.UnexpectedsCount;
             UIThread.Run(()  => SetItems(items));
+            UpdateCounts();
         }
 
 
-        protected T Cast<T>(object rec)
+        private void UpdateCounts()
+        {
+            UnexpectedsCount = ComparisonsAligner.UnexpectedsCount;
+            ByfCount  = this.Count(_ => _.Document1 != null);
+            RntCount  = this.Count(_ => _.Document2 != null);
+            DiffCount = this.Count(_ => _.IsTheSame != true);
+        }
+
+
+    protected T Cast<T>(object rec)
         {
             if (rec is T casted)
                 return casted;
@@ -62,6 +75,7 @@ namespace RentLog.ImportBYF.Converters
         private bool CanImportAll()
         {
             if (UnexpectedsCount != 0) return false;
+            if (DiffCount == 0) return false;
             return true;
         }
     }

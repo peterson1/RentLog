@@ -8,6 +8,13 @@
              xmlns:butns="clr-namespace:CommonTools.Lib45.StyledButtons;assembly=CommonTools.Lib45"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="labl:DualText">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="20 0 0 0" />
+            <Setter Property="Text1Width" Value="auto" />
+        </Style>
+    </UserControl.Resources>
     <StackPanel Orientation="Horizontal"
                 HorizontalAlignment="Right"
                 Margin="0 0 40 0">
@@ -17,17 +24,24 @@
 
         <StackPanel Orientation="Horizontal"
                     DataContext="{Binding PickedList}"
-                    Margin="30 0 0 0" 
                     VerticalAlignment="Center">
+
+            <labl:DualText Text1="BYFs"
+                           Text2="{Binding ByfCount}" />
+
+            <labl:DualText Text1="RNTs"
+                           Text2="{Binding RntCount}" />
+
+            <labl:DualText Text1="Diffs"
+                           Text2="{Binding DiffCount}" />
             
             <labl:DualText Text1="Unexpecteds"
-                           Text2="{Binding UnexpectedsCount}"
-                           VerticalAlign="Center" />
+                           Text2="{Binding UnexpectedsCount}" />
 
             <Button Command="{Binding ImportAllCmd}"
                     Content="{Binding ImportAllCmd.CurrentLabel}"
                     VerticalAlignment="Center"
-                    Margin="30 0 0 0" />
+                    Margin="30 3 0 3" />
         </StackPanel>
 
         <butns:SimpleRefreshButton Margin="30 0 0 0"

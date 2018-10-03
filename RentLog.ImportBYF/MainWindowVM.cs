@@ -1,11 +1,15 @@
 ﻿using CommonTools.Lib11.DataStructures;
+using CommonTools.Lib45.ApplicationTools;
 using PropertyChanged;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib45.BaseViewModels;
+using RentLog.ImportBYF.CommonJsonComparer;
 using RentLog.ImportBYF.Converters;
 using RentLog.ImportBYF.Converters.CollectorConverters;
 using RentLog.ImportBYF.Converters.LeaseConverters;
+using RentLog.ImportBYF.Converters.SectionConverters;
+using RentLog.ImportBYF.Converters.StallConverters;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -22,8 +26,10 @@ namespace RentLog.ImportBYF
 
         public MainWindowVM(ITenantDBsDir tenantDBsDir) : base(tenantDBsDir)
         {
+            Enlist("Stalls"    , () => new StallConverter1    (this));
             Enlist("Collectors", () => new CollectorConverter1(this));
-            Enlist("Leases"    , () => new LeaseConverter1(this));
+            Enlist("Sections"  , () => new SectionConverter1  (this));
+            Enlist("Leases"    , () => new LeaseConverter1    (this));
         }
 
 
@@ -31,13 +37,6 @@ namespace RentLog.ImportBYF
         public int                  PickedListIndex  { get; set; } = -1;
         public ComparisonsListBase  PickedList       { get; private set; }
         public string               PickedListName   => ListNames[PickedListIndex];
-
-
-        private void Enlist(string label, Func<ComparisonsListBase> constructor)
-        {
-            _enlisteds.Add(_enlisteds.Count, constructor);
-            ListNames.Add(label);
-        }
 
 
         protected override void OnWindowLoaded()
@@ -70,5 +69,14 @@ namespace RentLog.ImportBYF
             ContractStart = byf.ContractStart,
             ContractEnd = byf.ContractEnd,
         };
+
+
+        private void Enlist<T>(string label, Func<T> constructor)
+            where T : ComparisonsListBase
+        {
+            _enlisteds.Add(_enlisteds.Count, constructor);
+            ListNames.Add(label);
+            App.Current.SetTemplate<T, JsComparerTable>();
+        }
     }
 }
