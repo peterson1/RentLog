@@ -6,6 +6,10 @@ namespace RentLog.DomainLib11.AdHocJobs
 {
     public static class EnsureGLAccount
     {
+        public static void ElectricWaterDeposit(ITenantDBsDir dir)
+            => dir.AddIfNone("Electric/Water Deposit", GLAcctType.Liability);
+
+
         public static void MeralcoDeposit(ITenantDBsDir dir)
             => dir.AddIfNone("Meralco - Deposit", GLAcctType.Asset);
 

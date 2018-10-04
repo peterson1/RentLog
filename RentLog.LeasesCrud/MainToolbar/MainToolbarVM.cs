@@ -1,5 +1,6 @@
 ﻿using CommonTools.Lib11.DateTimeTools;
 using CommonTools.Lib11.InputCommands;
+using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.ExcelTools;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.PrintTools;
@@ -74,7 +75,7 @@ namespace RentLog.LeasesCrud.MainToolbar
 
         private Action GetAdHocJob(out string desc)
         {
-            desc = "ForActiveLeases.ResetStart(21.Sep(2018)";
+            desc = "EnsureGLAccount.ElectricWaterDeposit";
 
             // multi-job parallel
             //var jobs = ForAllLeases.RecomputeAllBalances(_args);
@@ -97,7 +98,7 @@ namespace RentLog.LeasesCrud.MainToolbar
             //};
 
             // solo task job
-            return () => ForActiveLeases.ResetStart(21.Sep(2018), _args);
+            return () => EnsureGLAccount.ElectricWaterDeposit(_args);
         }
     }
 }
