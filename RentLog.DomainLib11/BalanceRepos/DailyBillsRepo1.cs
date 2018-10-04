@@ -44,10 +44,17 @@ namespace RentLog.DomainLib11.BalanceRepos
         {
             var minID   = date.DaysSinceMin();
             var matches = _repo.Find(_ => _.Id >= minID);
-            if (matches == null || !matches.Any()) return null;
 
-            var oldRows = matches.OrderBy(_ => _.Id).ToList();
-            var maxDate = oldRows.Last ().GetBillDate();
+            //if (matches == null || !matches.Any()) return null;
+            //var oldRows = matches.OrderBy(_ => _.Id).ToList();
+            //var maxDate = oldRows.Last ().GetBillDate();
+            var oldRows = new List<DailyBillDTO>();
+            var maxDate = date;
+            if (matches?.Any() ?? false)
+            {
+                oldRows = matches.OrderBy(_ => _.Id).ToList();
+                maxDate = oldRows.Last().GetBillDate();
+            }
 
             foreach (var billCode in BillCodes.Collected())
             {
