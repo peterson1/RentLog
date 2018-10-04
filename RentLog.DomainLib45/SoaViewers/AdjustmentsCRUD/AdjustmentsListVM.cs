@@ -81,8 +81,12 @@ namespace RentLog.DomainLib45.SoaViewers.AdjustmentsCRUD
 
 
         private static IBalanceAdjustmentsRepo GetRepo(DateTime date, ITenantDBsDir args)
-            => args.Collections.For(date).BalanceAdjs;
+        {
+            var colxns = args.Collections.For(date)
+                      ?? args.Collections.CreateFor(date);
 
+            return colxns.BalanceAdjs;
+        }
 
         protected override Func<BalanceAdjustmentDTO, decimal> SummedAmount => _ => _.AmountOffset;
     }
