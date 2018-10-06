@@ -1,7 +1,11 @@
-﻿using CommonTools.Lib11.ExceptionTools;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using CommonTools.Lib11.ExceptionTools;
 using RentLog.DomainLib11.BalanceRepos;
 using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DTOs;
+using RentLog.DomainLib11.StateTransitions;
 
 namespace RentLog.DomainLib11.MarketStateRepos
 {
@@ -22,6 +26,7 @@ namespace RentLog.DomainLib11.MarketStateRepos
         public virtual IBalanceDB           Balances        { get; set; }
         public virtual ICollectionsDir      Collections     { get; set; }
 
+
         public LeaseDTO FindLease(int leaseID)
         {
             var match = ActiveLeases.Find(leaseID, false);
@@ -41,6 +46,21 @@ namespace RentLog.DomainLib11.MarketStateRepos
             if (lease == null) throw Fault.NullRef("Lease");
             if (lease.Stall == null) throw Fault.NullRef("Lease.Stall");
             lease.Stall = Stalls.Find(lease.Stall.Id, true);
+        }
+
+
+        public List<LeaseDTO> ActiveLeasesFor(DateTime date)
+        {
+            if (date == DateTime.MinValue)
+                return new List<LeaseDTO>();
+
+            var activs = ActiveLeases.GetAll()
+                            .Where(_ => _.IsActive(date));
+
+            var inactvs = InactiveLeases.GetAll()
+                            .Where(_ => _.IsActive(date));
+
+            return activs.Concat(inactvs).ToList();
         }
     }
 }

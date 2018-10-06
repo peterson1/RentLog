@@ -24,8 +24,13 @@ namespace RentLog.Cashiering.CashierCollections
 
 
         private IEnumerable<LeaseDTO> GetSortedLeases()
-            => AppArgs?.MarketState?.ActiveLeases?.GetAll()?.OrderBy(_ => _.Stall?.Name);
-
+        {
+            var mkt = AppArgs?.MarketState;
+            if (mkt == null) return null;
+            var date = AppArgs.Collections.UnclosedDate();
+            return mkt.ActiveLeasesFor(date)
+                      .OrderBy(_ => _.Stall?.Name);
+        }
 
         protected override void ModifyDraftForUpdating(CashierColxnDTO draft)
             => draft.Lease = Leases.SingleOrDefault(_ => _.Id == draft.Lease.Id);

@@ -75,10 +75,10 @@ namespace RentLog.LeasesCrud.MainToolbar
 
         private Action GetAdHocJob(out string desc)
         {
-            desc = "EnsureGLAccount.ElectricWaterDeposit";
+            desc = "ForAllLeases.RecomputeAllBalances";
 
             // multi-job parallel
-            //var jobs = ForAllLeases.RecomputeAllBalances(_args);
+            var jobs = ForAllLeases.RecomputeAllBalances(_args);
             //return jobs.AsParallelJob((ok, not, total) =>
             //{
             //    var left = total - (ok + not);
@@ -89,16 +89,14 @@ namespace RentLog.LeasesCrud.MainToolbar
             //});
             
             // multi-job serial
-            //return () =>
-            //{
-            //    foreach (var job in jobs)
-            //    {
-            //        job.Invoke();
-            //    }
-            //};
+            return () =>
+            {
+                foreach (var job in jobs)
+                    job.Invoke();
+            };
 
             // solo task job
-            return () => EnsureGLAccount.ElectricWaterDeposit(_args);
+            //return () => EnsureGLAccount.ElectricWaterDeposit(_args);
         }
     }
 }

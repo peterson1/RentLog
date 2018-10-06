@@ -1,6 +1,8 @@
 ﻿using RentLog.DomainLib11.BalanceRepos;
 using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DTOs;
+using System;
+using System.Collections.Generic;
 
 namespace RentLog.DomainLib11.MarketStateRepos
 {
@@ -22,5 +24,6 @@ namespace RentLog.DomainLib11.MarketStateRepos
 
         LeaseDTO FindLease(int leaseID);
         void RefreshStall(LeaseDTO lease);
+        List<LeaseDTO> ActiveLeasesFor(DateTime date);
     }
 }
