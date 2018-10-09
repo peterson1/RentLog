@@ -24,7 +24,7 @@
                                 Binding="{Binding DocumentRef}"
                                 ElementStyle="{StaticResource colSmallWrapCenter}" />
             <DataGridTextColumn Header="amount" Width="20*"
-                                Binding="{Binding Amount, StringFormat=N2}"
+                                Binding="{Binding Amount, StringFormat=N3}"
                                 ElementStyle="{StaticResource colSmallWrapRightBold}" />
         </DataGrid.Columns>
     </DataGrid>

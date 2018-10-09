@@ -74,7 +74,7 @@
                           ItemsSource="{Binding BankAccounts}"
                           SelectedItem="{Binding Draft.BankAccount, UpdateSourceTrigger=PropertyChanged}" />
 
-                <TextBox Text="{Binding Draft.Amount, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
+                <TextBox Text="{Binding Draft.Amount, StringFormat=N3, UpdateSourceTrigger=PropertyChanged}"
                          mat:HintAssist.Hint="amount"
                          x:Name="txtAmount">
                     <int:Interaction.Behaviors>

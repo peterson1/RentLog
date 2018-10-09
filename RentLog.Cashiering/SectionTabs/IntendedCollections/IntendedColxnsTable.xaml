@@ -15,11 +15,11 @@
             <DataGridTextColumn Width="2*" Header="tenant"   Binding="{Binding Lease.Tenant.FirstAndLastNames }"   ElementStyle="{StaticResource colSmallWrapLeft}" />
             <DataGridTextColumn Width="1*" Header="stall"    Binding="{Binding Lease.Stall.Name }"                 ElementStyle="{StaticResource colSmallWrapCenter}" />
             <DataGridTextColumn Width="1*" Header="PR#"      Binding="{Binding PRNumber}"                          ElementStyle="{StaticResource colSmallWrapCenter}" />
-            <DataGridTextColumn Width="1*" Header="rent"     Binding="{Binding Actuals.Rent    , StringFormat=N2}" ElementStyle="{StaticResource colSmallWrapRightBold}" />
-            <DataGridTextColumn Width="1*" Header="rights"   Binding="{Binding Actuals.Rights  , StringFormat=N2}" ElementStyle="{StaticResource colSmallWrapRightBold}" />
-            <DataGridTextColumn Width="1*" Header="electric" Binding="{Binding Actuals.Electric, StringFormat=N2}" ElementStyle="{StaticResource colSmallWrapRightBold}" />
-            <DataGridTextColumn Width="1*" Header="water"    Binding="{Binding Actuals.Water   , StringFormat=N2}" ElementStyle="{StaticResource colSmallWrapRightBold}" />
-            <DataGridTextColumn Width="1*" Header="total"    Binding="{Binding Actuals.Total   , StringFormat=N2}" ElementStyle="{StaticResource colSmallWrapRightBold}" />
+            <DataGridTextColumn Width="1*" Header="rent"     Binding="{Binding Actuals.Rent    , StringFormat=N3}" ElementStyle="{StaticResource colSmallWrapRightBold}" />
+            <DataGridTextColumn Width="1*" Header="rights"   Binding="{Binding Actuals.Rights  , StringFormat=N3}" ElementStyle="{StaticResource colSmallWrapRightBold}" />
+            <DataGridTextColumn Width="1*" Header="electric" Binding="{Binding Actuals.Electric, StringFormat=N3}" ElementStyle="{StaticResource colSmallWrapRightBold}" />
+            <DataGridTextColumn Width="1*" Header="water"    Binding="{Binding Actuals.Water   , StringFormat=N3}" ElementStyle="{StaticResource colSmallWrapRightBold}" />
+            <DataGridTextColumn Width="1*" Header="total"    Binding="{Binding Actuals.Total   , StringFormat=N3}" ElementStyle="{StaticResource colSmallWrapRightBold}" />
             <DataGridTextColumn Width="1*" Header="remarks"  Binding="{Binding Remarks}"                           ElementStyle="{StaticResource colSmallWrapCenter}" />
 
         </DataGrid.Columns>

@@ -52,7 +52,7 @@ namespace RentLog.Cashiering.SectionTabs.IntendedCollections
         private void SetHandlersForNullable(TextBox ctrl)
         {
             ctrl.MoveFocusToNextOnEnterKey();
-            ctrl.MoveFocusOnArrowKeys();
+            ctrl.MoveFocusOnArrowKeys(false, false, true, true);
             ctrl.PreviewKeyDown += (s, e) =>
             {
                 if (e.Key == Key.Add)

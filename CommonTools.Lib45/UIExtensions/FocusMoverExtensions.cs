@@ -43,41 +43,41 @@ namespace CommonTools.Lib45.UIExtensions
         }
 
 
-        public static void MoveFocusOnArrowKeys(this FrameworkElement ctrl)
+        public static void MoveFocusOnArrowKeys(this FrameworkElement ctrl,
+            bool onKeyLeft = true, bool onKeyRight = true,
+            bool onKeyUp = true, bool onKeyDown = true)
         {
             ctrl.KeyUp += (s, e) =>
             {
-                //if (e.Key == Key.Up)
-                //    ctrl.MoveFocusToUp();
-
-                //else if (e.Key == Key.Up)
-                //    ctrl.MoveFocusToUp();
-
-                //else if (e.Key == Key.Down)
-                //    ctrl.MoveFocusToDown();
-
-                //else if (e.Key == Key.Left)
-                //    ctrl.MoveFocusToLeft();
-
-                //else if (e.Key == Key.Right)
-                //    ctrl.MoveFocusToRight();
                 switch (e.Key)
                 {
                     case Key.Left:
-                        ctrl.MoveFocusToLeft();
-                        e.Handled = true;
+                        if (onKeyLeft)
+                        {
+                            ctrl.MoveFocusToLeft();
+                            e.Handled = true;
+                        }
                         break;
                     case Key.Up:
-                        ctrl.MoveFocusToUp();
-                        e.Handled = true;
+                        if (onKeyUp)
+                        {
+                            ctrl.MoveFocusToUp();
+                            e.Handled = true;
+                        }
                         break;
                     case Key.Right:
-                        ctrl.MoveFocusToRight();
-                        e.Handled = true;
+                        if (onKeyRight)
+                        {
+                            ctrl.MoveFocusToRight();
+                            e.Handled = true;
+                        }
                         break;
                     case Key.Down:
-                        ctrl.MoveFocusToDown();
-                        e.Handled = true;
+                        if (onKeyDown)
+                        {
+                            ctrl.MoveFocusToDown();
+                            e.Handled = true;
+                        }
                         break;
                     default:
                         break;

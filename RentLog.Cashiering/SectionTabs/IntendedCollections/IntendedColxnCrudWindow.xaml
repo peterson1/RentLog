@@ -87,7 +87,7 @@
                 <TextBlock Text="Actual Collections" 
                            Style="{StaticResource txtColHeadr}" />
 
-                <TextBox Text="{Binding Rent, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
+                <TextBox Text="{Binding Rent, StringFormat=N3, UpdateSourceTrigger=PropertyChanged}"
                          DataContext="{Binding Draft.Actuals}"
                          mat:HintAssist.Hint="Rent"
                          x:Name="txtRent">
@@ -96,7 +96,7 @@
                     </int:Interaction.Behaviors>
                 </TextBox>
 
-                <TextBox Text="{Binding Rights, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
+                <TextBox Text="{Binding Rights, StringFormat=N3, UpdateSourceTrigger=PropertyChanged}"
                          DataContext="{Binding Draft.Actuals}"
                          mat:HintAssist.Hint="Rights"
                          x:Name="txtRights">
@@ -105,7 +105,7 @@
                     </int:Interaction.Behaviors>
                 </TextBox>
 
-                <TextBox Text="{Binding Electric, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
+                <TextBox Text="{Binding Electric, StringFormat=N3, UpdateSourceTrigger=PropertyChanged}"
                          DataContext="{Binding Draft.Actuals}"
                          mat:HintAssist.Hint="Electric"
                          x:Name="txtElectric">
@@ -114,7 +114,7 @@
                     </int:Interaction.Behaviors>
                 </TextBox>
 
-                <TextBox Text="{Binding Water, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
+                <TextBox Text="{Binding Water, StringFormat=N3, UpdateSourceTrigger=PropertyChanged}"
                          DataContext="{Binding Draft.Actuals}"
                          mat:HintAssist.Hint="Water"
                          x:Name="txtWater">
@@ -123,7 +123,7 @@
                     </int:Interaction.Behaviors>
                 </TextBox>
 
-                <TextBox Text="{Binding UITotal, StringFormat=N2, Mode=OneWay}"
+                <TextBox Text="{Binding UITotal, StringFormat=N3, Mode=OneWay}"
                          Style="{StaticResource txtReadOnly}"
                          mat:HintAssist.Hint="Total" />
 
