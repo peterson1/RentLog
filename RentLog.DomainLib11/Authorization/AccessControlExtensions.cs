@@ -98,6 +98,9 @@ namespace RentLog.DomainLib11.Authorization
         public static bool CanTerminateteLease(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
             "Terminate Lease", "Supervisor", "Admin");
 
+        public static bool CanUndoLeaseTermination(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
+            "Undo Lease Termination", "Admin");
+
 
 
         public static bool CanAddStall(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,

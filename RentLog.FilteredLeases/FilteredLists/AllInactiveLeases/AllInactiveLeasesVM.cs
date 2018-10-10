@@ -1,6 +1,12 @@
-﻿using RentLog.DomainLib11.DataSources;
+﻿using CommonTools.Lib11.InputCommands;
+using CommonTools.Lib45.InputCommands;
+using CommonTools.Lib45.ThreadTools;
+using RentLog.DomainLib11.Authorization;
+using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
+using RentLog.DomainLib11.StateTransitions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,6 +16,26 @@ namespace RentLog.FilteredLeases.FilteredLists.AllInactiveLeases
     {
         public AllInactiveLeasesVM(MainWindowVM main, ITenantDBsDir dir) : base(main, dir)
         {
+            UndoTerminationCmd = R2Command.Relay(UndoTermination, 
+                             _ => AppArgs.CanUndoLeaseTermination(false), 
+                                    "Undo Lease Termination");
+        }
+
+
+        public IR2Command  UndoTerminationCmd  { get; }
+
+
+        private void UndoTermination()
+        {
+            if (!TryGetPickedItem(out LeaseDTO lse)) return;
+            var inactv = lse as InactiveLeaseDTO;
+
+            Alert.Confirm($"Undo contract termination for “{lse}”?", () =>
+            {
+                AppArgs.MarketState.UndoLeaseTermination(inactv);
+                Alert.Show($"“{lse}” is now Active.");
+                ReloadFromDB();
+            });
         }
 
 

@@ -31,7 +31,7 @@ namespace RentLog.FilteredLeases
             ExportToExcelCmd = R2Command.Relay(() => ToExcelRequested.Raise(), null, "Export to Excel");
 
             Enlist("All Active Leases", _ => new AllActiveLeasesVM(this, _));
-            Enlist("All Inactive Leases", _ => new AllInactiveLeasesVM(this, _));
+            Enlist("All Terminated Leases", _ => new AllInactiveLeasesVM(this, _));
             Enlist("With Backrents or Overdue Rights", _ => new WithBackRentsOrRightsVM(this, _));
             //todo: "Leases Nearing Rights Expiry"
         }

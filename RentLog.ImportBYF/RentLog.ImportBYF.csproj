@@ -122,6 +122,7 @@
     <Compile Include="Converters\DualSourceQueries.cs" />
     <Compile Include="Converters\LeaseConverters\LeaseConverter1.cs" />
     <Compile Include="Converters\SectionConverters\SectionConverter1.cs" />
+    <Compile Include="Converters\StallConverters\LastStallUsageFinder.cs" />
     <Compile Include="Converters\StallConverters\StallConverter1.cs" />
     <Compile Include="MainToolbar\MainToolbarUI.xaml.cs">
       <DependentUpon>MainToolbarUI.xaml</DependentUpon>

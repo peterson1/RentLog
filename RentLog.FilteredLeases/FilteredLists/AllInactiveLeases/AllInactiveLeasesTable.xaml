@@ -6,6 +6,18 @@
              xmlns:local="clr-namespace:RentLog.FilteredLeases.FilteredLists.AllInactiveLeases"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ContextMenu x:Key="rowCtxMenu">
+            <MenuItem Header ="{Binding UndoTerminationCmd.CurrentLabel}" 
+                      Command="{Binding UndoTerminationCmd}"
+                      DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+        </ContextMenu>
+
+        <Style TargetType="DataGridRow"
+               BasedOn="{StaticResource MaterialDesignDataGridRow}">
+            <Setter Property="ContextMenu" Value="{StaticResource rowCtxMenu}" />
+        </Style>
+    </UserControl.Resources>
     <DataGrid x:Name="dg" Style="{StaticResource dgReadOnly}"
               ItemsSource ="{Binding }"
               DataContext ="{Binding Rows}"

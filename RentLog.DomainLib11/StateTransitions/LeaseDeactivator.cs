@@ -19,5 +19,13 @@ namespace RentLog.DomainLib11.StateTransitions
 
             return inactv;
         }
+
+
+        public static void UndoLeaseTermination(this MarketStateDB mkt, InactiveLeaseDTO inactiveLeaseDTO)
+        {
+            //todo: reject if stall is in use
+            mkt.ActiveLeases.Insert(inactiveLeaseDTO);
+            mkt.InactiveLeases.Delete(inactiveLeaseDTO);
+        }
     }
 }
