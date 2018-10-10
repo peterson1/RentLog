@@ -1,4 +1,5 @@
 ﻿using CommonTools.Lib11.ExceptionTools;
+using CommonTools.Lib11.ReflectionTools;
 using RentLog.DomainLib11.BalanceRepos;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
@@ -24,7 +25,9 @@ namespace RentLog.DomainLib11.StateTransitions
         public static void UndoLeaseTermination(this MarketStateDB mkt, InactiveLeaseDTO inactiveLeaseDTO)
         {
             //todo: reject if stall is in use
-            mkt.ActiveLeases.Insert(inactiveLeaseDTO);
+            var activ = new LeaseDTO();
+            activ.CopyByNameFrom(inactiveLeaseDTO as LeaseDTO);
+            mkt.ActiveLeases.Insert(activ);
             mkt.InactiveLeases.Delete(inactiveLeaseDTO);
         }
     }
