@@ -23,7 +23,7 @@ namespace RentLog.ImportBYF.Converters
 
 
         public IR2Command     ImportAllCmd       { get; }
-        public MainWindowVM   MainWindow         { get;}
+        public MainWindowVM   MainWindow         { get; }
         public int            UnexpectedsCount   { get; private set; }
         public int            ByfCount           { get; private set; }
         public int            RntCount           { get; private set; }

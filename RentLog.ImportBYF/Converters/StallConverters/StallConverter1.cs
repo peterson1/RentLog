@@ -1,10 +1,8 @@
 ﻿using CommonTools.Lib11.DTOs;
-using PropertyChanged;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
 using RentLog.DomainLib11.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,6 +10,9 @@ namespace RentLog.ImportBYF.Converters.StallConverters
 {
     public class StallConverter1 : ComparisonsListBase
     {
+        private List<ReportModels.Lease> _byfLeases;
+
+
         public StallConverter1(MainWindowVM mainWindowVM) : base(mainWindowVM)
         {
         }
@@ -39,16 +40,12 @@ namespace RentLog.ImportBYF.Converters.StallConverters
         }
 
 
-        private RentParams FindDefaultRent(ReportModels.Stall byf)
-        {
-            return new RentParams();
-        }
+        private RentParams FindDefaultRent(ReportModels.Stall byf) 
+            => _byfLeases.FindLatestOccupancy(byf).Rent;
 
 
         private RightsParams FindDefaultRights(ReportModels.Stall byf)
-        {
-            return new RightsParams();
-        }
+            => _byfLeases.FindLatestOccupancy(byf).Rights;
 
 
         public override List<IDocumentDTO> GetListFromRNT(ITenantDBsDir dir)
@@ -57,8 +54,13 @@ namespace RentLog.ImportBYF.Converters.StallConverters
 
 
         public override List<object> GetListFromBYF(string cacheDir)
-            => CacheReader2.getStalls(cacheDir).Values
-                .Select(_ => _ as object).ToList();
+        {
+            _byfLeases = CacheReader2.getLeases(cacheDir)
+                                     .Values.ToList();
+
+            return CacheReader2.getStalls(cacheDir).Values
+                               .Select(_ => _ as object).ToList();
+        }
 
 
         public override int GetByfId(object byfRecord)
