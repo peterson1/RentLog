@@ -10,6 +10,21 @@
               ItemsSource="{Binding }"
               x:Name="dg"
               Style="{StaticResource dgReadOnly}">
+        <!--<DataGrid.RowDetailsTemplate>
+            <DataTemplate>
+                <TextBlock Background="Orange" Text="{Binding Remarks}" TextWrapping="Wrap"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            </DataTemplate>
+        </DataGrid.RowDetailsTemplate>-->
+        <DataGrid.RowStyle>
+            <Style TargetType="DataGridRow">
+                <Setter Property="ToolTip">
+                    <Setter.Value>
+                        <TextBlock Text="{Binding Remarks}" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </DataGrid.RowStyle>
         <DataGrid.Columns>
             <DataGridTextColumn Header="PR #" Width="10*"
                                 Binding="{Binding DocumentRef}" 
