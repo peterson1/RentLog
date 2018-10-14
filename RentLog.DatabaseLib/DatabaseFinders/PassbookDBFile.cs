@@ -34,8 +34,8 @@ namespace RentLog.DatabaseLib.DatabaseFinders
             var dir    = Path.GetDirectoryName(mkt.DatabasePath);
             var dbPath = Path.Combine(dir, FILENAME);
 
-            if (!File.Exists(dbPath))
-                throw Missing.File(dbPath, "Passbook DB file");
+            //if (!File.Exists(dbPath))
+            //    throw Missing.File(dbPath, "Passbook DB file");
 
             return dbPath;
         }

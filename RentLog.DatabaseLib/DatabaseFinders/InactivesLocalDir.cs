@@ -29,8 +29,8 @@ namespace RentLog.DatabaseLib.DatabaseFinders
         {
             var dbPath = Path.Combine(GetInactivesDir(dir), REQUESTS_FILE);
 
-            if (!File.Exists(dbPath))
-                throw Missing.File(dbPath, "Inactive Requests DB file");
+            //if (!File.Exists(dbPath))
+            //    throw Missing.File(dbPath, "Inactive Requests DB file");
 
             return dbPath;
         }
