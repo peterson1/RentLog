@@ -48,6 +48,9 @@ namespace CommonTools.Lib11.StringTools
         }
 
 
+        public static string NullIfBlank(this string text)
+            => text.IsBlank() ? null : text;
+
 
         public static bool HasText(this string lookInHere, string findThis)
         {

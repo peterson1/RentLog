@@ -120,7 +120,12 @@
     <Compile Include="Converters\ComparisonsAligner.cs" />
     <Compile Include="Converters\ComparisonsListBase.cs" />
     <Compile Include="Converters\DualSourceQueries.cs" />
+    <Compile Include="Converters\LeaseConverters\DeactivationConverter1.cs" />
     <Compile Include="Converters\LeaseConverters\LeaseConverter1.cs" />
+    <Compile Include="Converters\LeaseConverters\LeaseStateSegregator.cs" />
+    <Compile Include="Converters\LeaseConverters\RentRightsParamsConverter1.cs" />
+    <Compile Include="Converters\LeaseConverters\StallFinder1.cs" />
+    <Compile Include="Converters\LeaseConverters\TenantsConverter1.cs" />
     <Compile Include="Converters\SectionConverters\SectionConverter1.cs" />
     <Compile Include="Converters\StallConverters\LastStallUsageFinder.cs" />
     <Compile Include="Converters\StallConverters\StallConverter1.cs" />

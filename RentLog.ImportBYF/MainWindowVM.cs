@@ -26,10 +26,10 @@ namespace RentLog.ImportBYF
 
         public MainWindowVM(ITenantDBsDir tenantDBsDir) : base(tenantDBsDir)
         {
-            Enlist("Stalls"    , () => new StallConverter1    (this));
-            Enlist("Collectors", () => new CollectorConverter1(this));
-            Enlist("Sections"  , () => new SectionConverter1  (this));
             Enlist("Leases"    , () => new LeaseConverter1    (this));
+            Enlist("Stalls"    , () => new StallConverter1    (this));
+            Enlist("Sections"  , () => new SectionConverter1  (this));
+            Enlist("Collectors", () => new CollectorConverter1(this));
         }
 
 

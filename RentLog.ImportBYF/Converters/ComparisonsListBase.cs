@@ -35,6 +35,10 @@ namespace RentLog.ImportBYF.Converters
         public abstract int                GetByfId       (object byfRecord);
         public abstract void               ReplaceAll     (IEnumerable<IDocumentDTO> documents, MarketStateDB marketStateDB);
 
+        //public virtual object PreCompareBYF(object obj) => obj;
+        //public virtual object PreCompareRNT(object obj) => obj;
+
+
         public ITenantDBsDir AppArgs => MainWindow.AppArgs;
 
 
@@ -43,7 +47,7 @@ namespace RentLog.ImportBYF.Converters
             UIThread.Run(()  => ClearItems());
             UnexpectedsCount = 0;
             var tupl         = this.QueryBothSources();
-            var items        = tupl.AlignByIDs();
+            var items        = this.AlignByIDs(tupl);
             UIThread.Run(()  => SetItems(items));
             UpdateCounts();
         }
@@ -58,7 +62,7 @@ namespace RentLog.ImportBYF.Converters
         }
 
 
-    protected T Cast<T>(object rec)
+        protected T Cast<T>(object rec)
         {
             if (rec is T casted)
                 return casted;

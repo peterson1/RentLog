@@ -13,7 +13,7 @@ namespace RentLog.ImportBYF.Converters
     {
         public static int UnexpectedsCount;
 
-        public static List<JsonComparer> AlignByIDs(this (List<IDocumentDTO>, List<IDocumentDTO>) tupl)
+        public static List<JsonComparer> AlignByIDs(this ComparisonsListBase compList, (List<IDocumentDTO>, List<IDocumentDTO>) tupl)
         {
             var bag   = new ConcurrentBag<JsonComparer>();
             var jobs  = new List<Action>();
@@ -26,9 +26,12 @@ namespace RentLog.ImportBYF.Converters
             {
                 jobs.Add(() =>
                 {
-                    var id1 = item1.Id;
+                    var id1   = item1.Id;
                     var item2 = list2.SingleOrDefault(_ => _.Id == id1);
                     bag.Add(new JsonComparer(id1, item1, item2));
+                    //var byf   = compList.PreCompareBYF(item1);
+                    //var rnt   = compList.PreCompareRNT(item2);
+                    //bag.Add(new JsonComparer(id1, byf, rnt));
                 });
             }
             jobs.Add(() => AlertUnexpectedItems(list1, list2));

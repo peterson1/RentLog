@@ -1,8 +1,10 @@
 ﻿using CommonTools.Lib11.DTOs;
+using CommonTools.Lib11.ExceptionTools;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
 using RentLog.DomainLib11.Models;
+using RentLog.ImportBYF.Converters.LeaseConverters;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,10 +13,12 @@ namespace RentLog.ImportBYF.Converters.StallConverters
     public class StallConverter1 : ComparisonsListBase
     {
         private List<ReportModels.Lease> _byfLeases;
+        private LeaseConverter1          _lseConv;
 
 
         public StallConverter1(MainWindowVM mainWindowVM) : base(mainWindowVM)
         {
+            _lseConv = new LeaseConverter1(mainWindowVM);
         }
 
 
@@ -36,16 +40,21 @@ namespace RentLog.ImportBYF.Converters.StallConverters
         private SectionDTO FindSection(ReportModels.Stall byf)
         {
             var secId = (int)byf.Section.Id.Value;
-            return AppArgs.MarketState.Sections.Find(secId, true);
+            var sec   = AppArgs.MarketState.Sections.Find(secId, false);
+
+            if (sec == null)
+                throw No.Match<SectionDTO>("Id", secId);
+
+            return sec;
         }
 
 
         private RentParams FindDefaultRent(ReportModels.Stall byf) 
-            => _byfLeases.FindLatestOccupancy(byf).Rent;
+            => _byfLeases.FindLatestOccupancy(byf, _lseConv)?.Rent;
 
 
         private RightsParams FindDefaultRights(ReportModels.Stall byf)
-            => _byfLeases.FindLatestOccupancy(byf).Rights;
+            => _byfLeases.FindLatestOccupancy(byf, _lseConv)?.Rights;
 
 
         public override List<IDocumentDTO> GetListFromRNT(ITenantDBsDir dir)
