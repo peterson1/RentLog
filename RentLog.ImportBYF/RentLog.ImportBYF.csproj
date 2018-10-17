@@ -100,6 +100,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DailyTransactions\DailyTransactionsUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyTransactions\DateChooserUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainToolbar\MainToolbarUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -129,6 +137,16 @@
     <Compile Include="Converters\SectionConverters\SectionConverter1.cs" />
     <Compile Include="Converters\StallConverters\LastStallUsageFinder.cs" />
     <Compile Include="Converters\StallConverters\StallConverter1.cs" />
+    <Compile Include="DailyTransactions\DailyTransactionRow.cs" />
+    <Compile Include="DailyTransactions\DailyTransactionsUI.xaml.cs">
+      <DependentUpon>DailyTransactionsUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DailyTransactions\DailyTransactionsVM.cs" />
+    <Compile Include="DailyTransactions\DateChooserUI.xaml.cs">
+      <DependentUpon>DateChooserUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DailyTransactions\DateChooserVM.cs" />
+    <Compile Include="DailyTransactions\TransactionRowsVM.cs" />
     <Compile Include="MainToolbar\MainToolbarUI.xaml.cs">
       <DependentUpon>MainToolbarUI.xaml</DependentUpon>
     </Compile>
@@ -186,6 +204,7 @@
   <ItemGroup>
     <Resource Include="FodyWeavers.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.3.2.4\build\Fody.targets" Condition="Exists('..\packages\Fody.3.2.4\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

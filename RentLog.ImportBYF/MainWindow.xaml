@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:tbar="clr-namespace:RentLog.ImportBYF.MainToolbar"
+        xmlns:txns="clr-namespace:RentLog.ImportBYF.DailyTransactions"
         xmlns:local="clr-namespace:RentLog.ImportBYF"
         mc:Ignorable="d"
         Title="{Binding Caption}" 
@@ -23,15 +24,24 @@
         <butns:UpdatedExeNotifierBar DataContext="{Binding UpdateNotifier}"
                                      DockPanel.Dock="Top" />
         <Grid>
-            <DockPanel>
-
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="50*" />
+            </Grid.ColumnDefinitions>
+            
+            <DockPanel Grid.Column="0">
                 <tbar:MainToolbarUI DockPanel.Dock="Top" />
-
                 <ContentPresenter x:Name="presentr"
                                   Content="{Binding PickedList}" />
             </DockPanel>
 
-            <busy:BusyDialog />
+            <GridSplitter Grid.Column="1" Style="{StaticResource vSplit}" />
+
+            <txns:DailyTransactionsUI Grid.Column="2"
+                                      DataContext="{Binding DailyTxns}" />
+
+            <busy:BusyDialog Grid.ColumnSpan="3" />
         </Grid>
     </DockPanel>
 </Window>

@@ -13,16 +13,17 @@ namespace RentLog.ImportBYF.Converters
 {
     public static class DualSourceQueries
     {
-        private const string CACHE_DIR = "BasicAuthBulkCacheReader";
+        //private const string CACHE_DIR = "BasicAuthBulkCacheReader";
 
 
         public static (List<IDocumentDTO>, List<IDocumentDTO>) QueryBothSources(this ComparisonsListBase compList)
         {
-            var dir                  = compList.AppArgs;
+            var byfDir               = compList.MainWindow.CacheDir;
+            var rntDir               = compList.AppArgs;
             List<IDocumentDTO> byfs  = null;
             List<IDocumentDTO> rnts  = null;
-            Parallel.Invoke(() => byfs = QueryBYF(compList, FindCacheDir()),
-                            () => rnts = compList.GetListFromRNT(dir));
+            Parallel.Invoke(() => byfs = QueryBYF(compList, byfDir),
+                            () => rnts = compList.GetListFromRNT(rntDir));
             return (byfs, rnts);
         }
 
@@ -74,7 +75,7 @@ namespace RentLog.ImportBYF.Converters
         }
 
 
-        private static string FindCacheDir()
-            => SpecialFolder.LocalApplicationData.Path(CACHE_DIR);
+        //private static string FindCacheDir()
+        //    => SpecialFolder.LocalApplicationData.Path(CACHE_DIR);
     }
 }

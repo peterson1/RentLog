@@ -1,5 +1,6 @@
 ﻿using CommonTools.Lib11.DataStructures;
 using CommonTools.Lib45.ApplicationTools;
+using CommonTools.Lib45.FileSystemTools;
 using PropertyChanged;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
@@ -10,9 +11,11 @@ using RentLog.ImportBYF.Converters.CollectorConverters;
 using RentLog.ImportBYF.Converters.LeaseConverters;
 using RentLog.ImportBYF.Converters.SectionConverters;
 using RentLog.ImportBYF.Converters.StallConverters;
+using RentLog.ImportBYF.DailyTransactions;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using static System.Environment;
 
 namespace RentLog.ImportBYF
 {
@@ -26,6 +29,7 @@ namespace RentLog.ImportBYF
 
         public MainWindowVM(ITenantDBsDir tenantDBsDir) : base(tenantDBsDir)
         {
+            DailyTxns = new DailyTransactionsVM(this);
             Enlist("Leases"    , () => new LeaseConverter1    (this));
             Enlist("Stalls"    , () => new StallConverter1    (this));
             Enlist("Sections"  , () => new SectionConverter1  (this));
@@ -33,16 +37,22 @@ namespace RentLog.ImportBYF
         }
 
 
+        public DailyTransactionsVM  DailyTxns        { get; }
         public UIList<string>       ListNames        { get; } = new UIList<string>();
         public int                  PickedListIndex  { get; set; } = -1;
         public ComparisonsListBase  PickedList       { get; private set; }
         public string               PickedListName   => ListNames[PickedListIndex];
 
 
+        public string CacheDir => SpecialFolder.LocalApplicationData.Path("BasicAuthBulkCacheReader");
+
+
         protected override void OnWindowLoaded()
         {
             if (PickedListIndex == -1)
                 PickedListIndex = 0;
+
+            //DailyTxns.DateChooser.PickInitialDates();
         }
 
 
