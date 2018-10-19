@@ -12,6 +12,7 @@ using RentLog.ImportBYF.Converters.LeaseConverters;
 using RentLog.ImportBYF.Converters.SectionConverters;
 using RentLog.ImportBYF.Converters.StallConverters;
 using RentLog.ImportBYF.DailyTransactions;
+using RentLog.ImportBYF.RntQueries;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -37,6 +38,7 @@ namespace RentLog.ImportBYF
         }
 
 
+        public RntCache             RntCache         { get; } = new RntCache();
         public DailyTransactionsVM  DailyTxns        { get; }
         public UIList<string>       ListNames        { get; } = new UIList<string>();
         public int                  PickedListIndex  { get; set; } = -1;
@@ -52,7 +54,7 @@ namespace RentLog.ImportBYF
             if (PickedListIndex == -1)
                 PickedListIndex = 0;
 
-            //DailyTxns.DateChooser.PickInitialDates();
+            DailyTxns.RefreshCmd.ExecuteIfItCan();
         }
 
 
@@ -69,7 +71,9 @@ namespace RentLog.ImportBYF
             if (PickedList == null) return;
             StartBeingBusy($"Loading {PickedListName} ...");
             await Task.Delay(1);
-            await Task.Run(() => PickedList.ReloadList());
+            await Task.Run(() =>
+                Parallel.Invoke(() => PickedList.ReloadList(),
+                                () => RntCache.RefillFrom(AppArgs)));
             StopBeingBusy();
         }
 

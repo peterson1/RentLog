@@ -30,6 +30,7 @@
                     <DataGridTextColumn.CellStyle>
                         <Style TargetType="DataGridCell">
                             <Setter Property="ToolTip" Value="{Binding Json2}" />
+                            <Setter Property="ToolTipService.ShowDuration" Value="2147483647" />
                         </Style>
                     </DataGridTextColumn.CellStyle>
                 </DataGridTextColumn>

@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="RentLog.ImportBYF.DailyTransactions.TransactionsTable.ByfCellUI"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RentLog.ImportBYF.DailyTransactions.TransactionsTable"
+             xmlns:labl="clr-namespace:CommonTools.Lib45.TextLabels;assembly=CommonTools.Lib45"
+             mc:Ignorable="d" 
+             VerticalAlignment="Center"
+             HorizontalAlignment="Center"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="labl:DualText">
+            <Setter Property="Text1Size" Value="10" />
+            <Setter Property="Text1Width" Value="50" />
+            <Setter Property="Text2Size" Value="10" />
+        </Style>
+    </UserControl.Resources>
+    <Grid Visibility="{Binding ByfCell, Converter={StaticResource visIfNotNull}}">
+        <StackPanel Visibility="{Binding ByfCell.HasValue, Converter={StaticResource visIfTrue}}">
+            <labl:DualText Text1="colxn"
+                           Text2="{Binding ByfCell.TotalCollections, StringFormat=N2}" />
+            <labl:DualText Text1="deps"
+                           Text2="{Binding ByfCell.TotalDeposits, StringFormat=N2}" />
+            <labl:DualText Text1="balanced"
+                           Text2="{Binding ByfCell.IsBalanced}" />
+            <labl:DualText Text1="diff"
+                           Text2="{Binding ByfCell.TotalDiff, StringFormat=N2}"
+                           Visibility="{Binding ByfCell.IsBalanced, Converter={StaticResource visIfFalse}}" />
+        </StackPanel>
+
+        <Button Command="{Binding QueryByfCmd}"
+                Content="{Binding QueryByfCmd.CurrentLabel}"
+                Visibility="{Binding ByfCell.HasValue, Converter={StaticResource visIfFalse}}" />
+    </Grid>
+</UserControl>

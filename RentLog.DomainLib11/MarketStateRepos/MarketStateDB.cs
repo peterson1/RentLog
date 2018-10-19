@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CommonTools.Lib11.ExceptionTools;
+﻿using CommonTools.Lib11.ExceptionTools;
 using RentLog.DomainLib11.BalanceRepos;
 using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.StateTransitions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RentLog.DomainLib11.MarketStateRepos
 {
@@ -60,6 +60,14 @@ namespace RentLog.DomainLib11.MarketStateRepos
             var inactvs = InactiveLeases.GetAll()
                             .Where(_ => _.IsActive(date));
 
+            return activs.Concat(inactvs).ToList();
+        }
+
+
+        public List<LeaseDTO> GetAllLeases()
+        {
+            var activs  = ActiveLeases.GetAll();
+            var inactvs = InactiveLeases.GetAll();
             return activs.Concat(inactvs).ToList();
         }
     }

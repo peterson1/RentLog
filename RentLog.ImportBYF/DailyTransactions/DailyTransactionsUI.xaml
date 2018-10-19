@@ -4,9 +4,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RentLog.ImportBYF.DailyTransactions"
+             xmlns:busy="clr-namespace:CommonTools.Lib45.BusyIndicators;assembly=CommonTools.Lib45"
+             xmlns:butns="clr-namespace:CommonTools.Lib45.StyledButtons;assembly=CommonTools.Lib45"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <local:DateChooserUI DataContext="{Binding DateChooser}" />
+        <DockPanel>
+            <StackPanel DockPanel.Dock="Top"
+                        Orientation="Horizontal">
+                <local:DateChooserUI DataContext="{Binding DateChooser}" />
+                <butns:SimpleRefreshButton Margin="30 0 0 0" />
+            </StackPanel>
+
+            <local:TxnRowsTable />
+        </DockPanel>
+        <busy:BusyDialog />
     </Grid>
 </UserControl>

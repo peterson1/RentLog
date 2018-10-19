@@ -25,5 +25,6 @@ namespace RentLog.DomainLib11.MarketStateRepos
         LeaseDTO FindLease(int leaseID);
         void RefreshStall(LeaseDTO lease);
         List<LeaseDTO> ActiveLeasesFor(DateTime date);
+        List<LeaseDTO> GetAllLeases();
     }
 }

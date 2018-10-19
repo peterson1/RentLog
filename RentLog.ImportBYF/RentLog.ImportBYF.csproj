@@ -54,7 +54,9 @@
     <Reference Include="Dragablz, Version=0.0.3.203, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dragablz.0.0.3.203\lib\net45\Dragablz.dll</HintPath>
     </Reference>
-    <Reference Include="FSharp.Core, Version=4.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="FSharp.Core, Version=4.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FSharp.Core.4.5.2\lib\net45\FSharp.Core.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.1.3\lib\net45\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -96,6 +98,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\DailyTxnConverterBase.cs" />
+    <Compile Include="RntQueries\RntCache.cs" />
+    <Compile Include="RntQueries\RntDailyTxnQuery.cs" />
     <Page Include="CommonJsonComparer\JsComparerTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -105,6 +110,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DailyTransactions\DateChooserUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyTransactions\TransactionsTable\ByfCellUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyTransactions\TransactionsTable\RntCellUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyTransactions\TransactionsTable\TxnRowsTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -128,6 +145,7 @@
     <Compile Include="Converters\ComparisonsAligner.cs" />
     <Compile Include="Converters\ComparisonsListBase.cs" />
     <Compile Include="Converters\DualSourceQueries.cs" />
+    <Compile Include="Converters\IntendedColxnConverters\IntendedColxnConverter1.cs" />
     <Compile Include="Converters\LeaseConverters\DeactivationConverter1.cs" />
     <Compile Include="Converters\LeaseConverters\LeaseConverter1.cs" />
     <Compile Include="Converters\LeaseConverters\LeaseStateSegregator.cs" />
@@ -137,7 +155,13 @@
     <Compile Include="Converters\SectionConverters\SectionConverter1.cs" />
     <Compile Include="Converters\StallConverters\LastStallUsageFinder.cs" />
     <Compile Include="Converters\StallConverters\StallConverter1.cs" />
-    <Compile Include="DailyTransactions\DailyTransactionRow.cs" />
+    <Compile Include="DailyTransactions\ByfDailyTxnQuery.cs" />
+    <Compile Include="DailyTransactions\RntUpdateDayCommand.cs" />
+    <Compile Include="DailyTransactions\TransactionsTable\ByfCellUI.xaml.cs">
+      <DependentUpon>ByfCellUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DailyTransactions\TransactionsTable\DailyTransactionCell.cs" />
+    <Compile Include="DailyTransactions\TransactionsTable\DailyTransactionRow.cs" />
     <Compile Include="DailyTransactions\DailyTransactionsUI.xaml.cs">
       <DependentUpon>DailyTransactionsUI.xaml</DependentUpon>
     </Compile>
@@ -146,7 +170,13 @@
       <DependentUpon>DateChooserUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="DailyTransactions\DateChooserVM.cs" />
-    <Compile Include="DailyTransactions\TransactionRowsVM.cs" />
+    <Compile Include="DailyTransactions\TransactionsTable\RntCellUI.xaml.cs">
+      <DependentUpon>RntCellUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DailyTransactions\TransactionsTable\TransactionRowsVM.cs" />
+    <Compile Include="DailyTransactions\TransactionsTable\TxnRowsTable.xaml.cs">
+      <DependentUpon>TxnRowsTable.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainToolbar\MainToolbarUI.xaml.cs">
       <DependentUpon>MainToolbarUI.xaml</DependentUpon>
     </Compile>
