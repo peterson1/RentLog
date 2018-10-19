@@ -2,7 +2,9 @@
 using CommonTools.Lib11.DTOs;
 using CommonTools.Lib11.ExceptionTools;
 using Newtonsoft.Json;
+using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DataSources;
+using RentLog.ImportBYF.ByfQueries;
 using RentLog.ImportBYF.RntQueries;
 using System;
 using System.Collections.Generic;
@@ -15,25 +17,34 @@ namespace RentLog.ImportBYF.Converters
     {
         protected ITenantDBsDir _rntDir;
         protected RntCache      _rntCache;
-        protected string        _byfCache;
+        protected ByfCache      _byfCache;
 
 
         public DailyTxnConverterBase(MainWindowVM mainWindowVM)
         {
-            _byfCache = mainWindowVM.CacheDir;
             _rntDir   = mainWindowVM.AppArgs;
             _rntCache = mainWindowVM.RntCache;
+            _byfCache = mainWindowVM.ByfCache;
         }
 
 
-        public    abstract void    Rewrite   (DateTime date);
-        protected abstract T       CastToDTO (dynamic byf);
-        protected abstract string  DisplayId { get; }
+        protected abstract T       CastToDTO          (dynamic byf);
+        protected abstract string  DisplayId          { get; }
+        protected abstract void    ReplaceInColxnsDB  (IEnumerable<T> rntDTOs, ICollectionsDB colxnsDB);
+
+
+        public void Rewrite(DateTime date)
+        {
+            var rntDTOs  = GetCastedsByDate(date);
+            var colxnsDb = GetOrCreateColxnsDB(date);
+            ReplaceInColxnsDB(rntDTOs, colxnsDb);
+        }
+
 
         protected IEnumerable<T> GetCastedsByDate(DateTime date)
         {
             var startStr  = CacheReader2.appendToDisplayId(DisplayId);
-            var matches   = CacheReader2.findInJsonFiles(_byfCache, startStr);
+            var matches   = CacheReader2.findInJsonFiles(_byfCache.Dir, startStr);
             var dateMatch = PickOneWithDate(date, matches);
             return dateMatch.Select(_ => (T)CastToDTO(_));
         }
@@ -50,6 +61,13 @@ namespace RentLog.ImportBYF.Converters
                     return list;
             }
             throw Bad.Data($"No cached json file dated [{date}].");
+        }
+
+
+        protected ICollectionsDB GetOrCreateColxnsDB(DateTime date)
+        {
+            var dir = _rntDir.Collections;
+            return dir.For(date) ?? dir.CreateFor(date);
         }
     }
 }

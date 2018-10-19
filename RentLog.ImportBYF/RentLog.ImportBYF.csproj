@@ -98,7 +98,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ByfQueries\ByfCache.cs" />
+    <Compile Include="Converters\BankAccountConverters\BankAccountConverter1.cs" />
+    <Compile Include="Converters\BankDepositConverters\BankDepositConverter1.cs" />
     <Compile Include="Converters\DailyTxnConverterBase.cs" />
+    <Compile Include="Converters\OtherColxnConverters\OtherColxnConverter1.cs" />
     <Compile Include="RntQueries\RntCache.cs" />
     <Compile Include="RntQueries\RntDailyTxnQuery.cs" />
     <Page Include="CommonJsonComparer\JsComparerTable.xaml">

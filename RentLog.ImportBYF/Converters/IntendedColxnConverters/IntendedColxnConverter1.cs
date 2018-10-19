@@ -1,6 +1,8 @@
-﻿using RentLog.DomainLib11.DTOs;
+﻿using RentLog.DomainLib11.CollectionRepos;
+using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace RentLog.ImportBYF.Converters.IntendedColxnConverters
@@ -14,15 +16,13 @@ namespace RentLog.ImportBYF.Converters.IntendedColxnConverters
         }
 
 
-        public override void Rewrite(DateTime date)
+        protected override void ReplaceInColxnsDB(IEnumerable<IntendedColxnDTO> rntDTOs, ICollectionsDB colxnsDb)
         {
-            var rntDTOs   = GetCastedsByDate(date);
-            var grpBySec  = rntDTOs.GroupBy(_ => _.Lease.Stall.Section.Id);
-            var colxnsDir = _rntDir.Collections;
-            var colxnsDb  = colxnsDir.For(date) ?? colxnsDir.CreateFor(date);
+            var grpBySec = rntDTOs.GroupBy(_ => _.Lease?.Stall?.Section?.Id ?? 0);
 
             foreach (var secGrp in grpBySec)
             {
+                if (secGrp.Key == 0) continue; 
                 var repo = colxnsDb.IntendedColxns[secGrp.Key];
                 repo.DropAndInsert(secGrp, true, false);
             }

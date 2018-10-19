@@ -16,7 +16,7 @@
             <Setter Property="Text2Size" Value="10" />
         </Style>
     </UserControl.Resources>
-    <Grid Visibility="{Binding RntCell, Converter={StaticResource visIfNotNull}}">
+    <StackPanel Visibility="{Binding RntCell, Converter={StaticResource visIfNotNull}}">
         <StackPanel Visibility="{Binding RntCell.HasValue, Converter={StaticResource visIfTrue}}">
             <labl:DualText Text1="colxn"
                            Text2="{Binding RntCell.TotalCollections, StringFormat=N2}" />
@@ -31,6 +31,7 @@
 
         <Button Command="{Binding UpdateRntCmd}"
                 Content="{Binding UpdateRntCmd.CurrentLabel}"
-                Visibility="{Binding RntCell.HasValue, Converter={StaticResource visIfFalse}}" />
-    </Grid>
+                Margin="0 10 0 0"
+                Visibility="{Binding RntCell.IsBalanced, Converter={StaticResource visIfFalse}}" />
+    </StackPanel>
 </UserControl>

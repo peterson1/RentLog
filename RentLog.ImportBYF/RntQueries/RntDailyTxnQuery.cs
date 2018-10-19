@@ -1,5 +1,4 @@
 ﻿using RentLog.ImportBYF.DailyTransactions;
-using System;
 using System.Linq;
 
 namespace RentLog.ImportBYF.RntQueries
@@ -17,6 +16,7 @@ namespace RentLog.ImportBYF.RntQueries
         {
             var db = row.MainWindow.AppArgs.Collections.For(row.Date);
             if (db == null) return 0;
+            //todo: add other collections here
             return db.IntendedColxns.Values.SelectMany(_ => _.GetAll())
                          .Sum(_ => _.Actuals.Total);
         }

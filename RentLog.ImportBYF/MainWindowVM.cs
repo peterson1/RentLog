@@ -5,8 +5,10 @@ using PropertyChanged;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib45.BaseViewModels;
+using RentLog.ImportBYF.ByfQueries;
 using RentLog.ImportBYF.CommonJsonComparer;
 using RentLog.ImportBYF.Converters;
+using RentLog.ImportBYF.Converters.BankAccountConverters;
 using RentLog.ImportBYF.Converters.CollectorConverters;
 using RentLog.ImportBYF.Converters.LeaseConverters;
 using RentLog.ImportBYF.Converters.SectionConverters;
@@ -31,14 +33,16 @@ namespace RentLog.ImportBYF
         public MainWindowVM(ITenantDBsDir tenantDBsDir) : base(tenantDBsDir)
         {
             DailyTxns = new DailyTransactionsVM(this);
-            Enlist("Leases"    , () => new LeaseConverter1    (this));
-            Enlist("Stalls"    , () => new StallConverter1    (this));
-            Enlist("Sections"  , () => new SectionConverter1  (this));
-            Enlist("Collectors", () => new CollectorConverter1(this));
+            Enlist("Leases"    , () => new LeaseConverter1      (this));
+            Enlist("Stalls"    , () => new StallConverter1      (this));
+            Enlist("Sections"  , () => new SectionConverter1    (this));
+            Enlist("Collectors", () => new CollectorConverter1  (this));
+            Enlist("Bank Accts", () => new BankAccountConverter1(this));
         }
 
 
         public RntCache             RntCache         { get; } = new RntCache();
+        public ByfCache             ByfCache         { get; } = new ByfCache();
         public DailyTransactionsVM  DailyTxns        { get; }
         public UIList<string>       ListNames        { get; } = new UIList<string>();
         public int                  PickedListIndex  { get; set; } = -1;
@@ -73,7 +77,8 @@ namespace RentLog.ImportBYF
             await Task.Delay(1);
             await Task.Run(() =>
                 Parallel.Invoke(() => PickedList.ReloadList(),
-                                () => RntCache.RefillFrom(AppArgs)));
+                                () => RntCache.RefillFrom(AppArgs),
+                                () => ByfCache.RefillFrom(CacheDir)));
             StopBeingBusy();
         }
 
