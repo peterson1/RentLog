@@ -25,6 +25,10 @@ namespace RentLog.ImportBYF.Converters.LeaseConverters
         public override IDocumentDTO CastByfToDTO(object byfRecord)
         {
             var byf    = Cast(byfRecord);
+            //if (byf.Id.Value == 4566788)
+            //{
+            //    var a = "DSAf";
+            //}
             var stall  = _stalls?.Single(_ => _.Id == byf.Stall.Id.Value);
             var active = new LeaseDTO
             {
@@ -69,7 +73,7 @@ namespace RentLog.ImportBYF.Converters.LeaseConverters
             _lastClosedDate = CacheReader2.getLastClosedDay(cacheDir);
 
             return CacheReader2.getLeases(cacheDir).Values
-                               .Where    (_ => _.Rent.Interval == ReportModels.BillInterval.Daily)
+                               //.Where    (_ => _.Rent.Interval == ReportModels.BillInterval.Daily)
                                .Select   (_ => _ as object).ToList();
         }
 

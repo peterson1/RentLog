@@ -1,4 +1,6 @@
-﻿using RentLog.ImportBYF.Converters.BankDepositConverters;
+﻿using RentLog.ImportBYF.Converters.AmbulantColxnConverters;
+using RentLog.ImportBYF.Converters.BankDepositConverters;
+using RentLog.ImportBYF.Converters.CashierColxnConverters;
 using RentLog.ImportBYF.Converters.IntendedColxnConverters;
 using RentLog.ImportBYF.Converters.OtherColxnConverters;
 using System.Threading.Tasks;
@@ -24,6 +26,9 @@ namespace RentLog.ImportBYF.DailyTransactions
             await Task.Run(() =>
             {
                 UpdateIntendedColxns (row);
+                UpdateAmbulantColxns (row);
+                UpdateOtherColxns    (row);
+                UpdateCashierColxns  (row);
                 UpdateBankDeposits   (row);
             });
             row.StopBeingBusy();
@@ -36,8 +41,18 @@ namespace RentLog.ImportBYF.DailyTransactions
                 .Rewrite(row.Date);
 
 
+        private static void UpdateAmbulantColxns(DailyTransactionRow row)
+            => new AmbulantColxnConverter1(row.MainWindow)
+                .Rewrite(row.Date);
+
+
         private static void UpdateOtherColxns(DailyTransactionRow row)
             => new OtherColxnConverter1(row.MainWindow)
+                .Rewrite(row.Date);
+
+
+        private static void UpdateCashierColxns(DailyTransactionRow row)
+            => new CashierColxnConverter1(row.MainWindow)
                 .Rewrite(row.Date);
 
 

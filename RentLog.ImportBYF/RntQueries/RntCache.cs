@@ -1,4 +1,5 @@
-﻿using RentLog.DomainLib11.DataSources;
+﻿using CommonTools.Lib11.ExceptionTools;
+using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,20 +24,38 @@ namespace RentLog.ImportBYF.RntQueries
         }
 
 
-        public LeaseDTO LeaseById(int leaseNid)
-            => _lsesById.TryGetValue(leaseNid, out LeaseDTO lse)
-                ? lse : new LeaseDTO();
+        public LeaseDTO LeaseById(int leaseNid, bool errorIfNoMatch = true)
+            => FindById(leaseNid, _lsesById, errorIfNoMatch);
 
 
-        public BankAccountDTO BankAcctById(int bankAcctNid)
-            => _bankAcctsById[bankAcctNid];
+        public BankAccountDTO BankAcctById(int bankAcctNid, bool errorIfNoMatch = true)
+            => FindById(bankAcctNid, _bankAcctsById, errorIfNoMatch);
 
 
-        public CollectorDTO CollectorById(int collectorId)
-            => _colctrsById[collectorId];
+        public CollectorDTO CollectorById(int collectorId, bool errorIfNoMatch = true)
+            => FindById(collectorId, _colctrsById, errorIfNoMatch);
 
 
-        public GLAccountDTO GLAcctById(int gLAccountNid)
-            => _glAcctsById[gLAccountNid];
+        public CollectorDTO CollectorByName(string collectorName, bool errorIfNoMatch = true)
+        {
+            var match = _colctrsById.Values.SingleOrDefault(_ => _.Name == collectorName);
+            if (match != null) return match;
+            if (!errorIfNoMatch) return null;
+            throw No.Match<CollectorDTO>("Name", collectorName);
+        }
+
+
+        public GLAccountDTO GLAcctById(int gLAccountNid, bool errorIfNoMatch = true)
+            => FindById(gLAccountNid, _glAcctsById, errorIfNoMatch);
+
+
+        private T FindById<T>(int recId, Dictionary<int, T> dict, bool errorIfNoMatch)
+        {
+            var found = dict.TryGetValue(recId, out T dto);
+            if (found) return dto;
+            if (!errorIfNoMatch) return default(T);
+            throw No.Match<T>("Id", recId);
+
+        }
     }
 }

@@ -5,10 +5,12 @@ using CommonTools.Lib11.JsonTools;
 using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.ThreadTools;
+using Newtonsoft.Json;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.MarketStateRepos;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace RentLog.ImportBYF.Converters
@@ -81,6 +83,15 @@ namespace RentLog.ImportBYF.Converters
             if (UnexpectedsCount != 0) return false;
             if (DiffCount == 0) return false;
             return true;
+        }
+
+
+        protected List<dynamic> ReadJsonList(string displayID)
+        {
+            var startStr = CacheReader2.appendToDisplayId(displayID);
+            var matches  = CacheReader2.findInJsonFiles(MainWindow.ByfCache.Dir, startStr);
+            var lines    = File.ReadAllText(matches.Single());
+            return JsonConvert.DeserializeObject<List<dynamic>>(lines);
         }
     }
 }

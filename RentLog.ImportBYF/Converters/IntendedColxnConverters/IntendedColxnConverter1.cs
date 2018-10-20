@@ -1,7 +1,6 @@
 ﻿using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -19,7 +18,6 @@ namespace RentLog.ImportBYF.Converters.IntendedColxnConverters
         protected override void ReplaceInColxnsDB(IEnumerable<IntendedColxnDTO> rntDTOs, ICollectionsDB colxnsDb)
         {
             var grpBySec = rntDTOs.GroupBy(_ => _.Lease?.Stall?.Section?.Id ?? 0);
-
             foreach (var secGrp in grpBySec)
             {
                 if (secGrp.Key == 0) continue; 
@@ -32,7 +30,7 @@ namespace RentLog.ImportBYF.Converters.IntendedColxnConverters
         protected override IntendedColxnDTO CastToDTO(dynamic byf)
         {
             var lseNid   = (int)byf.LeaseNid;
-            var rntLease = _rntCache.LeaseById(lseNid);
+            var rntLease = _rntCache.LeaseById(lseNid, false);
             var actuals  = new BillAmounts
             {
                 Rent     = byf.Rent + byf.Surcharge,
@@ -47,7 +45,7 @@ namespace RentLog.ImportBYF.Converters.IntendedColxnConverters
                 Actuals       = actuals,
                 Targets       = actuals,
                 Lease         = rntLease,
-                StallSnapshot = ((LeaseDTO)rntLease).Stall,
+                StallSnapshot = rntLease?.Stall,
                 Remarks       = byf.Remarks,
             };
         }

@@ -99,9 +99,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ByfQueries\ByfCache.cs" />
+    <Compile Include="Converters\AmbulantColxnConverters\AmbulantColxnConverter1.cs" />
     <Compile Include="Converters\BankAccountConverters\BankAccountConverter1.cs" />
     <Compile Include="Converters\BankDepositConverters\BankDepositConverter1.cs" />
+    <Compile Include="Converters\CashierColxnConverters\CashierColxnConverter1.cs" />
     <Compile Include="Converters\DailyTxnConverterBase.cs" />
+    <Compile Include="Converters\GLAccountConverters\GLAccountConverter1.cs" />
+    <Compile Include="Converters\LeaseConverters\LeaseConverter2.cs" />
     <Compile Include="Converters\OtherColxnConverters\OtherColxnConverter1.cs" />
     <Compile Include="RntQueries\RntCache.cs" />
     <Compile Include="RntQueries\RntDailyTxnQuery.cs" />
@@ -160,7 +164,7 @@
     <Compile Include="Converters\StallConverters\LastStallUsageFinder.cs" />
     <Compile Include="Converters\StallConverters\StallConverter1.cs" />
     <Compile Include="DailyTransactions\ByfDailyTxnQuery.cs" />
-    <Compile Include="DailyTransactions\RntUpdateDayCommand.cs" />
+    <Compile Include="RntCommands\RntUpdateDayCommand.cs" />
     <Compile Include="DailyTransactions\TransactionsTable\ByfCellUI.xaml.cs">
       <DependentUpon>ByfCellUI.xaml</DependentUpon>
     </Compile>

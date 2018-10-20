@@ -46,7 +46,8 @@ namespace RentLog.ImportBYF.Converters
             var startStr  = CacheReader2.appendToDisplayId(DisplayId);
             var matches   = CacheReader2.findInJsonFiles(_byfCache.Dir, startStr);
             var dateMatch = PickOneWithDate(date, matches);
-            return dateMatch.Select(_ => (T)CastToDTO(_));
+            return dateMatch.Select(_ => (T)CastToDTO(_))
+                            .Where (_ => _ != null);
         }
 
 

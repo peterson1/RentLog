@@ -10,6 +10,7 @@ using RentLog.ImportBYF.CommonJsonComparer;
 using RentLog.ImportBYF.Converters;
 using RentLog.ImportBYF.Converters.BankAccountConverters;
 using RentLog.ImportBYF.Converters.CollectorConverters;
+using RentLog.ImportBYF.Converters.GLAccountConverters;
 using RentLog.ImportBYF.Converters.LeaseConverters;
 using RentLog.ImportBYF.Converters.SectionConverters;
 using RentLog.ImportBYF.Converters.StallConverters;
@@ -38,6 +39,7 @@ namespace RentLog.ImportBYF
             Enlist("Sections"  , () => new SectionConverter1    (this));
             Enlist("Collectors", () => new CollectorConverter1  (this));
             Enlist("Bank Accts", () => new BankAccountConverter1(this));
+            Enlist("GL Accts"  , () => new GLAccountConverter1  (this));
         }
 
 

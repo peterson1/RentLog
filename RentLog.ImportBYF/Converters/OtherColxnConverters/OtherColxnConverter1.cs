@@ -1,10 +1,7 @@
-﻿using RentLog.DomainLib11.CollectionRepos;
+﻿using CommonTools.Lib11.StringTools;
+using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DTOs;
-using CommonTools.Lib11.StringTools;
-using RentLog.DomainLib11.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace RentLog.ImportBYF.Converters.OtherColxnConverters
 {
@@ -16,25 +13,28 @@ namespace RentLog.ImportBYF.Converters.OtherColxnConverters
         {
         }
 
+
         protected override OtherColxnDTO CastToDTO(dynamic byf)
         {
-            var byfRem   = (string)byf.Remarks;
-            var colctrId = int.Parse(byfRem.Between(":", "}", true));
-            var payFor   = _byfCache.Term((int)byf.PaymentForTid);
-            var rntRem   = $"from: {byf.ReceivedFrom}"
-                         + $"{L.f}{payFor}"
-                         + $"{L.f}{byf.Remarks}";
+            if (byf.PaymentForTid != 32) return null;
+            var byfColctr = (string)byf.ReceivedFrom;
+            var rntColctr = _rntCache.CollectorByName(byfColctr, false);
+            var rntGLAcct = _rntCache.GLAcctById((int)byf.GLAccountNid);
+            var payFor    = _byfCache.Term((int)byf.PaymentForTid);
 
             return new OtherColxnDTO
             {
                 Id          = byf.nid,
                 Amount      = byf.Amount,
                 DocumentRef = byf.ReferenceNum,
-                Remarks     = rntRem,
-                Collector   = _rntCache.CollectorById(colctrId),
-                GLAccount   = _rntCache.GLAcctById((int)byf.GLAccountNid)
+                Collector   = rntColctr,
+                GLAccount   = rntGLAcct,
+                Remarks     = $"from: {byfColctr}"
+                            + $"{L.f}{payFor}"
+                            + $"{L.f}{byf.Remarks}",
             };
         }
+
 
         protected override void ReplaceInColxnsDB(IEnumerable<OtherColxnDTO> rntDTOs, ICollectionsDB colxnsDB)
             => colxnsDB.OtherColxns.DropAndInsert(rntDTOs, true, false);
