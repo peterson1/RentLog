@@ -99,16 +99,44 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ByfQueries\ByfCache.cs" />
+    <Compile Include="ByfServerAccess\ByfClient1.cs" />
+    <Compile Include="ByfServerAccess\ByfServerVM.cs" />
     <Compile Include="Converters\AmbulantColxnConverters\AmbulantColxnConverter1.cs" />
     <Compile Include="Converters\BankAccountConverters\BankAccountConverter1.cs" />
+    <Compile Include="Converters\BankAccountConverters\BankAccountConverter2.cs" />
     <Compile Include="Converters\BankDepositConverters\BankDepositConverter1.cs" />
     <Compile Include="Converters\CashierColxnConverters\CashierColxnConverter1.cs" />
+    <Compile Include="Converters\CollectorConverters\CollectorConverter2.cs" />
     <Compile Include="Converters\DailyTxnConverterBase.cs" />
     <Compile Include="Converters\GLAccountConverters\GLAccountConverter1.cs" />
+    <Compile Include="Converters\GLAccountConverters\GLAccountConverter2.cs" />
     <Compile Include="Converters\LeaseConverters\LeaseConverter2.cs" />
     <Compile Include="Converters\OtherColxnConverters\OtherColxnConverter1.cs" />
+    <Compile Include="Converters\SectionConverters\SectionConverter2.cs" />
+    <Compile Include="Converters\StallConverters\StallConverter2.cs" />
     <Compile Include="RntQueries\RntCache.cs" />
     <Compile Include="RntQueries\RntDailyTxnQuery.cs" />
+    <Compile Include="Version2UI\MainWindow2.xaml.cs">
+      <DependentUpon>MainWindow2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Version2UI\MainWindowVM2.cs" />
+    <Compile Include="Version2UI\MasterDataPane\ConvertersList\ComparisonsAligner2.cs" />
+    <Compile Include="Version2UI\MasterDataPane\ConvertersList\ConverterRowBase.cs" />
+    <Compile Include="Version2UI\MasterDataPane\ConvertersList\ConverterRowBase_PrimitiveCasters.cs" />
+    <Compile Include="Version2UI\MasterDataPane\ConvertersList\ConverterRowBase_UpdateRntCmd.cs" />
+    <Compile Include="Version2UI\MasterDataPane\ConvertersList\ConvertersListVM.cs" />
+    <Compile Include="Version2UI\MasterDataPane\ConvertersList\ConvertersTable.xaml.cs">
+      <DependentUpon>ConvertersTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Version2UI\MasterDataPane\ConvertersList\IConverterRow.cs" />
+    <Compile Include="Version2UI\MasterDataPane\ConvertersList\ConverterRowBase_RefreshCmd.cs" />
+    <Compile Include="Version2UI\MasterDataPane\MasterDataPaneUI.xaml.cs">
+      <DependentUpon>MasterDataPaneUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Version2UI\MasterDataPane\MasterDataPaneVM.cs" />
+    <Compile Include="Version2UI\TransactionDataPane\TransactionDataPaneUI.xaml.cs">
+      <DependentUpon>TransactionDataPaneUI.xaml</DependentUpon>
+    </Compile>
     <Page Include="CommonJsonComparer\JsComparerTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -192,6 +220,22 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Version2UI\MainWindow2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Version2UI\MasterDataPane\ConvertersList\ConvertersTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Version2UI\MasterDataPane\MasterDataPaneUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Version2UI\TransactionDataPane\TransactionDataPaneUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindowVM.cs" />

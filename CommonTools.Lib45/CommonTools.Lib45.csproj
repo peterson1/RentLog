@@ -147,6 +147,7 @@
     <Compile Include="FileSystemTools\UpdatedFileNotifier.cs" />
     <Compile Include="GoogleTools\FirebaseCustomExtensions.cs" />
     <Compile Include="GoogleTools\FirebaseSender.cs" />
+    <Compile Include="HttpTools\HttpClientAccessors.cs" />
     <Compile Include="InputCommands\ExeLauncherCommand.cs" />
     <Compile Include="InputCommands\R2AsyncCommandWPF.cs" />
     <Compile Include="InputCommands\R2CommandsFactory.cs" />

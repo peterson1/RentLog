@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="RentLog.ImportBYF.Version2UI.MasterDataPane.ConvertersList.ConvertersTable"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RentLog.ImportBYF.Version2UI.MasterDataPane.ConvertersList"
+             xmlns:labl="clr-namespace:CommonTools.Lib45.TextLabels;assembly=CommonTools.Lib45"
+             xmlns:butn="clr-namespace:CommonTools.Lib45.StyledButtons;assembly=CommonTools.Lib45"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <DataGrid DataContext="{Binding Converters}"
+              ItemsSource="{Binding }"
+              HeadersVisibility="None"
+              Style="{StaticResource dgReadOnly}">
+
+        <DataGrid.RowDetailsTemplate>
+            <DataTemplate>
+                <TextBlock Background="LightYellow" Text="{Binding ErrorText}" TextWrapping="Wrap"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                           FontSize="11" />
+            </DataTemplate>
+        </DataGrid.RowDetailsTemplate>
+
+        <DataGrid.Columns>
+            <DataGridTemplateColumn>
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="5">
+                            <StackPanel Orientation="Horizontal">
+                                
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Label}"
+                                               FontWeight="Medium" />
+                                    <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+                                        <butn:SimpleRefreshButton />
+                                        <Button Command="{Binding UpdateRntCmd}"
+                                                Content="{Binding UpdateRntCmd.CurrentLabel}"
+                                                Margin="10 0 0 0" />
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <StackPanel Margin="10 0 0 0">
+                                    <labl:DualText Text1="BYF count"
+                                                   Text2="{Binding ByfCount}" />
+                                    <labl:DualText Text1="RNT count"
+                                                   Text2="{Binding RntCount}" />
+                                    <labl:DualText Text1="Diffs"
+                                                   Text2="{Binding DiffsCount}" />
+                                    <labl:DualText Text1="Unexpecteds"
+                                                   Text2="{Binding Unexpecteds}" />
+                                </StackPanel>
+                            </StackPanel>
+                                
+                            <TextBlock Text="{Binding BusyText}" />
+                            
+                        </StackPanel>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+        </DataGrid.Columns>
+    </DataGrid>
+</UserControl>

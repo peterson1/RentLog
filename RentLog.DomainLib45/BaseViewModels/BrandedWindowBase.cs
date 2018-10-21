@@ -15,7 +15,7 @@ namespace RentLog.DomainLib45.BaseViewModels
     public abstract class BrandedWindowBase : UpdatedExeVMBase<ITenantDBsDir>
     {
         protected override string CaptionPrefix 
-            => $"{AppArgs?.MarketState?.SystemName} {SubAppName}  :  {AppArgs?.MarketState?.BranchName}";
+            => $"{SystemNameOrDefault} {SubAppName}  :  {BranchNameOrDefault}";
 
 
         public abstract string SubAppName { get; }
@@ -48,5 +48,9 @@ namespace RentLog.DomainLib45.BaseViewModels
 
         private static void ShowNotAllowed(string msg)
             => MessageBox.Show(msg, "  Unauthorized Access", MessageBoxButton.OK, MessageBoxImage.Information);
+
+
+        private string SystemNameOrDefault => AppArgs?.MarketState?.SystemName ?? "‹blank-system-name›";
+        private string BranchNameOrDefault => AppArgs?.MarketState?.BranchName ?? "‹blank-branch-name›";
     }
 }

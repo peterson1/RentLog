@@ -1,5 +1,6 @@
 ﻿using CommonTools.Lib45.ApplicationTools;
 using RentLog.DomainLib45;
+using RentLog.ImportBYF.Version2UI;
 using System.Windows;
 
 namespace RentLog.ImportBYF
@@ -12,7 +13,8 @@ namespace RentLog.ImportBYF
 
             this.Initialize<AppArguments>(args =>
             {
-                new MainWindowVM(args).Show<MainWindow>();
+                //new MainWindowVM(args).Show<MainWindow>();
+                new MainWindowVM2(args).Show<MainWindow2>();
             });
         }
     }

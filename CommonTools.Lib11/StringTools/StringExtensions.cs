@@ -41,6 +41,10 @@ namespace CommonTools.Lib11.StringTools
         }
 
 
+        public static string AppendIfNotEndingWith(this string text, string suffix)
+            => text.EndsWith(suffix) ? text : text + suffix;
+
+
         public static bool IsBlank(this string text)
         {
             if (text == null) return true;

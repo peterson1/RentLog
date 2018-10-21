@@ -50,7 +50,7 @@ namespace CommonTools.Lib45.BaseViewModels
 
 
 
-        protected void SetCaption(string message)
+        public void SetCaption(string message)
         {
             try   { Caption = $"   {CaptionPrefix}   (v{CurrentExe.GetShortVersion()})    {message}"; }
             catch { Caption = $"   {CaptionPrefix}   {message}"; }
