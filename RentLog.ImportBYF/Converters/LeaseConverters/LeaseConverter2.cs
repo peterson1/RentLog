@@ -1,46 +1,61 @@
-﻿using System;
+﻿using CommonTools.Lib11.StringTools;
+using RentLog.DomainLib11.DataSources;
+using RentLog.DomainLib11.DTOs;
+using RentLog.DomainLib11.MarketStateRepos;
+using RentLog.ImportBYF.Version2UI;
+using RentLog.ImportBYF.Version2UI.MasterDataPane.ConvertersList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CommonTools.Lib11.DTOs;
-using RentLog.DomainLib11.DataSources;
-using RentLog.DomainLib11.MarketStateRepos;
 
 namespace RentLog.ImportBYF.Converters.LeaseConverters
 {
-    public class LeaseConverter2 : LeaseConverter1
+    public class LeaseConverter2 : ConverterRowBase<LeaseDTO>
     {
-        public LeaseConverter2(MainWindowVM mainWindowVM) : base(mainWindowVM)
+        public override string Label          => "Leases";
+        public override string ViewsDisplayID => "leases_list?display_id=page_2";
+
+        public LeaseConverter2(MainWindowVM2 mainWindowVM2) : base(mainWindowVM2)
         {
         }
 
 
-        public override IDocumentDTO CastByfToDTO(object byfRecord)
+        public override LeaseDTO CastToRNT(dynamic byf)
         {
-            var byf = byfRecord as dynamic;
-
-            throw new NotImplementedException();
+            var period = GetContractDates((string)byf.contractstartend);
+            return new LeaseDTO
+            {
+                Id                   = AsID(byf.nid),
+                ContractStart        = period.Start,
+                ContractEnd          = period.End,
+                ProductToSell        = AsText(byf.producttosell),
+                ApplicationSubmitted = AsDate(byf.formsubmitteddate),
+                Remarks              = AsText(byf.remarks),
+                //Rent                 = 
+            };
         }
 
 
-        public override List<IDocumentDTO> GetListFromRNT(ITenantDBsDir appArgs)
+        private (DateTime Start, DateTime End) GetContractDates(string periodText)
         {
-            var mkt = appArgs.MarketState;
-            var actives = mkt.ActiveLeases.GetAll()
-                             .Select(_ => _ as IDocumentDTO);
-            var inactvs = mkt.InactiveLeases.GetAll()
-                             .Select(_ => _ as IDocumentDTO);
-            return actives.Concat(inactvs).ToList();
+            var split = periodText.SplitTrim("to");
+            return (DateTime.Parse(split[0]).ToLocalTime(),
+                    DateTime.Parse(split[1]).ToLocalTime());
         }
 
 
-        public override List<object> GetListFromBYF(string cacheDir)
-            => ReadJsonList("leases_list?display_id=page_2")
-                .Select(_ => _ as object).ToList();
+        public override List<LeaseDTO> GetRntRecords(ITenantDBsDir dir) 
+            => dir.MarketState.GetAllLeases();
 
 
-        public override int GetByfId(object byfRecord)
-            => (int)((dynamic)byfRecord).nid;
+        public override void ReplaceAll(IEnumerable<LeaseDTO> newRecords, MarketStateDB mkt)
+        {
+            var actives = newRecords.Where(_ => !(_ is InactiveLeaseDTO));
+            var inactvs = newRecords.Where(_ =>   _ is InactiveLeaseDTO)
+                                    .Select(_ => _ as InactiveLeaseDTO);
+
+            mkt.ActiveLeases  .DropAndInsert(actives, true, false);
+            mkt.InactiveLeases.DropAndInsert(inactvs, true, false);
+        }
     }
 }

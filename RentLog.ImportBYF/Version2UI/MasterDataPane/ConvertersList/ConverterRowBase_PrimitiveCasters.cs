@@ -1,5 +1,6 @@
 ﻿using CommonTools.Lib11.ExceptionTools;
 using CommonTools.Lib11.StringTools;
+using System;
 
 namespace RentLog.ImportBYF.Version2UI.MasterDataPane.ConvertersList
 {
@@ -44,6 +45,16 @@ namespace RentLog.ImportBYF.Version2UI.MasterDataPane.ConvertersList
 
                 default: throw Bad.Cast(str, true);
             }
+        }
+
+
+        protected DateTime AsDate(dynamic dynamic)
+        {
+            var str = (string)dynamic;
+            if (DateTime.TryParse(str, out DateTime date))
+                return date.Date.ToLocalTime();
+            else
+                throw Bad.Cast(str, date);
         }
     }
 }
