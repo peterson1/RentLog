@@ -111,9 +111,13 @@
     <Compile Include="Converters\GLAccountConverters\GLAccountConverter1.cs" />
     <Compile Include="Converters\GLAccountConverters\GLAccountConverter2.cs" />
     <Compile Include="Converters\LeaseConverters\LeaseConverter2.cs" />
+    <Compile Include="Converters\LeaseConverters\RentRightsParamsConverter2.cs" />
+    <Compile Include="Converters\LeaseRevisionConverters\LeaseRevisionConverter1.cs" />
+    <Compile Include="Converters\MiscellaneousConverters\FiscalDaysConverter1.cs" />
     <Compile Include="Converters\OtherColxnConverters\OtherColxnConverter1.cs" />
     <Compile Include="Converters\SectionConverters\SectionConverter2.cs" />
     <Compile Include="Converters\StallConverters\StallConverter2.cs" />
+    <Compile Include="Converters\TenantConverters\TenantConverter2.cs" />
     <Compile Include="RntQueries\RntCache.cs" />
     <Compile Include="RntQueries\RntDailyTxnQuery.cs" />
     <Compile Include="Version2UI\MainWindow2.xaml.cs">
@@ -122,7 +126,6 @@
     <Compile Include="Version2UI\MainWindowVM2.cs" />
     <Compile Include="Version2UI\MasterDataPane\ConvertersList\ComparisonsAligner2.cs" />
     <Compile Include="Version2UI\MasterDataPane\ConvertersList\ConverterRowBase.cs" />
-    <Compile Include="Version2UI\MasterDataPane\ConvertersList\ConverterRowBase_PrimitiveCasters.cs" />
     <Compile Include="Version2UI\MasterDataPane\ConvertersList\ConverterRowBase_UpdateRntCmd.cs" />
     <Compile Include="Version2UI\MasterDataPane\ConvertersList\ConvertersListVM.cs" />
     <Compile Include="Version2UI\MasterDataPane\ConvertersList\ConvertersTable.xaml.cs">
@@ -137,6 +140,7 @@
     <Compile Include="Version2UI\TransactionDataPane\TransactionDataPaneUI.xaml.cs">
       <DependentUpon>TransactionDataPaneUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Version2UI\TransactionDataPane\TransactionDataPaneVM.cs" />
     <Page Include="CommonJsonComparer\JsComparerTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

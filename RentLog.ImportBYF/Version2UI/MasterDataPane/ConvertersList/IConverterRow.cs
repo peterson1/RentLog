@@ -1,6 +1,8 @@
 ﻿using CommonTools.Lib11.DataStructures;
 using CommonTools.Lib11.InputCommands;
 using CommonTools.Lib11.JsonTools;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace RentLog.ImportBYF.Version2UI.MasterDataPane.ConvertersList
 {
@@ -18,6 +20,7 @@ namespace RentLog.ImportBYF.Version2UI.MasterDataPane.ConvertersList
         IR2Command  RefreshCmd    { get; }
         IR2Command  UpdateRntCmd  { get; }
 
-        UIList<JsonComparer> DiffRows { get; }
+        UIList<JsonComparer> DiffRows     { get; }
+        Task<List<dynamic>>  GetViewsList (string viewsDisplayID);
     }
 }

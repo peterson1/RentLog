@@ -1,4 +1,5 @@
-﻿using RentLog.DomainLib11.DataSources;
+﻿using CommonTools.Lib11.DynamicTools;
+using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
 using RentLog.ImportBYF.Version2UI;
@@ -19,10 +20,10 @@ namespace RentLog.ImportBYF.Converters.CollectorConverters
 
         public override CollectorDTO CastToRNT(dynamic byf) => new CollectorDTO
         {
-            Id       = AsID(byf.nid),
-            Name     = AsText(byf.name),
-            IsActive = AsBool(byf.isactive),
-            Remarks  = AsText(byf.contactinfo)
+            Id       = As.ID(byf.nid),
+            Name     = As.Text(byf.name),
+            IsActive = As.Bool(byf.isactive),
+            Remarks  = As.Text(byf.contactinfo)
         };
 
 

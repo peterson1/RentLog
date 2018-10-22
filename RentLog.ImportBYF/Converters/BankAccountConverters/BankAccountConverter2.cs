@@ -1,4 +1,5 @@
-﻿using RentLog.DomainLib11.DataSources;
+﻿using CommonTools.Lib11.DynamicTools;
+using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
 using RentLog.ImportBYF.Version2UI;
@@ -19,8 +20,8 @@ namespace RentLog.ImportBYF.Converters.BankAccountConverters
 
         public override BankAccountDTO CastToRNT(dynamic byf) => new BankAccountDTO
         {
-            Id                 = AsID(byf.nid),
-            Name               = AsText(byf.bankname),
+            Id                 = As.ID(byf.nid),
+            Name               = As.Text(byf.bankname),
             MaintainingBalance = 50_000
         };
 

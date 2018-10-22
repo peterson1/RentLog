@@ -75,11 +75,12 @@ namespace RentLog.ImportBYF.Version2UI.MasterDataPane.ConvertersList
         }
 
 
-        private static Task<List<dynamic>> QueryByfServer<T>(this ConverterRowBase<T> row) where T : class, IDocumentDTO
+        private static async Task<List<dynamic>> QueryByfServer<T>(this ConverterRowBase<T> row) where T : class, IDocumentDTO
         {
             try
             {
-                return row.Main.ByfServer.GetViewsList(row.ViewsDisplayID);
+                await row.BeforeByfQuery();
+                return await row.GetViewsList(row.ViewsDisplayID);
             }
             catch (Exception ex)
             {

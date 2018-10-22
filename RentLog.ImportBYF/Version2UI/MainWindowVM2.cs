@@ -3,6 +3,7 @@ using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib45.BaseViewModels;
 using RentLog.ImportBYF.ByfServerAccess;
 using RentLog.ImportBYF.Version2UI.MasterDataPane;
+using RentLog.ImportBYF.Version2UI.TransactionDataPane;
 
 namespace RentLog.ImportBYF.Version2UI
 {
@@ -18,13 +19,15 @@ namespace RentLog.ImportBYF.Version2UI
             AppArgs.Credentials.Roles     = "Admin";
             SetCaption(AppArgs.Credentials.NameAndRole);
 
-            ByfServer  = new ByfServerVM(this);
-            MasterData = new MasterDataPaneVM(this);
+            ByfServer       = new ByfServerVM(this);
+            MasterData      = new MasterDataPaneVM(this);
+            TransactionData = new TransactionDataPaneVM(this);
         }
 
 
-        public ByfServerVM       ByfServer   { get; }
-        public MasterDataPaneVM  MasterData  { get; }
+        public ByfServerVM           ByfServer       { get; }
+        public MasterDataPaneVM      MasterData      { get; }
+        public TransactionDataPaneVM TransactionData { get; }
 
 
         protected override async void OnWindowLoaded()

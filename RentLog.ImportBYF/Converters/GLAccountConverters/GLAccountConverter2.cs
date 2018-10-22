@@ -1,4 +1,5 @@
-﻿using CommonTools.Lib11.ExceptionTools;
+﻿using CommonTools.Lib11.DynamicTools;
+using CommonTools.Lib11.ExceptionTools;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
@@ -20,12 +21,12 @@ namespace RentLog.ImportBYF.Converters.GLAccountConverters
 
         public override GLAccountDTO CastToRNT(dynamic byf)
         {
-            var typ = GetAcctType(AsID(byf.accttypetid));
+            var typ = GetAcctType(As.ID(byf.accttypetid));
             return new GLAccountDTO
             {
-                Id          = AsID(byf.nid),
-                Name        = AsText(byf.label),
-                Remarks     = AsText(byf.remarks),
+                Id          = As.ID(byf.nid),
+                Name        = As.Text(byf.label),
+                Remarks     = As.Text(byf.remarks),
                 AccountType = typ
             };
         }

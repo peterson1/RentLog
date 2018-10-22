@@ -9,11 +9,12 @@ using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.MarketStateRepos;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace RentLog.ImportBYF.Version2UI.MasterDataPane.ConvertersList
 {
     [AddINotifyPropertyChangedInterface]
-    public abstract partial class ConverterRowBase<T> : IConverterRow
+    public abstract class ConverterRowBase<T> : IConverterRow
         where T : class, IDocumentDTO
     {
 
@@ -29,6 +30,7 @@ namespace RentLog.ImportBYF.Version2UI.MasterDataPane.ConvertersList
         public abstract T        CastToRNT       (dynamic byf);
         public abstract List<T>  GetRntRecords   (ITenantDBsDir dir);
         public abstract void     ReplaceAll      (IEnumerable<T> newRecords, MarketStateDB mkt);
+        public virtual  Task     BeforeByfQuery  () => Task.Delay(1);
 
 
         public int     ByfCount     { get; private set; }
@@ -65,6 +67,10 @@ namespace RentLog.ImportBYF.Version2UI.MasterDataPane.ConvertersList
             BusyText = message;
         }
         public void LogError       (string errorText) => ErrorText += L.F + errorText;
+
+
+        public Task<List<dynamic>> GetViewsList(string viewsDisplayID)
+            => Main.ByfServer.GetViewsList(viewsDisplayID);
     }
 }
  

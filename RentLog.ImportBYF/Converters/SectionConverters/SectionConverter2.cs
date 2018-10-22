@@ -1,4 +1,5 @@
-﻿using RentLog.DomainLib11.DataSources;
+﻿using CommonTools.Lib11.DynamicTools;
+using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
 using RentLog.ImportBYF.Version2UI;
@@ -19,10 +20,10 @@ namespace RentLog.ImportBYF.Converters.SectionConverters
 
         public override SectionDTO CastToRNT(dynamic byf)
         {
-            var nme = AsText(byf.label);
+            var nme = As.Text(byf.label);
             return new SectionDTO
             {
-                Id            = AsID(byf.nid),
+                Id            = As.ID(byf.nid),
                 Name          = nme,
                 IsActive      = true,
                 StallTemplate = StallDTO.Named(nme + " {0:000}"),
