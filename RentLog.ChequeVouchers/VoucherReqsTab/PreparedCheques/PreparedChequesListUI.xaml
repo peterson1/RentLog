@@ -9,7 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
         <StackPanel DockPanel.Dock="Top">
-            <common:LightColorZone />
+            <common:LightColorZone x:Name="cZone" />
             <local:PreparedChequesFilterUI DataContext="{Binding Filter}" />
         </StackPanel>
 

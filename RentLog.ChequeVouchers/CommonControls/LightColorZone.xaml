@@ -40,6 +40,12 @@
                            FontWeight="Medium"
                            Visibility="{Binding TotalVisible, Converter={StaticResource visIfTrue}}"
                            Margin="5 0 0 0" />
+                <Button Content="{mat:PackIcon Printer, Size=19}"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        x:Name="btnPrint"
+                        Height="21"
+                        Padding="3 0 3 0"
+                        Margin="10 0 0 0" />
             </StackPanel>
 
         </Grid>

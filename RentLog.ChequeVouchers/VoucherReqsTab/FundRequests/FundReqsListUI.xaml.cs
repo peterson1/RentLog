@@ -1,28 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using CommonTools.Lib45.PrintTools;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace RentLog.ChequeVouchers.VoucherReqsTab.FundRequests
 {
-    /// <summary>
-    /// Interaction logic for FundReqsListUI.xaml
-    /// </summary>
     public partial class FundReqsListUI : UserControl
     {
         public FundReqsListUI()
         {
             InitializeComponent();
+            Loaded += (a, b) =>
+            {
+                cZone.btnPrint.Click += (c, d)
+                    => tbl.dg.AskToPrint("For Check Preparation", 
+                                null, $"Total: {VM.TotalSum:N2}");
+            };
         }
+
+
+        private FundReqsListVM VM => DataContext as FundReqsListVM;
     }
 }
