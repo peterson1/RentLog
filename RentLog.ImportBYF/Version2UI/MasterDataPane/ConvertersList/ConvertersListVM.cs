@@ -22,10 +22,13 @@ namespace RentLog.ImportBYF.Version2UI.MasterDataPane.ConvertersList
             Add(new SectionConverter2     (main));
             Add(new StallConverter2       (main));
             Add(new LeaseConverter2       (main));
+
+            main.ByfServer.ConnectedToServer 
+                += async (s, e) => await RefreshAll();
         }
 
 
-        public async Task RefreshAll()
+        private async Task RefreshAll()
         {
             foreach (var row in this)
             {

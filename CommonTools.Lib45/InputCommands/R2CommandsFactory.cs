@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using CommonTools.Lib11.InputCommands;
 
 namespace CommonTools.Lib45.InputCommands
 {
@@ -23,5 +24,10 @@ namespace CommonTools.Lib45.InputCommands
                 action?.Invoke(x);
             },
             canExecute, buttonLabel);
+
+        public static IR2Command Async(object updateRnt, Func<object, bool> p, string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

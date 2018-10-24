@@ -2,22 +2,24 @@
 using CommonTools.Lib11.InputCommands;
 using CommonTools.Lib45.InputCommands;
 using PropertyChanged;
+using RentLog.ImportBYF.ByfQueries;
+using RentLog.ImportBYF.DailyTransactions;
 using RentLog.ImportBYF.RntQueries;
 using System;
 using System.Threading.Tasks;
 
-namespace RentLog.ImportBYF.DailyTransactions
+namespace RentLog.ImportBYF.Version2UI.TransactionDataPane.PeriodsList
 {
     [AddINotifyPropertyChangedInterface]
-    public class DailyTransactionRow
+    public class PeriodRowVM
     {
-        public DailyTransactionRow(DateTime date, MainWindowVM mainWindowVM)
+        public PeriodRowVM(DateTime date, MainWindowVM2 mainWindowVM2)
         {
             Date         = date;
-            MainWindow   = mainWindowVM;
+            MainWindow   = mainWindowVM2;
             RefreshCmd   = R2Command.Async(FillBothCells, _ => !IsBusy);
             QueryByfCmd  = R2Command.Async(FillByfCell, _ => !IsBusy, "Query BYF");
-            UpdateRntCmd = R2Command.Async(this.UpdateRnt, _ => this.CanUpdateRnt(), "Update RNT");
+            UpdateRntCmd = R2Command.Async(this.UpdateRnt, _ => CanUpdateRnt(), "Update RNT");
         }
 
 
@@ -26,12 +28,18 @@ namespace RentLog.ImportBYF.DailyTransactions
         public IR2Command  UpdateRntCmd  { get; }
 
         public DateTime              Date          { get; }
-        public MainWindowVM          MainWindow    { get; }
+        public MainWindowVM2         MainWindow    { get; }
         public bool                  IsBusy        { get; private set; }
         public DailyTransactionCell  ByfCell       { get; private set; }
         public DailyTransactionCell  RntCell       { get; private set; }
         public bool                  IsValidImport { get; private set; }
         public string                Remarks       { get; private set; }
+
+
+        private Task UpdateRnt()
+        {
+            throw new NotImplementedException();
+        }
 
 
         private async Task FillBothCells()
@@ -52,25 +60,21 @@ namespace RentLog.ImportBYF.DailyTransactions
         }
 
 
+        private bool CanUpdateRnt()
+        {
+            if (IsBusy) return false;
+            if (ByfCell == null) return false;
+            if (!ByfCell.HasValue) return false;
+            if (!ByfCell.IsBalanced) return false;
+            return true;
+        }
+
+
         private async Task FillByfCell()
         {
             StartBeingBusy("Querying BYF server ...");
-            ByfCell = await this.CheckCache(MainWindow.CacheDir);
+            ByfCell = await MainWindow.ByfServer.QueryPeriodCell(Date);
             StopBeingBusy();
-        }
-
-
-        public void StartBeingBusy(string jobDescription)
-        {
-            IsBusy = true;
-            Remarks = jobDescription;
-        }
-
-
-        public void StopBeingBusy(string message = null)
-        {
-            IsBusy = false;
-            Remarks = message;
         }
 
 
@@ -93,6 +97,18 @@ namespace RentLog.ImportBYF.DailyTransactions
             }
             whyNot = "";
             return true;
+        }
+
+
+        public void StartBeingBusy(string jobDescription)
+        {
+            IsBusy = true;
+            Remarks = jobDescription;
+        }
+        public void StopBeingBusy(string message = null)
+        {
+            IsBusy = false;
+            Remarks = message;
         }
     }
 }

@@ -1,15 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PropertyChanged;
+using RentLog.ImportBYF.Version2UI.TransactionDataPane.PeriodsList;
 
 namespace RentLog.ImportBYF.Version2UI.TransactionDataPane
 {
+    [AddINotifyPropertyChangedInterface]
     public class TransactionDataPaneVM
     {
-        public TransactionDataPaneVM(MainWindowVM2 mainWindowVM2)
+        public TransactionDataPaneVM(MainWindowVM2 main)
         {
+            PeriodsList = new PeriodsListVM(main);
+
+            main.ByfServer.GotMinMaxDates
+                += (s, e) => PeriodsList.FillPeriodsList(e);
         }
+
+
+        public PeriodsListVM  PeriodsList  { get; }
     }
 }

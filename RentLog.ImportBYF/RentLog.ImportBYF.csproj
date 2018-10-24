@@ -98,7 +98,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ByfQueries\ByfBankDepositQueries.cs" />
     <Compile Include="ByfQueries\ByfCache.cs" />
+    <Compile Include="ByfQueries\ByfCashierColxnsQueries.cs" />
+    <Compile Include="ByfQueries\ByfLeaseColxnsQueries.cs" />
+    <Compile Include="ByfQueries\ByfAmbulantColxnsQueries.cs" />
+    <Compile Include="ByfQueries\ByfOtherColxnsQueries.cs" />
     <Compile Include="ByfServerAccess\ByfClient1.cs" />
     <Compile Include="ByfServerAccess\ByfServerVM.cs" />
     <Compile Include="Converters\AmbulantColxnConverters\AmbulantColxnConverter1.cs" />
@@ -137,6 +142,8 @@
       <DependentUpon>MasterDataPaneUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="Version2UI\MasterDataPane\MasterDataPaneVM.cs" />
+    <Compile Include="Version2UI\TransactionDataPane\PeriodsList\PeriodRowVM.cs" />
+    <Compile Include="Version2UI\TransactionDataPane\PeriodsList\PeriodsListVM.cs" />
     <Compile Include="Version2UI\TransactionDataPane\TransactionDataPaneUI.xaml.cs">
       <DependentUpon>TransactionDataPaneUI.xaml</DependentUpon>
     </Compile>

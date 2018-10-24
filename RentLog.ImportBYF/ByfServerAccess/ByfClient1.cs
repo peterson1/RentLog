@@ -45,9 +45,24 @@ namespace RentLog.ImportBYF.ByfServerAccess
             => new Uri(new Uri(_server.URL), relativeURL).ToString();
 
 
-        public async Task<List<dynamic>> GetViewsList(string viewsDisplayId)
+        public Task<List<dynamic>> GetViewsList(string viewsDisplayId)
+            => GetDynamicsList(ToViewsURL(viewsDisplayId));
+
+
+        public Task<List<dynamic>> GetViewsList(string viewsDisplayId, DateTime date)
+            => GetDynamicsList(ToViewsURL(viewsDisplayId, date));
+
+
+        private string ToViewsURL(string viewsDisplayId)
+            => ToURL("api/views/" + viewsDisplayId);
+
+
+        private string ToViewsURL(string viewsDisplayId, DateTime date)
+            => ToViewsURL(viewsDisplayId) + $"&args[0]={date:yyyy-mm-dd}";
+
+
+        private async Task<List<dynamic>> GetDynamicsList(string url)
         {
-            var url  = ToURL("api/views/" + viewsDisplayId);
             var rep  = await _httpC.GetAsync(url);
             var json = await rep.Content.ReadAsStringAsync();
             return json.ReadJson<List<dynamic>>();

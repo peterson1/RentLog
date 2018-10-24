@@ -4,6 +4,7 @@ using RentLog.DomainLib45.BaseViewModels;
 using RentLog.ImportBYF.ByfServerAccess;
 using RentLog.ImportBYF.Version2UI.MasterDataPane;
 using RentLog.ImportBYF.Version2UI.TransactionDataPane;
+using static RentLog.ImportBYF.Properties.Settings;
 
 namespace RentLog.ImportBYF.Version2UI
 {
@@ -32,9 +33,7 @@ namespace RentLog.ImportBYF.Version2UI
 
         protected override async void OnWindowLoaded()
         {
-            await ByfServer.SetURL("https://localhost:450");
-            if (ByfServer.IsOnline)
-                await MasterData.Converters.RefreshAll();
+            await ByfServer.SetURL(Default.ServerURL);
         }
     }
 }
