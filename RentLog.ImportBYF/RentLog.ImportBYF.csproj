@@ -104,25 +104,31 @@
     <Compile Include="ByfQueries\ByfLeaseColxnsQueries.cs" />
     <Compile Include="ByfQueries\ByfAmbulantColxnsQueries.cs" />
     <Compile Include="ByfQueries\ByfOtherColxnsQueries.cs" />
+    <Compile Include="ByfQueries\ByfTaxonomyTermsQueries.cs" />
     <Compile Include="ByfServerAccess\ByfClient1.cs" />
     <Compile Include="ByfServerAccess\ByfServerVM.cs" />
     <Compile Include="Converters\AmbulantColxnConverters\AmbulantColxnConverter1.cs" />
+    <Compile Include="Converters\AmbulantColxnConverters\AmbulantColxnConverter2.cs" />
     <Compile Include="Converters\BankAccountConverters\BankAccountConverter1.cs" />
     <Compile Include="Converters\BankAccountConverters\BankAccountConverter2.cs" />
     <Compile Include="Converters\BankDepositConverters\BankDepositConverter1.cs" />
     <Compile Include="Converters\CashierColxnConverters\CashierColxnConverter1.cs" />
     <Compile Include="Converters\CollectorConverters\CollectorConverter2.cs" />
     <Compile Include="Converters\DailyTxnConverterBase.cs" />
+    <Compile Include="Converters\DailyTxnConverterBase2.cs" />
     <Compile Include="Converters\GLAccountConverters\GLAccountConverter1.cs" />
     <Compile Include="Converters\GLAccountConverters\GLAccountConverter2.cs" />
+    <Compile Include="Converters\IntendedColxnConverters\IntendedColxnConverter2.cs" />
     <Compile Include="Converters\LeaseConverters\LeaseConverter2.cs" />
     <Compile Include="Converters\LeaseConverters\RentRightsParamsConverter2.cs" />
     <Compile Include="Converters\LeaseRevisionConverters\LeaseRevisionConverter1.cs" />
     <Compile Include="Converters\MiscellaneousConverters\FiscalDaysConverter1.cs" />
     <Compile Include="Converters\OtherColxnConverters\OtherColxnConverter1.cs" />
+    <Compile Include="Converters\OtherColxnConverters\OtherColxnConverter2.cs" />
     <Compile Include="Converters\SectionConverters\SectionConverter2.cs" />
     <Compile Include="Converters\StallConverters\StallConverter2.cs" />
     <Compile Include="Converters\TenantConverters\TenantConverter2.cs" />
+    <Compile Include="RntCommands\RntUpdateDayCommand2.cs" />
     <Compile Include="RntQueries\RntCache.cs" />
     <Compile Include="RntQueries\RntDailyTxnQuery.cs" />
     <Compile Include="Version2UI\MainWindow2.xaml.cs">
@@ -143,6 +149,9 @@
     </Compile>
     <Compile Include="Version2UI\MasterDataPane\MasterDataPaneVM.cs" />
     <Compile Include="Version2UI\TransactionDataPane\PeriodsList\PeriodRowVM.cs" />
+    <Compile Include="Version2UI\TransactionDataPane\PeriodsList\PeriodsListTable.xaml.cs">
+      <DependentUpon>PeriodsListTable.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Version2UI\TransactionDataPane\PeriodsList\PeriodsListVM.cs" />
     <Compile Include="Version2UI\TransactionDataPane\TransactionDataPaneUI.xaml.cs">
       <DependentUpon>TransactionDataPaneUI.xaml</DependentUpon>
@@ -240,6 +249,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Version2UI\MasterDataPane\MasterDataPaneUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Version2UI\TransactionDataPane\PeriodsList\PeriodsListTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

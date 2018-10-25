@@ -80,7 +80,7 @@ namespace RentLog.ImportBYF
             await Task.Run(() =>
                 Parallel.Invoke(() => PickedList.ReloadList(),
                                 () => RntCache.RefillFrom(AppArgs),
-                                () => ByfCache.RefillFrom(CacheDir)));
+                                () => ByfCache.RefillFromCache(CacheDir)));
             StopBeingBusy();
         }
 

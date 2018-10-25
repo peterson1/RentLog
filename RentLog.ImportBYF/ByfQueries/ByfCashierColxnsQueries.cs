@@ -14,7 +14,13 @@ namespace RentLog.ImportBYF.ByfQueries
         public static async Task<decimal> GetCashierColxnsTotal(this ByfClient1 client, DateTime date)
         {
             var dynamics = await client.GetViewsList(PUBLISHED_CASHIER_COLXNS, date);
-            return dynamics.Select(_ => GetSubTotal(_)).Sum(_ => _);
+            //return dynamics.Select(_ => GetSubTotal(_)).Sum(_ => _);
+            var total = 0M;
+
+            foreach (var byf in dynamics)
+                total += GetSubTotal(byf);
+
+            return total;
         }
 
 

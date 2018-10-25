@@ -1,5 +1,7 @@
-﻿using System;
+﻿using RentLog.ImportBYF.ByfServerAccess;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace RentLog.ImportBYF.ByfQueries
 {
@@ -8,18 +10,28 @@ namespace RentLog.ImportBYF.ByfQueries
         private Dictionary<int, string> _terms;
 
 
-        public string   Dir   { get; private set; }
+        public string  CacheDir  { get; private set; }
+        public bool    IsFilled  { get; private set; }
 
 
-        public void RefillFrom(string cacheDir)
+        public void RefillFromCache(string cacheDir)
         {
-            Dir      = cacheDir;
-            var dict = CacheReader2.getTaxonomyTerms(Dir);
+            CacheDir = cacheDir;
+            var dict = CacheReader2.getTaxonomyTerms(CacheDir);
             _terms   = null;
             _terms   = new Dictionary<int, string>();
 
             foreach (var kv in dict)
                 _terms.Add((int)kv.Key, kv.Value);
+
+            IsFilled = true;
+        }
+
+
+        public async Task RefillFromServer(ByfServerVM byfServer)
+        {
+            _terms   = await byfServer.Client.GetTaxonomyDictionary();
+            IsFilled = true;
         }
 
 

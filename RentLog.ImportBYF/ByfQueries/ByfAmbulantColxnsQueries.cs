@@ -1,6 +1,8 @@
 ﻿using CommonTools.Lib11.DynamicTools;
+using CommonTools.Lib11.StringTools;
 using RentLog.ImportBYF.ByfServerAccess;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,26 +15,31 @@ namespace RentLog.ImportBYF.ByfQueries
 
         public static async Task<decimal> GetAmbulantColxnsTotal(this ByfClient1 client, DateTime date)
         {
-            var dynamics = await client.GetViewsList(PUBLISHED_AMBULANT_COLXNS, date);
-            return dynamics.Select(_ => GetAmount(_)).Sum(_ => _);
-        }
+            var dynamics = await client.GetRawByfAmbulantColxns(date);
+            var total = 0M;
 
+            foreach (var byf in dynamics)
+                total += As.Decimal(byf.amount);
 
-        public static decimal GetAmount (dynamic byf)
-        {
-            if (!IsValidRemarks(byf)) return 0;
-            return As.Decimal(byf.amount);
+            return total;
         }
 
 
         private static bool IsValidRemarks(dynamic byf)
         {
-            var rem = As.Text(byf.remarks);
+            var rem = (string)As.Text(byf.remarks);
             if ( rem.IsBlank()) return false;
             if (!rem.Contains("{")) return false;
             if (!rem.Contains(":")) return false;
             if (!rem.Contains("}")) return false;
             return true;
+        }
+
+
+        public static async Task<List<dynamic>> GetRawByfAmbulantColxns(this ByfClient1 client, DateTime date)
+        {
+            var list = await client.GetViewsList(PUBLISHED_AMBULANT_COLXNS, date);
+            return list.Where(_ => IsValidRemarks(_)).ToList();
         }
     }
 }

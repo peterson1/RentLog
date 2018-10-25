@@ -44,7 +44,7 @@ namespace RentLog.ImportBYF.Converters
         protected IEnumerable<T> GetCastedsByDate(DateTime date)
         {
             var startStr  = CacheReader2.appendToDisplayId(DisplayId);
-            var matches   = CacheReader2.findInJsonFiles(_byfCache.Dir, startStr);
+            var matches   = CacheReader2.findInJsonFiles(_byfCache.CacheDir, startStr);
             var dateMatch = PickOneWithDate(date, matches);
             return dateMatch.Select(_ => (T)CastToDTO(_))
                             .Where (_ => _ != null);

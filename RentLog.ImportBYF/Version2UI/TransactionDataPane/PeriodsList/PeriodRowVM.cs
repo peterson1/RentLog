@@ -2,8 +2,8 @@
 using CommonTools.Lib11.InputCommands;
 using CommonTools.Lib45.InputCommands;
 using PropertyChanged;
-using RentLog.ImportBYF.ByfQueries;
 using RentLog.ImportBYF.DailyTransactions;
+using RentLog.ImportBYF.RntCommands;
 using RentLog.ImportBYF.RntQueries;
 using System;
 using System.Threading.Tasks;
@@ -19,7 +19,7 @@ namespace RentLog.ImportBYF.Version2UI.TransactionDataPane.PeriodsList
             MainWindow   = mainWindowVM2;
             RefreshCmd   = R2Command.Async(FillBothCells, _ => !IsBusy);
             QueryByfCmd  = R2Command.Async(FillByfCell, _ => !IsBusy, "Query BYF");
-            UpdateRntCmd = R2Command.Async(this.UpdateRnt, _ => CanUpdateRnt(), "Update RNT");
+            UpdateRntCmd = R2Command.Async(_ => this.UpdateRNT(Date), _ => CanUpdateRnt(), "Update RNT");
         }
 
 
@@ -33,13 +33,7 @@ namespace RentLog.ImportBYF.Version2UI.TransactionDataPane.PeriodsList
         public DailyTransactionCell  ByfCell       { get; private set; }
         public DailyTransactionCell  RntCell       { get; private set; }
         public bool                  IsValidImport { get; private set; }
-        public string                Remarks       { get; private set; }
-
-
-        private Task UpdateRnt()
-        {
-            throw new NotImplementedException();
-        }
+        public string                Remarks       { get; set; }
 
 
         private async Task FillBothCells()
@@ -66,6 +60,7 @@ namespace RentLog.ImportBYF.Version2UI.TransactionDataPane.PeriodsList
             if (ByfCell == null) return false;
             if (!ByfCell.HasValue) return false;
             if (!ByfCell.IsBalanced) return false;
+            if (!MainWindow.ByfCache.IsFilled) return false;
             return true;
         }
 

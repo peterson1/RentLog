@@ -89,7 +89,7 @@ namespace RentLog.ImportBYF.Converters
         protected List<dynamic> ReadJsonList(string displayID)
         {
             var startStr = CacheReader2.appendToDisplayId(displayID);
-            var matches  = CacheReader2.findInJsonFiles(MainWindow.ByfCache.Dir, startStr);
+            var matches  = CacheReader2.findInJsonFiles(MainWindow.ByfCache.CacheDir, startStr);
             var lines    = File.ReadAllText(matches.Single());
             return JsonConvert.DeserializeObject<List<dynamic>>(lines);
         }

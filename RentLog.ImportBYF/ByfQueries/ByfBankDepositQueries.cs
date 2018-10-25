@@ -14,7 +14,13 @@ namespace RentLog.ImportBYF.ByfQueries
         public static async Task<decimal> GetBankDepositsTotal(this ByfClient1 client, DateTime date)
         {
             var dynamics = await client.GetViewsList(PUBLISHED_BANK_DEPS, date);
-            return dynamics.Select(_ => As.Decimal(_.amount)).Sum(_ => _);
+            //return dynamics.Select(_ => As.Decimal(_.amount)).Sum(_ => _);
+            var total = 0M;
+
+            foreach (var byf in dynamics)
+                total += As.Decimal(byf.amount);
+
+            return total;
         }
     }
 }

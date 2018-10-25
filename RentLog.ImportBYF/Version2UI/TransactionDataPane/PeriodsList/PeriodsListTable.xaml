@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="RentLog.ImportBYF.Version2UI.TransactionDataPane.PeriodsList.PeriodsListTable"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:tabl="clr-namespace:RentLog.ImportBYF.DailyTransactions.TransactionsTable"
+             xmlns:local="clr-namespace:RentLog.ImportBYF.Version2UI.TransactionDataPane.PeriodsList"
+             xmlns:butns="clr-namespace:CommonTools.Lib45.StyledButtons;assembly=CommonTools.Lib45"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <DataGrid DataContext="{Binding PeriodsList}"
+              ItemsSource="{Binding }"
+              Style="{StaticResource dgReadOnly}">
+        <DataGrid.Columns>
+            <DataGridTemplateColumn>
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <butns:SimpleRefreshButton />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTextColumn Header="date"
+                                Binding="{Binding Date, StringFormat=d MMM yyyy}"
+                                ElementStyle="{StaticResource colSmallWrapCenter}"
+                                Width="60" />
+
+            <DataGridTemplateColumn Header="BYF">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <tabl:ByfCellUI />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+            <DataGridTemplateColumn Header="RNT">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <tabl:RntCellUI />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+            <DataGridTextColumn Header="Is Valid"
+                                Binding="{Binding IsValidImport}"
+                                ElementStyle="{StaticResource colCenter}" />
+
+            <DataGridTextColumn Header="remarks" Width="*"
+                                Binding="{Binding Remarks}"
+                                FontSize="9"
+                                ElementStyle="{StaticResource colLeft}">
+                <DataGridTextColumn.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="ToolTip" Value="{Binding Remarks}" />
+                        <Setter Property="ToolTipService.ShowDuration" Value="2147483647" />
+                    </Style>
+                </DataGridTextColumn.CellStyle>
+            </DataGridTextColumn>
+        </DataGrid.Columns>
+    </DataGrid>
+</UserControl>

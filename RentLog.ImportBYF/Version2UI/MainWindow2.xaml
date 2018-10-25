@@ -35,7 +35,8 @@
 
             <GridSplitter Grid.Column="1" Style="{StaticResource vSplit}" />
 
-            <txns:TransactionDataPaneUI Grid.Column="2" />
+            <txns:TransactionDataPaneUI Grid.Column="2"
+                                        DataContext="{Binding TransactionData}" />
 
             <busy:BusyDialog Grid.ColumnSpan="3" />
         </Grid>

@@ -4,6 +4,8 @@ using CommonTools.Lib45.ThreadTools;
 using PropertyChanged;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace RentLog.ImportBYF.Version2UI.TransactionDataPane.PeriodsList
 {
@@ -22,8 +24,22 @@ namespace RentLog.ImportBYF.Version2UI.TransactionDataPane.PeriodsList
         public void FillPeriodsList((DateTime Min, DateTime Max) periods)
         {
             var list = periods.Min.EachDayUpTo(periods.Max)
+                              .OrderByDescending(_ => _)
                               .Select(_ => new PeriodRowVM(_, MainWindow));
             UIThread.Run(() => SetItems(list));
+        }
+
+
+        public async Task RefreshAll()
+        {
+            foreach (var row in this)
+            {
+                if (!MainWindow.TransactionData.IsRunning) return;
+                await row.RefreshCmd.RunAsync();
+                CommandManager.InvalidateRequerySuggested();
+                if (!MainWindow.TransactionData.IsRunning) return;
+                await Task.Delay(500);
+            }
         }
     }
 }

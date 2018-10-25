@@ -1,7 +1,9 @@
 ﻿using PropertyChanged;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib45.BaseViewModels;
+using RentLog.ImportBYF.ByfQueries;
 using RentLog.ImportBYF.ByfServerAccess;
+using RentLog.ImportBYF.RntQueries;
 using RentLog.ImportBYF.Version2UI.MasterDataPane;
 using RentLog.ImportBYF.Version2UI.TransactionDataPane;
 using static RentLog.ImportBYF.Properties.Settings;
@@ -26,6 +28,8 @@ namespace RentLog.ImportBYF.Version2UI
         }
 
 
+        public ByfCache              ByfCache        { get; } = new ByfCache();
+        public RntCache              RntCache        { get; } = new RntCache();
         public ByfServerVM           ByfServer       { get; }
         public MasterDataPaneVM      MasterData      { get; }
         public TransactionDataPaneVM TransactionData { get; }
@@ -33,7 +37,10 @@ namespace RentLog.ImportBYF.Version2UI
 
         protected override async void OnWindowLoaded()
         {
+            RntCache.RefillFrom(AppArgs);
             await ByfServer.SetURL(Default.ServerURL);
+            if (ByfServer.IsOnline)
+                await ByfCache.RefillFromServer(ByfServer);
         }
     }
 }
