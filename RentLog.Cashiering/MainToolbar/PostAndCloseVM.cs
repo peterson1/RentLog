@@ -45,20 +45,20 @@ namespace RentLog.Cashiering.MainToolbar
             if (Main.IsBusy) return false;
             if (!Main.SectionTabs.All(_ => _.HasCollector))
             {
-                PostAndCloseCmd.CurrentLabel = "Please set a collector for each of the sections.";
+                PostAndCloseCmd.SetLabel("Please set a collector for each of the sections.");
                 return false;
             }
             if (!Main.SectionTabs.All(_ => _.VacantsSaved))
             {
-                PostAndCloseCmd.CurrentLabel = "Cashier should do another “Submit”.";
+                PostAndCloseCmd.SetLabel("Cashier should do another “Submit”.");
                 return false;
             }
             if (!_respondr.CanApproveRequest(out string whyNot))
             {
-                PostAndCloseCmd.CurrentLabel = whyNot;
+                PostAndCloseCmd.SetLabel(whyNot);
                 return false;
             }
-            PostAndCloseCmd.CurrentLabel = "Post & Close";
+            PostAndCloseCmd.SetLabel("Post & Close");
             return IsBalanced;
         }
 

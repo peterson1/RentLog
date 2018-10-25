@@ -81,14 +81,14 @@ namespace CommonTools.Lib45.BaseViewModels
         private bool PrivateCanRunMain()
         {
             if (!CanRunMainMethod()) return false;
-            MainMethodCmd.CurrentLabel = MainMethodCmdLabel;
+            MainMethodCmd.SetLabel(MainMethodCmdLabel);
             return true;
         }
 
 
         protected bool CantDo(string whyNot)
         {
-            MainMethodCmd.CurrentLabel = $"{MainMethodCmdLabel} -- {whyNot}";
+            MainMethodCmd.SetLabel($"{MainMethodCmdLabel} -- {whyNot}");
             return false;
         }
 

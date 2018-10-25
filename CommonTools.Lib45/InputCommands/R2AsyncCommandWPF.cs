@@ -1,5 +1,6 @@
 ﻿using CommonTools.Lib11.InputCommands;
 using CommonTools.Lib45.ThreadTools;
+using PropertyChanged;
 using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using System.Windows.Input;
 
 namespace CommonTools.Lib45.InputCommands
 {
+    [AddINotifyPropertyChangedInterface]
     public class R2AsyncCommandWPF : IR2Command, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
@@ -24,7 +26,7 @@ namespace CommonTools.Lib45.InputCommands
         }
 
 
-        public string    CurrentLabel      { get; set; }
+        public string    CurrentLabel      { get; private set; }
         public bool      IsBusy            { get; protected set; }
         public bool      IsCheckable       { get; set; }
         public bool      IsChecked         { get; set; }
@@ -33,10 +35,12 @@ namespace CommonTools.Lib45.InputCommands
         public bool      LastExecutedOK    { get; protected set; }
         public DateTime  LastExecuteStart  { get; protected set; }
         public DateTime  LastExecuteEnd    { get; protected set; }
+        public bool      UpdateLabelOnRun  { get; set; } = true;
 
         public Func<object, Task>  AsyncTask  { get; }
 
         public string OriginalLabel => _origLabel;
+
 
         public Task RunAsync(object arg = null) => AsyncTask(arg);
 
@@ -49,7 +53,9 @@ namespace CommonTools.Lib45.InputCommands
             IsBusy           = true;
             _origOverride    = OverrideEnabled;
             _origLabel       = CurrentLabel;
-            CurrentLabel     = $"Running “{_origLabel}”…";
+            //CurrentLabel     = $"Running “{_origLabel}”…";
+            if (UpdateLabelOnRun)
+                SetLabel($"Running “{_origLabel}”…");
             OverrideEnabled  = false;
             LastExecuteStart = DateTime.Now;
 
@@ -105,14 +111,17 @@ namespace CommonTools.Lib45.InputCommands
 
 
         public override string ToString() => CurrentLabel;
+        public void SetLabel(string newLabel) => CurrentLabel = newLabel;
 
 
         public void ConcludeExecute()
         {
             LastExecuteEnd  = DateTime.Now;
             IsBusy          = false;
-            CurrentLabel    = _origLabel;
+            if (UpdateLabelOnRun) SetLabel(_origLabel);
             OverrideEnabled = DisableWhenDone ? false : _origOverride;
         }
+
+
     }
 }

@@ -35,7 +35,7 @@ namespace RentLog.ChequeVouchers
             Journals       = new JournalsTabVM(this);
             AllChkVouchers = new AllChequeVouchersVM(this);
 
-            PrintCmd.CurrentLabel = "Print “Pending Checks” List";
+            PrintCmd.SetLabel("Print “Pending Checks” List");
         }
 
 
