@@ -1,5 +1,7 @@
 ﻿using CommonTools.Lib11.ExceptionTools;
 using RentLog.ImportBYF.Converters.AmbulantColxnConverters;
+using RentLog.ImportBYF.Converters.BankDepositConverters;
+using RentLog.ImportBYF.Converters.CashierColxnConverters;
 using RentLog.ImportBYF.Converters.IntendedColxnConverters;
 using RentLog.ImportBYF.Converters.OtherColxnConverters;
 using RentLog.ImportBYF.Version2UI.TransactionDataPane.PeriodsList;
@@ -20,9 +22,10 @@ namespace RentLog.ImportBYF.RntCommands
                 await new AmbulantColxnConverter2(row).Rewrite(date);
                 row.Remarks = "Updating Other Collections ...";
                 await new OtherColxnConverter2(row).Rewrite(date);
-                //todo: continue from here
-                //UpdateCashierColxns(row);
-                //UpdateBankDeposits(row);
+                row.Remarks = "Updating Cashier Collections ...";
+                await new CashierColxnConverter2(row).Rewrite(date);
+                row.Remarks = "Updating Bank Deposits    ...";
+                await new BankDepositConverter2(row).Rewrite(date);
                 await row.RefreshCmd.RunAsync();
             }
             catch (Exception ex)

@@ -1,6 +1,7 @@
 ﻿using CommonTools.Lib11.DynamicTools;
 using RentLog.ImportBYF.ByfServerAccess;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,8 +14,7 @@ namespace RentLog.ImportBYF.ByfQueries
 
         public static async Task<decimal> GetBankDepositsTotal(this ByfClient1 client, DateTime date)
         {
-            var dynamics = await client.GetViewsList(PUBLISHED_BANK_DEPS, date);
-            //return dynamics.Select(_ => As.Decimal(_.amount)).Sum(_ => _);
+            var dynamics = await client.GetRawByfBankDeposits(date);
             var total = 0M;
 
             foreach (var byf in dynamics)
@@ -22,5 +22,9 @@ namespace RentLog.ImportBYF.ByfQueries
 
             return total;
         }
+
+
+        public static Task<List<dynamic>> GetRawByfBankDeposits(this ByfClient1 client, DateTime date)
+            => client.GetViewsList(PUBLISHED_BANK_DEPS, date);
     }
 }

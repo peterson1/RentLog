@@ -25,7 +25,7 @@ namespace RentLog.ImportBYF.ByfQueries
         }
 
 
-        private static bool IsValidRemarks(dynamic byf)
+        public static bool IsCompositeRemarks(dynamic byf)
         {
             var rem = (string)As.Text(byf.remarks);
             if ( rem.IsBlank()) return false;
@@ -39,7 +39,7 @@ namespace RentLog.ImportBYF.ByfQueries
         public static async Task<List<dynamic>> GetRawByfAmbulantColxns(this ByfClient1 client, DateTime date)
         {
             var list = await client.GetViewsList(PUBLISHED_AMBULANT_COLXNS, date);
-            return list.Where(_ => IsValidRemarks(_)).ToList();
+            return list.Where(_ => IsCompositeRemarks(_)).ToList();
         }
     }
 }

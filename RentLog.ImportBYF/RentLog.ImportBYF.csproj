@@ -112,7 +112,9 @@
     <Compile Include="Converters\BankAccountConverters\BankAccountConverter1.cs" />
     <Compile Include="Converters\BankAccountConverters\BankAccountConverter2.cs" />
     <Compile Include="Converters\BankDepositConverters\BankDepositConverter1.cs" />
+    <Compile Include="Converters\BankDepositConverters\BankDepositConverter2.cs" />
     <Compile Include="Converters\CashierColxnConverters\CashierColxnConverter1.cs" />
+    <Compile Include="Converters\CashierColxnConverters\CashierColxnConverter2.cs" />
     <Compile Include="Converters\CollectorConverters\CollectorConverter2.cs" />
     <Compile Include="Converters\DailyTxnConverterBase.cs" />
     <Compile Include="Converters\DailyTxnConverterBase2.cs" />

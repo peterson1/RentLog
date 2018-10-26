@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Net;
 
 namespace RentLog.ImportBYF.ByfServerAccess
 {
@@ -58,14 +59,15 @@ namespace RentLog.ImportBYF.ByfServerAccess
 
 
         private string ToViewsURL(string viewsDisplayId, DateTime date)
-            => ToViewsURL(viewsDisplayId) + $"&args[0]={date:yyyy-mm-dd}";
+            => ToViewsURL(viewsDisplayId) + $"&args[0]={date:yyyy-MM-dd}";
 
 
         private async Task<List<dynamic>> GetDynamicsList(string url)
         {
-            var rep  = await _httpC.GetAsync(url);
-            var json = await rep.Content.ReadAsStringAsync();
-            return json.ReadJson<List<dynamic>>();
+            var rep     = await _httpC.GetAsync(url);
+            var json    = await rep.Content.ReadAsStringAsync();
+            var decoded = WebUtility.HtmlDecode(json);
+            return decoded.ReadJson<List<dynamic>>();
         }
     }
 }

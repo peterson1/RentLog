@@ -24,21 +24,17 @@ namespace RentLog.ImportBYF.ByfQueries
         }
 
 
-        //public static decimal GetAmount(dynamic byf)
-        //{
-        //    if (As.ID(byf.paymentfortid) != 32) return 0;
-        //    return As.Decimal(byf.amount);
-        //}
+        //private static bool IsValidPaymentFor(dynamic byf)
+        //    => As.ID(byf.paymentfortid) == 32;
 
-
-        private static bool IsValidPaymentFor(dynamic byf)
-            => As.ID(byf.paymentfortid) == 32;
+        private static bool IsAmbulantColxn(dynamic byf)
+            => ByfAmbulantColxnsQueries.IsCompositeRemarks(byf);
 
 
         public static async Task<List<dynamic>> GetRawByfOtherColxns(this ByfClient1 client, DateTime date)
         {
             var list = await client.GetViewsList(PUBLISHED_OTHER_COLXNS, date);
-            return list.Where(_ => IsValidPaymentFor(_)).ToList();
+            return list.Where(_ => !IsAmbulantColxn(_)).ToList();
         }
     }
 }

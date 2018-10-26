@@ -38,7 +38,13 @@ namespace RentLog.ImportBYF.Version2UI.TransactionDataPane.PeriodsList
                 await row.RefreshCmd.RunAsync();
                 CommandManager.InvalidateRequerySuggested();
                 if (!MainWindow.TransactionData.IsRunning) return;
-                await Task.Delay(500);
+
+                if (row.IsValidImport) continue;
+
+                if (row.UpdateRntCmd.CanExecute(null))
+                    await row.UpdateRntCmd.RunAsync();
+
+                await Task.Delay(100);
             }
         }
     }
