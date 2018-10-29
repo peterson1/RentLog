@@ -28,8 +28,8 @@ namespace RentLog.DatabaseLib.DatabaseFinders
                                
             DatabasePath   = marketDbFilePath;
             CurrentUser    = currentUser;
-            SystemName     = mktDb.Metadata[SYSTEM_NAME_KEY];
-            BranchName     = mktDb.Metadata[BRANCH_NAME_KEY];
+            //SystemName     = mktDb.Metadata[SYSTEM_NAME_KEY];
+            //BranchName     = mktDb.Metadata[BRANCH_NAME_KEY];
                            
             Stalls         = new StallsRepo1(new StallsCollection(mktDb), this);
             Collectors     = new CollectorsRepo1(new CollectorsCollection(mktDb), this);
@@ -44,6 +44,21 @@ namespace RentLog.DatabaseLib.DatabaseFinders
         {
             get => base.GLAccounts ?? TryLoadPassbookDB(_ => _.GLAccounts);
             set => base.GLAccounts = value;
+        }
+
+
+        private SharedLiteDB MktDB => new SharedLiteDB(_mktDbPath, _currUsr);
+
+        public override string SystemName
+        {
+            get => MktDB.Metadata[SYSTEM_NAME_KEY];
+            set => MktDB.Metadata[SYSTEM_NAME_KEY] = value;
+        }
+
+        public override string BranchName
+        {
+            get => MktDB.Metadata[BRANCH_NAME_KEY];
+            set => MktDB.Metadata[BRANCH_NAME_KEY] = value;
         }
 
 

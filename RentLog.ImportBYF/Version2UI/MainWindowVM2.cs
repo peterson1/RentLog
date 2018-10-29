@@ -1,4 +1,5 @@
 ﻿using PropertyChanged;
+using CommonTools.Lib11.StringTools;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib45.BaseViewModels;
 using RentLog.ImportBYF.ByfQueries;
@@ -18,12 +19,13 @@ namespace RentLog.ImportBYF.Version2UI
 
         public MainWindowVM2(ITenantDBsDir tenantDBsDir) : base(tenantDBsDir)
         {
+            SetBranchAndSystemNames();
             AppArgs.Credentials.HumanName = "Migrator";
-            AppArgs.Credentials.Roles     = "Admin";
+            AppArgs.Credentials.Roles = "Admin";
             SetCaption(AppArgs.Credentials.NameAndRole);
 
-            ByfServer       = new ByfServerVM(this);
-            MasterData      = new MasterDataPaneVM(this);
+            ByfServer = new ByfServerVM(this);
+            MasterData = new MasterDataPaneVM(this);
             TransactionData = new TransactionDataPaneVM(this);
         }
 
@@ -33,6 +35,18 @@ namespace RentLog.ImportBYF.Version2UI
         public ByfServerVM           ByfServer       { get; }
         public MasterDataPaneVM      MasterData      { get; }
         public TransactionDataPaneVM TransactionData { get; }
+
+
+        private void SetBranchAndSystemNames()
+        {
+            var mkt = AppArgs.MarketState;
+
+            if (mkt.BranchName.IsBlank())
+                mkt.BranchName = "branch-name-goes-here";
+
+            if (mkt.SystemName.IsBlank())
+                mkt.SystemName = "system-name-goes-here";
+        }
 
 
         protected override async void OnWindowLoaded()
