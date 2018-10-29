@@ -43,7 +43,7 @@ namespace RentLog.ImportBYF.Version2UI.TransactionDataPane.PeriodsList
             try
             {
                 await FillByfCell();
-                RntCell       = MainWindow.AppArgs.QueryRNT(Date);
+                FillRntCell();
                 IsValidImport = Validate(out err);
             }
             catch (Exception ex)
@@ -70,6 +70,13 @@ namespace RentLog.ImportBYF.Version2UI.TransactionDataPane.PeriodsList
             StartBeingBusy("Querying BYF server ...");
             ByfCell = await MainWindow.ByfServer.QueryPeriodCell(Date);
             StopBeingBusy();
+        }
+
+
+        public void FillRntCell()
+        {
+            RntCell = MainWindow.AppArgs.QueryRNT(Date);
+            IsValidImport = RntCell.IsBalanced;
         }
 
 

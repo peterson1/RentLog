@@ -35,6 +35,10 @@ namespace RentLog.ImportBYF.Version2UI.TransactionDataPane.PeriodsList
             foreach (var row in this)
             {
                 if (!MainWindow.TransactionData.IsRunning) return;
+
+                await Task.Run(() => row.FillRntCell());
+                if (row.RntCell.HasValue) continue;
+
                 await row.RefreshCmd.RunAsync();
                 CommandManager.InvalidateRequerySuggested();
                 if (!MainWindow.TransactionData.IsRunning) return;

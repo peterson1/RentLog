@@ -11,6 +11,15 @@
     <DataGrid DataContext="{Binding PeriodsList}"
               ItemsSource="{Binding }"
               Style="{StaticResource dgReadOnly}">
+
+        <DataGrid.RowDetailsTemplate>
+            <DataTemplate>
+                <TextBlock Background="LightYellow" Text="{Binding Remarks}" TextWrapping="Wrap"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                           FontSize="11" />
+            </DataTemplate>
+        </DataGrid.RowDetailsTemplate>
+
         <DataGrid.Columns>
             <DataGridTemplateColumn>
                 <DataGridTemplateColumn.CellTemplate>
@@ -44,7 +53,7 @@
                                 Binding="{Binding IsValidImport}"
                                 ElementStyle="{StaticResource colCenter}" />
 
-            <DataGridTextColumn Header="remarks" Width="*"
+            <!--<DataGridTextColumn Header="remarks" Width="*"
                                 Binding="{Binding Remarks}"
                                 FontSize="9"
                                 ElementStyle="{StaticResource colLeft}">
@@ -54,7 +63,7 @@
                         <Setter Property="ToolTipService.ShowDuration" Value="2147483647" />
                     </Style>
                 </DataGridTextColumn.CellStyle>
-            </DataGridTextColumn>
+            </DataGridTextColumn>-->
         </DataGrid.Columns>
     </DataGrid>
 </UserControl>
