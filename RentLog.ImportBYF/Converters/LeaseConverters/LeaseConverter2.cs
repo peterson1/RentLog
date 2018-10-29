@@ -5,7 +5,6 @@ using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
 using RentLog.DomainLib11.Models;
 using RentLog.ImportBYF.Converters.LeaseRevisionConverters;
-using RentLog.ImportBYF.Converters.MiscellaneousConverters;
 using RentLog.ImportBYF.Converters.TenantConverters;
 using RentLog.ImportBYF.Version2UI;
 using RentLog.ImportBYF.Version2UI.MasterDataPane.ConvertersList;
@@ -55,6 +54,10 @@ namespace RentLog.ImportBYF.Converters.LeaseConverters
         }
 
 
+        public override void OnAllRecordsMatch() 
+            => Main.MasterData.RaiseAllLeasesMatch();
+
+
         public override async Task BeforeByfQuery()
         {
             _stallsDict       = Main.AppArgs.MarketState.Stalls
@@ -62,6 +65,7 @@ namespace RentLog.ImportBYF.Converters.LeaseConverters
             _tenantsDict      = await this.GetTenantsDictionary();
             _terminationDates = await this.GetTerminationDates();
         }
+
 
         private (DateTime Start, DateTime End) GetContractDates(string periodText)
         {

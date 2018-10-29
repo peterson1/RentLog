@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mstr="clr-namespace:RentLog.ImportBYF.Version2UI.MasterDataPane"
         xmlns:txns="clr-namespace:RentLog.ImportBYF.Version2UI.TransactionDataPane"
+        xmlns:bals="clr-namespace:RentLog.ImportBYF.Version2UI.LeaseBalancesPane"
         xmlns:local="clr-namespace:RentLog.ImportBYF.Version2UI"
         mc:Ignorable="d"
         Title="{Binding Caption}" 
@@ -27,6 +28,8 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
@@ -38,7 +41,12 @@
             <txns:TransactionDataPaneUI Grid.Column="2"
                                         DataContext="{Binding TransactionData}" />
 
-            <busy:BusyDialog Grid.ColumnSpan="3" />
+            <GridSplitter Grid.Column="3" Style="{StaticResource vSplit}" />
+
+            <bals:LeaseBalancesPaneUI Grid.Column="4"
+                                      DataContext="{Binding LeaseBalances}" />
+
+            <busy:BusyDialog Grid.ColumnSpan="5" />
         </Grid>
     </DockPanel>
 </Window>

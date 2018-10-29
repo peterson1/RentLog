@@ -130,9 +130,20 @@
     <Compile Include="Converters\SectionConverters\SectionConverter2.cs" />
     <Compile Include="Converters\StallConverters\StallConverter2.cs" />
     <Compile Include="Converters\TenantConverters\TenantConverter2.cs" />
+    <Compile Include="RntCommands\RntUpdateBalancesCommand.cs" />
     <Compile Include="RntCommands\RntUpdateDayCommand2.cs" />
     <Compile Include="RntQueries\RntCache.cs" />
     <Compile Include="RntQueries\RntDailyTxnQuery.cs" />
+    <Compile Include="RntQueries\RntLeaseBalanceQueries.cs" />
+    <Compile Include="Version2UI\LeaseBalancesPane\LeaseBalancesPaneUI.xaml.cs">
+      <DependentUpon>LeaseBalancesPaneUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Version2UI\LeaseBalancesPane\LeaseBalancesPaneVM.cs" />
+    <Compile Include="Version2UI\LeaseBalancesPane\LeasesList\LeaseRowVM.cs" />
+    <Compile Include="Version2UI\LeaseBalancesPane\LeasesList\LeasesListUI.xaml.cs">
+      <DependentUpon>LeasesListUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Version2UI\LeaseBalancesPane\LeasesList\LeasesListVM.cs" />
     <Compile Include="Version2UI\MainWindow2.xaml.cs">
       <DependentUpon>MainWindow2.xaml</DependentUpon>
     </Compile>
@@ -242,6 +253,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Version2UI\LeaseBalancesPane\LeaseBalancesPaneUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Version2UI\LeaseBalancesPane\LeasesList\LeasesListUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Version2UI\MainWindow2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -27,7 +27,11 @@ namespace RentLog.ImportBYF.Version2UI.MasterDataPane.ConvertersList
         private static void ShowFirstDiff<T>(this ConverterRowBase<T> row) where T : class, IDocumentDTO
         {
             var diff1 = row.DiffRows.FirstOrDefault(_ => _.IsTheSame == false);
-            if (diff1 == null) return;
+            if (diff1 == null)
+            {
+                row.OnAllRecordsMatch();
+                return;
+            }
             row.LogError(diff1.Difference);
         }
 

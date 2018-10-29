@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows.Input;
-using CommonTools.Lib11.InputCommands;
+﻿using CommonTools.Lib11.InputCommands;
 using CommonTools.Lib45.InputCommands;
 using PropertyChanged;
 using RentLog.ImportBYF.Version2UI.TransactionDataPane.PeriodsList;

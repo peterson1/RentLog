@@ -1,6 +1,4 @@
-﻿using RentLog.DomainLib11.DTOs;
-
-namespace RentLog.DomainLib11.Models
+﻿namespace RentLog.DomainLib11.Models
 {
     public class BillAmounts
     {
@@ -13,6 +11,8 @@ namespace RentLog.DomainLib11.Models
                                       + (Rights   ?? 0) 
                                       + (Electric ?? 0) 
                                       + (Water    ?? 0);
+
+        public bool HasValue => Total != 0M;
 
 
         public decimal? For(BillCode billCode)

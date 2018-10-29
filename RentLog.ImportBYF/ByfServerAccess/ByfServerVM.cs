@@ -1,6 +1,8 @@
 ﻿using CommonTools.Lib11.DynamicTools;
 using CommonTools.Lib11.EventHandlerTools;
 using PropertyChanged;
+using RentLog.DomainLib11.DTOs;
+using RentLog.DomainLib11.Models;
 using RentLog.ImportBYF.ByfQueries;
 using RentLog.ImportBYF.Converters.MiscellaneousConverters;
 using RentLog.ImportBYF.DailyTransactions;
@@ -69,6 +71,12 @@ namespace RentLog.ImportBYF.ByfServerAccess
             var suffx = ok ? "(online)" : "!! Failed to connect !!";
             _main.SetCaption($"{_main.AppArgs.Credentials.NameAndRole} {URL} {suffx}");
             return ok;
+        }
+
+
+        public Task<BillAmounts> QueryLeaseBalances(LeaseDTO lease)
+        {
+            throw new NotImplementedException();
         }
 
 

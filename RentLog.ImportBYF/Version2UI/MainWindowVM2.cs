@@ -1,10 +1,11 @@
-﻿using PropertyChanged;
-using CommonTools.Lib11.StringTools;
+﻿using CommonTools.Lib11.StringTools;
+using PropertyChanged;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib45.BaseViewModels;
 using RentLog.ImportBYF.ByfQueries;
 using RentLog.ImportBYF.ByfServerAccess;
 using RentLog.ImportBYF.RntQueries;
+using RentLog.ImportBYF.Version2UI.LeaseBalancesPane;
 using RentLog.ImportBYF.Version2UI.MasterDataPane;
 using RentLog.ImportBYF.Version2UI.TransactionDataPane;
 using static RentLog.ImportBYF.Properties.Settings;
@@ -24,9 +25,10 @@ namespace RentLog.ImportBYF.Version2UI
             AppArgs.Credentials.Roles = "Admin";
             SetCaption(AppArgs.Credentials.NameAndRole);
 
-            ByfServer = new ByfServerVM(this);
-            MasterData = new MasterDataPaneVM(this);
+            ByfServer       = new ByfServerVM(this);
+            MasterData      = new MasterDataPaneVM(this);
             TransactionData = new TransactionDataPaneVM(this);
+            LeaseBalances   = new LeaseBalancesPaneVM(this);
         }
 
 
@@ -35,6 +37,7 @@ namespace RentLog.ImportBYF.Version2UI
         public ByfServerVM           ByfServer       { get; }
         public MasterDataPaneVM      MasterData      { get; }
         public TransactionDataPaneVM TransactionData { get; }
+        public LeaseBalancesPaneVM   LeaseBalances   { get; }
 
 
         private void SetBranchAndSystemNames()

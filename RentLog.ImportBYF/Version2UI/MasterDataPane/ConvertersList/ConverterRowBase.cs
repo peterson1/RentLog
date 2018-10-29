@@ -25,12 +25,13 @@ namespace RentLog.ImportBYF.Version2UI.MasterDataPane.ConvertersList
             UpdateRntCmd = R2Command.Async(this.UpdateRnt, _ => this.CanUpdateRnt(), "Update RNT");
         }
 
-        public abstract string   Label           { get; }
-        public abstract string   ViewsDisplayID  { get; }
-        public abstract T        CastToRNT       (dynamic byf);
-        public abstract List<T>  GetRntRecords   (ITenantDBsDir dir);
-        public abstract void     ReplaceAll      (IEnumerable<T> newRecords, MarketStateDB mkt);
-        public virtual  Task     BeforeByfQuery  () => Task.Delay(1);
+        public abstract string   Label             { get; }
+        public abstract string   ViewsDisplayID    { get; }
+        public abstract T        CastToRNT         (dynamic byf);
+        public abstract List<T>  GetRntRecords     (ITenantDBsDir dir);
+        public abstract void     ReplaceAll        (IEnumerable<T> newRecords, MarketStateDB mkt);
+        public virtual  Task     BeforeByfQuery    () => Task.Delay(1);
+        public virtual  void     OnAllRecordsMatch () { }
 
 
         public int     ByfCount     { get; private set; }

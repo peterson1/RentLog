@@ -51,12 +51,14 @@ namespace RentLog.ImportBYF.RntQueries
             return sum;
         }
 
+
         private static decimal GetCashierColxnsTotal(ICollectionsDB db)
         {
             var all = db.CashierColxns.GetAll();
             var sum = all.Sum(_ => _.Amount);
             return sum;
         }
+
 
         private static decimal GetTotalDeposits(ICollectionsDB db) 
             => db.BankDeposits.GetAll().Sum(_ => _.Amount);
