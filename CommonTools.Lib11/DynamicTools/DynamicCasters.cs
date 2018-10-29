@@ -43,6 +43,10 @@ namespace CommonTools.Lib11.DynamicTools
         }
 
 
+        public static decimal DecimalOrZero(dynamic dynamic)
+            => As.Decimal_(dynamic) ?? 0M;
+
+
         public static bool Bool(dynamic dynamic)
         {
             var str = (string)dynamic;

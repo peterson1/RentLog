@@ -66,7 +66,8 @@ namespace RentLog.ImportBYF.ByfServerAccess
         {
             var rep     = await _httpC.GetAsync(url);
             var json    = await rep.Content.ReadAsStringAsync();
-            var decoded = WebUtility.HtmlDecode(json);
+            var unquot  = json.Replace("&quot;", "&apos;");
+            var decoded = WebUtility.HtmlDecode(unquot);
             return decoded.ReadJson<List<dynamic>>();
         }
     }

@@ -38,8 +38,11 @@ namespace RentLog.ImportBYF.RntQueries
 
         public CollectorDTO CollectorByName(string collectorName, bool errorIfNoMatch = true)
         {
-            var match = _colctrsById.Values.SingleOrDefault(_ => _.Name == collectorName);
-            if (match != null) return match;
+            var matches = _colctrsById.Values.Where(_ => _.Name == collectorName);
+            if (matches.Count() == 1) return matches.First();
+            if (matches.Count() > 1)
+                DuplicateRecordsException.For(matches, "Name", collectorName);
+
             if (!errorIfNoMatch) return null;
             throw No.Match<CollectorDTO>("Name", collectorName);
         }

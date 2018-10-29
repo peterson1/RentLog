@@ -20,6 +20,7 @@ namespace RentLog.ImportBYF.Converters.StallConverters
 
         public StallConverter2(MainWindowVM2 mainWindowVM2) : base(mainWindowVM2)
         {
+            _lses = Main.AppArgs.MarketState.GetAllLeases();
         }
 
 
@@ -60,11 +61,9 @@ namespace RentLog.ImportBYF.Converters.StallConverters
                     ?.LastOrDefault();
 
 
-        public override List<StallDTO> GetRntRecords(ITenantDBsDir dir)
-        {
-            _lses = dir.MarketState.GetAllLeases();
-            return dir.MarketState.Stalls.GetAll();
-        }
+        public override List<StallDTO> GetRntRecords(ITenantDBsDir dir) 
+            => dir.MarketState.Stalls.GetAll();
+
 
         public override void ReplaceAll(IEnumerable<StallDTO> newRecords, MarketStateDB mkt)
             => mkt.Stalls.DropAndInsert(newRecords, true, false);

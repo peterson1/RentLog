@@ -18,11 +18,11 @@ namespace RentLog.ImportBYF.ByfQueries
             var total = 0M;
 
             foreach (var byf in dynamics)
-                total += As.Decimal(byf.rent)
-                       + As.Decimal(byf.rights)
-                       + As.Decimal(byf.electric)
-                       + As.Decimal(byf.water)
-                       + As.Decimal(byf.surcharge);
+                total += As.DecimalOrZero(byf.rent     )
+                       + As.DecimalOrZero(byf.rights   )
+                       + As.DecimalOrZero(byf.electric )
+                       + As.DecimalOrZero(byf.water    )
+                       + As.DecimalOrZero(byf.surcharge);
 
             return total;
         }

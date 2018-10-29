@@ -21,11 +21,11 @@ namespace RentLog.ImportBYF.Converters.CashierColxnConverters
         protected override CashierColxnDTO CastToDTO(dynamic byf) => new CashierColxnDTO
         {
             Id          = byf.nid,
-            Amount      = As.Decimal(byf.rent)
-                        + As.Decimal(byf.rights)
-                        + As.Decimal(byf.electric)
-                        + As.Decimal(byf.water)
-                        + As.Decimal(byf.surcharge),
+            Amount      = As.DecimalOrZero(byf.rent)
+                        + As.DecimalOrZero(byf.rights)
+                        + As.DecimalOrZero(byf.electric)
+                        + As.DecimalOrZero(byf.water)
+                        + As.DecimalOrZero(byf.surcharge),
             DocumentRef = byf.referencenum,
             Remarks     = byf.remarks,
             Lease       = _rntCache.LeaseById(As.ID(byf.leasenid)),
@@ -35,11 +35,11 @@ namespace RentLog.ImportBYF.Converters.CashierColxnConverters
 
         private BillCode GetBillCode(dynamic byf)
         {
-            if (byf.rent      != 0) return BillCode.Rent;
-            if (byf.surcharge != 0) return BillCode.Rent;
-            if (byf.rights    != 0) return BillCode.Rights;
-            if (byf.electric  != 0) return BillCode.Electric;
-            if (byf.water     != 0) return BillCode.Water;
+            if (As.DecimalOrZero(byf.rent     ) != 0M) return BillCode.Rent;
+            if (As.DecimalOrZero(byf.surcharge) != 0M) return BillCode.Rent;
+            if (As.DecimalOrZero(byf.rights   ) != 0M) return BillCode.Rights;
+            if (As.DecimalOrZero(byf.electric ) != 0M) return BillCode.Electric;
+            if (As.DecimalOrZero(byf.water    ) != 0M) return BillCode.Water;
             return BillCode.Other;
         }
 
