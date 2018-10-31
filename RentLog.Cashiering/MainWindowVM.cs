@@ -8,6 +8,7 @@ using RentLog.Cashiering.SectionTabs;
 using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DataSources;
+using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib45.BaseViewModels;
 using System;
 using System.Collections.Generic;
@@ -119,9 +120,13 @@ namespace RentLog.Cashiering
             var lastIndx = CurrentTabIndex;
             var list     = new List<SectionTabVM>();
             var all      = AppArgs.MarketState.Sections.GetAll();
+            var activs   = AppArgs.MarketState.ActiveLeasesFor(Date);
 
             foreach (var sec in all)
-                list.Add(new SectionTabVM(sec, this));
+            {
+                if (activs.Any(_ => _.Stall.Section.Id == sec.Id))
+                    list.Add(new SectionTabVM(sec, this));
+            }
 
             AsUI(() => SectionTabs.SetItems(list));
             AppArgs.CurrentSection = SectionTabs.FirstOrDefault()?.Section;
