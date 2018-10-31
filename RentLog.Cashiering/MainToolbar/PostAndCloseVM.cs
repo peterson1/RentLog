@@ -48,11 +48,11 @@ namespace RentLog.Cashiering.MainToolbar
                 PostAndCloseCmd.SetLabel("Please set a collector for each of the sections.");
                 return false;
             }
-            if (!Main.SectionTabs.All(_ => _.VacantsSaved))
-            {
-                PostAndCloseCmd.SetLabel("Cashier should do another “Submit”.");
-                return false;
-            }
+            //if (!Main.SectionTabs.All(_ => _.VacantsSaved))
+            //{
+            //    PostAndCloseCmd.SetLabel("Cashier should do another “Submit”.");
+            //    return false;
+            //}
             if (!_respondr.CanApproveRequest(out string whyNot))
             {
                 PostAndCloseCmd.SetLabel(whyNot);
