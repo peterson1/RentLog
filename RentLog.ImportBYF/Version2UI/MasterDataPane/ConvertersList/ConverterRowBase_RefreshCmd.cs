@@ -44,7 +44,7 @@ namespace RentLog.ImportBYF.Version2UI.MasterDataPane.ConvertersList
         }
 
 
-        private static async Task<List<T>> GetByfRecords<T>(this ConverterRowBase<T> row) where T : class, IDocumentDTO
+        public static async Task<List<T>> GetByfRecords<T>(this ConverterRowBase<T> row) where T : class, IDocumentDTO
         {
             var casteds = new List<T>();
             var dynamics = await row.QueryByfServer();

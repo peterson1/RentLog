@@ -21,9 +21,14 @@ namespace RentLog.ImportBYF.Version2UI.LeaseBalancesPane.LeasesList
 
         public void FillLeasesList()
         {
-            var items = MainWindow.AppArgs.MarketState.GetAllLeases()
-                                  .Select(_ => new LeaseRowVM(_, MainWindow));
-            UIThread.Run(() => SetItems(items));
+            var mkt     = MainWindow.AppArgs.MarketState;
+            var actives = mkt.ActiveLeases.GetAll()
+                             .OrderByDescending(_ => _.Id);
+            var inactvs = mkt.InactiveLeases.GetAll()
+                             .OrderByDescending(_ => _.Id);
+            var both    = actives.Concat(inactvs)
+                                 .Select(_ => new LeaseRowVM(_, MainWindow));
+            UIThread.Run(() => SetItems(both));
         }
 
 

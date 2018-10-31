@@ -4,15 +4,58 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RentLog.ImportBYF.Version2UI.LeaseBalancesPane.LeasesList"
+             xmlns:butns="clr-namespace:CommonTools.Lib45.StyledButtons;assembly=CommonTools.Lib45"
+             xmlns:labl="clr-namespace:CommonTools.Lib45.TextLabels;assembly=CommonTools.Lib45"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DataGrid DataContext="{Binding LeasesList}"
               ItemsSource="{Binding }"
               Style="{StaticResource dgReadOnly}">
+
+        <DataGrid.RowDetailsTemplate>
+            <DataTemplate>
+                <TextBlock Background="LightYellow" Text="{Binding Remarks}" TextWrapping="Wrap"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                           FontSize="11" />
+            </DataTemplate>
+        </DataGrid.RowDetailsTemplate>
+        
         <DataGrid.Columns>
+            <DataGridTemplateColumn>
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <butns:SimpleRefreshButton />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTextColumn Header="id"
+                                Binding="{Binding Lease.Id, StringFormat=N0}"
+                                ElementStyle="{StaticResource colSmallWrapCenter}" />
             <DataGridTextColumn Header="lease"
-                                Binding="{Binding Lease}"
-                                ElementStyle="{StaticResource colLabel}" />
+                                Binding="{Binding CompositeLabel}"
+                                ElementStyle="{StaticResource colSmallWrapLeft}"
+                                Width="150" />
+
+            <DataGridTemplateColumn Header="RNT">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <StackPanel.Resources>
+                                <Style TargetType="labl:DualText">
+                                    <Setter Property="Text1Width" Value="60" />
+                                </Style>
+                            </StackPanel.Resources>
+                            
+                            <labl:DualText Text1="Rent"
+                                           Text2="{Binding RntCell.Rent, StringFormat=N2}" />
+                            <labl:DualText Text1="Rights"
+                                           Text2="{Binding RntCell.Rights, StringFormat=N2}" />
+                            <Button Command="{Binding UpdateRntCmd}"
+                                    Content="{Binding UpdateRntCmd.CurrentLabel}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
         </DataGrid.Columns>
     </DataGrid>
 </UserControl>

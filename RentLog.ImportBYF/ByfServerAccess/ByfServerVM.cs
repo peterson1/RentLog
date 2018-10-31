@@ -74,10 +74,10 @@ namespace RentLog.ImportBYF.ByfServerAccess
         }
 
 
-        public Task<BillAmounts> QueryLeaseBalances(LeaseDTO lease)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<BillAmounts> QueryLeaseBalances(LeaseDTO lease)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
 
         public async Task<DailyTransactionCell> QueryPeriodCell(DateTime date)

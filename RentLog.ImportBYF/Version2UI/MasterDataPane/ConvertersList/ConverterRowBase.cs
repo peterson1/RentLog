@@ -70,7 +70,7 @@ namespace RentLog.ImportBYF.Version2UI.MasterDataPane.ConvertersList
         public void LogError       (string errorText) => ErrorText += L.F + errorText;
 
 
-        public Task<List<dynamic>> GetViewsList(string viewsDisplayID)
+        public virtual Task<List<dynamic>> GetViewsList(string viewsDisplayID)
             => Main.ByfServer.GetViewsList(viewsDisplayID);
     }
 }

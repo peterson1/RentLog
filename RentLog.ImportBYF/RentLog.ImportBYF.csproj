@@ -109,6 +109,7 @@
     <Compile Include="ByfServerAccess\ByfServerVM.cs" />
     <Compile Include="Converters\AmbulantColxnConverters\AmbulantColxnConverter1.cs" />
     <Compile Include="Converters\AmbulantColxnConverters\AmbulantColxnConverter2.cs" />
+    <Compile Include="Converters\BalanceAdjConverters\BalanceAdjConverter1.cs" />
     <Compile Include="Converters\BankAccountConverters\BankAccountConverter1.cs" />
     <Compile Include="Converters\BankAccountConverters\BankAccountConverter2.cs" />
     <Compile Include="Converters\BankDepositConverters\BankDepositConverter1.cs" />

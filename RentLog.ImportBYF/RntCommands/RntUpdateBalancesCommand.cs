@@ -1,6 +1,6 @@
-﻿using CommonTools.Lib11.ExceptionTools;
+﻿using RentLog.ImportBYF.Converters.BalanceAdjConverters;
 using RentLog.ImportBYF.Version2UI.LeaseBalancesPane.LeasesList;
-using System;
+using RentLog.ImportBYF.Version2UI.MasterDataPane.ConvertersList;
 using System.Threading.Tasks;
 
 namespace RentLog.ImportBYF.RntCommands
@@ -9,17 +9,10 @@ namespace RentLog.ImportBYF.RntCommands
     {
         public static async Task UpdateRNT(this LeaseRowVM row)
         {
-            try
-            {
-                row.Remarks = "Updating Rent balances ...";
-                await Task.Delay(1);
-                row.Remarks = "Updating Rights balances ...";
-                await row.RefreshCmd.RunAsync();
-            }
-            catch (Exception ex)
-            {
-                row.Remarks = ex.Info(true, true);
-            }
+            var mkt   = row.MainWindow.AppArgs.MarketState;
+            var conv  = new BalanceAdjConverter1(row.Lease, row.MainWindow);
+            var byfs  = await conv.GetByfRecords();
+            conv.ReplaceAll(byfs, mkt);
         }
     }
 }

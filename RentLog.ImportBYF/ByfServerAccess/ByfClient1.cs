@@ -54,12 +54,20 @@ namespace RentLog.ImportBYF.ByfServerAccess
             => GetDynamicsList(ToViewsURL(viewsDisplayId, date));
 
 
+        public Task<List<dynamic>> GetViewsList(string viewsDisplayId, int idFilter)
+            => GetDynamicsList(ToViewsURL(viewsDisplayId, idFilter));
+
+
         private string ToViewsURL(string viewsDisplayId)
             => ToURL("api/views/" + viewsDisplayId);
 
 
         private string ToViewsURL(string viewsDisplayId, DateTime date)
             => ToViewsURL(viewsDisplayId) + $"&args[0]={date:yyyy-MM-dd}";
+
+
+        private string ToViewsURL(string viewsDisplayId, int idFilter)
+            => ToViewsURL(viewsDisplayId) + $"&args[0]={idFilter}";
 
 
         private async Task<List<dynamic>> GetDynamicsList(string url)
