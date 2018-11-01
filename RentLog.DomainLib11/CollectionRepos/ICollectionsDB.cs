@@ -28,7 +28,7 @@ namespace RentLog.DomainLib11.CollectionRepos
         void          MarkAsPosted           (string postedBy);
         CollectorDTO  GetCollector           (LeaseDTO lease);
         CollectorDTO  GetCollector           (SectionDTO section);
-        void          SetCollector           (SectionDTO section, CollectorDTO collector);
+        void          SetCollector           (int sectionId, int collectorId);
         void          TakeSectionsSnapshot   (List<SectionDTO> currentSections);
         void          TakeCollectorsSnapshot (List<CollectorDTO> currentCollectors);
         bool          HasVacantsTable        (SectionDTO section);

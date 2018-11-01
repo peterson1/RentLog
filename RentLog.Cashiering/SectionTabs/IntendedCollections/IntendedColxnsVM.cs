@@ -20,7 +20,7 @@ namespace RentLog.Cashiering.SectionTabs.IntendedCollections
             FillCollectorsList(main.ColxnsDB.GetCollector(sec));
 
             CurrentCollectorChanged += (s, e) 
-                => main.ColxnsDB.SetCollector(sec, e);
+                => main.ColxnsDB.SetCollector(sec.Id, e.Id);
         }
 
 

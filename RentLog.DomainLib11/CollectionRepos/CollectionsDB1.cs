@@ -78,10 +78,10 @@ namespace RentLog.DomainLib11.CollectionRepos
         }
 
 
-        public void SetCollector(SectionDTO section, CollectorDTO collector)
+        public void SetCollector(int sectionId, int collectorId)
         {
-            var key = string.Format(COLLECTOR_KEY, section.Id);
-            _meta[key] = collector.Id.ToString();
+            var key = string.Format(COLLECTOR_KEY, sectionId);
+            _meta[key] = collectorId.ToString();
         }
 
 
