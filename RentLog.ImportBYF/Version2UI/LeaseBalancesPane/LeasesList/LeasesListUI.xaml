@@ -8,7 +8,8 @@
              xmlns:labl="clr-namespace:CommonTools.Lib45.TextLabels;assembly=CommonTools.Lib45"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <DataGrid DataContext="{Binding LeasesList}"
+    <DataGrid x:Name="dg" 
+              DataContext="{Binding LeasesList}"
               ItemsSource="{Binding }"
               Style="{StaticResource dgReadOnly}">
 

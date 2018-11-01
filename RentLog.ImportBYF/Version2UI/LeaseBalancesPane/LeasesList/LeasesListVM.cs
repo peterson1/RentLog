@@ -1,6 +1,7 @@
 ﻿using CommonTools.Lib11.DataStructures;
 using CommonTools.Lib45.ThreadTools;
 using PropertyChanged;
+using RentLog.DomainLib45.SoaViewers.MainWindow;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -13,6 +14,8 @@ namespace RentLog.ImportBYF.Version2UI.LeaseBalancesPane.LeasesList
         public LeasesListVM(MainWindowVM2 mainWindowVM2)
         {
             MainWindow = mainWindowVM2;
+            this.ItemOpened += (s, e) 
+                => SoaViewer.Show(e.Lease, MainWindow.AppArgs);
         }
 
 
