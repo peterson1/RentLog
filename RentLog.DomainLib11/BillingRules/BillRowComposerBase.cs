@@ -58,7 +58,7 @@ namespace RentLog.DomainLib11.BillingRules
 
             var fromCol = db.IntendedColxns[sec.Id].GetAll()
                             .Where(_ => _.Lease.Id == lse.Id
-                                && _.Actuals.For(this.BillCode).HasValue)
+                                && IsValidValue(_))
                             .Select(_ => ToPayment(_, db));
 
             var fromCas = db.CashierColxns.GetAll()
@@ -67,6 +67,14 @@ namespace RentLog.DomainLib11.BillingRules
                             .Select(_ => _.ToBillPayment());
 
             return fromCol.Concat(fromCas).ToList();
+        }
+
+
+        private bool IsValidValue(IntendedColxnDTO colxn)
+        {
+            var val = colxn.Actuals.For(this.BillCode);
+            if (!val.HasValue) return false;
+            return val.Value != 0M;
         }
 
 
