@@ -14,6 +14,9 @@ namespace RentLog.ImportBYF.Converters.IntendedColxnConverters
 {
     public class IntendedColxnConverter2 : DailyTxnConverterBase2<IntendedColxnDTO>
     {
+        private Dictionary<int, int> _secCollectors = new Dictionary<int, int>();
+
+
         public IntendedColxnConverter2(PeriodRowVM periodRowVM) : base(periodRowVM)
         {
         }
@@ -21,8 +24,15 @@ namespace RentLog.ImportBYF.Converters.IntendedColxnConverters
 
         protected override IntendedColxnDTO CastToDTO(dynamic byf)
         {
-            var lseNid   = As.ID(byf.leasenid);
+            var lseNid   = (int)As.ID(byf.leasenid);
             var rntLease = _rntCache.LeaseById(lseNid, false);
+
+            if (rntLease != null)
+            {
+                var secId = rntLease.Stall.Section.Id;
+                _secCollectors[secId] = As.ID(byf.collectornid);
+            }
+
             var actuals  = new BillAmounts
             {
                 Rent     = As.Decimal(byf.rent) + As.Decimal(byf.surcharge),
@@ -52,6 +62,12 @@ namespace RentLog.ImportBYF.Converters.IntendedColxnConverters
                 var repo = colxnsDB.IntendedColxns[secGrp.Key];
                 repo.DropAndInsert(secGrp, true, false);
             }
+
+            foreach (var kvp in _secCollectors)
+                colxnsDB.SetCollector(kvp.Key, kvp.Value);
+
+            colxnsDB.MarkAsOpened();
+            colxnsDB.MarkAsPosted("Migrator");
         }
 
 
