@@ -54,8 +54,7 @@ namespace RentLog.Tests.UncollectedsRepoTests
             var win = new MainWindowVM(dte, arg, false);
             await win.RefreshCmd.RunAsync();
             win.SectionTabs[0].Uncollecteds.Should().HaveCount(6);
-            win.SectionTabs[1].Uncollecteds.Should().HaveCount(0);
-            win.SectionTabs[2].Uncollecteds.Should().HaveCount(3);
+            win.SectionTabs[1].Uncollecteds.Should().HaveCount(3);
         }
 
 

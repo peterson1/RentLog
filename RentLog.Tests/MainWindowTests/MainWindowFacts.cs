@@ -20,7 +20,7 @@ namespace RentLog.Tests.MainWindowTests
             var dte = arg.Collections.UnclosedDate();
             var sut = new MainWindowVM(dte, arg, false);
             await sut.RefreshCmd.RunAsync();
-            sut.SectionTabs.Should().HaveCount(3);
+            sut.SectionTabs.Should().HaveCount(2);
         }
     }
 }

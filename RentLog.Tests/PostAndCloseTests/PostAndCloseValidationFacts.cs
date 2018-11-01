@@ -18,7 +18,7 @@ namespace RentLog.Tests.PostAndCloseTests
 
             await vm.RefreshCmd.RunAsync();
             vm.CanPostAndClose().Should().BeFalse();
-            vm.PostAndCloseCmd.CurrentLabel.Should().Contain("Submit");
+            vm.PostAndCloseCmd.CurrentLabel.Should().Contain("submit");
         }
     }
 }

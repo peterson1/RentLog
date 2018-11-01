@@ -33,27 +33,18 @@ namespace RentLog.Tests.CashieringVMTests
             sut.SectionTabs[0].SectionTotal.Should().Be(6_890);
             sut.SectionTabs[0].Collector.Name.Should().Be("Jomar Pasaludos");
 
-            sut.SectionTabs[1].IntendedColxns.Should().HaveCount(0);
-            sut.SectionTabs[1].IntendedColxns.TotalSum.Should().Be(0);
+            sut.SectionTabs[1].IntendedColxns.Should().HaveCount(63);
+            sut.SectionTabs[1].IntendedColxns.TotalSum.Should().Be(7_785);
             sut.SectionTabs[1].AmbulantColxns.Should().HaveCount(4);
-            sut.SectionTabs[1].AmbulantColxns.TotalSum.Should().Be(210);
-            sut.SectionTabs[1].Uncollecteds.Should().HaveCount(0);
-            sut.SectionTabs[1].NoOperations.Should().HaveCount(0);
-            sut.SectionTabs[1].SectionTotal.Should().Be(210);
+            sut.SectionTabs[1].AmbulantColxns.TotalSum.Should().Be(530);
+            sut.SectionTabs[1].Uncollecteds.Should().HaveCount(2);
+            sut.SectionTabs[1].NoOperations.Should().HaveCount(11);
+            sut.SectionTabs[1].SectionTotal.Should().Be(8_315);
             sut.SectionTabs[1].Collector.Name.Should().Be("Jomar Pasaludos");
 
-            sut.SectionTabs[2].IntendedColxns.Should().HaveCount(63);
-            sut.SectionTabs[2].IntendedColxns.TotalSum.Should().Be(7_785);
-            sut.SectionTabs[2].AmbulantColxns.Should().HaveCount(4);
-            sut.SectionTabs[2].AmbulantColxns.TotalSum.Should().Be(530);
-            sut.SectionTabs[2].Uncollecteds.Should().HaveCount(2);
-            sut.SectionTabs[2].NoOperations.Should().HaveCount(11);
-            sut.SectionTabs[2].SectionTotal.Should().Be(8_315);
-            sut.SectionTabs[2].Collector.Name.Should().Be("Jomar Pasaludos");
-
-            sut.PostAndClose.TotalCollections.Should().Be(15_831);
+            sut.PostAndClose.TotalCollections.Should().Be(15_621);
             sut.PostAndClose.TotalDeposits.Should().Be(15_831);
-            sut.PostAndClose.IsBalanced.Should().BeTrue();
+            sut.PostAndClose.IsBalanced.Should().BeFalse();
         }
 
 
@@ -79,25 +70,17 @@ namespace RentLog.Tests.CashieringVMTests
             sut.SectionTabs[0].NoOperations.Should().HaveCount(3);
             sut.SectionTabs[0].SectionTotal.Should().Be(7_466);
 
-            sut.SectionTabs[1].IntendedColxns.Should().HaveCount(0);
-            sut.SectionTabs[1].IntendedColxns.TotalSum.Should().Be(0);
-            sut.SectionTabs[1].AmbulantColxns.Should().HaveCount(4);
-            sut.SectionTabs[1].AmbulantColxns.TotalSum.Should().Be(168);
+            sut.SectionTabs[1].IntendedColxns.Should().HaveCount(67);
+            sut.SectionTabs[1].IntendedColxns.TotalSum.Should().Be(9_560);
+            sut.SectionTabs[1].AmbulantColxns.Should().HaveCount(6);
+            sut.SectionTabs[1].AmbulantColxns.TotalSum.Should().Be(585);
             sut.SectionTabs[1].Uncollecteds.Should().HaveCount(0);
-            sut.SectionTabs[1].NoOperations.Should().HaveCount(0);
-            sut.SectionTabs[1].SectionTotal.Should().Be(168);
+            sut.SectionTabs[1].NoOperations.Should().HaveCount(9);
+            sut.SectionTabs[1].SectionTotal.Should().Be(10_145);
 
-            sut.SectionTabs[2].IntendedColxns.Should().HaveCount(67);
-            sut.SectionTabs[2].IntendedColxns.TotalSum.Should().Be(9_560);
-            sut.SectionTabs[2].AmbulantColxns.Should().HaveCount(6);
-            sut.SectionTabs[2].AmbulantColxns.TotalSum.Should().Be(585);
-            sut.SectionTabs[2].Uncollecteds.Should().HaveCount(0);
-            sut.SectionTabs[2].NoOperations.Should().HaveCount(9);
-            sut.SectionTabs[2].SectionTotal.Should().Be(10_145);
-
-            sut.PostAndClose.TotalCollections.Should().Be(23_298);
+            sut.PostAndClose.TotalCollections.Should().Be(23_130);
             sut.PostAndClose.TotalDeposits.Should().Be(23_298);
-            sut.PostAndClose.IsBalanced.Should().BeTrue();
+            sut.PostAndClose.IsBalanced.Should().BeFalse();
         }
     }
 }

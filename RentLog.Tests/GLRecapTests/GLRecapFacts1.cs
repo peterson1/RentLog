@@ -40,7 +40,7 @@ namespace RentLog.Tests.GLRecapTests
             assets.TotalCredits.Should().Be(756405.14M);
 
             sut.TotalDebits .Should().Be(770000.23M);
-            sut.TotalCredits.Should().Be(770000.23M);
+            sut.TotalCredits.Should().Be(1268102.23M);
         }
 
 
