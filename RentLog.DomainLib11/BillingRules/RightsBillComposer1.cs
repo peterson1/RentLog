@@ -28,7 +28,7 @@ namespace RentLog.DomainLib11.BillingRules
                         .GetPenalties(lse, date, previousBalance);
 
                 default:
-                    throw Fault.BadArg(nameof(lse.Rent.PenaltyRule), lse.Rent.PenaltyRule);
+                    throw Fault.BadArg(nameof(lse.Rights.PenaltyRule), lse.Rights.PenaltyRule);
             }
         }
 
