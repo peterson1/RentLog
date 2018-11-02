@@ -12,6 +12,11 @@
                     Orientation="Horizontal">
             <Button Command="{Binding ToggleBtn}"
                     Content="{Binding ToggleBtn.CurrentLabel}" />
+
+            <TextBlock Text="{Binding Status}"
+                       VerticalAlignment="Center"
+                       Margin="10 0 0 0" />
+
         </StackPanel>
         <bList:LeasesListUI />
     </DockPanel>

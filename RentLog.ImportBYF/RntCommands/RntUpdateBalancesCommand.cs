@@ -7,7 +7,7 @@ namespace RentLog.ImportBYF.RntCommands
 {
     public static class RntUpdateBalancesCommand
     {
-        public static async Task UpdateRNT(this LeaseRowVM row)
+        public static async Task UpdateBalances(this LeaseRowVM row)
         {
             var mkt   = row.MainWindow.AppArgs.MarketState;
             var conv  = new BalanceAdjConverter1(row.Lease, row.MainWindow);

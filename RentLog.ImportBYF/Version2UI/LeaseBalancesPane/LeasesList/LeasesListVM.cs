@@ -2,6 +2,8 @@
 using CommonTools.Lib45.ThreadTools;
 using PropertyChanged;
 using RentLog.DomainLib45.SoaViewers.MainWindow;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -29,28 +31,45 @@ namespace RentLog.ImportBYF.Version2UI.LeaseBalancesPane.LeasesList
                              .OrderByDescending(_ => _.Id);
             var inactvs = mkt.InactiveLeases.GetAll()
                              .OrderByDescending(_ => _.Id);
-            var both    = actives.Concat(inactvs)
-                                 .Select(_ => new LeaseRowVM(_, MainWindow));
-            UIThread.Run(() => SetItems(both));
+
+            var list = actives.Concat(inactvs)
+                        .Select(_ => new LeaseRowVM(_, MainWindow));
+            //var both    = actives.Concat(inactvs).ToList();
+            //var list    = new List<LeaseRowVM>();
+            //
+            //for (int i = 0; i < both.Count; i++)
+            //    list.Add(new LeaseRowVM(i, both[i], MainWindow));
+
+            UIThread.Run(() => SetItems(list));
         }
 
 
         public async Task RefreshAll()
         {
-            foreach (var row in this)
+            var jobs = new List<Task>();
+
+            for (int i = 0; i < this.Count; i++)
+                jobs.Add(UpdateAsNeeded(this[i], i * 200));
+
+            //foreach (var job in jobs)
+            //    await job;
+            await Task.WhenAll(jobs);
+        }
+
+
+        private async Task UpdateAsNeeded(LeaseRowVM row, int delayMS)
+        {
+            await Task.Delay(delayMS);
+            await row.RefreshCmd.RunAsync();
+            if (!MainWindow.LeaseBalances.IsRunning) return;
+
+            if (!row.IsValidImport)
             {
-                if (!MainWindow.LeaseBalances.IsRunning) return;
+                await row.UpdateRntCmd.RunAsync();
                 await row.RefreshCmd.RunAsync();
-                CommandManager.InvalidateRequerySuggested();
-                if (!MainWindow.LeaseBalances.IsRunning) return;
-
-                if (row.IsValidImport) continue;
-
-                if (row.UpdateRntCmd.CanExecute(null))
-                    await row.UpdateRntCmd.RunAsync();
-
-                await Task.Delay(100);
             }
+
+            MainWindow.LeaseBalances.ShowCompleted(row);
         }
     }
 }

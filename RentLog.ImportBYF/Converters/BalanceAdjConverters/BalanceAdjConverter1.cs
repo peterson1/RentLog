@@ -87,6 +87,7 @@ namespace RentLog.ImportBYF.Converters.BalanceAdjConverters
             var start = _lse.ContractStart;
             var end   = Main.ByfServer.LastPostedDate;
             var bals  = mkt.Balances.GetRepo(_lse.Id);
+            bals.Drop();
 
             foreach (var day in start.EachDayUpTo(end))
                 bals.ProcessBalancedDay(day);

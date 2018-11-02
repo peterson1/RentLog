@@ -19,8 +19,8 @@ namespace RentLog.ImportBYF.Version2UI.LeaseBalancesPane.LeasesList
         {
             Lease        = leaseDTO;
             MainWindow   = mainWindowVM2;
-            RefreshCmd   = R2Command.Async(UpdateIfEmpty, _ => !IsBusy);
-            UpdateRntCmd = R2Command.Async(_ => this.UpdateRNT(), _ => !IsBusy, "Update RNT");
+            RefreshCmd   = R2Command.Async(LoadRntCell, _ => !IsBusy);
+            UpdateRntCmd = R2Command.Async(UpdateRntDB, _ => !IsBusy, "Update RNT");
         }
 
 
@@ -39,27 +39,27 @@ namespace RentLog.ImportBYF.Version2UI.LeaseBalancesPane.LeasesList
                                         : $"[Inactive]  {Lease}";
 
 
-        private async Task UpdateIfEmpty()
+        private async Task LoadRntCell()
         {
-            string err = null;
-            try
-            {
-                RntCell = MainWindow.GetBalances(Lease);
-                if (RntCell == null)
-                {
-                    await UpdateRntCmd.RunAsync();
-                    RntCell = MainWindow.GetBalances(Lease);
-                }
-                IsValidImport = Validate(out err);
-            }
-            catch (Exception ex)
-            {
-                err = ex.Info(true, true);
-            }
+            StartBeingBusy($"Reading RNT balances for “{Lease}” ...");
+
+            await Task.Run(() 
+                => RntCell = MainWindow.GetBalances(Lease));
+
+            IsValidImport = Validate(out string err);
+
             if (!IsValidImport || !err.IsBlank())
                 Remarks = err;
             else
                 StopBeingBusy();
+        }
+
+
+        private async Task UpdateRntDB()
+        {
+            StartBeingBusy($"Rewriting balances for “{Lease}” ...");
+            await Task.Run(() => this.UpdateBalances());
+            StopBeingBusy();
         }
 
 
