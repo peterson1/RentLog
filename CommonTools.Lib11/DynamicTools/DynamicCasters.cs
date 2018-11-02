@@ -76,7 +76,7 @@ namespace CommonTools.Lib11.DynamicTools
         {
             var str = (string)dynamic;
             if (DateTime.TryParse(str, out DateTime date))
-                return date.Date.ToLocalTime();
+                return date.Date.ToLocalTime().Date;
             else
                 throw Bad.Cast(str, date);
         }

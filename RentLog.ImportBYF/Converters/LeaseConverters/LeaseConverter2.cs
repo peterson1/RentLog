@@ -70,8 +70,8 @@ namespace RentLog.ImportBYF.Converters.LeaseConverters
         private (DateTime Start, DateTime End) GetContractDates(string periodText)
         {
             var split = periodText.SplitTrim("to");
-            return (DateTime.Parse(split[0]).ToLocalTime(),
-                    DateTime.Parse(split[1]).ToLocalTime());
+            return (DateTime.Parse(split[0]).ToLocalTime().Date,
+                    DateTime.Parse(split[1]).ToLocalTime().Date);
         }
 
 
