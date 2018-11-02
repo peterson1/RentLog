@@ -77,8 +77,10 @@ namespace RentLog.ImportBYF.Converters.BalanceAdjConverters
         {
             foreach (var adj in newRecords)
             {
-                var date = _adjDates[adj.Id];
-                var adjs = mkt.Collections.For(date).BalanceAdjs;
+                var date   = _adjDates[adj.Id];
+                var colxns = mkt.Collections.For(date)
+                          ?? mkt.Collections.CreateFor(date);
+                var adjs   = colxns.BalanceAdjs;
                 adjs.Upsert(adj);
             }
 
