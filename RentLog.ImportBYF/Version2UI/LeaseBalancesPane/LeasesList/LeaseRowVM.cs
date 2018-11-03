@@ -31,8 +31,9 @@ namespace RentLog.ImportBYF.Version2UI.LeaseBalancesPane.LeasesList
         public MainWindowVM2    MainWindow     { get; }
         public bool             IsBusy         { get; private set; }
         public BillAmounts      RntCell        { get; private set; }
-        public bool             IsValidImport  { get; private set; }
+        public bool?            IsValidImport  { get; private set; }
         public string           Remarks        { get; set; }
+        public string           Errors         { get; set; }
 
         public bool IsActive => !(Lease is InactiveLeaseDTO);
         public string CompositeLabel => IsActive ? $"{Lease}"
@@ -42,24 +43,40 @@ namespace RentLog.ImportBYF.Version2UI.LeaseBalancesPane.LeasesList
         private async Task LoadRntCell()
         {
             StartBeingBusy($"Reading RNT balances for “{Lease}” ...");
-
-            await Task.Run(() 
-                => RntCell = MainWindow.GetBalances(Lease));
-
-            IsValidImport = Validate(out string err);
-
-            if (!IsValidImport || !err.IsBlank())
-                Remarks = err;
-            else
-                StopBeingBusy();
+            await Task.Run(() =>
+            {
+                try
+                {
+                    RntCell = MainWindow.GetBalances(Lease);
+                    IsValidImport = Validate(out string err);
+                    Remarks = err;
+                }
+                catch (Exception ex)
+                {
+                    IsValidImport = false;
+                    Errors = ex.Info(true, true);
+                }
+            });
+            StopBeingBusy();
         }
 
 
         private async Task UpdateRntDB()
         {
             StartBeingBusy($"Rewriting balances for “{Lease}” ...");
-            await Task.Run(() => this.UpdateBalances());
-            StopBeingBusy();
+            await Task.Run(async () =>
+            {
+                try
+                {
+                    await this.UpdateBalances();
+                    StopBeingBusy();
+
+                }
+                catch (Exception ex)
+                {
+                    Errors = ex.Info(true, true);
+                }
+            });
         }
 
 

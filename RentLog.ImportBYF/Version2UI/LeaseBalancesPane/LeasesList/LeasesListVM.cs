@@ -1,4 +1,5 @@
 ﻿using CommonTools.Lib11.DataStructures;
+using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.ThreadTools;
 using PropertyChanged;
 using RentLog.DomainLib45.SoaViewers.MainWindow;
@@ -46,14 +47,15 @@ namespace RentLog.ImportBYF.Version2UI.LeaseBalancesPane.LeasesList
 
         public async Task RefreshAll()
         {
-            var jobs = new List<Task>();
+            //var jobs = new List<Task>();
 
-            for (int i = 0; i < this.Count; i++)
-                jobs.Add(UpdateAsNeeded(this[i], i * 200));
+            //for (int i = 0; i < this.Count; i++)
+            //    jobs.Add(UpdateAsNeeded(this[i], i * 200));
 
-            //foreach (var job in jobs)
-            //    await job;
-            await Task.WhenAll(jobs);
+            //await Task.WhenAll(jobs);
+
+            foreach (var row in this)
+                await UpdateAsNeeded(row, 0);
         }
 
 
@@ -63,10 +65,11 @@ namespace RentLog.ImportBYF.Version2UI.LeaseBalancesPane.LeasesList
             await row.RefreshCmd.RunAsync();
             if (!MainWindow.LeaseBalances.IsRunning) return;
 
-            if (!row.IsValidImport)
+            if (row.IsValidImport != true)
             {
                 await row.UpdateRntCmd.RunAsync();
-                await row.RefreshCmd.RunAsync();
+                if (row.Errors.IsBlank())
+                    await row.RefreshCmd.RunAsync();
             }
 
             MainWindow.LeaseBalances.ShowCompleted(row);

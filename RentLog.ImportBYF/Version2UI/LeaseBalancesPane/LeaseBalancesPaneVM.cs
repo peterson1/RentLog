@@ -1,4 +1,5 @@
 ﻿using CommonTools.Lib11.InputCommands;
+using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.InputCommands;
 using PropertyChanged;
 using RentLog.ImportBYF.Version2UI.LeaseBalancesPane.LeasesList;
@@ -43,7 +44,7 @@ namespace RentLog.ImportBYF.Version2UI.LeaseBalancesPane
 
         public void ShowCompleted(LeaseRowVM row)
         {
-            _bag.Add(row.IsValidImport);
+            _bag.Add(row.Errors.IsBlank());
             var done = _bag.Count;
             var guds = _bag.Count(_ => _);
             var bads = _bag.Count(_ => !_);

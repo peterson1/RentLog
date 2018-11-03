@@ -15,9 +15,14 @@
 
         <DataGrid.RowDetailsTemplate>
             <DataTemplate>
-                <TextBlock Background="LightYellow" Text="{Binding Remarks}" TextWrapping="Wrap"
-                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                           FontSize="11" />
+                <StackPanel>
+                    <TextBlock Text="{Binding Remarks}" TextWrapping="Wrap"
+                               HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                               FontSize="11" />
+                    <TextBlock Background="LightYellow" Text="{Binding Errors}" TextWrapping="Wrap"
+                               HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                               FontSize="11" />
+                </StackPanel>
             </DataTemplate>
         </DataGrid.RowDetailsTemplate>
         
@@ -57,6 +62,10 @@
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
+            
+            <DataGridTextColumn Header="valid"
+                                Binding="{Binding IsValidImport}"
+                                ElementStyle="{StaticResource colCenter}" />
         </DataGrid.Columns>
     </DataGrid>
 </UserControl>
