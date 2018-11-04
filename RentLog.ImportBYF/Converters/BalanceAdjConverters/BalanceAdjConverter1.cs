@@ -1,6 +1,6 @@
-﻿using CommonTools.Lib11.DynamicTools;
+﻿using CommonTools.Lib11.DateTimeTools;
+using CommonTools.Lib11.DynamicTools;
 using CommonTools.Lib11.ExceptionTools;
-using CommonTools.Lib11.DateTimeTools;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
@@ -87,10 +87,13 @@ namespace RentLog.ImportBYF.Converters.BalanceAdjConverters
             var start = _lse.ContractStart;
             var end   = Main.ByfServer.LastPostedDate;
             var bals  = mkt.Balances.GetRepo(_lse.Id);
-            bals.Drop();
 
             foreach (var day in start.EachDayUpTo(end))
-                bals.ProcessBalancedDay(day);
+            {
+                var recId = day.DaysSinceMin();
+                if (!bals.HasId(recId))
+                    bals.ProcessBalancedDay(day);
+            }
         }
     }
 }
