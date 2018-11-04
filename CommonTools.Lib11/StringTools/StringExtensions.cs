@@ -56,6 +56,19 @@ namespace CommonTools.Lib11.StringTools
             => text.IsBlank() ? null : text;
 
 
+        public static string JoinNonBlanks(this string separator, params string[] texts)
+        {
+            var nonBlanks = new List<string>();
+            foreach (var text in texts)
+            {
+                var trimd = text?.Trim();
+                if (!trimd.IsBlank())
+                    nonBlanks.Add(trimd);
+            }
+            return string.Join(separator, nonBlanks);
+        }
+
+
         public static bool HasText(this string lookInHere, string findThis)
         {
             var allLength = lookInHere.Length;

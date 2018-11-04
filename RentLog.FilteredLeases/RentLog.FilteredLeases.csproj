@@ -112,6 +112,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="FilteredLists\FullTenantDetails\FullTenantDetailsFilter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FilteredLists\FullTenantDetails\FullTenantDetailsTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FilteredLists\FullTenantDetails\FullTenantDetailsUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainToolbar\MainToolbarUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -146,6 +158,16 @@
     <Compile Include="FilteredLists\AllInactiveLeases\AllInactiveLeasesVM.cs" />
     <Compile Include="FilteredLists\CommonTextFilterVM.cs" />
     <Compile Include="FilteredLists\FilteredListVMBase.cs" />
+    <Compile Include="FilteredLists\FullTenantDetails\FullTenantDetailsFilter.xaml.cs">
+      <DependentUpon>FullTenantDetailsFilter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FilteredLists\FullTenantDetails\FullTenantDetailsTable.xaml.cs">
+      <DependentUpon>FullTenantDetailsTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FilteredLists\FullTenantDetails\FullTenantDetailsUI.xaml.cs">
+      <DependentUpon>FullTenantDetailsUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FilteredLists\FullTenantDetails\FullTenantDetailsVM.cs" />
     <Compile Include="FilteredLists\WithBackRentsOrRights\WithBackRentsOrRightsVM.cs" />
     <Compile Include="MainToolbar\MainToolbarUI.xaml.cs">
       <DependentUpon>MainToolbarUI.xaml</DependentUpon>

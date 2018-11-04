@@ -12,6 +12,7 @@ using RentLog.FilteredLeases.FilteredLists.WithBackRentsOrRights;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RentLog.FilteredLeases.FilteredLists.FullTenantDetails;
 
 namespace RentLog.FilteredLeases
 {
@@ -33,6 +34,7 @@ namespace RentLog.FilteredLeases
             Enlist("All Active Leases", _ => new AllActiveLeasesVM(this, _));
             Enlist("All Terminated Leases", _ => new AllInactiveLeasesVM(this, _));
             Enlist("With Backrents or Overdue Rights", _ => new WithBackRentsOrRightsVM(this, _));
+            Enlist("Full Tenant Details", _ => new FullTenantDetailsVM(this, _));
             //todo: "Leases Nearing Rights Expiry"
         }
 

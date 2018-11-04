@@ -33,10 +33,6 @@ namespace RentLog.FilteredLeases.FilteredLists
         }
 
 
-        public FilteredListVMBase() : this(null, null)
-        {
-        }
-
         public FilteredListVMBase(MainWindowVM mainWindowVM, ITenantDBsDir dir) 
             : base(null, dir, false)
         {

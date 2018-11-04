@@ -1,4 +1,5 @@
 ﻿using CommonTools.Lib11.DTOs;
+using CommonTools.Lib11.StringTools;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.Models;
 using System;
@@ -25,6 +26,10 @@ namespace RentLog.DomainLib11.ReportRows
         public string           DeactivatedBy    => Inactive?.DeactivatedBy ;
         public string           WhyInactive      => Inactive?.WhyInactive;
         public string           StatusText       => IsActive ? "Active" : "(terminated)";
+        public string           CompositeRemarks => " -- ".JoinNonBlanks(DTO.Remarks,
+                                                                         DTO.Tenant.Remarks,
+                                                                         WhyInactive);
+
 
         InactiveLeaseDTO IHasDTO<InactiveLeaseDTO>.DTO => Inactive;
     }
