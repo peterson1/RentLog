@@ -16,7 +16,7 @@ namespace RentLog.DomainLib11.StateTransitions
 
             EnqueueBalanceUpdates(jobs, balancd, dir);
 
-            jobs.Add(() => dir.AddDepositsToPassbook(balancd));
+            jobs.Add(() => dir.AddDepositsToPassbook(balancd, true));
             jobs.Add(() => colxnsDB.MarkAsOpened());
             return jobs;
         }
@@ -32,21 +32,23 @@ namespace RentLog.DomainLib11.StateTransitions
         }
 
 
-        public static void AddDepositsToPassbook(this ITenantDBsDir dir, DateTime colxnDate)
+        public static void AddDepositsToPassbook(this ITenantDBsDir dir, DateTime colxnDate, bool recomputeBalances)
         {
             var db = dir.Collections.For(colxnDate);
             if (db == null) return;
 
             var deps = db.BankDeposits.GetAll();
-            dir.UpdateAccountPassbooks(deps, colxnDate);
+            dir.UpdateAccountPassbooks(deps, colxnDate, recomputeBalances);
         }
 
 
-        public static void UpdateAccountPassbooks(this ITenantDBsDir dir, IEnumerable<BankDepositDTO> deps, DateTime colxnDate)
+        public static void UpdateAccountPassbooks(this ITenantDBsDir dir, IEnumerable<BankDepositDTO> deps, DateTime colxnDate, bool recomputeBalances)
         {
             foreach (var dep in deps)
                 dir.Passbooks.GetRepo(dep.BankAccount.Id)
                     .InsertDepositedColxn(dep, colxnDate);
+
+            if (!recomputeBalances) return;
 
             foreach (var id in deps.Select(_ => _.BankAccount.Id))
                 dir.Passbooks.GetRepo(id).RecomputeBalancesFrom(colxnDate);

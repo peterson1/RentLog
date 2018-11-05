@@ -4,6 +4,7 @@ using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.StateTransitions;
 using RentLog.ImportBYF.ByfQueries;
 using RentLog.ImportBYF.ByfServerAccess;
+using RentLog.ImportBYF.RntCommands;
 using RentLog.ImportBYF.Version2UI.TransactionDataPane.PeriodsList;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,8 @@ namespace RentLog.ImportBYF.Converters.BankDepositConverters
         protected override void ReplaceInColxnsDB(IEnumerable<BankDepositDTO> rntDTOs, ICollectionsDB colxnsDB)
         {
             colxnsDB.BankDeposits.DropAndInsert(rntDTOs, true, false);
-            _rntDir.UpdateAccountPassbooks(rntDTOs, colxnsDB.Date);
+            //_rntDir.UpdateAccountPassbooks(rntDTOs, colxnsDB.Date);
+            colxnsDB.AddDepsToPassbookIfNeeded(rntDTOs, _rntDir);
         }
     }
 }

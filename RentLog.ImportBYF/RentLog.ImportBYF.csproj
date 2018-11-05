@@ -131,6 +131,7 @@
     <Compile Include="Converters\SectionConverters\SectionConverter2.cs" />
     <Compile Include="Converters\StallConverters\StallConverter2.cs" />
     <Compile Include="Converters\TenantConverters\TenantConverter2.cs" />
+    <Compile Include="RntCommands\DepsToPassbookRemedialCmd.cs" />
     <Compile Include="RntCommands\RntUpdateBalancesCommand.cs" />
     <Compile Include="RntCommands\RntUpdateDayCommand2.cs" />
     <Compile Include="RntQueries\RntCache.cs" />

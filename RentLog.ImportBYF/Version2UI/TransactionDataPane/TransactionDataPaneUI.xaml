@@ -12,6 +12,11 @@
             <Button Command="{Binding ToggleBtn}"
                     Content="{Binding ToggleBtn.CurrentLabel}"
                     HorizontalAlignment="Left" />
+
+            <TextBlock Text="{Binding Status}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center" />
+
             <Button Command="{Binding RemediateCmd}"
                     Content="{Binding RemediateCmd.CurrentLabel}"
                     HorizontalAlignment="Right"/>
