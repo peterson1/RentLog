@@ -1,5 +1,4 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
-using CommonTools.Lib11.DTOs;
 using CommonTools.Lib11.ExceptionTools;
 using CommonTools.Lib11.JsonTools;
 using CommonTools.Lib11.StringTools;
@@ -7,7 +6,6 @@ using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace RentLog.DomainLib11.CollectionRepos
 {
@@ -20,14 +18,13 @@ namespace RentLog.DomainLib11.CollectionRepos
         private const string SEC_SNAPS_KEY = "SectionSnapshots";
         private const string COL_SNAPS_KEY = "CollectorSnapshots";
 
-        private IKeyValueStore _meta;
         private MarketStateDB  _mkt;
         private Dictionary<int, CollectorDTO> _collectorBySecID = new Dictionary<int, CollectorDTO>();
 
 
         public CollectionsDB1(DateTime date, IKeyValueStore metadataRepo, MarketStateDB marketStateDB, string databasePath)
         {
-            _meta              = metadataRepo;
+            Meta               = metadataRepo;
             _mkt               = marketStateDB;
             DatabasePath       = databasePath;
             Date               = date;
@@ -45,6 +42,7 @@ namespace RentLog.DomainLib11.CollectionRepos
 
         public string                   DatabasePath        { get; }
         public DateTime                 Date                { get; }
+        public IKeyValueStore           Meta                { get; }
         public List<SectionDTO>         SectionsSnapshot    { get; }
         public List<CollectorDTO>       CollectorsSnapshot  { get; }
         public ICashierColxnsRepo       CashierColxns       { get; set; }
@@ -58,7 +56,7 @@ namespace RentLog.DomainLib11.CollectionRepos
             if (_collectorBySecID.TryGetValue(sec.Id, out CollectorDTO cachd))
                 return cachd;
 
-            var val = _meta[string.Format(COLLECTOR_KEY, sec.Id)];
+            var val = Meta[string.Format(COLLECTOR_KEY, sec.Id)];
             if (val.IsBlank()) return null;
 
             if (!int.TryParse(val, out int id))
@@ -81,33 +79,33 @@ namespace RentLog.DomainLib11.CollectionRepos
         public void SetCollector(int sectionId, int collectorId)
         {
             var key = string.Format(COLLECTOR_KEY, sectionId);
-            _meta[key] = collectorId.ToString();
+            Meta[key] = collectorId.ToString();
         }
 
 
-        public bool   IsPosted     () => _meta.Has(POST_DATE);
-        public string PostedBy     () => _meta[POST_DATE];
-        public bool   IsOpened     () => _meta.IsTrue(IS_OPENED);
-        public void   MarkAsOpened () => _meta.SetTrue(IS_OPENED);
+        public bool   IsPosted     () => Meta.Has(POST_DATE);
+        public string PostedBy     () => Meta[POST_DATE];
+        public bool   IsOpened     () => Meta.IsTrue(IS_OPENED);
+        public void   MarkAsOpened () => Meta.SetTrue(IS_OPENED);
 
         public void MarkAsPosted(string postedBy)
-            => _meta[POST_DATE] = postedBy;
+            => Meta[POST_DATE] = postedBy;
 
 
         private List<T> LoadSnapshot<T>(string metaKey)
         {
-            var json = _meta[metaKey];
+            var json = Meta[metaKey];
             if (json.IsBlank()) return null;
             return json.ReadJson<List<T>>();
         }
 
 
         public void TakeSectionsSnapshot(List<SectionDTO> currentSections)
-            => _meta[SEC_SNAPS_KEY] = currentSections.ToJson();
+            => Meta[SEC_SNAPS_KEY] = currentSections.ToJson();
 
 
         public void TakeCollectorsSnapshot(List<CollectorDTO> currentCollectors)
-            => _meta[COL_SNAPS_KEY] = currentCollectors.ToJson();
+            => Meta[COL_SNAPS_KEY] = currentCollectors.ToJson();
 
 
         public bool HasVacantsTable(SectionDTO sec)
