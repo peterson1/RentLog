@@ -53,9 +53,17 @@ namespace CommonTools.Lib45.BaseViewModels
 
             try
             {
-                list.RemoveAll(x => !propertyGetter(x).ToLower().HasText(findThis));
+                list.RemoveAll(x => !PropertyValContains(propertyGetter, x, findThis));
             }
             catch { }
+        }
+
+
+        private static bool PropertyValContains(Func<T, string> propertyGetter, T x, string findThis)
+        {
+            var propVal = propertyGetter(x);
+            if (propVal.IsBlank()) return false;
+            return propVal.ToLower().HasText(findThis);
         }
     }
 }
