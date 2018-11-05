@@ -17,7 +17,7 @@ namespace RentLog.ImportBYF.Version2UI.TransactionDataPane
             main.ByfServer.GotMinMaxDates += (s, e) =>
             {
                 PeriodsList.FillPeriodsList(e);
-                ToggleRun();
+                //ToggleRun();
             };
         }
 
