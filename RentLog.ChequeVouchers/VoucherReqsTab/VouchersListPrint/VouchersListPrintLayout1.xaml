@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RentLog.ChequeVouchers.VoucherReqsTab.VouchersListPrint"
              Width="900">
-    <StackPanel Margin="30 40 20 50">
+    <StackPanel Margin="30 100 20 50">
         <local:VouchersListReportHeaderUI />
 
         <local:OutstandingChecksUI Margin="0 30 0 0" />
