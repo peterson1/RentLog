@@ -61,7 +61,9 @@ namespace RentLog.DomainLib45
             IsValidUser = SeatLicenser.TryGetCredentials(key, 
                 out FirebaseCredentials creds, out string err);
 
-            Credentials = creds;
+            Credentials = IsValidUser ? creds
+                        : new FirebaseCredentials
+                        { HumanName = "Anonymous", Roles = "Guest" };
 
 #if DEBUG
             //Credentials.Roles = "Cashier";
