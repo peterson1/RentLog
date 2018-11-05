@@ -21,6 +21,23 @@ namespace RentLog.FilteredLeases.FilteredLists
         public string  RightsDateFilter      { get; set; }
         public string  ProductToSellFilter   { get; set; }
         public string  RemarksFilter         { get; set; }
+        public string  StatusFilter         { get; set; }
+        public string FirstNameFilter { get; set; }
+        public string MiddleNameFilter { get; set; }
+        public string LastNameFilter { get; set; }
+        public string BirthdateFilter { get; set; }
+        public string SSSFilter { get; set; }
+        public string TINFilter { get; set; }
+        public string SpouseFilter { get; set; }
+        public string Phone1Filter { get; set; }
+        public string Phone2Filter { get; set; }
+        public string EmailFilter { get; set; }
+        public string LotNumberFilter { get; set; }
+        public string StreetFilter { get; set; }
+        public string BarangayFilter { get; set; }
+        public string MunicipalityFilter { get; set; }
+        public string ProvinceFilter { get; set; }
+        public string CompositeRemarksFilter { get; set; }
 
 
         protected override Dictionary<string, Func<LeaseBalanceRow, string>> FilterProperties => new Dictionary<string, Func<LeaseBalanceRow, string>>
@@ -39,6 +56,23 @@ namespace RentLog.FilteredLeases.FilteredLists
                 { nameof(RightsDateFilter     ), _ => _.DTO.RightsDueDate.ToString("d MMM yyyy")},
                 { nameof(ProductToSellFilter  ), _ => _.DTO.ProductToSell                       },
                 { nameof(RemarksFilter        ), _ => _.DTO.Remarks                             },
+                { nameof(StatusFilter  ), _ => _.StatusText                           },
+                { nameof(FirstNameFilter ), _ => _.DTO.Tenant.FirstName                           },
+                { nameof(MiddleNameFilter), _ => _.DTO.Tenant.MiddleName                           },
+                { nameof(LastNameFilter), _ => _.DTO.Tenant.LastName                           },
+                { nameof(BirthdateFilter), _ => _.DTO.Tenant.BirthDate.ToString("d MMM yyyy")                           },
+                { nameof(SSSFilter), _ => _.DTO.Tenant.SssNumber                         },
+                { nameof(TINFilter), _ => _.DTO.Tenant.TinNumber                         },
+                { nameof(SpouseFilter), _ => _.DTO.Tenant.SpouseName                         },
+                { nameof(Phone1Filter), _ => _.DTO.Tenant.Phone1                         },
+                { nameof(Phone2Filter), _ => _.DTO.Tenant.Phone2                         },
+                { nameof(EmailFilter), _ => _.DTO.Tenant.Email                        },
+                { nameof(LotNumberFilter), _ => _.DTO.Tenant.LotNumber                       },
+                { nameof(StreetFilter), _ => _.DTO.Tenant.StreetName                       },
+                { nameof(BarangayFilter), _ => _.DTO.Tenant.Barangay                     },
+                { nameof(MunicipalityFilter), _ => _.DTO.Tenant.Municipality                     },
+                { nameof(ProvinceFilter), _ => _.DTO.Tenant.Province                    },
+                { nameof(CompositeRemarksFilter), _ => _.CompositeRemarks                    },
         };
     }
 }
