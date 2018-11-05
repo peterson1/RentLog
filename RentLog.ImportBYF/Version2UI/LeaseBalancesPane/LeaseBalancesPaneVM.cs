@@ -23,7 +23,7 @@ namespace RentLog.ImportBYF.Version2UI.LeaseBalancesPane
             main.MasterData.OnAllLeasesMatch += (s, e) =>
             {
                 LeasesList.FillLeasesList();
-                ToggleRun();
+                //ToggleRun();
             };
         }
 
