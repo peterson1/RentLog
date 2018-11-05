@@ -1,12 +1,13 @@
 ﻿using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DataSources;
+using RentLog.DomainLib11.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace RentLog.DomainLib11.StateTransitions
 {
-    public class MarketDayOpener
+    public static class MarketDayOpener
     {
         public static List<Action> GetActions(ICollectionsDB colxnsDB, ITenantDBsDir dir)
         {
@@ -15,7 +16,7 @@ namespace RentLog.DomainLib11.StateTransitions
 
             EnqueueBalanceUpdates(jobs, balancd, dir);
 
-            jobs.Add(() => AddDepositsToPassbook(balancd, dir));
+            jobs.Add(() => dir.AddDepositsToPassbook(balancd));
             jobs.Add(() => colxnsDB.MarkAsOpened());
             return jobs;
         }
@@ -31,12 +32,18 @@ namespace RentLog.DomainLib11.StateTransitions
         }
 
 
-        private static void AddDepositsToPassbook(DateTime colxnDate, ITenantDBsDir dir)
+        public static void AddDepositsToPassbook(this ITenantDBsDir dir, DateTime colxnDate)
         {
             var db = dir.Collections.For(colxnDate);
             if (db == null) return;
 
             var deps = db.BankDeposits.GetAll();
+            dir.UpdateAccountPassbooks(deps, colxnDate);
+        }
+
+
+        public static void UpdateAccountPassbooks(this ITenantDBsDir dir, IEnumerable<BankDepositDTO> deps, DateTime colxnDate)
+        {
             foreach (var dep in deps)
                 dir.Passbooks.GetRepo(dep.BankAccount.Id)
                     .InsertDepositedColxn(dep, colxnDate);
