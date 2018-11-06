@@ -101,6 +101,7 @@
     <Compile Include="ByfQueries\ByfBankDepositQueries.cs" />
     <Compile Include="ByfQueries\ByfCache.cs" />
     <Compile Include="ByfQueries\ByfCashierColxnsQueries.cs" />
+    <Compile Include="ByfQueries\ByfCheckVouchersByDateQueries.cs" />
     <Compile Include="ByfQueries\ByfLeaseColxnsQueries.cs" />
     <Compile Include="ByfQueries\ByfAmbulantColxnsQueries.cs" />
     <Compile Include="ByfQueries\ByfOtherColxnsQueries.cs" />
@@ -135,8 +136,22 @@
     <Compile Include="RntCommands\RntUpdateBalancesCommand.cs" />
     <Compile Include="RntCommands\RntUpdateDayCommand2.cs" />
     <Compile Include="RntQueries\RntCache.cs" />
+    <Compile Include="RntQueries\RntCheckVouchersByDateQueries.cs" />
     <Compile Include="RntQueries\RntDailyTxnQuery.cs" />
     <Compile Include="RntQueries\RntLeaseBalanceQueries.cs" />
+    <Compile Include="Version2UI\CheckVouchersPane\CheckVouchersPaneUI.xaml.cs">
+      <DependentUpon>CheckVouchersPaneUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Version2UI\CheckVouchersPane\CheckVouchersPaneVM.cs" />
+    <Compile Include="Version2UI\CheckVouchersPane\CVsByDateList\CellUI.xaml.cs">
+      <DependentUpon>CellUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Version2UI\CheckVouchersPane\CVsByDateList\CVsByDateCell.cs" />
+    <Compile Include="Version2UI\CheckVouchersPane\CVsByDateList\CVsByDateListVM.cs" />
+    <Compile Include="Version2UI\CheckVouchersPane\CVsByDateList\CVsByDateRow.cs" />
+    <Compile Include="Version2UI\CheckVouchersPane\CVsByDateList\CVsByDateTable.xaml.cs">
+      <DependentUpon>CVsByDateTable.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Version2UI\LeaseBalancesPane\LeaseBalancesPaneUI.xaml.cs">
       <DependentUpon>LeaseBalancesPaneUI.xaml</DependentUpon>
     </Compile>
@@ -255,6 +270,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Version2UI\CheckVouchersPane\CheckVouchersPaneUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Version2UI\CheckVouchersPane\CVsByDateList\CellUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Version2UI\CheckVouchersPane\CVsByDateList\CVsByDateTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Version2UI\LeaseBalancesPane\LeaseBalancesPaneUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

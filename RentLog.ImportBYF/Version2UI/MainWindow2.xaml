@@ -6,6 +6,7 @@
         xmlns:mstr="clr-namespace:RentLog.ImportBYF.Version2UI.MasterDataPane"
         xmlns:txns="clr-namespace:RentLog.ImportBYF.Version2UI.TransactionDataPane"
         xmlns:bals="clr-namespace:RentLog.ImportBYF.Version2UI.LeaseBalancesPane"
+        xmlns:chks="clr-namespace:RentLog.ImportBYF.Version2UI.CheckVouchersPane"
         xmlns:local="clr-namespace:RentLog.ImportBYF.Version2UI"
         mc:Ignorable="d"
         Title="{Binding Caption}" 
@@ -28,9 +29,11 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="5" />
-                <ColumnDefinition Width="50*" />
+                <ColumnDefinition Width="30*" />
                 <ColumnDefinition Width="5" />
-                <ColumnDefinition Width="50*" />
+                <ColumnDefinition Width="30*" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="40*" />
             </Grid.ColumnDefinitions>
 
             <mstr:MasterDataPaneUI Grid.Column="0"
@@ -45,6 +48,11 @@
 
             <bals:LeaseBalancesPaneUI Grid.Column="4"
                                       DataContext="{Binding LeaseBalances}" />
+
+            <GridSplitter Grid.Column="5" Style="{StaticResource vSplit}" />
+
+            <chks:CheckVouchersPaneUI Grid.Column="6"
+                                      DataContext="{Binding CheckVouchers}" />
 
             <busy:BusyDialog Grid.ColumnSpan="5" />
         </Grid>

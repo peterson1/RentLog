@@ -1,8 +1,6 @@
 ﻿using CommonTools.Lib11.DynamicTools;
 using CommonTools.Lib11.EventHandlerTools;
 using PropertyChanged;
-using RentLog.DomainLib11.DTOs;
-using RentLog.DomainLib11.Models;
 using RentLog.ImportBYF.ByfQueries;
 using RentLog.ImportBYF.Converters.MiscellaneousConverters;
 using RentLog.ImportBYF.DailyTransactions;
@@ -98,5 +96,8 @@ namespace RentLog.ImportBYF.ByfServerAccess
 
         internal Task<List<dynamic>> GetViewsList(string viewsDisplayID)
             => Client.GetViewsList(viewsDisplayID);
+
+        internal Task<List<dynamic>> GetViewsList(string viewsDisplayID, DateTime date)
+            => Client.GetViewsList(viewsDisplayID, date);
     }
 }

@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="RentLog.ImportBYF.Version2UI.CheckVouchersPane.CVsByDateList.CellUI"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RentLog.ImportBYF.Version2UI.CheckVouchersPane.CVsByDateList"
+             xmlns:labl="clr-namespace:CommonTools.Lib45.TextLabels;assembly=CommonTools.Lib45"
+             mc:Ignorable="d" 
+             VerticalAlignment="Center"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="labl:DualText">
+            <Setter Property="Text1Width" Value="80" />
+            <Setter Property="Text1Size" Value="10" />
+            <Setter Property="Text2Size" Value="10" />
+        </Style>
+    </UserControl.Resources>
+    <StackPanel>
+        <labl:DualText Text1="active heads"    Text2="{Binding ActivesHeadCount    , StringFormat=N0}" />
+        <labl:DualText Text1="active children" Text2="{Binding ActivesChildCount   , StringFormat=N0}" />
+        <labl:DualText Text1="active total"    Text2="{Binding ActivesTotalAmount  , StringFormat=N2}" />
+        <labl:DualText Text1="inactv heads"    Text2="{Binding InactivesHeadCount  , StringFormat=N0}" />
+        <labl:DualText Text1="inactv children" Text2="{Binding InactivesChildCount , StringFormat=N0}" />
+        <labl:DualText Text1="inactv total"    Text2="{Binding InactivesTotalAmount, StringFormat=N2}" />
+        <labl:DualText Text1="check heads"     Text2="{Binding ChecksHeadCount     , StringFormat=N0}" />
+        <labl:DualText Text1="check children"  Text2="{Binding ChecksChildCount    , StringFormat=N0}" />
+        <labl:DualText Text1="check total"     Text2="{Binding ChecksTotalAmount   , StringFormat=N2}" />
+    </StackPanel>
+</UserControl>
