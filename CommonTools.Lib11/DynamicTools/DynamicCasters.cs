@@ -1,4 +1,5 @@
-﻿using CommonTools.Lib11.ExceptionTools;
+﻿using CommonTools.Lib11.DateTimeTools;
+using CommonTools.Lib11.ExceptionTools;
 using CommonTools.Lib11.StringTools;
 using System;
 
@@ -80,5 +81,9 @@ namespace CommonTools.Lib11.DynamicTools
             else
                 throw Bad.Cast(str, date);
         }
+
+
+        public static int DateOffset(dynamic dynamic)
+            => ((DateTime)As.Date(dynamic)).DaysSinceMin();
     }
 }

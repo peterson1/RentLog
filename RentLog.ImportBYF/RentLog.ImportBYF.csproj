@@ -105,6 +105,7 @@
     <Compile Include="ByfQueries\ByfLeaseColxnsQueries.cs" />
     <Compile Include="ByfQueries\ByfAmbulantColxnsQueries.cs" />
     <Compile Include="ByfQueries\ByfOtherColxnsQueries.cs" />
+    <Compile Include="ByfQueries\ByfSavedPayeesQuery.cs" />
     <Compile Include="ByfQueries\ByfTaxonomyTermsQueries.cs" />
     <Compile Include="ByfServerAccess\ByfClient1.cs" />
     <Compile Include="ByfServerAccess\ByfServerVM.cs" />

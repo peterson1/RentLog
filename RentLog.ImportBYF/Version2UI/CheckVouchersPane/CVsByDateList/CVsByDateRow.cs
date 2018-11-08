@@ -55,7 +55,7 @@ namespace RentLog.ImportBYF.Version2UI.CheckVouchersPane.CVsByDateList
 
         private async Task FillByfCell()
         {
-            ByfCell = await MainWindow.ByfServer.QueryCheckVouchers(Date);
+            ByfCell = await MainWindow.QueryCheckVouchers(Date);
         }
 
 
