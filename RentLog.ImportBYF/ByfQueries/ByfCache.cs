@@ -1,5 +1,5 @@
 ﻿using RentLog.ImportBYF.ByfServerAccess;
-using System;
+using RentLog.ImportBYF.Converters.BankAccountConverters;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -13,6 +13,8 @@ namespace RentLog.ImportBYF.ByfQueries
 
         public string  CacheDir  { get; private set; }
         public bool    IsFilled  { get; private set; }
+
+        public Dictionary<int, int> BankAcctByGlAcct { get; private set; }
 
 
         //public void RefillFromCache(string cacheDir)
@@ -31,10 +33,11 @@ namespace RentLog.ImportBYF.ByfQueries
 
         public async Task RefillFromServer(ByfServerVM byfServer)
         {
-            var client = byfServer.Client;
-            _terms     = await client.GetTaxonomyDictionary();
-            _payees    = await client.GetPayeesDictionary();
-            IsFilled   = true;
+            var client       = byfServer.Client;
+            _terms           = await client.GetTaxonomyDictionary();
+            _payees          = await client.GetPayeesDictionary();
+            BankAcctByGlAcct = await client.GetBankAcctsByGLAcctDict();
+            IsFilled         = true;
         }
 
 

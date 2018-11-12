@@ -1,4 +1,6 @@
-﻿using CommonTools.Lib11.DynamicTools;
+﻿using CommonTools.Lib11.CollectionTools;
+using CommonTools.Lib11.DynamicTools;
+using CommonTools.Lib11.ExceptionTools;
 using CommonTools.Lib11.StringTools;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.Models;
@@ -49,16 +51,23 @@ namespace RentLog.ImportBYF.ByfQueries
                 headrsDict[tupl.HeaderId].Allocations.Add(tupl.Allocation);
 
             foreach (var hdr in headrsDict.Values)
-                hdr.BankAccountId = GetBankAcctId(hdr);
+                hdr.BankAccountId = GetBankAcctId(hdr, main);
 
-            throw new NotImplementedException();
+            return headrsDict.Values.ToList();
         }
 
 
-        private static int GetBankAcctId(FundRequestDTO hdr)
+        private static int GetBankAcctId(FundRequestDTO hdr, MainWindowVM2 main)
         {
-            //todo: set Bank Acct ID
-            throw new NotImplementedException();
+            var cache = main.ByfCache;
+            foreach (var row in hdr.Allocations)
+            {
+                if (row.IsDebit) continue;
+                var glAcct     = row.Account.Id;
+                var bnkAcctId  = cache.BankAcctByGlAcct.GetOrDefault(glAcct);
+                if (bnkAcctId != 0) return bnkAcctId;
+            }
+            throw Bad.Data($"No valid bank acct row from voucher items [hdr:{hdr.Id}].");
         }
 
 
@@ -114,7 +123,8 @@ namespace RentLog.ImportBYF.ByfQueries
         {
             var list = new List<ChequeVoucherDTO>();
 
-            return list;
+            throw new NotImplementedException();
+            //return list;
         }
 
 
