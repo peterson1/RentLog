@@ -3,6 +3,7 @@ using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.InputCommands;
 using PropertyChanged;
 using RentLog.ImportBYF.Version2UI.LeaseBalancesPane.LeasesList;
+using System;
 using System.Collections.Concurrent;
 using System.Linq;
 
@@ -51,6 +52,7 @@ namespace RentLog.ImportBYF.Version2UI.LeaseBalancesPane
             var totl = LeasesList.Count;
             Status = $"Fail: {bads:N0}  :  "
                    + $"Success: {guds:N0}/{done:N0}  :  "
+                   + $"({DateTime.Now:h:mm})  "
                    + $"Done: {done:N0}/{totl:N0} : {row.Lease}";
         }
     }
