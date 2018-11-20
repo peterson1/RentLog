@@ -14,13 +14,19 @@ namespace CommonTools.Lib11.DynamicTools
         }
 
 
-        public static int ID(dynamic dynamic)
+        public static int? ID_(dynamic dynamic)
         {
             var str = (string)dynamic;
             if (int.TryParse(str, out int id))
                 return id;
             else
-                throw Bad.Cast(str, id);
+                return null;
+        }
+
+        public static int ID(dynamic dynamic)
+        {
+            var num = (int?)ID_(dynamic);
+            return num ?? throw Bad.Cast((string)dynamic, num);
         }
 
 
@@ -73,13 +79,20 @@ namespace CommonTools.Lib11.DynamicTools
         }
 
 
-        public static DateTime Date(dynamic dynamic)
+        public static DateTime? Date_(dynamic dynamic)
         {
             var str = (string)dynamic;
             if (DateTime.TryParse(str, out DateTime date))
                 return date.Date.ToLocalTime().Date;
             else
-                throw Bad.Cast(str, date);
+                return null;
+        }
+
+
+        public static DateTime Date(dynamic dynamic)
+        {
+            var dte = (DateTime?)Date_(dynamic);
+            return dte ?? throw Bad.Cast((string)dynamic, dte);
         }
 
 

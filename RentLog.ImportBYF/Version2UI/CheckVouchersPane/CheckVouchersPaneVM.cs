@@ -2,11 +2,6 @@
 using CommonTools.Lib45.InputCommands;
 using PropertyChanged;
 using RentLog.ImportBYF.Version2UI.CheckVouchersPane.CVsByDateList;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RentLog.ImportBYF.Version2UI.CheckVouchersPane
 {
@@ -29,7 +24,7 @@ namespace RentLog.ImportBYF.Version2UI.CheckVouchersPane
 
         private async void ToggleRun()
         {
-            Status = "";
+            Status    = "";
             IsRunning = !IsRunning;
             ToggleCmd.SetLabel(IsRunning ? "Stop" : "Run");
             if (IsRunning) await Rows.RefreshAll();

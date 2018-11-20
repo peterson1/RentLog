@@ -43,13 +43,13 @@ namespace RentLog.ImportBYF.Version2UI.CheckVouchersPane.CVsByDateList
                 await FillByfCell();
                 await FillRntCell();
                 CompareByfVsRnt();
-                StopBeingBusy();
             }
             catch (Exception ex)
             {
                 IsValidImport = false;
                 Errors        = ex.Info(true, true);
             }
+            StopBeingBusy();
         }
 
 

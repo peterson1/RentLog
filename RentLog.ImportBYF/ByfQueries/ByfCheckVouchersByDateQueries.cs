@@ -28,8 +28,16 @@ namespace RentLog.ImportBYF.ByfQueries
             await Task.WhenAll(headrJob, itemsJob);
             var byfHeadrs = await headrJob;
             var byfItems  = await itemsJob;
-            var fundReqs  = CastAsFundReqs(byfHeadrs, byfItems, main);
-            var checks    = CastAsChecks  (byfHeadrs, byfItems);
+
+            var allByfs   = CastAsAllByfs (byfHeadrs, byfItems, main);
+            //var fundReqs  = CastAsFundReqs(byfHeadrs, byfItems, main);
+            //var checks    = CastAsChecks  (byfHeadrs, byfItems, fundReqs);
+            var fundReqs = allByfs.Where  (_ => _.ChequeNumber == 0)
+                                  .Select (_ => _.Request)
+                                  .ToList ();
+
+            var checks   = allByfs.Where  (_ => _.ChequeNumber != 0)
+                                  .ToList ();
 
             return new CVsByDateCell
             {
@@ -40,18 +48,18 @@ namespace RentLog.ImportBYF.ByfQueries
         }
 
 
-        private static List<FundRequestDTO> CastAsFundReqs(List<dynamic> byfHeadrs, List<dynamic> byfItems, MainWindowVM2 main)
+        private static List<ChequeVoucherDTO> CastAsAllByfs(List<dynamic> byfHeadrs, List<dynamic> byfItems, MainWindowVM2 main)
         {
-            var headrsDict = byfHeadrs.Select(_ => (FundRequestDTO)CastAsFundReqHeader(_, main.ByfCache))
+            var headrsDict = byfHeadrs.Select(_ => (ChequeVoucherDTO)CastAsCheckDTO(_, main.ByfCache))
                                       .ToDictionary(_ => _.Id);
 
             var itemsList  = byfItems.Select(_ => CastAsAllocation(_, main.RntCache)).ToList();
 
             foreach ((int HeaderId, AccountAllocation Allocation) tupl in itemsList)
-                headrsDict[tupl.HeaderId].Allocations.Add(tupl.Allocation);
+                headrsDict[tupl.HeaderId].Request.Allocations.Add(tupl.Allocation);
 
             foreach (var hdr in headrsDict.Values)
-                hdr.BankAccountId = GetBankAcctId(hdr, main);
+                hdr.Request.BankAccountId = GetBankAcctId(hdr.Request, main);
 
             return headrsDict.Values.ToList();
         }
@@ -76,17 +84,18 @@ namespace RentLog.ImportBYF.ByfQueries
             var hdrId    = As.ID(byf.parentnid);
             var isCredit = (int)As.ID(byf.cr_dr) == 1;
             var absAmt   = (decimal)As.Decimal(byf.amount);
+            var glAcctId = As.ID(byf.glaccountnid);
             return (hdrId, new AccountAllocation
             {
                 SubAmount = absAmt * (isCredit ? 1M : -1M),
-                Account   = cache.GLAcctById(byf.glaccountnid)
+                Account   = cache.GLAcctById(glAcctId)
             });
         }
 
 
-        private static FundRequestDTO CastAsFundReqHeader(dynamic byf, ByfCache cache)
+        private static ChequeVoucherDTO CastAsCheckDTO(dynamic byf, ByfCache cache)
         {
-            var rnt = new FundRequestDTO
+            var req = new FundRequestDTO
             {
                 Id           = As.ID(byf.nid),
                 Amount       = As.Decimal_(byf.checkamountactual),
@@ -99,10 +108,19 @@ namespace RentLog.ImportBYF.ByfQueries
                 Allocations  = new List<AccountAllocation>()
             };
 
-            if (rnt.Payee.IsBlank())
-                rnt.Payee = cache.PayeeById(As.ID(byf.savedpayeenid));
+            if (req.Payee.IsBlank())
+                req.Payee = cache.PayeeById(As.ID(byf.savedpayeenid));
 
-            return rnt;
+            return new ChequeVoucherDTO
+            {
+                Id           = req.Id,
+                Request      = req,
+                ChequeDate   = As.Date_(byf.checkdate) ?? DateTime.MinValue,
+                ChequeNumber = As.ID_(byf.checknumber) ?? 0,
+                IssuedDate   = As.Date_(byf.issueddate),
+                IssuedTo     = As.Text(byf.issuedto),
+                Remarks      = req.Remarks,
+            };
         }
 
 
@@ -111,7 +129,8 @@ namespace RentLog.ImportBYF.ByfQueries
             if (HasValue(byf.canceleddate)) return ChequeState.Cancelled;
             if (HasValue(byf.cleareddate )) return ChequeState.Cleared;
             if (HasValue(byf.issueddate  )) return ChequeState.Issued;
-            return ChequeState.Prepared;
+            if (HasValue(byf.checkdate   )) return ChequeState.Prepared;
+            return null;
         }
 
 
@@ -119,30 +138,30 @@ namespace RentLog.ImportBYF.ByfQueries
             => !((string)As.Text(byfVal)).IsBlank();
 
 
-        private static List<ChequeVoucherDTO> CastAsChecks(List<dynamic> byfHeadrs, List<dynamic> byfItems)
-        {
-            var list = new List<ChequeVoucherDTO>();
+        //private static List<ChequeVoucherDTO> CastAsChecks(
+        //    List<dynamic> byfHeadrs, List<dynamic> byfItems, 
+        //    List<FundRequestDTO> fundReqs)
+        //{
+        //    var list = new List<ChequeVoucherDTO>();
+        //    foreach (var req in fundReqs)
+        //    {
+        //        var chq = 
+        //    }
+        //    return list;
+        //}
 
-            throw new NotImplementedException();
-            //return list;
-        }
 
-
-        private static List<FundRequestDTO> GetActiveRequests(List<FundRequestDTO> fundReqs)
-        {
-            throw new NotImplementedException();
-        }
+        private static List<FundRequestDTO> GetActiveRequests(List<FundRequestDTO> fundReqs) 
+            => fundReqs.Where(_ => !_.ChequeStatus.HasValue).ToList();
 
 
         private static List<FundRequestDTO> GetInactiveRequests(List<FundRequestDTO> fundReqs)
-        {
-            throw new NotImplementedException();
-        }
+            => fundReqs.Where(_ => _.ChequeStatus.HasValue).ToList();
 
 
         private static List<ChequeVoucherDTO> GetRequestedChecks(List<ChequeVoucherDTO> checks)
-        {
-            throw new NotImplementedException();
-        }
+            => checks.Where(_ => _.Request              != null 
+                              && _.Request.ChequeStatus != ChequeState.Cancelled)
+                     .ToList();
     }
 }
