@@ -17,7 +17,7 @@ namespace RentLog.ImportBYF.RntQueries
             {
                 ActiveRequests   = GetActiveRequests  (db, date),
                 InactiveRequests = GetInactiveRequests(db, date),
-                RequestedChecks  = GetPreparedCheques (db, date),
+                PreparedCheques  = GetPreparedCheques (db, date),
             };
         }
 

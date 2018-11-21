@@ -29,9 +29,13 @@ namespace CommonTools.Lib11.ExceptionTools
             => BadKeyException.For<T>(expectedKey, actualKey, keyDescription);
 
 
-        public static InvalidCastException BadCast<T>(string textToParse, T targetType)
+
+        public static InvalidCastException BadCast<T>(string textToParse)
             => new InvalidCastException(
                 $"Non-convertible to ‹{typeof(T).Name}›: “{textToParse}”.");
+
+        public static InvalidCastException BadCast<T>(string textToParse, T targetType)
+            => BadCast<T>(textToParse);
 
 
         public static IntrusionAttemptException Intruder()

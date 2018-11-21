@@ -43,7 +43,7 @@ namespace RentLog.ImportBYF.ByfQueries
             {
                 ActiveRequests   = GetActiveRequests  (fundReqs),
                 InactiveRequests = GetInactiveRequests(fundReqs),
-                RequestedChecks  = GetRequestedChecks (checks),
+                PreparedCheques  = GetRequestedChecks (checks),
             };
         }
 
@@ -56,12 +56,17 @@ namespace RentLog.ImportBYF.ByfQueries
             var itemsList  = byfItems.Select(_ => CastAsAllocation(_, main.RntCache)).ToList();
 
             foreach ((int HeaderId, AccountAllocation Allocation) tupl in itemsList)
+            {
+                if (tupl.HeaderId == 0) continue;
                 headrsDict[tupl.HeaderId].Request.Allocations.Add(tupl.Allocation);
+            }
 
             foreach (var hdr in headrsDict.Values)
                 hdr.Request.BankAccountId = GetBankAcctId(hdr.Request, main);
 
-            return headrsDict.Values.ToList();
+            return headrsDict.Values
+                             .Where  (_ => _.Request.BankAccountId != 0)
+                             .ToList ();
         }
 
 
@@ -70,18 +75,19 @@ namespace RentLog.ImportBYF.ByfQueries
             var cache = main.ByfCache;
             foreach (var row in hdr.Allocations)
             {
-                if (row.IsDebit) continue;
+                //if (row.IsDebit) continue;
                 var glAcct     = row.Account.Id;
                 var bnkAcctId  = cache.BankAcctByGlAcct.GetOrDefault(glAcct);
                 if (bnkAcctId != 0) return bnkAcctId;
             }
-            throw Bad.Data($"No valid bank acct row from voucher items [hdr:{hdr.Id}].");
+            //throw Bad.Data($"No valid bank acct row from voucher items [hdr:{hdr.Id}].");
+            return 0;
         }
 
 
         private static (int HeaderId, AccountAllocation Allocation) CastAsAllocation(dynamic byf, RntCache cache)
         {
-            var hdrId    = As.ID(byf.parentnid);
+            var hdrId    = As.ID_(byf.parentnid) ?? 0;
             var isCredit = (int)As.ID(byf.cr_dr) == 1;
             var absAmt   = (decimal)As.Decimal(byf.amount);
             var glAcctId = As.ID(byf.glaccountnid);
@@ -99,7 +105,7 @@ namespace RentLog.ImportBYF.ByfQueries
             {
                 Id           = As.ID(byf.nid),
                 Amount       = As.Decimal_(byf.checkamountactual),
-                SerialNum    = As.ID(byf.serial),
+                SerialNum    = As.ID_(byf.serial) ?? 0,
                 DateOffset   = As.DateOffset(byf.requestdate),
                 Payee        = (string)As.Text(byf.adhocpayee),
                 Purpose      = As.Text(byf.description),

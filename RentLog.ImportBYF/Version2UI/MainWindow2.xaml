@@ -29,11 +29,11 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="5" />
-                <ColumnDefinition Width="30*" />
+                <ColumnDefinition Width="20*" />
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="30*" />
                 <ColumnDefinition Width="5" />
-                <ColumnDefinition Width="40*" />
+                <ColumnDefinition Width="50*" />
             </Grid.ColumnDefinitions>
 
             <mstr:MasterDataPaneUI Grid.Column="0"

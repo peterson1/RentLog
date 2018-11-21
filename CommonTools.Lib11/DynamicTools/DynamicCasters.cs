@@ -22,22 +22,9 @@ namespace CommonTools.Lib11.DynamicTools
             else
                 return null;
         }
-
         public static int ID(dynamic dynamic)
-        {
-            var num = (int?)ID_(dynamic);
-            return num ?? throw Bad.Cast((string)dynamic, num);
-        }
-
-
-        public static decimal Decimal(dynamic dynamic)
-        {
-            var str = (string)dynamic;
-            if (decimal.TryParse(str, out decimal num))
-                return num;
-            else
-                throw Bad.Cast(str, num);
-        }
+            => (int?)ID_(dynamic) 
+            ?? throw Bad.Cast<int>((string)dynamic);
 
 
         public static decimal? Decimal_(dynamic dynamic)
@@ -48,6 +35,9 @@ namespace CommonTools.Lib11.DynamicTools
             else
                 return null;
         }
+        public static decimal Decimal(dynamic dynamic) 
+            => (decimal?)Decimal_(dynamic) 
+            ?? throw Bad.Cast<decimal>((string)dynamic);
 
 
         public static decimal DecimalOrZero(dynamic dynamic)
@@ -74,7 +64,7 @@ namespace CommonTools.Lib11.DynamicTools
                 case "f":
                 case "false": return false;
 
-                default: throw Bad.Cast(str, true);
+                default: throw Bad.Cast<bool>(str);
             }
         }
 
@@ -92,7 +82,7 @@ namespace CommonTools.Lib11.DynamicTools
         public static DateTime Date(dynamic dynamic)
         {
             var dte = (DateTime?)Date_(dynamic);
-            return dte ?? throw Bad.Cast((string)dynamic, dte);
+            return dte ?? throw Bad.Cast<DateTime>((string)dynamic);
         }
 
 

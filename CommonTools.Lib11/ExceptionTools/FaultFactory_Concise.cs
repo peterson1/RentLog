@@ -17,6 +17,9 @@ namespace CommonTools.Lib11.ExceptionTools
         public static BadKeyException Key<T>(string expectedKey, string actualKey, string keyDescription = "Key")
             => Fault.BadKey<T>(expectedKey, actualKey, keyDescription);
 
+        public static InvalidCastException Cast<T>(string textToParse)
+            => Fault.BadCast<T>(textToParse);
+
         public static InvalidCastException Cast<T>(string textToParse, T targetType)
             => Fault.BadCast<T>(textToParse, targetType);
 

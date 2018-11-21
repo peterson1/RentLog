@@ -135,6 +135,7 @@
     <Compile Include="Converters\TenantConverters\TenantConverter2.cs" />
     <Compile Include="RntCommands\DepsToPassbookRemedialCmd.cs" />
     <Compile Include="RntCommands\RntUpdateBalancesCommand.cs" />
+    <Compile Include="RntCommands\RntUpdateCheckVouchersCommand.cs" />
     <Compile Include="RntCommands\RntUpdateDayCommand2.cs" />
     <Compile Include="RntQueries\RntCache.cs" />
     <Compile Include="RntQueries\RntCheckVouchersByDateQueries.cs" />

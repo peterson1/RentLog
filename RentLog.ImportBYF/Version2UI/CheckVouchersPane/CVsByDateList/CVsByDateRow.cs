@@ -3,6 +3,7 @@ using CommonTools.Lib11.InputCommands;
 using CommonTools.Lib45.InputCommands;
 using PropertyChanged;
 using RentLog.ImportBYF.ByfQueries;
+using RentLog.ImportBYF.RntCommands;
 using RentLog.ImportBYF.RntQueries;
 using System;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace RentLog.ImportBYF.Version2UI.CheckVouchersPane.CVsByDateList
             Date         = date;
             MainWindow   = mainWindowVM2;
             RefreshCmd   = R2Command.Async(FillBothCells, _ => !IsBusy);
-            UpdateRntCmd = R2Command.Async(UpdateRnt, _ => CanUpdateRnt(), "Update RNT");
+            UpdateRntCmd = R2Command.Async(UpdateRnt, _ => CanUpdateRnt(), "Import");
         }
 
 
@@ -72,6 +73,7 @@ namespace RentLog.ImportBYF.Version2UI.CheckVouchersPane.CVsByDateList
             if (ByfCell == null) return false;
             if (!ByfCell.IsQueried) return false;
             if (!MainWindow.ByfCache.IsFilled) return false;
+            if (IsValidImport == true) return false;
             return true;
         }
 
@@ -81,21 +83,16 @@ namespace RentLog.ImportBYF.Version2UI.CheckVouchersPane.CVsByDateList
             StartBeingBusy("Updating local Rnt DB ...");
             try
             {
-                await Task.Run(() => WriteToRntDB());
+                await Task.Run(() => this.UpdateCheckVouchers());
                 await FillRntCell();
                 CompareByfVsRnt();
-                StopBeingBusy();
             }
             catch (Exception ex)
             {
+                IsValidImport = false;
                 Errors = ex.Info(true, true);
             }
-        }
-
-
-        private void WriteToRntDB()
-        {
-            throw new NotImplementedException();
+            StopBeingBusy();
         }
 
 

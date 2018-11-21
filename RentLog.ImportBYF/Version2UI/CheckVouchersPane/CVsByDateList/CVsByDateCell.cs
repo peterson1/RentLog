@@ -8,7 +8,7 @@ namespace RentLog.ImportBYF.Version2UI.CheckVouchersPane.CVsByDateList
     {
         public List<FundRequestDTO>    ActiveRequests    { get; set; }
         public List<FundRequestDTO>    InactiveRequests  { get; set; }
-        public List<ChequeVoucherDTO>  RequestedChecks   { get; set; }
+        public List<ChequeVoucherDTO>  PreparedCheques   { get; set; }
         
         public bool     IsQueried            => ActiveRequests != null;
 
@@ -18,9 +18,9 @@ namespace RentLog.ImportBYF.Version2UI.CheckVouchersPane.CVsByDateList
         public int?     InactivesHeadCount   => InactiveRequests?.Count;
         public int?     InactivesChildCount  => InactiveRequests?.Sum(_ => _.Allocations.Count);
         public decimal? InactivesTotalAmount => InactiveRequests?.Sum(_ => _.Amount ?? 0);
-        public int?     ChecksHeadCount      => RequestedChecks?.Count;
-        public int?     ChecksChildCount     => RequestedChecks?.Sum(_ => _.Request.Allocations.Count);
-        public decimal? ChecksTotalAmount    => RequestedChecks?.Sum(_ => _.Request.Amount ?? 0);
+        public int?     ChecksHeadCount      => PreparedCheques?.Count;
+        public int?     ChecksChildCount     => PreparedCheques?.Sum(_ => _.Request.Allocations.Count);
+        public decimal? ChecksTotalAmount    => PreparedCheques?.Sum(_ => _.Request.Amount ?? 0);
 
 
         public bool Matches(CVsByDateCell othr, out string whyNot)

@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RentLog.ImportBYF.Version2UI.CheckVouchersPane.CVsByDateList"
              xmlns:butns="clr-namespace:CommonTools.Lib45.StyledButtons;assembly=CommonTools.Lib45"
-            mc:Ignorable="d" 
+             xmlns:labl="clr-namespace:CommonTools.Lib45.TextLabels;assembly=CommonTools.Lib45"
+             mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DataGrid DataContext="{Binding Rows}"
               ItemsSource="{Binding }"
@@ -21,24 +22,36 @@
                     </StackPanel.Resources>
                     <TextBlock Text="{Binding Status}" />
                     <TextBlock Text="{Binding WhyInvalid}" />
-                    <!--<TextBlock Text="{Binding Errors}" />-->
+                    <TextBlock Text="{Binding Errors}" />
                 </StackPanel>
             </DataTemplate>
         </DataGrid.RowDetailsTemplate>
 
         <DataGrid.Columns>
             <DataGridTemplateColumn>
+                <!--<DataGridTemplateColumn.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="ToolTip" Value="{Binding Errors}" />
+                        <Setter Property="ToolTipService.ShowDuration" Value="2147483647" />
+                    </Style>
+                </DataGridTemplateColumn.CellStyle>-->
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <butns:SimpleRefreshButton />
+                        <StackPanel>
+                            <butns:SimpleRefreshButton />
+                            <TextBlock Text="{Binding Date, StringFormat=d MMM yyyy}" />
+                            <!--<labl:DualText Text1="valid" Text2="{Binding IsValidImport}" />-->
+                            <Button Command="{Binding UpdateRntCmd}"
+                                    Content="{Binding UpdateRntCmd.CurrentLabel}" />
+                        </StackPanel>
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
-            <DataGridTextColumn Header="date"
+            <!--<DataGridTextColumn Header="date"
                                 Binding="{Binding Date, StringFormat=d MMM yyyy}"
                                 ElementStyle="{StaticResource colSmallWrapCenter}"
-                                Width="60" />
-
+                                Width="60" />-->
+            
             <DataGridTemplateColumn Header="BYF">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
@@ -66,9 +79,6 @@
                 </DataGridTextColumn.CellStyle>
             </DataGridTextColumn>
 
-            <!--<DataGridTextColumn Header="error"
-                                Binding="{Binding Errors}"
-                                ElementStyle="{StaticResource colSmallWrapLeft}" />-->
         </DataGrid.Columns>
     </DataGrid>
 </UserControl>
