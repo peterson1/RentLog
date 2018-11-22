@@ -162,11 +162,13 @@ namespace RentLog.ImportBYF.ByfQueries
 
 
         private static List<FundRequestDTO> GetInactiveRequests(List<FundRequestDTO> fundReqs)
-            => fundReqs.Where(_ => _.ChequeStatus.HasValue).ToList();
+            => fundReqs.Where(_ => _.ChequeStatus == ChequeState.Cleared 
+                                || _.ChequeStatus == ChequeState.Cancelled).ToList();
 
 
         private static List<ChequeVoucherDTO> GetRequestedChecks(List<ChequeVoucherDTO> checks)
-            => checks.Where(_ => _.Request              != null 
+            => checks.Where(_ => _.Request              != null
+                              && _.Request.ChequeStatus != ChequeState.Cleared
                               && _.Request.ChequeStatus != ChequeState.Cancelled)
                      .ToList();
     }

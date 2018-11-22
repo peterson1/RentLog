@@ -16,6 +16,12 @@ namespace RentLog.ImportBYF.RntCommands
 
             db.PreparedCheques.Delete(row.ByfCell.PreparedCheques);
             db.PreparedCheques.Insert(row.ByfCell.PreparedCheques, true);
+
+            //todo: insert cleared check to passbook
+            foreach (var req in collection)
+            {
+
+            }
         }
     }
 }
