@@ -6,6 +6,7 @@ using RentLog.ImportBYF.ByfQueries;
 using RentLog.ImportBYF.RntCommands;
 using RentLog.ImportBYF.RntQueries;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace RentLog.ImportBYF.Version2UI.CheckVouchersPane.CVsByDateList
@@ -41,9 +42,9 @@ namespace RentLog.ImportBYF.Version2UI.CheckVouchersPane.CVsByDateList
             StartBeingBusy("Querying both sources ...");
             try
             {
-                await FillByfCell();
-                await FillRntCell();
-                CompareByfVsRnt();
+                await FillByfCell ();
+                await FillRntCell ();
+                CompareByfVsRnt   ();
             }
             catch (Exception ex)
             {

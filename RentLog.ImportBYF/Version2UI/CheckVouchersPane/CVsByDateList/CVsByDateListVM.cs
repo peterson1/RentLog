@@ -34,7 +34,8 @@ namespace RentLog.ImportBYF.Version2UI.CheckVouchersPane.CVsByDateList
         public Task RefreshAll() => ProcessEachRow(this);
 
         public Task RefreshAllReversed() => ProcessEachRow
-            (this.OrderBy(_ => _.Date));
+            (this.Where   (_ => _.Date.Year >= 2015)
+                 .OrderBy (_ => _.Date));
 
 
         private async Task ProcessEachRow(IEnumerable<CVsByDateRow> rows)

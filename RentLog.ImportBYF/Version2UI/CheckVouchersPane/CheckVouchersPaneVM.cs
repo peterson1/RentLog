@@ -16,10 +16,11 @@ namespace RentLog.ImportBYF.Version2UI.CheckVouchersPane
         }
 
 
-        public CVsByDateListVM  Rows       { get; }
-        public bool             IsRunning  { get; private set; }
-        public IR2Command       ToggleCmd  { get; }
-        public string           Status     { get; set; }
+        public CVsByDateListVM  Rows        { get; }
+        public bool             IsRunning   { get; private set; }
+        public IR2Command       ToggleCmd   { get; }
+        public string           Status      { get; set; }
+        public bool             IsReversed  { get; set; }
 
 
         private async void ToggleRun()
@@ -27,7 +28,12 @@ namespace RentLog.ImportBYF.Version2UI.CheckVouchersPane
             Status    = "";
             IsRunning = !IsRunning;
             ToggleCmd.SetLabel(IsRunning ? "Stop" : "Run");
-            if (IsRunning) await Rows.RefreshAll();
+            if (!IsRunning) return;
+
+            if (IsReversed)
+                await Rows.RefreshAllReversed();
+            else
+                await Rows.RefreshAll();
         }
     }
 }
