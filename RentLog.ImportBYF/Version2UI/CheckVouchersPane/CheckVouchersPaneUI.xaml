@@ -11,6 +11,10 @@
         <StackPanel DockPanel.Dock="Top" 
                     Margin="20 10 20 10"
                     Orientation="Horizontal">
+
+            <Label Content="is reversed" />
+            <CheckBox IsChecked="{Binding IsReversed}" />
+
             <Button Command="{Binding ToggleCmd}"
                     Content="{Binding ToggleCmd.CurrentLabel}" />
 

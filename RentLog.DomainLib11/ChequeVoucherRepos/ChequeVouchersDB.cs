@@ -45,7 +45,7 @@ namespace RentLog.DomainLib11.ChequeVoucherRepos
         private FundRequestDTO ToInactive(FundRequestDTO orig)
         {
             var inactv = orig.ShallowClone<FundRequestDTO>();
-            inactv.Id = 0;
+            inactv.Id  = 0;
             return inactv;
         }
 

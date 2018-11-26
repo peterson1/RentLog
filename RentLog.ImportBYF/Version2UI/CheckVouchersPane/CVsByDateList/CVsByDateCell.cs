@@ -7,17 +7,17 @@ namespace RentLog.ImportBYF.Version2UI.CheckVouchersPane.CVsByDateList
     public class CVsByDateCell
     {
         public List<FundRequestDTO>    ActiveRequests    { get; set; }
-        public List<FundRequestDTO>    InactiveRequests  { get; set; }
+        public List<ChequeVoucherDTO>  InactiveRequests  { get; set; }
         public List<ChequeVoucherDTO>  PreparedCheques   { get; set; }
-        
+
         public bool     IsQueried            => ActiveRequests != null;
 
         public int?     ActivesHeadCount     => ActiveRequests?.Count;
         public int?     ActivesChildCount    => ActiveRequests?.Sum(_ => _.Allocations.Count);
         public decimal? ActivesTotalAmount   => ActiveRequests?.Sum(_ => _.Amount ?? 0);
         public int?     InactivesHeadCount   => InactiveRequests?.Count;
-        public int?     InactivesChildCount  => InactiveRequests?.Sum(_ => _.Allocations.Count);
-        public decimal? InactivesTotalAmount => InactiveRequests?.Sum(_ => _.Amount ?? 0);
+        public int?     InactivesChildCount  => InactiveRequests?.Sum(_ => _.Request.Allocations.Count);
+        public decimal? InactivesTotalAmount => InactiveRequests?.Sum(_ => _.Request.Amount ?? 0);
         public int?     ChecksHeadCount      => PreparedCheques?.Count;
         public int?     ChecksChildCount     => PreparedCheques?.Sum(_ => _.Request.Allocations.Count);
         public decimal? ChecksTotalAmount    => PreparedCheques?.Sum(_ => _.Request.Amount ?? 0);

@@ -1,5 +1,6 @@
 ﻿using RentLog.ImportBYF.ByfServerAccess;
 using RentLog.ImportBYF.Converters.BankAccountConverters;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -14,7 +15,8 @@ namespace RentLog.ImportBYF.ByfQueries
         public string  CacheDir  { get; private set; }
         public bool    IsFilled  { get; private set; }
 
-        public Dictionary<int, int> BankAcctByGlAcct { get; private set; }
+        public Dictionary<int, int>      BankAcctByGlAcct { get; private set; }
+        public Dictionary<int, DateTime> ClearedDatesById { get; } = new Dictionary<int, DateTime>();
 
 
         //public void RefillFromCache(string cacheDir)

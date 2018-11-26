@@ -32,18 +32,18 @@ namespace RentLog.ImportBYF.ByfQueries
             var allByfs   = CastAsAllByfs (byfHeadrs, byfItems, main);
             //var fundReqs  = CastAsFundReqs(byfHeadrs, byfItems, main);
             //var checks    = CastAsChecks  (byfHeadrs, byfItems, fundReqs);
-            var fundReqs = allByfs.Where  (_ => _.ChequeNumber == 0)
-                                  .Select (_ => _.Request)
-                                  .ToList ();
+            var fundReqs  = allByfs.Where  (_ => _.ChequeNumber == 0)
+                                   .Select (_ => _.Request)
+                                   .ToList ();
 
-            var checks   = allByfs.Where  (_ => _.ChequeNumber != 0)
-                                  .ToList ();
+            var prepareds = allByfs.Where  (_ => _.ChequeNumber != 0)
+                                   .ToList ();
 
             return new CVsByDateCell
             {
-                ActiveRequests   = GetActiveRequests  (fundReqs),
-                InactiveRequests = GetInactiveRequests(fundReqs),
-                PreparedCheques  = GetRequestedChecks (checks),
+                ActiveRequests   = GetActiveRequests   (fundReqs),
+                InactiveRequests = GetInactiveRequests (allByfs),
+                PreparedCheques  = GetRequestedChecks  (prepareds),
             };
         }
 
@@ -114,6 +114,10 @@ namespace RentLog.ImportBYF.ByfQueries
                 Allocations  = new List<AccountAllocation>()
             };
 
+            var cleared = (DateTime?)As.Date_(byf.cleareddate);
+            if (cleared.HasValue)
+                cache.ClearedDatesById[req.Id] = cleared.Value;
+
             if (req.Payee.IsBlank())
                 req.Payee = cache.PayeeById(As.ID(byf.savedpayeenid));
 
@@ -161,9 +165,9 @@ namespace RentLog.ImportBYF.ByfQueries
             => fundReqs.Where(_ => !_.ChequeStatus.HasValue).ToList();
 
 
-        private static List<FundRequestDTO> GetInactiveRequests(List<FundRequestDTO> fundReqs)
-            => fundReqs.Where(_ => _.ChequeStatus == ChequeState.Cleared 
-                                || _.ChequeStatus == ChequeState.Cancelled).ToList();
+        private static List<ChequeVoucherDTO> GetInactiveRequests(List<ChequeVoucherDTO> checks)
+            => checks.Where(_ => _.Request.ChequeStatus == ChequeState.Cleared 
+                              || _.Request.ChequeStatus == ChequeState.Cancelled).ToList();
 
 
         private static List<ChequeVoucherDTO> GetRequestedChecks(List<ChequeVoucherDTO> checks)

@@ -28,9 +28,10 @@ namespace RentLog.ImportBYF.RntQueries
                  .ToList();
 
 
-        private static List<FundRequestDTO> GetInactiveRequests(ChequeVouchersDB db, DateTime date)
+        private static List<ChequeVoucherDTO> GetInactiveRequests(ChequeVouchersDB db, DateTime date)
             => db.InactiveRequests.GetAll()
                  .Where  (_ => _.RequestDate == date)
+                 .Select (_ => new ChequeVoucherDTO { Request = _ })
                  .ToList ();
 
 
