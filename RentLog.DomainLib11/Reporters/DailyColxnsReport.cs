@@ -56,7 +56,11 @@ namespace RentLog.DomainLib11.Reporters
             this.Clear();
 
             foreach (var sec in dir.MarketState.Sections.GetAll())
-                this.Add(new SectionColxnsRow(sec, Date, dir));
+            {
+                var row = new SectionColxnsRow(sec, Date, dir);
+                if (row.Total != 0)
+                    this.Add(row);
+            }
 
             this.Add(new OfficeColxnsRow(Date, dir));
         }

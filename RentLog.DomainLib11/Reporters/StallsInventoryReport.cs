@@ -13,7 +13,11 @@ namespace RentLog.DomainLib11.Reporters
             var sections = colxns.SectionsSnapshot ?? mkt.Sections.GetAll();
 
             foreach (var sec in sections)
-                this.Add(new StallsInventoryRow(sec, colxns));
+            {
+                var row = new StallsInventoryRow(sec, colxns);
+                if (row.TotalCount > 0)
+                    this.Add(row);
+            }
 
             this.SetSummary(new StallsInventoryTotal(this));
         }
