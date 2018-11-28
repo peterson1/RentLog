@@ -12,6 +12,8 @@ namespace RentLog.DomainLib11.PassbookRepos
         void  InsertDepositedColxn  (BankDepositDTO bankDeposit, DateTime colxnDate);
         void  RecomputeBalancesFrom (DateTime date);
 
+        PassbookRowDTO  FindByDocRefId  (int docRefId, DateTime transactionDate);
+
         List<PassbookRowDTO> RowsFor (DateTime dateTime);
         List<PassbookRowDTO> RowsFor (DateTime startDate, DateTime endDate);
     }

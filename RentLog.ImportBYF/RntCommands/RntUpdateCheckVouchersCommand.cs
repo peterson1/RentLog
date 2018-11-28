@@ -24,7 +24,6 @@ namespace RentLog.ImportBYF.RntCommands
             db.PreparedCheques.Delete(row.ByfCell.PreparedCheques);
             db.PreparedCheques.Insert(row.ByfCell.PreparedCheques, true);
 
-            //todo: insert cleared check to passbook
             foreach (var chk in row.ByfCell.InactiveRequests)
             {
                 if (!cache.ClearedDatesById.TryGetValue(chk.Id, 
@@ -32,7 +31,9 @@ namespace RentLog.ImportBYF.RntCommands
 
                 if (chk.Request.ChequeStatus != ChequeState.Cleared) continue;
 
-                var repo = pbk.GetRepo(chk.Request.BankAccountId);
+                var repo   = pbk.GetRepo(chk.Request.BankAccountId);
+                var match  = repo.FindByDocRefId(chk.Id, cleared);
+                if (match != null) repo.Delete(match);
                 repo.InsertClearedCheque(chk, cleared);
             }
         }

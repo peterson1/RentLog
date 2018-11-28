@@ -19,6 +19,7 @@ namespace RentLog.DatabaseLib.PassbookRowsRepository
         protected override void EnsureIndeces(LiteCollection<PassbookRowDTO> coll)
         {
             coll.EnsureIndex(_ => _.DateOffset, false);
+            coll.EnsureIndex(_ => _.DocRefId  , false);
         }
     }
 }

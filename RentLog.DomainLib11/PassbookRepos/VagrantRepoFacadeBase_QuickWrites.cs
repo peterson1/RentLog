@@ -5,6 +5,7 @@ using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.StateTransitions;
 using RentLog.DomainLib11.Validations;
 using System;
+using System.Linq;
 
 namespace RentLog.DomainLib11.PassbookRepos
 {
@@ -69,5 +70,9 @@ namespace RentLog.DomainLib11.PassbookRepos
             if (!ok) throw new Exception("IPassbookRowsRepo.Delete returned False");
             return ok;
         }
+
+
+        public PassbookRowDTO FindByDocRefId(int docRefId, DateTime transactionDate)
+            => FindRepo(transactionDate).Find(_ => _.DocRefId == docRefId).FirstOrDefault();
     }
 }
