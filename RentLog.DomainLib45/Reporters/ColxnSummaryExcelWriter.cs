@@ -25,8 +25,9 @@ namespace RentLog.DomainLib45.Reporters
 
         public ColxnSummaryExcelWriter(ColxnSummaryReport colxnSummaryReport)
         {
-            _src = colxnSummaryReport;
             _xl  = new CellWriter1ByRow("Collections_Summary");
+            _src = colxnSummaryReport;
+            _src.RemoveZeroSections();
 
             WriteTitles();
             writeDatesColumn();
@@ -98,8 +99,13 @@ namespace RentLog.DomainLib45.Reporters
             _xl.MoveTo(N1_ROW, null);
             foreach (var row in _src)
             {
-                var colxn = row.Single(_ => _.Section.Id == secID);
-                var val   = getter(colxn);
+                var colxn = row.SingleOrDefault(_ => _.Section.Id == secID);
+                if (colxn == null)
+                {
+                    _xl.WriteNumber(null);
+                    continue;
+                }
+                var val = getter(colxn);
                 _xl.WriteNumber(val);
             }
 

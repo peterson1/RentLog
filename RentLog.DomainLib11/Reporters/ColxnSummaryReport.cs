@@ -26,14 +26,29 @@ namespace RentLog.DomainLib11.Reporters
         public string    Title      { get; set; } = "Collection Summary Report";
 
         public Dictionary<int, CollectionAmounts> SectionTotals { get; } = new Dictionary<int, CollectionAmounts>();
-        public Dictionary<int, decimal>           OtherTotals   { get; } = new Dictionary<int, decimal>();
-        public Dictionary<int, string>            GLAccounts    { get; } = new Dictionary<int, string>();
-        public Dictionary<int, string>            Sections      { get; } = new Dictionary<int, string>();
+
+
+        public Dictionary<int, decimal>   OtherTotals   { get; } = new Dictionary<int, decimal>();
+        public Dictionary<int, string>    GLAccounts    { get; } = new Dictionary<int, string>();
+        public Dictionary<int, string>    Sections      { get; } = new Dictionary<int, string>();
 
         public string   BranchName      { get; private set; }
         public string   DateRangeText    => $"{StartDate.ToString(LONG_FMT)}  to  {EndDate.ToString(LONG_FMT)}";
         public decimal  TotalCollections => this.Sum(_ => _.CollectionsSum);
         public decimal  TotalDeposits    => this.Sum(_ => _.DepositsSum);
+
+
+        public void RemoveZeroSections()
+        {
+            var zeroSecs = SectionTotals.Where (_ => _.Value.Total == 0)
+                                        .Select(_ => _.Key).ToList();
+
+            foreach (var secId in zeroSecs)
+            {
+                Sections     .Remove(secId);
+                SectionTotals.Remove(secId);
+            }
+        }
 
 
         private DateTime LimitToPostedDate(DateTime endDate, ITenantDBsDir tenantDBsDir)
@@ -80,11 +95,11 @@ namespace RentLog.DomainLib11.Reporters
         private CollectionAmounts GetCollectionAmounts(int sectionId)
             => new CollectionAmounts
             {
-                Rent     = this.Sum(_ => _.Single(x => x.Section.Id == sectionId).Rent    ),
-                Rights   = this.Sum(_ => _.Single(x => x.Section.Id == sectionId).Rights  ),
-                Electric = this.Sum(_ => _.Single(x => x.Section.Id == sectionId).Electric),
-                Water    = this.Sum(_ => _.Single(x => x.Section.Id == sectionId).Water   ),
-                Ambulant = this.Sum(_ => _.Single(x => x.Section.Id == sectionId).Ambulant),
+                Rent     = this.Sum(_ => _.SingleOrDefault(x => x.Section.Id == sectionId)?.Rent    ),
+                Rights   = this.Sum(_ => _.SingleOrDefault(x => x.Section.Id == sectionId)?.Rights  ),
+                Electric = this.Sum(_ => _.SingleOrDefault(x => x.Section.Id == sectionId)?.Electric),
+                Water    = this.Sum(_ => _.SingleOrDefault(x => x.Section.Id == sectionId)?.Water   ),
+                Ambulant = this.Sum(_ => _.SingleOrDefault(x => x.Section.Id == sectionId)?.Ambulant),
             };
 
 
