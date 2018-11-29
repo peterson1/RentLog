@@ -58,5 +58,19 @@ namespace RentLog.DomainLib11.AdHocJobs
             var rows  = repo.Find(_ => _.Id < minId);
             repo.Delete(rows);
         }
+
+
+        public static void SetSectionID(ITenantDBsDir dir)
+        {
+            var activs = dir.MarketState.ActiveLeases.GetAll();
+            foreach (var lse in activs)
+                lse.SectionID = lse.Stall.Section.Id;
+            dir.MarketState.ActiveLeases.DropAndInsert(activs, true, false);
+
+            var inactvs = dir.MarketState.InactiveLeases.GetAll();
+            foreach (var lse in inactvs)
+                lse.SectionID = lse.Stall.Section.Id;
+            dir.MarketState.InactiveLeases.DropAndInsert(inactvs, true, false);
+        }
     }
 }

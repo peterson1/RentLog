@@ -75,7 +75,7 @@ namespace RentLog.LeasesCrud.MainToolbar
 
         private Action GetAdHocJob(out string desc)
         {
-            desc = "AddCollector.DefaultRecords";
+            desc = "ForAllLeases.SetSectionID";
 
             // multi-job parallel
             //var jobs = ForAllLeases.RecomputeAllBalances(_args);
@@ -96,7 +96,7 @@ namespace RentLog.LeasesCrud.MainToolbar
             //};
 
             // solo task job
-            return () => AddCollector.DefaultRecords(15, _args);
+            return () => ForAllLeases.SetSectionID(_args);
         }
     }
 }
