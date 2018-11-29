@@ -6,24 +6,24 @@ using Xunit;
 namespace RentLog.Tests.LeasesTests
 {
     [Trait("Active Leases Repo", "Sample Dir")]
-    public class ActiveLeasesRepoReaderFacts
+    public class InactiveLeasesRepoReaderFacts
     {
         [Fact(DisplayName = "Find by ID includes Section object")]
         public void FindbyIDIncludesSectionobject()
         {
-            var arg = SampleDir.Lease197();
-            var sut = arg.MarketState.ActiveLeases;
-            var rec = sut.Find(10, true);
+            var arg = SampleDir.Aug27_GRY();
+            var sut = arg.MarketState.InactiveLeases;
+            var rec = sut.Find(16, true);
             rec.Stall.Section.Should().NotBeNull();
-            rec.Stall.Section.Name.Should().Be("WET");
+            rec.Stall.Section.Name.Should().Be("DRY");
         }
 
 
         [Fact(DisplayName = "GetAll includes Section object")]
         public void GetAllIncludesSectionobject()
         {
-            var arg = SampleDir.Lease197();
-            var sut = arg.MarketState.ActiveLeases;
+            var arg = SampleDir.Aug27_GRY();
+            var sut = arg.MarketState.InactiveLeases;
             var all = sut.GetAll();
             foreach (var rec in all)
             {
@@ -37,10 +37,10 @@ namespace RentLog.Tests.LeasesTests
         public void BySectionfiltersbySecID()
         {
             var arg = SampleDir.Aug27_GRY();
-            var sut = arg.MarketState.ActiveLeases;
+            var sut = arg.MarketState.InactiveLeases;
             var res = sut.BySection(2); //DRY section
 
-            res.Count.Should().Be(30);
+            res.Count.Should().Be(65);
         }
     }
 }

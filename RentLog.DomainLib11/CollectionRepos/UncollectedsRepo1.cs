@@ -121,15 +121,12 @@ namespace RentLog.DomainLib11.CollectionRepos
 
 
         private List<LeaseDTO> GetActiveLeases()
-            => _dir.MarketState.ActiveLeases.GetAll()
-                   .Where(_ => _.Stall.Section.Id == _sec.Id)
-                   .ToList();
+            => _dir.MarketState.ActiveLeases.BySection(_sec.Id);
 
 
         private List<LeaseDTO> GetInactiveLeases()
             => _dir.MarketState
-                   .InactiveLeases.GetAll()
-                   .Where(_ => _.Stall.Section.Id == _sec.Id)
+                   .InactiveLeases.BySection(_sec.Id)
                    .Select(_ => _ as LeaseDTO)
                    .ToList();
     }

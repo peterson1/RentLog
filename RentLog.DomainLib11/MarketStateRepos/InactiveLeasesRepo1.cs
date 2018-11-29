@@ -1,6 +1,7 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
 using CommonTools.Lib11.ExceptionTools;
 using RentLog.DomainLib11.DTOs;
+using System.Collections.Generic;
 
 namespace RentLog.DomainLib11.MarketStateRepos
 {
@@ -9,6 +10,10 @@ namespace RentLog.DomainLib11.MarketStateRepos
         public InactiveLeasesRepo1(ISimpleRepo<InactiveLeaseDTO> simpleRepo, MarketStateDB marketStateDB) : base(simpleRepo, marketStateDB)
         {
         }
+
+
+        public List<InactiveLeaseDTO> BySection(int sectionId)
+            => _repo.Find(_ => _.Stall.Section.Id == sectionId);
 
 
         protected override void ValidateBeforeInsert(InactiveLeaseDTO lse)

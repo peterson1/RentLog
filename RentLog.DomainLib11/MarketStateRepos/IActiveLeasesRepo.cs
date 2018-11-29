@@ -7,5 +7,6 @@ namespace RentLog.DomainLib11.MarketStateRepos
     public interface IActiveLeasesRepo : ISimpleRepo<LeaseDTO>
     {
         Dictionary<int, LeaseDTO> StallsLookup();
+        List<LeaseDTO>  BySection  (int sectionId);
     }
 }

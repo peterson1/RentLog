@@ -111,6 +111,7 @@
     <Compile Include="LeasesTests\ActiveLeasesRepoReaderFacts.cs" />
     <Compile Include="LeasesTests\ActiveLeasesRepoValidationFacts.cs" />
     <Compile Include="LeasesTests\ActiveLeasesRepoWriterFacts.cs" />
+    <Compile Include="LeasesTests\InactiveLeasesRepoReaderFacts.cs" />
     <Compile Include="LeasesTests\InactiveLeasesRepoWriterFacts.cs" />
     <Compile Include="LeasesTests\LeaseCrudWalkthrough.cs" />
     <Compile Include="MainWindowTests\MainWindowFacts.cs" />
