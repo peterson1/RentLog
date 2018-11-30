@@ -3,10 +3,8 @@ using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.FileSystemTools;
 using CommonTools.Lib45.LiteDbTools;
 using RentLog.DatabaseLib.DailyColxnsRepository;
-using RentLog.DomainLib11.BalanceRepos;
 using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DataSources;
-using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
 using System;
 using System.Collections.Generic;
@@ -114,7 +112,7 @@ namespace RentLog.DatabaseLib.DatabaseFinders
             foreach (var sec in _mkt.Sections.GetAll())
             {
                 var colxn = new UncollectedsCollection(sec, db);
-                var repo  = new UncollectedsRepo1(sec, date, colxn, _dir);
+                var repo  = new UncollectedsRepo1(sec, date, colxn, _dir, null);//todo: actual instead of null
                 dict.Add(sec.Id, repo);
             }
         }
