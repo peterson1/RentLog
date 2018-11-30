@@ -1,8 +1,9 @@
 ﻿using CommonTools.Lib11.JsonTools;
+using CommonTools.Lib45.FileSystemTools;
 using System.IO;
 using System.Text;
 
-namespace CommonTools.Lib45.FileSystemTools
+namespace CommonTools.Lib45.JsonTools
 {
     public class JsonFileReader
     {

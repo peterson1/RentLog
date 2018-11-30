@@ -137,8 +137,8 @@
     <Compile Include="FileSystemTools\CurrentExeTools.cs" />
     <Compile Include="FileSystemTools\FileChangeWatcher1.cs" />
     <Compile Include="FileSystemTools\FilePathExtensions.cs" />
-    <Compile Include="FileSystemTools\JsonFileReader.cs" />
-    <Compile Include="FileSystemTools\JsonFileWriter.cs" />
+    <Compile Include="JsonTools\JsonFileReader.cs" />
+    <Compile Include="JsonTools\JsonFileWriter.cs" />
     <Compile Include="FileSystemTools\ReverseLineReader.cs" />
     <Compile Include="FileSystemTools\SpecialFolderExtensions.cs" />
     <Compile Include="FileSystemTools\TemporaryFileTools.cs" />
@@ -178,6 +178,7 @@
       <DependentUpon>PopUpInputStringWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="InputExtensions\KeyExtensions.cs" />
+    <Compile Include="JsonTools\TempJsonCache.cs" />
     <Compile Include="LicenseTools\SeatLicenser.cs" />
     <Compile Include="LiteDbTools\CorruptedTablesRemover.cs" />
     <Compile Include="LiteDbTools\MetadataCollection.cs" />

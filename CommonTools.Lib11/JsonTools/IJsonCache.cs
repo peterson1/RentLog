@@ -1,6 +1,6 @@
-﻿namespace CommonTools.Lib11.FileSystemTools
+﻿namespace CommonTools.Lib11.JsonTools
 {
-    public interface IDiskCache
+    public interface IJsonCache
     {
         void Put   <T>(string key, T content);
         T    Get   <T>(string key);
