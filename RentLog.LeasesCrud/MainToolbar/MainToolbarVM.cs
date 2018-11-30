@@ -1,6 +1,4 @@
-﻿using CommonTools.Lib11.DateTimeTools;
-using CommonTools.Lib11.InputCommands;
-using CommonTools.Lib11.StringTools;
+﻿using CommonTools.Lib11.InputCommands;
 using CommonTools.Lib45.ExcelTools;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.PrintTools;
@@ -83,10 +81,15 @@ namespace RentLog.LeasesCrud.MainToolbar
 
         private Action GetAdHocJob(out string desc)
         {
-            desc = "null";
+            desc = "ForInactiveLeases.RebuildSoA";
+
+            // solo task job
+            //return () => ForAllLeases.SetSectionID(_args);
+            
+            // multi-job
+            var jobs = ForInactiveLeases.RebuildSoA(_args);
 
             // multi-job parallel
-            //var jobs = ForAllLeases.RecomputeAllBalances(_args);
             //return jobs.AsParallelJob((ok, not, total) =>
             //{
             //    var left = total - (ok + not);
@@ -95,17 +98,13 @@ namespace RentLog.LeasesCrud.MainToolbar
             //                 + L.f + $"total: {total}"
             //                 + L.f + $"left: {left}");
             //});
-            
-            // multi-job serial
-            //return () =>
-            //{
-            //    foreach (var job in jobs)
-            //        job.Invoke();
-            //};
 
-            // solo task job
-            //return () => ForAllLeases.SetSectionID(_args);
-            return null;
+            // multi-job serial
+            return () =>
+            {
+                foreach (var job in jobs)
+                    job.Invoke();
+            };
         }
     }
 }
