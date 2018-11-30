@@ -17,10 +17,10 @@ namespace RentLog.DomainLib11.MarketStateRepos
 
 
         public List<LeaseDTO> BySection(int sectionId)
-            //=> _repo.Find(_ => _.Stall.Section.Id == sectionId);
-            => _repo.GetAll ()
-                    .Where  (_ => _.Stall.Section.Id == sectionId)
-                    .ToList ();
+            => _repo.Find(_ => _.SectionID == sectionId);
+            //=> _repo.GetAll ()
+            //        .Where  (_ => _.Stall.Section.Id == sectionId)
+            //        .ToList ();
 
 
         public Dictionary<int, LeaseDTO> StallsLookup()

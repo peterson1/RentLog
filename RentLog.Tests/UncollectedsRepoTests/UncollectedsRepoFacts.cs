@@ -48,13 +48,13 @@ namespace RentLog.Tests.UncollectedsRepoTests
         [Fact(DisplayName = "Infer Uncollecteds")]
         public async Task TestMethod00004()
         {
-            var arg = SampleDir.Jun16_GRY();
+            var arg = SampleDir.Nov29_BIG();
             arg.Credentials.Roles = "Cashier";
             var dte = arg.Collections.UnclosedDate();
             var win = new MainWindowVM(dte, arg, false);
             await win.RefreshCmd.RunAsync();
-            win.SectionTabs[0].Uncollecteds.Should().HaveCount(6);
-            win.SectionTabs[1].Uncollecteds.Should().HaveCount(3);
+            win.SectionTabs[0].Uncollecteds.Should().HaveCount(11);
+            win.SectionTabs[1].Uncollecteds.Should().HaveCount(0);
         }
 
 

@@ -36,11 +36,11 @@ namespace RentLog.Tests.LeasesTests
         [Fact(DisplayName = "BySection filters by SecID")]
         public void BySectionfiltersbySecID()
         {
-            var arg = SampleDir.Aug27_GRY();
+            var arg = SampleDir.Nov29_BIG();
             var sut = arg.MarketState.ActiveLeases;
             var res = sut.BySection(2); //DRY section
 
-            res.Count.Should().Be(30);
+            res.Count.Should().Be(71);
         }
     }
 }

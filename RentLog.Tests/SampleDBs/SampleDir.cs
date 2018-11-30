@@ -11,6 +11,7 @@
         internal const string JUL15_F_MEY     = "2018-07-15 F_MEY";
         internal const string JUL21_NO_UNCOL  = "2018-07-21 F_MEY no uncollecteds";
         internal const string AUG27_F_GRY     = "2018-08-27 F_GRY";
+        internal const string NOV29_F_BIG     = "2018-11-29 F_BIG";
 
         internal static SampleArgs Lease197      () => GetArgsFor("2018-05-12 Lease 197 - DRY 008", "Supervisor");
         internal static SampleArgs May19_GRY     () => GetArgsFor("2018-05-19 F_GRY", "Supervisor");
@@ -23,6 +24,7 @@
         internal static SampleArgs Jul9_GRY_Open () => GetArgsFor(JUL09_GRY_OPEN, "Supervisor");
         internal static SampleArgs Jul21_NoUncol () => GetArgsFor(JUL21_NO_UNCOL, "Supervisor");
         internal static SampleArgs Aug27_GRY     () => GetArgsFor(AUG27_F_GRY, "Supervisor");
+        internal static SampleArgs Nov29_BIG     () => GetArgsFor(NOV29_F_BIG, "Supervisor");
 
 
         private static SampleArgs GetArgsFor(string dirName, string roles)

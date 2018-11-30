@@ -18,6 +18,12 @@ namespace RentLog.DatabaseLib.LeasesRepository
         }
 
 
+        protected override void EnsureIndeces(LiteCollection<InactiveLeaseDTO> coll)
+        {
+            coll.EnsureIndex(_ => _.SectionID, false);
+        }
+
+
         public override LiteCollection<InactiveLeaseDTO> GetCollection(LiteDatabase db)
             => db.GetCollection<InactiveLeaseDTO>(COLXN_NAME)
                     .Include(_ => _.Stall)

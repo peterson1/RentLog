@@ -13,7 +13,7 @@ namespace RentLog.DomainLib11.MarketStateRepos
 
 
         public List<InactiveLeaseDTO> BySection(int sectionId)
-            => _repo.Find(_ => _.Stall.Section.Id == sectionId);
+            => _repo.Find(_ => _.SectionID == sectionId);
 
 
         protected override void ValidateBeforeInsert(InactiveLeaseDTO lse)
