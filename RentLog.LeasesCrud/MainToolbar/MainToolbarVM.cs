@@ -83,7 +83,7 @@ namespace RentLog.LeasesCrud.MainToolbar
 
         private Action GetAdHocJob(out string desc)
         {
-            desc = "ForAllLeases.SetSectionID";
+            desc = "null";
 
             // multi-job parallel
             //var jobs = ForAllLeases.RecomputeAllBalances(_args);
@@ -104,8 +104,8 @@ namespace RentLog.LeasesCrud.MainToolbar
             //};
 
             // solo task job
-            return () => ForAllLeases.SetSectionID(_args);
-            //return null;
+            //return () => ForAllLeases.SetSectionID(_args);
+            return null;
         }
     }
 }

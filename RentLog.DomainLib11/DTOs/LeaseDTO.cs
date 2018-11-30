@@ -14,10 +14,10 @@ namespace RentLog.DomainLib11.DTOs
         public RentParams    Rent                  { get; set; }
         public RightsParams  Rights                { get; set; }
         public string        ProductToSell         { get; set; }
-        public int           SectionID             { get; set; }
+        //public int           SectionID             { get; set; }
 
 
-        //public int        SectionID         => Stall?.Section?.Id ?? 0;
+        public int        SectionID         => Stall?.Section?.Id ?? 0;
         public string     TenantAndStall    => $"{Tenant} : {Stall}";
         public DateTime   FirstRentDueDate  => ContractStart.AddDays(Rent?.GracePeriodDays ?? 0);
         public DateTime   RightsDueDate     => ContractStart.AddDays(Rights?.SettlementDays ?? 0);
