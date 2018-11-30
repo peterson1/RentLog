@@ -54,9 +54,17 @@ namespace RentLog.LeasesCrud.MainToolbar
             => _main.CurrentTable.ExportToExcel();
 
 
-        public void UpdateAll() 
-            => Overdues = _args.Balances.TotalOverdues();
-
+        public void UpdateAll()
+        {
+            try
+            {
+                Overdues = _args.Balances.TotalOverdues();
+            }
+            catch (Exception ex)
+            {
+                Alert.Show(ex, "Getting total overdues");
+            }
+        }
 
         private void RunAdHocTask()
         {
@@ -75,7 +83,7 @@ namespace RentLog.LeasesCrud.MainToolbar
 
         private Action GetAdHocJob(out string desc)
         {
-            desc = "null";
+            desc = "ForAllLeases.SetSectionID";
 
             // multi-job parallel
             //var jobs = ForAllLeases.RecomputeAllBalances(_args);
@@ -96,8 +104,8 @@ namespace RentLog.LeasesCrud.MainToolbar
             //};
 
             // solo task job
-            //return () => ForAllLeases.SetSectionID(_args);
-            return null;
+            return () => ForAllLeases.SetSectionID(_args);
+            //return null;
         }
     }
 }

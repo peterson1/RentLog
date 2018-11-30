@@ -1,5 +1,6 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
 using CommonTools.Lib45.BaseViewModels;
+using CommonTools.Lib45.ThreadTools;
 using PropertyChanged;
 using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.DTOs;
@@ -7,6 +8,7 @@ using RentLog.DomainLib11.ReportRows;
 using RentLog.DomainLib45;
 using RentLog.DomainLib45.SoaViewers.MainWindow;
 using RentLog.LeasesCrud.LeaseCRUD;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -35,7 +37,16 @@ namespace RentLog.LeasesCrud.LeasesList
         protected override LeaseBalanceRow CastToRow(InactiveLeaseDTO lse)
         {
             var repo = AppArgs.Balances.GetRepo(lse);
-            var bill = repo.Latest();
+            DailyBillDTO bill = null;
+            try
+            {
+                bill = repo.Latest();
+            }
+            catch (Exception ex)
+            {
+                var desc = $"[{lse.Id}] “{lse.TenantAndStall}”";
+                Alert.Show(ex, $"Reading latest bill row for {desc}");
+            }
             return new LeaseBalanceRow(lse, bill);
         }
 
