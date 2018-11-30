@@ -131,16 +131,19 @@ namespace RentLog.DomainLib11.CollectionRepos
 
         private List<LeaseDTO> GetInactiveLeases()
         {
-            if (_disk.TryGet(_cacheKey, out List<LeaseDTO> list))
-                return list;
+            return _dir.MarketState.InactiveLeases.BySection(_sec.Id)
+                       .Select(_ => _ as LeaseDTO).ToList();
 
-            list = _dir.MarketState
-                       .InactiveLeases.BySection(_sec.Id)
-                       .Select (_ => _ as LeaseDTO)
-                       .ToList ();
+            //if (_disk.TryGet(_cacheKey, out List<LeaseDTO> list))
+            //    return list;
 
-            _disk.Put(_cacheKey, list);
-            return list;
+            //list = _dir.MarketState
+            //           .InactiveLeases.BySection(_sec.Id)
+            //           .Select (_ => _ as LeaseDTO)
+            //           .ToList ();
+
+            //_disk.Put(_cacheKey, list);
+            //return list;
         }
     }
 }
