@@ -60,17 +60,17 @@ namespace RentLog.DomainLib11.AdHocJobs
         }
 
 
-        //public static void SetSectionID(ITenantDBsDir dir)
-        //{
-        //    var activs = dir.MarketState.ActiveLeases.GetAll();
-        //    foreach (var lse in activs)
-        //        lse.SectionID = lse.Stall.Section.Id;
-        //    dir.MarketState.ActiveLeases.DropAndInsert(activs, true, false);
+        public static void SetSectionID(ITenantDBsDir dir)
+        {
+            var activs = dir.MarketState.ActiveLeases.GetAll();
+            foreach (var lse in activs)
+                lse.SectionID = lse.Stall.Section.Id;
+            dir.MarketState.ActiveLeases.DropAndInsert(activs, true, false);
 
-        //    var inactvs = dir.MarketState.InactiveLeases.GetAll();
-        //    foreach (var lse in inactvs)
-        //        lse.SectionID = lse.Stall.Section.Id;
-        //    dir.MarketState.InactiveLeases.DropAndInsert(inactvs, true, false);
-        //}
+            var inactvs = dir.MarketState.InactiveLeases.GetAll();
+            foreach (var lse in inactvs)
+                lse.SectionID = lse.Stall.Section.Id;
+            dir.MarketState.InactiveLeases.DropAndInsert(inactvs, true, false);
+        }
     }
 }
