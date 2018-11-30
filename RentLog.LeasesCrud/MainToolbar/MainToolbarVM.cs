@@ -81,13 +81,13 @@ namespace RentLog.LeasesCrud.MainToolbar
 
         private Action GetAdHocJob(out string desc)
         {
-            desc = "ForInactiveLeases.RebuildSoA";
+            desc = "StallsJob.RenameOldStalls";
 
             // solo task job
-            //return () => ForAllLeases.SetSectionID(_args);
+            return () => StallsJob.RenameOldStalls(_args);
             
             // multi-job
-            var jobs = ForInactiveLeases.RebuildSoA(_args);
+            //var jobs = ForInactiveLeases.RebuildSoA(_args);
 
             // multi-job parallel
             //return jobs.AsParallelJob((ok, not, total) =>
@@ -100,11 +100,11 @@ namespace RentLog.LeasesCrud.MainToolbar
             //});
 
             // multi-job serial
-            return () =>
-            {
-                foreach (var job in jobs)
-                    job.Invoke();
-            };
+            //return () =>
+            //{
+            //    foreach (var job in jobs)
+            //        job.Invoke();
+            //};
         }
     }
 }
