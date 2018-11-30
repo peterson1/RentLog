@@ -1,6 +1,8 @@
 ﻿using CommonTools.Lib11.ExceptionTools;
+using CommonTools.Lib11.JsonTools;
 using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.FileSystemTools;
+using CommonTools.Lib45.JsonTools;
 using CommonTools.Lib45.LiteDbTools;
 using RentLog.DatabaseLib.DailyColxnsRepository;
 using RentLog.DomainLib11.CollectionRepos;
@@ -18,6 +20,7 @@ namespace RentLog.DatabaseLib.DatabaseFinders
         private const string COLLECTIONS_DIR = "Collections";
         private const string FILENAME_FMT    = "{0:yyyy-MM-dd}_Solo.ldb";
 
+        //private IJsonCache    _jCache = new TempJsonCache();
         private string        _foldrPath;
         private MarketStateDB _mkt;
         private ITenantDBsDir _dir;
@@ -112,7 +115,7 @@ namespace RentLog.DatabaseLib.DatabaseFinders
             foreach (var sec in _mkt.Sections.GetAll())
             {
                 var colxn = new UncollectedsCollection(sec, db);
-                var repo  = new UncollectedsRepo1(sec, date, colxn, _dir, null);//todo: actual instead of null
+                var repo  = new UncollectedsRepo1(sec, date, colxn, _dir);
                 dict.Add(sec.Id, repo);
             }
         }

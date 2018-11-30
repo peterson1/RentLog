@@ -1,5 +1,5 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
-using CommonTools.Lib11.FileSystemTools;
+using CommonTools.Lib11.JsonTools;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.Models;
@@ -12,21 +12,17 @@ namespace RentLog.DomainLib11.CollectionRepos
 {
     public class UncollectedsRepo1 : SimpleRepoShimBase<UncollectedLeaseDTO>, IUncollectedsRepo
     {
-        private IDiskCache    _disk;
-        private string        _cacheKey;
         private ITenantDBsDir _dir;
         private DateTime      _date;
         private SectionDTO    _sec;
         private Dictionary<int, DailyBillDTO> _soaRowsByLseID;
 
 
-        public UncollectedsRepo1(SectionDTO sectionDTO, DateTime date, ISimpleRepo<UncollectedLeaseDTO> simpleRepo, ITenantDBsDir tenantDBsDir, IDiskCache diskCache) : base(simpleRepo)
+        public UncollectedsRepo1(SectionDTO sectionDTO, DateTime date, ISimpleRepo<UncollectedLeaseDTO> simpleRepo, ITenantDBsDir tenantDBsDir) : base(simpleRepo)
         {
             _sec      = sectionDTO;
             _dir      = tenantDBsDir;
             _date     = date;
-            _disk     = diskCache;
-            _cacheKey = $"{DateTime.Now.Ticks}_{_sec.Id}";
             //_dir.Collections.UnclosedDate();// <-- throws StackOverflow exception
         }
 
@@ -134,14 +130,17 @@ namespace RentLog.DomainLib11.CollectionRepos
             return _dir.MarketState.InactiveLeases.BySection(_sec.Id)
                        .Select(_ => _ as LeaseDTO).ToList();
 
+            //if (_cacheKey == null)
+            //    _cacheKey = $"{DateTime.Now.Ticks}_{_sec.Id}";
+
             //if (_disk.TryGet(_cacheKey, out List<LeaseDTO> list))
             //    return list;
-
+            
             //list = _dir.MarketState
             //           .InactiveLeases.BySection(_sec.Id)
-            //           .Select (_ => _ as LeaseDTO)
-            //           .ToList ();
-
+            //           .Select(_ => _ as LeaseDTO)
+            //           .ToList();
+            
             //_disk.Put(_cacheKey, list);
             //return list;
         }
