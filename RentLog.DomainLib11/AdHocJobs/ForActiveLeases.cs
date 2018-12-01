@@ -73,5 +73,14 @@ namespace RentLog.DomainLib11.AdHocJobs
             else
                 return lse.ContractStart.AddYears(1);
         }
+
+
+        public static void RebuildSoA(ITenantDBsDir dir)
+        {
+            var lses = dir.MarketState.ActiveLeases.GetAll();
+
+            foreach (var lse in lses)
+                dir.Balances.GetRepo(lse).RecomputeAll();
+        }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using CommonTools.Lib11.DateTimeTools;
 using CommonTools.Lib11.ExceptionTools;
 using CommonTools.Lib11.InputCommands;
-using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.ExcelTools;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.PrintTools;
@@ -126,15 +125,15 @@ namespace RentLog.LeasesCrud.MainToolbar
 
         private Action GetAdHocJob2(out string desc)
         {
-            desc = "MarketRenovation.MarkOldStallsAsNonOperational";
-            return () => MarketRenovation.MarkOldStallsAsNonOperational(_args, 3);
+            desc = "ForActiveLeases.RebuildSoA";
+            return () => ForActiveLeases.RebuildSoA(_args);
         }
 
 
         private Action GetAdHocJob3(out string desc)
         {
-            desc = "MarketRenovation.MarkNewStallsAsOperational";
-            return () => MarketRenovation.MarkNewStallsAsOperational(_args, 3);
+            desc = "ForInactiveLeases.RebuildSoA";
+            return () => ForInactiveLeases.RebuildSoA(_args);
         }
     }
 }
