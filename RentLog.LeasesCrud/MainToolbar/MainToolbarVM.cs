@@ -1,4 +1,7 @@
-﻿using CommonTools.Lib11.InputCommands;
+﻿using CommonTools.Lib11.DateTimeTools;
+using CommonTools.Lib11.ExceptionTools;
+using CommonTools.Lib11.InputCommands;
+using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.ExcelTools;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.PrintTools;
@@ -28,14 +31,18 @@ namespace RentLog.LeasesCrud.MainToolbar
             WithOverduesReportCmd = WithOverduesReport.CreateLauncherCmd(_args);
             PrintCurrentListCmd   = R2Command.Relay(PrintCurrentList, null, "Print Current List");
             ExportListToExcelCmd  = R2Command.Relay(ExportListToExcel, null, "Export List to Excel");
-            RunAdHocTaskCmd       = R2Command.Relay(RunAdHocTask, _ => _args.CanRunAdHocTask(false), "Run Ad Hoc Script");
+            RunAdHocTask1Cmd      = R2Command.Relay(_ => RunAdHocTask(1), _ => _args.CanRunAdHocTask(false), "Run Ad Hoc Script 1");
+            RunAdHocTask2Cmd      = R2Command.Relay(_ => RunAdHocTask(2), _ => _args.CanRunAdHocTask(false), "Run Ad Hoc Script 2");
+            RunAdHocTask3Cmd      = R2Command.Relay(_ => RunAdHocTask(3), _ => _args.CanRunAdHocTask(false), "Run Ad Hoc Script 3");
         }
 
 
         public IR2Command   WithOverduesReportCmd  { get; }
         public IR2Command   PrintCurrentListCmd    { get; }
         public IR2Command   ExportListToExcelCmd   { get; }
-        public IR2Command   RunAdHocTaskCmd        { get; }
+        public IR2Command   RunAdHocTask1Cmd       { get; }
+        public IR2Command   RunAdHocTask2Cmd       { get; }
+        public IR2Command   RunAdHocTask3Cmd       { get; }
         public BillAmounts  Overdues               { get; private set; }
 
 
@@ -64,9 +71,18 @@ namespace RentLog.LeasesCrud.MainToolbar
             }
         }
 
-        private void RunAdHocTask()
+        private void RunAdHocTask(int taskNumber)
         {
-            var adhocJob = GetAdHocJob(out string desc);
+            Action adhocJob; string desc;
+
+            switch (taskNumber)
+            {
+                case 1: adhocJob = GetAdHocJob1(out desc); break;
+                case 2: adhocJob = GetAdHocJob2(out desc); break;
+                case 3: adhocJob = GetAdHocJob3(out desc); break;
+                default: throw Bad.Data($"Task #: [{taskNumber}]");
+            }
+
             Alert.Confirm($"Run Ad Hoc job “{desc}”?", async () =>
             {
                 _main.StartBeingBusy("Running Ad Hoc task ...");
@@ -79,15 +95,15 @@ namespace RentLog.LeasesCrud.MainToolbar
         }
 
 
-        private Action GetAdHocJob(out string desc)
+        private Action GetAdHocJob1(out string desc)
         {
-            desc = "ForInactiveLeases.RebuildSoA";
+            desc = "MarketRenovation.DecommissionOldStalls";
 
             // solo task job
-            //return () => StallsJob.RenameOldStalls(_args);
-            
+            return () => MarketRenovation.DecommissionOldStalls(_args, 3, 29.Nov(2018));
+
             // multi-job
-            var jobs = ForInactiveLeases.RebuildSoA(_args);
+            //var jobs = MarketRenovation.TerminateOldLeases(_args, 3, 29.Nov(2018));
 
             // multi-job parallel
             //return jobs.AsParallelJob((ok, not, total) =>
@@ -100,11 +116,25 @@ namespace RentLog.LeasesCrud.MainToolbar
             //});
 
             // multi-job serial
-            return () =>
-            {
-                foreach (var job in jobs)
-                    job.Invoke();
-            };
+            //return () =>
+            //{
+            //    foreach (var job in jobs)
+            //        job.Invoke();
+            //};
+        }
+
+
+        private Action GetAdHocJob2(out string desc)
+        {
+            desc = "MarketRenovation.MarkOldStallsAsNonOperational";
+            return () => MarketRenovation.MarkOldStallsAsNonOperational(_args, 3);
+        }
+
+
+        private Action GetAdHocJob3(out string desc)
+        {
+            desc = "MarketRenovation.MarkNewStallsAsOperational";
+            return () => MarketRenovation.MarkNewStallsAsOperational(_args, 3);
         }
     }
 }

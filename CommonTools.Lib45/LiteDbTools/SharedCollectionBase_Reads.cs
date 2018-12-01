@@ -73,7 +73,9 @@ namespace CommonTools.Lib45.LiteDbTools
                 try { count = coll.Count(); }
                 catch (InvalidCastException) { }//https://github.com/mbdavid/LiteDB/issues/641
                 if (count == 0) return new List<T>();
-                return coll.FindAll().ToList();
+                //return coll.FindAll().ToList();
+                var all = coll.FindAll();
+                return all.ToList();
             }
         }
 

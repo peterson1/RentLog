@@ -14,7 +14,7 @@ namespace CommonTools.Tests.LiteDbToolsTests
         public void TestMethod00001()
         {
             var dbPath = TemmpCopyOf.FMEY_20180924();
-            var tmpDb  = new SharedLiteDB(dbPath, "Test User", false);
+            var tmpDb  = new SharedLiteDB(dbPath, "Test User");
 
             tmpDb.RemoveCorruptedTables();
 

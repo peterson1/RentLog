@@ -46,8 +46,14 @@
                 <Button Command="{Binding ExportListToExcelCmd}"
                         Content="{Binding ExportListToExcelCmd.CurrentLabel}" />
 
-                <Button Command="{Binding RunAdHocTaskCmd}"
-                        Content="{Binding RunAdHocTaskCmd.CurrentLabel}" />
+                <Button Command="{Binding RunAdHocTask1Cmd}"
+                        Content="{Binding RunAdHocTask1Cmd.CurrentLabel}" />
+
+                <Button Command="{Binding RunAdHocTask2Cmd}"
+                        Content="{Binding RunAdHocTask2Cmd.CurrentLabel}" />
+
+                <Button Command="{Binding RunAdHocTask3Cmd}"
+                        Content="{Binding RunAdHocTask3Cmd.CurrentLabel}" />
             </StackPanel>
         </mat:PopupBox>
         
