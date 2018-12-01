@@ -1,4 +1,6 @@
-﻿using CommonTools.Lib11.DatabaseTools;
+﻿using System.Collections.Generic;
+using System.Linq;
+using CommonTools.Lib11.DatabaseTools;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.Validations;
 
@@ -9,6 +11,9 @@ namespace RentLog.DomainLib11.MarketStateRepos
         public CollectorsRepo1(ISimpleRepo<CollectorDTO> simpleRepo, MarketStateDB marketStateDB) : base(simpleRepo, marketStateDB)
         {
         }
+
+        protected override IEnumerable<CollectorDTO> ToSorted(IEnumerable<CollectorDTO> items)
+            => items.OrderBy(_ => _.Name);
 
 
         protected override void ValidateBeforeInsert(CollectorDTO newRecord)
