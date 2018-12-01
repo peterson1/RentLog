@@ -12,8 +12,9 @@ namespace RentLog.DomainLib11.AdHocJobs
         public static void DecommissionOldStalls
             (ITenantDBsDir dir, int oldSectionsMaxId, DateTime terminationDate)
         {
+            dir.Credentials.HumanName = "AdHoc Admin";
             TerminateOldLeases  (dir, oldSectionsMaxId, terminationDate);
-            ZeroOutRentBalances (dir, terminationDate);
+            ZeroOutRentBalances (dir);
             MarkOldStallsAsNonOperational(dir, oldSectionsMaxId);
             MarkNewStallsAsOperational(dir, oldSectionsMaxId);
         }
@@ -32,19 +33,22 @@ namespace RentLog.DomainLib11.AdHocJobs
         }
 
 
-        private static void ZeroOutRentBalances(ITenantDBsDir dir, DateTime terminationDate)
+        private static void ZeroOutRentBalances(ITenantDBsDir dir)
         {
-            var adjs = (dir.Collections.For      (terminationDate)
-                     ?? dir.Collections.CreateFor(terminationDate))
-                    .BalanceAdjs;
+            //var adjs = (dir.Collections.For      (terminationDate)
+            //         ?? dir.Collections.CreateFor(terminationDate))
+            //        .BalanceAdjs;
 
             var inactvs = dir.MarketState.InactiveLeases.GetAll();
 
             foreach (var lse in inactvs)
             {
-                var bill   = dir.Balances.GetBill(lse, terminationDate);
+                var bill   = dir.Balances.GetRepo(lse.Id)?.Latest();
                 var endBal = bill?.For(BillCode.Rent)?.ClosingBalance ?? 0;
                 if (endBal == 0) continue;
+
+                var adjs = dir.Collections.For(bill.GetBillDate())
+                                          .BalanceAdjs;
 
                 adjs.Insert(new BalanceAdjustmentDTO
                 {
