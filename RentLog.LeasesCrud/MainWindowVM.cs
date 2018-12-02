@@ -39,10 +39,17 @@ namespace RentLog.LeasesCrud
 
         protected override void OnRefreshClicked()
         {
+            //Parallel.Invoke
+            //(
+            //    () => MainToolBar.UpdateAll(),
+            //    () => ActiveLeases.ReloadFromDB(),
+            //    () => InactiveLeases.ReloadFromDB()
+            //);
+            ActiveLeases.ReloadFromDB();
+            StopBeingBusy();
             Parallel.Invoke
             (
                 () => MainToolBar.UpdateAll(),
-                () => ActiveLeases.ReloadFromDB(),
                 () => InactiveLeases.ReloadFromDB()
             );
         }
