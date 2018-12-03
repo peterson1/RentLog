@@ -24,7 +24,7 @@ namespace RentLog.ImportBYF.Version2UI.CheckVouchersPane.CVsByDateList
 
         private void ByfServer_GotMinMaxDates(object sender, (DateTime Min, DateTime Max) dates)
         {
-            var list = dates.Min.EachDayUpTo(dates.Max)
+            var list = dates.Min.EachDayUpTo(dates.Max.AddDays(4))
                             .OrderByDescending(_ => _)
                             .Select(_ => new CVsByDateRow(_, MainWindow));
             UIThread.Run(() => SetItems(list));
