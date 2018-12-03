@@ -1,5 +1,8 @@
 ﻿using CommonTools.Lib11.DynamicTools;
+using CommonTools.Lib11.InputCommands;
 using CommonTools.Lib11.StringTools;
+using CommonTools.Lib45.InputCommands;
+using CommonTools.Lib45.ThreadTools;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
@@ -87,6 +90,24 @@ namespace RentLog.ImportBYF.Converters.LeaseConverters
 
             mkt.ActiveLeases  .DropAndInsert(actives, true, false);
             mkt.InactiveLeases.DropAndInsert(inactvs, true, false);
+        }
+
+
+        protected override IR2Command CreateRemediate1Cmd()
+            => R2Command.Relay(FindActiveLeasesOnNonOperatingStalls);
+
+
+        private void FindActiveLeasesOnNonOperatingStalls()
+        {
+            var matches = new List<string>();
+            var mkt = Main.AppArgs.MarketState;
+            foreach (var lse in mkt.ActiveLeases.GetAll())
+            {
+                if (!lse.Stall.IsOperational)
+                    matches.Add(lse.Stall.Name);
+            }
+            Alert.Show($"Active Leases on non-operating stalls: {matches.Count}",
+                      string.Join(L.f, matches));
         }
     }
 }
