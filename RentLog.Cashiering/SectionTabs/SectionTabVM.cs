@@ -4,7 +4,10 @@ using RentLog.Cashiering.SectionTabs.IntendedCollections;
 using RentLog.Cashiering.SectionTabs.NoOperations;
 using RentLog.Cashiering.SectionTabs.Uncollecteds;
 using RentLog.DomainLib11.DTOs;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
+using static RentLog.Cashiering.Properties.Settings;
 
 namespace RentLog.Cashiering.SectionTabs
 {
@@ -37,7 +40,6 @@ namespace RentLog.Cashiering.SectionTabs
         public decimal SectionTotal => IntendedColxns.TotalSum
                                      + AmbulantColxns.TotalSum;
 
-
         internal void ReloadAll()
         {
             Parallel.Invoke(() => IntendedColxns.ReloadFromDB(),
@@ -50,8 +52,9 @@ namespace RentLog.Cashiering.SectionTabs
         internal void EncodeNewIntendedColxn(UncollectedLeaseDTO dto)
         {
             if (!Main.CanEncode) return;
-            var repo = Main.ColxnsDB.IntendedColxns[Section.Id];
-            var vm   = new IntendedColxnCrudVM(dto, repo, Main.AppArgs);
+            var repo   = Main.ColxnsDB.IntendedColxns[Section.Id];
+            var nextPR = Default.SuggestPRNumber ? GetNextPRNumber() : 0;
+            var vm     = new IntendedColxnCrudVM(nextPR, dto, repo, Main.AppArgs);
             vm.EncodeNewDraftCmd.ExecuteIfItCan();
         }
 
@@ -60,8 +63,16 @@ namespace RentLog.Cashiering.SectionTabs
         {
             if (!Main.CanEncode) return;
             var repo = Main.ColxnsDB.IntendedColxns[Section.Id];
-            var vm = new IntendedColxnCrudVM(dto, repo, Main.AppArgs);
+            var vm = new IntendedColxnCrudVM(0, dto, repo, Main.AppArgs);
             vm.EditCurrentRecord(dto);
+        }
+
+
+        private int GetNextPRNumber()
+        {
+            if (IntendedColxns == null) return 1;
+            if (!IntendedColxns.Any()) return 1;
+            return IntendedColxns.Max(_ => _.PRNumber) + 1;
         }
     }
 }

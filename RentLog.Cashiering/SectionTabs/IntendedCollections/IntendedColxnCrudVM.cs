@@ -8,9 +8,12 @@ namespace RentLog.Cashiering.SectionTabs.IntendedCollections
 {
     public class IntendedColxnCrudVM : RepoCrudWindowVMBase<IIntendedColxnsRepo, IntendedColxnDTO, IntendedColxnCrudWindow, ITenantDBsDir>
     {
-        public IntendedColxnCrudVM(UncollectedLeaseDTO uncollectedLeaseDTO, IIntendedColxnsRepo repository, ITenantDBsDir appArguments) : base(repository, appArguments)
+        private int _suggestedPRNum;
+
+        public IntendedColxnCrudVM(int suggestedPRNumber, UncollectedLeaseDTO uncollectedLeaseDTO, IIntendedColxnsRepo repository, ITenantDBsDir appArguments) : base(repository, appArguments)
         {
-            Intention = uncollectedLeaseDTO;
+            Intention       = uncollectedLeaseDTO;
+            _suggestedPRNum = suggestedPRNumber;
         }
 
 
@@ -20,6 +23,7 @@ namespace RentLog.Cashiering.SectionTabs.IntendedCollections
 
         protected override void ModifyDraftForInserting(IntendedColxnDTO draft)
         {
+            draft.PRNumber      = _suggestedPRNum;
             draft.Lease         = Intention.Lease;
             draft.StallSnapshot = Intention.StallSnapshot;
             draft.Targets       = Intention.Targets;
