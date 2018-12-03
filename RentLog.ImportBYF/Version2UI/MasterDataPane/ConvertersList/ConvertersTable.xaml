@@ -52,7 +52,12 @@
                             </StackPanel>
                                 
                             <TextBlock Text="{Binding BusyText}" />
-                            
+
+                            <Button Command="{Binding Remediate1Cmd}"
+                                    Content="Fix 1"
+                                    HorizontalAlignment="Left"
+                                    Visibility="{Binding Remediate1Cmd, Converter={StaticResource visIfNotNull}}" />
+
                         </StackPanel>
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>

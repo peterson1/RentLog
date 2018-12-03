@@ -7,6 +7,7 @@ using CommonTools.Lib45.InputCommands;
 using PropertyChanged;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.MarketStateRepos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,10 +21,12 @@ namespace RentLog.ImportBYF.Version2UI.MasterDataPane.ConvertersList
 
         public ConverterRowBase(MainWindowVM2 mainWindowVM2)
         {
-            Main         = mainWindowVM2;
-            RefreshCmd   = R2Command.Async(this.GetDifferences, _ => !IsBusy, "Get Diffs");
-            UpdateRntCmd = R2Command.Async(this.UpdateRnt, _ => this.CanUpdateRnt(), "Update RNT");
+            Main          = mainWindowVM2;
+            RefreshCmd    = R2Command.Async(this.GetDifferences, _ => !IsBusy, "Get Diffs");
+            UpdateRntCmd  = R2Command.Async(this.UpdateRnt, _ => this.CanUpdateRnt(), "Update RNT");
+            Remediate1Cmd = CreateRemediate1Cmd();
         }
+
 
         public abstract string   Label             { get; }
         public abstract string   ViewsDisplayID    { get; }
@@ -44,6 +47,7 @@ namespace RentLog.ImportBYF.Version2UI.MasterDataPane.ConvertersList
 
         public IR2Command  RefreshCmd    { get; }
         public IR2Command  UpdateRntCmd  { get; }
+        public IR2Command  Remediate1Cmd { get; }
 
         public MainWindowVM2         Main      { get; }
         public UIList<JsonComparer>  DiffRows  { get; } = new UIList<JsonComparer>();
@@ -56,7 +60,6 @@ namespace RentLog.ImportBYF.Version2UI.MasterDataPane.ConvertersList
             DiffsCount  = DiffRows.Count(_ => _.IsTheSame != true);
         }
 
-
         public void StartBeingBusy (string message)
         {
             IsBusy   = true;
@@ -68,6 +71,9 @@ namespace RentLog.ImportBYF.Version2UI.MasterDataPane.ConvertersList
             BusyText = message;
         }
         public void LogError       (string errorText) => ErrorText += L.F + errorText;
+
+
+        protected virtual IR2Command CreateRemediate1Cmd() => null;
 
 
         public virtual Task<List<dynamic>> GetViewsList(string viewsDisplayID)
