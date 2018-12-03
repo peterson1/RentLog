@@ -14,11 +14,14 @@
             <Setter Property="Text1Width" Value="auto" />
             <Setter Property="Text1Brush" Value="LightBlue" />
             <Setter Property="Text2Brush" Value="White" />
-            <Setter Property="Margin" Value="10 0 10 0" />
+            <Setter Property="Text2Weight" Value="Bold" />
+            <Setter Property="Text2Size" Value="14" />
+            <Setter Property="Margin" Value="10 5 10 0" />
+            <Setter Property="GapWidth" Value="6" />
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
         <Style x:Key="txtVerdict" TargetType="TextBlock">
-            <Setter Property="Padding" Value="15 5 15 5" />
+            <Setter Property="Padding" Value="10 5 10 5" />
             <Setter Property="FontWeight" Value="Medium" />
             <Setter Property="Foreground" Value="White" />
             <Setter Property="VerticalAlignment" Value="Center" />
@@ -29,21 +32,21 @@
         <StackPanel Orientation="Horizontal"
                     Visibility="{Binding HasDeposits, Converter={StaticResource visIfTrue}}">
 
-            <labls:DualText Text1="Total Collections"
-                            Text2="{Binding TotalCollections, StringFormat=N2}" />
-
-            <TextBlock Style="{StaticResource txtVerdict}"
+            <!--<TextBlock Style="{StaticResource txtVerdict}"
                         Visibility="{Binding IsBalanced, Converter={StaticResource visIfTrue}}"
                         Text="="
-                        Background="ForestGreen" />
+                        Background="ForestGreen" />-->
 
-            <TextBlock Style="{StaticResource txtVerdict}"
-                        Visibility="{Binding IsBalanced, Converter={StaticResource visIfFalse}}"
-                        Text="does NOT match"
-                        Background="Red" />
+            <!--<TextBlock Style="{StaticResource txtVerdict}"
+                       Visibility="{Binding IsBalanced, Converter={StaticResource visIfFalse}}"
+                       Text="mismatch"
+                       Background="Red" />-->
 
-            <labls:DualText Text1="Deposits"
-                            Text2="{Binding TotalDeposits, StringFormat=N2}" />
+            <!--<labls:DualText Text1="Deposits"
+                            Text2="{Binding TotalDeposits, StringFormat=N2}" />-->
+
+            <labls:DualText Text1="Total Collections"
+                            Text2="{Binding TotalCollections, StringFormat=N2}" />
 
             <TextBlock Style="{StaticResource txtVerdict}"
                         Visibility="{Binding IsBalanced, Converter={StaticResource visIfFalse}}"
