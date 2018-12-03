@@ -1,4 +1,5 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
+using CommonTools.Lib11.FileSystemTools;
 using CommonTools.Lib11.JsonTools;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
@@ -16,13 +17,15 @@ namespace RentLog.DomainLib11.CollectionRepos
         private DateTime      _date;
         private SectionDTO    _sec;
         private Dictionary<int, DailyBillDTO> _soaRowsByLseID;
+        private IPersistentCollection<LeaseDTO> _cache;
 
 
-        public UncollectedsRepo1(SectionDTO sectionDTO, DateTime date, ISimpleRepo<UncollectedLeaseDTO> simpleRepo, ITenantDBsDir tenantDBsDir) : base(simpleRepo)
+        public UncollectedsRepo1(IPersistentCollection<LeaseDTO> persistentCollection, SectionDTO sectionDTO, DateTime date, ISimpleRepo<UncollectedLeaseDTO> simpleRepo, ITenantDBsDir tenantDBsDir) : base(simpleRepo)
         {
-            _sec      = sectionDTO;
-            _dir      = tenantDBsDir;
-            _date     = date;
+            _sec  = sectionDTO;
+            _dir  = tenantDBsDir;
+            _date = date;
+            _cache.Clear();
             //_dir.Collections.UnclosedDate();// <-- throws StackOverflow exception
         }
 
@@ -61,7 +64,7 @@ namespace RentLog.DomainLib11.CollectionRepos
 
 
         private List<UncollectedLeaseDTO> GetUncollecteds(
-            List<LeaseDTO> leases, DateTime asOfDate,
+            IEnumerable<LeaseDTO> leases, DateTime asOfDate,
             IEnumerable<int> intendedColxns,
             IEnumerable<int> didNotOperate)
         {
@@ -75,7 +78,7 @@ namespace RentLog.DomainLib11.CollectionRepos
         }
 
 
-        private List<LeaseDTO> GetUncollectedLeases(List<LeaseDTO> leases, DateTime asOfDate, IEnumerable<int> intendedColxns, IEnumerable<int> didNotOperate) 
+        private List<LeaseDTO> GetUncollectedLeases(IEnumerable<LeaseDTO> leases, DateTime asOfDate, IEnumerable<int> intendedColxns, IEnumerable<int> didNotOperate) 
             => leases.Where(_ => IsUncollected(_, asOfDate, intendedColxns, didNotOperate)).ToList();
 
 
@@ -125,24 +128,32 @@ namespace RentLog.DomainLib11.CollectionRepos
             => _dir.MarketState.ActiveLeases.BySection(_sec.Id);
 
 
-        private List<LeaseDTO> GetInactiveLeases()
+        private IEnumerable<LeaseDTO> GetInactiveLeases()
         {
-            return _dir.MarketState.InactiveLeases.BySection(_sec.Id)
-                       .Select(_ => _ as LeaseDTO).ToList();
+            //return _dir.MarketState.InactiveLeases.BySection(_sec.Id)
+            //           .Select(_ => _ as LeaseDTO).ToList();
 
             //if (_cacheKey == null)
             //    _cacheKey = $"{DateTime.Now.Ticks}_{_sec.Id}";
 
             //if (_disk.TryGet(_cacheKey, out List<LeaseDTO> list))
             //    return list;
-            
+
             //list = _dir.MarketState
             //           .InactiveLeases.BySection(_sec.Id)
             //           .Select(_ => _ as LeaseDTO)
             //           .ToList();
-            
+
             //_disk.Put(_cacheKey, list);
             //return list;
+
+            if (_cache.Any()) return _cache.Enumerate();
+
+            var list = _dir.MarketState
+                           .InactiveLeases.BySection(_sec.Id)
+                           .Select(_ => _ as LeaseDTO);
+            _cache.Set(list);
+            return list;
         }
     }
 }

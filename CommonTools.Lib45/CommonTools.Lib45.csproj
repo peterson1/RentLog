@@ -181,6 +181,7 @@
     <Compile Include="JsonTools\TempJsonCache.cs" />
     <Compile Include="LicenseTools\SeatLicenser.cs" />
     <Compile Include="LiteDbTools\CorruptedTablesRemover.cs" />
+    <Compile Include="LiteDbTools\LiteDBPersistentCollection.cs" />
     <Compile Include="LiteDbTools\MetadataCollection.cs" />
     <Compile Include="LiteDbTools\NamedCollection.cs" />
     <Compile Include="LiteDbTools\SharedCollectionBase_Connects.cs" />
