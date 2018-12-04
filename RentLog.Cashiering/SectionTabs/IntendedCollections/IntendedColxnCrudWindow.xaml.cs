@@ -17,6 +17,7 @@ namespace RentLog.Cashiering.SectionTabs.IntendedCollections
                 await Task.Delay(100);
                 txtPRnum.SelectAll();
                 txtPRnum.KeyUp += TxtPRnum_KeyUp;
+                TrySaveOnPlus(txtPRnum);
                 SetHandlersForNullable(txtRent    );
                 SetHandlersForNullable(txtRights  );
                 SetHandlersForNullable(txtElectric);
@@ -55,6 +56,12 @@ namespace RentLog.Cashiering.SectionTabs.IntendedCollections
         {
             ctrl.MoveFocusToNextOnEnterKey();
             ctrl.MoveFocusOnArrowKeys(false, false, true, true);
+            TrySaveOnPlus(ctrl);
+        }
+
+
+        private void TrySaveOnPlus(TextBox ctrl)
+        {
             ctrl.PreviewKeyDown += (s, e) =>
             {
                 if (e.Key == Key.Add)

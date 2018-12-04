@@ -30,6 +30,7 @@ namespace RentLog.Cashiering.SectionTabs.IntendedCollections
             draft.StallSnapshot = Intention.StallSnapshot;
             draft.Targets       = Intention.Targets;
             draft.Actuals       = new BillAmounts();
+            draft.Actuals.Rent  = Intention.Lease.Rent.RegularRate;
         }
 
 
