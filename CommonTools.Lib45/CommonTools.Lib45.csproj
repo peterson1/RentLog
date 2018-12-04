@@ -252,6 +252,7 @@
     <Compile Include="UIExtensions\ForceBindingUpdaters.cs" />
     <Compile Include="UIExtensions\ListScrollerExtensions.cs" />
     <Compile Include="UIExtensions\StylePropertySetters.cs" />
+    <Compile Include="UIExtensions\TextBoxExtensions.cs" />
     <Compile Include="UIExtensions\UIValidationExtensions.cs" />
     <Compile Include="UIExtensions\VisualElementExtensions.cs" />
     <Compile Include="UIExtensions\WindowExtensions.cs" />

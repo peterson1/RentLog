@@ -53,7 +53,7 @@ namespace RentLog.Cashiering.SectionTabs
         {
             if (!Main.CanEncode) return;
             var repo   = Main.ColxnsDB.IntendedColxns[Section.Id];
-            var nextPR = Default.SuggestPRNumber ? GetNextPRNumber() : 0;
+            var nextPR = (IntendedColxns.LastOrDefault()?.PRNumber ?? 0) + 1;
             var vm     = new IntendedColxnCrudVM(nextPR, dto, repo, Main.AppArgs);
             vm.EncodeNewDraftCmd.ExecuteIfItCan();
         }
@@ -68,11 +68,11 @@ namespace RentLog.Cashiering.SectionTabs
         }
 
 
-        private int GetNextPRNumber()
-        {
-            if (IntendedColxns == null) return 1;
-            if (!IntendedColxns.Any()) return 1;
-            return IntendedColxns.Max(_ => _.PRNumber) + 1;
-        }
+        //private int GetNextPRNumber()
+        //{
+        //    if (IntendedColxns == null) return 1;
+        //    if (!IntendedColxns.Any()) return 1;
+        //    return IntendedColxns.Max(_ => _.PRNumber) + 1;
+        //}
     }
 }

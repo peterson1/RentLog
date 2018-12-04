@@ -1,4 +1,5 @@
 ﻿using CommonTools.Lib45.BaseViewModels;
+using PropertyChanged;
 using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
@@ -6,6 +7,7 @@ using RentLog.DomainLib11.Models;
 
 namespace RentLog.Cashiering.SectionTabs.IntendedCollections
 {
+    [AddINotifyPropertyChangedInterface]
     public class IntendedColxnCrudVM : RepoCrudWindowVMBase<IIntendedColxnsRepo, IntendedColxnDTO, IntendedColxnCrudWindow, ITenantDBsDir>
     {
         private int _suggestedPRNum;

@@ -42,17 +42,5 @@ namespace RentLog.Cashiering.Properties {
                 this["DepositDescriptions"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool SuggestPRNumber {
-            get {
-                return ((bool)(this["SuggestPRNumber"]));
-            }
-            set {
-                this["SuggestPRNumber"] = value;
-            }
-        }
     }
 }

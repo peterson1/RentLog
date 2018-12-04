@@ -38,6 +38,8 @@ namespace RentLog.Cashiering.SectionTabs.IntendedCollections
         {
             switch (e.Key)
             {
+                case Key.Up   : txtPRnum.IncrementInt(); break;
+                case Key.Down : txtPRnum.DecrementInt(); break;
                 case Key.Right:
                 case Key.Return:
                     if (VM.Draft.PRNumber != 0)
