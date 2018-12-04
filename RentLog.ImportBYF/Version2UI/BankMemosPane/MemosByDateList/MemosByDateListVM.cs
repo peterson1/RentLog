@@ -33,14 +33,14 @@ namespace RentLog.ImportBYF.Version2UI.BankMemosPane.MemosByDateList
 
         public Task RefreshAll() => ProcessEachRow(this);
 
-        public Task RefreshAllReversed() => ProcessEachRow
-            (this.Where   (_ => _.Date.Year >= 2015)
-                 .OrderBy (_ => _.Date));
+        public Task RefreshAllReversed() 
+            => ProcessEachRow(this.OrderBy (_ => _.Date));
 
 
         private async Task ProcessEachRow(IEnumerable<MemosByDateRow> rows)
         {
-            foreach (var row in rows)
+            var recents = rows.Where(_ => _.Date.Year >= 2015);
+            foreach (var row in recents)
             {
                 SetStatus($"Refreshing [{row.Date:d-MMM-yyyy}] ...");
                 if (!ShouldKeepRunning) return;
