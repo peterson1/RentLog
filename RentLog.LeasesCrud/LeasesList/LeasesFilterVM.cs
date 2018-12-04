@@ -25,7 +25,7 @@ namespace RentLog.LeasesCrud.LeasesList
 
         protected override Dictionary<string, Func<LeaseBalanceRow, string>> FilterProperties => new Dictionary<string, Func<LeaseBalanceRow, string>>
         {
-                { nameof(TenantFilter         ), _ => _.DTO.Tenant.FirstAndLastNames            },
+                { nameof(TenantFilter         ), _ => _.DTO.Tenant.LastAndFirstNames            },
                 { nameof(StallFilter          ), _ => _.DTO.Stall.Name                          },
                 { nameof(ContractStartFilter  ), _ => _.DTO.ContractStart.ToString("d MMM yyyy")},
                 { nameof(ContractEndFilter    ), _ => _.DTO.ContractEnd?.ToString("d MMM yyyy")  },

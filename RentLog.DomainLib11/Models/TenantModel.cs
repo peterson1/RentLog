@@ -27,6 +27,7 @@ namespace RentLog.DomainLib11.Models
         public string    Country       { get; set; }
 
         public string FirstAndLastNames => $"{FirstName} {LastName}";
+        public string LastAndFirstNames => $"{LastName}, {FirstName}";
 
         public override string ToString() => FirstAndLastNames;
 
