@@ -115,7 +115,7 @@ namespace RentLog.DatabaseLib.DatabaseFinders
             foreach (var sec in _mkt.Sections.GetAll())
             {
                 var colxn = new UncollectedsCollection(sec, db);
-                var repo  = new UncollectedsRepo1(sec, date, colxn, _dir);
+                var repo  = new UncollectedsRepo1(null, sec, date, colxn, _dir);
                 dict.Add(sec.Id, repo);
             }
         }

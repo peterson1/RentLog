@@ -1,6 +1,5 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
 using CommonTools.Lib11.FileSystemTools;
-using CommonTools.Lib11.JsonTools;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.Models;
@@ -17,7 +16,7 @@ namespace RentLog.DomainLib11.CollectionRepos
         private DateTime      _date;
         private SectionDTO    _sec;
         private Dictionary<int, DailyBillDTO> _soaRowsByLseID;
-        private IPersistentCollection<LeaseDTO> _cache;
+        //private IPersistentCollection<LeaseDTO> _cache;
 
 
         public UncollectedsRepo1(IPersistentCollection<LeaseDTO> persistentCollection, SectionDTO sectionDTO, DateTime date, ISimpleRepo<UncollectedLeaseDTO> simpleRepo, ITenantDBsDir tenantDBsDir) : base(simpleRepo)
@@ -25,7 +24,7 @@ namespace RentLog.DomainLib11.CollectionRepos
             _sec  = sectionDTO;
             _dir  = tenantDBsDir;
             _date = date;
-            _cache.Clear();
+            //_cache.Clear();
             //_dir.Collections.UnclosedDate();// <-- throws StackOverflow exception
         }
 
@@ -130,8 +129,9 @@ namespace RentLog.DomainLib11.CollectionRepos
 
         private IEnumerable<LeaseDTO> GetInactiveLeases()
         {
-            //return _dir.MarketState.InactiveLeases.BySection(_sec.Id)
-            //           .Select(_ => _ as LeaseDTO).ToList();
+            return _dir.MarketState.InactiveLeases.BySection(_sec.Id)
+                       .Select(_ => _ as LeaseDTO).ToList();
+
 
             //if (_cacheKey == null)
             //    _cacheKey = $"{DateTime.Now.Ticks}_{_sec.Id}";
@@ -147,13 +147,15 @@ namespace RentLog.DomainLib11.CollectionRepos
             //_disk.Put(_cacheKey, list);
             //return list;
 
-            if (_cache.Any()) return _cache.Enumerate();
 
-            var list = _dir.MarketState
-                           .InactiveLeases.BySection(_sec.Id)
-                           .Select(_ => _ as LeaseDTO);
-            _cache.Set(list);
-            return list;
+
+            //if (_cache.Any()) return _cache.Enumerate();
+
+            //var list = _dir.MarketState
+            //               .InactiveLeases.BySection(_sec.Id)
+            //               .Select(_ => _ as LeaseDTO);
+            //_cache.Set(list);
+            //return list;
         }
     }
 }

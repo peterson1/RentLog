@@ -90,7 +90,7 @@ namespace RentLog.DomainLib11.Authorization
             "Add Lease", "Supervisor", "Admin");
 
         public static bool CanEditLease(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
-            "Edit Lease", "Admin");
+            "Edit Lease", "Admin", "Acctg.Head");
 
         public static bool CanEditTenantInfo(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
             "Edit Tenant Info", "Supervisor", "Admin");
