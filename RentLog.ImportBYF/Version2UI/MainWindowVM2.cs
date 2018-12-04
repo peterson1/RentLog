@@ -5,6 +5,7 @@ using RentLog.DomainLib45.BaseViewModels;
 using RentLog.ImportBYF.ByfQueries;
 using RentLog.ImportBYF.ByfServerAccess;
 using RentLog.ImportBYF.RntQueries;
+using RentLog.ImportBYF.Version2UI.BankMemosPane;
 using RentLog.ImportBYF.Version2UI.CheckVouchersPane;
 using RentLog.ImportBYF.Version2UI.LeaseBalancesPane;
 using RentLog.ImportBYF.Version2UI.MasterDataPane;
@@ -30,7 +31,8 @@ namespace RentLog.ImportBYF.Version2UI
             MasterData      = new MasterDataPaneVM(this);
             TransactionData = new TransactionDataPaneVM(this);
             LeaseBalances   = new LeaseBalancesPaneVM(this);
-            CheckVouchers   = new CheckVouchersPaneVM(this);
+            //CheckVouchers   = new CheckVouchersPaneVM(this);
+            BankMemos       = new BankMemosPaneVM(this);
         }
 
 
@@ -41,6 +43,7 @@ namespace RentLog.ImportBYF.Version2UI
         public TransactionDataPaneVM TransactionData { get; }
         public LeaseBalancesPaneVM   LeaseBalances   { get; }
         public CheckVouchersPaneVM   CheckVouchers   { get; }
+        public BankMemosPaneVM       BankMemos       { get; }
 
 
         private void SetBranchAndSystemNames()

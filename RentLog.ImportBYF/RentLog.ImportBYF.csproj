@@ -99,6 +99,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ByfQueries\ByfBankDepositQueries.cs" />
+    <Compile Include="ByfQueries\ByfBankMemosByDateQueries.cs" />
     <Compile Include="ByfQueries\ByfCache.cs" />
     <Compile Include="ByfQueries\ByfCashierColxnsQueries.cs" />
     <Compile Include="ByfQueries\ByfCheckVouchersByDateQueries.cs" />
@@ -135,12 +136,27 @@
     <Compile Include="Converters\TenantConverters\TenantConverter2.cs" />
     <Compile Include="RntCommands\DepsToPassbookRemedialCmd.cs" />
     <Compile Include="RntCommands\RntUpdateBalancesCommand.cs" />
+    <Compile Include="RntCommands\RntUpdateBankMemosCommand.cs" />
     <Compile Include="RntCommands\RntUpdateCheckVouchersCommand.cs" />
     <Compile Include="RntCommands\RntUpdateDayCommand2.cs" />
+    <Compile Include="RntQueries\RntBankMemosByDateQueries.cs" />
     <Compile Include="RntQueries\RntCache.cs" />
     <Compile Include="RntQueries\RntCheckVouchersByDateQueries.cs" />
     <Compile Include="RntQueries\RntDailyTxnQuery.cs" />
     <Compile Include="RntQueries\RntLeaseBalanceQueries.cs" />
+    <Compile Include="Version2UI\BankMemosPane\BankMemosPaneUI.xaml.cs">
+      <DependentUpon>BankMemosPaneUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Version2UI\BankMemosPane\BankMemosPaneVM.cs" />
+    <Compile Include="Version2UI\BankMemosPane\MemosByDateList\CellUI.xaml.cs">
+      <DependentUpon>CellUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Version2UI\BankMemosPane\MemosByDateList\MemosByDateCell.cs" />
+    <Compile Include="Version2UI\BankMemosPane\MemosByDateList\MemosByDateListVM.cs" />
+    <Compile Include="Version2UI\BankMemosPane\MemosByDateList\MemosByDateRow.cs" />
+    <Compile Include="Version2UI\BankMemosPane\MemosByDateList\MemosByDateTable.xaml.cs">
+      <DependentUpon>MemosByDateTable.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Version2UI\CheckVouchersPane\CheckVouchersPaneUI.xaml.cs">
       <DependentUpon>CheckVouchersPaneUI.xaml</DependentUpon>
     </Compile>
@@ -272,6 +288,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Version2UI\BankMemosPane\BankMemosPaneUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Version2UI\BankMemosPane\MemosByDateList\CellUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Version2UI\BankMemosPane\MemosByDateList\MemosByDateTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Version2UI\CheckVouchersPane\CheckVouchersPaneUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

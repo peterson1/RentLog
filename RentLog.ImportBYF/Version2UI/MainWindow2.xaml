@@ -7,6 +7,7 @@
         xmlns:txns="clr-namespace:RentLog.ImportBYF.Version2UI.TransactionDataPane"
         xmlns:bals="clr-namespace:RentLog.ImportBYF.Version2UI.LeaseBalancesPane"
         xmlns:chks="clr-namespace:RentLog.ImportBYF.Version2UI.CheckVouchersPane"
+        xmlns:memo="clr-namespace:RentLog.ImportBYF.Version2UI.BankMemosPane"
         xmlns:local="clr-namespace:RentLog.ImportBYF.Version2UI"
         mc:Ignorable="d"
         Title="{Binding Caption}" 
@@ -51,8 +52,10 @@
 
             <GridSplitter Grid.Column="5" Style="{StaticResource vSplit}" />
 
-            <chks:CheckVouchersPaneUI Grid.Column="6"
-                                      DataContext="{Binding CheckVouchers}" />
+            <!--<chks:CheckVouchersPaneUI Grid.Column="6"
+                                      DataContext="{Binding CheckVouchers}" />-->
+            <memo:BankMemosPaneUI Grid.Column="6"
+                                  DataContext="{Binding BankMemos}" />
 
             <busy:BusyDialog Grid.ColumnSpan="5" />
         </Grid>
