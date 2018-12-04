@@ -1,4 +1,5 @@
 ﻿using CommonTools.Lib11.ExceptionTools;
+using CommonTools.Lib11.FileSystemTools;
 using CommonTools.Lib11.JsonTools;
 using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.FileSystemTools;
@@ -7,6 +8,7 @@ using CommonTools.Lib45.LiteDbTools;
 using RentLog.DatabaseLib.DailyColxnsRepository;
 using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DataSources;
+using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
 using System;
 using System.Collections.Generic;
@@ -115,9 +117,18 @@ namespace RentLog.DatabaseLib.DatabaseFinders
             foreach (var sec in _mkt.Sections.GetAll())
             {
                 var colxn = new UncollectedsCollection(sec, db);
-                var repo  = new UncollectedsRepo1(null, sec, date, colxn, _dir);
+                var cache = GetSectionCache(sec);
+                var repo  = new UncollectedsRepo1(cache, sec, date, colxn, _dir);
                 dict.Add(sec.Id, repo);
             }
+        }
+
+
+        private IPersistentCollection<LeaseDTO> GetSectionCache(SectionDTO sec)
+        {
+            var fName = $"Section_{sec.Id}.ldb";
+            var fPath = Path.Combine(Path.GetTempPath(), fName);
+            return new LiteDBPersistentCollection<LeaseDTO>(fPath, "Inactives");
         }
 
 
