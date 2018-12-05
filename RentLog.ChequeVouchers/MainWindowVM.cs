@@ -34,6 +34,7 @@ namespace RentLog.ChequeVouchers
             DcdrReport     = new DcdrTabVM(this);
             Journals       = new JournalsTabVM(this);
             AllChkVouchers = new AllChequeVouchersVM(this);
+            AdHocJobs      = new AdHocJobCmdsVM(this);
 
             PrintCmd.SetLabel("Print “Pending Checks” List");
         }
@@ -45,6 +46,7 @@ namespace RentLog.ChequeVouchers
         public DcdrTabVM            DcdrReport      { get; }
         public JournalsTabVM        Journals        { get; }
         public AllChequeVouchersVM  AllChkVouchers  { get; }
+        public AdHocJobCmdsVM       AdHocJobs       { get; }
         public int                  SelectedIndex   { get; set; }
         public MainTabs             SelectedTab
         {

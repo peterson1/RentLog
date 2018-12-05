@@ -167,6 +167,7 @@
       <DependentUpon>JournalsTabUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="JournalsTab\JournalsTabVM.cs" />
+    <Compile Include="MainToolbar\AdHocJobCmdsVM.cs" />
     <Compile Include="MainToolbar\BankAccountPickerVM.cs" />
     <Compile Include="MainToolbar\DateRangePickerUI.xaml.cs">
       <DependentUpon>DateRangePickerUI.xaml</DependentUpon>

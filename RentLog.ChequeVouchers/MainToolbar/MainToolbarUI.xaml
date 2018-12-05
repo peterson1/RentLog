@@ -48,6 +48,16 @@
                 <MenuItem Header="{Binding PrintCmd.CurrentLabel}"
                           Command="{Binding PrintCmd}" />
                 <Separator />
+                <MenuItem Header="Ad hoc Commands"
+                          DataContext="{Binding AdHocJobs}">
+                    <MenuItem Header ="{Binding AdHocJobCmd1.CurrentLabel}"
+                              Command="{Binding AdHocJobCmd1}" />
+                    <MenuItem Header ="{Binding AdHocJobCmd2.CurrentLabel}"
+                              Command="{Binding AdHocJobCmd2}" />
+                    <MenuItem Header ="{Binding AdHocJobCmd3.CurrentLabel}"
+                              Command="{Binding AdHocJobCmd3}" />
+                </MenuItem>
+                <Separator />
                 <MenuItem Header="{Binding CloseWindowCmd.CurrentLabel}"
                           Command="{Binding CloseWindowCmd}" />
             </Menu>
