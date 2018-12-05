@@ -93,7 +93,11 @@ namespace RentLog.DomainLib11.ChequeVoucherRepos
             var matches = InactiveRequests.Find(_ => _.SerialNum == chq.Request.SerialNum);
 
             if (!matches.Any())
-                throw No.Match<FundRequestDTO>("SerialNum", chq.Request.SerialNum);
+            {
+                //throw No.Match<FundRequestDTO>("SerialNum", chq.Request.SerialNum);
+                InactiveRequests.Insert(chq.Request);
+                return FindInactiveRequest(chq);
+            }
 
             if (matches.Count() > 1)
                 throw DuplicateRecordsException.For(matches, "SerialNum", chq.Request.SerialNum);
