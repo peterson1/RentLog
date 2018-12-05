@@ -30,8 +30,8 @@ namespace RentLog.ImportBYF.Version2UI
             ByfServer       = new ByfServerVM(this);
             MasterData      = new MasterDataPaneVM(this);
             TransactionData = new TransactionDataPaneVM(this);
-            LeaseBalances   = new LeaseBalancesPaneVM(this);
-            //CheckVouchers   = new CheckVouchersPaneVM(this);
+            //LeaseBalances   = new LeaseBalancesPaneVM(this);
+            CheckVouchers   = new CheckVouchersPaneVM(this);
             BankMemos       = new BankMemosPaneVM(this);
         }
 
