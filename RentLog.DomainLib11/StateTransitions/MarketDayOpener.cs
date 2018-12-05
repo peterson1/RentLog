@@ -18,7 +18,23 @@ namespace RentLog.DomainLib11.StateTransitions
 
             jobs.Add(() => dir.AddDepositsToPassbook(balancd, true));
             jobs.Add(() => colxnsDB.MarkAsOpened());
+            jobs.Add(() => TerminateExpiredLeases(dir));
             return jobs;
+        }
+
+
+        public static void TerminateExpiredLeases(ITenantDBsDir dir)
+        {
+            var actives = dir.MarketState.ActiveLeases.GetAll();
+            var asOfDte = dir.Collections.LastPostedDate();
+
+            foreach (var lse in actives)
+            {
+                var lastDte = lse.ContractEnd ?? asOfDte;
+                if (!lse.IsActive(asOfDte))
+                    dir.MarketState.DeactivateLease(lse,
+                        "Reached contract end date", lastDte);
+            }
         }
 
 
