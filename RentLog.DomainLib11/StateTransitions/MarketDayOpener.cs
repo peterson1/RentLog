@@ -26,14 +26,14 @@ namespace RentLog.DomainLib11.StateTransitions
         public static void TerminateExpiredLeases(ITenantDBsDir dir)
         {
             var actives = dir.MarketState.ActiveLeases.GetAll();
-            var asOfDte = dir.Collections.LastPostedDate();
+            var asOfDte = dir.Collections.UnclosedDate();
 
             foreach (var lse in actives)
             {
-                var lastDte = lse.ContractEnd ?? asOfDte;
-                if (!lse.IsActive(asOfDte))
+                if (!lse.ContractEnd.HasValue) continue;
+                if (lse.ContractEnd.Value.Date < asOfDte)
                     dir.MarketState.DeactivateLease(lse,
-                        "Reached contract end date", lastDte);
+                        "Reached contract end date", lse.ContractEnd.Value);
             }
         }
 

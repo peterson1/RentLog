@@ -1,10 +1,8 @@
 ﻿using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
-using RentLog.DomainLib11.StateTransitions;
 using RentLog.DomainLib11.MarketStateRepos;
 using System.Collections.Generic;
 using System.Linq;
-using CommonTools.Lib45.ThreadTools;
 
 namespace RentLog.FilteredLeases.FilteredLists.AllActiveLeases
 {
@@ -20,7 +18,6 @@ namespace RentLog.FilteredLeases.FilteredLists.AllActiveLeases
             var all  = mkt.ActiveLeases.GetAll();
 
             //MarketDayOpener.TerminateExpiredLeases(AppArgs);
-
             //var asOf = mkt.Collections.LastPostedDate();
             //foreach (var lse in all)
             //{
