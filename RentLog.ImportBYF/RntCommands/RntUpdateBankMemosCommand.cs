@@ -1,4 +1,5 @@
 ﻿using RentLog.DomainLib11.DataSources;
+using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.PassbookRepos;
 using RentLog.ImportBYF.ByfQueries;
 using RentLog.ImportBYF.Version2UI.BankMemosPane.MemosByDateList;

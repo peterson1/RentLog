@@ -31,10 +31,11 @@ namespace RentLog.ChequeVouchers.DcdrTab.PassbookRows
         protected override bool CanAddNewItem () => AppArgs.CanAddPassbookRow(false);
         protected override bool CanDeleteRecord(PassbookRowDTO rec)
         {
-            if (rec.DocRefType != PASSBOOKROW_TYPE)
-                return AppArgs.CanDeleteSystemGeneratedPassbookRow(true);
+            if (rec.DocRefType == PASSBOOKROW_TYPE
+             || rec.DocRefType == ByfBankMemoNode.TypeName)
+                return AppArgs.CanDeletePassbookRow(true);
 
-            return AppArgs.CanDeletePassbookRow(true);
+            return AppArgs.CanDeleteSystemGeneratedPassbookRow(true);
         }
 
 
@@ -58,6 +59,7 @@ namespace RentLog.ChequeVouchers.DcdrTab.PassbookRows
         {
             switch (rec.DocRefType)
             {
+                case ByfBankMemoNode.TypeName:
                 case PASSBOOKROW_TYPE:
                     if (AppArgs.CanEditPassbookRow(true))
                         CreateCrud().EditCurrentRecord(rec);

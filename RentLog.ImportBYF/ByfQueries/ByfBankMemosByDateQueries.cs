@@ -9,11 +9,6 @@ using System.Threading.Tasks;
 
 namespace RentLog.ImportBYF.ByfQueries
 {
-    public struct ByfBankMemoNode
-    {
-        public const string TypeName = "[Fats]bank_balance_adjustment";
-    }
-
     public static class ByfBankMemosByDateQueries
     {
         private const string VIEW_ID = "bank_balance_adjustments?display_id=page";
