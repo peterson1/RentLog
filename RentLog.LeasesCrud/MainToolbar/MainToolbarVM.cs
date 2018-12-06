@@ -30,18 +30,18 @@ namespace RentLog.LeasesCrud.MainToolbar
             WithOverduesReportCmd = WithOverduesReport.CreateLauncherCmd(_args);
             PrintCurrentListCmd   = R2Command.Relay(PrintCurrentList, null, "Print Current List");
             ExportListToExcelCmd  = R2Command.Relay(ExportListToExcel, null, "Export List to Excel");
-            RunAdHocTask1Cmd      = R2Command.Relay(_ => RunAdHocTask(1), _ => _args.CanRunAdHocTask(false), "Run Ad Hoc Script 1");
-            RunAdHocTask2Cmd      = R2Command.Relay(_ => RunAdHocTask(2), _ => _args.CanRunAdHocTask(false), "Run Ad Hoc Script 2");
-            RunAdHocTask3Cmd      = R2Command.Relay(_ => RunAdHocTask(3), _ => _args.CanRunAdHocTask(false), "Run Ad Hoc Script 3");
+            //RunAdHocTask1Cmd      = R2Command.Relay(_ => RunAdHocTask(1), _ => _args.CanRunAdHocTask(false), "Run Ad Hoc Script 1");
+            //RunAdHocTask2Cmd      = R2Command.Relay(_ => RunAdHocTask(2), _ => _args.CanRunAdHocTask(false), "Run Ad Hoc Script 2");
+            //RunAdHocTask3Cmd      = R2Command.Relay(_ => RunAdHocTask(3), _ => _args.CanRunAdHocTask(false), "Run Ad Hoc Script 3");
         }
 
 
         public IR2Command   WithOverduesReportCmd  { get; }
         public IR2Command   PrintCurrentListCmd    { get; }
         public IR2Command   ExportListToExcelCmd   { get; }
-        public IR2Command   RunAdHocTask1Cmd       { get; }
-        public IR2Command   RunAdHocTask2Cmd       { get; }
-        public IR2Command   RunAdHocTask3Cmd       { get; }
+        //public IR2Command   RunAdHocTask1Cmd       { get; }
+        //public IR2Command   RunAdHocTask2Cmd       { get; }
+        //public IR2Command   RunAdHocTask3Cmd       { get; }
         public BillAmounts  Overdues               { get; private set; }
 
 
@@ -70,7 +70,7 @@ namespace RentLog.LeasesCrud.MainToolbar
             }
         }
 
-        private void RunAdHocTask(int taskNumber)
+        /*private void RunAdHocTask(int taskNumber)
         {
             Action adhocJob; string desc;
 
@@ -134,6 +134,6 @@ namespace RentLog.LeasesCrud.MainToolbar
         {
             desc = "ForInactiveLeases.RebuildSoA";
             return () => ForInactiveLeases.RebuildSoA(_args);
-        }
+        }*/
     }
 }

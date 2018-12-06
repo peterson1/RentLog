@@ -57,6 +57,23 @@
                 <butns:PrintButtonWhite Margin="10 0 0 0" />
 
                 <butns:ExcelButtonWhite Margin="10 0 0 0" />
+
+                <mat:PopupBox PlacementMode="BottomAndAlignRightEdges"
+                              StaysOpen="False"
+                              Foreground="White">
+                    <Menu>
+                        <MenuItem Header="Ad Hoc Commands"
+                                  DataContext="{Binding AdHocJobsCmds}">
+                            <MenuItem Header ="{Binding AdHocJobCmd1.CurrentLabel}"
+                                      Command="{Binding AdHocJobCmd1}" />
+                            <MenuItem Header ="{Binding AdHocJobCmd2.CurrentLabel}"
+                                      Command="{Binding AdHocJobCmd2}" />
+                            <MenuItem Header ="{Binding AdHocJobCmd3.CurrentLabel}"
+                                      Command="{Binding AdHocJobCmd3}" />
+                        </MenuItem>
+                    </Menu>
+                </mat:PopupBox>
+                
             </StackPanel>
         </DockPanel>
     </mat:ColorZone>

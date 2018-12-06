@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using RentLog.FilteredLeases.FilteredLists.FullTenantDetails;
+using RentLog.FilteredLeases.MainToolbar;
 
 namespace RentLog.FilteredLeases
 {
@@ -29,6 +30,7 @@ namespace RentLog.FilteredLeases
 
         public MainWindowVM(ITenantDBsDir tenantDBsDir) : base(tenantDBsDir)
         {
+            AdHocJobsCmds    = new AdHocJobCmdsVM(this);
             ExportToExcelCmd = R2Command.Relay(() => ToExcelRequested.Raise(), null, "Export to Excel");
 
             Enlist("All Active Leases", _ => new AllActiveLeasesVM(this, _));
@@ -39,6 +41,7 @@ namespace RentLog.FilteredLeases
         }
 
 
+        public AdHocJobCmdsVM      AdHocJobsCmds      { get; }
         public IR2Command          ExportToExcelCmd   { get; }
         public UIList<string>      FilterNames        { get; } = new UIList<string>();
         public int                 PickedFilterIndex  { get; set; } = -1;

@@ -169,6 +169,7 @@
     </Compile>
     <Compile Include="FilteredLists\FullTenantDetails\FullTenantDetailsVM.cs" />
     <Compile Include="FilteredLists\WithBackRentsOrRights\WithBackRentsOrRightsVM.cs" />
+    <Compile Include="MainToolbar\AdHocJobCmdsVM.cs" />
     <Compile Include="MainToolbar\MainToolbarUI.xaml.cs">
       <DependentUpon>MainToolbarUI.xaml</DependentUpon>
     </Compile>
