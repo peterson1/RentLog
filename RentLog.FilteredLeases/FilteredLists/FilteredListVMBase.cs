@@ -37,15 +37,17 @@ namespace RentLog.FilteredLeases.FilteredLists
             : base(null, dir, false)
         {
             _main = mainWindowVM;
+            EncodeNewDraftCmd = CreateEncodeNewDraftCmd();
             PrintCmd = R2Command.Relay(() => _printRequested?.Raise(), null, "Print");
             FillSectionsList();
         }
 
 
-        public UIList<SectionDTO>  Sections        { get; } = new UIList<SectionDTO>();
-        public SectionDTO          PickedSection   { get; set; }
-        public bool                IsPrinting      { get; set; }
-        public IR2Command          PrintCmd        { get; }
+        public IR2Command          EncodeNewDraftCmd  { get; }
+        public UIList<SectionDTO>  Sections           { get; } = new UIList<SectionDTO>();
+        public SectionDTO          PickedSection      { get; set; }
+        public bool                IsPrinting         { get; set; }
+        public IR2Command          PrintCmd           { get; }
 
 
         protected abstract List<LeaseDTO> GetLeases(MarketStateDB mkt, int sectionId);
@@ -56,6 +58,8 @@ namespace RentLog.FilteredLeases.FilteredLists
 
 
         public virtual string TopLeftText => _main?.SectionAndFilter;
+        protected virtual IR2Command CreateEncodeNewDraftCmd() => null;
+
 
 
         public virtual string TopRightText

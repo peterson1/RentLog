@@ -34,6 +34,10 @@
                                   Content="{Binding PickedList}" />
             </DockPanel>
 
+            <butns:EncodeNewDraftBtn1 HorizontalAlignment="Right"
+                                      VerticalAlignment="Bottom"
+                                      DataContext="{Binding PickedList}"
+                                      Margin="0 0 40 30" />
             <busy:BusyDialog />
         </Grid>
     </DockPanel>

@@ -169,6 +169,7 @@
     </Compile>
     <Compile Include="FilteredLists\FullTenantDetails\FullTenantDetailsVM.cs" />
     <Compile Include="FilteredLists\WithBackRentsOrRights\WithBackRentsOrRightsVM.cs" />
+    <Compile Include="LeaseCRUDs\LeaseCRUD1\LeaseCRUD1VM.cs" />
     <Compile Include="MainToolbar\AdHocJobCmdsVM.cs" />
     <Compile Include="MainToolbar\MainToolbarUI.xaml.cs">
       <DependentUpon>MainToolbarUI.xaml</DependentUpon>
@@ -241,6 +242,7 @@
   <ItemGroup>
     <Resource Include="FodyWeavers.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

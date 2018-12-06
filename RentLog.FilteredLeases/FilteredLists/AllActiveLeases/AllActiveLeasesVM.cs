@@ -1,6 +1,9 @@
-﻿using RentLog.DomainLib11.DataSources;
+﻿using CommonTools.Lib11.InputCommands;
+using CommonTools.Lib45.InputCommands;
+using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
+using RentLog.FilteredLeases.LeaseCRUDs.LeaseCRUD1;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,18 +18,13 @@ namespace RentLog.FilteredLeases.FilteredLists.AllActiveLeases
 
         protected override List<LeaseDTO> GetLeases(MarketStateDB mkt, int secId)
         {
-            var all  = mkt.ActiveLeases.GetAll();
-
-            //MarketDayOpener.TerminateExpiredLeases(AppArgs);
-            //var asOf = mkt.Collections.LastPostedDate();
-            //foreach (var lse in all)
-            //{
-            //    if (!lse.IsActive(asOf))
-            //        Alert.Show($"{lse}");
-            //}
-
+            var all = mkt.ActiveLeases.GetAll();
             return secId == 0 ? all
-                : all.Where(_ => _.Stall.Section.Id == secId).ToList();
+                 : all.Where(_ => _.Stall.Section.Id == secId).ToList();
         }
+
+
+        protected override IR2Command CreateEncodeNewDraftCmd()
+            => LeaseCRUD1VM.GetEncodeNewDraftCmd(() => this.ClickRefresh());
     }
 }
