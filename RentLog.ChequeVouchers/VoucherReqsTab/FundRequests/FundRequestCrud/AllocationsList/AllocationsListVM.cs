@@ -95,8 +95,10 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.FundRequests.FundRequestCrud.All
             if (cib == null)
                 _list.AddCashInBankEntry(_bank, amount.Value);
             else
-                cib.SubAmount = amount.Value;
-
+            {
+                var polarity  = cib.IsCredit ? 1M : -1M;
+                cib.SubAmount = amount.Value * polarity;
+            }
             UpdateUILists();
         }
 
