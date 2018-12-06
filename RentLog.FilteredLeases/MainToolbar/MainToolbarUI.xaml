@@ -30,7 +30,7 @@
                            Style="{StaticResource tbarHeadr1}" />
                 <TextBlock Text="{Binding SelectedItem, ElementName=cmbFiltr}"
                            Style="{StaticResource tbarHeadr1}" />
-                <TextBlock Text="{Binding PickedList.Rows.Count, StringFormat={}({0})}"
+                <TextBlock Text="{Binding PickedList.Rows.Count, StringFormat={}({0:N0})}"
                            Style="{StaticResource tbarHeadr1}" />
             </StackPanel>
             

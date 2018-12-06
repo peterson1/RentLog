@@ -23,7 +23,7 @@
               DataContext ="{Binding Rows}"
               SelectedItem="{Binding CurrentItem}">
         <DataGrid.Columns>
-            <DataGridTextColumn Width="12*" Header="tenant"          Binding="{Binding DTO.Tenant.FirstAndLastNames}" ElementStyle="{StaticResource colLabel}" />
+            <DataGridTextColumn Width="12*" Header="tenant"          Binding="{Binding DTO.Tenant.LastAndFirstNames}" ElementStyle="{StaticResource colLabel}" />
             <DataGridTextColumn Width="09*" Header="stall"           Binding="{Binding DTO.Stall.Name}" ElementStyle="{StaticResource colCenter}" />
             <DataGridTextColumn Width="09*" Header="start"           Binding="{Binding DTO.ContractStart, StringFormat=d MMM yyyy}" ElementStyle="{StaticResource colCenter}" />
             <DataGridTextColumn Width="09*" Header="terminated"      Binding="{Binding DeactivatedDate, StringFormat=d MMM yyyy}" ElementStyle="{StaticResource colCenter}" />
