@@ -21,7 +21,11 @@ namespace RentLog.DomainLib11.VoucherRules
                 && _.Account.Name.Contains("Cash in Bank"));
 
 
-        public static void AddCashInBankEntry(this List<AccountAllocation> list, BankAccountDTO bankAccount, decimal amount)
-            => list.Insert(0, AccountAllocation.DefaultCashInBank(bankAccount, amount));
+        public static AccountAllocation AddCashInBankEntry(this List<AccountAllocation> list, BankAccountDTO bankAccount, decimal amount)
+        {
+            var alloc = AccountAllocation.DefaultCashInBank(bankAccount, amount);
+            list.Insert(0, alloc);
+            return alloc;
+        }
     }
 }

@@ -23,13 +23,15 @@ namespace RentLog.ChequeVouchers.MainToolbar
         {
             _main = mainWindowVM;
             _dir  = _main.AppArgs;
-            AdHocJobCmd1 = R2Command.Relay(_ => 
-                CheckVoucherAdHocs.FixBDO1ImportBug(_dir), 
-                _ => _dir.CanRunAdHocTask(false),
-                "Fix BDO-1 Import Bug");
 
-            //AdHocJobCmd2 = R2Command.Relay(_ => RunAdHoc(2), _ => _dir.CanRunAdHocTask(false), "Run Ad Hoc Command 2");
-            //AdHocJobCmd3 = R2Command.Relay(_ => RunAdHoc(3), _ => _dir.CanRunAdHocTask(false), "Run Ad Hoc Command 3");
+            //AdHocJobCmd1 = R2Command.Relay(_ => 
+            //    CheckVoucherAdHocs.FixBDO1ImportBug(_dir), 
+            //    _ => _dir.CanRunAdHocTask(false),
+            //    "Fix BDO-1 Import Bug");
+
+            AdHocJobCmd1 = R2Command.Relay(_ => RunAdHoc(1), _ => _dir.CanRunAdHocTask(false), "Run Ad Hoc Command 1");
+            AdHocJobCmd2 = R2Command.Relay(_ => RunAdHoc(2), _ => _dir.CanRunAdHocTask(false), "Run Ad Hoc Command 2");
+            AdHocJobCmd3 = R2Command.Relay(_ => RunAdHoc(3), _ => _dir.CanRunAdHocTask(false), "Run Ad Hoc Command 3");
         }
 
 
@@ -38,27 +40,27 @@ namespace RentLog.ChequeVouchers.MainToolbar
         public IR2Command  AdHocJobCmd3  { get; }
 
 
-        //private void RunAdHoc(int taskNumber)
-        //{
-        //    Action adhocJob; string desc;
-        //    switch (taskNumber)
-        //    {
-        //        case 1: adhocJob = 
-        //            CheckVoucherAdHocs.FixBDO1ImportBug(_dir, out desc);
-        //            break;
+        private void RunAdHoc(int taskNumber)
+        {
+            Action adhocJob; string desc;
+            switch (taskNumber)
+            {
+                case 1: adhocJob =
+                    CheckVoucherAdHocs.FixBDO1ImportBug(_dir, out desc);
+                    break;
 
-        //        default: throw Bad.Data($"Task #: [{taskNumber}]");
-        //    }
+                default: throw Bad.Data($"Task #: [{taskNumber}]");
+            }
 
-        //    Alert.Confirm($"Run Ad Hoc job “{desc}”?", async () =>
-        //    {
-        //        _main.StartBeingBusy("Running Ad Hoc task ...");
+            Alert.Confirm($"Run Ad Hoc job “{desc}”?", async () =>
+            {
+                _main.StartBeingBusy("Running Ad Hoc task ...");
 
-        //        await Task.Run(() => adhocJob.Invoke());
+                await Task.Run(() => adhocJob.Invoke());
 
-        //        _main.StopBeingBusy();
-        //        _main.ClickRefresh();
-        //    });
-        //}
+                _main.StopBeingBusy();
+                _main.ClickRefresh();
+            });
+        }
     }
 }
