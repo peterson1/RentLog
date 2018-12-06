@@ -9,8 +9,8 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <Style TargetType="labl:DualText">
-            <Setter Property="Text1Width" Value="120" />
-            <Setter Property="Text2Width" Value="160" />
+            <Setter Property="Text1Width" Value="100" />
+            <Setter Property="Text2Width" Value="130" />
             <Setter Property="Text1Weight" Value="Normal" />
             <Setter Property="Margin" Value="0 3 0 3" />
         </Style>
