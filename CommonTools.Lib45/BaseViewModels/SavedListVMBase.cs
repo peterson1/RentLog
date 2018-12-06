@@ -72,6 +72,9 @@ namespace CommonTools.Lib45.BaseViewModels
         protected virtual void  RunMainMethod     () { }
 
 
+        public void ClickRefresh() => RefreshCmd.ExecuteIfItCan();
+
+
         protected virtual void OnCollectionChanged()
         {
             UpdateTotalSum();
