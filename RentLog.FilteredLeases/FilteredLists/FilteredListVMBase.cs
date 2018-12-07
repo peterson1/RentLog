@@ -37,7 +37,7 @@ namespace RentLog.FilteredLeases.FilteredLists
             : base(null, dir, false)
         {
             _main = mainWindowVM;
-            EncodeNewDraftCmd = CreateEncodeNewDraftCmd();
+            EncodeNewDraftCmd = CreateEncodeNewDraftCmd(dir);
             PrintCmd = R2Command.Relay(() => _printRequested?.Raise(), null, "Print");
             FillSectionsList();
         }
@@ -58,7 +58,7 @@ namespace RentLog.FilteredLeases.FilteredLists
 
 
         public virtual string TopLeftText => _main?.SectionAndFilter;
-        protected virtual IR2Command CreateEncodeNewDraftCmd() => null;
+        protected virtual IR2Command CreateEncodeNewDraftCmd(ITenantDBsDir dir) => null;
 
 
 

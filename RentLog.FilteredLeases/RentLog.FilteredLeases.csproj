@@ -238,6 +238,10 @@
       <Project>{d789ffc5-112e-4e95-8d86-e46da7ee54ff}</Project>
       <Name>RentLog.DomainLib45</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RentLog.LeasesCrud\RentLog.LeasesCrud.csproj">
+      <Project>{ad025f09-f180-45d9-868c-5f0274d32555}</Project>
+      <Name>RentLog.LeasesCrud</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="FodyWeavers.xml" />

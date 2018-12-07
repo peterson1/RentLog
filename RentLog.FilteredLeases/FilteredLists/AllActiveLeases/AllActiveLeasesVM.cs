@@ -11,6 +11,9 @@ namespace RentLog.FilteredLeases.FilteredLists.AllActiveLeases
 {
     public class AllActiveLeasesVM : FilteredListVMBase
     {
+        //private LeaseCRUD1VM _crud;
+
+
         public AllActiveLeasesVM(MainWindowVM main, ITenantDBsDir dir) : base(main, dir)
         {
         }
@@ -19,12 +22,16 @@ namespace RentLog.FilteredLeases.FilteredLists.AllActiveLeases
         protected override List<LeaseDTO> GetLeases(MarketStateDB mkt, int secId)
         {
             var all = mkt.ActiveLeases.GetAll();
-            return secId == 0 ? all
-                 : all.Where(_ => _.Stall.Section.Id == secId).ToList();
+            var filtered = secId == 0 ? all
+                         : all.Where(_ => _.Stall.Section.Id == secId);
+            return filtered.OrderByDescending(_ => _.Id).ToList();
         }
 
 
-        protected override IR2Command CreateEncodeNewDraftCmd()
-            => LeaseCRUD1VM.GetEncodeNewDraftCmd(() => this.ClickRefresh());
+        protected override IR2Command CreateEncodeNewDraftCmd(ITenantDBsDir dir)
+        {
+            //_crud = new LeaseCRUD1VM(dir);
+            return LeaseCRUD1VM.GetEncodeNewDraftCmd(dir, () => this.ClickRefresh());
+        }
     }
 }
