@@ -8,6 +8,9 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <ContextMenu x:Key="rowCtxMenu">
+            <MenuItem Header ="{Binding AddStallToTenantCmd.CurrentLabel}" 
+                      Command="{Binding AddStallToTenantCmd}"
+                      DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
             <MenuItem Header ="{Binding UndoTerminationCmd.CurrentLabel}" 
                       Command="{Binding UndoTerminationCmd}"
                       DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
