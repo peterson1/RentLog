@@ -45,7 +45,9 @@ namespace RentLog.DomainLib45.StallPicker
 
         private IEnumerable<StallDTO> GetVacantStalls()
             => _mkt.Stalls.ForSection(PickedSection)
-                    .Where(_ => !_occupiedIDs.Contains(_.Id));
+                    .Where(_ => !_occupiedIDs.Contains(_.Id)
+                        && _.IsOperational)
+                    .OrderBy(_ => _.Name);
 
 
         private List<int> GetOccupiedStallIDs()
