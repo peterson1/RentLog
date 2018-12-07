@@ -13,16 +13,22 @@ namespace RentLog.FilteredLeases.FilteredLists.AllActiveLeases
     {
         public AllActiveLeasesVM(MainWindowVM main, ITenantDBsDir dir) : base(main, dir)
         {
-            AddStallToTenantCmd   = LeaseCRUD1VM.GetAddStallToTenantCmd  (this, DoOnSave);
-            EditThisLeaseCmd      = LeaseCRUD1VM.GetEditThisLeaseCmd     (this, DoOnSave);
-            EditTenantInfoCmd     = LeaseCRUD1VM.GetEditTenantInfoCmd    (this, DoOnSave);
-            TerminateThisLeaseCmd = LeaseCRUD1VM.GetTerminateThisLeaseCmd(this, DoOnSave);
+            AddStallToTenantCmd   = LeaseCRUD1VM.GetAddStallToTenantCmd  (this);
+            EditThisLeaseCmd      = LeaseCRUD1VM.GetEditThisLeaseCmd     (this);
+            EditTenantInfoCmd     = LeaseCRUD1VM.GetEditTenantInfoCmd    (this);
+            TerminateThisLeaseCmd = LeaseCRUD1VM.GetTerminateThisLeaseCmd(this);
+            AdhocLeaseJobCmd1     = AdhocLeaseJobs.CreateLeaseJobCmd  (1, this);
+            AdhocLeaseJobCmd2     = AdhocLeaseJobs.CreateLeaseJobCmd  (2, this);
+            AdhocLeaseJobCmd3     = AdhocLeaseJobs.CreateLeaseJobCmd  (3, this);
         }
 
         public IR2Command   AddStallToTenantCmd    { get; }
         public IR2Command   EditThisLeaseCmd       { get; }
         public IR2Command   EditTenantInfoCmd      { get; }
         public IR2Command   TerminateThisLeaseCmd  { get; }
+        public IR2Command   AdhocLeaseJobCmd1      { get; }
+        public IR2Command   AdhocLeaseJobCmd2      { get; }
+        public IR2Command   AdhocLeaseJobCmd3      { get; }
 
 
         protected override List<LeaseDTO> GetLeases(MarketStateDB mkt, int secId)
@@ -35,9 +41,6 @@ namespace RentLog.FilteredLeases.FilteredLists.AllActiveLeases
 
 
         protected override IR2Command CreateEncodeNewDraftCmd(ITenantDBsDir dir)
-            => LeaseCRUD1VM.GetEncodeNewDraftCmd(this, DoOnSave);
-
-
-        private Action DoOnSave => () => this.ClickRefresh();
+            => LeaseCRUD1VM.GetEncodeNewDraftCmd(this);
     }
 }

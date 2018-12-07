@@ -16,18 +16,18 @@ namespace RentLog.FilteredLeases.LeaseCRUDs.LeaseCRUD1
     public class LeaseCRUD1VM
     {
         public static IR2Command GetEncodeNewDraftCmd(FilteredListVMBase listVM, 
-            Action doWhenDone, string label = "Encode new Lease Contract")
+            string label = "Encode new Lease Contract")
         {
             if (!listVM.AppArgs.CanAddLease(false)) return null;
-            return LeaseCRUD1VM.NewCmd(listVM, doWhenDone, label, true,
+            return LeaseCRUD1VM.NewCmd(listVM, label, true,
                 (lse, crud) => crud.EncodeNewDraftCmd.ExecuteIfItCan());
         }
 
 
         public static IR2Command GetAddStallToTenantCmd(FilteredListVMBase listVM, 
-            Action doWhenDone, string label = "Add another Stall to this Tenant")
+            string label = "Add another Stall to this Tenant")
         {
-            return LeaseCRUD1VM.NewCmd(listVM, doWhenDone, label,
+            return LeaseCRUD1VM.NewCmd(listVM, label,
                 listVM.AppArgs.CanAddLease(false), (lse, crud) =>
                 {
                     if (lse == null) return;
@@ -39,9 +39,9 @@ namespace RentLog.FilteredLeases.LeaseCRUDs.LeaseCRUD1
 
 
         public static IR2Command GetEditThisLeaseCmd(FilteredListVMBase listVM,
-            Action doWhenDone, string label = "Edit this Lease")
+            string label = "Edit this Lease")
         {
-            return LeaseCRUD1VM.NewCmd(listVM, doWhenDone, label,
+            return LeaseCRUD1VM.NewCmd(listVM, label,
                 listVM.AppArgs.CanEditLease(false), (lse, crud) =>
                 {
                     if (lse == null) return;
@@ -52,9 +52,9 @@ namespace RentLog.FilteredLeases.LeaseCRUDs.LeaseCRUD1
 
 
         public static IR2Command GetEditTenantInfoCmd(FilteredListVMBase listVM,
-            Action doWhenDone, string label = "Edit Tenant Info")
+            string label = "Edit Tenant Info")
         {
-            return LeaseCRUD1VM.NewCmd(listVM, doWhenDone, label,
+            return LeaseCRUD1VM.NewCmd(listVM, label,
                 listVM.AppArgs.CanEditTenantInfo(false), (lse, crud) =>
             {
                 if (lse == null) return;
@@ -65,9 +65,9 @@ namespace RentLog.FilteredLeases.LeaseCRUDs.LeaseCRUD1
 
 
         public static IR2Command GetTerminateThisLeaseCmd(FilteredListVMBase listVM,
-            Action doWhenDone, string label = "Terminate this Lease")
+            string label = "Terminate this Lease")
         {
-            return LeaseCRUD1VM.NewCmd(listVM, doWhenDone, label,
+            return LeaseCRUD1VM.NewCmd(listVM, label,
                 listVM.AppArgs.CanTerminateteLease(false), (lse, crud) =>
             {
                 if (lse == null) return;
@@ -88,14 +88,13 @@ namespace RentLog.FilteredLeases.LeaseCRUDs.LeaseCRUD1
         }
 
 
-        private static IR2Command NewCmd(FilteredListVMBase listVM, 
-            Action doWhenDone, string buttonLabel, bool canExecute, 
-            Action<LeaseDTO, LeaseCrudVM> action)
+        private static IR2Command NewCmd(FilteredListVMBase listVM, string buttonLabel, 
+            bool canExecute, Action<LeaseDTO, LeaseCrudVM> action)
         {
             var dir     = listVM.AppArgs;
             var repo    = dir.MarketState.ActiveLeases;
             var oldCrud = new LeaseCrudVM(repo, dir as AppArguments);
-            oldCrud.SaveCompleted += (s, e) => doWhenDone.Invoke();
+            oldCrud.SaveCompleted += (s, e) => listVM.DoAfterSave.Invoke();
             return R2Command.Relay(() =>
             {
                 var lse = listVM.Rows.CurrentItem?.DTO;

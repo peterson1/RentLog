@@ -60,6 +60,8 @@ namespace RentLog.FilteredLeases.FilteredLists
         public virtual string TopLeftText => _main?.SectionAndFilter;
         protected virtual IR2Command CreateEncodeNewDraftCmd(ITenantDBsDir dir) => null;
 
+        public virtual Action DoAfterSave => () => this.ClickRefresh();
+
 
         public virtual string TopRightText
         {

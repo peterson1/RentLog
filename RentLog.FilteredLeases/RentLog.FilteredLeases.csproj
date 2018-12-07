@@ -136,6 +136,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FilteredLists\AllActiveLeases\AdhocLeaseJobs.cs" />
     <Compile Include="FilteredLists\AllActiveLeases\AllActiveLeasesFilter.xaml.cs">
       <DependentUpon>AllActiveLeasesFilter.xaml</DependentUpon>
     </Compile>

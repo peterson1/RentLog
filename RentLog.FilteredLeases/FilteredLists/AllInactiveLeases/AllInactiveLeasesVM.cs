@@ -17,7 +17,7 @@ namespace RentLog.FilteredLeases.FilteredLists.AllInactiveLeases
     {
         public AllInactiveLeasesVM(MainWindowVM main, ITenantDBsDir dir) : base(main, dir)
         {
-            AddStallToTenantCmd = LeaseCRUD1VM.GetAddStallToTenantCmd(this, DoOnSave);
+            AddStallToTenantCmd = LeaseCRUD1VM.GetAddStallToTenantCmd(this);
             UndoTerminationCmd  = R2Command.Relay(UndoTermination, 
                               _ => AppArgs.CanUndoLeaseTermination(false), 
                                     "Undo Lease Termination");
@@ -51,8 +51,5 @@ namespace RentLog.FilteredLeases.FilteredLists.AllInactiveLeases
                            .Select (_ => _ as LeaseDTO)
                            .ToList ();
         }
-
-
-        private Action DoOnSave => () => this.ClickRefresh();
     }
 }

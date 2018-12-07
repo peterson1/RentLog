@@ -20,6 +20,17 @@
             <MenuItem Header ="{Binding TerminateThisLeaseCmd.CurrentLabel}" 
                       Command="{Binding TerminateThisLeaseCmd}"
                       DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+            <MenuItem Header="Ad Hoc Commands">
+                <MenuItem Header ="{Binding AdhocLeaseJobCmd1.CurrentLabel}" 
+                          Command="{Binding AdhocLeaseJobCmd1}"
+                          DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+                <MenuItem Header ="{Binding AdhocLeaseJobCmd2.CurrentLabel}" 
+                          Command="{Binding AdhocLeaseJobCmd2}"
+                          DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+                <MenuItem Header ="{Binding AdhocLeaseJobCmd3.CurrentLabel}" 
+                          Command="{Binding AdhocLeaseJobCmd3}"
+                          DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+            </MenuItem>
         </ContextMenu>
 
         <Style TargetType="DataGridRow"
