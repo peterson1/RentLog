@@ -1,9 +1,9 @@
 ﻿using CommonTools.Lib11.InputCommands;
-using CommonTools.Lib45.InputCommands;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
 using RentLog.FilteredLeases.LeaseCRUDs.LeaseCRUD1;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,12 +11,18 @@ namespace RentLog.FilteredLeases.FilteredLists.AllActiveLeases
 {
     public class AllActiveLeasesVM : FilteredListVMBase
     {
-        //private LeaseCRUD1VM _crud;
-
-
         public AllActiveLeasesVM(MainWindowVM main, ITenantDBsDir dir) : base(main, dir)
         {
+            AddStallToTenantCmd   = LeaseCRUD1VM.GetAddStallToTenantCmd  (this, DoOnSave);
+            EditThisLeaseCmd      = LeaseCRUD1VM.GetEditThisLeaseCmd     (this, DoOnSave);
+            EditTenantInfoCmd     = LeaseCRUD1VM.GetEditTenantInfoCmd    (this, DoOnSave);
+            TerminateThisLeaseCmd = LeaseCRUD1VM.GetTerminateThisLeaseCmd(this, DoOnSave);
         }
+
+        public IR2Command   AddStallToTenantCmd    { get; }
+        public IR2Command   EditThisLeaseCmd       { get; }
+        public IR2Command   EditTenantInfoCmd      { get; }
+        public IR2Command   TerminateThisLeaseCmd  { get; }
 
 
         protected override List<LeaseDTO> GetLeases(MarketStateDB mkt, int secId)
@@ -29,9 +35,9 @@ namespace RentLog.FilteredLeases.FilteredLists.AllActiveLeases
 
 
         protected override IR2Command CreateEncodeNewDraftCmd(ITenantDBsDir dir)
-        {
-            //_crud = new LeaseCRUD1VM(dir);
-            return LeaseCRUD1VM.GetEncodeNewDraftCmd(dir, () => this.ClickRefresh());
-        }
+            => LeaseCRUD1VM.GetEncodeNewDraftCmd(this, DoOnSave);
+
+
+        private Action DoOnSave => () => this.ClickRefresh();
     }
 }

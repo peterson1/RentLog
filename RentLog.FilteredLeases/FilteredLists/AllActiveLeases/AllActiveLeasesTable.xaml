@@ -6,6 +6,27 @@
              xmlns:local="clr-namespace:RentLog.FilteredLeases.FilteredLists.AllActiveLeases"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ContextMenu x:Key="rowCtxMenu">
+            <MenuItem Header ="{Binding AddStallToTenantCmd.CurrentLabel}" 
+                      Command="{Binding AddStallToTenantCmd}"
+                      DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+            <MenuItem Header ="{Binding EditThisLeaseCmd.CurrentLabel}" 
+                      Command="{Binding EditThisLeaseCmd}"
+                      DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+            <MenuItem Header ="{Binding EditTenantInfoCmd.CurrentLabel}" 
+                      Command="{Binding EditTenantInfoCmd}"
+                      DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+            <MenuItem Header ="{Binding TerminateThisLeaseCmd.CurrentLabel}" 
+                      Command="{Binding TerminateThisLeaseCmd}"
+                      DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+        </ContextMenu>
+
+        <Style TargetType="DataGridRow"
+               BasedOn="{StaticResource MaterialDesignDataGridRow}">
+            <Setter Property="ContextMenu" Value="{StaticResource rowCtxMenu}" />
+        </Style>
+    </UserControl.Resources>
     <DataGrid x:Name="dg" ItemsSource="{Binding }"
               SelectedItem="{Binding CurrentItem}"
               DataContext="{Binding Rows}"

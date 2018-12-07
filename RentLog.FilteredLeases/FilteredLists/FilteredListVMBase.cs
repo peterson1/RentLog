@@ -1,8 +1,9 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
-using CommonTools.Lib11.EventHandlerTools;
 using CommonTools.Lib11.DataStructures;
+using CommonTools.Lib11.EventHandlerTools;
 using CommonTools.Lib11.InputCommands;
 using CommonTools.Lib11.MathTools;
+using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.BaseViewModels;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.ThreadTools;
@@ -10,13 +11,12 @@ using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
 using RentLog.DomainLib11.ReportRows;
+using RentLog.DomainLib45.SoaViewers.MainWindow;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using RentLog.DomainLib45.SoaViewers.MainWindow;
-using CommonTools.Lib11.StringTools;
 
 namespace RentLog.FilteredLeases.FilteredLists
 {
@@ -61,17 +61,17 @@ namespace RentLog.FilteredLeases.FilteredLists
         protected virtual IR2Command CreateEncodeNewDraftCmd(ITenantDBsDir dir) => null;
 
 
-
         public virtual string TopRightText
         {
             get
             {
-                var rentBal = Rows.Sum(_ => _.Rent.ZeroIfNullOrNegative());
+                var rentBal   = Rows.Sum(_ => _.Rent.ZeroIfNullOrNegative());
                 var rightsBal = Rows.Sum(_ => _.Rights.ZeroIfNullOrNegative());
                 return $"Total Rent Balance :  {rentBal:N2}" + L.f
                      + $"Total Rights Balance :  {rightsBal:N2}";
             }
         }
+
 
         public override async void ReloadFromDB()
         {

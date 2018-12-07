@@ -1,40 +1,107 @@
 ﻿using CommonTools.Lib11.InputCommands;
+using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.InputCommands;
+using CommonTools.Lib45.InputDialogs;
 using RentLog.DomainLib11.Authorization;
-using RentLog.DomainLib11.DataSources;
+using RentLog.DomainLib11.DTOs;
+using RentLog.DomainLib11.StateTransitions;
 using RentLog.DomainLib45;
+using RentLog.FilteredLeases.FilteredLists;
 using RentLog.LeasesCrud.LeaseCRUD;
 using System;
+using System.Windows;
 
 namespace RentLog.FilteredLeases.LeaseCRUDs.LeaseCRUD1
 {
     public class LeaseCRUD1VM
     {
-        private ITenantDBsDir _dir;
-        private Action       _doWhenDone;
-
-
-        public LeaseCRUD1VM(ITenantDBsDir tenantDBsDir, Action doWhenDone)
+        public static IR2Command GetEncodeNewDraftCmd(FilteredListVMBase listVM, 
+            Action doWhenDone, string label = "Encode new Lease Contract")
         {
-            _dir        = tenantDBsDir;
-            _doWhenDone = doWhenDone;
+            if (!listVM.AppArgs.CanAddLease(false)) return null;
+            return LeaseCRUD1VM.NewCmd(listVM, doWhenDone, label, true,
+                (lse, crud) => crud.EncodeNewDraftCmd.ExecuteIfItCan());
         }
 
 
-        public static IR2Command GetEncodeNewDraftCmd(ITenantDBsDir dir, Action doWhenDone)
+        public static IR2Command GetAddStallToTenantCmd(FilteredListVMBase listVM, 
+            Action doWhenDone, string label = "Add another Stall to this Tenant")
         {
-            if (!dir.CanAddLease(false)) return null;
-            var thisVM = new LeaseCRUD1VM(dir, doWhenDone);
-            return R2Command.Relay(thisVM.LaunchOldForInserting);
+            return LeaseCRUD1VM.NewCmd(listVM, doWhenDone, label,
+                listVM.AppArgs.CanAddLease(false), (lse, crud) =>
+                {
+                    if (lse == null) return;
+                    crud.TenantTemplate = lse.Tenant.ShallowClone();
+                    crud.DraftBirthDate = lse.Tenant.BirthDate;
+                    crud.EncodeNewDraftCmd.ExecuteIfItCan();
+                });
         }
 
 
-        private void LaunchOldForInserting()
+        public static IR2Command GetEditThisLeaseCmd(FilteredListVMBase listVM,
+            Action doWhenDone, string label = "Edit this Lease")
         {
-            var repo = _dir.MarketState.ActiveLeases;
-            var oldCrud = new LeaseCrudVM(repo, _dir as AppArguments);
-            oldCrud.SaveCompleted += (s, e) => _doWhenDone.Invoke();
-            oldCrud.EncodeNewDraftCmd.ExecuteIfItCan();
+            return LeaseCRUD1VM.NewCmd(listVM, doWhenDone, label,
+                listVM.AppArgs.CanEditLease(false), (lse, crud) =>
+                {
+                    if (lse == null) return;
+                    crud.AllFieldsEnabled = true;
+                    crud.EditCurrentRecord(lse);
+                });
+        }
+
+
+        public static IR2Command GetEditTenantInfoCmd(FilteredListVMBase listVM,
+            Action doWhenDone, string label = "Edit Tenant Info")
+        {
+            return LeaseCRUD1VM.NewCmd(listVM, doWhenDone, label,
+                listVM.AppArgs.CanEditTenantInfo(false), (lse, crud) =>
+            {
+                if (lse == null) return;
+                crud.AllFieldsEnabled = false;
+                crud.EditCurrentRecord(lse);
+            });
+        }
+
+
+        public static IR2Command GetTerminateThisLeaseCmd(FilteredListVMBase listVM,
+            Action doWhenDone, string label = "Terminate this Lease")
+        {
+            return LeaseCRUD1VM.NewCmd(listVM, doWhenDone, label,
+                listVM.AppArgs.CanTerminateteLease(false), (lse, crud) =>
+            {
+                if (lse == null) return;
+
+                var resp = MessageBox.Show($"Are you sure you want to terminate the lease for {L.f} {lse}?",
+                    "   Confirm Termination", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (resp != MessageBoxResult.Yes) return;
+
+                if (!PopUpInput.TryGetDate($"When is the last billable day for {L.f}{lse}?",
+                    out DateTime termDate, DateTime.Now.Date)) return;
+
+                if (!PopUpInput.TryGetString("Why are you terminating this lease?",
+                    out string reason)) return;
+
+                listVM.AppArgs.MarketState.DeactivateLease(lse, reason, termDate);
+            });
+        }
+
+
+        private static IR2Command NewCmd(FilteredListVMBase listVM, 
+            Action doWhenDone, string buttonLabel, bool canExecute, 
+            Action<LeaseDTO, LeaseCrudVM> action)
+        {
+            var dir     = listVM.AppArgs;
+            var repo    = dir.MarketState.ActiveLeases;
+            var oldCrud = new LeaseCrudVM(repo, dir as AppArguments);
+            oldCrud.SaveCompleted += (s, e) => doWhenDone.Invoke();
+            return R2Command.Relay(() =>
+            {
+                var lse = listVM.Rows.CurrentItem?.DTO;
+                action(lse, oldCrud);
+            }, 
+            _ => canExecute, buttonLabel);
         }
     }
 }
