@@ -25,13 +25,13 @@ namespace RentLog.TrayLauncher
             EncoderCmd      = NewCmd("RL.Cashier.exe"     , "Encode Collections");
             ReviewerCmd     = NewCmd("RL.Cashier.exe"     , "Review Collections");
             StallsCmd       = NewCmd("RL.Stalls.exe"      , "Stalls & Sections");
-            LeasesCmd       = NewCmd("RL.Leases.exe"      , "Tenants & Leases");
+            LeasesCmd       = NewCmd("RL.Leases.exe"      , "deprecated Tenants & Leases");
             ChequesCmd      = NewCmd("RL.Cheques.exe"     , "Vouchers & DCDR");
             OverduesCmd     = NewCmd("RL.Reports.exe"     , "Backrentals & Overdue Rights", "Overdues");
             ColxnSummaryCmd = NewCmd("RL.Reports.exe"     , "Collections Summary Report"  , "ColxnSmry");
             DailyStatusCmd  = NewCmd("RL.Reports.exe"     , "Daily Status Report"         , "DailyStatus");
             GLRecapCmd      = NewCmd("RL.Reports.exe"     , "GL Recap Report"             , "GLRecap");
-            LeaseFiltersCmd = NewCmd("RL.LeaseFilters.exe", "Filtered Tenants/Leases");
+            LeaseFiltersCmd = NewCmd("RL.LeaseFilters.exe", "Tenants & Leases");
             ClickRefresh();
         }
 

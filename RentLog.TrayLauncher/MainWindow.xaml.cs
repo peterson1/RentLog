@@ -23,7 +23,7 @@ namespace RentLog.TrayLauncher
                 ctxMenu.Items.Add(new Separator());
 
                 ctxMenu.Add("Contracts");
-                ctxMenu.AddLauncher(VM.LeasesCmd  );
+                ctxMenu.AddLauncher(VM.LeaseFiltersCmd);
                 ctxMenu.AddLauncher(VM.StallsCmd  );
                 ctxMenu.Items.Add(new Separator());
 
@@ -36,7 +36,10 @@ namespace RentLog.TrayLauncher
                 ctxMenu.AddLauncher(VM.ColxnSummaryCmd);
                 ctxMenu.AddLauncher(VM.DailyStatusCmd);
                 ctxMenu.AddLauncher(VM.GLRecapCmd);
-                ctxMenu.AddLauncher(VM.LeaseFiltersCmd);
+                ctxMenu.Items.Add(new Separator());
+
+                ctxMenu.Add("Deprecated (do NOT use)");
+                ctxMenu.AddLauncher(VM.LeasesCmd  );
                 ctxMenu.Items.Add(new Separator());
 
                 ctxMenu.Add(VM.CloseWindowCmd);
