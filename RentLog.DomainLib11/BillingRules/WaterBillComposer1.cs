@@ -22,7 +22,7 @@ namespace RentLog.DomainLib11.BillingRules
         }
 
 
-        protected override decimal GetRegularDue(LeaseDTO lse, DailyBillDTO.BillState billState, DateTime date)
+        protected override decimal GetRegularDue(LeaseDTO lse, DateTime date)
         {
             return 0;
         }

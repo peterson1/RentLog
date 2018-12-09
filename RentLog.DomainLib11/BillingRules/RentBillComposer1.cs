@@ -32,18 +32,35 @@ namespace RentLog.DomainLib11.BillingRules
                     return new RentDailySurchargerNoRoundOff()
                         .GetPenalties(lse, date, previousBalance);
 
+                case RentPenalty.MonthlySurcharge:
+                    return new RentMonthlySurcharger()
+                        .GetPenalties(lse, date, previousBalance);
+
                 default:
                     throw Fault.BadArg(nameof(lse.Rent.PenaltyRule), lse.Rent.PenaltyRule);
             }
         }
 
 
-        protected override decimal GetRegularDue(LeaseDTO lse, BillState billState, DateTime date)
+        protected override decimal GetRegularDue(LeaseDTO lse, DateTime date)
         {
             if (!lse.IsActive(date)) return 0;
-
-            return date.Date >= lse.FirstRentDueDate
-                ? lse.Rent.RegularRate : 0;
+            if (date.Date < lse.FirstRentDueDate.Date) return 0;
+            switch (lse.Rent.Interval)
+            {
+                case BillInterval.Daily  : return GetDailyDue   (lse, date);
+                case BillInterval.Monthly: return GetMonthlyDue (lse, date);
+                default: throw Bad.Arg("Rent.Interval", lse.Rent.Interval);
+            }
         }
+
+
+        private static decimal GetDailyDue(LeaseDTO lse, DateTime date) 
+            => lse.Rent.RegularRate;
+
+
+        private decimal GetMonthlyDue(LeaseDTO lse, DateTime date)
+            => date.Day == lse.Rent.PenaltyRate2
+             ? lse.Rent.RegularRate : 0;
     }
 }

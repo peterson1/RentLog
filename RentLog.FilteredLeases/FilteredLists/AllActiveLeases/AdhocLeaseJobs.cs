@@ -2,6 +2,7 @@
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.ThreadTools;
 using RentLog.DomainLib11.Authorization;
+using RentLog.DomainLib11.BillingRules.RentPenalties;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.Models;
@@ -35,7 +36,10 @@ namespace RentLog.FilteredLeases.FilteredLists.AllActiveLeases
 
         private static void SetToMonthly(LeaseDTO lse, ITenantDBsDir dir)
         {
-            lse.Rent.Interval = BillInterval.Monthly;
+            lse.Rent.Interval     = BillInterval.Monthly;
+            lse.Rent.PenaltyRule  = RentPenalty.MonthlySurcharge;
+            lse.Rent.PenaltyRate1 = 0.03M;
+            lse.Rent.PenaltyRate2 = 5;
             dir.MarketState.ActiveLeases.Update(lse);
         }
     }

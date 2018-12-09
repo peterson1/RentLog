@@ -68,7 +68,7 @@ namespace RentLog.Tests.BillRowComposerTests
             }
 
 
-            protected override decimal GetRegularDue(LeaseDTO lse, BillState billState, DateTime date)
+            protected override decimal GetRegularDue(LeaseDTO lse, DateTime date)
             {
                 throw new NotImplementedException();
             }

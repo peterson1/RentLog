@@ -21,18 +21,18 @@ namespace RentLog.DomainLib11.BillingRules
         protected abstract BillCode BillCode { get; }
 
         public abstract List<BillPenalty> ComputePenalties (LeaseDTO lse, DateTime date, decimal? previousBalance);
-        protected abstract decimal        GetRegularDue    (LeaseDTO lse, BillState billState, DateTime date);
+        protected abstract decimal        GetRegularDue    (LeaseDTO lse, DateTime date);
 
 
         public decimal GetTotalDue(LeaseDTO lse, BillState state, DateTime date)
         {
             if (state == null)
-                return GetRegularDue(lse, state, date);
+                return GetRegularDue(lse, date);
             else
-            return (state.OpeningBalance ?? 0)
-                  + state.TotalPenalties
-                  + state.TotalAdjustments
-                  + GetRegularDue(lse, state, date);
+                return (state.OpeningBalance ?? 0)
+                      + state.TotalPenalties
+                      + state.TotalAdjustments
+                      + GetRegularDue(lse, date);
         }
 
         public decimal ComputeClosingBalance(LeaseDTO lse, BillState billState, DateTime date)

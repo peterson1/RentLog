@@ -7,11 +7,13 @@ namespace RentLog.DomainLib11.BillingRules.RentPenalties
     {
         public const string DailySurcharge            = "Daily Surcharge";
         public const string DailySurcharge_NoRoundOff = "Daily Surcharge (No Round-off)";
+        public const string MonthlySurcharge          = "Monthly Surcharge";
 
         public static ReadOnlyCollection<string> Rules = new ReadOnlyCollection<string>(new List<string>
         {
             DailySurcharge,
-            DailySurcharge_NoRoundOff
+            DailySurcharge_NoRoundOff,
+            MonthlySurcharge,
         });
     }
 }

@@ -33,7 +33,7 @@ namespace RentLog.DomainLib11.BillingRules
         }
 
 
-        protected override decimal GetRegularDue(LeaseDTO lse, BillState billState, DateTime date)
+        protected override decimal GetRegularDue(LeaseDTO lse, DateTime date)
             => lse.ContractStart == date.Date 
              ? lse.Rights.TotalAmount : 0;
     }

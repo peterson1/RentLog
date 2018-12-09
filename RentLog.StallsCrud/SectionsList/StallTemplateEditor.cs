@@ -56,7 +56,7 @@ namespace RentLog.StallsCrud.SectionsList
             {
                 Interval        = BillInterval.Daily,
                 GracePeriodDays = 3,
-                PenaltyRule     = "Daily Surcharge",
+                PenaltyRule     = RentPenalty.DailySurcharge,
                 PenaltyRate1    = 0.03M,
             },
             DefaultRights = new RightsParams

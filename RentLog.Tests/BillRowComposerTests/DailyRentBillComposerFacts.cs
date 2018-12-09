@@ -11,8 +11,8 @@ using static RentLog.DomainLib11.DTOs.DailyBillDTO;
 
 namespace RentLog.Tests.BillRowComposerTests
 {
-    [Trait("Rent Bill Composer 1", "Solitary")]
-    public class RentBillComposerFacts
+    [Trait("Daily Rent Bill Composer 1", "Solitary")]
+    public class DailyRentBillComposerFacts
     {
         [Fact(DisplayName = "Due includes rent rate")]
         public void Dueincludesrentrate()
@@ -105,6 +105,7 @@ namespace RentLog.Tests.BillRowComposerTests
                 ContractEnd   = 29.May(2018),
                 Rent          = new RentParams
                 {
+                    Interval     = BillInterval.Daily,
                     RegularRate  = 120,
                     PenaltyRule  = RentPenalty.DailySurcharge,
                     PenaltyRate1 = 0.03M,
