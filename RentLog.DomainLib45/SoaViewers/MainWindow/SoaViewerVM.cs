@@ -26,7 +26,7 @@ namespace RentLog.DomainLib45.SoaViewers.MainWindow
         public SoaViewerVM(LeaseDTO leaseDTO, ITenantDBsDir appArguments) : base(appArguments)
         {
             Lease = leaseDTO;
-            UpdateBalanceFromDateCmd = R2Command.Relay(UpdateBalanceFromDate, 
+            UpdateBalanceFromDateCmd = R2Command.Async(UpdateBalanceFromDate, 
                                    _ => AppArgs.CanForceLeaseBalanceUpdate(false), "Recompute Balances starting from this date");
             SetCaption($"[{Lease.Id}]  {Lease.TenantAndStall}");
             Rows.ItemOpened += (s, e) => OnItemOpened(e);
@@ -47,10 +47,15 @@ namespace RentLog.DomainLib45.SoaViewers.MainWindow
             => StartBalanceEditorVM.ListenTo(GetWindowInstance());
 
 
-        private void UpdateBalanceFromDate(object cmdParam)
+        private async Task UpdateBalanceFromDate(object cmdParam)
         {
             if (!(cmdParam is DailyBillsRow row)) return;
-            AppArgs.Balances.GetRepo(row.Lease).RecomputeFrom(row.Date);
+            StartBeingBusy("Recomputing lease balances ...");
+
+            await Task.Run(() 
+                => AppArgs.Balances.GetRepo(row.Lease).RecomputeFrom(row.Date));
+
+            StopBeingBusy();
             ClickRefresh();
         }
 
