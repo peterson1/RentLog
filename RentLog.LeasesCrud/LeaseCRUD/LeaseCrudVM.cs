@@ -20,6 +20,7 @@ namespace RentLog.LeasesCrud.LeaseCRUD
         private StallDTO  _pickedStall;
         private DateTime? _pickedStart;
         private int?      _renewedFromID;
+        private string    _productToSell;
 
 
         public LeaseCrudVM(IActiveLeasesRepo repository, AppArguments appArguments) : base(repository, appArguments)
@@ -58,7 +59,8 @@ namespace RentLog.LeasesCrud.LeaseCRUD
                 Stall                = _pickedStall,
                 Rent                 = _pickedStall.DefaultRent.ShallowClone(),
                 Rights               = _pickedStall.DefaultRights.ShallowClone(),
-                RenewedFromID        = _renewedFromID
+                RenewedFromID        = _renewedFromID,
+                ProductToSell        = _productToSell,
             };
             draft.Tenant = TenantTemplate?.ShallowClone()
                          ?? new TenantModel { Country = "Philippines" };
@@ -89,9 +91,10 @@ namespace RentLog.LeasesCrud.LeaseCRUD
         }
 
 
-        public void SetPickedStall(StallDTO stallDTO ) => _pickedStall   = stallDTO;
-        public void SetPickedStart(DateTime startDate) => _pickedStart   = startDate;
-        public void SetRenewedFrom(LeaseDTO lease    ) => _renewedFromID = lease.Id;
+        public void SetPickedStall  (StallDTO stallDTO   ) => _pickedStall   = stallDTO;
+        public void SetPickedStart  (DateTime startDate  ) => _pickedStart   = startDate;
+        public void SetRenewedFrom  (LeaseDTO lease      ) => _renewedFromID = lease.Id;
+        public void SetProductToSell(string productToSell) => _productToSell = productToSell;
 
 
         public void UpdateDerivatives()

@@ -66,8 +66,8 @@ namespace RentLog.DomainLib45
                         { HumanName = "Anonymous", Roles = "Guest" };
 
 #if DEBUG
-            //Credentials.Roles = "Cashier";
-            Credentials.Roles = "Supervisor";
+            Credentials.Roles = "Cashier";
+            //Credentials.Roles = "Supervisor";
             //Credentials.Roles = "Supervisor, Acctg.Head";
 #endif
         }
