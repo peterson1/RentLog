@@ -24,6 +24,8 @@ namespace RentLog.DomainLib11.MarketStateRepos
 
         LeaseDTO FindLease(int leaseID);
         void RefreshStall(LeaseDTO lease);
+        bool IsOccupied(StallDTO stall);
+        LeaseDTO GetOccupant(StallDTO stall);
         List<LeaseDTO> ActiveLeasesFor(DateTime date);
         List<LeaseDTO> GetAllLeases();
     }

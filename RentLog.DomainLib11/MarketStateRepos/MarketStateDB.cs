@@ -70,5 +70,20 @@ namespace RentLog.DomainLib11.MarketStateRepos
             var inactvs = InactiveLeases.GetAll();
             return activs.Concat(inactvs).ToList();
         }
+
+
+        public LeaseDTO GetOccupant(StallDTO stall)
+        {
+            var matches = ActiveLeases.GetAll()
+                            .Where(_ => _.Stall.Id == stall.Id);
+
+            if (!matches.Any()) return null;
+            if (matches.Count() > 1)
+                throw Bad.Data($"1 occupant for [{stall}] but found [{matches.Count()}]");
+            return matches.Single();
+        }
+
+
+        public bool IsOccupied(StallDTO stall) => GetOccupant(stall) != null;
     }
 }
