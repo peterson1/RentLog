@@ -7,6 +7,7 @@ using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.Models;
 using System;
+using System.Threading.Tasks;
 
 namespace RentLog.FilteredLeases.FilteredLists.AllActiveLeases
 {
@@ -16,14 +17,25 @@ namespace RentLog.FilteredLeases.FilteredLists.AllActiveLeases
         {
             return R2Command.Relay(() =>
             {
-                var dir = listVM.AppArgs;
-                var lse = listVM.Rows.CurrentItem?.DTO;
+                Action<LeaseDTO, ITenantDBsDir> job = null;
+                string desc = null;
                 switch (taskNumber)
                 {
-                    case 1 : SetToMonthly(lse, dir); break;
+                    case 1 : job = SetToMonthly(out desc); break;
                     default: Alert.Show($"Unrecognized task number: [{taskNumber}]"); break;
                 }
-                listVM.DoAfterSave.Invoke();
+
+                Alert.Confirm($"Run “{desc}”?", async () =>
+                {
+                    listVM.Main.StartBeingBusy($"Running “{desc}” ...");
+
+                    var dir = listVM.AppArgs;
+                    var lse = listVM.Rows.CurrentItem?.DTO;
+                    await Task.Run(() => job.Invoke(lse, dir));
+
+                    listVM.Main.StopBeingBusy();
+                    listVM.DoAfterSave.Invoke();
+                });
             }, 
             CanRun(listVM), $"Run Ad Hoc command {taskNumber}");
         }
@@ -34,13 +46,17 @@ namespace RentLog.FilteredLeases.FilteredLists.AllActiveLeases
                 && listVM.AppArgs.CanRunAdHocTask(false);
 
 
-        private static void SetToMonthly(LeaseDTO lse, ITenantDBsDir dir)
+        private static Action<LeaseDTO, ITenantDBsDir> SetToMonthly (out string taskDescription)
         {
-            lse.Rent.Interval     = BillInterval.Monthly;
-            lse.Rent.PenaltyRule  = RentPenalty.MonthlySurcharge;
-            lse.Rent.PenaltyRate1 = 0.03M;
-            lse.Rent.PenaltyRate2 = 5;
-            dir.MarketState.ActiveLeases.Update(lse);
+            taskDescription = "Set Interval to ‹Monthly›";
+            return (lse, dir) =>
+            {
+                lse.Rent.Interval     = BillInterval.Monthly;
+                lse.Rent.PenaltyRule  = RentPenalty.MonthlySurcharge;
+                lse.Rent.PenaltyRate1 = 0.03M;
+                lse.Rent.PenaltyRate2 = 5;
+                dir.MarketState.ActiveLeases.Update(lse);
+            };
         }
     }
 }

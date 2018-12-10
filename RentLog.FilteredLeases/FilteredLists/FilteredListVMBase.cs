@@ -23,7 +23,6 @@ namespace RentLog.FilteredLeases.FilteredLists
     public abstract class FilteredListVMBase : IndirectFilteredListVMBase<LeaseBalanceRow, LeaseDTO, CommonTextFilterVM, ITenantDBsDir>
     {
         private ConcurrentDictionary<int, DailyBillDTO> _bills = new ConcurrentDictionary<int, DailyBillDTO>();
-        private MainWindowVM _main;
 
         public       EventHandler _printRequested;
         public event EventHandler  PrintRequested
@@ -36,13 +35,14 @@ namespace RentLog.FilteredLeases.FilteredLists
         public FilteredListVMBase(MainWindowVM mainWindowVM, ITenantDBsDir dir) 
             : base(null, dir, false)
         {
-            _main = mainWindowVM;
+            Main = mainWindowVM;
             EncodeNewDraftCmd = CreateEncodeNewDraftCmd(dir);
             PrintCmd = R2Command.Relay(() => _printRequested?.Raise(), null, "Print");
             FillSectionsList();
         }
 
 
+        public MainWindowVM        Main               { get; }
         public IR2Command          EncodeNewDraftCmd  { get; }
         public UIList<SectionDTO>  Sections           { get; } = new UIList<SectionDTO>();
         public SectionDTO          PickedSection      { get; set; }
@@ -57,7 +57,7 @@ namespace RentLog.FilteredLeases.FilteredLists
         protected override void OnItemOpened           (LeaseDTO lse) => SoaViewer.Show(lse, AppArgs);
 
 
-        public virtual string TopLeftText => _main?.SectionAndFilter;
+        public virtual string TopLeftText => Main?.SectionAndFilter;
         protected virtual IR2Command CreateEncodeNewDraftCmd(ITenantDBsDir dir) => null;
 
         public virtual Action DoAfterSave => () => this.ClickRefresh();
@@ -77,11 +77,11 @@ namespace RentLog.FilteredLeases.FilteredLists
 
         public override async void ReloadFromDB()
         {
-            _main.StartBeingBusy($"Loading “{_main.PickedFilterName}”...");
+            Main.StartBeingBusy($"Loading “{Main.PickedFilterName}”...");
             await Task.Delay(1);
             await Task.Run(() => base.ReloadFromDB());
-            _main.RaisePickedListLoaded();
-            _main.StopBeingBusy();
+            Main.RaisePickedListLoaded();
+            Main.StopBeingBusy();
         }
 
 
