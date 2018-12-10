@@ -17,15 +17,17 @@ namespace RentLog.FilteredLeases.FilteredLists.AllInactiveLeases
     {
         public AllInactiveLeasesVM(MainWindowVM main, ITenantDBsDir dir) : base(main, dir)
         {
-            AddStallToTenantCmd = LeaseCRUD1VM.GetAddStallToTenantCmd(this);
-            UndoTerminationCmd  = R2Command.Relay(UndoTermination, 
-                              _ => AppArgs.CanUndoLeaseTermination(false), 
+            AddStallToTenantCmd   = LeaseCRUD1VM.GetAddStallToTenantCmd(this);
+            RenewInactiveLeaseCmd = LeaseCRUD1VM.GetRenewInactiveLeaseCmd(this);
+            UndoTerminationCmd    = R2Command.Relay(UndoTermination, 
+                                _ => AppArgs.CanUndoLeaseTermination(false), 
                                     "Undo Lease Termination");
         }
 
 
-        public IR2Command  AddStallToTenantCmd { get; }
-        public IR2Command  UndoTerminationCmd  { get; }
+        public IR2Command  AddStallToTenantCmd    { get; }
+        public IR2Command  RenewInactiveLeaseCmd  { get; }
+        public IR2Command  UndoTerminationCmd     { get; }
 
 
         private void UndoTermination()

@@ -17,7 +17,9 @@ namespace RentLog.LeasesCrud.LeaseCRUD
     {
         public    override string TypeDescription => "Lease";
         protected override string CaptionPrefix   => "Lease Editor";
-        private StallDTO _pickedStall;
+        private StallDTO  _pickedStall;
+        private DateTime? _pickedStart;
+        private int?      _renewedFromID;
 
 
         public LeaseCrudVM(IActiveLeasesRepo repository, AppArguments appArguments) : base(repository, appArguments)
@@ -45,17 +47,18 @@ namespace RentLog.LeasesCrud.LeaseCRUD
                     .MarketState, out _pickedStall)) return null;
             }
 
-            var start  = DateTime.Now.Date;
+            var start  = _pickedStart ?? DateTime.Now.Date;
             AllFieldsEnabled = true;
             WhyInvalid = "Please fill up all required fields.";
 
             var draft = new LeaseDTO
             {
                 ContractStart        = start,
-                ContractEnd          = start.AddYears(1),
+                ContractEnd          = start.AddYears(1).Date,
                 Stall                = _pickedStall,
                 Rent                 = _pickedStall.DefaultRent.ShallowClone(),
                 Rights               = _pickedStall.DefaultRights.ShallowClone(),
+                RenewedFromID        = _renewedFromID
             };
             draft.Tenant = TenantTemplate?.ShallowClone()
                          ?? new TenantModel { Country = "Philippines" };
@@ -86,8 +89,9 @@ namespace RentLog.LeasesCrud.LeaseCRUD
         }
 
 
-        public void SetPickedStall(StallDTO stallDTO)
-            => _pickedStall = stallDTO;
+        public void SetPickedStall(StallDTO stallDTO ) => _pickedStall   = stallDTO;
+        public void SetPickedStart(DateTime startDate) => _pickedStart   = startDate;
+        public void SetRenewedFrom(LeaseDTO lease    ) => _renewedFromID = lease.Id;
 
 
         public void UpdateDerivatives()

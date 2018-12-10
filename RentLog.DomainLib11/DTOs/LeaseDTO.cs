@@ -14,7 +14,7 @@ namespace RentLog.DomainLib11.DTOs
         public RentParams    Rent                  { get; set; }
         public RightsParams  Rights                { get; set; }
         public string        ProductToSell         { get; set; }
-        //public int           SectionID             { get; set; }
+        public int?          RenewedFromID         { get; set; }
 
 
         public int        SectionID         => Stall?.Section?.Id ?? 0;

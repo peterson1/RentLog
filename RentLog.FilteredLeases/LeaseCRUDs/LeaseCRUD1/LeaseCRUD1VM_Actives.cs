@@ -1,7 +1,9 @@
-﻿using CommonTools.Lib11.InputCommands;
+﻿using CommonTools.Lib11.ExceptionTools;
+using CommonTools.Lib11.InputCommands;
 using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.InputDialogs;
+using CommonTools.Lib45.ThreadTools;
 using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.StateTransitions;
@@ -9,11 +11,13 @@ using RentLog.DomainLib45;
 using RentLog.FilteredLeases.FilteredLists;
 using RentLog.LeasesCrud.LeaseCRUD;
 using System;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace RentLog.FilteredLeases.LeaseCRUDs.LeaseCRUD1
 {
-    public class LeaseCRUD1VM
+    public partial class LeaseCRUD1VM
     {
         public static IR2Command GetEncodeNewDraftCmd(FilteredListVMBase listVM, 
             string label = "Encode new Lease Contract")

@@ -170,7 +170,8 @@
     </Compile>
     <Compile Include="FilteredLists\FullTenantDetails\FullTenantDetailsVM.cs" />
     <Compile Include="FilteredLists\WithBackRentsOrRights\WithBackRentsOrRightsVM.cs" />
-    <Compile Include="LeaseCRUDs\LeaseCRUD1\LeaseCRUD1VM.cs" />
+    <Compile Include="LeaseCRUDs\LeaseCRUD1\LeaseCRUD1VM_Actives.cs" />
+    <Compile Include="LeaseCRUDs\LeaseCRUD1\LeaseCRUD1VM_Inactives.cs" />
     <Compile Include="MainToolbar\AdHocJobCmdsVM.cs" />
     <Compile Include="MainToolbar\MainToolbarUI.xaml.cs">
       <DependentUpon>MainToolbarUI.xaml</DependentUpon>
