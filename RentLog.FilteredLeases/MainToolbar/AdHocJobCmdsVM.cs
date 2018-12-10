@@ -36,7 +36,7 @@ namespace RentLog.FilteredLeases.MainToolbar
             switch (taskNumber)
             {
                 case 1: adhocJob =
-                    CheckVoucherAdHocs.FixBDO1ImportBug(_dir, out desc);
+                    ForActiveLeases.RebuildSoA(_dir, out desc);
                     break;
 
                 default: throw Bad.Data($"Task #: [{taskNumber}]");

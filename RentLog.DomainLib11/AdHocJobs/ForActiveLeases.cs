@@ -75,12 +75,16 @@ namespace RentLog.DomainLib11.AdHocJobs
         }
 
 
-        public static void RebuildSoA(ITenantDBsDir dir)
+        public static Action RebuildSoA(ITenantDBsDir dir, out string jobDesc)
         {
-            var lses = dir.MarketState.ActiveLeases.GetAll();
+            jobDesc = "Rebuild SoA for all Active Leases";
+            return () =>
+            {
+                var lses = dir.MarketState.ActiveLeases.GetAll();
 
-            foreach (var lse in lses)
-                dir.Balances.GetRepo(lse).RecomputeAll();
+                foreach (var lse in lses)
+                    dir.Balances.GetRepo(lse).RecomputeAll();
+            };
         }
     }
 }
