@@ -1,5 +1,6 @@
 ﻿using CommonTools.Lib11.ExceptionTools;
 using CommonTools.Lib11.InputCommands;
+using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.ThreadTools;
 using RentLog.DomainLib11.AdHocJobs;
@@ -19,9 +20,9 @@ namespace RentLog.FilteredLeases.MainToolbar
         {
             _main        = mainWindowVM;
             _dir         = _main.AppArgs;
-            AdHocJobCmd1 = R2Command.Relay(_ => RunAdHoc(1), _ => _dir.CanRunAdHocTask(false), "Run Ad Hoc Command 1");
-            AdHocJobCmd2 = R2Command.Relay(_ => RunAdHoc(2), _ => _dir.CanRunAdHocTask(false), "Run Ad Hoc Command 2");
-            AdHocJobCmd3 = R2Command.Relay(_ => RunAdHoc(3), _ => _dir.CanRunAdHocTask(false), "Run Ad Hoc Command 3");
+            AdHocJobCmd1 = R2Command.Relay(_ => RunAdHoc(1), null, "Run Ad Hoc Command 1");
+            AdHocJobCmd2 = R2Command.Relay(_ => RunAdHoc(2), null, "Run Ad Hoc Command 2");
+            AdHocJobCmd3 = R2Command.Relay(_ => RunAdHoc(3), null, "Run Ad Hoc Command 3");
         }
 
 
@@ -32,14 +33,22 @@ namespace RentLog.FilteredLeases.MainToolbar
 
         private void RunAdHoc(int taskNumber)
         {
-            Action adhocJob; string desc;
+            Action adhocJob; string desc; bool canRun;
             switch (taskNumber)
             {
                 case 1: adhocJob =
-                    ForActiveLeases.RebuildSoA(_dir, out desc);
+                    ForActiveLeases.RebuildSoA(_dir, out desc, out canRun);
                     break;
 
                 default: throw Bad.Data($"Task #: [{taskNumber}]");
+            }
+
+            if (!canRun)
+            {
+                var creds = _dir.Credentials;
+                Alert.ShowModal("Not Authorized to Execute",
+                    $"“{creds.HumanName}” ({creds.Roles}) {L.f} is not allowed to {L.f} “{desc}”.");
+                return;
             }
 
             Alert.Confirm($"Run Ad Hoc job “{desc}”?", async () =>

@@ -1,4 +1,5 @@
-﻿using RentLog.DomainLib11.BillingRules.RentPenalties;
+﻿using RentLog.DomainLib11.Authorization;
+using RentLog.DomainLib11.BillingRules.RentPenalties;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using System;
@@ -75,8 +76,10 @@ namespace RentLog.DomainLib11.AdHocJobs
         }
 
 
-        public static Action RebuildSoA(ITenantDBsDir dir, out string jobDesc)
+        public static Action RebuildSoA(ITenantDBsDir dir, 
+            out string jobDesc, out bool canRun)
         {
+            canRun  = true;
             jobDesc = "Rebuild SoA for all Active Leases";
             return () =>
             {
