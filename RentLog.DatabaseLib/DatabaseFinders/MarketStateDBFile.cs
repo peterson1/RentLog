@@ -65,6 +65,12 @@ namespace RentLog.DatabaseLib.DatabaseFinders
             set => MktDB.Metadata[BRANCH_NAME_KEY] = _branchName = value;
         }
 
+        public override int YearsBackCount
+        {
+            get => _yrsBackCount;
+            set => MktDB.Metadata[YEARS_BACK_KEY] = $"{_yrsBackCount = value}";
+        }
+
 
         private T TryLoadPassbookDB<T>(Func<MarketStateDbBase, T> getter)
         {
@@ -81,7 +87,6 @@ namespace RentLog.DatabaseLib.DatabaseFinders
         }
 
 
-        public override int YearsBackCount => _yrsBackCount;
         private SharedLiteDB MktDB => new SharedLiteDB(_mktDbPath, _currUsr);
     }
 }

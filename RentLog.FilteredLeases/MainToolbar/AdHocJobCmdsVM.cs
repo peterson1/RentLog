@@ -4,7 +4,6 @@ using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.ThreadTools;
 using RentLog.DomainLib11.AdHocJobs;
-using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.DataSources;
 using System;
 using System.Threading.Tasks;
@@ -37,9 +36,11 @@ namespace RentLog.FilteredLeases.MainToolbar
             switch (taskNumber)
             {
                 case 1: adhocJob =
-                    ForActiveLeases.RebuildSoA(_dir, out desc, out canRun);
-                    break;
-
+                        ForActiveLeases.RebuildSoA(_dir, out desc, out canRun);
+                        break;
+                case 2: adhocJob =
+                        EditMarketMeta.SetYearsBack_1(_dir, out desc, out canRun);
+                        break;
                 default: throw Bad.Data($"Task #: [{taskNumber}]");
             }
 

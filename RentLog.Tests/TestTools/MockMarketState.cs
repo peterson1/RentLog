@@ -30,6 +30,6 @@ namespace RentLog.Tests.TestTools
         public override IInactiveLeasesRepo InactiveLeases => MoqInactiveLeases.Object;
         public override IBalanceDB          Balances       => MoqBalanceDB.Object;
         public override IBankAccountsRepo   BankAccounts   => MoqBankAccounts.Object;
-        public override int                 YearsBackCount => 0;
+        public override int                 YearsBackCount { get; set; }
     }
 }
