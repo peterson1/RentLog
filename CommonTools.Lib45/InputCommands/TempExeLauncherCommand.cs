@@ -1,4 +1,5 @@
-﻿using CommonTools.Lib45.ThreadTools;
+﻿using CommonTools.Lib45.BusyIndicators;
+using CommonTools.Lib45.ThreadTools;
 using PropertyChanged;
 using System;
 using System.IO;
@@ -39,8 +40,7 @@ namespace CommonTools.Lib45.InputCommands
 
         public override async void Execute(object parameter)
         {
-            var splash = new SplashScreen(Assembly.GetAssembly(typeof(TempExeLauncherCommand)), "loading.png");
-            splash.Show(false, true);
+            var splash = new LoadingSplash();
 
             KillProcess.ByName(ExeName, true);
 
@@ -48,7 +48,7 @@ namespace CommonTools.Lib45.InputCommands
                 StartExeProcess(TempExePath);
 
             UpdateVersionInfo();
-            splash.Close(TimeSpan.FromSeconds(3));
+            splash.Close();
         }
 
 

@@ -127,6 +127,7 @@
     <Compile Include="BusyIndicators\BusyDialogWithCancel.xaml.cs">
       <DependentUpon>BusyDialogWithCancel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BusyIndicators\LoadingSplash.cs" />
     <Compile Include="Cryptography\AESThenHMAC.cs" />
     <Compile Include="ExcelTools\BorderWriter1.cs" />
     <Compile Include="ExcelTools\CellWriter1ByRow.cs" />
