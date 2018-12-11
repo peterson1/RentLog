@@ -1,4 +1,5 @@
 ﻿using CommonTools.Lib11.DateTimeTools;
+using CommonTools.Lib45.BusyIndicators;
 using CommonTools.Lib45.ExcelTools;
 using CommonTools.Lib45.InputDialogs;
 using RentLog.DomainLib11.Models;
@@ -197,9 +198,15 @@ namespace RentLog.DomainLib45.Reporters
             var bgn = new DateTime(now.Year, now.Month, 1);
             var end = args.Collections.LastPostedDate();
 
-            if (!PopUpInput.TryGetDateRange("Dates covered by Collection Summary Report", out (DateTime Start, DateTime End) rng, bgn, end)) return;
+            if (!PopUpInput.TryGetDateRange
+                ("Dates covered by Collection Summary Report", 
+                out (DateTime Start, DateTime End) rng, bgn, end)) return;
+
+            var splash = new LoadingSplash();
 
             new ColxnSummaryReport(rng.Start, rng.End, args).ToExcel();
+
+            splash.Close();
         }
     }
 
