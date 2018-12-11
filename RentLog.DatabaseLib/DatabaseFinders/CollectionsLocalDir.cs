@@ -24,7 +24,7 @@ namespace RentLog.DatabaseLib.DatabaseFinders
 
         //private IJsonCache    _jCache = new TempJsonCache();
         private string        _foldrPath;
-        private MarketStateDB _mkt;
+        private MarketStateDbBase _mkt;
         private ITenantDBsDir _dir;
 
 

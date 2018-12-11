@@ -50,7 +50,7 @@ namespace RentLog.FilteredLeases.FilteredLists
         public IR2Command          PrintCmd           { get; }
 
 
-        protected abstract List<LeaseDTO> GetLeases(MarketStateDB mkt, int sectionId);
+        protected abstract List<LeaseDTO> GetLeases(MarketStateDbBase mkt, int sectionId);
 
 
         public             void OnPickedSectionChanged ()             => ReloadFromDB();

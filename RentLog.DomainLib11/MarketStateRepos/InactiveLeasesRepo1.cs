@@ -7,7 +7,7 @@ namespace RentLog.DomainLib11.MarketStateRepos
 {
     public class InactiveLeasesRepo1 : MarketStateRepoShimBase<InactiveLeaseDTO>, IInactiveLeasesRepo
     {
-        public InactiveLeasesRepo1(ISimpleRepo<InactiveLeaseDTO> simpleRepo, MarketStateDB marketStateDB) : base(simpleRepo, marketStateDB)
+        public InactiveLeasesRepo1(ISimpleRepo<InactiveLeaseDTO> simpleRepo, MarketStateDbBase marketStateDB) : base(simpleRepo, marketStateDB)
         {
         }
 

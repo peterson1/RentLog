@@ -9,8 +9,9 @@ using System.Linq;
 
 namespace RentLog.DomainLib11.MarketStateRepos
 {
-    public class MarketStateDB : IMarketStateDB
+    public abstract class MarketStateDbBase : IMarketStateDB
     {
+        public abstract int                 YearsBackCount  { get; }
         public virtual string               DatabasePath    { get; set; }
         public virtual string               CurrentUser     { get; set; }
         public virtual string               SystemName      { get; set; }

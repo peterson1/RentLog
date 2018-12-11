@@ -35,7 +35,7 @@ namespace RentLog.ImportBYF.Converters
         public abstract List<IDocumentDTO> GetListFromRNT (ITenantDBsDir dir);
         public abstract IDocumentDTO       CastByfToDTO   (object byfRecord);
         public abstract int                GetByfId       (object byfRecord);
-        public abstract void               ReplaceAll     (IEnumerable<IDocumentDTO> documents, MarketStateDB marketStateDB);
+        public abstract void               ReplaceAll     (IEnumerable<IDocumentDTO> documents, MarketStateDbBase marketStateDB);
 
         //public virtual object PreCompareBYF(object obj) => obj;
         //public virtual object PreCompareRNT(object obj) => obj;

@@ -8,7 +8,7 @@ namespace RentLog.DomainLib11.Reporters
 {
     public class StallsInventoryReport : UIList<StallsInventoryRow>
     {
-        public StallsInventoryReport(ICollectionsDB colxns, MarketStateDB mkt)
+        public StallsInventoryReport(ICollectionsDB colxns, MarketStateDbBase mkt)
         {
             var sections = colxns.SectionsSnapshot ?? mkt.Sections.GetAll();
 

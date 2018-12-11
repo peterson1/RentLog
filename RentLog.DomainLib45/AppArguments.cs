@@ -41,7 +41,7 @@ namespace RentLog.DomainLib45
         public string                DbFilePath       { get; private set; }
         public string                Param1           { get; private set; }
                                      
-        public MarketStateDB         MarketState      { get; }
+        public MarketStateDbBase         MarketState      { get; }
         public ChequeVouchersDB      Vouchers         { get; }
         public ICollectionsDir       Collections      { get; }
         public IBalanceDB            Balances         { get; }
@@ -52,7 +52,7 @@ namespace RentLog.DomainLib45
         public BankAccountDTO        CurrentBankAcct  { get; set; }
 
 
-        protected virtual MarketStateDB GetMarketStateDB() 
+        protected virtual MarketStateDbBase GetMarketStateDB() 
             => new MarketStateDBFile(DbFilePath, CurrentUser);
 
 

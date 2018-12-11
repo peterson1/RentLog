@@ -13,7 +13,7 @@ namespace RentLog.DomainLib11.DataSources
 {
     public interface ITenantDBsDir : ICredentialsProvider, IHasUpdatedCopy
     {
-        MarketStateDB         MarketState   { get; }
+        MarketStateDbBase         MarketState   { get; }
         ChequeVouchersDB      Vouchers      { get; }
         ICollectionsDir       Collections   { get; }
         IBalanceDB            Balances      { get; }

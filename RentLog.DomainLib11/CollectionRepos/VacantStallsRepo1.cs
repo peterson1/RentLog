@@ -17,7 +17,7 @@ namespace RentLog.DomainLib11.CollectionRepos
 
     public static class VacantStallsDictionaryExtensions
     {
-        public static void UpdateAllLists(this Dictionary<int, IVacantStallsRepo> dict, MarketStateDB marketState)
+        public static void UpdateAllLists(this Dictionary<int, IVacantStallsRepo> dict, MarketStateDbBase marketState)
         {
             foreach (var keyVal in dict)
             {
@@ -31,7 +31,7 @@ namespace RentLog.DomainLib11.CollectionRepos
         }
 
 
-        private static IEnumerable<StallDTO> GetVacantsFor(int secID, MarketStateDB mkt)
+        private static IEnumerable<StallDTO> GetVacantsFor(int secID, MarketStateDbBase mkt)
         {
             var occupieds = mkt.ActiveLeases.GetAll()
                                .Where  (_ => _.Stall.Section.Id == secID)

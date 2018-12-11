@@ -20,7 +20,7 @@ namespace RentLog.DatabaseLib.DatabaseFinders
         private string _pbkDbPath;
 
 
-        public TransactionsByMonthDir(MarketStateDB marketStateDB)
+        public TransactionsByMonthDir(MarketStateDbBase marketStateDB)
         {
             _dir       = GetTransactionsDir(marketStateDB.DatabasePath);
             _usr       = marketStateDB.CurrentUser;
@@ -52,7 +52,7 @@ namespace RentLog.DatabaseLib.DatabaseFinders
         }
 
 
-        public List<PassbookRowDTO> RowsFromAllAccounts(DateTime startDate, DateTime endDate, MarketStateDB marketStateDB)
+        public List<PassbookRowDTO> RowsFromAllAccounts(DateTime startDate, DateTime endDate, MarketStateDbBase marketStateDB)
         {
             var acctIDs = marketStateDB.BankAccounts.GetAll().Select(_ => _.Id);
             var repos   = acctIDs.Select(id => GetRepo(id));

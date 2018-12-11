@@ -6,7 +6,7 @@ namespace RentLog.DomainLib11.MarketStateRepos
 {
     public class BankAccountsRepo1 : MarketStateRepoShimBase<BankAccountDTO>, IBankAccountsRepo
     {
-        public BankAccountsRepo1(ISimpleRepo<BankAccountDTO> simpleRepo, MarketStateDB marketStateDB) : base(simpleRepo, marketStateDB)
+        public BankAccountsRepo1(ISimpleRepo<BankAccountDTO> simpleRepo, MarketStateDbBase marketStateDB) : base(simpleRepo, marketStateDB)
         {
         }
 

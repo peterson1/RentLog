@@ -21,6 +21,7 @@ namespace RentLog.DomainLib11.MarketStateRepos
         ISectionsRepo Sections { get; set; }
         IStallsRepo Stalls { get; set; }
         string SystemName { get; set; }
+        int YearsBackCount { get; }
 
         LeaseDTO FindLease(int leaseID);
         void RefreshStall(LeaseDTO lease);

@@ -21,7 +21,7 @@ namespace RentLog.Tests.TestTools
         public Mock<IJournalVouchersRepo>  MoqJournals       { get; } = new Mock<IJournalVouchersRepo>();
         public Mock<IDailyBiller>          MoqDailyBiller    { get; } = new Mock<IDailyBiller>();
 
-        public MarketStateDB         MarketState  => MoqMarketState;
+        public MarketStateDbBase         MarketState  => MoqMarketState;
         public ChequeVouchersDB      Vouchers     => throw new System.NotImplementedException();
         public ICollectionsDir       Collections  => MoqCollectionsDir.Object;
         public IBalanceDB            Balances     => MoqBalanceDB.Object;

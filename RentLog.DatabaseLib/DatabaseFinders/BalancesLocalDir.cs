@@ -1,12 +1,10 @@
 ﻿using CommonTools.Lib45.FileSystemTools;
 using CommonTools.Lib45.LiteDbTools;
 using RentLog.DatabaseLib.DailyBillsRepository;
-using RentLog.DatabaseLib.LeasesRepository;
 using RentLog.DomainLib11.BalanceRepos;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
-using System;
 using System.IO;
 
 namespace RentLog.DatabaseLib.DatabaseFinders
@@ -17,7 +15,7 @@ namespace RentLog.DatabaseLib.DatabaseFinders
         private const string FILENAME_FMT = "Lease{0:0000#}_Balance.ldb";
 
         private string        _foldrPath;
-        private MarketStateDB _mkt;
+        private MarketStateDbBase _mkt;
         private ITenantDBsDir _dir;
 
 
@@ -62,6 +60,6 @@ namespace RentLog.DatabaseLib.DatabaseFinders
             return balDir;
         }
 
-        protected override MarketStateDB GetMarketState() => _mkt;
+        protected override MarketStateDbBase GetMarketState() => _mkt;
     }
 }

@@ -33,7 +33,7 @@ namespace RentLog.ImportBYF.Converters.BankAccountConverters
             => dir.MarketState.BankAccounts.GetAll();
 
 
-        public override void ReplaceAll(IEnumerable<BankAccountDTO> newRecords, MarketStateDB mkt)
+        public override void ReplaceAll(IEnumerable<BankAccountDTO> newRecords, MarketStateDbBase mkt)
             => mkt.BankAccounts.DropAndInsert(newRecords, true, false);
     }
 

@@ -59,7 +59,7 @@ namespace RentLog.ImportBYF.Converters.GLAccountConverters
             => (int)((dynamic)byfRecord).nid;
 
 
-        public override void ReplaceAll(IEnumerable<IDocumentDTO> documents, MarketStateDB mkt)
+        public override void ReplaceAll(IEnumerable<IDocumentDTO> documents, MarketStateDbBase mkt)
             => mkt.GLAccounts.DropAndInsert(documents
                 .Select(_ => _ as GLAccountDTO), true, false);
     }

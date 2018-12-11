@@ -80,7 +80,7 @@ namespace RentLog.ImportBYF.Converters.StallConverters
             => Cast<ReportModels.Stall>(rec);
 
 
-        public override void ReplaceAll(IEnumerable<IDocumentDTO> docs, MarketStateDB mkt)
+        public override void ReplaceAll(IEnumerable<IDocumentDTO> docs, MarketStateDbBase mkt)
             => mkt.Stalls.DropAndInsert(docs
                 .Select(_ => _ as StallDTO), true, false);
     }

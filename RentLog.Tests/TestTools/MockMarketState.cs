@@ -4,7 +4,7 @@ using RentLog.DomainLib11.MarketStateRepos;
 
 namespace RentLog.Tests.TestTools
 {
-    class MockMarketState : MarketStateDB
+    class MockMarketState : MarketStateDbBase
     {
         public MockMarketState()
         {
@@ -30,5 +30,6 @@ namespace RentLog.Tests.TestTools
         public override IInactiveLeasesRepo InactiveLeases => MoqInactiveLeases.Object;
         public override IBalanceDB          Balances       => MoqBalanceDB.Object;
         public override IBankAccountsRepo   BankAccounts   => MoqBankAccounts.Object;
+        public override int                 YearsBackCount => 0;
     }
 }

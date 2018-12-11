@@ -22,7 +22,7 @@ namespace RentLog.DatabaseLib.JournalsRepository
         private string _usr;
 
 
-        public JournalsByMonthDir(MarketStateDB marketStateDB)
+        public JournalsByMonthDir(MarketStateDbBase marketStateDB)
         {
             _usr   = marketStateDB.CurrentUser;
             _foldr = FindJournalsFolder(marketStateDB.DatabasePath);

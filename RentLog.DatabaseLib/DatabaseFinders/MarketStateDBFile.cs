@@ -1,5 +1,4 @@
-﻿using CommonTools.Lib11.ExceptionTools;
-using CommonTools.Lib45.LiteDbTools;
+﻿using CommonTools.Lib45.LiteDbTools;
 using RentLog.DatabaseLib.BankAccountsRepository;
 using RentLog.DatabaseLib.CollectorsRepository;
 using RentLog.DatabaseLib.GLAccountsRepository;
@@ -8,35 +7,43 @@ using RentLog.DatabaseLib.SectionsRepository;
 using RentLog.DatabaseLib.StallsRepository;
 using RentLog.DomainLib11.MarketStateRepos;
 using System;
-using System.IO;
 
 namespace RentLog.DatabaseLib.DatabaseFinders
 {
-    public class MarketStateDBFile : MarketStateDB
+    public class MarketStateDBFile : MarketStateDbBase
     {
         private const string SYSTEM_NAME_KEY = "SystemName";
         private const string BRANCH_NAME_KEY = "BranchName";
-        private string _mktDbPath;
-        private string _currUsr;
+        private const string YEARS_BACK_KEY  = "YearsBack";
+        private string      _mktDbPath;
+        private string      _currUsr;
+        private string      _systemName;
+        private string      _branchName;
+        private int         _yrsBackCount;
 
 
         public MarketStateDBFile(string marketDbFilePath, string currentUser)
         {
             _mktDbPath     = marketDbFilePath;
             _currUsr       = currentUser;
-            var mktDb      = new SharedLiteDB(_mktDbPath, _currUsr);
-                               
             DatabasePath   = marketDbFilePath;
             CurrentUser    = currentUser;
-            //SystemName     = mktDb.Metadata[SYSTEM_NAME_KEY];
-            //BranchName     = mktDb.Metadata[BRANCH_NAME_KEY];
-                           
-            Stalls         = new StallsRepo1(new StallsCollection(mktDb), this);
-            Collectors     = new CollectorsRepo1(new CollectorsCollection(mktDb), this);
-            BankAccounts   = new BankAccountsRepo1(new BankAccountsCollection(mktDb), this);
-            Sections       = new SectionsRepo1(new SectionsCollection(mktDb), this);
-            ActiveLeases   = new ActiveLeasesRepo1(new ActiveLeasesCollection(mktDb), this);
+            var mktDb      = new SharedLiteDB(_mktDbPath, _currUsr);
+            Stalls         = new StallsRepo1        (new StallsCollection        (mktDb), this);
+            Collectors     = new CollectorsRepo1    (new CollectorsCollection    (mktDb), this);
+            BankAccounts   = new BankAccountsRepo1  (new BankAccountsCollection  (mktDb), this);
+            Sections       = new SectionsRepo1      (new SectionsCollection      (mktDb), this);
+            ActiveLeases   = new ActiveLeasesRepo1  (new ActiveLeasesCollection  (mktDb), this);
             InactiveLeases = new InactiveLeasesRepo1(new InactiveLeasesCollection(mktDb), this);
+            CacheMetadataFields(mktDb);
+        }
+
+
+        private void CacheMetadataFields(SharedLiteDB mktDb)
+        {
+            _systemName   = mktDb.Metadata[SYSTEM_NAME_KEY];
+            _branchName   = mktDb.Metadata[BRANCH_NAME_KEY];
+            _yrsBackCount = int.TryParse(mktDb.Metadata[YEARS_BACK_KEY], out int num) ? num : 2;
         }
 
 
@@ -46,23 +53,20 @@ namespace RentLog.DatabaseLib.DatabaseFinders
             set => base.GLAccounts = value;
         }
 
-
-        private SharedLiteDB MktDB => new SharedLiteDB(_mktDbPath, _currUsr);
-
         public override string SystemName
         {
-            get => MktDB.Metadata[SYSTEM_NAME_KEY];
-            set => MktDB.Metadata[SYSTEM_NAME_KEY] = value;
+            get => _systemName;
+            set => MktDB.Metadata[SYSTEM_NAME_KEY] = _systemName = value;
         }
 
         public override string BranchName
         {
-            get => MktDB.Metadata[BRANCH_NAME_KEY];
-            set => MktDB.Metadata[BRANCH_NAME_KEY] = value;
+            get => _branchName;
+            set => MktDB.Metadata[BRANCH_NAME_KEY] = _branchName = value;
         }
 
 
-        private T TryLoadPassbookDB<T>(Func<MarketStateDB, T> getter)
+        private T TryLoadPassbookDB<T>(Func<MarketStateDbBase, T> getter)
         {
             //var dir    = Path.GetDirectoryName(_mktDbPath);
             //var dbPath = Path.Combine(dir, PassbookDBFile.FILENAME);
@@ -75,5 +79,9 @@ namespace RentLog.DatabaseLib.DatabaseFinders
             GLAccounts = new GLAccountsRepo1(new GLAccountsCollection(pbkDb), this);
             return getter(this);
         }
+
+
+        public override int YearsBackCount => _yrsBackCount;
+        private SharedLiteDB MktDB => new SharedLiteDB(_mktDbPath, _currUsr);
     }
 }

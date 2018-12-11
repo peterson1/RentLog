@@ -44,7 +44,7 @@ namespace RentLog.ImportBYF.Converters.BankAccountConverters
             => Cast<ReportModels.BankAccount>(rec);
 
 
-        public override void ReplaceAll(IEnumerable<IDocumentDTO> documents, MarketStateDB mkt)
+        public override void ReplaceAll(IEnumerable<IDocumentDTO> documents, MarketStateDbBase mkt)
             => mkt.BankAccounts.DropAndInsert(documents
                 .Select(_ => _ as BankAccountDTO), true, false);
     }

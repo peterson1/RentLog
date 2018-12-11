@@ -37,7 +37,7 @@ namespace RentLog.FilteredLeases.FilteredLists.WithBackRentsOrRights
              + $"Total Overdue Rights :  {_totals?.Rights:N2}";
 
 
-        protected override List<LeaseDTO> GetLeases(MarketStateDB mkt, int secId)
+        protected override List<LeaseDTO> GetLeases(MarketStateDbBase mkt, int secId)
             => throw new NotImplementedException();
     }
 }

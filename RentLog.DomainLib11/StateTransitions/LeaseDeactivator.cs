@@ -8,7 +8,7 @@ namespace RentLog.DomainLib11.StateTransitions
 {
     public static class LeaseDeactivator
     {
-        public static InactiveLeaseDTO DeactivateLease(this MarketStateDB mkt, LeaseDTO lse,
+        public static InactiveLeaseDTO DeactivateLease(this MarketStateDbBase mkt, LeaseDTO lse,
             string reason, DateTime deactivationDate)
         {
             if (lse is InactiveLeaseDTO)
@@ -21,7 +21,7 @@ namespace RentLog.DomainLib11.StateTransitions
         }
 
 
-        public static void UndoLeaseTermination(this MarketStateDB mkt, InactiveLeaseDTO inactiveLeaseDTO)
+        public static void UndoLeaseTermination(this MarketStateDbBase mkt, InactiveLeaseDTO inactiveLeaseDTO)
         {
             //todo: reject if stall is in use
             var activ = new LeaseDTO();

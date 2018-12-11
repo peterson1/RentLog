@@ -51,7 +51,7 @@ namespace RentLog.ImportBYF.Converters.GLAccountConverters
             => dir.MarketState.GLAccounts.GetAll();
 
 
-        public override void ReplaceAll(IEnumerable<GLAccountDTO> newRecords, MarketStateDB mkt) 
+        public override void ReplaceAll(IEnumerable<GLAccountDTO> newRecords, MarketStateDbBase mkt) 
             => mkt.GLAccounts.DropAndInsert(newRecords, true, false);
     }
 }

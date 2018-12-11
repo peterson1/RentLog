@@ -29,7 +29,7 @@ namespace RentLog.DatabaseLib.DatabaseFinders
         }
 
 
-        internal static string GetDbPath(MarketStateDB mkt)
+        internal static string GetDbPath(MarketStateDbBase mkt)
         {
             var dir    = Path.GetDirectoryName(mkt.DatabasePath);
             var dbPath = Path.Combine(dir, FILENAME);

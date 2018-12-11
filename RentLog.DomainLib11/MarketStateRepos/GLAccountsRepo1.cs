@@ -7,7 +7,7 @@ namespace RentLog.DomainLib11.MarketStateRepos
 {
     public class GLAccountsRepo1 : MarketStateRepoShimBase<GLAccountDTO>, IGLAccountsRepo
     {
-        public GLAccountsRepo1(ISimpleRepo<GLAccountDTO> simpleRepo, MarketStateDB marketStateDB) : base(simpleRepo, marketStateDB)
+        public GLAccountsRepo1(ISimpleRepo<GLAccountDTO> simpleRepo, MarketStateDbBase marketStateDB) : base(simpleRepo, marketStateDB)
         {
         }
 

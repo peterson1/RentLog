@@ -69,7 +69,7 @@ namespace RentLog.ImportBYF.Converters.SectionConverters
             => dir.MarketState.Sections.GetAll();
 
 
-        public override void ReplaceAll(IEnumerable<SectionDTO> newRecords, MarketStateDB mkt)
+        public override void ReplaceAll(IEnumerable<SectionDTO> newRecords, MarketStateDbBase mkt)
             => mkt.Sections.DropAndInsert(newRecords, true, false);
     }
 }

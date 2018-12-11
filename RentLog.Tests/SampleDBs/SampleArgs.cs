@@ -26,7 +26,7 @@ namespace RentLog.Tests.SampleDBs
         }
 
 
-        protected override MarketStateDB GetMarketStateDB()
+        protected override MarketStateDbBase GetMarketStateDB()
         {
             var dbPath = FindDB(DirName);
             return new MarketStateDBFile(dbPath, _usr);

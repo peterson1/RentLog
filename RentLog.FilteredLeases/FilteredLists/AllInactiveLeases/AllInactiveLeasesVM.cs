@@ -44,7 +44,7 @@ namespace RentLog.FilteredLeases.FilteredLists.AllInactiveLeases
         }
 
 
-        protected override List<LeaseDTO> GetLeases(MarketStateDB mkt, int secId)
+        protected override List<LeaseDTO> GetLeases(MarketStateDbBase mkt, int secId)
         {
             var all = mkt.InactiveLeases.GetAll();
             var filtered = secId == 0 ? all

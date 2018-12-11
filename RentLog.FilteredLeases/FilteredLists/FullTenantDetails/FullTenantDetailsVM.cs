@@ -13,7 +13,7 @@ namespace RentLog.FilteredLeases.FilteredLists.FullTenantDetails
         }
 
 
-        protected override List<LeaseDTO> GetLeases(MarketStateDB mkt, int secId)
+        protected override List<LeaseDTO> GetLeases(MarketStateDbBase mkt, int secId)
         {
             var all = mkt.GetAllLeases();
             return secId == 0 ? all

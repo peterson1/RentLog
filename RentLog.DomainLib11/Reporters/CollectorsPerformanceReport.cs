@@ -8,7 +8,7 @@ namespace RentLog.DomainLib11.Reporters
 {
     public class CollectorsPerformanceReport : UIList<CollectorPerformanceRow>
     {
-        public CollectorsPerformanceReport(ICollectionsDB db, MarketStateDB mkt)
+        public CollectorsPerformanceReport(ICollectionsDB db, MarketStateDbBase mkt)
         {
             foreach (var collector in db.CollectorsSnapshot)
                 this.Add(new CollectorPerformanceRow(collector, db, mkt.Stalls));

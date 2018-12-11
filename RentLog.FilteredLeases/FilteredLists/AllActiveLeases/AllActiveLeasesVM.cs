@@ -31,7 +31,7 @@ namespace RentLog.FilteredLeases.FilteredLists.AllActiveLeases
         public IR2Command   AdhocLeaseJobCmd3      { get; }
 
 
-        protected override List<LeaseDTO> GetLeases(MarketStateDB mkt, int secId)
+        protected override List<LeaseDTO> GetLeases(MarketStateDbBase mkt, int secId)
         {
             var all = mkt.ActiveLeases.GetAll();
             var filtered = secId == 0 ? all

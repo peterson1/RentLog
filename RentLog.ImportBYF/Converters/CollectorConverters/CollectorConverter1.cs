@@ -45,7 +45,7 @@ namespace RentLog.ImportBYF.Converters.CollectorConverters
             => Cast<ReportModels.Collector>(rec);
 
 
-        public override void ReplaceAll(IEnumerable<IDocumentDTO> docs, MarketStateDB mkt) 
+        public override void ReplaceAll(IEnumerable<IDocumentDTO> docs, MarketStateDbBase mkt) 
             => mkt.Collectors.DropAndInsert(docs
                 .Select(_ => _ as CollectorDTO), true, false);
     }

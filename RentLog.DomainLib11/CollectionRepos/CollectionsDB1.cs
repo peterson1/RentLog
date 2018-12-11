@@ -18,11 +18,11 @@ namespace RentLog.DomainLib11.CollectionRepos
         private const string SEC_SNAPS_KEY = "SectionSnapshots";
         private const string COL_SNAPS_KEY = "CollectorSnapshots";
 
-        private MarketStateDB  _mkt;
+        private MarketStateDbBase  _mkt;
         private Dictionary<int, CollectorDTO> _collectorBySecID = new Dictionary<int, CollectorDTO>();
 
 
-        public CollectionsDB1(DateTime date, IKeyValueStore metadataRepo, MarketStateDB marketStateDB, string databasePath)
+        public CollectionsDB1(DateTime date, IKeyValueStore metadataRepo, MarketStateDbBase marketStateDB, string databasePath)
         {
             Meta               = metadataRepo;
             _mkt               = marketStateDB;

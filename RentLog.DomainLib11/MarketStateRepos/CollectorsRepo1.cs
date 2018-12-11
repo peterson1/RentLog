@@ -8,7 +8,7 @@ namespace RentLog.DomainLib11.MarketStateRepos
 {
     public class CollectorsRepo1 : MarketStateRepoShimBase<CollectorDTO>, ICollectorsRepo
     {
-        public CollectorsRepo1(ISimpleRepo<CollectorDTO> simpleRepo, MarketStateDB marketStateDB) : base(simpleRepo, marketStateDB)
+        public CollectorsRepo1(ISimpleRepo<CollectorDTO> simpleRepo, MarketStateDbBase marketStateDB) : base(simpleRepo, marketStateDB)
         {
         }
 

@@ -37,7 +37,7 @@ namespace RentLog.ImportBYF.Converters.SectionConverters
                 .Select(_ => _ as object).ToList();
 
 
-        public override void ReplaceAll(IEnumerable<IDocumentDTO> records, MarketStateDB mkt)
+        public override void ReplaceAll(IEnumerable<IDocumentDTO> records, MarketStateDbBase mkt)
             => mkt.Sections.DropAndInsert(records
                 .Select(_ => _ as SectionDTO), true, false);
 

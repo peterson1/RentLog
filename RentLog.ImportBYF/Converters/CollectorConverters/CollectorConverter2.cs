@@ -31,7 +31,7 @@ namespace RentLog.ImportBYF.Converters.CollectorConverters
             => dir.MarketState.Collectors.GetAll();
 
 
-        public override void ReplaceAll(IEnumerable<CollectorDTO> newRecords, MarketStateDB mkt)
+        public override void ReplaceAll(IEnumerable<CollectorDTO> newRecords, MarketStateDbBase mkt)
             => mkt.Collectors.DropAndInsert(newRecords, true, false);
     }
 }

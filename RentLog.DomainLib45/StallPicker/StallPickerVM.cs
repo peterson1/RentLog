@@ -17,10 +17,10 @@ namespace RentLog.DomainLib45.StallPicker
     internal class StallPickerVM
     {
         private Window        _win;
-        private MarketStateDB _mkt;
+        private MarketStateDbBase _mkt;
         private List<int>     _occupiedIDs;
 
-        internal StallPickerVM(MarketStateDB marketStateDB, Window window)
+        internal StallPickerVM(MarketStateDbBase marketStateDB, Window window)
         {
             _mkt = marketStateDB;
             _win = window;
@@ -61,7 +61,7 @@ namespace RentLog.DomainLib45.StallPicker
 
     public class StallPicker
     {
-        public static bool TryPick(MarketStateDB marketStateDB, out StallDTO stall)
+        public static bool TryPick(MarketStateDbBase marketStateDB, out StallDTO stall)
         {
             var win = CreateWindow();
             var vm  = new StallPickerVM(marketStateDB, win);
@@ -71,7 +71,7 @@ namespace RentLog.DomainLib45.StallPicker
         }
 
 
-        public static StallDTO PickFirstVacant(MarketStateDB mkt)
+        public static StallDTO PickFirstVacant(MarketStateDbBase mkt)
         {
             var vm = new StallPickerVM(mkt, null);
             foreach (var sec in vm.Sections)

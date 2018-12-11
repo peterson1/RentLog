@@ -12,9 +12,10 @@ namespace RentLog.DomainLib11.BalanceRepos
 {
     public abstract class BalanceDBBase : IBalanceDB
     {
+
         public    abstract IDailyBillsRepo GetRepo        (int leaseID);
         public    abstract IDailyBillsRepo GetRepo        (LeaseDTO lease);
-        protected abstract MarketStateDB   GetMarketState ();
+        protected abstract MarketStateDbBase   GetMarketState ();
 
 
         //public IDailyBillsRepo GetRepo(LeaseDTO lse) => GetRepo(lse.Id);
@@ -55,7 +56,8 @@ namespace RentLog.DomainLib11.BalanceRepos
                     list.Add(GetBalance(lse, date));
             }
 
-            foreach (var lse in mkt.InactiveLeases.GetAll())
+            var inactvs = GetInactiveLeases(mkt, date);
+            foreach (var lse in inactvs)
             {
                 if (sectionId == 0 || lse.Stall.Section.Id == sectionId)
                     list.Add(GetBalance(lse, null));
@@ -72,6 +74,14 @@ namespace RentLog.DomainLib11.BalanceRepos
                 Water    = list.Sum  (_ => _.Water   .ZeroIfNullOrNegative()),
             };
             return list;
+        }
+
+
+        private IEnumerable<InactiveLeaseDTO> GetInactiveLeases(MarketStateDbBase mkt, DateTime asOfDate)
+        {
+            var minYr = asOfDate.Year - mkt.YearsBackCount;
+            return mkt.InactiveLeases.GetAll()
+                      .Where(_ => _.ContractStart.Year >= minYr);
         }
 
 

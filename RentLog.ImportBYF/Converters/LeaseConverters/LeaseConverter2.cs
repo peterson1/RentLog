@@ -82,7 +82,7 @@ namespace RentLog.ImportBYF.Converters.LeaseConverters
             => dir.MarketState.GetAllLeases();
 
 
-        public override void ReplaceAll(IEnumerable<LeaseDTO> newRecords, MarketStateDB mkt)
+        public override void ReplaceAll(IEnumerable<LeaseDTO> newRecords, MarketStateDbBase mkt)
         {
             var actives = newRecords.Where(_ => !(_ is InactiveLeaseDTO));
             var inactvs = newRecords.Where(_ =>   _ is InactiveLeaseDTO)

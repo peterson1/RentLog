@@ -35,7 +35,7 @@ namespace RentLog.ChequeVouchers.VoucherReqsTab.VouchersListPrint
         public UIList<FundRequestDTO>   ForPreparations => Tab?.FundRequests.ItemsList;
         public ITenantDBsDir            AppArgs         => Main?.AppArgs;
         public BankAccountDTO           BankAcct        => AppArgs?.CurrentBankAcct;
-        public MarketStateDB            MarketState     => AppArgs?.MarketState;
+        public MarketStateDbBase            MarketState     => AppArgs?.MarketState;
         public VoucherReqsTabVM         Tab             => Main?.VoucherReqs;
         public decimal?                 BankBalance     => LatestRow?.RunningBalance;
         public DateTime?                AsOfDate        => LatestRow?.TransactionDate;

@@ -65,7 +65,7 @@ namespace RentLog.ImportBYF.Converters.StallConverters
             => dir.MarketState.Stalls.GetAll();
 
 
-        public override void ReplaceAll(IEnumerable<StallDTO> newRecords, MarketStateDB mkt)
+        public override void ReplaceAll(IEnumerable<StallDTO> newRecords, MarketStateDbBase mkt)
             => mkt.Stalls.DropAndInsert(newRecords, true, false);
     }
 }

@@ -73,7 +73,7 @@ namespace RentLog.ImportBYF.Converters.BalanceAdjConverters
             => Main.ByfServer.Client.GetViewsList(viewsDisplayID, _lse.Id);
 
 
-        public override void ReplaceAll(IEnumerable<BalanceAdjustmentDTO> newRecords, MarketStateDB mkt)
+        public override void ReplaceAll(IEnumerable<BalanceAdjustmentDTO> newRecords, MarketStateDbBase mkt)
         {
             foreach (var adj in newRecords)
             {
