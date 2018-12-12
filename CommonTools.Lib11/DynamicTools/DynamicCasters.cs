@@ -44,10 +44,33 @@ namespace CommonTools.Lib11.DynamicTools
             => As.Decimal_(dynamic) ?? 0M;
 
 
-        public static bool Bool(dynamic dynamic)
+        //public static bool Bool(dynamic dynamic)
+        //{
+        //    var str = (string)dynamic;
+        //    if (str.IsBlank()) return false;
+        //    str = str.Trim().ToLower();
+
+        //    switch (str)
+        //    {
+        //        case "1":
+        //        case "y":
+        //        case "yes":
+        //        case "t":
+        //        case "true": return true;
+
+        //        case "0":
+        //        case "n":
+        //        case "no":
+        //        case "f":
+        //        case "false": return false;
+
+        //        default: throw Bad.Cast<bool>(str);
+        //    }
+        //}
+        public static bool? Bool_(dynamic dynamic)
         {
             var str = (string)dynamic;
-            if (str.IsBlank()) return false;
+            if (str.IsBlank()) return null;
             str = str.Trim().ToLower();
 
             switch (str)
@@ -64,9 +87,14 @@ namespace CommonTools.Lib11.DynamicTools
                 case "f":
                 case "false": return false;
 
-                default: throw Bad.Cast<bool>(str);
+                default: return null;
             }
         }
+
+
+        public static bool Bool(dynamic dynamic)
+            => (bool?)Bool_(dynamic)
+            ?? throw Bad.Cast<bool>((string)dynamic);
 
 
         public static DateTime? Date_(dynamic dynamic)

@@ -7,6 +7,7 @@ using RentLog.ImportBYF.ByfServerAccess;
 using RentLog.ImportBYF.RntQueries;
 using RentLog.ImportBYF.Version2UI.BankMemosPane;
 using RentLog.ImportBYF.Version2UI.CheckVouchersPane;
+using RentLog.ImportBYF.Version2UI.JournalVouchersPane;
 using RentLog.ImportBYF.Version2UI.LeaseBalancesPane;
 using RentLog.ImportBYF.Version2UI.MasterDataPane;
 using RentLog.ImportBYF.Version2UI.TransactionDataPane;
@@ -33,17 +34,19 @@ namespace RentLog.ImportBYF.Version2UI
             //LeaseBalances   = new LeaseBalancesPaneVM(this);
             CheckVouchers   = new CheckVouchersPaneVM(this);
             BankMemos       = new BankMemosPaneVM(this);
+            JournalVouchers = new JournalVouchersPaneVM(this);
         }
 
 
-        public ByfCache              ByfCache        { get; } = new ByfCache();
-        public RntCache              RntCache        { get; } = new RntCache();
-        public ByfServerVM           ByfServer       { get; }
-        public MasterDataPaneVM      MasterData      { get; }
-        public TransactionDataPaneVM TransactionData { get; }
-        public LeaseBalancesPaneVM   LeaseBalances   { get; }
-        public CheckVouchersPaneVM   CheckVouchers   { get; }
-        public BankMemosPaneVM       BankMemos       { get; }
+        public ByfCache               ByfCache         { get; } = new ByfCache();
+        public RntCache               RntCache         { get; } = new RntCache();
+        public ByfServerVM            ByfServer        { get; }
+        public MasterDataPaneVM       MasterData       { get; }
+        public TransactionDataPaneVM  TransactionData  { get; }
+        public LeaseBalancesPaneVM    LeaseBalances    { get; }
+        public CheckVouchersPaneVM    CheckVouchers    { get; }
+        public BankMemosPaneVM        BankMemos        { get; }
+        public JournalVouchersPaneVM  JournalVouchers  { get; }
 
 
         private void SetBranchAndSystemNames()

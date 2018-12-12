@@ -103,6 +103,7 @@
     <Compile Include="ByfQueries\ByfCache.cs" />
     <Compile Include="ByfQueries\ByfCashierColxnsQueries.cs" />
     <Compile Include="ByfQueries\ByfCheckVouchersByDateQueries.cs" />
+    <Compile Include="ByfQueries\ByfJVsByDateQueries.cs" />
     <Compile Include="ByfQueries\ByfLeaseColxnsQueries.cs" />
     <Compile Include="ByfQueries\ByfAmbulantColxnsQueries.cs" />
     <Compile Include="ByfQueries\ByfOtherColxnsQueries.cs" />
@@ -139,10 +140,12 @@
     <Compile Include="RntCommands\RntUpdateBankMemosCommand.cs" />
     <Compile Include="RntCommands\RntUpdateCheckVouchersCommand.cs" />
     <Compile Include="RntCommands\RntUpdateDayCommand2.cs" />
+    <Compile Include="RntCommands\RntUpdateJVsCommand.cs" />
     <Compile Include="RntQueries\RntBankMemosByDateQueries.cs" />
     <Compile Include="RntQueries\RntCache.cs" />
     <Compile Include="RntQueries\RntCheckVouchersByDateQueries.cs" />
     <Compile Include="RntQueries\RntDailyTxnQuery.cs" />
+    <Compile Include="RntQueries\RntJVsByDateQueries.cs" />
     <Compile Include="RntQueries\RntLeaseBalanceQueries.cs" />
     <Compile Include="Version2UI\BankMemosPane\BankMemosPaneUI.xaml.cs">
       <DependentUpon>BankMemosPaneUI.xaml</DependentUpon>
@@ -170,6 +173,19 @@
     <Compile Include="Version2UI\CheckVouchersPane\CVsByDateList\CVsByDateTable.xaml.cs">
       <DependentUpon>CVsByDateTable.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Version2UI\JournalVouchersPane\JournalVouchersPaneUI.xaml.cs">
+      <DependentUpon>JournalVouchersPaneUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Version2UI\JournalVouchersPane\JournalVouchersPaneVM.cs" />
+    <Compile Include="Version2UI\JournalVouchersPane\JVsByDateList\CellUI.xaml.cs">
+      <DependentUpon>CellUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Version2UI\JournalVouchersPane\JVsByDateList\JVsByDateCell.cs" />
+    <Compile Include="Version2UI\JournalVouchersPane\JVsByDateList\JVsByDateListUI.xaml.cs">
+      <DependentUpon>JVsByDateListUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Version2UI\JournalVouchersPane\JVsByDateList\JVsByDateListVM.cs" />
+    <Compile Include="Version2UI\JournalVouchersPane\JVsByDateList\JVsByDateRow.cs" />
     <Compile Include="Version2UI\LeaseBalancesPane\LeaseBalancesPaneUI.xaml.cs">
       <DependentUpon>LeaseBalancesPaneUI.xaml</DependentUpon>
     </Compile>
@@ -309,6 +325,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Version2UI\CheckVouchersPane\CVsByDateList\CVsByDateTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Version2UI\JournalVouchersPane\JournalVouchersPaneUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Version2UI\JournalVouchersPane\JVsByDateList\CellUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Version2UI\JournalVouchersPane\JVsByDateList\JVsByDateListUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

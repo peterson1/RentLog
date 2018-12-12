@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="RentLog.ImportBYF.Version2UI.JournalVouchersPane.JVsByDateList.JVsByDateListUI"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RentLog.ImportBYF.Version2UI.JournalVouchersPane.JVsByDateList"
+             xmlns:butns="clr-namespace:CommonTools.Lib45.StyledButtons;assembly=CommonTools.Lib45"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <DataGrid DataContext="{Binding Rows}"
+              ItemsSource="{Binding }"
+              Style="{StaticResource dgReadOnly}">
+
+        <DataGrid.RowDetailsTemplate>
+            <DataTemplate>
+                <StackPanel>
+                    <StackPanel.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="FontSize" Value="11" />
+                        </Style>
+                    </StackPanel.Resources>
+                    <TextBlock Text="{Binding Status}" />
+                    <TextBlock Text="{Binding WhyInvalid}" />
+                    <TextBlock Text="{Binding Errors}" />
+                </StackPanel>
+            </DataTemplate>
+        </DataGrid.RowDetailsTemplate>
+
+        <DataGrid.Columns>
+            <DataGridTemplateColumn>
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <butns:SimpleRefreshButton />
+                            <TextBlock Text="{Binding Date, StringFormat=d MMM yyyy}" />
+                            <Button Command="{Binding UpdateRntCmd}"
+                                    Content="{Binding UpdateRntCmd.CurrentLabel}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+            <DataGridTemplateColumn Header="BYF">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <local:CellUI DataContext="{Binding ByfCell}" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+            <DataGridTemplateColumn Header="RNT">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <local:CellUI DataContext="{Binding RntCell}" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+            <DataGridTextColumn Header="valid"
+                                Binding="{Binding IsValidImport}"
+                                ElementStyle="{StaticResource colCenter}">
+                <DataGridTextColumn.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="ToolTip" Value="{Binding Errors}" />
+                        <Setter Property="ToolTipService.ShowDuration" Value="2147483647" />
+                    </Style>
+                </DataGridTextColumn.CellStyle>
+            </DataGridTextColumn>
+
+        </DataGrid.Columns>
+    </DataGrid>
+</UserControl>

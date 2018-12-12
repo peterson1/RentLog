@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="RentLog.ImportBYF.Version2UI.JournalVouchersPane.JVsByDateList.CellUI"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RentLog.ImportBYF.Version2UI.JournalVouchersPane.JVsByDateList"
+             xmlns:labl="clr-namespace:CommonTools.Lib45.TextLabels;assembly=CommonTools.Lib45"
+             mc:Ignorable="d" 
+             VerticalAlignment="Center"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="labl:DualText">
+            <Setter Property="Text1Width" Value="80" />
+            <Setter Property="Text1Size" Value="10" />
+            <Setter Property="Text2Size" Value="10" />
+        </Style>
+    </UserControl.Resources>
+    <StackPanel>
+        <labl:DualText Text1="DTOs.Count" Text2="{Binding DTOs.Count, StringFormat=N0}" />
+    </StackPanel>
+</UserControl>

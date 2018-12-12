@@ -1,0 +1,59 @@
+﻿using CommonTools.Lib11.DataStructures;
+using CommonTools.Lib11.DateTimeTools;
+using CommonTools.Lib45.ThreadTools;
+using PropertyChanged;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace RentLog.ImportBYF.Version2UI.JournalVouchersPane.JVsByDateList
+{
+    [AddINotifyPropertyChangedInterface]
+    public class JVsByDateListVM : UIList<JVsByDateRow>
+    {
+        public JVsByDateListVM(MainWindowVM2 mainWindowVM2)
+        {
+            MainWindow = mainWindowVM2;
+            MainWindow.ByfServer.GotMinMaxDates += ByfServer_GotMinMaxDates;
+        }
+
+
+        public MainWindowVM2 MainWindow { get; }
+
+
+        private void ByfServer_GotMinMaxDates(object sender, (DateTime Min, DateTime Max) dates)
+        {
+            var list = dates.Min.EachDayUpTo(dates.Max.AddDays(4))
+                            .OrderByDescending(_ => _)
+                            .Select(_ => new JVsByDateRow(_, MainWindow));
+            UIThread.Run(() => SetItems(list));
+        }
+
+
+        private async Task ProcessEachRow(IEnumerable<JVsByDateRow> rows)
+        {
+            var recents = rows.Where(_ => _.Date.Year >= 2015);
+            foreach (var row in recents)
+            {
+                SetStatus($"Refreshing [{row.Date:d-MMM-yyyy}] ...");
+                if (!ShouldKeepRunning) return;
+
+                await row.RefreshCmd.RunAsync();
+                if (!ShouldKeepRunning) return;
+
+                if (row.CanUpdateRnt())
+                    await row.UpdateRntCmd.RunAsync();
+
+                await Task.Delay(100);
+            }
+            SetStatus("All rows refreshed.");
+        }
+
+
+        private void SetStatus(string message) => MainWindow.JournalVouchers.Status = message;
+        private bool ShouldKeepRunning         => MainWindow.JournalVouchers.IsRunning;
+        public  Task RefreshAll        ()      => ProcessEachRow(this);
+        public  Task RefreshAllReversed()      => ProcessEachRow(this.OrderBy(_ => _.Date));
+    }
+}
