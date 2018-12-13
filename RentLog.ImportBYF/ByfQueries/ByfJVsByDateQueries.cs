@@ -43,7 +43,11 @@ namespace RentLog.ImportBYF.ByfQueries
                 if (headr == null)
                     throw No.Match<JournalVoucherDTO>("Id", kvp.Key);
 
+                if (!headr.IsBalanced)
+                    throw Bad.State<JournalVoucherDTO>("balanced", "not balanced");
+
                 headr.Allocations = kvp.Value;
+                headr.Amount = headr.TotalCredit;
             }
             return headrs;
         }
