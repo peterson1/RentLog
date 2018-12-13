@@ -1,4 +1,5 @@
 ﻿using CommonTools.Lib11.DynamicTools;
+using CommonTools.Lib11.ExceptionTools;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.Models;
 using RentLog.ImportBYF.RntQueries;
@@ -7,7 +8,6 @@ using RentLog.ImportBYF.Version2UI.JournalVouchersPane.JVsByDateList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace RentLog.ImportBYF.ByfQueries
@@ -28,18 +28,24 @@ namespace RentLog.ImportBYF.ByfQueries
             var byfItems  = await itemsJob;
 
             var allByfs   = CastAsAllByfs(byfHeadrs, byfItems, main);
+            return new JVsByDateCell { DTOs = allByfs };
         }
 
 
         private static List<JournalVoucherDTO> CastAsAllByfs(List<dynamic> byfHeadrs, List<dynamic> byfItems, MainWindowVM2 main)
         {
-            var headrs    = byfHeadrs.Select(_ => (JournalVoucherDTO)CastAsVoucherDTO(_, main.RntCache));
-            var itemsDict = GroupItemsByHeader(byfItems, main.ByfCache);
+            var headrs    = byfHeadrs.Select(_ => (JournalVoucherDTO)CastAsVoucherDTO(_)).ToList();
+            var itemsDict = GroupItemsByHeader(byfItems, main.RntCache);
 
-            foreach (var kvp in headrsDict)
+            foreach (var kvp in itemsDict)
             {
-                var dto = kvp.Value;
+                var headr = headrs.SingleOrDefault(_ => _.Id == kvp.Key);
+                if (headr == null)
+                    throw No.Match<JournalVoucherDTO>("Id", kvp.Key);
+
+                headr.Allocations = kvp.Value;
             }
+            return headrs;
         }
 
 
@@ -50,6 +56,10 @@ namespace RentLog.ImportBYF.ByfQueries
             {
                 var alloc = CastAsAllocation(byf, cache, out int headrId);
 
+                if (!dict.TryGetValue(headrId, out List<AccountAllocation> list))
+                    dict[headrId] = list = new List<AccountAllocation>();
+
+                list.Add(alloc);
             }
             return dict;
         }

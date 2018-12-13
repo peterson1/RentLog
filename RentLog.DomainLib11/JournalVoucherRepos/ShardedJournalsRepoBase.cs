@@ -48,7 +48,11 @@ namespace RentLog.DomainLib11.JournalVoucherRepos
 
 
         private ISimpleRepo<JournalVoucherDTO> GetRepo(JournalVoucherDTO dto)
-            => ConnectToDB(GetDatabasePath(dto.TransactionDate));
+            => GetSoloShard(dto.TransactionDate);
+
+
+        public ISimpleRepo<JournalVoucherDTO> GetSoloShard(DateTime date)
+            => ConnectToDB(GetDatabasePath(date));
 
 
         private int GetMaxSerial(string dbPath)

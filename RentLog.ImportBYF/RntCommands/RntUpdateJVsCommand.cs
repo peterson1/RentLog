@@ -1,9 +1,4 @@
 ﻿using RentLog.ImportBYF.Version2UI.JournalVouchersPane.JVsByDateList;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RentLog.ImportBYF.RntCommands
 {
@@ -11,7 +6,13 @@ namespace RentLog.ImportBYF.RntCommands
     {
         public static void UpdateJournalVouchers(this JVsByDateRow row)
         {
-            throw new NotImplementedException();
+            var repo = row.MainWindow.AppArgs.Journals;
+            foreach (var jv in row.ByfCell.DTOs)
+            {
+                var shard = repo.GetSoloShard(jv.TransactionDate);
+                shard.Delete(jv.Id);
+                shard.Insert(jv);
+            }
         }
     }
 }

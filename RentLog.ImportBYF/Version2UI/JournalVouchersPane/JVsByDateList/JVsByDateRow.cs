@@ -1,6 +1,7 @@
 ﻿using CommonTools.Lib11.ExceptionTools;
 using CommonTools.Lib11.InputCommands;
 using CommonTools.Lib45.InputCommands;
+using PropertyChanged;
 using RentLog.ImportBYF.ByfQueries;
 using RentLog.ImportBYF.RntCommands;
 using RentLog.ImportBYF.RntQueries;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace RentLog.ImportBYF.Version2UI.JournalVouchersPane.JVsByDateList
 {
+    [AddINotifyPropertyChangedInterface]
     public class JVsByDateRow
     {
         public JVsByDateRow(DateTime date, MainWindowVM2 mainWindow)

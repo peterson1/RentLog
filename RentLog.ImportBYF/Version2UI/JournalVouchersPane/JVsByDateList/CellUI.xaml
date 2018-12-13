@@ -16,6 +16,12 @@
         </Style>
     </UserControl.Resources>
     <StackPanel>
-        <labl:DualText Text1="DTOs.Count" Text2="{Binding DTOs.Count, StringFormat=N0}" />
+        <labl:DualText Text1="DTOs.Count"  Text2="{Binding DTOs.Count, StringFormat=N0}" />
+        <labl:DualText Text1="SerialSum"   Text2="{Binding SerialSum  , StringFormat=N0}" />
+        <labl:DualText Text1="DateSum"     Text2="{Binding DateSum    , StringFormat=N0}" />
+        <labl:DualText Text1="AllocsCount" Text2="{Binding AllocsCount, StringFormat=N0}" />
+        <labl:DualText Text1="AllocAccts"  Text2="{Binding AllocAccts , StringFormat=N0}" />
+        <labl:DualText Text1="AllocsSum"   Text2="{Binding AllocsSum  , StringFormat=N0}" />
+        <labl:DualText Text1="AmountSum"   Text2="{Binding AmountSum  , StringFormat=N0}" />
     </StackPanel>
 </UserControl>

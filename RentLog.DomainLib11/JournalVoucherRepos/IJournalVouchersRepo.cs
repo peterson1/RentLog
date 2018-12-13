@@ -8,7 +8,8 @@ namespace RentLog.DomainLib11.JournalVoucherRepos
 {
     public interface IJournalVouchersRepo : ISimplerRepo<JournalVoucherDTO>
     {
-        List<JournalVoucherDTO>  List              (DateTime startDate, DateTime endDate);
-        Task<int>                GetNextSerialNum  ();
+        Task<int>                      GetNextSerialNum ();
+        List<JournalVoucherDTO>        List             (DateTime startDate, DateTime endDate);
+        ISimpleRepo<JournalVoucherDTO> GetSoloShard     (DateTime date);
     }
 }
