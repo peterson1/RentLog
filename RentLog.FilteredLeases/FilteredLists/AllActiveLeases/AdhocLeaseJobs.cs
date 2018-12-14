@@ -1,6 +1,8 @@
 ﻿using CommonTools.Lib11.InputCommands;
 using CommonTools.Lib45.InputCommands;
+using CommonTools.Lib45.InputDialogs;
 using CommonTools.Lib45.ThreadTools;
+using RentLog.DomainLib11.AdHocJobs;
 using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.BillingRules.RentPenalties;
 using RentLog.DomainLib11.DataSources;
@@ -21,7 +23,9 @@ namespace RentLog.FilteredLeases.FilteredLists.AllActiveLeases
                 string desc = null;
                 switch (taskNumber)
                 {
-                    case 1 : job = SetToMonthly(out desc); break;
+                    case 1: job = SetToMonthly(out desc); break;
+                    case 2: if (!PopUpInput.TryGetDate("Look for Balances starting from", out DateTime date)) break;
+                            job = ForSpecificLease.FindMemosFrom(date, out desc); break;
                     default: Alert.Show($"Unrecognized task number: [{taskNumber}]"); break;
                 }
 
