@@ -32,7 +32,7 @@ namespace RentLog.DomainLib11.ReportRows
         public decimal  OccupiedRate  => Occupieds.Count.PercentOf(TotalCount);
         public decimal  VacantRate    => Vacants  .Count.PercentOf(TotalCount);
         public decimal  OccupiedRent  => Occupieds.Sum(_ => _.Rent.RegularRate);
-        public decimal  VacantRent    => Vacants  .Sum(_ => _.DefaultRent.RegularRate);
+        public decimal  VacantRent    => Vacants  .Sum(_ => _.DefaultRent?.RegularRate ?? 0);
 
 
         private IEnumerable<StallDTO> GetVacants(ICollectionsDB db)

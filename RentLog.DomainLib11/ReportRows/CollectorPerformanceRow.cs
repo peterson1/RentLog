@@ -13,6 +13,7 @@ namespace RentLog.DomainLib11.ReportRows
     {
         public CollectorPerformanceRow(CollectorDTO collector, ICollectionsDB db, IStallsRepo fallbackStallsRepo)
         {
+            //todo: remove logic from constructor
             Collector = collector;
 
             foreach (var sec in db.SectionsSnapshot)
