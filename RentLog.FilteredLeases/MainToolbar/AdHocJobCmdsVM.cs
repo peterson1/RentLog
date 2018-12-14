@@ -41,6 +41,9 @@ namespace RentLog.FilteredLeases.MainToolbar
                 case 2: adhocJob =
                         EditMarketMeta.SetYearsBack_1(_dir, out desc, out canRun);
                         break;
+                case 3: adhocJob =
+                        StallsJob.SetStallDefaults(_dir, out desc, out canRun);
+                        break;
                 default: throw Bad.Data($"Task #: [{taskNumber}]");
             }
 
