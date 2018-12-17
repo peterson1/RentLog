@@ -44,18 +44,8 @@ namespace RentLog.DomainLib45.DailyStatusReporter
         public void OnReportDateChanged() => ClickRefresh();
 
 
-        protected override void OnRefreshClicked()
-        {
-            MainReport = null;
-            try
-            {
-                MainReport = new DailyStatusReport(ReportDate, AppArgs);
-            }
-            catch (Exception ex)
-            {
-                Alert.Show(ex);
-            }
-        }
+        protected override void OnRefreshClicked() 
+            => MainReport = DailyStatusReport.New(AppArgs, ReportDate);
 
 
         protected override async void OnPrintClicked()

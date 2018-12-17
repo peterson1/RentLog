@@ -11,38 +11,19 @@ namespace RentLog.DomainLib11.ReportRows
 {
     public class CollectorPerformanceRow : UIList<CollectorPerfSubRow>
     {
-        public CollectorPerformanceRow(CollectorDTO collector, ICollectionsDB db, IStallsRepo fallbackStallsRepo)
+        private CollectorPerformanceRow(CollectorDTO collector)
         {
-            //todo: remove logic from constructor
             Collector = collector;
-
-            foreach (var sec in db.SectionsSnapshot)
-                AddSubRows(collector, sec, db, fallbackStallsRepo);
-
-            Sections = this.DistinctBy(_ => _.Section.Id)
-                           .Select    (_ => _.Section)
-                           .ToList    ();
-
-            StallCoverage = new ColPerfStallCoverage(this, db);
-            RentBill      = new ColPerfBillPerformance(BillCode.Rent  , this.Select(_ => _.Rent));
-            RightsBill    = new ColPerfBillPerformance(BillCode.Rights, this.Select(_ => _.Rights));
-
-            this.SetSummary(new CollectorPerfSubRowsTotal(this));
         }
 
                                                      
         public CollectorDTO            Collector     { get; }
-        public List<SectionDTO>        Sections      { get; }
-        public ColPerfStallCoverage    StallCoverage { get; }
-        public ColPerfBillPerformance  RentBill      { get; }
-        public ColPerfBillPerformance  RightsBill    { get; }
+        public List<SectionDTO>        Sections      { get; private set; }
+        public ColPerfStallCoverage    StallCoverage { get; private set; }
+        public ColPerfBillPerformance  RentBill      { get; private set; }
+        public ColPerfBillPerformance  RightsBill    { get; private set; }
 
         public string Assignment => string.Join(", ", Sections?.Select(_ => _.Name));
-
-
-        //private List<SectionDTO> GetSections(CollectorDTO collector, ICollectionsDB db)
-        //    => db.SectionsSnapshot.Where(sec 
-        //        => db.GetCollector(sec).Id == collector.Id).ToList();
 
 
         private void AddSubRows(CollectorDTO collector, SectionDTO sec, ICollectionsDB db, IStallsRepo stalls)
@@ -61,6 +42,27 @@ namespace RentLog.DomainLib11.ReportRows
 
                 this.Add(new CollectorPerfSubRow(colxn, sec));
             }
+        }
+
+
+        public static CollectorPerformanceRow New (CollectorDTO collector, IStallsRepo fallbackStallsRepo, ICollectionsDB db)
+        {
+            var cp = new CollectorPerformanceRow(collector);
+
+            foreach (var sec in db.SectionsSnapshot)
+                cp.AddSubRows(collector, sec, db, fallbackStallsRepo);
+
+            cp.Sections = cp.DistinctBy(_ => _.Section.Id)
+                            .Select    (_ => _.Section)
+                            .ToList    ();
+
+            cp.StallCoverage = ColPerfStallCoverage  .New(cp, db);
+            cp.RentBill      = ColPerfBillPerformance.New(BillCode.Rent  , cp.Select(_ => _.Rent));
+            cp.RightsBill    = ColPerfBillPerformance.New(BillCode.Rights, cp.Select(_ => _.Rights));
+
+            cp.SetSummary(new CollectorPerfSubRowsTotal(cp));
+
+            return cp;
         }
     }
 }

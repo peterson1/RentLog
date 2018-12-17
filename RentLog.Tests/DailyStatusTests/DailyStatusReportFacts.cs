@@ -19,7 +19,7 @@ namespace RentLog.Tests.DailyStatusTests
         public void Jul3()
         {
             var arg = SampleDir.Jul3_GRY();
-            var sut = new DailyStatusReport(3.July(2018), arg);
+            var sut = DailyStatusReport.New(arg, 3.July(2018));
 
             sut.StallsInventory.Should().HaveCount(3);
 

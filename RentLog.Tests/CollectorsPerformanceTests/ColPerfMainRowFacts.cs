@@ -14,7 +14,7 @@ namespace RentLog.Tests.CollectorsPerformanceTests
         {
             var arg = SampleDir.Jul3_GRY();
             var db  = arg.Collections.For(3.July(2018));
-            var sut = new CollectorsPerformanceReport(db, arg.MarketState);
+            var sut = CollectorsPerformanceReport.New(arg.MarketState, db);
 
             sut.Should().HaveCount(1);
             sut[0].Collector.Should().NotBeNull();

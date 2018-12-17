@@ -15,7 +15,7 @@ namespace RentLog.Tests.CollectorsPerformanceTests
         {
             var arg = SampleDir.Jul3_GRY();
             var db  = arg.Collections.For(3.July(2018));
-            var sut = new CollectorsPerformanceReport(db, arg.MarketState);
+            var sut = CollectorsPerformanceReport.New(arg.MarketState, db);
 
             sut.Should().HaveCount(1);
             sut[0].Should().HaveCount(94);
@@ -63,7 +63,7 @@ namespace RentLog.Tests.CollectorsPerformanceTests
         {
             var dir = SampleDir.Aug27_GRY();
             var db  = dir.Collections.For(27.August(2018));
-            var sut = new CollectorsPerformanceReport(db, dir.MarketState);
+            var sut = CollectorsPerformanceReport.New(dir.MarketState, db);
             sut.Should().HaveCount(1);
             sut[0].Should().HaveCount(75);
 

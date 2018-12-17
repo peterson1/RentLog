@@ -1,50 +1,26 @@
 ﻿using CommonTools.Lib11.DataStructures;
 using RentLog.DomainLib11.CollectionRepos;
-using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
 using RentLog.DomainLib11.ReportRows;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace RentLog.DomainLib11.Reporters
 {
     public class CollectorsPerformanceReport : UIList<CollectorPerformanceRow>
     {
-        public CollectorsPerformanceReport(ICollectionsDB db, MarketStateDbBase mkt)
+        public static CollectorsPerformanceReport New(IMarketStateDB mkt, ICollectionsDB db)
         {
-            //todo: remove logic from constructor
-            List<CollectorDTO> collectors;
-            try
-            {
-                collectors = db.CollectorsSnapshot
-                              ?? mkt.Collectors.GetAll();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            var cp = new CollectorsPerformanceReport();
+
+            var collectors = db.CollectorsSnapshot
+                          ?? mkt.Collectors.GetAll();
 
             foreach (var collector in collectors)
-            {
-                try
-                {
-                    this.Add(new CollectorPerformanceRow(collector, db, mkt.Stalls));
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
+                cp.Add(CollectorPerformanceRow.New(collector, mkt.Stalls, db));
 
-            try
-            {
-                this.RemoveAll(_ => !_.Any());
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            cp.RemoveAll(_ => !_.Any());
+
+            return cp;
         }
     }
 }

@@ -76,7 +76,6 @@ namespace RentLog.ImportBYF.ByfQueries
             DateOffset  = As.DateOffset(byf.batchdate),
             SerialNum   = As.ID(byf.serial),
             Remarks     = As.Text(byf.remarks),
-            Amount      = 0, //todo: set amount
             Allocations = new List<AccountAllocation>(),
         };
 
