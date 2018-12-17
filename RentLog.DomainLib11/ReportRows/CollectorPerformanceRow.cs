@@ -1,6 +1,7 @@
 ﻿using CommonTools.Lib11.CollectionTools;
 using CommonTools.Lib11.DataStructures;
 using RentLog.DomainLib11.CollectionRepos;
+using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.DomainLib11.MarketStateRepos;
 using RentLog.DomainLib11.Models;
@@ -45,11 +46,12 @@ namespace RentLog.DomainLib11.ReportRows
         }
 
 
-        public static CollectorPerformanceRow New (CollectorDTO collector, IStallsRepo fallbackStallsRepo, ICollectionsDB db)
+        public static CollectorPerformanceRow New (CollectorDTO collector, IStallsRepo fallbackStallsRepo, ICollectionsDB db, IMarketStateDB mkt)
         {
             var cp = new CollectorPerformanceRow(collector);
+            var sections = db.SectionsSnapshot ?? mkt.Sections.GetAll();
 
-            foreach (var sec in db.SectionsSnapshot)
+            foreach (var sec in sections)
                 cp.AddSubRows(collector, sec, db, fallbackStallsRepo);
 
             cp.Sections = cp.DistinctBy(_ => _.Section.Id)

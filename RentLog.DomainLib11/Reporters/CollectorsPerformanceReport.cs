@@ -16,7 +16,7 @@ namespace RentLog.DomainLib11.Reporters
                           ?? mkt.Collectors.GetAll();
 
             foreach (var collector in collectors)
-                cp.Add(CollectorPerformanceRow.New(collector, mkt.Stalls, db));
+                cp.Add(CollectorPerformanceRow.New(collector, mkt.Stalls, db, mkt));
 
             cp.RemoveAll(_ => !_.Any());
 
