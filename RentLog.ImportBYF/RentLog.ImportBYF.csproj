@@ -135,6 +135,19 @@
     <Compile Include="Converters\SectionConverters\SectionConverter2.cs" />
     <Compile Include="Converters\StallConverters\StallConverter2.cs" />
     <Compile Include="Converters\TenantConverters\TenantConverter2.cs" />
+    <Compile Include="Remediations\VerifyLeaseMemos\DtoCell.xaml.cs">
+      <DependentUpon>DtoCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Remediations\VerifyLeaseMemos\LeaseBalAdjRow.cs" />
+    <Compile Include="Remediations\VerifyLeaseMemos\LeaseBalAdjsList.cs" />
+    <Compile Include="Remediations\VerifyLeaseMemos\LeaseBalAdjsTable.xaml.cs">
+      <DependentUpon>LeaseBalAdjsTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Remediations\VerifyLeaseMemos\LeaseBalAdjustmentsVM.cs" />
+    <Compile Include="Remediations\VerifyLeaseMemos\LeaseBalAjsWindow.xaml.cs">
+      <DependentUpon>LeaseBalAjsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Remediations\VerifyLeaseMemos\VerifyLeaseMemosFix.cs" />
     <Compile Include="RntCommands\DepsToPassbookRemedialCmd.cs" />
     <Compile Include="RntCommands\RntUpdateBalancesCommand.cs" />
     <Compile Include="RntCommands\RntUpdateBankMemosCommand.cs" />
@@ -304,6 +317,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Remediations\VerifyLeaseMemos\DtoCell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Remediations\VerifyLeaseMemos\LeaseBalAdjsTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Remediations\VerifyLeaseMemos\LeaseBalAjsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Version2UI\BankMemosPane\BankMemosPaneUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

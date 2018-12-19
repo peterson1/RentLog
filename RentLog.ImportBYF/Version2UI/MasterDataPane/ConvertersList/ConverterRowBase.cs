@@ -25,6 +25,7 @@ namespace RentLog.ImportBYF.Version2UI.MasterDataPane.ConvertersList
             RefreshCmd    = R2Command.Async(this.GetDifferences, _ => !IsBusy, "Get Diffs");
             UpdateRntCmd  = R2Command.Async(this.UpdateRnt, _ => this.CanUpdateRnt(), "Update RNT");
             Remediate1Cmd = CreateRemediate1Cmd();
+            Remediate2Cmd = CreateRemediate2Cmd();
         }
 
 
@@ -48,6 +49,7 @@ namespace RentLog.ImportBYF.Version2UI.MasterDataPane.ConvertersList
         public IR2Command  RefreshCmd    { get; }
         public IR2Command  UpdateRntCmd  { get; }
         public IR2Command  Remediate1Cmd { get; }
+        public IR2Command  Remediate2Cmd { get; }
 
         public MainWindowVM2         Main      { get; }
         public UIList<JsonComparer>  DiffRows  { get; } = new UIList<JsonComparer>();
@@ -74,6 +76,7 @@ namespace RentLog.ImportBYF.Version2UI.MasterDataPane.ConvertersList
 
 
         protected virtual IR2Command CreateRemediate1Cmd() => null;
+        protected virtual IR2Command CreateRemediate2Cmd() => null;
 
 
         public virtual Task<List<dynamic>> GetViewsList(string viewsDisplayID)

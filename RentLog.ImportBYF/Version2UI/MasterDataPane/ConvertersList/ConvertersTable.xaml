@@ -58,6 +58,11 @@
                                     HorizontalAlignment="Left"
                                     Visibility="{Binding Remediate1Cmd, Converter={StaticResource visIfNotNull}}" />
 
+                            <Button Command="{Binding Remediate2Cmd}"
+                                    Content="Fix 2"
+                                    HorizontalAlignment="Left"
+                                    Visibility="{Binding Remediate2Cmd, Converter={StaticResource visIfNotNull}}" />
+
                         </StackPanel>
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>

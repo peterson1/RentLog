@@ -29,12 +29,9 @@ namespace RentLog.ImportBYF.Converters
                     var id1   = item1.Id;
                     var item2 = list2.SingleOrDefault(_ => _.Id == id1);
                     bag.Add(new JsonComparer(id1, item1, item2));
-                    //var byf   = compList.PreCompareBYF(item1);
-                    //var rnt   = compList.PreCompareRNT(item2);
-                    //bag.Add(new JsonComparer(id1, byf, rnt));
                 });
             }
-            jobs.Add(() => AlertUnexpectedItems(list1, list2));
+            //jobs.Add(() => AlertUnexpectedItems(list1, list2));
 
             Parallel.Invoke(jobs.ToArray());
             var diffs = bag.ToList();

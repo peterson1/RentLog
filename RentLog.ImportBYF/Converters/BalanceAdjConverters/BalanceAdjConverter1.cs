@@ -15,10 +15,11 @@ namespace RentLog.ImportBYF.Converters.BalanceAdjConverters
 {
     public class BalanceAdjConverter1 : ConverterRowBase<BalanceAdjustmentDTO>
     {
+        public const    string VIEWS_ID       =  "balance_adjustments?display_id=page_3";
         public override string Label          => "Balance Adjustments";
-        public override string ViewsDisplayID => "balance_adjustments?display_id=page_3";
+        public override string ViewsDisplayID => VIEWS_ID;
 
-        private Dictionary<int, DateTime> _adjDates = new Dictionary<int, DateTime>();
+        internal Dictionary<int, DateTime> _adjDates = new Dictionary<int, DateTime>();
         private LeaseDTO _lse;
 
 
