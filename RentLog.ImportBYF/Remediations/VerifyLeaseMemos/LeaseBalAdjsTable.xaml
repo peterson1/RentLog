@@ -10,27 +10,31 @@
               DataContext="{Binding Rows}"
               ItemsSource="{Binding }">
 
-        <DataGridTextColumn Header="Id"
-                            Binding="{Binding Id}" />
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="Id"
+                                Binding="{Binding Id}" />
 
-        <DataGridTextColumn Header="Date"
-                            Binding="{Binding Date, StringFormat=d-MMM-yyyy}" />
+            <DataGridTextColumn Header="Date"
+                                Binding="{Binding Date, StringFormat=d-MMM-yyyy}" />
 
-        <DataGridTemplateColumn Header="BYF">
-            <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate>
-                    <local:DtoCell DataContext="{Binding ByfDTO}" />
-                </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-        </DataGridTemplateColumn>
+            <DataGridTemplateColumn Header="BYF">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <local:DtoCell DataContext="{Binding ByfDTO}" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
 
-        <DataGridTemplateColumn Header="RNT">
-            <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate>
-                    <local:DtoCell DataContext="{Binding RntDTO}" />
-                </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-        </DataGridTemplateColumn>
+            <DataGridTemplateColumn Header="RNT">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <local:DtoCell DataContext="{Binding RntDTO}" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
 
+            <DataGridTextColumn Header="AreEqual"
+                                Binding="{Binding AreEqual}" />
+        </DataGrid.Columns>
     </DataGrid>
 </UserControl>

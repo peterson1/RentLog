@@ -11,27 +11,23 @@ namespace RentLog.ImportBYF.Remediations.VerifyLeaseMemos
 {
     class VerifyLeaseMemosFix
     {
-        internal static async Task Run(MainWindowVM2 main)
+        internal static void Run(MainWindowVM2 main)
         {
             var mkt = main.AppArgs.MarketState;
-            await ProcessLeases(main, mkt.ActiveLeases);
-            await ProcessLeases(main, mkt.InactiveLeases);
+            ProcessLeases(main, mkt.ActiveLeases);
+            ProcessLeases(main, mkt.InactiveLeases);
             main.StopBeingBusy();
         }
 
 
-        private static async Task ProcessLeases<T>(MainWindowVM2 main, ISimpleRepo<T> repo)
+        private static void ProcessLeases<T>(MainWindowVM2 main, ISimpleRepo<T> repo)
             where T : LeaseDTO
         {
-            var url    = BalanceAdjConverter1.VIEWS_ID;
             foreach (var lse in repo.GetAll())
             {
                 main.StartBeingBusy($"Verifying memos for “{lse}”...");
-                var conv     = new BalanceAdjConverter1(lse, main);
-                var dynamics = await conv.GetViewsList(url);
-                var byfAdjs  = dynamics.Select(_ => conv.CastToRNT(_));
 
-                var win = new LeaseBalAdjustmentsVM(lse, main.AppArgs);
+                var win = new LeaseBalAdjustmentsVM(lse, main);
                 win.Show<LeaseBalAjsWindow>(false, true);
 
                 //foreach (BalanceAdjustmentDTO byf in byfAdjs)

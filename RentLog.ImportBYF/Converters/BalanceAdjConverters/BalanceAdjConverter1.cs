@@ -62,7 +62,8 @@ namespace RentLog.ImportBYF.Converters.BalanceAdjConverters
         {
             var num = (decimal?)As.Decimal_(dynamic);
             val = num ?? 0;
-            return num.HasValue;
+            //return num.HasValue;
+            return val != 0;
         }
 
 

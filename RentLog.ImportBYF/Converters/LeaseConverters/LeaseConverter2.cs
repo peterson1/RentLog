@@ -10,6 +10,7 @@ using RentLog.DomainLib11.Models;
 using RentLog.ImportBYF.Converters.LeaseRevisionConverters;
 using RentLog.ImportBYF.Converters.TenantConverters;
 using RentLog.ImportBYF.Remediations;
+using RentLog.ImportBYF.Remediations.VerifyLeaseMemos;
 using RentLog.ImportBYF.Version2UI;
 using RentLog.ImportBYF.Version2UI.MasterDataPane.ConvertersList;
 using System;
@@ -99,7 +100,7 @@ namespace RentLog.ImportBYF.Converters.LeaseConverters
 
 
         protected override IR2Command CreateRemediate2Cmd()
-            => R2Command.Async(_ => VerifyLeaseMemosFix.Run(Main));
+            => R2Command.Relay(_ => VerifyLeaseMemosFix.Run(Main));
 
 
         private void FindActiveLeasesOnNonOperatingStalls()

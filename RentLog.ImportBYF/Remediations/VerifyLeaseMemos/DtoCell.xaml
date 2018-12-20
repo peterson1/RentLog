@@ -8,10 +8,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel>
-        <labl:DualText Text1="BillCode"     Text2="{Binding BillCode    }" />
-        <labl:DualText Text1="LeaseId"      Text2="{Binding LeaseId     }" />
-        <labl:DualText Text1="AmountOffset" Text2="{Binding AmountOffset}" />
-        <labl:DualText Text1="Reason"       Text2="{Binding Reason      }" />
-        <labl:DualText Text1="DocumentRef"  Text2="{Binding DocumentRef }" />
+        <labl:DualText Text1="BillCode"   Text2="{Binding BillCode    }" />
+        <labl:DualText Text1="LeaseId"    Text2="{Binding LeaseId     }" />
+        <labl:DualText Text1="amt offset" Text2="{Binding AmountOffset}" />
+        <labl:DualText Text1="Reason"     Text2="{Binding Reason      }" />
+        <labl:DualText Text1="doc ref"    Text2="{Binding DocumentRef }" />
     </StackPanel>
 </UserControl>

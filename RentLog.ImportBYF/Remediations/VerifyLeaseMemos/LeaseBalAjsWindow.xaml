@@ -5,9 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RentLog.ImportBYF.Remediations.VerifyLeaseMemos"
         mc:Ignorable="d"
-        Title="LeaseBalAjsWindow" Height="450" Width="800">
+        Title="{Binding Caption}" 
+        WindowStartupLocation="CenterScreen"
+        Height="450" Width="800"
+        xmlns:butns="clr-namespace:CommonTools.Lib45.StyledButtons;assembly=CommonTools.Lib45"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
     <DockPanel>
-
+        <StackPanel DockPanel.Dock="Top"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+            <Button Content="{Binding ImportCmd.CurrentLabel}"
+                    Command="{Binding ImportCmd}" />
+            <butns:SimpleRefreshButton Margin="20 0 0 0" />
+        </StackPanel>
+        
         <local:LeaseBalAdjsTable />
 
     </DockPanel>

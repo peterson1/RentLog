@@ -1,14 +1,19 @@
 ﻿using PropertyChanged;
+using RentLog.DomainLib11.CollectionRepos;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.ImportBYF.Converters.BalanceAdjConverters;
 using System;
+using System.Linq;
 
 namespace RentLog.ImportBYF.Remediations.VerifyLeaseMemos
 {
     [AddINotifyPropertyChangedInterface]
     public class LeaseBalAdjRow
     {
+        private IBalanceAdjustmentsRepo _repo;
+
+
         public LeaseBalAdjRow(BalanceAdjustmentDTO byfDTO, BalanceAdjConverter1 conv, ITenantDBsDir dir)
         {
             ByfDTO = byfDTO;
@@ -21,16 +26,18 @@ namespace RentLog.ImportBYF.Remediations.VerifyLeaseMemos
         public BalanceAdjustmentDTO  ByfDTO  { get; }
         public BalanceAdjustmentDTO  RntDTO  { get; }
 
-        public int Id => ByfDTO.Id;
-
-        //todo: create AreEqual auto-property
+        public int   Id          => ByfDTO.Id;
+        public bool? AreEqual    => ByfDTO?.Equals(RntDTO);
+        public void  UpsertDTO() => _repo.Upsert(ByfDTO);
 
 
         private BalanceAdjustmentDTO FindRntDTO(BalanceAdjConverter1 conv, ITenantDBsDir dir, out DateTime date)
         {
-            date     = conv._adjDates[Id];
-            var repo = dir.Collections.For(date).BalanceAdjs;
-            return repo.Find(Id, false);
+            date       = conv._adjDates[Id];
+            var colxns = dir.Collections.For(date);
+            _repo      = colxns?.BalanceAdjs;
+            //return _repo?.Find(Id, false);
+            return _repo?.GetAll().SingleOrDefault(_ => _.Id == Id);
         }
     }
 }
