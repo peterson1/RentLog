@@ -48,7 +48,7 @@ namespace RentLog.ImportBYF.Version2UI.MasterDataPane.ConvertersList
                 {
                     unexpecteds++;
                     var cap = $"Unexpected item in RNT list: [id: {rnt.Id}]";
-                    Alert.Show(cap, rnt.ToString());
+                    //Alert.Show(cap, rnt.ToString());
                 }
             }
             return unexpecteds;

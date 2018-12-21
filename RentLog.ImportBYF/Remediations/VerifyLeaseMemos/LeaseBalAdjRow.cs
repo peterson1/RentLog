@@ -28,7 +28,15 @@ namespace RentLog.ImportBYF.Remediations.VerifyLeaseMemos
 
         public int   Id          => ByfDTO.Id;
         public bool? AreEqual    => ByfDTO?.Equals(RntDTO);
-        public void  UpsertDTO() => _repo.Upsert(ByfDTO);
+
+
+        public void UpsertDTO()
+        {
+            if (RntDTO == null)
+                _repo.Insert(ByfDTO);
+            else
+                _repo.Update(ByfDTO);
+        } 
 
 
         private BalanceAdjustmentDTO FindRntDTO(BalanceAdjConverter1 conv, ITenantDBsDir dir, out DateTime date)
@@ -36,8 +44,8 @@ namespace RentLog.ImportBYF.Remediations.VerifyLeaseMemos
             date       = conv._adjDates[Id];
             var colxns = dir.Collections.For(date);
             _repo      = colxns?.BalanceAdjs;
-            //return _repo?.Find(Id, false);
-            return _repo?.GetAll().SingleOrDefault(_ => _.Id == Id);
+            return _repo?.Find(Id, false);
+            //return _repo?.GetAll().SingleOrDefault(_ => _.Id == Id);
         }
     }
 }

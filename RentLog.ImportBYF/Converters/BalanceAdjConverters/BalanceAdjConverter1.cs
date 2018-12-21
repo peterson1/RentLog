@@ -19,7 +19,8 @@ namespace RentLog.ImportBYF.Converters.BalanceAdjConverters
         public override string Label          => "Balance Adjustments";
         public override string ViewsDisplayID => VIEWS_ID;
 
-        internal Dictionary<int, DateTime> _adjDates = new Dictionary<int, DateTime>();
+        internal Dictionary<int, int>      _memoTypes = new Dictionary<int, int>();
+        internal Dictionary<int, DateTime> _adjDates  = new Dictionary<int, DateTime>();
         private LeaseDTO _lse;
 
 
@@ -31,19 +32,26 @@ namespace RentLog.ImportBYF.Converters.BalanceAdjConverters
 
         public override BalanceAdjustmentDTO CastToRNT(dynamic byf)
         {
-            var id        = As.ID(byf.nid);
-            var date      = As.Date(byf.date);
-            var amount    = GetAmount(byf, out BillCode billCode);
-            _adjDates[id] = date;
-            return new BalanceAdjustmentDTO
+            var id         = As.ID(byf.nid);
+            var date       = As.Date(byf.date);
+            var amount     = GetAmount(byf, out BillCode billCode);
+            _adjDates[id]  = date;
+            _memoTypes[id] = As.ID(byf.memotype);
+            var dto        = new BalanceAdjustmentDTO
             {
                 Id           = id,
                 LeaseId      = As.ID(byf.leasenid),
                 AmountOffset = amount,
                 BillCode     = billCode,
                 DocumentRef  = As.Text(byf.referencenum),
-                Reason       = As.Text(byf.description),
+                Reason       = As.Text(byf.remarks),
+                Remarks      = As.Text(byf.description),
             };
+
+            if (dto.Remarks.Contains("Debit"))
+                dto.AmountOffset = amount * -1;
+
+            return dto;
         }
 
 
@@ -67,8 +75,10 @@ namespace RentLog.ImportBYF.Converters.BalanceAdjConverters
         }
 
 
-        public override List<BalanceAdjustmentDTO> GetRntRecords(ITenantDBsDir dir) 
-            => throw new NotImplementedException();
+        public override List<BalanceAdjustmentDTO> GetRntRecords(ITenantDBsDir dir)
+        {
+            throw new NotImplementedException();
+        }
 
 
         public override Task<List<dynamic>> GetViewsList(string viewsDisplayID)

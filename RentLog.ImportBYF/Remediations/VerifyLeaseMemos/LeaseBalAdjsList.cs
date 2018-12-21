@@ -1,6 +1,7 @@
 ﻿using CommonTools.Lib11.DataStructures;
 using CommonTools.Lib45.ThreadTools;
 using PropertyChanged;
+using RentLog.DomainLib11.DTOs;
 using RentLog.ImportBYF.Converters.BalanceAdjConverters;
 using System;
 using System.Collections.Generic;
@@ -22,8 +23,9 @@ namespace RentLog.ImportBYF.Remediations.VerifyLeaseMemos
             var byfAdjs  = dynamics.Select(_ => conv.CastToRNT(_));
             var rows     = new List<LeaseBalAdjRow>();
 
-            foreach (var byf in byfAdjs)
+            foreach (BalanceAdjustmentDTO byf in byfAdjs)
             {
+                if (conv._memoTypes[byf.Id] == 1) continue;
                 var row = new LeaseBalAdjRow(byf, conv, main.AppArgs);
                 rows.Add(row);
             }
@@ -40,11 +42,12 @@ namespace RentLog.ImportBYF.Remediations.VerifyLeaseMemos
                 foreach (var row in this)
                     row.UpsertDTO();
 
-                var lse = windowVM.Lease;
+                var lse  = windowVM.Lease;
                 var bals = windowVM.AppArgs.Balances.GetRepo(lse);
+                var day1 = bals.Earliest().GetBillDate();
 
                 windowVM.StartBeingBusy("Recomputing ...");
-                bals.RecomputeFrom(this.First().Date);
+                bals.RecomputeFrom(day1);
             });
             windowVM.StopBeingBusy();
         }
