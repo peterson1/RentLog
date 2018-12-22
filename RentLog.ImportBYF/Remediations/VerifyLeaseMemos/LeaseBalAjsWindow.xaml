@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="{Binding Caption}" 
         WindowStartupLocation="CenterScreen"
-        Height="450" Width="800"
+        SizeToContent="WidthAndHeight"
         xmlns:butns="clr-namespace:CommonTools.Lib45.StyledButtons;assembly=CommonTools.Lib45"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"

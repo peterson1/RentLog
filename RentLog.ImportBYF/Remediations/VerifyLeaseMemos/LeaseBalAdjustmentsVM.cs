@@ -5,7 +5,6 @@ using PropertyChanged;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
 using RentLog.ImportBYF.Version2UI;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -38,6 +37,7 @@ namespace RentLog.ImportBYF.Remediations.VerifyLeaseMemos
         {
             await Rows.Fill(this);
             if (!Rows.Any()) this.CloseWindow();
+            if (Rows.All(_ => _.AreEqual)) this.CloseWindow();
             //if (CanAutoImport()) ImportCmd.ExecuteIfItCan();
         }
 

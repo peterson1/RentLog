@@ -26,8 +26,8 @@ namespace RentLog.ImportBYF.Remediations.VerifyLeaseMemos
         public BalanceAdjustmentDTO  ByfDTO  { get; }
         public BalanceAdjustmentDTO  RntDTO  { get; }
 
-        public int   Id          => ByfDTO.Id;
-        public bool? AreEqual    => ByfDTO?.Equals(RntDTO);
+        public int  Id          => ByfDTO.Id;
+        public bool AreEqual    => ByfDTO.Equals(RntDTO);
 
 
         public void UpsertDTO()

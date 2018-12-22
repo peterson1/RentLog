@@ -25,7 +25,8 @@ namespace RentLog.ImportBYF.Remediations.VerifyLeaseMemos
 
             foreach (BalanceAdjustmentDTO byf in byfAdjs)
             {
-                if (conv._memoTypes[byf.Id] == 1) continue;
+                if (conv._memoTypes[byf.Id] == 1) continue; //cashier colxn?
+                if (byf.Remarks.Contains("Daily Rights Surcharge Memo")) continue;
                 var row = new LeaseBalAdjRow(byf, conv, main.AppArgs);
                 rows.Add(row);
             }
