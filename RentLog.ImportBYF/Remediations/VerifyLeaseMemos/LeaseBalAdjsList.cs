@@ -51,6 +51,7 @@ namespace RentLog.ImportBYF.Remediations.VerifyLeaseMemos
                 bals.RecomputeFrom(day1);
             });
             windowVM.StopBeingBusy();
+            windowVM.ClickRefresh();
         }
     }
 }

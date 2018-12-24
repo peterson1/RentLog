@@ -41,7 +41,7 @@ namespace RentLog.ImportBYF.Converters.BalanceAdjConverters
             {
                 Id           = id,
                 LeaseId      = As.ID(byf.leasenid),
-                AmountOffset = amount,
+                AmountOffset = Math.Abs(amount),
                 BillCode     = billCode,
                 DocumentRef  = As.Text(byf.referencenum),
                 Reason       = As.Text(byf.remarks),
