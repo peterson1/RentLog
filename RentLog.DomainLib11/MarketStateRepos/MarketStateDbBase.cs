@@ -58,7 +58,12 @@ namespace RentLog.DomainLib11.MarketStateRepos
             else
             {
                 lease.Stall = Stalls.Find(stallID, true);
-                _stalls[stallID] = lease.Stall;
+                //_stalls[stallID] = lease.Stall;
+                try
+                {
+                    _stalls?.Add(stallID, lease.Stall);
+                }
+                catch { }
             }
         }
 
