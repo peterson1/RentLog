@@ -56,8 +56,10 @@ namespace RentLog.DomainLib11.MarketStateRepos
             if (_stalls.TryGetValue(stallID, out StallDTO cached))
                 lease.Stall = cached;
             else
-                lease.Stall = _stalls[stallID] 
-                            = Stalls.Find(stallID, true);
+            {
+                lease.Stall = Stalls.Find(stallID, true);
+                _stalls[stallID] = lease.Stall;
+            }
         }
 
 
