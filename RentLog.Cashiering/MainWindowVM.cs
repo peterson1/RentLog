@@ -94,20 +94,20 @@ namespace RentLog.Cashiering
         protected override async Task OnRefreshClickedAsync()
         {
             await NextDayOpener.RunIfNeeded();
-            Parallel.Invoke(() => ReloadAllSectionTabs(),
-                            () => CashierColxns.ReloadFromDB(),
-                            () => OtherColxns.ReloadFromDB(),
-                            () => BankDeposits.ReloadFromDB());
-            PostAndClose.UpdateTotals();
+            //Parallel.Invoke(() => ReloadAllSectionTabs(),
+            //                () => CashierColxns.ReloadFromDB(),
+            //                () => OtherColxns.ReloadFromDB(),
+            //                () => BankDeposits.ReloadFromDB());
+            //PostAndClose.UpdateTotals();
 
-            //await Task.Run(() => ReloadAllSectionTabs());
+            await Task.Run(() => ReloadAllSectionTabs());
 
-            //await Task.Run(() => Parallel.Invoke(
-            //               () => CashierColxns.ReloadFromDB(),
-            //               () => OtherColxns.ReloadFromDB(),
-            //               () => BankDeposits.ReloadFromDB()));
+            await Task.Run(() => Parallel.Invoke(
+                           () => CashierColxns.ReloadFromDB(),
+                           () => OtherColxns.ReloadFromDB(),
+                           () => BankDeposits.ReloadFromDB()));
 
-            //await Task.Run(() => PostAndClose.UpdateTotals());
+            await Task.Run(() => PostAndClose.UpdateTotals());
         }
 
 
