@@ -25,7 +25,7 @@ namespace RentLog.ImportBYF.Remediations.VerifyLeaseMemos
         {
             foreach (var lse in repo.GetAll())
             {
-                main.StartBeingBusy($"Verifying memos for “{lse}”...");
+                main.StartBeingBusy($"Verifying memos for [{lse.Id}] “{lse}”...");
 
                 var win = new LeaseBalAdjustmentsVM(lse, main);
                 win.Show<LeaseBalAjsWindow>(false, true);

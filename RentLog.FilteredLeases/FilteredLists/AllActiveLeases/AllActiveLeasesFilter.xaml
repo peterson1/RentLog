@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RentLog.FilteredLeases.FilteredLists.AllActiveLeases"
+             xmlns:int="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:txbhv="clr-namespace:CommonTools.Lib45.UIBehaviors.TextBoxBehaviors;assembly=CommonTools.Lib45"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -11,6 +13,7 @@
                BasedOn="{StaticResource MaterialDesignTextBox}">
             <Setter Property="Margin" Value="6 0 6 0" />
             <!--<Setter Property="HorizontalContentAlignment" Value="Center" />-->
+            
         </Style>
     </UserControl.Resources>
     <Grid DataContext="{Binding Filter}">
@@ -32,8 +35,16 @@
             <ColumnDefinition Width="06*" />
         </Grid.ColumnDefinitions>
 
-        <TextBox Grid.Column="0" Text="{Binding TenantFilter       , UpdateSourceTrigger=PropertyChanged}" />
-        <TextBox Grid.Column="1" Text="{Binding StallFilter        , UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="0" Text="{Binding TenantFilter       , UpdateSourceTrigger=PropertyChanged}">
+            <int:Interaction.Behaviors>
+                <txbhv:SelectAllOnFocusBehavior />
+            </int:Interaction.Behaviors>
+        </TextBox>
+        <TextBox Grid.Column="1" Text="{Binding StallFilter        , UpdateSourceTrigger=PropertyChanged}">
+            <int:Interaction.Behaviors>
+                <txbhv:SelectAllOnFocusBehavior />
+            </int:Interaction.Behaviors>
+        </TextBox>
         <TextBox Grid.Column="2" Text="{Binding ContractStartFilter, UpdateSourceTrigger=PropertyChanged}" />
         <TextBox Grid.Column="3" Text="{Binding ContractEndFilter  , UpdateSourceTrigger=PropertyChanged}" />
         <TextBox Grid.Column="4" Text="{Binding RentIntervalFilter , UpdateSourceTrigger=PropertyChanged}" />
