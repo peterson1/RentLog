@@ -14,6 +14,7 @@ namespace RentLog.DomainLib11.CollectionRepos
     {
         private ITenantDBsDir _dir;
         private DateTime      _date;
+        private DateTime?     _unclosedDate;
         private SectionDTO    _sec;
         private Dictionary<int, DailyBillDTO> _soaRowsByLseID;
         private IPersistentCollection<LeaseDTO> _cache;
@@ -21,10 +22,10 @@ namespace RentLog.DomainLib11.CollectionRepos
 
         public UncollectedsRepo1(IPersistentCollection<LeaseDTO> persistentCollection, SectionDTO sectionDTO, DateTime date, ISimpleRepo<UncollectedLeaseDTO> simpleRepo, ITenantDBsDir tenantDBsDir) : base(simpleRepo)
         {
-            _sec  = sectionDTO;
-            _dir  = tenantDBsDir;
-            _date = date;
-            _cache = persistentCollection;
+            _sec          = sectionDTO;
+            _dir          = tenantDBsDir;
+            _date         = date;
+            _cache        = persistentCollection;
             _cache.Clear();
             //_dir.Collections.UnclosedDate();// <-- throws StackOverflow exception
         }
@@ -45,17 +46,19 @@ namespace RentLog.DomainLib11.CollectionRepos
             IEnumerable<IntendedColxnDTO> intendedColxns, 
             IEnumerable<UncollectedLeaseDTO> didNotOperate)
         {
-            var asOfDate    = _dir.Collections.UnclosedDate();
+            if (!_unclosedDate.HasValue)
+                _unclosedDate = _dir.Collections.UnclosedDate();
+
             var intendedIDs = intendedColxns.Select(_ => _.Lease.Id).ToList();
             var noOpsIDs    = didNotOperate.Select(_ => _.Lease.Id).ToList();
 
             if (_soaRowsByLseID == null)
                 _soaRowsByLseID = CreateSoaRowsDictionary();
 
-            var actives     = GetUncollecteds(GetActiveLeases(), 
-                                asOfDate, intendedIDs, noOpsIDs);
+            var actives     = GetUncollecteds(GetActiveLeases(),
+                                _unclosedDate.Value, intendedIDs, noOpsIDs);
             var inactvs     = GetUncollecteds(GetInactiveLeases(),
-                                asOfDate, intendedIDs, noOpsIDs);
+                                _unclosedDate.Value, intendedIDs, noOpsIDs);
 
             return actives.Concat(inactvs)
                           .OrderBy(_ => _.Lease.Stall.Name)
