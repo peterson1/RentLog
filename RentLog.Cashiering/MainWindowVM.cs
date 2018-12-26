@@ -24,6 +24,7 @@ namespace RentLog.Cashiering
     {
         private string UserTask => CanReview ? "Reviewing" : "Encoding";
         public override string SubAppName => $"Cashiering  :  {UserTask} Collections for {Date:MMMM d, yyyy}";
+        private List<LeaseDTO> _activs;
 
 
         public MainWindowVM(DateTime unclosedDate, ITenantDBsDir tenantDBsDir, bool clickRefresh = true) : base(tenantDBsDir)
@@ -98,21 +99,16 @@ namespace RentLog.Cashiering
                             () => OtherColxns.ReloadFromDB(),
                             () => BankDeposits.ReloadFromDB());
             PostAndClose.UpdateTotals();
+
+            //await Task.Run(() => ReloadAllSectionTabs());
+
+            //await Task.Run(() => Parallel.Invoke(
+            //               () => CashierColxns.ReloadFromDB(),
+            //               () => OtherColxns.ReloadFromDB(),
+            //               () => BankDeposits.ReloadFromDB()));
+
+            //await Task.Run(() => PostAndClose.UpdateTotals());
         }
-
-
-        //public async Task ReloadCurrentSectionTab()
-        //{
-        //    if (IsBusy) return;
-        //    StartBeingBusy($"Reloading “{AppArgs.CurrentSection}”...");
-        //    await Task.Run(() =>
-        //    {
-        //        SectionTabs[CurrentTabIndex].ReloadAll();
-        //        PostAndClose.UpdateTotals();
-        //    });
-        //    StopBeingBusy();
-        //}
-        //public SectionTabVM CurrentSectionTab => SectionTabs[CurrentTabIndex];
 
 
         private void ReloadAllSectionTabs()
@@ -120,11 +116,13 @@ namespace RentLog.Cashiering
             var lastIndx = CurrentTabIndex;
             var list     = new List<SectionTabVM>();
             var all      = AppArgs.MarketState.Sections.GetAll();
-            var activs   = AppArgs.MarketState.ActiveLeasesFor(Date);
+
+            if (_activs == null)
+                _activs = AppArgs.MarketState.ActiveLeasesFor(Date);
 
             foreach (var sec in all)
             {
-                if (activs.Any(_ => _.Stall.Section.Id == sec.Id))
+                if (_activs.Any(_ => _.Stall.Section.Id == sec.Id))
                     list.Add(new SectionTabVM(sec, this));
             }
 
