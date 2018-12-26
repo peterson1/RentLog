@@ -11,6 +11,8 @@ namespace RentLog.DomainLib11.MarketStateRepos
 {
     public abstract class MarketStateDbBase : IMarketStateDB
     {
+        private Dictionary<int, StallDTO> _stalls = new Dictionary<int, StallDTO>();
+
         public abstract int                 YearsBackCount  { get; set; }
         public virtual string               DatabasePath    { get; set; }
         public virtual string               CurrentUser     { get; set; }
@@ -44,9 +46,18 @@ namespace RentLog.DomainLib11.MarketStateRepos
 
         public void RefreshStall(LeaseDTO lease)
         {
+            if (Stalls == null) return;
             if (lease == null) throw Fault.NullRef("Lease");
             if (lease.Stall == null) throw Fault.NullRef("Lease.Stall");
-            lease.Stall = Stalls.Find(lease.Stall.Id, true);
+
+            //lease.Stall = Stalls.Find(lease.Stall.Id, true);
+            var stallID = lease.Stall.Id;
+
+            if (_stalls.TryGetValue(stallID, out StallDTO cached))
+                lease.Stall = cached;
+            else
+                lease.Stall = _stalls[stallID] 
+                            = Stalls.Find(stallID, true);
         }
 
 
