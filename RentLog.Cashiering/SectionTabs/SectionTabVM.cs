@@ -14,11 +14,11 @@ namespace RentLog.Cashiering.SectionTabs
     [AddINotifyPropertyChangedInterface]
     public class SectionTabVM
     {
-        public SectionTabVM(SectionDTO sec, MainWindowVM main)
+        public SectionTabVM(int tabIndex, SectionDTO sec, MainWindowVM main)
         {
+            TabIndex       = tabIndex;
             Main           = main;
             Section        = sec;
-            //Collector      = main.ColxnsDB.GetCollector(sec);
             IntendedColxns = new IntendedColxnsVM(this, sec, main);
             AmbulantColxns = new AmbulantColxnsVM(sec, main);
             NoOperations   = new NoOperationsVM  (sec, main);
@@ -26,6 +26,7 @@ namespace RentLog.Cashiering.SectionTabs
         }
 
 
+        public int                  TabIndex         { get; }
         public MainWindowVM         Main             { get; }
         public SectionDTO           Section          { get; }
         public IntendedColxnsVM     IntendedColxns   { get; }
@@ -66,13 +67,5 @@ namespace RentLog.Cashiering.SectionTabs
             var vm = new IntendedColxnCrudVM(0, dto, repo, Main.AppArgs);
             vm.EditCurrentRecord(dto);
         }
-
-
-        //private int GetNextPRNumber()
-        //{
-        //    if (IntendedColxns == null) return 1;
-        //    if (!IntendedColxns.Any()) return 1;
-        //    return IntendedColxns.Max(_ => _.PRNumber) + 1;
-        //}
     }
 }
