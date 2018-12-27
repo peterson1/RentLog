@@ -117,18 +117,9 @@ namespace RentLog.DatabaseLib.DatabaseFinders
             foreach (var sec in _mkt.Sections.GetAll())
             {
                 var colxn = new UncollectedsCollection(sec, db);
-                var cache = GetSectionCache(sec);
-                var repo  = new UncollectedsRepo1(cache, sec, date, colxn, _dir);
+                var repo  = new UncollectedsRepo1(sec, date, colxn, _dir);
                 dict.Add(sec.Id, repo);
             }
-        }
-
-
-        private IPersistentCollection<LeaseDTO> GetSectionCache(SectionDTO sec)
-        {
-            var fName = $"Section_{sec.Id}.ldb";
-            var fPath = Path.Combine(Path.GetTempPath(), fName);
-            return new LiteDBPersistentCollection<LeaseDTO>(fPath, "Inactives");
         }
 
 
