@@ -94,24 +94,32 @@ namespace RentLog.Cashiering
         protected override async Task OnRefreshClickedAsync()
         {
             await NextDayOpener.RunIfNeeded();
-            //Parallel.Invoke(() => ReloadAllSectionTabs(),
-            //                () => CashierColxns.ReloadFromDB(),
-            //                () => OtherColxns.ReloadFromDB(),
-            //                () => BankDeposits.ReloadFromDB());
-            //PostAndClose.UpdateTotals();
 
-            await Task.Run(() => ReloadAllSectionTabs());
+            await Task.Run(() => FillSectionTabs());
+            SectionTabs[CurrentTabIndex].ReloadAll();
 
-            await Task.Run(() => Parallel.Invoke(
-                           () => CashierColxns.ReloadFromDB(),
-                           () => OtherColxns.ReloadFromDB(),
-                           () => BankDeposits.ReloadFromDB()));
 
-            await Task.Run(() => PostAndClose.UpdateTotals());
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            Task.Run(async () =>
+            {
+                Parallel.ForEach(SectionTabs, tab =>
+                {
+                    if (tab.TabIndex != CurrentTabIndex)
+                        tab.ReloadAll();
+                });
+
+                await Task.Run(() => Parallel.Invoke(
+                               () => CashierColxns.ReloadFromDB(),
+                               () => OtherColxns.ReloadFromDB(),
+                               () => BankDeposits.ReloadFromDB()));
+
+                await Task.Run(() => PostAndClose.UpdateTotals());
+            });
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         }
 
 
-        private void ReloadAllSectionTabs()
+        private void FillSectionTabs()
         {
             var lastIndx = CurrentTabIndex;
             var list     = new List<SectionTabVM>();
@@ -120,17 +128,16 @@ namespace RentLog.Cashiering
             if (_activs == null)
                 _activs = AppArgs.MarketState.ActiveLeasesFor(Date);
 
-            foreach (var sec in all)
+            for (int i = 0; i < all.Count; i++)
             {
+                var sec = all[i];
                 if (_activs.Any(_ => _.Stall.Section.Id == sec.Id))
-                    list.Add(new SectionTabVM(sec, this));
+                    list.Add(new SectionTabVM(i, sec, this));
             }
 
             AsUI(() => SectionTabs.SetItems(list));
             AppArgs.CurrentSection = SectionTabs.FirstOrDefault()?.Section;
             CurrentTabIndex = SectionTabs.Any() ? lastIndx : -1;
-
-            Parallel.ForEach(SectionTabs, _ => _.ReloadAll());
         }
 
 
