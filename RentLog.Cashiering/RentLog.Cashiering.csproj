@@ -170,6 +170,7 @@
       <DependentUpon>SectionTabUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="SectionTabs\SectionTabVM.cs" />
+    <Compile Include="SectionTabs\TabsListVM.cs" />
     <Compile Include="SectionTabs\Uncollecteds\UncollectedsFilterUI.xaml.cs">
       <DependentUpon>UncollectedsFilterUI.xaml</DependentUpon>
     </Compile>

@@ -37,12 +37,13 @@ namespace RentLog.Cashiering
             ColxnsDB = CheckIfDbExists(Date);
             if (ColxnsDB == null) return;
 
-            CashierColxns   = new CashierColxnsVM   (this);
-            OtherColxns     = new OtherColxnsVM     (this);
-            BankDeposits    = new BankDepositsVM    (this);
-            ApprovalAwaiter = new ApprovalRequesterVM(this);
-            PostAndClose    = new PostAndCloseVM    (this);
-            NextDayOpener   = new NextDayOpenerVM   (this);
+            SectionTabs     = new TabsListVM          (this);
+            CashierColxns   = new CashierColxnsVM     (this);
+            OtherColxns     = new OtherColxnsVM       (this);
+            BankDeposits    = new BankDepositsVM      (this);
+            ApprovalAwaiter = new ApprovalRequesterVM (this);
+            PostAndClose    = new PostAndCloseVM      (this);
+            NextDayOpener   = new NextDayOpenerVM     (this);
 
             if (clickRefresh) ClickRefresh();
             SetCaption("");
@@ -53,19 +54,18 @@ namespace RentLog.Cashiering
         public ICollectionsDB        ColxnsDB          { get; }
         public bool                  CanReview         { get; }
         public bool                  CanEncode         { get; }
-        public UIList<SectionTabVM>  SectionTabs       { get; } = new UIList<SectionTabVM>();
+        public TabsListVM            SectionTabs       { get; }
         public CashierColxnsVM       CashierColxns     { get; }
         public OtherColxnsVM         OtherColxns       { get; }
         public BankDepositsVM        BankDeposits      { get; }
         public PostAndCloseVM        PostAndClose      { get; }
         public NextDayOpenerVM       NextDayOpener     { get; }
         public ApprovalRequesterVM   ApprovalAwaiter   { get; }
-        public int                   CurrentTabIndex   { get; set; }
 
 
-        public void OnCurrentTabIndexChanged()
-            => AppArgs.CurrentSection = CurrentTabIndex == -1 ? null 
-                                      : SectionTabs[CurrentTabIndex].Section;
+        //public void OnCurrentTabIndexChanged()
+        //    => AppArgs.CurrentSection = CurrentTabIndex == -1 ? null 
+        //                              : SectionTabs[CurrentTabIndex].Section;
 
 
         private bool IsPrivilegedUser()
@@ -108,7 +108,7 @@ namespace RentLog.Cashiering
 
         private void FillSectionTabs()
         {
-            var lastIndx = CurrentTabIndex;
+            //var lastIndx = CurrentTabIndex;
             var list     = new List<SectionTabVM>();
             var all      = AppArgs.MarketState.Sections.GetAll();
 
@@ -123,10 +123,10 @@ namespace RentLog.Cashiering
 
             AsUI(() => SectionTabs.SetItems(list));
             AppArgs.CurrentSection = SectionTabs.FirstOrDefault()?.Section;
-            CurrentTabIndex = SectionTabs.Any() ? lastIndx : -1;
+            //CurrentTabIndex = SectionTabs.Any() ? lastIndx : -1;
         }
 
-
+        1
         public override async Task OnWindowClosing(CancelEventArgs cancelEvtArgs)
         {
             if (!CanEncode) return;
