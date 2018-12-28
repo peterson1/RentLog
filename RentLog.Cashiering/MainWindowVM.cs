@@ -24,7 +24,6 @@ namespace RentLog.Cashiering
     {
         private string UserTask => CanReview ? "Reviewing" : "Encoding";
         public override string SubAppName => $"Cashiering  :  {UserTask} Collections for {Date:MMMM d, yyyy}";
-        private List<LeaseDTO> _activs;
 
 
         public MainWindowVM(DateTime unclosedDate, ITenantDBsDir tenantDBsDir, bool clickRefresh = true) : base(tenantDBsDir)
@@ -95,8 +94,13 @@ namespace RentLog.Cashiering
         {
             await NextDayOpener.RunIfNeeded();
 
-            FillSectionTabs();
-            Parallel.ForEach(SectionTabs, _ => _.ReloadAll());
+            //FillSectionTabs();
+            if (!SectionTabs.Any())
+            {
+                SectionTabs.FillTabs();
+                Parallel.ForEach(SectionTabs, _ => _.ReloadAll());
+            }
+            //SectionTabs.Current.ReloadAll();
 
             CashierColxns.ReloadFromDB();
             OtherColxns  .ReloadFromDB();
@@ -106,27 +110,25 @@ namespace RentLog.Cashiering
         }
 
 
-        private void FillSectionTabs()
-        {
-            //var lastIndx = CurrentTabIndex;
-            var list     = new List<SectionTabVM>();
-            var all      = AppArgs.MarketState.Sections.GetAll();
+        //private void FillSectionTabs()
+        //{
+        //    var list     = new List<SectionTabVM>();
+        //    var all      = AppArgs.MarketState.Sections.GetAll();
 
-            if (_activs == null)
-                _activs = AppArgs.MarketState.ActiveLeasesFor(Date);
+        //    if (_activs == null)
+        //        _activs = AppArgs.MarketState.ActiveLeasesFor(Date);
 
-            foreach (var sec in all)
-            {
-                if (_activs.Any(_ => _.Stall.Section.Id == sec.Id))
-                    list.Add(new SectionTabVM(list.Count, sec, this));
-            }
+        //    foreach (var sec in all)
+        //    {
+        //        if (_activs.Any(_ => _.Stall.Section.Id == sec.Id))
+        //            list.Add(new SectionTabVM(list.Count, sec, this));
+        //    }
 
-            AsUI(() => SectionTabs.SetItems(list));
-            AppArgs.CurrentSection = SectionTabs.FirstOrDefault()?.Section;
-            //CurrentTabIndex = SectionTabs.Any() ? lastIndx : -1;
-        }
+        //    AsUI(() => SectionTabs.SetItems(list));
+        //    AppArgs.CurrentSection = SectionTabs.FirstOrDefault()?.Section;
+        //}
 
-        1
+        
         public override async Task OnWindowClosing(CancelEventArgs cancelEvtArgs)
         {
             if (!CanEncode) return;
