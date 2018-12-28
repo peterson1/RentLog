@@ -48,7 +48,7 @@ namespace RentLog.Tests.CashieringVMTests
         }
 
 
-        [Fact(DisplayName = "Review May 8", Skip = "broken")]
+        [Fact(DisplayName = "Review May 8")]
         public async Task ReviewMay8()
         {
             var args = SampleDir.Lease197();

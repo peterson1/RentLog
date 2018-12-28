@@ -95,27 +95,14 @@ namespace RentLog.Cashiering
         {
             await NextDayOpener.RunIfNeeded();
 
-            await Task.Run(() => FillSectionTabs());
-            SectionTabs[CurrentTabIndex].ReloadAll();
+            FillSectionTabs();
+            Parallel.ForEach(SectionTabs, _ => _.ReloadAll());
 
+            CashierColxns.ReloadFromDB();
+            OtherColxns  .ReloadFromDB();
+            BankDeposits .ReloadFromDB();
 
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            Task.Run(async () =>
-            {
-                Parallel.ForEach(SectionTabs, tab =>
-                {
-                    if (tab.TabIndex != CurrentTabIndex)
-                        tab.ReloadAll();
-                });
-
-                await Task.Run(() => Parallel.Invoke(
-                               () => CashierColxns.ReloadFromDB(),
-                               () => OtherColxns.ReloadFromDB(),
-                               () => BankDeposits.ReloadFromDB()));
-
-                await Task.Run(() => PostAndClose.UpdateTotals());
-            });
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            PostAndClose.UpdateTotals();
         }
 
 
@@ -128,11 +115,10 @@ namespace RentLog.Cashiering
             if (_activs == null)
                 _activs = AppArgs.MarketState.ActiveLeasesFor(Date);
 
-            for (int i = 0; i < all.Count; i++)
+            foreach (var sec in all)
             {
-                var sec = all[i];
                 if (_activs.Any(_ => _.Stall.Section.Id == sec.Id))
-                    list.Add(new SectionTabVM(i, sec, this));
+                    list.Add(new SectionTabVM(list.Count, sec, this));
             }
 
             AsUI(() => SectionTabs.SetItems(list));
