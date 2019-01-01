@@ -31,7 +31,7 @@ namespace RentLog.ImportBYF.Converters
                     bag.Add(new JsonComparer(id1, item1, item2));
                 });
             }
-            //jobs.Add(() => AlertUnexpectedItems(list1, list2));
+            jobs.Add(() => AlertUnexpectedItems(list1, list2));
 
             Parallel.Invoke(jobs.ToArray());
             var diffs = bag.ToList();

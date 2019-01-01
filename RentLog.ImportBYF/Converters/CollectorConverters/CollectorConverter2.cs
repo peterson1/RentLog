@@ -22,7 +22,7 @@ namespace RentLog.ImportBYF.Converters.CollectorConverters
         {
             Id       = As.ID(byf.nid),
             Name     = As.Text(byf.name),
-            IsActive = As.Bool(byf.isactive),
+            IsActive = As.Bool_(byf.isactive) ?? false,
             Remarks  = As.Text(byf.contactinfo)
         };
 
