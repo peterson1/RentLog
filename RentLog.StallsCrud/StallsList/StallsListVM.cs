@@ -1,5 +1,6 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
 using CommonTools.Lib11.InputCommands;
+using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.BaseViewModels;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.InputDialogs;
@@ -30,7 +31,7 @@ namespace RentLog.StallsCrud.StallsList
         {
             _main            = mainWindowVM;
             Crud             = new StallCrudVM(appArguments);
-            _stallIdToLeases = AppArgs.MarketState.ActiveLeases.StallsLookup();
+            _stallIdToLeases = GetStallsLookup();
             AddMultipleCmd   = R2Command.Async(AddMultipleStalls, _ => !_main.IsBusy, "Add Multiple Stalls");
         }
 
@@ -52,6 +53,28 @@ namespace RentLog.StallsCrud.StallsList
             }
 
             _main.StopBeingBusy();
+        }
+
+
+        private Dictionary<int, LeaseDTO> GetStallsLookup()
+        {
+            var repo = AppArgs.MarketState.ActiveLeases;
+            try
+            {
+                return repo.StallsLookup();
+            }
+            catch (ArgumentException)
+            {
+                var grpd = repo.GetAll().GroupBy(_ => _.Stall.Id);
+                var dups = grpd.Where (_ => _.Count() > 1)
+                               .Select(_ => _.First().Stall.Name);
+                var nmes = string.Join(L.f, dups);
+                Alert.Show("Stalls with multiple active occupants", nmes);
+
+                return grpd.Where       (_ => _.Count() == 1)
+                           .Select      (_ => _.First())
+                           .ToDictionary(_ => _.Stall.Id);
+            }
         }
 
 
