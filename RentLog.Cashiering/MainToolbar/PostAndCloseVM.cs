@@ -45,7 +45,7 @@ namespace RentLog.Cashiering.MainToolbar
             if (Main.IsBusy) return false;
             if (!Main.SectionTabs.All(_ => _.HasCollector))
             {
-                PostAndCloseCmd.SetLabel("Please set a collector for each of the sections.");
+                PostAndCloseCmd.SetLabel("Incomplete Collectors");
                 return false;
             }
             //if (!Main.SectionTabs.All(_ => _.VacantsSaved))

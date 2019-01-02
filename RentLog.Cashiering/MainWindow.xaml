@@ -79,7 +79,8 @@
 
                 <dragz:TabablzControl.HeaderItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Section.Name}" />
+                        <TextBlock Text="{Binding Section.Name}"
+                                   MaxWidth="40" />
                     </DataTemplate>
                 </dragz:TabablzControl.HeaderItemTemplate>
 
