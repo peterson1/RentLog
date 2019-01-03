@@ -56,7 +56,10 @@ namespace RentLog.DomainLib11.CollectionRepos
             var inactvs     = GetUncollecteds(GetInactiveLeases(),
                                 _unclosedDate.Value, intendedIDs, noOpsIDs);
 
-            return actives.Concat(inactvs)
+            var stallIDs = actives.Select(_ => _.Lease.Stall.Id).ToList();
+            var noDups   = inactvs.Where (_ => !stallIDs.Contains(_.Lease.Stall.Id));
+
+            return actives.Concat(noDups)
                           .OrderBy(_ => _.Lease.Stall.Name)
                           .ToList();
         }

@@ -100,7 +100,7 @@ namespace RentLog.Cashiering
                 SectionTabs.FillTabs();
                 Parallel.ForEach(SectionTabs, _ => _.ReloadAll());
             }
-            SectionTabs.Current.ReloadAll();
+            SectionTabs.Current?.ReloadAll();
 
             CashierColxns.ReloadFromDB();
             OtherColxns  .ReloadFromDB();
