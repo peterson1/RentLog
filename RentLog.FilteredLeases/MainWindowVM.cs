@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using RentLog.FilteredLeases.FilteredLists.FullTenantDetails;
 using RentLog.FilteredLeases.MainToolbar;
+using RentLog.FilteredLeases.FilteredLists.UpcomingBirthdays;
 
 namespace RentLog.FilteredLeases
 {
@@ -37,6 +38,7 @@ namespace RentLog.FilteredLeases
             Enlist("All Terminated Leases", _ => new AllInactiveLeasesVM(this, _));
             Enlist("With Backrents or Overdue Rights", _ => new WithBackRentsOrRightsVM(this, _));
             Enlist("Full Tenant Details", _ => new FullTenantDetailsVM(this, _));
+            Enlist("Upcoming Birthdays", _ => new UpcomingBirthdaysVM(this, _));
             //todo: "Leases Nearing Rights Expiry"
         }
 

@@ -130,6 +130,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="FilteredLists\UpcomingBirthdays\UpcomingBirthdaysFilter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FilteredLists\UpcomingBirthdays\UpcomingBirthdaysTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FilteredLists\UpcomingBirthdays\UpcomingBirthdaysUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainToolbar\MainToolbarUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -175,6 +187,16 @@
       <DependentUpon>FullTenantDetailsUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="FilteredLists\FullTenantDetails\FullTenantDetailsVM.cs" />
+    <Compile Include="FilteredLists\UpcomingBirthdays\UpcomingBirthdaysFilter.xaml.cs">
+      <DependentUpon>UpcomingBirthdaysFilter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FilteredLists\UpcomingBirthdays\UpcomingBirthdaysTable.xaml.cs">
+      <DependentUpon>UpcomingBirthdaysTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FilteredLists\UpcomingBirthdays\UpcomingBirthdaysUI.xaml.cs">
+      <DependentUpon>UpcomingBirthdaysUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FilteredLists\UpcomingBirthdays\UpcomingBirthdaysVM.cs" />
     <Compile Include="FilteredLists\WithBackRentsOrRights\WithBackRentsOrRightsVM.cs" />
     <Compile Include="LeaseCRUDs\LeaseCRUD1\LeaseCRUD1VM_Actives.cs" />
     <Compile Include="LeaseCRUDs\LeaseCRUD1\LeaseCRUD1VM_Inactives.cs" />
