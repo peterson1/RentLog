@@ -78,6 +78,22 @@
   <ItemGroup>
     <Compile Include="AppArguments.cs" />
     <Compile Include="BaseViewModels\BrandedWindowBase.cs" />
+    <Compile Include="CollectorsCRUD\CollectorsMainVM.cs" />
+    <Compile Include="CollectorsCRUD\CollectorsMainWindow.xaml.cs">
+      <DependentUpon>CollectorsMainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CollectorsCRUD\MainList\FilterVM.cs" />
+    <Compile Include="CollectorsCRUD\MainList\MainListFilter.xaml.cs">
+      <DependentUpon>MainListFilter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CollectorsCRUD\MainList\MainListTable.xaml.cs">
+      <DependentUpon>MainListTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CollectorsCRUD\MainList\MainListVM.cs" />
+    <Compile Include="CollectorsCRUD\MainToolbar\MainToolbarUI.xaml.cs">
+      <DependentUpon>MainToolbarUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CollectorsCRUD\MainToolbar\MainToolbarVM.cs" />
     <Compile Include="DailyStatusReporter\BankDeposits\BankDepositsTable.xaml.cs">
       <DependentUpon>BankDepositsTable.xaml</DependentUpon>
     </Compile>
@@ -274,6 +290,22 @@
     <Resource Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="CollectorsCRUD\CollectorsMainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CollectorsCRUD\MainList\MainListFilter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CollectorsCRUD\MainList\MainListTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CollectorsCRUD\MainToolbar\MainToolbarUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DailyStatusReporter\BankDeposits\BankDepositsTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

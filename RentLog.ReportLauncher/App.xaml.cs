@@ -1,6 +1,7 @@
 ﻿using CommonTools.Lib11.ExceptionTools;
 using CommonTools.Lib45.ApplicationTools;
 using RentLog.DomainLib45;
+using RentLog.DomainLib45.CollectorsCRUD;
 using RentLog.DomainLib45.DailyStatusReporter;
 using RentLog.DomainLib45.Reporters;
 using RentLog.DomainLib45.WithOverduesReport;
@@ -32,6 +33,9 @@ namespace RentLog.ReportLauncher
                     break;
                 case "GLRECAP":
                     GLRecapExcelWriter.Launch(args);
+                    break;
+                case "COLLECTORS":
+                    CollectorsMainVM.Launch(args);
                     break;
                 default: throw Bad.Arg("Param1", args.Param1);
             }
