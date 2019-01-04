@@ -13,10 +13,22 @@ namespace CommonTools.Lib45.UIExtensions
             => menu.Items.Add(NewLauncher(command));
 
 
+        public static void AddLauncher(this MenuItem menu, ExeLauncherCommand command)
+            => menu.Items.Add(NewLauncher(command));
+
+
         public static void Add(this ContextMenu menu, string text)
             => menu.Items.Add(new MenuItem
             {
                 Header    = text,
+                IsEnabled = false
+            });
+
+
+        public static void Add(this MenuItem menu, string text)
+            => menu.Items.Add(new MenuItem
+            {
+                Header = text,
                 IsEnabled = false
             });
 
