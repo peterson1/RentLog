@@ -9,7 +9,7 @@
     <StackPanel>
         <TextBlock Text="Bank Deposits" 
                    Style="{StaticResource MaterialDesignTitleTextBlock}"
-                   Margin="20 0 20 10" />
+                   Margin="20 0 20 0" />
 
         <local:BankDepositsTable DataContext="{Binding BankDeposits}" />
     </StackPanel>

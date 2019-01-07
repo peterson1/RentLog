@@ -55,10 +55,10 @@
 
             <GridSplitter Grid.Column="5" Style="{StaticResource vSplit}" />
 
-            <memo:BankMemosPaneUI Grid.Column="6"
-                                  DataContext="{Binding BankMemos}" />
-            <!--<jvs:JournalVouchersPaneUI Grid.Column="6"
-                                       DataContext="{Binding JournalVouchers}" />-->
+            <!--<memo:BankMemosPaneUI Grid.Column="6"
+                                  DataContext="{Binding BankMemos}" />-->
+            <jvs:JournalVouchersPaneUI Grid.Column="6"
+                                       DataContext="{Binding JournalVouchers}" />
             
             <busy:BusyDialog Grid.ColumnSpan="5" />
         </Grid>

@@ -9,7 +9,6 @@
     <StackPanel>
         <DataGrid x:Name="dg" ItemsSource="{Binding }"
                   Background="White"
-                  MinRowHeight="35"
                   Style="{StaticResource dgReadOnly}">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="15*" ElementStyle="{StaticResource colCenter}" Header="Deposited"     Binding="{Binding DepositDate, StringFormat=MMM. d}" />
@@ -20,7 +19,6 @@
         </DataGrid>
         <DataGrid x:Name="smry" ItemsSource="{Binding SummaryRows}"
                   Background="White"
-                  MinRowHeight="35"
                   Style="{StaticResource dgTotals}"
                   HeadersVisibility="None">
             <DataGrid.Columns>

@@ -16,22 +16,24 @@
         </Style>
     </UserControl.Resources>
     <StackPanel VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                Margin="0 4 0 4">
+                HorizontalAlignment="Center">
 
         <TextBlock Text="{Binding Section.Name}"
                    FontWeight="Medium"
                    FontSize="15" />
 
-        <StackPanel Orientation="Horizontal" Margin="0 4 0 0">
+        <StackPanel Orientation="Horizontal" Margin="0 2 0 0">
 
             <StackPanel>
-                <TextBlock Text="{Binding TotalCount, StringFormat=N0}" />
+                <TextBlock Text="{Binding TotalCount, StringFormat=N0}"
+                           FontSize="12" />
                 <Label Content="stalls" />
             </StackPanel>
 
             <StackPanel Margin="10 0 0 0">
-                <TextBlock Text="{Binding TotalRent, StringFormat=N2}" HorizontalAlignment="Right" />
+                <TextBlock Text="{Binding TotalRent, StringFormat=N2}" 
+                           HorizontalAlignment="Right"
+                           FontSize="12" />
                 <Label Content="total rent" />
             </StackPanel>
 

@@ -10,7 +10,7 @@
         <TextBlock Text="Collectors' Performance" 
                    Style="{StaticResource MaterialDesignTitleTextBlock}"
                    HorizontalAlignment="Left"
-                   Margin="20 0 20 10" />
+                   Margin="20 0 20 0" />
 
         <local:CollectorsPerfTable />
     </StackPanel>

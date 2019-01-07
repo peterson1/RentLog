@@ -9,7 +9,7 @@
     <StackPanel>
         <TextBlock Text="Other Collections" 
                    Style="{StaticResource MaterialDesignTitleTextBlock}"
-                   Margin="20 0 20 10" />
+                   Margin="20 0 20 0" />
 
         <local:OtherColxnsTable DataContext="{Binding OtherColxns}" />
     </StackPanel>

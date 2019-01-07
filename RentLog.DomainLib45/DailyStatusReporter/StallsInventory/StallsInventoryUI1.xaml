@@ -10,7 +10,7 @@
         <TextBlock Text="Stalls Inventory" 
                    Style="{StaticResource MaterialDesignTitleTextBlock}"
                    HorizontalAlignment="Left"
-                   Margin="20 0 20 10" />
+                   Margin="20 0 20 0" />
 
         <local:StallsInventoryTable DataContext="{Binding StallsInventory}" />
         <local:StallsInventoryTable DataContext="{Binding StallsInventory.SummaryRows}"

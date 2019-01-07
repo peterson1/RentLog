@@ -20,9 +20,9 @@
             <stallsInv:StallsInventoryUI1 />
         </DockPanel>
 
-        <tenantColxns:TenantCollectionsUI1 Margin="0 30 0 0" />
+        <tenantColxns:TenantCollectionsUI1 Margin="0 10 0 0" />
 
-        <Grid Margin="0 50 0 0">
+        <Grid Margin="0 30 0 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40*" />
                 <ColumnDefinition Width="60" />
@@ -37,7 +37,7 @@
             <bankDeps:BankDepositsUI1 Grid.Column="2" />
         </Grid>
 
-        <colPerf:CollectorsPerformanceUI1 Margin="0 50 0 0" />
+        <colPerf:CollectorsPerformanceUI1 Margin="0 20 0 0" />
 
     </StackPanel>
 </UserControl>
