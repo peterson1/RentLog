@@ -3,11 +3,7 @@ using CommonTools.Lib45.BaseViewModels;
 using PropertyChanged;
 using RentLog.DomainLib11.DataSources;
 using RentLog.DomainLib11.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RentLog.DomainLib45.CollectorsCRUD.MainEditor;
 
 namespace RentLog.DomainLib45.CollectorsCRUD.MainList
 {
@@ -16,6 +12,14 @@ namespace RentLog.DomainLib45.CollectorsCRUD.MainList
     {
         public MainListVM(ISimpleRepo<CollectorDTO> simpleRepo, ITenantDBsDir appArguments, bool doReload = true) : base(simpleRepo, appArguments, doReload)
         {
+        }
+
+
+        protected override void LoadRecordForEditing(CollectorDTO rec)
+        {
+            var crud = new MainEditorVM(AppArgs.MarketState.Collectors, AppArgs);
+            crud.SaveCompleted += (s, e) => ClickRefresh();
+            crud.EditCurrentRecord(rec);
         }
     }
 }
