@@ -32,6 +32,9 @@ namespace RentLog.TrayLauncher
             DailyStatusCmd  = NewCmd("RL.Reports.exe"     , "Daily Status Report"         , "DailyStatus");
             GLRecapCmd      = NewCmd("RL.Reports.exe"     , "GL Recap Report"             , "GLRecap");
             LeaseFiltersCmd = NewCmd("RL.LeaseFilters.exe", "Tenants & Leases");
+
+            CollectorsCmd   = NewCmd("RL.Reports.exe", "Add Collector", "COLLECTORS");
+
             ClickRefresh();
         }
 
@@ -51,6 +54,8 @@ namespace RentLog.TrayLauncher
         public ExeLauncherCommand   DailyStatusCmd   { get; }
         public ExeLauncherCommand   GLRecapCmd       { get; }
         public ExeLauncherCommand   LeaseFiltersCmd  { get; }
+
+        public ExeLauncherCommand   CollectorsCmd    { get; }
 
         public string               NameAndRole      { get; private set; } = "verifying ...";
         public string               ArgumentError    { get; private set; }

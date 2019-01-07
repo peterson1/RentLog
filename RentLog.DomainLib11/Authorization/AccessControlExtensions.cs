@@ -122,6 +122,14 @@ namespace RentLog.DomainLib11.Authorization
 
 
 
+        public static bool CanAddCollector(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
+            "Add Collector", "Supervisor", "Admin");
+
+        public static bool CanEditCollector(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
+            "Edit Collector", "Supervisor", "Admin");
+
+
+
         public static bool CanRunAdHocTask(this ICredentialsProvider creds, bool alertIfNotAllowed) => creds.Check(alertIfNotAllowed,
             "Run Ad Hoc Job", "Admin");
 

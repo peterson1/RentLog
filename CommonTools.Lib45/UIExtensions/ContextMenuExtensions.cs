@@ -1,6 +1,7 @@
 ﻿using CommonTools.Lib11.InputCommands;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.TextLabels;
+using System;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -31,6 +32,17 @@ namespace CommonTools.Lib45.UIExtensions
                 Header = text,
                 IsEnabled = false
             });
+
+
+        public static void Add(this MenuItem menu, string label, Action action)
+        {
+            var mnu     = new MenuItem();
+            mnu.Command = R2Command.Relay(action, null, label);
+            var bnd     = new Binding(nameof(IR2Command.CurrentLabel));
+            bnd.Source  = mnu.Command;
+            BindingOperations.SetBinding(mnu, MenuItem.HeaderProperty, bnd);
+            menu.Items.Add(mnu);
+        }
 
 
         public static void Add(this ContextMenu menu, IR2Command command)

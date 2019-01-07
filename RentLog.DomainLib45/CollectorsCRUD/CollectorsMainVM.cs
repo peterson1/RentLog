@@ -4,6 +4,7 @@ using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.ThreadTools;
 using PropertyChanged;
 using RentLog.DomainLib11.DataSources;
+using RentLog.DomainLib45.CollectorsCRUD.MainEditor;
 using RentLog.DomainLib45.CollectorsCRUD.MainList;
 using RentLog.DomainLib45.CollectorsCRUD.MainToolbar;
 
@@ -31,7 +32,9 @@ namespace RentLog.DomainLib45.CollectorsCRUD
 
         private void EncodeNewDraft()
         {
-            Alert.ShowModal("???", "---");
+            var crud = new MainEditorVM(AppArgs.MarketState.Collectors, AppArgs);
+            crud.SaveCompleted += (s, e) => Rows.ClickRefresh();
+            crud.EncodeNewDraftCmd.ExecuteIfItCan();
         }
 
 

@@ -1,5 +1,4 @@
 ﻿using CommonTools.Lib45.UIExtensions;
-using System;
 using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
@@ -53,6 +52,7 @@ namespace RentLog.TrayLauncher
         {
             var mnu = new MenuItem();
             mnu.Header = "Back Office Maintenance";
+            mnu.AddLauncher(VM.CollectorsCmd);
             mnu.Add("Deprecated (do NOT use)");
             mnu.AddLauncher(VM.LeasesCmd);
             return mnu;

@@ -12,12 +12,14 @@ namespace RentLog.DomainLib45.CollectorsCRUD.MainList
         public string   FilterId         { get; set; }
         public string   FilterName       { get; set; }
         public string   FilterIsActive   { get; set; }
+        public string   FilterRemarks    { get; set; }
 
         protected override Dictionary<string, Func<CollectorDTO, string>> FilterProperties => new Dictionary<string, Func<CollectorDTO, string>>
         {
             { nameof(FilterId)      , _ => _.Id.ToString()       },
             { nameof(FilterName)    , _ => _.Name                },
-            { nameof(FilterIsActive), _ => _.IsActive.ToString() }
+            { nameof(FilterIsActive), _ => _.IsActive.ToString() },
+            { nameof(FilterRemarks) , _ => _.Remarks             },
         };
     }
 }

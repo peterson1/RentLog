@@ -82,6 +82,10 @@
     <Compile Include="CollectorsCRUD\CollectorsMainWindow.xaml.cs">
       <DependentUpon>CollectorsMainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CollectorsCRUD\MainEditor\MainEditorVM.cs" />
+    <Compile Include="CollectorsCRUD\MainEditor\MainEditorWindow.xaml.cs">
+      <DependentUpon>MainEditorWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CollectorsCRUD\MainList\FilterVM.cs" />
     <Compile Include="CollectorsCRUD\MainList\MainListFilter.xaml.cs">
       <DependentUpon>MainListFilter.xaml</DependentUpon>
@@ -291,6 +295,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="CollectorsCRUD\CollectorsMainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CollectorsCRUD\MainEditor\MainEditorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
