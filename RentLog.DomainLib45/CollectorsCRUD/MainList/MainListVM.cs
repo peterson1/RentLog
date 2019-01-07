@@ -1,4 +1,6 @@
-﻿using CommonTools.Lib11.DatabaseTools;
+﻿using System.Collections.Generic;
+using System.Linq;
+using CommonTools.Lib11.DatabaseTools;
 using CommonTools.Lib45.BaseViewModels;
 using PropertyChanged;
 using RentLog.DomainLib11.DataSources;
@@ -21,5 +23,9 @@ namespace RentLog.DomainLib45.CollectorsCRUD.MainList
             crud.SaveCompleted += (s, e) => ClickRefresh();
             crud.EditCurrentRecord(rec);
         }
+
+
+        protected override List<CollectorDTO> QueryItems(ISimpleRepo<CollectorDTO> db)
+            => db.GetAll().OrderBy(_ => _.Id).ToList();
     }
 }
