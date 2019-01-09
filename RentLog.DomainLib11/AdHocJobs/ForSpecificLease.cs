@@ -19,14 +19,19 @@ namespace RentLog.DomainLib11.AdHocJobs
             {
                 var endDate = lse.ContractStart;
                 var bals    = dir.MarketState.Balances.GetRepo(lse.Id);
+                var secId   = lse.Stall.Section.Id;
                 foreach (var date in startDate.EachDayUpTo(endDate))
                 {
-                    var colxns = dir.Collections.For(date);
-                    var memos  = colxns.BalanceAdjs.GetAll();
-                    var cashrs = colxns.CashierColxns.GetAll();
+                    var colxns  = dir.Collections.For(date);
 
-                    if (memos .Any(_ => _.LeaseId  == lse.Id)
-                     || cashrs.Any(_ => _.Lease.Id == lse.Id))
+                    var intends = colxns.IntendedColxns[secId].GetAll();
+                    
+                    var memos   = colxns.BalanceAdjs.GetAll();
+                    var cashrs  = colxns.CashierColxns.GetAll();
+
+                    if (intends.Any(_ => _.Lease.Id == lse.Id)
+                     || memos  .Any(_ => _.LeaseId  == lse.Id)
+                     || cashrs .Any(_ => _.Lease.Id == lse.Id))
                         bals.ProcessBalancedDay(date);
                 }
             };

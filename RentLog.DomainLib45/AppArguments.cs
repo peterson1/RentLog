@@ -41,7 +41,7 @@ namespace RentLog.DomainLib45
         public string                DbFilePath       { get; private set; }
         public string                Param1           { get; private set; }
                                      
-        public MarketStateDbBase         MarketState      { get; }
+        public MarketStateDbBase     MarketState      { get; }
         public ChequeVouchersDB      Vouchers         { get; }
         public ICollectionsDir       Collections      { get; }
         public IBalanceDB            Balances         { get; }
@@ -67,7 +67,7 @@ namespace RentLog.DomainLib45
 
 #if DEBUG
             //Credentials.Roles = "Cashier";
-            Credentials.Roles = "Supervisor";
+            //Credentials.Roles = "Supervisor";
             //Credentials.Roles = "Supervisor, Acctg.Head";
 #endif
         }
