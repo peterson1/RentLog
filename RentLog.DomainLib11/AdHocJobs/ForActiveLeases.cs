@@ -89,5 +89,22 @@ namespace RentLog.DomainLib11.AdHocJobs
                     dir.Balances.GetRepo(lse).RecomputeAll();
             };
         }
+
+
+        public static Action Reprocess3DaysBack(ITenantDBsDir dir, 
+            out string jobDesc, out bool canRun)
+        {
+            canRun  = true;
+            jobDesc = "Reprocess Market Day: 3 days back";
+            return () =>
+            {
+                var lses = dir.MarketState.ActiveLeases.GetAll();
+                foreach (var lse in lses)
+                {
+                    var date = lse.ContractStart.AddDays(-3);
+                    lse.ReprocessBalancedDay(date, dir);
+                }
+            };
+        }
     }
 }

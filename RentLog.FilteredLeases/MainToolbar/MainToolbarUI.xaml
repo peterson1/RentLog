@@ -70,6 +70,8 @@
                                       Command="{Binding AdHocJobCmd2}" />
                             <MenuItem Header ="{Binding AdHocJobCmd3.CurrentLabel}"
                                       Command="{Binding AdHocJobCmd3}" />
+                            <MenuItem Header ="{Binding AdHocJobCmd4.CurrentLabel}"
+                                      Command="{Binding AdHocJobCmd4}" />
                         </MenuItem>
                     </Menu>
                 </mat:PopupBox>
