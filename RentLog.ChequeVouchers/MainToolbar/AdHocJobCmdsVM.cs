@@ -24,11 +24,6 @@ namespace RentLog.ChequeVouchers.MainToolbar
             _main = mainWindowVM;
             _dir  = _main.AppArgs;
 
-            //AdHocJobCmd1 = R2Command.Relay(_ => 
-            //    CheckVoucherAdHocs.FixBDO1ImportBug(_dir), 
-            //    _ => _dir.CanRunAdHocTask(false),
-            //    "Fix BDO-1 Import Bug");
-
             AdHocJobCmd1 = R2Command.Relay(_ => RunAdHoc(1), _ => _dir.CanRunAdHocTask(false), "Run Ad Hoc Command 1");
             AdHocJobCmd2 = R2Command.Relay(_ => RunAdHoc(2), _ => _dir.CanRunAdHocTask(false), "Run Ad Hoc Command 2");
             AdHocJobCmd3 = R2Command.Relay(_ => RunAdHoc(3), _ => _dir.CanRunAdHocTask(false), "Run Ad Hoc Command 3");
@@ -47,6 +42,10 @@ namespace RentLog.ChequeVouchers.MainToolbar
             {
                 case 1: adhocJob =
                     CheckVoucherAdHocs.FixBDO1ImportBug(_dir, out desc);
+                    break;
+
+                case 2: adhocJob =
+                    FixBdoImportBug.Run(_dir, out desc);
                     break;
 
                 default: throw Bad.Data($"Task #: [{taskNumber}]");

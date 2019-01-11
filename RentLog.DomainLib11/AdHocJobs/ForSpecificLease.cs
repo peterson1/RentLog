@@ -30,6 +30,7 @@ namespace RentLog.DomainLib11.AdHocJobs
             foreach (var date in startDate.EachDayUpTo(endDate))
             {
                 var colxns  = dir.Collections.For(date);
+                if (colxns == null) continue;
                 var intends = colxns.IntendedColxns[secId].GetAll();
                 var memos   = colxns.BalanceAdjs.GetAll();
                 var cashrs  = colxns.CashierColxns.GetAll();
