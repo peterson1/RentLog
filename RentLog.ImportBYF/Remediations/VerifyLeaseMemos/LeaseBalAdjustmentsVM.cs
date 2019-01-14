@@ -38,7 +38,7 @@ namespace RentLog.ImportBYF.Remediations.VerifyLeaseMemos
             await Rows.Fill(this);
             if (!Rows.Any()) this.CloseWindow();
             if (Rows.All(_ => _.AreEqual)) this.CloseWindow();
-            //if (CanAutoImport()) ImportCmd.ExecuteIfItCan();
+            if (CanAutoImport()) ImportCmd.ExecuteIfItCan();
         }
 
 
