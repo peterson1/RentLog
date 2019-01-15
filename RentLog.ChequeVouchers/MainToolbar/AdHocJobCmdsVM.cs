@@ -45,7 +45,7 @@ namespace RentLog.ChequeVouchers.MainToolbar
                     break;
 
                 case 2: adhocJob =
-                    FixBdoImportBug.Run(_dir, out desc);
+                    BankTxnsFix.RemoveDuplicates(_dir, out desc);
                     break;
 
                 default: throw Bad.Data($"Task #: [{taskNumber}]");

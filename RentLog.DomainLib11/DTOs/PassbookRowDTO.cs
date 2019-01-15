@@ -1,5 +1,6 @@
 ﻿using CommonTools.Lib11.DTOs;
 using System;
+using System.Collections.Generic;
 
 namespace RentLog.DomainLib11.DTOs
 {
@@ -17,6 +18,28 @@ namespace RentLog.DomainLib11.DTOs
         public decimal?  Deposit         => IsDeposit ? Amount : (decimal?)null;
         public decimal?  Withdrawal      => IsWithdrawal ? Math.Abs(Amount) : (decimal?)null;
         public DateTime  TransactionDate => DateTime.MinValue.AddDays(DateOffset);
+
+        public override bool Equals(object obj)
+        {
+            var dTO = obj as PassbookRowDTO;
+            return dTO != null &&
+                   Subject == dTO.Subject &&
+                   Description == dTO.Description &&
+                   DateOffset == dTO.DateOffset &&
+                   TransactionRef == dTO.TransactionRef &&
+                   Amount == dTO.Amount;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 125899803;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Subject);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Description);
+            hashCode = hashCode * -1521134295 + DateOffset.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(TransactionRef);
+            hashCode = hashCode * -1521134295 + Amount.GetHashCode();
+            return hashCode;
+        }
 
 
         //public static PassbookRowDTO Deposit(DateTime transactionDate, 
