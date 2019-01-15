@@ -1,15 +1,11 @@
 ﻿using CommonTools.Lib11.ExceptionTools;
 using CommonTools.Lib11.InputCommands;
-using CommonTools.Lib11.DateTimeTools;
 using CommonTools.Lib45.InputCommands;
 using CommonTools.Lib45.ThreadTools;
 using RentLog.DomainLib11.AdHocJobs;
 using RentLog.DomainLib11.Authorization;
 using RentLog.DomainLib11.DataSources;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace RentLog.ChequeVouchers.MainToolbar
@@ -45,7 +41,7 @@ namespace RentLog.ChequeVouchers.MainToolbar
                     break;
 
                 case 2: adhocJob =
-                    BankTxnsFix.RemoveDuplicates(_dir, out desc);
+                    BankTxnsFix.RemoveDuplicates(13052, _dir, out desc);
                     break;
 
                 default: throw Bad.Data($"Task #: [{taskNumber}]");
