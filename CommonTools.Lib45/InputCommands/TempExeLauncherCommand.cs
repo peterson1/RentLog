@@ -62,6 +62,7 @@ namespace CommonTools.Lib45.InputCommands
             try
             {
                 await Task.Delay(AfterCopyDelayMS);
+                GetTempExeDir(); // ensures directory exists
                 File.Copy(ExePath, TempExePath, true);
                 await Task.Delay(AfterCopyDelayMS);
                 return true;
