@@ -32,26 +32,14 @@
         <StackPanel Orientation="Horizontal"
                     Visibility="{Binding HasDeposits, Converter={StaticResource visIfTrue}}">
 
-            <!--<TextBlock Style="{StaticResource txtVerdict}"
-                        Visibility="{Binding IsBalanced, Converter={StaticResource visIfTrue}}"
-                        Text="="
-                        Background="ForestGreen" />-->
-
-            <!--<TextBlock Style="{StaticResource txtVerdict}"
-                       Visibility="{Binding IsBalanced, Converter={StaticResource visIfFalse}}"
-                       Text="mismatch"
-                       Background="Red" />-->
-
-            <!--<labls:DualText Text1="Deposits"
-                            Text2="{Binding TotalDeposits, StringFormat=N2}" />-->
-
             <labls:DualText Text1="Total Collections"
+                            VerticalAlign="Bottom"
                             Text2="{Binding TotalCollections, StringFormat=N2}" />
 
             <TextBlock Style="{StaticResource txtVerdict}"
                         Visibility="{Binding IsBalanced, Converter={StaticResource visIfFalse}}"
                         Text="{Binding TotalDifference, StringFormat={}diff :  {0:N2}}"
-                        Margin="0 0 0 0"
+                        Margin="0 3 0 0"
                         Background="Red" />
 
             <Grid Visibility="{Binding Main.CanReview, Converter={StaticResource visIfTrue}}">
@@ -72,6 +60,6 @@
             </Grid>
         </StackPanel>
         
-        <butns:RefreshButtonWhite Margin="10 0 0 0" />
+        <!--<butns:RefreshButtonWhite Margin="10 0 0 0" />-->
     </StackPanel>
 </UserControl>
