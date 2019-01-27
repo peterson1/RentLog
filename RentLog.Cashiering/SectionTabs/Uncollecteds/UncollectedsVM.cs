@@ -1,4 +1,6 @@
 ﻿using CommonTools.Lib11.DatabaseTools;
+using CommonTools.Lib11.ExceptionTools;
+using CommonTools.Lib11.StringTools;
 using CommonTools.Lib45.ThreadTools;
 using PropertyChanged;
 using RentLog.Cashiering.CommonControls;
@@ -58,9 +60,27 @@ namespace RentLog.Cashiering.SectionTabs.Uncollecteds
 
 
         private List<UncollectedLeaseDTO> GetUpdatedUncollecteds(ISimpleRepo<UncollectedLeaseDTO> db)
-            => (db as IUncollectedsRepo).InferUncollecteds(
-                    _tab.IntendedColxns.ItemsList,
-                    _tab.NoOperations.ItemsList);
+        {
+            //return (db as IUncollectedsRepo).InferUncollecteds(
+            //                   _tab.IntendedColxns.ItemsList,
+            //                   _tab.NoOperations.ItemsList);
+            var repo    = db as IUncollectedsRepo;
+            var intents = _tab.IntendedColxns.ItemsList;
+            var no_ops  = _tab.NoOperations.ItemsList;
+            try
+            {
+                return repo.InferUncollecteds(intents, no_ops);
+            }
+            catch (LockedFileException ex)
+            {
+                Alert.ShowModal("Access Conflict caused the file to be locked.",
+                                "Please restart your PC, login to your Windows account," 
+                                + L.f + "then wait for 5 mins. before relaunching MSA."
+                                + L.F + ex.Info());
+                App.Current.Shutdown();
+                return null;
+            }
+        }
 
 
         protected override List<UncollectedLeaseDTO> QueryItems(ISimpleRepo<UncollectedLeaseDTO> db)
