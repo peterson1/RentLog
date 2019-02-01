@@ -105,6 +105,9 @@
     <Compile Include="AllChequeVouchers\MainTable.xaml.cs">
       <DependentUpon>MainTable.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AllChequeVouchers\MainToolbar.xaml.cs">
+      <DependentUpon>MainToolbar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CommonControls\ChequeVoucherViewer\AllocationsListUI.xaml.cs">
       <DependentUpon>AllocationsListUI.xaml</DependentUpon>
     </Compile>
@@ -270,6 +273,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AllChequeVouchers\MainTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AllChequeVouchers\MainToolbar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

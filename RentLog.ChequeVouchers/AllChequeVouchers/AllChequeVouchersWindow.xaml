@@ -20,9 +20,14 @@
         FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid>
         <DockPanel DataContext="{Binding MainList}">
-            <local:FiltersUI DockPanel.Dock="Top"
-                             DataContext="{Binding Filter}" />
+            <!--<local:FiltersUI DockPanel.Dock="Top"
+                             DataContext="{Binding Filter}" />-->
 
+            <StackPanel DockPanel.Dock="Top">
+                <local:MainToolbar x:Name="tBar" />
+                <local:FiltersUI DataContext="{Binding Filter}" />
+            </StackPanel>
+            
             <local:MainTable x:Name="tbl" />
         </DockPanel>
         <busy:BusyDialog />

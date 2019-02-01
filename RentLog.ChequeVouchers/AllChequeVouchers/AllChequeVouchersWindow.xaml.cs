@@ -1,12 +1,10 @@
-﻿using CommonTools.Lib45.UIExtensions;
+﻿using CommonTools.Lib45.ExcelTools;
+using CommonTools.Lib45.UIExtensions;
 using RentLog.DomainLib11.DTOs;
 using System.Windows;
 
 namespace RentLog.ChequeVouchers.AllChequeVouchers
 {
-    /// <summary>
-    /// Interaction logic for AllChequeVouchersWindow.xaml
-    /// </summary>
     public partial class AllChequeVouchersWindow : Window
     {
         public AllChequeVouchersWindow()
@@ -15,6 +13,7 @@ namespace RentLog.ChequeVouchers.AllChequeVouchers
             Loaded += (a, b) =>
             {
                 tbl.dg.EnableOpenCurrent<FundRequestDTO>();
+                tBar.btn.Click += (c, d) => tbl.dg.ExportToExcel();
             };
         }
     }
