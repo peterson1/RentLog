@@ -13,11 +13,11 @@ namespace RentLog.DomainLib11.AdHocJobs
 {
     public class SectionNight
     {
-        public static Action SetNoSurcharge(ITenantDBsDir dir,
+        public static Action SetNoBackRent(ITenantDBsDir dir,
             out string jobDesc, out bool canRun)
         {
             canRun  = dir.CanRunAdHocTask(false);
-            jobDesc = "Zero-Surcharge for Night Market leases";
+            jobDesc = "Zero-Backrent for Night Market leases";
             return () =>
             {
                 var mkt   = dir.MarketState;
@@ -35,7 +35,7 @@ namespace RentLog.DomainLib11.AdHocJobs
             var sec  = repo.Find(secId, true);
 
             sec.StallTemplate.DefaultRent
-                .PenaltyRule = RentPenalty.ZeroSurcharge;
+                .PenaltyRule = RentPenalty.ZeroBackrent;
 
             if (!repo.Update(sec))
                 throw Bad.Data("Update(sec) did NOT return true.");
@@ -55,7 +55,7 @@ namespace RentLog.DomainLib11.AdHocJobs
 
         private static void EditLease<T>(T lse, ISimpleRepo<T> repo) where T : LeaseDTO
         {
-            lse.Rent.PenaltyRule = RentPenalty.ZeroSurcharge;
+            lse.Rent.PenaltyRule = RentPenalty.ZeroBackrent;
             if (!repo.Update(lse))
                 throw Bad.Data("Update(lse) did NOT return true.");
         }

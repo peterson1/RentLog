@@ -41,7 +41,7 @@ namespace RentLog.FilteredLeases.MainToolbar
                         ForActiveLeases.RebuildSoA(_dir, out desc, out canRun);
                         break;
                 case 2: adhocJob =
-                        SectionNight.SetNoSurcharge(_dir, out desc, out canRun);
+                        SectionNight.SetNoBackRent(_dir, out desc, out canRun);
                         break;
                 case 3: adhocJob =
                         StallsJob.SetStallDefaults(_dir, out desc, out canRun);
