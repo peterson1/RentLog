@@ -36,6 +36,10 @@ namespace RentLog.DomainLib11.BillingRules
                     return new RentMonthlySurcharger()
                         .GetPenalties(lse, date, previousBalance);
 
+                case RentPenalty.ZeroSurcharge:
+                    return new RentZeroSurcharger()
+                        .GetPenalties(lse, date, previousBalance);
+
                 default:
                     throw Fault.BadArg(nameof(lse.Rent.PenaltyRule), lse.Rent.PenaltyRule);
             }
