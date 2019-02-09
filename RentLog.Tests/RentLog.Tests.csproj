@@ -139,6 +139,7 @@
     <Compile Include="SurchargerTests\RentSurchargerTests\RentDailySurchargeFacts.cs" />
     <Compile Include="SurchargerTests\RentSurchargerTests\RentDailySurchargeNoRoundOffFacts.cs" />
     <Compile Include="SurchargerTests\RentSurchargerTests\RentMonthlySurchargeFacts.cs" />
+    <Compile Include="SurchargerTests\RentSurchargerTests\RentZeroSurchargerFacts.cs" />
     <Compile Include="SurchargerTests\RightsSurchargerTests\RightsDailyAfter90SurchargerFacts.cs" />
     <Compile Include="TestTools\MockDBsDir.cs" />
     <Compile Include="TestTools\MockMarketState.cs" />
