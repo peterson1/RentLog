@@ -35,7 +35,7 @@ namespace RentLog.DomainLib11.BillingRules
                       + GetRegularDue(lse, date);
         }
 
-        public decimal ComputeClosingBalance(LeaseDTO lse, BillState billState, DateTime date)
+        public virtual decimal ComputeClosingBalance(LeaseDTO lse, BillState billState, DateTime date)
             => GetTotalDue(lse, billState, date) - billState.TotalPayments;
 
 

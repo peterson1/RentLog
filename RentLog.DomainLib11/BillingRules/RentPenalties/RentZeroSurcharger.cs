@@ -9,9 +9,7 @@ namespace RentLog.DomainLib11.BillingRules.RentPenalties
         public override string RuleName => RentPenalty.ZeroSurcharge;
 
 
-        protected override List<DailyBillDTO.BillPenalty> GetPenaltiesList(LeaseDTO lse, DateTime date, decimal? oldBal)
-        {
-            return null;
-        }
+        protected override List<DailyBillDTO.BillPenalty> GetPenaltiesList(LeaseDTO lse, DateTime date, decimal? oldBal) 
+            => null;
     }
 }

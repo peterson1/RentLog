@@ -40,6 +40,29 @@ namespace RentLog.DomainLib11.BillingRules
                     return new RentZeroSurcharger()
                         .GetPenalties(lse, date, previousBalance);
 
+                case RentPenalty.ZeroBackrent:
+                    return new RentZeroBackrent()
+                        .GetPenalties(lse, date, previousBalance);
+
+                default:
+                    throw Fault.BadArg(nameof(lse.Rent.PenaltyRule), lse.Rent.PenaltyRule);
+            }
+        }
+
+
+        public override decimal ComputeClosingBalance(LeaseDTO lse, BillState billState, DateTime date)
+        {
+            switch (lse.Rent.PenaltyRule)
+            {
+                case RentPenalty.DailySurcharge:
+                case RentPenalty.DailySurcharge_NoRoundOff:
+                case RentPenalty.MonthlySurcharge:
+                case RentPenalty.ZeroSurcharge:
+                    return base.ComputeClosingBalance(lse, billState, date);
+
+                case RentPenalty.ZeroBackrent:
+                    return 0.0M;
+
                 default:
                     throw Fault.BadArg(nameof(lse.Rent.PenaltyRule), lse.Rent.PenaltyRule);
             }

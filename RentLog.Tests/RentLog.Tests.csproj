@@ -87,6 +87,7 @@
     <Compile Include="BillRowComposerTests\DailyRentBillComposerFacts.cs" />
     <Compile Include="BillRowComposerTests\MonthlyRentBillComposerFacts.cs" />
     <Compile Include="BillRowComposerTests\RightsBillComposerFacts.cs" />
+    <Compile Include="BillRowComposerTests\ZeroBackrentComposerFacts.cs" />
     <Compile Include="CashierColxnsRepoTests\CashierColxnsRepoFacts.cs" />
     <Compile Include="CashieringVMTests\CashieringVMFacts2.cs" />
     <Compile Include="CashieringVMTests\ReviewerVMFacts1.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="StateTransitionTests\LeaseIsActiveFacts.cs" />
     <Compile Include="StateTransitionTests\MarketDayCloserFacts.cs" />
     <Compile Include="StringToolsTests\QuotifyCmdArgsFacts.cs" />
+    <Compile Include="SurchargerTests\RentSurchargerTests\ZeroBackrentSurchargerFacts.cs" />
     <Compile Include="SurchargerTests\RentSurchargerTests\RentDailySurchargeFacts.cs" />
     <Compile Include="SurchargerTests\RentSurchargerTests\RentDailySurchargeNoRoundOffFacts.cs" />
     <Compile Include="SurchargerTests\RentSurchargerTests\RentMonthlySurchargeFacts.cs" />
