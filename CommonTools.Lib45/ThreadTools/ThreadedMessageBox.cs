@@ -69,5 +69,17 @@ namespace CommonTools.Lib45.ThreadTools
             if (choice == MessageBoxResult.Yes)
                 action?.Invoke();
         }
+
+
+        public static bool Confirm(string message,
+                                   string caption = "Please Confirm",
+                                   MessageBoxImage messageBoxImage = MessageBoxImage.Question,
+                                   MessageBoxButton messageBoxButton = MessageBoxButton.YesNo)
+        {
+            var choice = MessageBox.Show(message, "   " + caption,
+                            messageBoxButton, messageBoxImage);
+
+            return choice == MessageBoxResult.Yes;
+        }
     }
 }
