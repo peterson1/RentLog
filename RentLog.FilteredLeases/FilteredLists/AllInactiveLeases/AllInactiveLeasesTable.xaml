@@ -17,6 +17,9 @@
             <MenuItem Header ="{Binding UndoTerminationCmd.CurrentLabel}" 
                       Command="{Binding UndoTerminationCmd}"
                       DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+            <MenuItem Header ="{Binding RebuildSoaCmd.CurrentLabel}" 
+                      Command="{Binding RebuildSoaCmd}"
+                      DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
         </ContextMenu>
 
         <Style TargetType="DataGridRow"

@@ -10,6 +10,7 @@ using RentLog.FilteredLeases.LeaseCRUDs.LeaseCRUD1;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace RentLog.FilteredLeases.FilteredLists.AllInactiveLeases
 {
@@ -22,12 +23,30 @@ namespace RentLog.FilteredLeases.FilteredLists.AllInactiveLeases
             UndoTerminationCmd    = R2Command.Relay(UndoTermination, 
                                 _ => AppArgs.CanUndoLeaseTermination(false), 
                                     "Undo Lease Termination");
+            RebuildSoaCmd         = R2Command.Async(RebuildSoA, _ => AppArgs.CanRunAdHocTask(false), 
+                                    "Rebuild Statement of Account");
         }
 
 
         public IR2Command  AddStallToTenantCmd    { get; }
         public IR2Command  RenewInactiveLeaseCmd  { get; }
         public IR2Command  UndoTerminationCmd     { get; }
+        public IR2Command  RebuildSoaCmd          { get; }
+
+
+        private async Task RebuildSoA()
+        {
+            if (!TryGetPickedItem(out LeaseDTO lse)) return;
+            var inactv = lse as InactiveLeaseDTO;
+            if (!Alert.Confirm($"Rebuild SoA for “{lse}”?")) return;
+            Main.StartBeingBusy($"Rebuilding SoA for “{lse}” ...");
+            await Task.Run(() =>
+            {
+                AppArgs.Balances.GetRepo(lse).RecomputeAll();
+            });
+            Main.StopBeingBusy();
+            ReloadFromDB();
+        }
 
 
         private void UndoTermination()
