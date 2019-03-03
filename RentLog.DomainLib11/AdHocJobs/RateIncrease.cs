@@ -33,11 +33,12 @@ namespace RentLog.DomainLib11.AdHocJobs
 
         private static LeaseDTO CreateNewActive(InactiveLeaseDTO old, DateTime lastDte)
         {
-            var lse              = old.ShallowClone<LeaseDTO>();
-            lse.Id               = 0;
-            lse.ContractStart    = lastDte.AddDays(1).Date;
-            lse.RenewedFromID    = old.Id;
-            lse.Rent.RegularRate = GetNewRentRate(old);
+            var lse                  = old.ShallowClone<LeaseDTO>();
+            lse.Id                   = 0;
+            lse.ContractStart        = lastDte.AddDays(1).Date;
+            lse.RenewedFromID        = old.Id;
+            lse.Rent.RegularRate     = GetNewRentRate(old);
+            lse.Rent.GracePeriodDays = 0;
             return lse;
         }
 
