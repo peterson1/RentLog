@@ -10,7 +10,7 @@ namespace RentLog.DomainLib11.BillingRules
         {
             var adjDate  = dir.Collections.UnclosedDate();
             var newAdjs  = dir.Collections.For(adjDate).BalanceAdjs;
-            var oldAdjs = dir.Collections.For(inactv.DeactivatedDate).BalanceAdjs;
+            var oldAdjs  = dir.Collections.For(inactv.DeactivatedDate).BalanceAdjs;
             var oldBills = dir.Balances.GetRepo(inactv).Latest();
             foreach (var billCode in BillCodes.Collected())
             {

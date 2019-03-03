@@ -23,6 +23,7 @@ namespace RentLog.FilteredLeases.MainToolbar
             AdHocJobCmd2 = R2Command.Relay(_ => RunAdHoc(2), null, "Run Ad Hoc Command 2");
             AdHocJobCmd3 = R2Command.Relay(_ => RunAdHoc(3), null, "Run Ad Hoc Command 3");
             AdHocJobCmd4 = R2Command.Relay(_ => RunAdHoc(4), null, "Run Ad Hoc Command 4");
+            AdHocJobCmd5 = R2Command.Relay(_ => RunAdHoc(5), null, "Run Ad Hoc Command 5");
         }
 
 
@@ -30,6 +31,7 @@ namespace RentLog.FilteredLeases.MainToolbar
         public IR2Command  AdHocJobCmd2  { get; }
         public IR2Command  AdHocJobCmd3  { get; }
         public IR2Command  AdHocJobCmd4  { get; }
+        public IR2Command  AdHocJobCmd5  { get; }
 
 
         private void RunAdHoc(int taskNumber)
@@ -49,8 +51,12 @@ namespace RentLog.FilteredLeases.MainToolbar
                 case 4: adhocJob =
                         ForActiveLeases.Reprocess3DaysBack(_dir, out desc, out canRun);
                         break;
+                case 5: adhocJob =
+                        RateIncrease.ApplyTo("Marilao", _dir, out desc, out canRun);
+                        break;
                 default: throw Bad.Data($"Task #: [{taskNumber}]");
             }
+
 
             if (!canRun)
             {
