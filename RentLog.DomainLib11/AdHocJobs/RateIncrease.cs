@@ -14,12 +14,6 @@ namespace RentLog.DomainLib11.AdHocJobs
     {
         private static void ExecuteRateIncrease(LeaseDTO origLse, ITenantDBsDir dir)
         {
-            //if (origLse.Stall.Id == 1630879
-            // || origLse.Stall.Id == 4034443)
-            //{
-            //    var a = "";
-            //}
-
             var mkt     = dir.MarketState;
             var lastDte = 28.Feb(2019);
             var reason  = "2019 Rate Increase";
@@ -33,10 +27,18 @@ namespace RentLog.DomainLib11.AdHocJobs
 
         private static LeaseDTO CreateNewActive(InactiveLeaseDTO old, DateTime lastDte)
         {
-            var lse                  = old.ShallowClone<LeaseDTO>();
-            lse.Id                   = 0;
-            lse.ContractStart        = lastDte.AddDays(1).Date;
-            lse.RenewedFromID        = old.Id;
+            var lse = new LeaseDTO
+            {
+                Tenant        = old.Tenant,
+                Stall         = old.Stall,
+                ContractStart = lastDte.AddDays(1).Date,
+                ContractEnd   = old.ContractEnd,
+                Rent          = old.Rent,
+                Rights        = old.Rights,
+                RenewedFromID = old.Id,
+                ProductToSell = old.ProductToSell,
+                Remarks       = old.Remarks,
+            };
             lse.Rent.RegularRate     = GetNewRentRate(old);
             lse.Rent.GracePeriodDays = 0;
             return lse;
