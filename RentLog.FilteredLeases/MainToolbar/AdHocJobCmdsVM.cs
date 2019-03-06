@@ -52,7 +52,7 @@ namespace RentLog.FilteredLeases.MainToolbar
                         ForActiveLeases.Reprocess3DaysBack(_dir, out desc, out canRun);
                         break;
                 case 5: adhocJob =
-                        RateIncrease.ApplyTo("Marilao", _dir, out desc, out canRun);
+                        RateIncrease.ApplyTo("BALAGTAS", _dir, out desc, out canRun);
                         break;
                 default: throw Bad.Data($"Task #: [{taskNumber}]");
             }

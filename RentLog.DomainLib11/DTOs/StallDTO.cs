@@ -15,6 +15,9 @@ namespace RentLog.DomainLib11.DTOs
         public override string ToString() => Name;
 
 
+        internal string UniqueKey => $"{Section?.Id}_{Name}";
+
+
         public static StallDTO Named(string name)
             => new StallDTO { Name = name };
     }

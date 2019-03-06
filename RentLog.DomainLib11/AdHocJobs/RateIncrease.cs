@@ -81,6 +81,54 @@ namespace RentLog.DomainLib11.AdHocJobs
                 case "BALAGTAS":
                     return new List<int>
                     {
+                        2950145, // Dizon, Jhoana   DRY 018
+                        2978980, // Cuevas, Chi Chi DRY 023
+                        2919287, // Caragos, Ma. Concepcion DRY 023- A
+                        2933259, // Panopio, Aldrich    DRY 028
+                        2873830, // Salazar, Jenevive Ann   DRY 031
+                        2907663, // Robles, Marissa DRY 056
+                        2979007, // Sarip, Sonaya   DRY 058
+                        2935600, // Delos Santos, Urbana    DRY 063
+                        2979004, // H. Carem, Moktar    DRY 085
+                        2979005, // H. Carem, Moktar    DRY 086
+                        2979011, // Tadman, Aiden   DRY 227
+                        2601253, // Hernandez, John Michael DRY 228
+                        2970561, // Banggolay, Catherine    DRY 230
+                        2767682, // Agustin, Antonio    DRY 232
+                        2727202, // Limbona, Haniyah    DRY 237
+                        2847542, // Manalo, Teresita    DRY 238
+                        2978982, // Macalabo, Mokindi   DT 002
+                        2979006, // Santiago, Evangeline    DT 027
+                        2979075, // Imam, Soraida   DT 038
+                        2978983, // Saumay, Alladin DT 040
+                        2943102, // Gonzaga, Melanio Jr WET 023
+                        2943103, // Gonzaga, Melanio Jr WET 024
+                        2978992, // Santiago, Alicia    WET 115
+                        2978999, // Manahan, Jocelyn    WET 116
+                        2679454, // Gemodiano, Josefino WET 123
+                        2679420, // Gemodiano, Josefino WET 124
+                        2870341, // Castillo, Elsa  WET 149
+                        2956954, // Castillo, Elsa  WET 150
+                        2782255, // Solangsawa, Rosalie WET 185
+                        2782270, // Solangsawa, Rosalie WET 186
+                        2870234, // Abejar, Jonathan    WET 190
+                        2979029, // Joaquin, Jed    WET 194
+                        2897367, // Castro, Teresita    WT 005
+                        2899941, // Castro, Teresita    WT 006
+                        2958846, // Pacheco, Rochelle   WT 008
+                        2934029, // Sevilla, Florinda   WT 015
+                        2721579, // Gomez, Blanca   WT 016
+                        2979043, // Garcia, Donato  WT 018
+                        2665163, // Garcia, Donato  WT 019
+                        2349949, // Berlon, Crizia  WT 039
+                        2347210, // Berlon, Crizia  WT 040
+                        2850674, // Magbitang, Ruby WT 069
+                        2791525, // Palma, April Lyn    WT 128
+                        2817651, // Silva, Asuncion WT 129
+                        2816153, // Tenorio, Eliza Marie    WT 130
+                        2816154, // Tenorio, Eliza Marie    WT 131
+                        2979019, // Fernandez, Ruby Ann WT 140
+                        2975689, // De Asis, Reglend    WT 141
                     };
 
                 case "MARILAO":

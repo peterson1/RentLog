@@ -64,6 +64,40 @@ namespace RentLog.Tests.StallsRepoTests
         }
 
 
+        [Fact(DisplayName = "Allows duplicate name diff section")]
+        public void Allowsduplicatenamediffsection()
+        {
+            var moq  = new Mock<ISimpleRepo<StallDTO>>();
+            var sut  = new StallsRepo1(moq.Object, null);
+
+            var rec1_1 = new StallDTO
+            {
+                Id      = 1,
+                Name    = "Sample 1",
+                Section = new SectionDTO { Id = 1 }
+            };
+            var rec1_2 = new StallDTO
+            {
+                Id      = 2,
+                Name    = "Sample 2",
+                Section = new SectionDTO { Id = 1 }
+            };
+            var rec2_1 = new StallDTO
+            {
+                Id      = 3,
+                Name    = "Sample 1",
+                Section = new SectionDTO { Id = 2 }
+            };
+
+            moq.Setup(_ => _.GetAll())
+                .Returns(new List<StallDTO> { rec1_1, rec1_2, rec2_1 });
+
+            rec2_1.Remarks = "edit";
+
+            sut.Update(rec2_1);
+        }
+
+
         [Fact(DisplayName = "Can't Delete if Occupied")]
         public void CantDeleteifOccupied()
         {

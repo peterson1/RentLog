@@ -22,7 +22,7 @@ namespace RentLog.DomainLib11.MarketStateRepos
 
         protected override void ValidateBeforeUpdate(StallDTO changedRecord)
         {
-            this.RejectDuplicateRecord(_ => _.Name == changedRecord.Name,
+            this.RejectDuplicateRecord(_ => _.UniqueKey == changedRecord.UniqueKey,
                 nameof(changedRecord.Name), changedRecord, _ => _.Id);
         }
 
