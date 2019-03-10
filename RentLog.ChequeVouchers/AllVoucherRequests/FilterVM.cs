@@ -3,7 +3,7 @@ using RentLog.DomainLib11.DTOs;
 using System;
 using System.Collections.Generic;
 
-namespace RentLog.ChequeVouchers.AllChequeVouchers
+namespace RentLog.ChequeVouchers.AllVoucherRequests
 {
     public class FilterVM : TextFilterBase<FundRequestDTO>
     {

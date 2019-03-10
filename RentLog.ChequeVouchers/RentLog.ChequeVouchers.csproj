@@ -93,19 +93,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AllChequeVouchers\AllChequeVouchersVM.cs" />
-    <Compile Include="AllChequeVouchers\AllChequeVouchersWindow.xaml.cs">
+    <Compile Include="AllVoucherRequests\AllVoucherRequestsVM.cs" />
+    <Compile Include="AllVoucherRequests\AllChequeVouchersWindow.xaml.cs">
       <DependentUpon>AllChequeVouchersWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AllChequeVouchers\FiltersUI.xaml.cs">
+    <Compile Include="AllVoucherRequests\FiltersUI.xaml.cs">
       <DependentUpon>FiltersUI.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AllChequeVouchers\FilterVM.cs" />
-    <Compile Include="AllChequeVouchers\MainListVM.cs" />
-    <Compile Include="AllChequeVouchers\MainTable.xaml.cs">
+    <Compile Include="AllVoucherRequests\FilterVM.cs" />
+    <Compile Include="AllVoucherRequests\MainListVM.cs" />
+    <Compile Include="AllVoucherRequests\MainTable.xaml.cs">
       <DependentUpon>MainTable.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AllChequeVouchers\MainToolbar.xaml.cs">
+    <Compile Include="AllVoucherRequests\MainToolbar.xaml.cs">
       <DependentUpon>MainToolbar.xaml</DependentUpon>
     </Compile>
     <Compile Include="CommonControls\ChequeVoucherViewer\AllocationsListUI.xaml.cs">
@@ -264,19 +264,19 @@
     <Compile Include="VoucherReqsTab\VouchersListPrint\VouchersListReportHeaderUI.xaml.cs">
       <DependentUpon>VouchersListReportHeaderUI.xaml</DependentUpon>
     </Compile>
-    <Page Include="AllChequeVouchers\AllChequeVouchersWindow.xaml">
+    <Page Include="AllVoucherRequests\AllChequeVouchersWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AllChequeVouchers\FiltersUI.xaml">
+    <Page Include="AllVoucherRequests\FiltersUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AllChequeVouchers\MainTable.xaml">
+    <Page Include="AllVoucherRequests\MainTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AllChequeVouchers\MainToolbar.xaml">
+    <Page Include="AllVoucherRequests\MainToolbar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

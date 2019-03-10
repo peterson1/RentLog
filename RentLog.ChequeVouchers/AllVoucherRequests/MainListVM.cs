@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RentLog.ChequeVouchers.AllChequeVouchers
+namespace RentLog.ChequeVouchers.AllVoucherRequests
 {
     [AddINotifyPropertyChangedInterface]
     public class MainListVM : FilteredSavedListVMBase<FundRequestDTO, FilterVM, ITenantDBsDir>

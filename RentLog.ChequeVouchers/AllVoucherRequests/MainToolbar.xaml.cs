@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace RentLog.ChequeVouchers.AllChequeVouchers
+namespace RentLog.ChequeVouchers.AllVoucherRequests
 {
     /// <summary>
-    /// Interaction logic for FiltersUI.xaml
+    /// Interaction logic for MainToolbar.xaml
     /// </summary>
-    public partial class FiltersUI : UserControl
+    public partial class MainToolbar : UserControl
     {
-        public FiltersUI()
+        public MainToolbar()
         {
             InitializeComponent();
         }
