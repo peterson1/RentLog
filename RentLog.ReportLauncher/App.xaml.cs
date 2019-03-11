@@ -1,6 +1,7 @@
 ﻿using CommonTools.Lib11.ExceptionTools;
 using CommonTools.Lib45.ApplicationTools;
 using RentLog.DomainLib45;
+using RentLog.DomainLib45.CheckVouchersReport;
 using RentLog.DomainLib45.CollectorsCRUD;
 using RentLog.DomainLib45.DailyStatusReporter;
 using RentLog.DomainLib45.Reporters;
@@ -22,22 +23,13 @@ namespace RentLog.ReportLauncher
         {
             switch (args.Param1.ToUpper())
             {
-                case "OVERDUES":
-                    WithOverduesReport.Show(args);
-                    break;
-                case "COLXNSMRY":
-                    ColxnSummaryExcelWriter.Launch(args);
-                    break;
-                case "DAILYSTATUS":
-                    DailyStatusReportVM.Launch(args);
-                    break;
-                case "GLRECAP":
-                    GLRecapExcelWriter.Launch(args);
-                    break;
-                case "COLLECTORS":
-                    CollectorsMainVM.Launch(args);
-                    break;
-                default: throw Bad.Arg("Param1", args.Param1);
+                case "OVERDUES"   : WithOverduesReport.Show(args);        break;
+                case "COLXNSMRY"  : ColxnSummaryExcelWriter.Launch(args); break;
+                case "DAILYSTATUS": DailyStatusReportVM.Launch(args);     break;
+                case "GLRECAP"    : GLRecapExcelWriter.Launch(args);      break;
+                case "COLLECTORS" : CollectorsMainVM.Launch(args);        break;
+                case "CHKVOUCHERS": CheckVouchersReporter.Launch(args);   break;
+                default           : throw Bad.Arg("Param1", args.Param1);
             }
         }
     }

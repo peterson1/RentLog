@@ -78,6 +78,7 @@
   <ItemGroup>
     <Compile Include="AppArguments.cs" />
     <Compile Include="BaseViewModels\BrandedWindowBase.cs" />
+    <Compile Include="CheckVouchersReport\CheckVouchersReporter.cs" />
     <Compile Include="CollectorsCRUD\CollectorsMainVM.cs" />
     <Compile Include="CollectorsCRUD\CollectorsMainWindow.xaml.cs">
       <DependentUpon>CollectorsMainWindow.xaml</DependentUpon>
